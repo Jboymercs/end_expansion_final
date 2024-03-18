@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ee:blocks/red_lamp_top",
+    "side": "ee:blocks/red_lamp_side"
+  }
+}

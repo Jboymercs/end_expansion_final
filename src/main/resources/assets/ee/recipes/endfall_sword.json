@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X",
+    "R"
+  ],
+  "key": {
+    "R": {
+      "item": "ee:dark_ingot"
+    },
+    "#": {
+      "item": "ee:infused_crystal"
+    },
+    "X": {
+      "item": "ee:soul"
+    }
+  },
+  "result": {
+    "item": "ee:endfall_sword"
+  }
+}

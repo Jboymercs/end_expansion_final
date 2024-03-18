@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=down,triggered=true":  { "model": "ee:ash_door_on_vertical", "x": 180 },
+    "facing=up,triggered=true":    { "model": "ee:ash_door_on_vertical" },
+    "facing=north,triggered=true": { "model": "ee:ash_door_on", "x": 90 },
+    "facing=south,triggered=true": { "model": "ee:ash_door_on", "x": -90 },
+    "facing=west,triggered=true":  { "model": "ee:ash_door_on", "x": -90, "y": 90 },
+    "facing=east,triggered=true":  { "model": "ee:ash_door_on", "x": 90, "y":90 },
+    "facing=down,triggered=false":  { "model": "ee:ash_door_off_vertical", "x": 180 },
+    "facing=up,triggered=false":    { "model": "ee:ash_door_off_vertical" },
+    "facing=north,triggered=false": { "model": "ee:ash_door_off", "x": 90 },
+    "facing=south,triggered=false": { "model": "ee:ash_door_off", "x": -90 },
+    "facing=west,triggered=false":  { "model": "ee:ash_door_off", "x": -90, "y": 90 },
+    "facing=east,triggered=false":  { "model": "ee:ash_door_off", "x": 90, "y":90 }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "ee:door_on" }
+  }
+}

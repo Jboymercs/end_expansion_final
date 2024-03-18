@@ -1,0 +1,20 @@
+[
+  {
+    "modid": "ee",
+    "name": "End Expansion",
+    "description": "A mod adding new creatures, blocks, items, and biomes within the End",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "modpage",
+    "authorList": [
+      "FakeDrayn",
+      "UnOriginal"
+    ],
+    "credits": "UnseenDontRun",
+    "logoFile": "endexpansion.png",
+    "screenshots": [],
+    "dependencies": [
+      "Geckolib 3.0.31", "Nether-API"
+    ]
+  }
+]

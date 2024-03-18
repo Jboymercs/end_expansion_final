@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=false": { "model": "ee:altar" },
+    "active=true" : {"model":  "ee:altar"}
+  }
+}

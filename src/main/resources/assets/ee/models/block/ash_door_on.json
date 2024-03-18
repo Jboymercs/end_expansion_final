@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "ee:blocks/ash_door_on",
+    "front": "ee:blocks/ash_door_on_front",
+    "side": "ee:blocks/ash_door_on"
+  }
+}

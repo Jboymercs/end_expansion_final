@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R#R",
+    "B B",
+    "V V"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:soul"
+    },
+    "V": {
+      "item": "ee:dark_ingot"
+    },
+    "R": {
+      "item": "ee:infused_crystal"
+    },
+    "B": {
+      "item": "ee:stalker_hide"
+    }
+  },
+  "result": {
+    "item": "ee:endfall_leggings"
+  }
+}

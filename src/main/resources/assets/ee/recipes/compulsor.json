@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "#R#",
+    "#R#"
+  ],
+  "key": {
+    "R": {
+      "item": "ee:purple_crystal_item"
+    },
+    "#": {
+      "item": "minecraft:end_bricks"
+    }
+  },
+  "result": {
+    "item": "ee:compulsor"
+  }
+}

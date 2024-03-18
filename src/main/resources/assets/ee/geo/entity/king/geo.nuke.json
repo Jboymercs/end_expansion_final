@@ -1,0 +1,52 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 5.5,
+				"visible_bounds_offset": [0, 2.25, 0]
+			},
+			"bones": [
+				{
+					"name": "DRing",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "FireRing",
+					"parent": "DRing",
+					"pivot": [0, 12, 0],
+					"cubes": [
+						{"origin": [-20, 12, -20], "size": [40, 0, 40], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "DBomb",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "MainBox",
+					"parent": "DBomb",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-16, 0, -16], "size": [32, 24, 32], "uv": [0, 40]}
+					]
+				},
+				{
+					"name": "Explosion",
+					"parent": "MainBox",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-6, 24, -6], "size": [12, 24, 12], "uv": [128, 56]},
+						{"origin": [-12, 48, -12], "size": [24, 16, 24], "uv": [96, 16]},
+						{"origin": [-28, 0, 0], "size": [56, 70, 0], "pivot": [0, 0, 0], "rotation": [0, 45, 0], "uv": [112, 96]},
+						{"origin": [-28, 0, 0], "size": [56, 70, 0], "pivot": [0, 0, 0], "rotation": [0, -45, 0], "uv": [0, 96]}
+					]
+				}
+			]
+		}
+	]
+}

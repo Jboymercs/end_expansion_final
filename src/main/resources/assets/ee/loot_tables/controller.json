@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "name" : "ee:controller",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "ee:plate",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

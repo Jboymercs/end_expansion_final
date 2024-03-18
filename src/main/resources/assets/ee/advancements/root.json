@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:lamented"
+    },
+    "title": {
+      "translate": "advancements.ee.root.title"
+    },
+    "description": {
+      "translate": "advancements.ee.root.description"
+    },
+    "background": "ee:textures/blocks/brown_stone.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "entered_end": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "the_end"
+      }
+    }
+  }
+}

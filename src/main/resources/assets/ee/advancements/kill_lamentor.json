@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:lamented"
+    },
+    "title": {
+      "translate": "advancements.ee.kill_lamentor.title"
+    },
+    "description": {
+      "translate": "advancements.ee.kill_lamentor.description"
+    },
+    "frame": "challenge"
+  },
+  "parent": "ee:root",
+  "criteria": {
+    "entered_end": {
+      "trigger": "ee:defeat_lamentor",
+      "conditions": {
+      }
+    }
+  }
+}

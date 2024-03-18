@@ -1,0 +1,112 @@
+{
+  "entity.boss.idle": {
+    "category": "entity",
+    "subtitle": "entity.boss.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/idle",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.hurt": {
+    "category": "entity",
+    "subtitle": "entity.boss.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/hurt",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.death": {
+    "category": "entity",
+    "subtitle": "entity.boss.death",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.summon": {
+    "category": "entity",
+    "subtitle": "entity.boss.summon",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/summon",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.hammer": {
+    "category": "entity",
+    "subtitle": "entity.boss.hammer",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/hammer",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.sword": {
+    "category": "entity",
+    "subtitle": "entity.boss.sword",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/sword",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.dash": {
+    "category": "entity",
+    "subtitle": "entity.boss.dash",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/dash",
+        "stream": true
+      }
+    ]
+  },
+  "entity.boss.cast": {
+    "category": "entity",
+    "subtitle": "entity.boss.cast",
+    "sounds": [
+      {
+        "name": "ee:entity/boss/cast",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.dash": {
+    "category": "entity",
+    "subtitle": "entity.king.dash",
+    "sounds": [
+      {
+        "name": "ee:entity/king/dash",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.explode": {
+    "category": "entity",
+    "subtitle": "entity.king.explode",
+    "sounds": [
+      {
+        "name": "ee:entity/king/explode",
+        "stream": true
+      }
+    ]
+  },
+  "entity.knight.step": {
+    "category": "entity",
+    "subtitle": "entity.knight.step",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/step",
+        "stream": true
+      }
+    ]
+  }
+}

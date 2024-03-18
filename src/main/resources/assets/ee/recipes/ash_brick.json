@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:end_ash"
+    }
+  },
+  "result": {
+    "item": "ee:ash_brick",
+    "count": 4
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "block/upper_slab",
+  "textures":
+  {
+    "bottom": "ee:blocks/ash_brick",
+    "top": "ee:blocks/ash_brick",
+    "side": "ee:blocks/ash_brick"
+  }
+}

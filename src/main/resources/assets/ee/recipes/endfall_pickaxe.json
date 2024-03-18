@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " R ",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "ee:dark_ingot"
+    },
+    "#": {
+      "item": "ee:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "ee:endfall_pickaxe"
+  }
+}

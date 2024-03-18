@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ee:blocks/nuke_end",
+    "side": "ee:blocks/nuke_side"
+  }
+}

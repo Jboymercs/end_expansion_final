@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " V#",
+    "R B",
+    " V#"
+  ],
+  "key": {
+    "R": {
+      "item": "ee:infused_crystal"
+    },
+    "B": {
+      "item": "ee:soul"
+    },
+    "V": {
+      "item": "ee:dark_ingot"
+    },
+    "#": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "ee:bow"
+  }
+}

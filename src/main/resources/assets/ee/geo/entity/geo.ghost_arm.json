@@ -1,0 +1,55 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 4.5,
+				"visible_bounds_offset": [0, 1.75, 0]
+			},
+			"bones": [
+				{
+					"name": "Ground",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Torso",
+					"parent": "Ground",
+					"pivot": [0, 38, 0]
+				},
+				{
+					"name": "LArmFake",
+					"parent": "Torso",
+					"pivot": [10, 43, 0],
+					"cubes": [
+						{"origin": [10, 34, -4], "size": [8, 12, 8], "uv": [0, 110]},
+						{"origin": [11, 45, -4.5], "size": [9, 3, 9], "uv": [0, 20]},
+						{"origin": [13, 42, -4.5], "size": [6, 3, 9], "uv": [97, 0]},
+						{"origin": [14, 39, -4.5], "size": [3, 3, 9], "uv": [56, 129]}
+					]
+				},
+				{
+					"name": "LArmElbowJ2",
+					"parent": "LArmFake",
+					"pivot": [14, 34, 0],
+					"cubes": [
+						{"origin": [10.5, 18, -3.5], "size": [7, 16, 7], "uv": [125, 119]}
+					]
+				},
+				{
+					"name": "AxeJoint",
+					"parent": "LArmElbowJ2",
+					"pivot": [14, 21, 0],
+					"cubes": [
+						{"origin": [13, 20, -31], "size": [2, 2, 36], "uv": [0, 0]},
+						{"origin": [13, 19, -37], "size": [2, 4, 6], "uv": [76, 27]},
+						{"origin": [14, 11, -38], "size": [0, 20, 14], "uv": [52, 88]}
+					]
+				}
+			]
+		}
+	]
+}

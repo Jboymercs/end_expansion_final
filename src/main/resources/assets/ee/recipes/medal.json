@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "RXR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "ee:purple_crystal_item"
+    },
+    "#": {
+      "item": "minecraft:string"
+    },
+    "X": {
+      "item": "ee:lamented"
+    }
+  },
+  "result": {
+    "item": "ee:medal"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "V V"
+  ],
+  "key": {
+    "V": {
+      "item": "ee:dark_ingot"
+    },
+    "R": {
+      "item": "ee:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "ee:endfall_boots"
+  }
+}

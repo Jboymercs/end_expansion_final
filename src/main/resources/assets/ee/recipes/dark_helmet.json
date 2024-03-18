@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:dark_ingot"
+    }
+  },
+  "result": {
+    "item": "ee:dark_helmet"
+  }
+}

@@ -1,0 +1,27 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"rise": {
+			"animation_length": 10,
+			"bones": {
+				"WallStart": {
+					"position": {
+						"0.0": {
+							"vector": [0, -48, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, 0]
+						},
+						"9.5": {
+							"vector": [0, 0, 0]
+						},
+						"10.0": {
+							"vector": [0, -48, 0]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

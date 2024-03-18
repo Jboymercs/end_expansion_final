@@ -1,0 +1,40 @@
+{
+	"parent": "builtin/entity",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0.5, 2, 0]
+		},
+		"thirdperson_lefthand": {
+			"translation": [1, 2, 0]
+		},
+		"firstperson_righthand": {
+			"rotation": [-22, 0, 0],
+			"translation": [-0.25, 2, 0]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-31, 0, 0],
+			"translation": [0.5, 2, -1.25]
+		},
+		"ground": {
+			"translation": [0, 2, 0]
+		},
+		"gui": {
+			"translation": [0, 2, 0],
+			"scale": [2.5, 2.5, 1]
+		},
+		"fixed": {
+			"translation": [0, 2, 0],
+			"scale": [2, 2, 2]
+		}
+	},
+	"groups": [
+		{
+			"name": "Crystal",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6]
+		}
+	]
+}

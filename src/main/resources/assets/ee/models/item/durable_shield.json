@@ -1,0 +1,43 @@
+{
+	"parent": "builtin/entity",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 0]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, -90, 0],
+			"translation": [0, 0, 7]
+		},
+		"firstperson_righthand": {
+			"translation": [-0.5, -7, 2],
+			"scale": [1.2, 1.2, 1.2]
+		},
+		"firstperson_lefthand": {
+			"translation": [5.25, -6, 3.25],
+			"scale": [1.2, 1.2, 1.2]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [-8, 157, 9],
+			"translation": [3, 0.75, 0.75],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"fixed": {
+			"translation": [-2.25, 1.5, 0.5],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	},
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "ee:item/durable_shield_blocking"
+    }
+  ]
+}

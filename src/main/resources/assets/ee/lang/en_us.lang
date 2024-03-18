@@ -1,0 +1,514 @@
+item.invisible.name=Invisible
+item.crystalball.name=Crystal Ball
+item.spinsword.name=Thousand Swords
+item.lamented.name= Lamented Eye
+item.sword.name= Lamented Sword
+item.endfall_sword.name=End Fall Sword
+item.info_book.name=Guide to the End
+entity.end_king.name=The Unholy Ender Lord
+entity.red_crystal.name=Ender Lord's spikes
+entity.red_sword.name=Unholy Sword
+entity.fire_ball_red.name=Unholy Fireball
+entity.nuke.name=Unholy Nuke
+entity.crystal_boss.name=The Lamentor
+entity.end_knight.name=Ender Knight
+entity.end_mage.name=Ender Mage
+entity.end_shield.name=Ender Shield
+entity.snatcher.name=End Stalker
+entity.end_lord.name=Unholy Ender Knight
+entity.heal_aura.name=Heal Aura
+entity.buffker.name=Constructor
+entity.crystal_ball.name=Spike Crystal
+entity.purple_ball.name=Infused Crystal
+entity.crytsal_ground.name=Lamentor's Spikes
+entity.entity_idle.name=idle
+entity.end_bug.name=Ashed Parasite
+entity.ghost_king_phase.name=End King's Ghost
+entity.ring_eye.name=King's Gaze
+entity.controller.name= Ancient Guilder
+entity.lame_eye.name=Lamented Eye
+entity.ghost_arm.name=King's Ghost Arm
+entity.mini_nuke.name=Mini Nuke
+entity.pghost_king.name=King's Shadow
+entity.sword_attack.name=King's Sword
+tile.lamented_end_stone.name=Lamented End Stone
+tile.end_ash.name=Ashed End Stone
+tile.ash_brick.name=Ashed Brick
+tile.ash_brick_half.name=Ashed Brick Slab
+tile.ash_brick_double.name=Ashed Brick Double Slab
+tile.ash_brick_stairs.name=Ashed Brick Stairs
+tile.ash_brick_wall.name=Ashed Brick Wall
+tile.ash_brick_pillar.name=Ashed Pillar
+tile.ash_skull.name=Chiseled Ashed Skull Brick
+tile.brown_stone.name=Burnt End Stone
+tile.brown_brick.name=Burnt End Brick
+tile.brown_smooth.name=Burnt Smooth End Stone
+tile.purple_crystal.name=Pure Crystal Block
+tile.purple_crystal_top.name=Small Pure Crystal Block
+tile.door_on.name=Ashed Key Activated
+tile.ash_door.name=Ashed Keyhole
+tile.reverse_on.name=Reverse Block Activated
+tile.reverse_off.name=Reverse Block
+tile.source_on.name=Source Block Activated
+tile.source_off.name=Source Block
+tile.ash_trap_floor.name=Ash Trap Block
+tile.ash_chisle.name=Chiseled Ashed Brick
+tile.end_barrier.name=Unholy Barrier
+tile.end_door.name=Ashed Door Creator
+tile.red_crystal.name=Unholy Crystal Block
+tile.red_crystal_top.name=Small Unholy Crystal Block
+tile.red_lamp.name=Ash Powered Lamp
+tile.key_block.name=End Dungeon Key Block
+tile.ee.altar.name=Ashed Altar
+tile.altar.name=Ashed Altar
+tile.end_pillar.name=End Stone Brick Alternative
+tile.compulsor.name=End Compulsor
+tile.mini_nuke.name=Mini-Nuke
+tile.ash_key_block.name=Ashed Key Block
+tile.ash_spawner.name=Disappearing Spawner Ash
+tile.disappearing_spawner.name=Disappearing Spawner
+tile.mega_structure_block.name=Mega Structure Block
+item.key.name=Lamented End Key
+item.red_crystal_item.name=Unholy Crystal
+item.purple_crystal_item.name=Pure Crystal
+item.infused_crystal.name=Infused Crystal
+item.infusion_core.name=Infusion Core
+item.stalker_hide.name=Stalker Hide
+item.carapace.name=Parasite Carapace
+item.soul.name=Stalled Soul
+item.plate.name=Guilder Plate
+item.medal.name= Forgotten Medallion
+item.dark_ingot.name=Dark Ingot
+item.red_sword.name=Unholy Sword
+item.dark_helmet.name=Dark Helmet
+item.dark_chestplate.name=Dark Chestplate
+item.bug_food.name=Parasite Flesh
+item.bow.name=End Fall Bow
+item.red_chunk.name=Unholy Crystal Chunk
+item.purple_chunk.name=Pure Crystal Chunk
+item.endfall_helmet.name=End Fall Helmet
+item.endfall_chestplate.name=End Fall Chestplate
+item.endfall_leggings.name=End Fall Leggings
+item.endfall_boots.name=End Fall Boots
+item.endfall_pickaxe.name=Infused Pickaxe
+item.efstaff.name=End Fall Staff
+item.durable_shield.name=Guilded Shield
+item.ash_key.name=Ash End Key
+item.projpurp.name=Purple Projectile
+
+itemGroup.expansion=End Expansion
+
+potion.corrupted=Red Rage
+
+#Dialog
+ee.dialog.king_talk_0=Is this really all you do...
+ee.dialog.king_talk_1=You run around swinging that sword, defying all who stand in your way.
+ee.dialog.king_talk_2=You and I have more in common than you think.
+ee.dialog.king_talk_3=This is where it ends for you...
+ee.dialog.king_talk_4=it's time to put your aspirations to the grave...
+ee.dialog.king_talk_5=traveller.
+#Advancements
+advancements.ee.root.title=End Expansion
+advancements.ee.root.description=Discover the End's new mysteries
+advancements.ee.kill_constructor.title=Old Remnants
+advancements.ee.kill_constructor.description=Slay a Constructor
+advancements.ee.kill_end_bug.title=Creepy Crawly
+advancements.ee.kill_end_bug.description=Slay an Ashed Parasite
+advancements.ee.kill_lamentor.description=Slay the Lamentor
+advancements.ee.kill_lamentor.title=Those Who Ruled
+
+ee.desc.dimensional_key=Right click on the key block to awaken the Lamentor
+ee.desc.lamented_eye=Right Click to enable Levitation 3 for a short period of time.
+ee.desc.sword_desc=The Lamentors Sword, a fast and deadly blade. Right click to find out
+ee.desc.red_crystal=A unstable crystal used in activating various machines and crafting equipment
+ee.desc.purple_crystal=A stable crystal used for gravity altercation and a boost to magical items
+ee.desc.infuse=By combining both crystals, you now unlock a new potential...
+ee.desc.core=A component capable of combining two crystals together in a crafting table.
+ee.desc.guide=A small handbook covering End Expansion's contents.
+ee.desc.unholy_sword_desc=Cursed with raw unholy energy after held for long periods of time
+ee.desc.medal_desc=Using this medallion will summon an eye that when mobs are near they will teleport them randomly away from you.
+ee.desc.efsword_desc=Calibrated and Perfected, Right clicking will summon forth a ghost arm to swing in front of you.
+ee.desc.nuke_desc=A Nuclear device created from raw Unholy energy, results might be chaotic.
+ee.desc.bow_desc=When in your main hand, any creatures that get too close will be attacked by the Thousand swords.
+ee.desc.shield_name_desc=Guilded Shield
+ee.desc.shield_desc=When blocking, you will summon a circle of spikes around you.
+ee.desc.dark_desc=Full Set Bonus ignores any Red Rage Effects
+ee.desc.compulsor_desc=When powered, this machine will suck any items/entities to it's location. Great for Mob farming!
+ee.desc.ash_key_desc=Right Click on the Fortresses key block to awaken the End King
+ee.desc.ef_desc=Full Set gives Speed I, Jump Boost I
+ee.desc.efstaff_desc=Right Click will launch enemies and apply the Red Rage, Left click will shoot a projectile
+death.attack.ee:maelstrom=%1$s succumbed to the void
+death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s
+death.attack.ee:playerMaelstrom=%1$s was killed by %2$s
+death.attack.ee:thrownMaelstrom=%1$s was pummeled to death by a %2$s
+death.attack.ee:explosionMaelstrom=%1$s was blown up
+death.attack.ee:explosionMaelstrom.player=%1$s was blown up while fighting a %2$s
+death.attack.ee:magicMaelstrom=%1$s was magicked by a %2$s
+
+
+#Index Titles
+
+#Book Info - Intro
+desc.intro_0=The end is known to hold many
+desc.intro_1=mysteries. This book will act
+desc.intro_2=as a guide of your travels and
+desc.intro_3=unlock new notes as you explore
+desc.intro_4=the end. But be wary traveller.
+desc.intro_5=There is many threats to be
+desc.intro_6=additionally found!
+
+#Pure Crystals
+title.pure_cry_0=Pure Crystals
+title.pure_cry_1=Pure Crystals Cont.
+
+desc.pure_cry_6=Pure Crystals, a resource used in a
+desc.pure_cry_7=multitude of recipes and is known as
+desc.pure_cry_8=the End's main form of advancement.
+desc.pure_cry_9=However, they can be difficult to
+desc.pure_cry_10=harvest and therefore should be used
+desc.pure_cry_11=wisely.
+
+desc.cont_cry_6=After collecting many chunks of it,
+desc.cont_cry_7=you will want to combine four of them
+desc.cont_cry_8=together to create a stronger source
+desc.cont_cry_9=of the crystal.
+
+#Ancient Guilder Desc
+
+desc.guilder_6=One of the races that inhabits the
+desc.guilder_7=End. Known for the capability of
+desc.guilder_8=changing blocks. By interacting with
+desc.guilder_9=them, it will change the block within
+desc.guilder_10=there head. They will then search for
+desc.guilder_11=that block and change it into a set
+desc.guilder_12=different block.
+# The Lamented islands
+title.lame_0=The Lamented Islands
+desc.lame_0=Found as a structure in the base
+desc.lame_1=biome, the Lamented islands are seen
+desc.lame_2=as the End's strangest architecture.
+desc.lame_3=This structure acts like a jail cell
+desc.lame_4=where an ancient race remains trapped
+desc.lame_5=within. It is recommended to seek
+desc.lame_6=out one of these buildings before
+desc.lame_7=progressing to any other biomes. But
+desc.lame_8=be wary traveller, as danger is high
+desc.lame_9=in Lamented Islands.
+
+
+#Constructor
+desc.cons_6=One of the main dungeon inhabitants in
+desc.cons_7=the Lamented Islands. These
+desc.cons_8=creatures are related to Shulkers
+desc.cons_9=but are more mobile and golem like in
+desc.cons_10=behaviour. They can also spawn on
+desc.cons_11=the regular End islands albeit less
+desc.cons_12=common than Endermen, they are also
+desc.cons_13=a great source for Shulker boxes.
+
+#The Lamentor
+desc.cboss_6=These guardians we're once the
+desc.cboss_7=original overseers of the End.
+desc.cboss_8=There sword skills and agile movement
+desc.cboss_9=proved to be a massive threat to the
+desc.cboss_10=Ender King's armies. However, they
+desc.cboss_11=eventually lost in the cataclysmic
+desc.cboss_12=event that created the Ash
+desc.cboss_13=Wastelands.
+
+title.cboss_0=The Lamentor Cont.
+
+skill.cboss_0=Activating the key block in the
+skill.cboss_1=center of the Lamented islands will
+skill.cboss_2=bring forth one of these creatures.
+skill.cboss_3=Upon killing it will drop one of
+skill.cboss_4=two items. It's eye, used for
+skill.cboss_5=granting levitation for a short
+skill.cboss_6=period of time. Or the Lamentor's
+skill.cboss_7=sword, that will allow the user
+skill.cboss_8=to dash quickly in a direction.
+skill.cboss_9=
+skill.cboss_10=Taking on the Lamentor is no easy
+skill.cboss_11=feat, it is recommended to have
+skill.cboss_12=atleast bare diamond armor and
+skill.cboss_13=a bow with plenty of arrows.
+
+#Lamented Eye Trinket
+title.lame_eye_0=Forgotten Medallion
+
+skill.mdl_6=This medallion can be proven quite
+skill.mdl_7=well for it's defensive measures.
+skill.mdl_8=When activating it, a Lamented Eye
+skill.mdl_9=will hover around you. It will fade
+skill.mdl_10=away when a mob gets near you,
+skill.mdl_11=teleporting them randomly away.
+
+#Guilded Shield
+title.shield_0=Guilded Shield
+
+skill.shield_6=Empowered with Pure Crystals,
+skill.shield_7=this shield becomes far more than
+skill.shield_8=an average sheet of protection.
+skill.shield_9=When Blocking, it will summon forth
+skill.shield_10=a set of spikes to encircle you.
+skill.shield_11=Making it's defensive power far
+skill.shield_12=greater, and further keeping it's
+skill.shield_13=user safe.
+#End Compulsor
+title.compulsor_0=End Compulsor
+
+block.cmp_6=A useful machine that when
+block.cmp_7=powered by a redstone source,
+block.cmp_8=it will suck up items and
+block.cmp_9=entities making it quite useful for
+block.cmp_10=transportation and mob farms. It
+block.cmp_11=can also be found as a foundation
+block.cmp_12=of traps in certain structures.
+#Ash Wastelands Biome
+title.biome_0=Ash Wastelands
+
+desc.ash_0=This biome is the result of an
+desc.ash_1=all out war. The End has never
+desc.ash_2=seen anything of this scale, a vast
+desc.ash_3= part of the End is forever scarred.
+desc.ash_4=The biome shows this hostility with
+desc.ash_5=the dark shroud that encompasses it
+desc.ash_6=when entering. Limiting visibility
+desc.ash_7=to a short distance for those that
+desc.ash_8=enter. However, life finds a way,
+desc.ash_9=and creatures have mutated to
+desc.ash_10=adopt this new environment and
+desc.ash_11=is also birth of many new
+desc.ash_12=creations such as Unholy
+desc.ash_13=crystals.
+
+#Ashed Bricks
+desc.ash_block_6=Created from End Ash, Ash Bricks
+desc.ash_block_7=are the new main block used in
+desc.ash_block_8=this biome. You can make all
+desc.ash_block_9=the block variants plus they are
+desc.ash_block_10=used within some of the
+desc.ash_block_11=contraptions that can be made
+desc.ash_block_12=from the biome's resources.
+
+#Unholy Crystals
+
+title.cont_red=Unholy Crystals Cont.
+
+desc.red_6=Found in Ash Wastelands, these
+desc.red_7=crystals are empowered with an
+desc.red_8=unsightly rage. Many creatures
+desc.red_9=within the Ash wastelands can be
+desc.red_10=seen with traces of this crystal
+desc.red_11=on there bodies. There is many
+desc.red_12=uses for this crystal however.
+
+desc.cont_red_6=Likewise with Pure Crystals
+desc.cont_red_7=you can combine four chunks to
+desc.cont_red_8=create an Unholy Crystal with
+desc.cont_red_9=greater power imbued into it.
+
+#Red Lamp
+desc.lamp_6=The common light source found
+desc.lamp_7=in the Ash Wastelands.
+
+#Ash Door Keyhole
+desc.hole_6=These devices work in tandem
+desc.hole_7=with Door Creators, upon entering
+desc.hole_8=a Unholy crystal in it. It will
+desc.hole_9=de-activate any Door Creators within
+desc.hole_10=7 blocks of each of it's axis.
+desc.hole_11=Used commonly in structures as a
+desc.hole_12=gate to keep any unwanted pests
+desc.hole_13=from entering.
+
+#Ash Door Creator
+desc.crea_6=This contraption when powered by
+desc.crea_7=redstone, will create a 7 block
+desc.crea_8=barrier in the direction that it has
+desc.crea_9=been placed. Can be used as doors,
+desc.crea_10=bridges, and so on.
+
+#Ash Trap Floor
+desc.trap_6=Ever wanted to have your base
+desc.trap_7=protected? These devices don't
+desc.trap_8=require redstone to be activated.
+desc.trap_9=They instead when any creature with
+desc.trap_10=the exception of the Ender Knights,
+desc.trap_11=will launch a spike from the floor
+desc.trap_12=when stepped on. Ouch!
+
+#Infused Crystals
+desc.if_cry_6=By combining both, you unlock a
+desc.if_cry_7=new potential. Used as a major
+desc.if_cry_8=crafting material for the End's
+desc.if_cry_9=finest armor, weapons, and magical
+desc.if_cry_10=abilities. One of the other major
+desc.if_cry_11=components is what lies inside
+desc.if_cry_12=every living being. Perhaps you
+desc.if_cry_13=should head to the eerie fortress.
+
+#Infused Pickaxe
+desc.pick_6=A major step up from a diamond
+desc.pick_7=pickaxe offering quick mining speed.
+desc.pick_8=Let this be a taste of the power of
+desc.pick_9=using Infused Crystals in your
+desc.pick_10=equipment.
+
+#Ashed Parasite
+desc.bug_6= These critters occasionally dig up
+desc.bug_7=Infusion Cores, and will do it faster
+desc.bug_8=if given Unholy Crystals and it will
+desc.bug_9=pacify them for the time being, also
+desc.bug_10=they will try to attack you while
+desc.bug_11=attempting to pacify them. They also
+desc.bug_12=drop a carapace and food upon being
+desc.bug_13=slain.
+
+#End Stalkers
+desc.stal_6=Terrifying creatures that seem to
+desc.stal_7=have some relations to Endermen.
+desc.stal_8=They like to stalk there prey while
+desc.stal_9=slowly approaching. If they get close
+desc.stal_10=enough they will frantically attack
+desc.stal_11=there target. If you see them before
+desc.stal_12=they attack, they'll run back into
+desc.stal_13=the darkness only to disappear again.
+
+#End Fortress and other Structures
+title.end_fort_0=The End King's Fortress
+
+desc.fort_0=The mighty fortress that shrouds atop
+desc.fort_1=the Wastelands. Could what's up there
+desc.fort_2=be the cause of such treachery?
+desc.fort_3=Would it even be wise to go up there?
+desc.fort_4=It is recommended to have your absolute
+desc.fort_5=best gear when attempting this dungeon.
+desc.fort_6=Stock up on food, healing potions,
+desc.fort_7=anything to give you the needed boost
+desc.fort_8=traveller. It's time to end this.
+
+title.ot_str_0=Other Structures
+
+desc.ot_0=Theres many other structures that lie
+desc.ot_1=within the Ash Wastelands. Most of
+desc.ot_2=them being ruins, but can offer
+desc.ot_3=great loot from what remains. Such
+desc.ot_4=structures as outposts, and small
+desc.ot_5=fortresses on lone islands. If you
+desc.ot_6=don't feel equipped or prepared
+desc.ot_7=enough, hunting for these ruins in
+desc.ot_8=the wastelands can prove beneficial.
+
+#House of Knights
+title.knights_0=The Unholy Household
+desc.knig_6=Although not native to the end, the
+desc.knig_7=knights are far from what they once
+desc.knig_8=we're. These crazed power hungry
+desc.knig_9=fanatics invaded the End just to
+desc.knig_10=feel their love for war again.
+desc.knig_11=However, following using Unholy
+desc.knig_12=Crystals they have seemed to lost
+desc.knig_13=there sentience and only seek more.
+
+#House of Knights Cont.
+title.knights_1=The Unholy Household Cont.
+desc.mage_0=These knights have specializations,
+desc.mage_1=and have different methods of combat.
+desc.mage_2=Mages, cast spells, heal there allies,
+desc.mage_3=and can perform a ritual to turn on of
+desc.mage_4=there own into something stronger.
+desc.mage_5=Swordsmen are fast and barbaric in
+desc.mage_6=there style, closing the gap and
+desc.mage_7=releasing a flurry of attacks. While
+desc.mage_8=the shielder is slow but highly
+desc.mage_9=defensive. As tough as they seem to
+desc.mage_10=be removed. A timed parry can disable
+desc.mage_11=there shield for a short period of
+desc.mage_12=time allowing you to strike them.
+
+#Dark Helmet and Chestplate
+
+desc.dd_helm_6=The Dark armour set, this set only
+desc.dd_helm_7=contains it's helmet and chest
+desc.dd_helm_8=piece for the full bonus to take
+desc.dd_helm_9=effect. With the bonus being
+desc.dd_helm_10=immunity to the Red Rage
+desc.dd_helm_11=potion effect.
+
+desc.dd_cont_6=In other words, basically allowing
+desc.dd_cont_7=you to carry Unholy Crystals, Chunks,
+desc.dd_cont_8=and the Unholy sword and any attacks
+desc.dd_cont_9=that deliver the Red Rage.
+
+#Chad Knight
+desc.chad_6=This beast of a warrior is created
+desc.chad_7=by Mages casting a curse on other
+desc.chad_8=Knights. They are very fast in there
+desc.chad_9=attacks, and will even try to block
+desc.chad_10=your melee attacks. Not many get to
+desc.chad_11=witness one of these warriors in
+desc.chad_12=action as you'll be lucky to leave
+desc.chad_13=alive.
+
+#End King
+desc.king_6=The one to blame for this blasphemy.
+desc.king_7=He is the one kindling all together,
+desc.king_8=he alone was the power to break the
+desc.king_9=End. He must be stopped at all costs.
+desc.king_10=You may find him atop the main
+desc.king_11=fortress by using an Ashed Key on
+desc.king_12=the key block. As he unlocks your
+desc.king_13=full potential.
+
+#Endfall Set
+desc.end_mod_6=Congrats on your quest traveller,
+desc.end_mod_7=although the End will never be
+desc.end_mod_8=restored to what it once was. You
+desc.end_mod_9=atleast rid the parasite that has
+desc.end_mod_10=decimated it. You have reached
+desc.end_mod_11=the true ending of the mod's
+desc.end_mod_12=progression line.
+
+desc.end_cont_6=As the last final pages, will
+desc.end_cont_7=show you the recipes for the
+desc.end_cont_8=rewards you deserve. The End
+desc.end_cont_9=Fall set is one of high
+desc.end_cont_10=durability along with having
+desc.end_cont_11=magical attributes. The full
+desc.end_cont_12=armour set provides Speed I,
+desc.end_cont_13=and Jump Boost I.
+
+desc.ef_arm=End Fall Leggings & Boots
+
+#Mini-Nuke
+desc.mn_6=harnessing the End King's power
+desc.mn_7=inside of one block. Just make
+desc.mn_8=sure you keep your distance when
+desc.mn_9=igniting this explosive.
+
+#EndFall Sword
+skill.sword_6=Forever rotating it's crystals
+skill.sword_7=around the blade. This lethal
+skill.sword_8=swords ability allows the user
+skill.sword_9=to summon the End King's ghost
+skill.sword_10=arm in front of them. Dealing
+skill.sword_11=1.5x damage to anyone in stands
+skill.sword_12=against you.
+
+#EndFall Bow
+skill.ef_bow_6=Great for a user who doesn't
+skill.ef_bow_7=wish anyone to interrupt there
+skill.ef_bow_8=archery skills. Anyone who gets
+skill.ef_bow_9=close to you while equipping this
+skill.ef_bow_10=bow will be dealt with by the
+skill.ef_bow_11=thousand swords.
+
+#EndFall Staff
+skill.ef_st_6=With this staff you'll be able to
+skill.ef_st_7=spread the Red Rage onto your
+skill.ef_st_8=opponents. By Right clicking, any
+skill.ef_st_9=living being close to you will be
+skill.ef_st_10=launched and applied with the Red
+skill.ef_st_11=Rage. While Left clicking will shoot
+skill.ef_st_12=a projectile every 3 seconds.

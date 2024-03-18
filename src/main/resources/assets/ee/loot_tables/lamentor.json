@@ -1,0 +1,39 @@
+{
+  "pools": [
+    {
+      "name" : "ee:constructor",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "ee:sword",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "ee:lamented",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        }
+
+      ]
+    }
+  ]
+}

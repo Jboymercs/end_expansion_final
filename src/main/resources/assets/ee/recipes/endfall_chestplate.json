@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V V",
+    "R#R",
+    "VBV"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:soul"
+    },
+    "V": {
+      "item": "ee:dark_ingot"
+    },
+    "R": {
+      "item": "ee:infused_crystal"
+    },
+    "B": {
+      "item": "ee:plate"
+    }
+  },
+  "result": {
+    "item": "ee:endfall_chestplate"
+  }
+}

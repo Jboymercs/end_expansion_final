@@ -1,0 +1,6 @@
+{
+  "variants":
+  {
+    "variant=default": { "model": "ee:ash_brick_double" }
+  }
+}

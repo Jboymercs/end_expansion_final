@@ -1,0 +1,261 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"fly": {
+			"loop": true,
+			"animation_length": 3,
+			"bones": {
+				"Ground": {
+					"position": {
+						"0.0": {
+							"vector": [0, 14, 1]
+						},
+						"1.5": {
+							"vector": [0, 16, 1]
+						},
+						"3.0": {
+							"vector": [0, 14, 1]
+						}
+					}
+				}
+			}
+		},
+		"idle": {
+			"loop": true,
+			"animation_length": 3,
+			"bones": {
+				"Torso": {
+					"rotation": {
+						"vector": [15, 0, 0]
+					}
+				},
+				"LowerLegs": {
+					"rotation": {
+						"vector": [-15, 0, 0]
+					}
+				},
+				"LArm": {
+					"rotation": {
+						"vector": [10, 10, -10]
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [0, -1, 0]
+						},
+						"3.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"RArm": {
+					"rotation": {
+						"vector": [10, -10, 10]
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [0, -1, 0]
+						},
+						"3.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"walk": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"Torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [20, 0, 0]
+						},
+						"1.0": {
+							"vector": [20, 0, 0]
+						}
+					}
+				},
+				"LowerLegs": {
+					"rotation": {
+						"vector": [10, 0, 0]
+					}
+				},
+				"LArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [25, 10, -10]
+						},
+						"1.0": {
+							"vector": [25, 10, -10]
+						}
+					}
+				},
+				"RArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [25, -10, 10]
+						},
+						"1.0": {
+							"vector": [25, -10, 10]
+						}
+					}
+				},
+				"LAJ": {
+					"rotation": {
+						"0.0": {
+							"vector": [20, 0, 0]
+						},
+						"1.0": {
+							"vector": [20, 0, 0]
+						}
+					}
+				},
+				"RAJ": {
+					"rotation": {
+						"0.0": {
+							"vector": [20, 0, 0]
+						},
+						"1.0": {
+							"vector": [20, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"interact": {
+			"animation_length": 2,
+			"bones": {
+				"Torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [15, 0, 0]
+						},
+						"0.5": {
+							"vector": [35, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [35, 0, 0]
+						},
+						"1.5": {
+							"vector": [-10, 0, 0]
+						},
+						"2.0": {
+							"vector": [15, 0, 0]
+						}
+					}
+				},
+				"LowerLegs": {
+					"rotation": {
+						"0.0": {
+							"vector": [-15, 0, 0]
+						},
+						"0.5": {
+							"vector": [-20, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [-20, 0, 0]
+						},
+						"1.5": {
+							"vector": [10, 0, 0]
+						},
+						"2.0": {
+							"vector": [-15, 0, 0]
+						}
+					}
+				},
+				"LArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [10, 10, -10]
+						},
+						"0.5": {
+							"vector": [-30, 10, -30],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [-30, 10, -30]
+						},
+						"1.5": {
+							"vector": [-70, -60, 0],
+							"easing": "easeInElastic"
+						},
+						"2.0": {
+							"vector": [10, 10, -10]
+						}
+					}
+				},
+				"RArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [10, -10, 10]
+						},
+						"0.5": {
+							"vector": [-30, -10, 30],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [-30, -10, 30]
+						},
+						"1.5": {
+							"vector": [-70, 60, 0],
+							"easing": "easeInElastic"
+						},
+						"2.0": {
+							"vector": [10, -10, 10]
+						}
+					}
+				},
+				"LAJ": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-20, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [-20, 0, 0]
+						},
+						"1.5": {
+							"vector": [40, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"RAJ": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-20, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [-20, 0, 0]
+						},
+						"1.5": {
+							"vector": [40, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

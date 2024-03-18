@@ -1,0 +1,55 @@
+{
+	"parent": "builtin/entity",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 1.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 1.5, 0.25]
+		},
+		"firstperson_righthand": {
+			"rotation": [-32, 6, 11],
+			"translation": [3.5, 1.5, -3]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-41, 13, -6],
+			"translation": [6.25, 1.5, -5.75]
+		},
+		"ground": {
+			"rotation": [-45, 0, 0],
+			"translation": [0, 2.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [0, 45, -57],
+			"translation": [0.5, 0.75, 0.75],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"fixed": {
+			"rotation": [0, 0, -45],
+			"scale": [0.7, 0.7, 0.7]
+		}
+	},
+	"groups": [
+		{
+			"name": "Base",
+			"origin": [8, 0, 8],
+			"color": 0,
+			"children": [
+				0,
+				1,
+				2,
+				{
+					"name": "CrystalBall",
+					"origin": [8, 19, 8],
+					"color": 0,
+					"children": [3]
+				},
+				4,
+				5
+			]
+		}
+	]
+}

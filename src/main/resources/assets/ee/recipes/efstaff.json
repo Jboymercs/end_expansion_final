@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GV#",
+    " B ",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "ee:dark_ingot"
+    },
+    "B": {
+      "item": "ee:soul"
+    },
+    "V": {
+      "item": "ee:infused_crystal"
+    },
+    "#": {
+      "item": "ee:red_chunk"
+    },
+    "G": {
+      "item": "ee:purple_chunk"
+    }
+  },
+  "result": {
+    "item": "ee:efstaff"
+  }
+}

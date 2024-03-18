@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R#R",
+    "RXR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "ee:plate"
+    },
+    "#": {
+      "item": "ee:dark_ingot"
+    },
+    "X": {
+      "item": "ee:purple_crystal_item"
+    }
+  },
+  "result": {
+    "item": "ee:durable_shield"
+  }
+}

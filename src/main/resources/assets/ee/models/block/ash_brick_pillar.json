@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ee:blocks/ash_pillar_top",
+    "side": "ee:blocks/ash_pillar_side"
+  }
+}
