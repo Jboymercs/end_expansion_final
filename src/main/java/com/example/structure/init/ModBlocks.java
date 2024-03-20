@@ -43,6 +43,7 @@ public class ModBlocks {
     public static final Block END_ASH = new BlockAsh("end_ash", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK = new BlockBase("ash_brick", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK_STAIRS = new BlockStairBase("ash_brick_stairs", ASH_BRICK.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+
     public static final BlockSlab ASH_BRICK_DOUBLE = new BlockDoubleSlab("ash_brick_double", Material.ROCK, ModCreativeTabs.ITEMS, ModBlocks.ASH_BRICK_HALF, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
     public static final BlockSlab ASH_BRICK_HALF = new BlockHalfSlab("ash_brick_half", Material.ROCK, ModCreativeTabs.ITEMS, ModBlocks.ASH_BRICK_HALF, ModBlocks.ASH_BRICK_DOUBLE, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
     public static final Block ASH_BRICK_WALL = new BlockModWall("ash_brick_wall", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
@@ -72,6 +73,16 @@ public class ModBlocks {
     public static final Block END_BARRIER = new BlockBarrier("end_barrier", Material.BARRIER);
 
 
+    //Concept Work
+    public static final Block BARE_SANS = new BlockBase("bare_sand", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.SAND).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_STONE = new BlockBase("bare_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_STONE_STAIRS = new BlockStairBase("bare_stairs", BARE_STONE.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_STONE_EYE = new BlockBase("eye_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_STONE_SMOOTH = new BlockBase("bare_stone_smooth", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_PLANT = new BlockBarrendPlant("bare_plant", Material.GRASS);
+    public static final Block BARE_LEAVES = new BlockBareLeaves("bare_leaves", PLANTS_HARDNESS, PLANTS_RESISTANCE, SoundType.PLANT).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_BARK = new BlockLogBase("bare_bark", WOOD_HARDNESS, WOOD_RESISTANCE, SoundType.WOOD).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_BARK_HOLE = new BlockLogBase("bare_bark_hole", WOOD_HARDNESS, WOOD_RESISTANCE, SoundType.WOOD).setCreativeTab(ModCreativeTabs.ITEMS);
     //Misc
     public static final Block MEGA_STRUCTURE_BLOCK = new BlockMegaStructure("mega_structure_block");
     public static final Block END_ASH_DOOR_ACTIVATE = new BlockDoorDeactivation("door_on", Material.ROCK, ModItems.RED_CRYSTAL_ITEM).setResistance(OBSIDIAN_RESISTANCE).setHardness(OBSIDIAN_HARDNESS);

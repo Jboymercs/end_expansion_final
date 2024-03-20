@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "ee:blocks/bare_stone_top",
+    "bottom" : "ee:blocks/eye_stone_bottom",
+    "side": "ee:blocks/eye_stone_side"
+  }
+}

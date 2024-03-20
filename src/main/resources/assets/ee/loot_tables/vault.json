@@ -260,7 +260,7 @@
         },
         {
           "type": "item",
-          "name": "mineacraft:diamond_pickaxe",
+          "name": "minecraft:diamond_pickaxe",
           "weight": 8,
           "functions": [
             {

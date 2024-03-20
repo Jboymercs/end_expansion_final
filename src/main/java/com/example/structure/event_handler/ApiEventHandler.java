@@ -22,6 +22,7 @@ public class ApiEventHandler {
     static void onNetherAPIRegistry(@Nonnull final NetherAPIRegistryEvent.End event)
     {
         event.registry.registerBiome(BiomeRegister.END_ASH_WASTELANDS, 80);
+        event.registry.registerBiome(BiomeRegister.END_BARREND_FOREST, 80);
         //King Fortress
         event.registry.registerStructure("EndKingsFortress", chunkGenerator -> Main.instance.fortress);
 

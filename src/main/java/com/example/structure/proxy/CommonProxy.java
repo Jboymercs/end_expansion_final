@@ -1,6 +1,7 @@
 package com.example.structure.proxy;
 
 import com.example.structure.Main;
+import com.example.structure.blocks.BlockLeavesBase;
 import com.example.structure.entity.tileentity.TileEntityAltar;
 import com.example.structure.event_handler.ModEvents;
 import com.example.structure.gui.book.GuiBook;
@@ -32,6 +33,10 @@ public class CommonProxy implements IGuiHandler {
 
     public static final int GUI_ALTAR = 1;
     public static final int GUI_BOOK = 2;
+
+    public void setFancyGraphics(BlockLeavesBase block, boolean isFancy) {
+    }
+
     public void registerItemRenderer(Item item, int meta, String id) {
     }
 

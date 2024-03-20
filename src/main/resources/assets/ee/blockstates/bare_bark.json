@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "ee:bare_bark" },
+    "axis=z":   { "model": "ee:bare_bark", "x": 90 },
+    "axis=x":   { "model": "ee:bare_bark", "x": 90, "y": 90 },
+    "axis=none": { "model": "ee:bare_bark" }
+  }
+}

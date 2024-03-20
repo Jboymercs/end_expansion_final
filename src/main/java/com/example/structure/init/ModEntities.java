@@ -10,6 +10,8 @@ import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
+import com.example.structure.entity.seekers.EndSeeker;
+import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.*;
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
 import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
@@ -99,8 +101,8 @@ public class ModEntities {
         registerEntityWithID("end_shield", EntityEnderShield.class, ENTITY_START_ID++, 60, knight_mobs);
         //Ender Mage
         registerEntityWithID("end_mage", EntityEnderMage.class, ENTITY_START_ID++, 60, knight_mobs);
-        //Ender Sword Ultra
-        registerEntityWithID("end_lord", EntityKnightLord.class, ENTITY_START_ID++, 60, knight_mobs);
+        //Ender Sword Ultra - Hidden Bosses
+        registerEntity("end_lord", EntityKnightLord.class, ENTITY_START_ID++, 60);
         //Snatcher
         registerEntityWithID("snatcher", EntitySnatcher.class, ENTITY_START_ID++, 70, ash_mobs);
         //Heal Aura
@@ -129,6 +131,12 @@ public class ModEntities {
         registerEntity("pghost_king", EntityPermanantGhost.class, ENTITY_START_ID++, 70);
         //Ground Sword Projectile - Utitlity
         registerEntity("sword_attack", EntityGroundSword.class, ENTITY_START_ID++, 80);
+        //End Seeker
+        registerEntityWithID("end_seeker", EndSeeker.class, ENTITY_START_ID++, 80, end_mobs);
+        //Ender Eye
+        registerEntityWithID("end_eye", EntityEnderEyeFly.class, ENTITY_START_ID++, 80, end_mobs);
+        //End Seeker - Hidden Bosses
+        registerEntity("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80);
     }
 
     public static void RegisterEntitySpawns() {

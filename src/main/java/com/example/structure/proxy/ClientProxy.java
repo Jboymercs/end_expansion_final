@@ -1,5 +1,6 @@
 package com.example.structure.proxy;
 
+import com.example.structure.blocks.BlockLeavesBase;
 import com.example.structure.entity.animation.IAnimatedEntity;
 import com.example.structure.entity.tileentity.TileEntityAltar;
 import com.example.structure.entity.util.data.GlowingMetadataSection;
@@ -28,6 +29,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerItemRenderer(Item item, int meta, String id) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
+    }
+
+    @Override
+    public void setFancyGraphics(BlockLeavesBase block, boolean isFancy) {
+        block.setFancyGraphics(isFancy);
     }
 
     @Override

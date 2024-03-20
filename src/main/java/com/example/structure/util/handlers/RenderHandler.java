@@ -9,6 +9,8 @@ import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
 import com.example.structure.entity.render.*;
+import com.example.structure.entity.seekers.EndSeeker;
+import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -115,5 +117,11 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityPermanantGhost.class, RenderPermanantGhost::new);
         //Ground Sword - Utility
         RenderingRegistry.registerEntityRenderingHandler(EntityGroundSword.class, RenderGroundSword::new);
+        //End Seeker - Mob
+        RenderingRegistry.registerEntityRenderingHandler(EndSeeker.class, RenderEnderSeeker::new);
+        //Ender Eye
+        RenderingRegistry.registerEntityRenderingHandler(EntityEnderEyeFly.class, RenderEnderEyeFly::new);
+        //End Seeker Prime
+        RenderingRegistry.registerEntityRenderingHandler(EndSeekerPrime.class, RenderSeekerPrime::new);
     }
 }

@@ -202,9 +202,6 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         final ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
 
         //Big Structures
-        //for(MapGenStructure structure : structures) {
-           // structure.generateStructure(chunkGenerator.getWorld(), random, chunkPos);
-      //  }
 
         //Outpost
         if(canStructureSpawn(pos.getX(), pos.getZ(), chunkGenerator.getWorld(), 30)) {

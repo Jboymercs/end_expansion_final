@@ -7,7 +7,9 @@ import com.example.structure.init.ModBlocks;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.init.ModItems;
 import com.example.structure.items.CrystalBallItem;
+import com.example.structure.items.ItemAbstractMultiModel;
 import com.example.structure.items.Items;
+import com.example.structure.items.tools.CustomModelLoader;
 import com.example.structure.renderer.*;
 import com.example.structure.util.IHasModel;
 import com.example.structure.util.ModReference;
@@ -21,6 +23,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -106,6 +109,9 @@ public class RegistryHandler {
                 ((IHasModel) block).registerModels();
             }
         }
+
+        ModelLoaderRegistry.registerLoader(new CustomModelLoader());
+        ((ItemAbstractMultiModel)ModItems.GUN_LAUNCHER).registerModels();
 
     }
 }

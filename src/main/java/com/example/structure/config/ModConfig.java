@@ -396,4 +396,31 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static int vault_distance = 300;
 
+    @Config.Name("End Seekers Health")
+    @Config.Comment("Change the Health of the End Seekers")
+    @Config.RequiresMcRestart
+    public static double seeker_health = 25D;
+
+    @Config.Name("End Seeker Attack Damaage")
+    @Config.Comment("Change the Attack Damage of the End Seeker")
+    @Config.RequiresMcRestart
+    public static double seeker_attack_damage = 6D;
+
+
+
+    @Config.Name("End Seekers Prime Health")
+    @Config.Comment("Change the Health of the End Seeker Prime")
+    @Config.RequiresMcRestart
+    public static double seeker_prime_health = 120D;
+
+    @Config.Name("End Seeker Prime Attack Damaage")
+    @Config.Comment("Change the Attack Damage of the End Seeker Prime")
+    @Config.RequiresMcRestart
+    public static double seeker_prime_attack_damage = 8D;
+
+    @Config.Name("Seeker Gun Cooldown")
+    @Config.Comment("Change the cooldown of the seeker gun in seconds")
+    @Config.RequiresMcRestart
+    public static int seeker_gun_cooldown = 5;
+
 }

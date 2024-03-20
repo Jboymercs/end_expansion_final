@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "check_decay=true,decayable=true": { "model": "ee:bare_leaves" },
+    "check_decay=true,decayable=false": { "model": "ee:bare_leaves" },
+    "check_decay=false,decayable=true": { "model": "ee:bare_leaves" },
+    "check_decay=false,decayable=false": { "model": "ee:bare_leaves" }
+  }
+}

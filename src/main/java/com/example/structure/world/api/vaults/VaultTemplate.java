@@ -2,9 +2,12 @@ package com.example.structure.world.api.vaults;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityBuffker;
+import com.example.structure.entity.EntityEnderEyeFly;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
+import com.example.structure.entity.seekers.EndSeeker;
+import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
 import com.example.structure.entity.tileentity.tileEntityMobSpawner;
 import com.example.structure.init.ModBlocks;
@@ -63,7 +66,48 @@ public class VaultTemplate extends ModStructureTemplate {
                 if (tileentity instanceof tileEntityMobSpawner) {
                     ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
                             new MobSpawnerLogic.MobSpawnData[]{
-                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityBuffker.class), 1)
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityBuffker.class), 1),
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EndSeeker.class), 1)
+                            },
+                            new int[]{1, 3},
+                            1,
+                            16);
+                }
+            } else {
+                world.setBlockToAir(pos);
+            }
+        }
+
+
+        //Mini-boss Spawn
+        else if(function.startsWith("boss")) {
+            if (generateMobSpawn()) {
+                world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER.getDefaultState(), 2);
+                TileEntity tileentity = world.getTileEntity(pos);
+                if (tileentity instanceof tileEntityMobSpawner) {
+                    ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
+                            new MobSpawnerLogic.MobSpawnData[]{
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EndSeekerPrime.class), 1),
+                            },
+                            new int[]{1},
+                            1,
+                            8);
+                }
+            } else {
+                world.setBlockToAir(pos);
+            }
+        }
+
+        //Ender Eye Spawns
+        else if(function.startsWith("ambient")) {
+            if (generateMobSpawn()) {
+                world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER.getDefaultState(), 2);
+                TileEntity tileentity = world.getTileEntity(pos);
+                if (tileentity instanceof tileEntityMobSpawner) {
+                    ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
+                            new MobSpawnerLogic.MobSpawnData[]{
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityEnderEyeFly.class), 1)
+
                             },
                             new int[]{1},
                             1,
