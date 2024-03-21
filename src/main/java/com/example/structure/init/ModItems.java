@@ -71,6 +71,7 @@ public class ModItems {
     public static final Item PROJECTILE_PURPLE = new CrystalBallItem("projpurp", null);
 
     public static final Item GUN_LAUNCHER = new ItemGunLauncher("gun", "gun_desc");
+    public static final Item HEAL_FOOD = new ItemHealFood("heal_food", 2, 1, false, "hf_desc");
 
 
     //Misc.

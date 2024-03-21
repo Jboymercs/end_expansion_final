@@ -91,7 +91,7 @@ public class ModConfig {
     public static int constructor_weights = 1;
 
     @Config.Name("End Biome Structure Spawning Enabled/Disabled")
-    @Config.Comment("Change the value to enable or disable structure spawning in the regular End Biome, this includes ruins, towers, and the Lamented Islands")
+    @Config.Comment("Change the value to enable or disable structure spawning in the regular End Biome, this includes plants, End Vaults, Lamented islands, and other ruins")
     @Config.RequiresMcRestart
     public static boolean does_structure_spawn = true;
 
@@ -130,17 +130,6 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean constructor_center_spawn = true;
 
-    @Config.Name("Mini Islands Spawn above Lamented Islands Enabled/Disabled")
-    @Config.Comment("Allow mini-islands to spawn above the dungeon, this is to make it easier to counteract levitation, if you want it to be harder set it too false")
-    @Config.RequiresMcRestart
-    public static boolean miniIslands_spawn = true;
-
-    @Config.Name("Mini-Island Chest Spawns Chance")
-    @Config.Comment("Change the chance of loot spawns for the mini-islands, higher number means lesser chance")
-    @Config.RangeInt(min = 0, max = 5)
-    @Config.RequiresMcRestart
-    public static int miniIslandLootChance = 3;
-
     @Config.Name("Lamented Islands Chest Spawn Chance")
     @Config.Comment("Change the chance of loot spawns for the Lamented Islands, higher number means lesser chance")
     @Config.RangeInt(min = 0, max = 5)
@@ -158,10 +147,14 @@ public class ModConfig {
     public static double biome_multiplier = 1D;
 
     @Config.Name("Lamented End Difficulty")
-    @Config.Comment("A Universal config option that multiplies all base health, attack damage, and abilities by this value to The Lamentor, Guilder, Constructor")
+    @Config.Comment("A Universal config option that multiplies all base health, attack damage, and abilities for all mobs pertaining to the base End Biome, Lamentor, Constructor, Guilder, Seeker")
     @Config.RequiresMcRestart
     public static double lamented_multiplier = 1D;
 
+    @Config.Name("End Ash Particle Turn off")
+    @Config.Comment("Change to turn on or off the particles from the End Ash, use this to improve performance")
+    @Config.RequiresMcRestart
+    public static boolean disable_end_ash_particles = false;
     @Config.Name("End King Health")
     @Config.Comment("Change the Health of the Ender King")
     @Config.RequiresMcRestart
@@ -275,7 +268,7 @@ public class ModConfig {
     @Config.Name("End Stalker Hibernation Timer")
     @Config.Comment("After being spotted and hiding, this timer will start in which it will go out of hiding once ended, in seconds")
     @Config.RequiresMcRestart
-    public static int stalker_hibernation = 75;
+    public static int stalker_hibernation = 50;
 
     @Config.Name("End Stalker Trigger Distance")
     @Config.Comment("After reaching within this distance, the End Stalker will enrage and go into attack mode")
@@ -363,7 +356,7 @@ public class ModConfig {
     @Config.Name("End King Fortress")
     @Config.Comment("Change the spacing of the End King Fortress in chunks away from another")
     @Config.RequiresMcRestart
-    public static int fortress_spacing = 40;
+    public static int fortress_spacing = 60;
 
     @Config.Name("End King Fortress Odds")
     @Config.Comment("Change the odds of this structure spawning, take in mind the fortress has few structure to compete with for odds of spawning")
@@ -374,7 +367,7 @@ public class ModConfig {
     @Config.Comment("Change the size of the fortress that generates")
     @Config.RangeInt(min = 1, max = 10)
     @Config.RequiresMcRestart
-    public static int fortress_size = 4;
+    public static int fortress_size = 5;
 
     @Config.Name("End Vaults Loot Chance")
     @Config.Comment("Change the chance of loot in the End Vaults, Higher is better chance")
@@ -394,29 +387,29 @@ public class ModConfig {
     @Config.Name("End Vault Chance to Spawn")
     @Config.Comment("Change the chance to spawn the End Vaults, WARNING putting it low will result in buggy and or over spawning, as this is not determined in chunks apart, it's by each time the surface is above 55")
     @Config.RequiresMcRestart
-    public static int vault_distance = 300;
+    public static int vault_distance = 275;
 
     @Config.Name("End Seekers Health")
     @Config.Comment("Change the Health of the End Seekers")
     @Config.RequiresMcRestart
-    public static double seeker_health = 25D;
+    public static double seeker_health = 30D;
 
     @Config.Name("End Seeker Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker")
     @Config.RequiresMcRestart
-    public static double seeker_attack_damage = 6D;
+    public static double seeker_attack_damage = 7D;
 
 
 
     @Config.Name("End Seekers Prime Health")
     @Config.Comment("Change the Health of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_health = 120D;
+    public static double seeker_prime_health = 140D;
 
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 8D;
+    public static double seeker_prime_attack_damage = 9D;
 
     @Config.Name("Seeker Gun Cooldown")
     @Config.Comment("Change the cooldown of the seeker gun in seconds")

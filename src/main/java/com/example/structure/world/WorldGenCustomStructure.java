@@ -1,10 +1,12 @@
 package com.example.structure.world;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.generation.WorldGenAshRuins;
+import com.example.structure.world.Biome.generation.WorldGenEndPlant;
 import com.example.structure.world.Biome.generation.WorldGenPurpleSpikes;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import com.example.structure.world.lamIslands.WorldGenBossArena;
@@ -42,13 +44,16 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
+    public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
+    public int plantsPerChunk = ModRand.range(1, 13);
+
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int x = chunkX * 16;
         int z = chunkZ * 16;
         BlockPos pos = new BlockPos(x + 8, 0, z + 8);
-        //End Expansion Islands
-        if(world.provider.getDimension() == 1) {
+        //End Expansion Structures - Mostly just the base ones, can't spawn within radius of the Ender Dragon Island
+        if(world.provider.getDimension() == 1 && pos.getX() > 500 && pos.getX() < -500 && pos.getZ() > 500 && pos.getZ() < -500) {
             if (ModConfig.does_structure_spawn) {
 
                 // Lamented Islands , Can not spawn in the Ash Wastelands
@@ -59,9 +64,6 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                     }
                 }
 
-                //Where you left off at
-                // Fix Loot tables
-                // Add End Seeker and Mini-boss
                 //End Vaults, Can not Spawn in Ash Wastelands
                 if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS) {
                     if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
@@ -69,11 +71,41 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                     }
 
                 }
+
+                //End Plants
+                if(world.rand.nextInt(7) == 0) {
+                    System.out.println("Reading this code Num Nuts");
+                    for (int k2 = 0; k2 < this.plantsPerChunk; ++k2) {
+                        int l6 = random.nextInt(16) + 8;
+                        int k10 = random.nextInt(16) + 8;
+                        int yHieght = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 70);
+                        if (yHieght > 0) {
+                            System.out.println("GENERATING PLANTS");
+                            healPlants.generate(world, random, pos.add(l6, yHieght, k10));
+                        }
+                    }
+                }
         }
 
 
 
         }
+    }
+
+
+    private int getEndSurfaceHeight(World world, BlockPos pos, int min, int max)
+    {
+        int maxY = max;
+        int minY = min;
+        int currentY = maxY;
+
+        while(currentY >= minY)
+        {
+            if(!world.isAirBlock(pos.add(0, currentY, 0)))
+                return currentY;
+            currentY--;
+        }
+        return 0;
     }
 
     /**

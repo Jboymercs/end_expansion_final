@@ -85,7 +85,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     @Override
     public boolean getCanSpawnHere() {
         // Middle end island check
-        if (this.world.provider.getDimension() == 1) {
+        if (this.world.provider.getDimension() == 1 && this.world.rand.nextInt(6) == 0) {
             return ModConfig.does_spawn_middle || this.posX > 500 || this.posX < -500 || this.posZ > 500 || this.posZ < -500;
         }
 

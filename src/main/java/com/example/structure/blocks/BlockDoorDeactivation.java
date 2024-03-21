@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -91,7 +92,6 @@ public class BlockDoorDeactivation extends BlockBase implements IBlockUpdater, I
                                     float hitZ) {
 
         if (playerIn.getHeldItemMainhand().isEmpty()) {
-            playerIn.inventory.add(1, ModItems.RED_CRYSTAL_ITEM.getDefaultInstance());
             worldIn.setBlockState(pos, ModBlocks.END_ASH_DOOR.getDefaultState());
 
         }

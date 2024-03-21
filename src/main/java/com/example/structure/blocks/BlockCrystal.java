@@ -18,6 +18,7 @@ public class BlockCrystal extends BlockBase {
     public BlockCrystal(String name, Material material, Item item) {
         super(name, material);
         this.itemDropped = item;
+        this.setSoundType(SoundType.GLASS);
     }
 
     @Override

@@ -77,6 +77,8 @@ tile.bare_stairs.name=Barrend Stone Stairs
 tile.bare_leaves.name=Barrend Leaves
 tile.bare_bark.name=Barrend Bark
 tile.bare_bark_hole.name=Barrend Bark Hole
+tile.end_h_plant.name=Turium Plant
+tile.ash_chute.name=Ashed Geyser
 tile.ash_spawner.name=Disappearing Spawner Ash
 tile.disappearing_spawner.name=Disappearing Spawner
 tile.mega_structure_block.name=Mega Structure Block
@@ -108,6 +110,7 @@ item.durable_shield.name=Guilded Shield
 item.ash_key.name=Ash End Key
 item.projpurp.name=Purple Projectile
 item.gun.name=Propulsion Gun
+item.heal_food.name=Turium Bulb
 
 itemGroup.expansion=End Expansion
 
@@ -151,6 +154,7 @@ ee.desc.ash_key_desc=Right Click on the Fortresses key block to awaken the End K
 ee.desc.ef_desc=Full Set gives Speed I, Jump Boost I
 ee.desc.efstaff_desc=Right Click will launch enemies and apply the Red Rage, Left click will shoot a projectile
 ee.desc.gun_desc=A part of the Seekers body, the fun part that shoots crystals at least.
+ee.desc.hf_desc=Eating will apply short Regeneration 2, eating too many can cause bad things to happen
 death.attack.ee:maelstrom=%1$s succumbed to the void
 death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s
 death.attack.ee:playerMaelstrom=%1$s was killed by %2$s

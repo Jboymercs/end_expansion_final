@@ -148,7 +148,7 @@ public class EndVaults {
     }
 
     private boolean generateEnd(VaultTemplate parent, BlockPos pos, Rotation rot) {
-        String[] end_types = {"end_2", "end_3", "end_4"};
+        String[] end_types = {"end_2", "end_3", "end_4", "end_6"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(end_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE) {
             return false;
@@ -310,7 +310,7 @@ public class EndVaults {
     }
 
     private boolean generateEndLevel(VaultTemplate parent, BlockPos pos, Rotation rot) {
-        String[] end_types = {"end_1", "end_2", "end_3", "end_4"};
+        String[] end_types = {"end_1", "end_2", "end_3", "end_4", "end_5"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(end_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SECOND_SIZE) {
             return false;

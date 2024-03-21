@@ -35,11 +35,11 @@ public class ModBlocks {
     public static final Block LAMENTED_END_STONE = new BlockBase("lamented_end_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_KEY_BLOCK = new BlockKey("key_block", ModItems.END_KEY, ((world, pos) -> new EntityExplosion(world, pos.getX(), pos.getY(), pos.getZ(), null, 1)));
     public static final Block ASH_KEY_BLOCK = new BlockAshKeyBlock("ash_key_block", ModItems.END_ASH_KEY,((world, pos) -> new EntityExplosion(world, pos.getX(), pos.getY(), pos.getZ(), null, 2)));
-    public static final Block PURPLE_CRYSTAL = new BlockCrystal("purple_crystal", Material.GLASS, ModItems.PURPLE_CRYSTAL_CHUNK).setHardness(WOOD_HARDNESS).setResistance(WOOD_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
-    public static final Block PURPLE_CRYSTAL_TOP = new BlockCrystalTopBase("purple_crystal_top", Material.GLASS, ModItems.PURPLE_CRYSTAL_CHUNK).setHardness(WOOD_HARDNESS).setResistance(WOOD_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block PURPLE_CRYSTAL = new BlockCrystal("purple_crystal", Material.ROCK, ModItems.PURPLE_CRYSTAL_CHUNK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block PURPLE_CRYSTAL_TOP = new BlockCrystalTopBase("purple_crystal_top", Material.ROCK, ModItems.PURPLE_CRYSTAL_CHUNK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
     //Ash Wastelands Blocks
-    public static final Block RED_CRYSTAL = new BlockCrystal("red_crystal", Material.GLASS, ModItems.RED_CRYSTAL_CHUNK).setHardness(WOOD_HARDNESS).setResistance(WOOD_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
-    public static final Block RED_CRYSTAL_TOP = new BlockCrystalTopBase("red_crystal_top", Material.GLASS, ModItems.RED_CRYSTAL_CHUNK).setHardness(WOOD_HARDNESS).setResistance(WOOD_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block RED_CRYSTAL = new BlockCrystal("red_crystal", Material.ROCK, ModItems.RED_CRYSTAL_CHUNK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block RED_CRYSTAL_TOP = new BlockCrystalTopBase("red_crystal_top", Material.ROCK, ModItems.RED_CRYSTAL_CHUNK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_ASH = new BlockAsh("end_ash", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK = new BlockBase("ash_brick", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK_STAIRS = new BlockStairBase("ash_brick_stairs", ASH_BRICK.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
@@ -69,6 +69,8 @@ public class ModBlocks {
     //End + Blocks and Utilities
     public static final Block END_PILLAR = new BlockBase("end_pillar", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_COMPULSOR = new BlockCompulsorOn("compulsor", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE, "compulsor_desc").setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block ASH_CHUTE = new BlockAshChute("ash_chute", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block END_HEAL_PLANT = new BlockEndPlant("end_h_plant", ModItems.HEAL_FOOD).setCreativeTab(ModCreativeTabs.ITEMS);
     //public static final Block ALTAR = new BlockAltar("altar", Material.ROCK).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_BARRIER = new BlockBarrier("end_barrier", Material.BARRIER);
 
@@ -79,7 +81,7 @@ public class ModBlocks {
     public static final Block BARE_STONE_STAIRS = new BlockStairBase("bare_stairs", BARE_STONE.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_STONE_EYE = new BlockBase("eye_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_STONE_SMOOTH = new BlockBase("bare_stone_smooth", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
-    public static final Block BARE_PLANT = new BlockBarrendPlant("bare_plant", Material.GRASS);
+    public static final Block BARE_PLANT = new BlockBarrendPlant("bare_plant", Material.GRASS).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_LEAVES = new BlockBareLeaves("bare_leaves", PLANTS_HARDNESS, PLANTS_RESISTANCE, SoundType.PLANT).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_BARK = new BlockLogBase("bare_bark", WOOD_HARDNESS, WOOD_RESISTANCE, SoundType.WOOD).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_BARK_HOLE = new BlockLogBase("bare_bark_hole", WOOD_HARDNESS, WOOD_RESISTANCE, SoundType.WOOD).setCreativeTab(ModCreativeTabs.ITEMS);

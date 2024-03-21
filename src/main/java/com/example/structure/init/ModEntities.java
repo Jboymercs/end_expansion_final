@@ -83,6 +83,8 @@ public class ModEntities {
         registerTileEntity(TileEntityNoSource.class, "source_off");
         //Compulsor
         registerTileEntity(TileEntityCompulsor.class, "compulsor_entity");
+        //Ash Chute - Utility
+        registerTileEntity(TileEntityAshChute.class, "ash_chute_entity");
         //End King
         registerEntityWithID("end_king", EntityEndKing.class, ENTITY_START_ID++, 50, knight_mobs);
         //Red Crystal
@@ -102,7 +104,7 @@ public class ModEntities {
         //Ender Mage
         registerEntityWithID("end_mage", EntityEnderMage.class, ENTITY_START_ID++, 60, knight_mobs);
         //Ender Sword Ultra - Hidden Bosses
-        registerEntity("end_lord", EntityKnightLord.class, ENTITY_START_ID++, 60);
+        registerEntityWithID("end_lord", EntityKnightLord.class, ENTITY_START_ID++, 60, knight_mobs);
         //Snatcher
         registerEntityWithID("snatcher", EntitySnatcher.class, ENTITY_START_ID++, 70, ash_mobs);
         //Heal Aura
@@ -136,7 +138,8 @@ public class ModEntities {
         //Ender Eye
         registerEntityWithID("end_eye", EntityEnderEyeFly.class, ENTITY_START_ID++, 80, end_mobs);
         //End Seeker - Hidden Bosses
-        registerEntity("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80);
+        registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, end_mobs);
+
     }
 
     public static void RegisterEntitySpawns() {

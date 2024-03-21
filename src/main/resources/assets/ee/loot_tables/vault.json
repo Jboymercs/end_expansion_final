@@ -31,6 +31,81 @@
         },
         {
           "type": "item",
+          "name": "minecraft:iron_chestplate",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "treasure": true,
+              "levels": {
+                "min": 20,
+                "max": 39
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:iron_leggings",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "treasure": true,
+              "levels": {
+                "min": 20,
+                "max": 39
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:iron_helmet",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "treasure": true,
+              "levels": {
+                "min": 20,
+                "max": 39
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:iron_pickaxe",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "treasure": true,
+              "levels": {
+                "min": 20,
+                "max": 39
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:iron_shovel",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "treasure": true,
+              "levels": {
+                "min": 20,
+                "max": 39
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "minecraft:book",
           "weight": 15,
           "functions": [

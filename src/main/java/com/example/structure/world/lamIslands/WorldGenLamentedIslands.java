@@ -41,7 +41,7 @@ public class WorldGenLamentedIslands extends WorldGenStructure {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.miniIslandLootChance) {
+        if(randomNumberChestGenerator >= ModConfig.lamentedIslandsLootChance) {
             return false;
         }
         return true;

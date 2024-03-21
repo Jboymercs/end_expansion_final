@@ -15,6 +15,7 @@ import com.example.structure.world.Biome.layer.GenerateIsland;
 import com.example.structure.world.WorldGenCustomStructure;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.api.vaults.MapGenEndVaults;
+import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import git.jbredwards.nether_api.api.event.NetherAPIRegistryEvent;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import git.jbredwards.nether_api.mod.common.registry.NetherAPIRegistry;
@@ -104,7 +105,6 @@ public class Main {
     }
 
     public MapGenStructure fortress = new MapGenKingFortress(ModConfig.fortress_spacing, 0, ModConfig.fortress_odds);
-
 
 
     @EventHandler

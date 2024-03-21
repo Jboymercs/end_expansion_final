@@ -81,19 +81,19 @@ public class VaultTemplate extends ModStructureTemplate {
 
         //Mini-boss Spawn
         else if(function.startsWith("boss")) {
-            if (generateMobSpawn()) {
+
                 world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER.getDefaultState(), 2);
                 TileEntity tileentity = world.getTileEntity(pos);
                 if (tileentity instanceof tileEntityMobSpawner) {
                     ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
                             new MobSpawnerLogic.MobSpawnData[]{
-                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EndSeekerPrime.class), 1),
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EndSeekerPrime.class), 1)
                             },
                             new int[]{1},
                             1,
                             8);
                 }
-            } else {
+             else {
                 world.setBlockToAir(pos);
             }
         }

@@ -1,6 +1,7 @@
 package com.example.structure.world.Biome.generation;
 
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,6 +12,7 @@ import java.util.Random;
 public class WorldGenEndPlant extends WorldGenerator {
     private final IBlockState plantState;
     private final BlockBush plantBlock;
+
 
     public WorldGenEndPlant(IBlockState plant)
     {

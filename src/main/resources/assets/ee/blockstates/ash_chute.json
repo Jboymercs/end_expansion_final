@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "ee:ash_chute", "x": 180 },
+    "facing=up":    { "model": "ee:ash_chute" },
+    "facing=north": { "model": "ee:ash_chute", "x": 90 },
+    "facing=south": { "model": "ee:ash_chute", "x": -90 },
+    "facing=west":  { "model": "ee:ash_chute", "x": -90, "y": 90 },
+    "facing=east":  { "model": "ee:ash_chute", "x": 90, "y":90 }
+  }
+}

@@ -14,6 +14,8 @@ import net.minecraft.util.math.Vec3i;
 import java.util.List;
 
 public class TileEntityCompulsor extends TileEntity implements ITickable {
+
+
     @Override
     public void update() {
         EnumFacing facing = BlockCompulsorOn.getFacing(this.getBlockMetadata());
