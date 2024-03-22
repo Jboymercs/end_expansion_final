@@ -53,7 +53,7 @@ public class BlockEndPlant extends BlockBush implements IHasModel {
     @Override
     @Nullable
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        if(rand.nextInt(3)==0) {
+        if(rand.nextInt(2)==0) {
             return itemDropped;
         }
         return null;

@@ -1,5 +1,6 @@
 package com.example.structure.world.Biome.barrend;
 
+import com.example.structure.blocks.BlockCrystal;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.world.Biome.BiomeFogged;
@@ -9,6 +10,7 @@ import git.jbredwards.nether_api.api.audio.IMusicType;
 import git.jbredwards.nether_api.api.biome.IEndBiome;
 import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -20,6 +22,8 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BiomeBarrendForest extends BiomeFogged implements IEndBiome, INetherAPIRegistryListener {
@@ -91,20 +95,6 @@ public class BiomeBarrendForest extends BiomeFogged implements IEndBiome, INethe
     public void buildSurface(@Nonnull INetherAPIChunkGenerator chunkGenerator, int chunkX, int chunkZ, @Nonnull ChunkPrimer primer, int x, int z, double terrainNoise) {
 
 
-        int currDepth = -1;
-
-        //Blotch Paint lower Lands of the End
-        for(int y = chunkGenerator.getWorld().getActualHeight() - 1; y >= 0; y--) {
-            final IBlockState here = primer.getBlockState(x, y, z);
-            if(here.getMaterial() == Material.AIR) currDepth = -1;
-            if(here.getBlock() == Blocks.END_STONE) {
-                int randomStart = 42 + ModRand.range(3, 8);
-                if(y < randomStart && random.nextInt(4) == 0) {
-                    currDepth--;
-                    primer.setBlockState(x, y, z, BARE_SANDS);
-                }
-            }
-        }
     }
 
     @Override
@@ -136,6 +126,58 @@ public class BiomeBarrendForest extends BiomeFogged implements IEndBiome, INethe
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
         return IEndBiome.super.getFogColor(celestialAngle, partialTicks);
+    }
+
+
+
+    @SuppressWarnings("deprecation")
+    public void makeCaveAt(ChunkPrimer primer, BlockPos source, Random rand) {
+        double expandX = (rand.nextDouble() - 0.5) * 2;
+        double expandY = (rand.nextDouble() - 0.5) * 0.1F;
+        double expandZ = (rand.nextDouble() - 0.5) * 2;
+
+        double curveAngle = rand.nextDouble() *  Math.PI * 2;
+        double curveRatio = rand.nextDouble() * 0.25 + 0.1;
+        double curveX = Math.cos(curveAngle) * curveRatio;
+        double curveY = (rand.nextFloat() - 0.5F) * 0.05F;
+        double curveZ = Math.sin(curveAngle) * curveRatio;
+
+        BlockPos hollowingCenter = source;
+        Vec3d expansion = new Vec3d(expandX, expandY, expandZ).normalize();
+        Vec3d curvature = new Vec3d(curveX, curveY, curveZ);
+
+        int length = 12 + rand.nextInt(10);
+        int size = 4 + rand.nextInt(3);
+        for(int i = 0; i < length; i++) {
+            hollowOut(primer, hollowingCenter, rand, size);
+
+            BlockPos currentCenter = hollowingCenter;
+            hollowingCenter = currentCenter.add(expansion.x * size * 0.5, expansion.y * size * 0.5, expansion.z * size * 0.5);
+
+            if(hollowingCenter.getY() < 10) {
+                expansion = new Vec3d(expansion.x, -expansion.y, expansion.z);
+                curvature = new Vec3d(curvature.x, -curvature.y, curvature.z);
+            }
+
+            expansion = expansion.add(curvature).normalize();
+        }
+    }
+
+    private void hollowOut(ChunkPrimer primer, BlockPos source, Random rand, int width) {
+
+
+        int max = width * width;
+        for(int i = -width; i <= width; i++)
+            for(int j = -width; j <= width; j++)
+                for(int k = -width; k <= width; k++) {
+                    BlockPos pos = source.add(i, j, k);
+                    int dist = i * i + j * j + k * k;
+
+                    if(dist < max) {
+                        primer.setBlockState(pos.getX(), pos.getY(), pos.getZ(), AIR);
+                    }
+                }
+
     }
 
     @Nonnull

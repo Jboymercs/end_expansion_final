@@ -59,7 +59,7 @@ public class WorldGenEndVaults extends WorldGenerator {
 
         int yHieght = getGroundFromAbove(world, pos.getX() + 2, pos.getZ() + 2);
         int yHieghtAdjust = getGroundFromAbove(world, pos.getX() + 16, pos.getZ() + 16);
-        if(yHieght > 57 && spacing > ModConfig.vault_distance && yHieghtAdjust > 57) {
+        if(yHieght > 60 && spacing > ModConfig.vault_distance && yHieghtAdjust > 57) {
 
 
 
@@ -95,7 +95,7 @@ public class WorldGenEndVaults extends WorldGenerator {
 
                 BlockPos posI = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
                 int yHeight = getGroundFromAbove(worldIn,posI.getX(), posI.getZ());
-                if(yHeight > 57) {
+                if(yHeight > 60) {
                     for (int i = 0; i < 4; i++) {
                         Rotation rotation = Rotation.values()[(rand + i) % Rotation.values().length];
                         components.clear();

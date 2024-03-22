@@ -45,7 +45,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
-    public int plantsPerChunk = ModRand.range(1, 13);
+    public int plantsPerChunk = ModRand.range(8, 19);
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -53,7 +53,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
         int z = chunkZ * 16;
         BlockPos pos = new BlockPos(x + 8, 0, z + 8);
         //End Expansion Structures - Mostly just the base ones, can't spawn within radius of the Ender Dragon Island
-        if(world.provider.getDimension() == 1 && pos.getX() > 500 && pos.getX() < -500 && pos.getZ() > 500 && pos.getZ() < -500) {
+        if(world.provider.getDimension() == 1  || pos.getX() > 500 || pos.getX() < -500 || pos.getZ() > 500 || pos.getZ() < -500) {
             if (ModConfig.does_structure_spawn) {
 
                 // Lamented Islands , Can not spawn in the Ash Wastelands
@@ -66,25 +66,25 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
                 //End Vaults, Can not Spawn in Ash Wastelands
                 if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS) {
-                    if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
+                    if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 60) {
                         endVaults.generate(world, random, pos);
                     }
 
                 }
-
                 //End Plants
-                if(world.rand.nextInt(7) == 0) {
-                    System.out.println("Reading this code Num Nuts");
+                if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS &&
+                canStructureSpawn(chunkX, chunkZ, world, 68)) {
                     for (int k2 = 0; k2 < this.plantsPerChunk; ++k2) {
                         int l6 = random.nextInt(16) + 8;
                         int k10 = random.nextInt(16) + 8;
-                        int yHieght = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 70);
-                        if (yHieght > 0) {
-                            System.out.println("GENERATING PLANTS");
+                        int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
+                        if (yHieght > 0 && world.getBlockState(pos.add(l6, yHieght, k10)) == Blocks.END_STONE.getDefaultState()) {
                             healPlants.generate(world, random, pos.add(l6, yHieght, k10));
                         }
                     }
                 }
+
+
         }
 
 

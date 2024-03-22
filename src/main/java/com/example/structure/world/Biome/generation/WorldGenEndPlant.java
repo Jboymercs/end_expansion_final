@@ -22,8 +22,9 @@ public class WorldGenEndPlant extends WorldGenerator {
 
     public boolean generate(World world, Random rand, BlockPos pos)
     {
-        if(plantBlock.canBlockStay(world, pos.up(), plantState))
+        if(plantBlock.canBlockStay(world, pos.up(), plantState)) {
             world.setBlockState(pos.up(), plantState);
+        }
         return true;
     }
 }
