@@ -8,6 +8,7 @@ import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.generation.WorldGenAshRuins;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
 import com.example.structure.world.Biome.generation.WorldGenPurpleSpikes;
+import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import com.example.structure.world.lamIslands.WorldGenBossArena;
 import net.minecraft.block.Block;
@@ -44,6 +45,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
+    public static final WorldGenAshTower ash_tower = new WorldGenAshTower();
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
     public int plantsPerChunk = ModRand.range(8, 19);
 
@@ -83,6 +85,12 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                         }
                     }
                 }
+
+                //Ashed Towers
+
+                    //if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
+                     //   ash_tower.generate(world, random, pos);
+                   // }
 
 
         }

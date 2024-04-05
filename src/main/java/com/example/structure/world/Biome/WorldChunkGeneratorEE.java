@@ -63,7 +63,7 @@ public class WorldChunkGeneratorEE extends ChunkGeneratorEnd {
     private final boolean mapFeaturesEnabled;
     private final BlockPos spawnPoint;
     private MapGenEndCity endCityGen = new MapGenEndCity(this);
-    private MapGenEndVaults endVaults = new MapGenEndVaults(10, 0, 3);
+
     private NoiseGeneratorSimplex islandNoise;
     private double[] buffer;
     /** The biomes that are used to generate the chunk */
@@ -98,7 +98,7 @@ public class WorldChunkGeneratorEE extends ChunkGeneratorEnd {
         this.noiseGen6 = ctx.getScale();
         this.islandNoise = ctx.getIsland();
         this.endCityGen = (MapGenEndCity) net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(this.endCityGen, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.END_CITY);
-        this.endVaults = (MapGenEndVaults) net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(this.endVaults, InitMapGenEvent.EventType.CUSTOM);
+
     }
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -279,7 +279,7 @@ public class WorldChunkGeneratorEE extends ChunkGeneratorEnd {
         if (this.mapFeaturesEnabled)
         {
             this.endCityGen.generate(this.world, x, z, chunkprimer);
-            this.endVaults.generate(this.world, x, z, chunkprimer);
+
 
         }
 
@@ -453,7 +453,7 @@ public class WorldChunkGeneratorEE extends ChunkGeneratorEnd {
         if (this.mapFeaturesEnabled)
         {
             this.endCityGen.generateStructure(this.world, this.rand, new ChunkPos(x, z));
-            this.endVaults.generateStructure(this.world, this.rand, new ChunkPos(x, z));
+
         }
 
         this.world.getBiome(blockpos.add(16, 0, 16)).decorate(this.world, this.world.rand, blockpos);

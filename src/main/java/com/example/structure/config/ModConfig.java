@@ -238,7 +238,7 @@ public class ModConfig {
     @Config.Name("Unholy End Knight Base Health")
     @Config.Comment("Change the Base Health of the Unholy End Knight")
     @Config.RequiresMcRestart
-    public static double unholy_knight_health = 150D;
+    public static double unholy_knight_health = 175D;
 
     @Config.Name("Unholy Knight Base Attack Damage")
     @Config.Comment("Change the Base attack damage of the Unholy knight")
@@ -354,9 +354,9 @@ public class ModConfig {
     public static int dungeon_mob_chance = 7;
 
     @Config.Name("End King Fortress")
-    @Config.Comment("Change the spacing of the End King Fortress in chunks away from another")
+    @Config.Comment("Change the spacing of the End King Fortress in chunks away from another, this is applied in chunks that are Ash Wastelands not every chunk")
     @Config.RequiresMcRestart
-    public static int fortress_spacing = 60;
+    public static int fortress_spacing = 50;
 
     @Config.Name("End King Fortress Odds")
     @Config.Comment("Change the odds of this structure spawning, take in mind the fortress has few structure to compete with for odds of spawning")
@@ -387,7 +387,7 @@ public class ModConfig {
     @Config.Name("End Vault Chance to Spawn")
     @Config.Comment("Change the chance to spawn the End Vaults, WARNING putting it low will result in buggy and or over spawning, as this is not determined in chunks apart, it's by each time the surface is above 55")
     @Config.RequiresMcRestart
-    public static int vault_distance = 275;
+    public static int vault_distance = 200;
 
     @Config.Name("End Seekers Health")
     @Config.Comment("Change the Health of the End Seekers")
@@ -414,6 +414,6 @@ public class ModConfig {
     @Config.Name("Seeker Gun Cooldown")
     @Config.Comment("Change the cooldown of the seeker gun in seconds")
     @Config.RequiresMcRestart
-    public static int seeker_gun_cooldown = 5;
+    public static int seeker_gun_cooldown = 3;
 
 }

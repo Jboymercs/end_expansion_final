@@ -108,5 +108,15 @@
         "stream": true
       }
     ]
+  },
+  "entity.seeker.shoot": {
+    "category": "entity",
+    "subtitle": "entity.seeker.shoot",
+    "sounds": [
+      {
+        "name": "ee:entity/seeker/shoot",
+        "stream": true
+      }
+    ]
   }
 }

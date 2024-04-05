@@ -7,6 +7,7 @@ import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.util.IHasModel;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -16,10 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -47,9 +45,10 @@ public class ItemGunLauncher extends ItemAbstractMultiModel implements IHasModel
         int SwordCoolDown = ModConfig.seeker_gun_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this) && !hasFired) {
             //Summon Crystals
+            worldIn.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, ModSoundHandler.SEEKER_SHOOT, SoundCategory.NEUTRAL, 1.0f, 1.0f / (worldIn.rand.nextFloat() * 0.4F + 0.4f));
             Vec3d playerLookVec = player.getLookVec();
             Vec3d playerPos = new Vec3d(player.posX + playerLookVec.x * 1.4D,player.posY + playerLookVec.y + player.getEyeHeight(), player. posZ + playerLookVec.z * 1.4D);
-            ProjectilePurple projectile = new ProjectilePurple(player.world, player, ModConfig.purp_projectile);
+            ProjectilePurple projectile = new ProjectilePurple(player.world, player, (float) (ModConfig.purp_projectile * 2));
             ModUtils.setEntityPosition(projectile, playerPos);
             player.world.spawnEntity(projectile);
             projectile.setTravelRange(20f);
@@ -93,9 +92,10 @@ public class ItemGunLauncher extends ItemAbstractMultiModel implements IHasModel
 
     public void repeatShoot(EntityPlayer player, World world) {
         if(!world.isRemote) {
+            world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, ModSoundHandler.SEEKER_SHOOT, SoundCategory.NEUTRAL, 1.0f, 1.0f / (world.rand.nextFloat() * 0.4F + 0.4f));
                     Vec3d playerLookVec2 = player.getLookVec();
                     Vec3d playerPos2 = new Vec3d(player.posX + playerLookVec2.x * 1.4D, player.posY + playerLookVec2.y + player.getEyeHeight(), player.posZ + playerLookVec2.z * 1.4D);
-                    ProjectilePurple projectile2 = new ProjectilePurple(player.world, player, ModConfig.purp_projectile);
+                    ProjectilePurple projectile2 = new ProjectilePurple(player.world, player, (float) (ModConfig.purp_projectile * 2));
                     ModUtils.setEntityPosition(projectile2, playerPos2);
                     player.world.spawnEntity(projectile2);
                     projectile2.setTravelRange(20f);

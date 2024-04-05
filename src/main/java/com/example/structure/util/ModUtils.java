@@ -732,6 +732,7 @@ public class ModUtils {
      * @param points          The number of points around the circle
      * @param particleSpawner
      */
+
     public static void circleCallback(float radius, int points, Consumer<Vec3d> particleSpawner) {
         float degrees = 360f / points;
         for (int i = 0; i < points; i++) {

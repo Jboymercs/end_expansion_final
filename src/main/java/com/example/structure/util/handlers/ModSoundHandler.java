@@ -31,6 +31,10 @@ public class ModSoundHandler {
     //Knight Household
     public static SoundEvent KNIGHT_STEP;
 
+    //End Seeker
+    public static SoundEvent SEEKER_SHOOT;
+
+
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
         BOSS_HURT = registerSound("boss.hurt", "entity");
@@ -46,6 +50,7 @@ public class ModSoundHandler {
 
         BOMB_EXPLODE = registerSound("king.explode", "entity");
         KNIGHT_STEP = registerSound("knight.step", "entity");
+        SEEKER_SHOOT = registerSound("seeker.shoot", "entity");
     }
 
 

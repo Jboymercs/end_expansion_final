@@ -14,6 +14,7 @@ import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.util.*;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.sun.jna.platform.win32.WinBase;
 import net.minecraft.entity.EntityLivingBase;
@@ -297,7 +298,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
         addEvent(()-> {
 
             addEvent(()-> {
-
+                this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
                Vec3d vel2 = target.getPositionVector().subtract(offset);
@@ -312,6 +313,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
         addEvent(()-> {
 
             addEvent(()-> {
+                this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
                 Vec3d vel2 = target.getPositionVector().subtract(offset);
@@ -326,7 +328,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
         addEvent(()-> {
 
             addEvent(()-> {
-
+                this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
                 Vec3d vel2 = target.getPositionVector().subtract(offset);

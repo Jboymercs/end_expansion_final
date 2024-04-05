@@ -5,6 +5,8 @@ import com.example.structure.world.Biome.altardungeon.AltarTemplate;
 import com.example.structure.world.Biome.altardungeon.MapGenAltarDungeon;
 import com.example.structure.world.Biome.bridgestructure.BridgeStructureTemplate;
 import com.example.structure.world.Biome.bridgestructure.MapGenBridgeStructure;
+import com.example.structure.world.api.ashtower.AshTowerTemplate;
+import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.structures.FortressTemplate;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.api.vaults.EndVaults;
@@ -21,9 +23,6 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import javax.annotation.Nonnull;
 
 public class StructureHandler {
-            //implements NetherAPIRegistryListener
-            //Removing this apparently causes nothing to load, not the biome, nothing.
-
 
     public static void handleStructureRegistries(){
 
@@ -31,6 +30,8 @@ public class StructureHandler {
         MapGenStructureIO.registerStructureComponent(FortressTemplate.class, "EFP");
         MapGenStructureIO.registerStructure(WorldGenEndVaults.Start.class, "EndVaults");
         MapGenStructureIO.registerStructureComponent(VaultTemplate.class, "EVP");
+        MapGenStructureIO.registerStructure(WorldGenAshTower.Start.class, "AshTowers");
+        MapGenStructureIO.registerStructureComponent(AshTowerTemplate.class, "ATP");
 
     }
 }
