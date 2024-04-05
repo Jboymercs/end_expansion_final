@@ -17,6 +17,7 @@ import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.sun.jna.platform.win32.WinBase;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -30,6 +31,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import scala.collection.immutable.Stream;
@@ -114,6 +117,11 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     @Override
     public void onUpdate() {
         super.onUpdate();
+
+        //Plays the quiet hover of the Seeker's
+        if(rand.nextInt(3) == 0) {
+            this.playSound(ModSoundHandler.SEEKER_HOVER, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+        }
         if(rand.nextInt(5) == 0 && blinkCoolDown > 120) {
 
             this.setBlinkMode(true);
@@ -395,6 +403,17 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
         event.getController().markNeedsReload();
         return PlayState.STOP;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn)
+    {
+
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.SEEKER_HURT;
     }
 
 

@@ -58,24 +58,28 @@ public class WorldGenCustomStructure implements IWorldGenerator {
         if(world.provider.getDimension() == 1  || pos.getX() > 500 || pos.getX() < -500 || pos.getZ() > 500 || pos.getZ() < -500) {
             if (ModConfig.does_structure_spawn) {
 
-                // Lamented Islands , Can not spawn in the Ash Wastelands
+                // Lamented Islands, the first major boss Arena and dungeon of the mod
+                //Cannot spawn in the Ash Wastelands
                 if (canStructureSpawn(chunkX, chunkZ, world, ModConfig.structureFrequency)) {
                     BlockPos posAdded = new BlockPos(x, 90, z);
-                    if(world.provider.getBiomeForCoords(pos).getClass() != BiomeAshWasteland.class) {
+                    if(world.provider.getBiomeForCoords(pos).getClass() != BiomeAshWasteland.class && world.provider.getBiomeForCoords(pos).getClass() == BiomeEnd.class) {
                          new WorldGenBossArena().generateStructure(world, posAdded, Rotation.NONE);
                     }
                 }
 
-                //End Vaults, Can not Spawn in Ash Wastelands
+                //End Vaults, A mini-dungeon that has roguelike generation too it. Main place to find the purple crystal resource
+                //Cannot spawn in the Ash Wastelands
                 if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS) {
                     if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 60) {
                         endVaults.generate(world, random, pos);
                     }
 
                 }
-                //End Plants
+
+                //End Plants, the Turium plant, can only be found in any End Biome that has End Stone
+                //Cannot spawn in the Ash Wastelands
                 if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS &&
-                canStructureSpawn(chunkX, chunkZ, world, 68)) {
+                canStructureSpawn(chunkX, chunkZ, world, 68) && world.getBiomeForCoordsBody(pos).getClass() == BiomeEnd.class) {
                     for (int k2 = 0; k2 < this.plantsPerChunk; ++k2) {
                         int l6 = random.nextInt(16) + 8;
                         int k10 = random.nextInt(16) + 8;
@@ -86,8 +90,8 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                     }
                 }
 
-                //Ashed Towers
-
+                //Ashed Towers, a randomly procedural generated Tower with the chance of different challenges
+                //Spawns only in the Ash Wastelands
                     //if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
                      //   ash_tower.generate(world, random, pos);
                    // }

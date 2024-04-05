@@ -118,5 +118,33 @@
         "stream": true
       }
     ]
+  },
+  "entity.seeker.hover": {
+    "category": "entity",
+    "subtitle": "entity.seeker.hover",
+    "sounds": [
+      {
+        "name": "ee:entity/seeker/hover_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/seeker/hover_2",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/seeker/hover_3",
+        "stream": true
+      }
+    ]
+  },
+  "entity.seeker.hurt": {
+    "category": "entity",
+    "subtitle": "entity.seeker.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/seeker/hurt",
+        "stream": true
+      }
+    ]
   }
 }
