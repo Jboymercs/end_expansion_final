@@ -26,7 +26,8 @@ public class ItemKingCrown extends ItemBase {
     public ItemKingCrown(String name, CreativeTabs tab, String info_loc) {
         super(name, tab);
         this.info_loc = info_loc;
-        this.setMaxDamage(0);
+        this.setMaxDamage(1);
+        this.setMaxStackSize(1);
     }
 
 
@@ -50,8 +51,8 @@ public class ItemKingCrown extends ItemBase {
             kingGhost.setPosition(posToo.getX(), posToo.getY() + 1, posToo.getZ());
             worldIn.spawnEntity(kingGhost);
             player.getCooldownTracker().setCooldown(this, crownCoolDown);
-            stack.damageItem(1, player);
         }
+        stack.damageItem(10, player);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 }

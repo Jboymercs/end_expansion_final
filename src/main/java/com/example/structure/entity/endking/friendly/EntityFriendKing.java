@@ -2,6 +2,7 @@ package com.example.structure.entity.endking.friendly;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
+import com.example.structure.entity.EntityMiniNuke;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
 import com.example.structure.entity.endking.*;
@@ -15,6 +16,7 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -206,6 +208,12 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         }
 
         return 20;
+    }
+
+    @Override
+    public void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.minion_attack_damage * ModConfig.biome_multiplier);
     }
 
 

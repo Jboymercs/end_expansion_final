@@ -36,7 +36,7 @@ public class AshTowerTemplate extends ModStructureTemplate {
         //Single Mob Spawn
        if(function.startsWith("mob")) {
             if (generateMobSpawn()) {
-                world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER.getDefaultState(), 2);
+                world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER_ASH.getDefaultState(), 2);
                 TileEntity tileentity = world.getTileEntity(pos);
                 if (tileentity instanceof tileEntityMobSpawner) {
                     ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(

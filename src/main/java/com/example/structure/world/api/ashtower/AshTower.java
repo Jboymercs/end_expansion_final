@@ -2,13 +2,15 @@ package com.example.structure.world.api.ashtower;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModRand;
-import com.example.structure.world.api.vaults.VaultTemplate;
+import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AshTower {
@@ -18,11 +20,12 @@ public class AshTower {
     private TemplateManager manager;
 
 
+    private static final List<Tuple<Rotation, BlockPos>> CROSS_POS = Lists.newArrayList(new Tuple(Rotation.NONE, new BlockPos(0, 0, 0)),
+            new Tuple(Rotation.CLOCKWISE_90, new BlockPos(20, 0, 0)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, 0, 20)));
 
 
 
-
-    private static final int SIZE = 4;
+    private static final int SIZE = 8;
 
     public AshTower(World worldIn, TemplateManager template, List<StructureComponent> components) {
         this.world = worldIn;
@@ -36,57 +39,91 @@ public class AshTower {
         String[] base_types = {"base_1", "base_2"};
         AshTowerTemplate template = new AshTowerTemplate(manager, "base_2", pos, rot, 0, true);
         components.add(template);
-        VaultTemplate.resetTemplateCount();
-        generateFirstLayer(template, pos.add(0, 16, 0), rot);
+        AshTowerTemplate.resetTemplateCount();
+        generateLayer(template, BlockPos.ORIGIN, rot);
+
+        generateWalkWays(template, BlockPos.ORIGIN, rot);
+
+       // int failedSTarts = 0;
+      //  for(Tuple<Rotation, BlockPos> tuple : CROSS_POS) {
+         //   if(!generateWalkWays(template, tuple.getSecond(), rot.add(tuple.getFirst()))) {
+         //       failedSTarts++;
+         //   }
+
+      //  }
+        //List<StructureComponent> structures = new ArrayList<>(components);
+       // if(failedSTarts > 3) {
+        //    components.clear();
+       //     components.addAll(structures);
+
+      //  }
     }
 
-
-
-    public boolean generateFirstLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
+    public boolean generateLayer(AshTowerTemplate parent, BlockPos pos, Rotation rotation) {
+        BlockPos posToo = pos.add(-21, 16, 0);
         String[] lower_level_layers = {"layer_1", "layer_2"};
-        AshTowerTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(lower_level_layers), rot);
+        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(lower_level_layers), rotation);
+
         if(template.isCollidingExcParent(manager, parent, components)) {
-            System.out.println("collided With Another Part");
+            System.out.println("Colliding");
             return false;
-
         }
-        components.add(template);
-        //Generate Second
-        generateSecondLayer(template, pos.add(0, 16, 0), rot);
 
+        components.add(template);
+        generateSecondLayer(template, pos, rotation);
         return true;
     }
 
+    public boolean generateWalkWays(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
+        AshTowerTemplate template = addAdjustedPiece(parent, pos, "walkway_1", rot);
+
+        if(template.isCollidingExcParent(manager, parent, components)) {
+            System.out.println("Walkways are Colliding with Parent");
+            return false;
+        }
+        components.add(template);
+        return true;
+    }
+
+
     public boolean generateSecondLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
+        BlockPos posToo = pos.add(-21, 16, 0);
         String[] upper_level_layers = {"layer_3", "layer_4"};
-        AshTowerTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(upper_level_layers), rot);
+        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(upper_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
             System.out.println("collided With Another Part");
             return false;
 
         }
+
+        if(template.getDistance() >= SIZE) {
+            return generateTopLayer(template, pos, rot);
+        }
         components.add(template);
         //Generate Second
-        generateThirdLayer(template, pos.add(0, 16, 0), rot);
+       generateThirdLayer(template, pos, rot);
 
         return true;
     }
 
     public boolean generateThirdLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
-        String[] highest_level_layers = {"layer_5"};
-
-        AshTowerTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(highest_level_layers), rot);
+        String[] highest_level_layers = {"layer_5", "layer_3"};
+        BlockPos posToo = pos.add(-21, 16, 0);
+        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(highest_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
             System.out.println("collided With Another Part");
             return false;
 
         }
+
+
+
         components.add(template);
         //Generate Roof or contnue on this layer
         if(SIZE >= template.getDistance()) {
-            generateTopLayer(template, pos.add(0, 16, 0), rot);
+            generateTopLayer(template, pos, rot);
         } else {
-            generateThirdLayer(template, pos.add(0, 16, 0), rot);
+            generateThirdLayer(template, pos, rot);
         }
 
 
@@ -94,8 +131,9 @@ public class AshTower {
     }
 
     public boolean generateTopLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
-        String[] roof_level_layers = {"top_1"};
-        AshTowerTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(roof_level_layers), rot);
+        BlockPos posToo = pos.add(-21, 16, 0);
+        String[] roof_level_layers = {"top_1", "top_2"};
+        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(roof_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
             System.out.println("collided With Another Part");
             return false;

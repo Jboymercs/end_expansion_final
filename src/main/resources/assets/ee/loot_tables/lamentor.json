@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name" : "ee:constructor",
+      "name" : "ee:lamentor",
       "rolls": 1,
       "entries": [
         {

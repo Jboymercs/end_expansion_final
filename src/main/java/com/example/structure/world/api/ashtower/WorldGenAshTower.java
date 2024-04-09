@@ -21,8 +21,6 @@ import java.util.Random;
 
 public class WorldGenAshTower extends WorldGenerator {
 
-    public static List<Biome> VALID_BIOMES = Arrays.asList(Biomes.SKY);
-    private int separation;
 
     /**
      * This is determined via how many times it attempts to spawn a tower and if the number is not met it will add on
@@ -117,7 +115,7 @@ public class WorldGenAshTower extends WorldGenerator {
 
         @Override
         public boolean isSizeableStructure() {
-            return components.size() > 4;
+            return components.size() > 8;
         }
     }
 

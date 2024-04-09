@@ -63,7 +63,7 @@ public class WorldGenEndVaults extends WorldGenerator {
 
 
 
-            getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 100, pos.getZ() - 100, pos.getX() + 100, pos.getZ() + 100));
+            getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 150, pos.getZ() - 150, pos.getX() + 150, pos.getZ() + 150));
             return true;
 
         }
