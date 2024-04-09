@@ -26,8 +26,10 @@ public class ItemKingCrown extends ItemBase {
     public ItemKingCrown(String name, CreativeTabs tab, String info_loc) {
         super(name, tab);
         this.info_loc = info_loc;
-        this.setMaxDamage(25);
+        this.setMaxDamage(0);
     }
+
+
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

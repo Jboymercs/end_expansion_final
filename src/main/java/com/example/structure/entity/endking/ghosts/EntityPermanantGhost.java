@@ -188,8 +188,8 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
                         (distance < 13 && distance > 5 && prevAttack != upperAttack) ? distance * 0.02 : 0, //Upper Attack
                         (distance < 7 && prevAttack != sideAttack) ? distance * 0.02 : 0,   //Side Swipe
                         (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack
-                        (distance < 24 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
-                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.01 : 0 //Summon Ground Swords
+                        (distance < 25 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
+                        (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.01 : 0 //Summon Ground Swords
                 };
 
                 prevAttack = ModRand.choice(attacks, rand, weights).next();
@@ -200,7 +200,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
                 List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(throwFireball, summon_ground_swords, projectileSwords, crystalSelfAOE)); //Readable Attacks
                 double[] weights = {
                         (distance > 1 && prevAttack != throwFireball) ? distance * 0.02 : 0, //Throw Fireball Attack
-                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.02 : 0, //Summon Ground Swords
+                        (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.02 : 0, //Summon Ground Swords
                         (distance > 1 && !hasSwordsNearby) ? distance * 0.02 : 0, // Projectile Swords Attack
                         (distance < 7 && prevAttack != crystalSelfAOE) ? 1/distance : 0  //Crystal Self AOE
                 };
@@ -418,12 +418,10 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         if(!this.isFullBodyUsage() && !this.isPGhostSummon()) {
 
-            if(event.isMoving()) {
+            if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALK_LOWER, true));
-            } else {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_LOWER, true));
+                return PlayState.CONTINUE;
             }
-            return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;
@@ -431,12 +429,14 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
     private<E extends IAnimatable> PlayState predicateArms(AnimationEvent<E> event) {
         if(!this.isSwingingArms() && !this.isFullBodyUsage() && !this.isPGhostSummon()) {
 
-            if(event.isMoving()) {
+            if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALK_UPPER, true));
+                return PlayState.CONTINUE;
             } else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_UPPER, true));
+                return PlayState.CONTINUE;
             }
-            return PlayState.CONTINUE;
+
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;

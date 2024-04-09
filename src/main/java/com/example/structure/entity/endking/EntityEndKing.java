@@ -464,8 +464,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                     (distance < 7 && prevAttack != crystalSelfAOE) ? 1/distance : 0,  //Crystal Self AOE
                     (distance > 5 && !hasSwordsNearby) ? distance * 0.02 : 0, // Projectile Swords Attack
                    (distance > 8 && prevAttack != throwFireball) ? distance * 0.02 : 0, //Throw Fireball Attack
-                    (distance < 24 && HealthChange < 0.9 && !hasEyesNearby && prevAttack != castArenaAttack) ? distance * 0.02 : 0, //Cast Arena Eye Attack
-                    (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.03 : 0 //Summon Ground Swords
+                    (distance < 25 && HealthChange < 0.9 && !hasEyesNearby && prevAttack != castArenaAttack) ? distance * 0.02 : 0, //Cast Arena Eye Attack
+                    (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.03 : 0 //Summon Ground Swords
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
             prevAttack.accept(target);
@@ -476,8 +476,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
             List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(sweepLeap, summonGhosts, upperAttack, sideAttack, regularAttack));
             //weights
             double[] weights = {
-                    (distance < 24 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
-                    (distance < 24 && prevAttack != summonGhosts) ? distance * 0.02 : 0, //Summon Ghosts
+                    (distance < 25 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
+                    (distance < 25 && prevAttack != summonGhosts) ? distance * 0.02 : 0, //Summon Ghosts
                     (distance < 13 && distance > 5 && prevAttack != upperAttack) ? distance * 0.02 : 0,  //Upper Attack
                     (distance < 7 && prevAttack != sideAttack) ? distance * 0.02 : 0,   //Side Swipe
                     (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack
@@ -494,7 +494,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                 //weights
                 double[] weights = {
                         (distance > 2) ? distance * 0.02 : 0, //Throw Fireball Attack
-                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.03 : 0, //Summon Ground Swords
+                        (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.03 : 0, //Summon Ground Swords
                         (distance > 2 && !hasSwordsNearby) ? distance * 0.02 : 0, // Projectile Swords Attack
                         (distance > 2 && prevAttack != lazer_beam_attack) ? distance * 0.02 : 0 //Lazer Beam Attack
                 };
@@ -509,7 +509,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                         (distance < 8 && prevAttack != sideAttack) ? distance * 0.02 : 0, //Side Attack PHASE
                         (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack PHASE
                         (distance < 8 && prevAttack != multiple_strikes) ? distance * 0.02 : 0, //New Phase Attack the circle Swing
-                        (distance < 24 && distance >= 8) ? distance * 0.02 : 0 //Fly Dash Move to get the King to the target quicker
+                        (distance < 25 && distance >= 8) ? distance * 0.02 : 0 //Fly Dash Move to get the King to the target quicker
                 };
                 prevAttack = ModRand.choice(attacks, rand, weights).next();
                 prevAttack.accept(target);

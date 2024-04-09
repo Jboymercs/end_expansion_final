@@ -4,14 +4,11 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
+import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.EndKingAction.ActionAOESimple;
 import com.example.structure.entity.endking.EndKingAction.ActionHoldSwordAttack;
 import com.example.structure.entity.endking.EndKingAction.ActionSummonSwordAttacks;
 import com.example.structure.entity.endking.EndKingAction.ActionThrowFireball;
-import com.example.structure.entity.endking.EntityAbstractEndKing;
-import com.example.structure.entity.endking.EntityEndKing;
-import com.example.structure.entity.endking.EntityFireBall;
-import com.example.structure.entity.endking.ProjectileSpinSword;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
@@ -94,6 +91,8 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         this.IisGhost = true;
         this.isMeleeMode =true;
         owner = player;
+        this.setPGhostSummon(true);
+        addEvent(()-> this.setPGhostSummon(false), 50);
     }
 
     @Override
@@ -110,6 +109,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
 
     protected boolean currentlyHasTarget = false;
+
 
     protected int killCountdown = ModConfig.minion_lifeTime * 20;
     @Override
@@ -132,29 +132,42 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         }
 
         EntityLivingBase targetCurrent = this.getAttackTarget();
-        if(targetCurrent != null) {
+        if(targetCurrent != null && this.getEntitySenses().canSee(targetCurrent)) {
             currentlyHasTarget = true;
         } else {
             this.setAttackTarget(null);
             currentlyHasTarget = false;
         }
 
+        if(targetCurrent != null) {
+            if(targetCurrent.isDead) {
+                this.setAttackTarget(null);
+                currentlyHasTarget = false;
+            }
+        }
+
+
+        System.out.println(currentlyHasTarget);
+
         //A simple function to allow the Ghost King to attack anything except the Owner
-        if(owner != null) {
+
             //Checks to make sure the Owner is not dead or not there
-            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(24D), e -> !e.getIsInvulnerable());
+            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(25D), e -> !e.getIsInvulnerable());
 
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase target : nearbyEntities) {
-                    if(target != owner && !currentlyHasTarget) {
-                        this.setAttackTarget(target);
+                    if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
+                        if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing)) {
+                            this.setAttackTarget(target);
+                        }
+
                     }
                 }
             }
 
-        } else {
-            this.setDead();
-        }
+
+
+
 
 
         //Lock Look system Implemented
@@ -172,19 +185,18 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
-        //The Change with this fight manager is that we want it to read what the parent Entity is doing and this will do an opposite attack in accordance with that
+        //Change Fight Manager to Independant
         double distance = Math.sqrt(distanceSq);
         if(!this.isFightMode()) {
             if(!this.isPGhostSummon()) {
-                List<Consumer<EntityLivingBase>> attackCurrent = new ArrayList<>(Arrays.asList(upperAttack, sideAttack, regularAttack, sweepLeap, summon_ground_swords, projectileSwords, crystalSelfAOE)); //Readable Attacks
+                List<Consumer<EntityLivingBase>> attackCurrent = new ArrayList<>(Arrays.asList(upperAttack, sideAttack, regularAttack, sweepLeap, summon_ground_swords, projectileSwords)); //Readable Attacks
                 double[] weights = {
-                        (distance < 13 && distance > 5 && prevAttack != upperAttack) ? distance * 0.02 : 0, //Upper Attack
+                        (distance < 13 && distance > 2 && prevAttack != upperAttack) ? distance * 0.02 : 0, //Upper Attack
                         (distance < 7 && prevAttack != sideAttack) ? distance * 0.02 : 0,   //Side Swipe
                         (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack
-                        (distance < 24 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack - Keep
-                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.02 : 0, //Summon Ground Swords - Keep
-                        (distance > 1 && !hasSwordsNearby) ? distance * 0.02 : 0, // Projectile Swords Attack
-                        (distance < 7 && prevAttack != crystalSelfAOE) ? 1/distance : 0  //Crystal Self AOE
+                        (distance < 25) ? distance * 0.02 : 0, //LeapAttack - Keep
+                        (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.02 : 0, //Summon Ground Swords - Keep
+                        (distance > 1 && !hasSwordsNearby) ? distance * 0.02 : 0 // Projectile Swords Attack
                 };
 
                 prevAttack = ModRand.choice(attackCurrent, rand, weights).next();
@@ -384,12 +396,10 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         if(!this.isFullBodyUsage() && !this.isPGhostSummon()) {
 
-            if(event.isMoving()) {
+            if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALK_LOWER, true));
-            } else {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_LOWER, true));
+                return PlayState.CONTINUE;
             }
-            return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;
@@ -397,12 +407,14 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
     private<E extends IAnimatable> PlayState predicateArms(AnimationEvent<E> event) {
         if(!this.isSwingingArms() && !this.isFullBodyUsage() && !this.isPGhostSummon()) {
 
-            if(event.isMoving()) {
+            if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALK_UPPER, true));
+                return PlayState.CONTINUE;
             } else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_UPPER, true));
+                return PlayState.CONTINUE;
             }
-            return PlayState.CONTINUE;
+
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;

@@ -310,7 +310,7 @@ public class ModConfig {
     @Config.Name("Crown of A Past Era Minion Lifetime")
     @Config.Comment("Change the life time of the Friendly End King summoned by the Crown of A Past Era in seconds")
     @Config.RequiresMcRestart
-    public static int minion_lifeTime = 120;
+    public static int minion_lifeTime = 240;
 
     @Config.Name("Guilded Shield Cooldown")
     @Config.Comment("Change the cooldown for the Guilded shield, in seconds")
