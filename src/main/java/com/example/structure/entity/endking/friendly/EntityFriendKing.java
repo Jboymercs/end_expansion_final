@@ -1,8 +1,7 @@
-package com.example.structure.entity.endking.ghosts;
+package com.example.structure.entity.endking.friendly;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
 import com.example.structure.entity.endking.EndKingAction.ActionAOESimple;
@@ -30,7 +29,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -46,11 +44,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnimatable, IAttack {
-
+public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatable, IAttack {
     /**
-     * This is the Permanant Ghost, This will be active in Phase 3
+     * This is a Friendly Version of the King, where it will not hurt the User
+     *
      */
+
     private final String ANIM_IDLE_LOWER = "idle_lower";
     private final String ANIM_IDLE_UPPER = "idle_upper";
     private final String ANIM_WALK_LOWER = "walk_lower";
@@ -70,66 +69,59 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
     private final String ANIM_SUMMON = "summon_ghost";
     private Consumer<EntityLivingBase> prevAttack;
 
-    protected EntityEndKing parentEntity;
+    protected EntityPlayer owner;
 
-    public void onSummon(BlockPos pos, EntityEndKing parentEntity) {
-        BlockPos offset = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
-        this.setPosition(offset);
-        this.setPGhostSummon(true);
-        addEvent(()-> this.setPGhostSummon(false), 50);
-        world.spawnEntity(this);
-        this.parentEntity = parentEntity;
-    }
+
     @Override
     public boolean canBeCollidedWith() {
         return false;
     }
 
-    public EntityPermanantGhost(World worldIn, float x, float y, float z) {
+    public EntityFriendKing(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
         this.IisGhost = true;
+        this.isMeleeMode =true;
     }
 
-    public EntityPermanantGhost(World worldIn) {
+    public EntityFriendKing(World worldIn) {
         super(worldIn);
         this.IisGhost = true;
+        this.isMeleeMode =true;
     }
 
-
+    public EntityFriendKing(World worldIn, EntityPlayer player) {
+        super(worldIn);
+        this.IisGhost = true;
+        this.isMeleeMode =true;
+        owner = player;
+    }
 
     @Override
     public void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new EntityKingTimedAttack<>(this, 1.0, 60, 24.0f, 0.4f));
+        this.tasks.addTask(4, new EntityKingTimedAttack<>(this, 1.0, 20, 24.0f, 0.4f));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityCrystalKnight>(this, EntityCrystalKnight.class, 1, true, false, null));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
     }
 
-    @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-        EntityLivingBase target = this.getAttackTarget();
 
-        if(target != null && !this.isBeingRidden() && !this.isMeleeMode) {
-            double distSq = this.getDistanceSq(target.posX, target.getEntityBoundingBox().minY, target.posZ);
-            double distance = Math.sqrt(distSq);
-            if(distance < 12) {
-                double d0 = (this.posX - target.posX) * 0.015;
-                double d1 = (this.posY - target.posY) * 0.01;
-                double d2 = (this.posZ - target.posZ) * 0.015;
-                this.addVelocity(d0, d1, d2);
-            }
-        }
-    }
 
+
+
+    protected boolean currentlyHasTarget = false;
+
+    protected int killCountdown = ModConfig.minion_lifeTime * 20;
     @Override
     public void onUpdate() {
         super.onUpdate();
-        //This is to hopefully hook the two together for reading off each other
 
+        //A kill countdown, will kill the Entity after a certain amount of time
+        if(killCountdown < 0) {
+            this.setDead();
+        } else {
+            killCountdown--;
+        }
         if(this.isPGhostSummon()) {
             this.motionZ = 0;
             this.motionY = 0;
@@ -138,30 +130,30 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
             this.rotationYaw = 0;
             this.rotationYawHead = 0;
         }
-            if(parentEntity != null) {
-                if (parentEntity.isRangedMode && !parentEntity.isMeleeMode) {
-                    //This switches them into opposites
-                    //Set Melee
-                    this.isMeleeMode = true;
-                    this.isRangedMode = false;
-                } else if (parentEntity.isMeleeMode && !parentEntity.isRangedMode) {
-                    //Set Ranged
-                    this.isRangedMode = true;
-                    this.isMeleeMode = false;
-                }
-            }
 
-
-        //This is to make sure the Permanant Ghost doesn't stay beyond it's bounds, such as if the King is not third phase or if the King is dead.
-        List<EntityEndKing> nearbyBoss = this.world.getEntitiesWithinAABB(EntityEndKing.class, this.getEntityBoundingBox().grow(50D), e -> !e.getIsInvulnerable());
-        if(nearbyBoss.isEmpty()) {
-            this.setDead();
+        EntityLivingBase targetCurrent = this.getAttackTarget();
+        if(targetCurrent != null) {
+            currentlyHasTarget = true;
         } else {
-            for(EntityEndKing king : nearbyBoss) {
-                if(!king.IPhaseThree) {
-                    this.setDead();
+            this.setAttackTarget(null);
+            currentlyHasTarget = false;
+        }
+
+        //A simple function to allow the Ghost King to attack anything except the Owner
+        if(owner != null) {
+            //Checks to make sure the Owner is not dead or not there
+            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(24D), e -> !e.getIsInvulnerable());
+
+            if(!nearbyEntities.isEmpty()) {
+                for(EntityLivingBase target : nearbyEntities) {
+                    if(target != owner && !currentlyHasTarget) {
+                        this.setAttackTarget(target);
+                    }
                 }
             }
+
+        } else {
+            this.setDead();
         }
 
 
@@ -177,60 +169,34 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
 
     }
 
+
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         //The Change with this fight manager is that we want it to read what the parent Entity is doing and this will do an opposite attack in accordance with that
         double distance = Math.sqrt(distanceSq);
-        if(!this.isFightMode() && parentEntity.isFightMode()) {
-            if(this.isMeleeMode && !this.isRangedMode && !this.isPGhostSummon()) {
-                List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(upperAttack, sideAttack, regularAttack, sweepLeap, summon_ground_swords)); //Readable Attacks
+        if(!this.isFightMode()) {
+            if(!this.isPGhostSummon()) {
+                List<Consumer<EntityLivingBase>> attackCurrent = new ArrayList<>(Arrays.asList(upperAttack, sideAttack, regularAttack, sweepLeap, summon_ground_swords, projectileSwords, crystalSelfAOE)); //Readable Attacks
                 double[] weights = {
                         (distance < 13 && distance > 5 && prevAttack != upperAttack) ? distance * 0.02 : 0, //Upper Attack
                         (distance < 7 && prevAttack != sideAttack) ? distance * 0.02 : 0,   //Side Swipe
                         (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack
-                        (distance < 24 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
-                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.01 : 0 //Summon Ground Swords
-                };
-
-                prevAttack = ModRand.choice(attacks, rand, weights).next();
-                    prevAttack.accept(target);
-
-            }
-            if(this.isRangedMode && !this.isMeleeMode && !this.isPGhostSummon()) {
-                List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(throwFireball, summon_ground_swords, projectileSwords, crystalSelfAOE)); //Readable Attacks
-                double[] weights = {
-                        (distance > 1 && prevAttack != throwFireball) ? distance * 0.02 : 0, //Throw Fireball Attack
-                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.02 : 0, //Summon Ground Swords
+                        (distance < 24 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack - Keep
+                        (distance < 24 && prevAttack != summon_ground_swords) ? distance * 0.02 : 0, //Summon Ground Swords - Keep
                         (distance > 1 && !hasSwordsNearby) ? distance * 0.02 : 0, // Projectile Swords Attack
                         (distance < 7 && prevAttack != crystalSelfAOE) ? 1/distance : 0  //Crystal Self AOE
                 };
 
-                prevAttack = ModRand.choice(attacks, rand, weights).next();
-                    prevAttack.accept(target);
-
+                prevAttack = ModRand.choice(attackCurrent, rand, weights).next();
+                prevAttack.accept(target);
             }
 
         }
 
-        return this.isMeleeMode ? 20 : 70;
+        return 20;
     }
 
 
-
-    Supplier<EntityFireBall> fireBallSupplier = () -> new EntityFireBall(world);
-
-    private final Consumer<EntityLivingBase> throwFireball = (target)-> {
-        this.setFightMode(true);
-        this.setSummonFireballsAttack(true);
-        this.setFullBodyUsage(true);
-        this.setImmovable(true);
-        new ActionThrowFireball(fireBallSupplier, 2.5f).performAction(this, target);
-
-        addEvent(()-> this.setImmovable(false), 35);
-        addEvent(()-> this.setFullBodyUsage(false), 35);
-        addEvent(()-> this.setSummonFireballsAttack(false), 35);
-        addEvent(()-> this.setFightMode(false), 80);
-    };
 
     private final Consumer<EntityLivingBase> crystalSelfAOE = (target)-> {
         this.setFightMode(true);
@@ -340,8 +306,8 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
 
         addEvent(()-> {
             //Summon Ground Sword Variant
-                //Makes them faster
-                new ActionSummonSwordAttacks(true).performAction(this, target);
+            //Makes them faster
+            new ActionSummonSwordAttacks(true).performAction(this, target);
         }, 35);
         addEvent(()-> {
             this.lockLook =false;
@@ -469,7 +435,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
             }
 
             if(this.isGroundSwords()) {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_SWORD, false));
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_SWORD, false));
             }
             return PlayState.CONTINUE;
         }
@@ -525,4 +491,5 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
     public AnimationFactory getFactory() {
         return factory;
     }
+
 }

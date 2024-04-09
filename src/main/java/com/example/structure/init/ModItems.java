@@ -73,6 +73,8 @@ public class ModItems {
     public static final Item GUN_LAUNCHER = new ItemGunLauncher("gun", "gun_desc");
     public static final Item HEAL_FOOD = new ItemHealFood("heal_food", 2, 1, false, "hf_desc");
 
+    public static final Item KING_CROWN = new ItemKingCrown("king_crown", ModCreativeTabs.ITEMS, "crown_desc");
+
 
     //Misc.
 

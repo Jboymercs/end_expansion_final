@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:compulsor"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_compulsor.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_compulsor.description"
+    }
+  },
+  "parent": "ee:kill_constructor",
+  "criteria": {
+    "bestiary": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:compulsor"
+          }
+        ]
+      }
+    }
+  }
+}

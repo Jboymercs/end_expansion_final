@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:dark_helmet"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_dark_gear.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_dark_gear.description"
+    }
+  },
+  "parent": "ee:kill_knights",
+  "criteria": {
+    "darkHelmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:dark_helmet"
+          }
+        ]
+      }
+    },
+    "darkChestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:dark_chestplate"
+          }
+        ]
+      }
+    }
+  }
+}

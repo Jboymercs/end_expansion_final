@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:ash_door"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_key.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_key.description"
+    }
+  },
+  "parent": "ee:craft_ash_brick",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:ash_door"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.*;
 import com.example.structure.entity.endking.*;
+import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
@@ -139,6 +140,8 @@ public class ModEntities {
         registerEntityWithID("end_eye", EntityEnderEyeFly.class, ENTITY_START_ID++, 80, end_mobs);
         //End Seeker - Hidden Bosses
         registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, end_mobs);
+        //End King Friendly - Item Summon
+        registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
 
     }
 

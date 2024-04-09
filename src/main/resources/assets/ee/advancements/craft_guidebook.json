@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:info_book"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_book.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_book.description"
+    }
+  },
+  "parent": "ee:root",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:info_book"
+          }
+        ]
+      }
+    }
+  }
+}

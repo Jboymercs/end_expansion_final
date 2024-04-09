@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "ee:lamented"
+      "item": "ee:gun"
     },
     "title": {
-      "translate": "advancements.ee.kill_lamentor.title"
+      "translate": "advancements.ee.kill_vault.title"
     },
     "description": {
-      "translate": "advancements.ee.kill_lamentor.description"
+      "translate": "advancements.ee.kill_vault.description"
     },
     "frame": "challenge"
   },
-  "parent": "ee:kill_constructor",
+  "parent": "ee:kill_seeker",
   "criteria": {
-    "Lamentor": {
+    "EndSeeker": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
-          "type": "ee:crystal_boss"
+          "type": "ee:end_seeker_prime"
         }
       }
     }

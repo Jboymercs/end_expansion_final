@@ -1,0 +1,56 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:endfall_helmet"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_end_gear.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_end_gear.description"
+    }
+  },
+  "parent": "ee:find_soul",
+  "criteria": {
+    "EndHelmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:endfall_helmet"
+          }
+        ]
+      }
+    },
+    "EndChestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:endfall_chestplate"
+          }
+        ]
+      }
+    },
+    "EndLeggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:endfall_leggings"
+          }
+        ]
+      }
+    },
+    "EndBoots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:endfall_boots"
+          }
+        ]
+      }
+    }
+  }
+}

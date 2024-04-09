@@ -1,6 +1,7 @@
 package com.example.structure.entity.endking;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.Projectile;
@@ -18,8 +19,8 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -120,6 +121,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     }
 
     public int switchTimer = 400;
+
 
 
 
@@ -423,15 +425,21 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
     }
 
-    @Override
-    public void initEntityAI() {
-        super.initEntityAI();
 
-    }
 
     public void initBossAi() {
         this.tasks.addTask(4,  new EntityKingTimedAttack<>(this, 1.0, 60, 24.0f, 0.4f));
         beginAI = true;
+    }
+
+    @Override
+    public void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityCrystalKnight>(this, EntityCrystalKnight.class, 1, true, false, null));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
     }
 
     private AnimationFactory factory = new AnimationFactory(this);

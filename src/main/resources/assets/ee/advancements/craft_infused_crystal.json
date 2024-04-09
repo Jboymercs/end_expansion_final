@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:infused_crystal"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_crystal.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_crystal.description"
+    }
+  },
+  "parent": "ee:find_core",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:infused_crystal"
+          }
+        ]
+      }
+    }
+  }
+}

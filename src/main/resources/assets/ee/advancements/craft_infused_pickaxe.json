@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:endfall_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_infused_pickaxe.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_infused_pickaxe.description"
+    }
+  },
+  "parent": "ee:craft_infused_crystal",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:endfall_pickaxe"
+          }
+        ]
+      }
+    }
+  }
+}

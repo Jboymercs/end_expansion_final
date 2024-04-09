@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:dark_ingot"
+    },
+    "title": {
+      "translate": "advancements.ee.kill_knight.title"
+    },
+    "description": {
+      "translate": "advancements.ee.kill_knight.description"
+    }
+  },
+  "parent": "ee:find_red",
+  "criteria": {
+    "darkIngot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:dark_ingot"
+          }
+        ]
+      }
+    }
+  }
+}

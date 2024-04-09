@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:bow"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_end_bow.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_end_bow.description"
+    }
+  },
+  "parent": "ee:find_soul",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:bow"
+          }
+        ]
+      }
+    }
+  }
+}

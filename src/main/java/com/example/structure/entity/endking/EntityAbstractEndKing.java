@@ -45,7 +45,7 @@ import java.util.Optional;
 public class EntityAbstractEndKing extends EntityModBase implements IEntityMultiPart, IPitch, DirectionalRender, ITarget {
 
     /**
-     * this is the base class for the End King, used by the EntityEndKing and as well EntityPermanantGhost
+     * this is the base class for the End King, used by the EntityEndKing and as well EntityPermanantGhost with the addition of changes in EntityFriendKing
      */
     protected Vec3d chargeDir;
 
@@ -424,15 +424,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.end_king_damage * ModConfig.biome_multiplier);
     }
 
-    @Override
-    public void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityCrystalKnight>(this, EntityCrystalKnight.class, 1, true, false, null));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
-    }
+
 
     @Override
     public void handleStatusUpdate(byte id) {

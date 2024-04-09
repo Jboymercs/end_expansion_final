@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:medal"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_medal.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_medal.description"
+    }
+  },
+  "parent": "ee:find_purple",
+  "criteria": {
+    "medallion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:medal"
+          }
+        ]
+      }
+    }
+  }
+}

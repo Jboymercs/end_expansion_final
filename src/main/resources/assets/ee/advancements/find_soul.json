@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:soul"
+    },
+    "title": {
+      "translate": "advancements.ee.find_soul.title"
+    },
+    "description": {
+      "translate": "advancements.ee.find_soul.description"
+    }
+  },
+  "parent": "ee:kill_king",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:soul"
+          }
+        ]
+      }
+    }
+  }
+}

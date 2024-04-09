@@ -1,22 +1,22 @@
 {
   "display": {
     "icon": {
-      "item": "ee:carapace"
+      "item": "ee:purple_chunk"
     },
     "title": {
-      "translate": "advancements.ee.kill_end_bug.title"
+      "translate": "advancements.ee.kill_seeker.title"
     },
     "description": {
-      "translate": "advancements.ee.kill_end_bug.description"
+      "translate": "advancements.ee.kill_seeker.description"
     }
   },
-  "parent": "ee:find_red",
+  "parent": "ee:root",
   "criteria": {
-    "EndBug": {
+    "EndSeeker": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
-          "type": "ee:end_bug"
+          "type": "ee:end_seeker"
         }
       }
     }

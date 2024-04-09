@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:red_lamp"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_lamp.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_lamp.description"
+    }
+  },
+  "parent": "ee:craft_ash_brick",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:red_lamp"
+          }
+        ]
+      }
+    }
+  }
+}

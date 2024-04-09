@@ -2,6 +2,7 @@ package com.example.structure.util.handlers;
 
 import com.example.structure.entity.*;
 import com.example.structure.entity.endking.*;
+import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
@@ -123,5 +124,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityEnderEyeFly.class, RenderEnderEyeFly::new);
         //End Seeker Prime
         RenderingRegistry.registerEntityRenderingHandler(EndSeekerPrime.class, RenderSeekerPrime::new);
+        //Friendly End King - Item Summon
+        RenderingRegistry.registerEntityRenderingHandler(EntityFriendKing.class, RenderFriendKing::new);
     }
 }

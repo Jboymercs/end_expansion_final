@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "ee:lamented"
+      "item": "ee:red_sword"
     },
     "title": {
-      "translate": "advancements.ee.kill_lamentor.title"
+      "translate": "advancements.ee.kill_lord.title"
     },
     "description": {
-      "translate": "advancements.ee.kill_lamentor.description"
+      "translate": "advancements.ee.kill_lord.description"
     },
     "frame": "challenge"
   },
-  "parent": "ee:kill_constructor",
+  "parent": "ee:kill_knights",
   "criteria": {
-    "Lamentor": {
+    "EndSeeker": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
-          "type": "ee:crystal_boss"
+          "type": "ee:end_lord"
         }
       }
     }

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:ash_brick"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_brick.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_brick.description"
+    }
+  },
+  "parent": "ee:find_red",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:ash_brick"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:infusion_core"
+    },
+    "title": {
+      "translate": "advancements.ee.find_core.title"
+    },
+    "description": {
+      "translate": "advancements.ee.find_core.description"
+    }
+  },
+  "parent": "ee:find_red",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:infusion_core"
+          }
+        ]
+      }
+    }
+  }
+}

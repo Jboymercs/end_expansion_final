@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:end_door"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_door.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_door.description"
+    }
+  },
+  "parent": "ee:craft_keyhole",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:end_door"
+          }
+        ]
+      }
+    }
+  }
+}

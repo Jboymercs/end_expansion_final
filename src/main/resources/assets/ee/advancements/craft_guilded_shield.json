@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:durable_shield"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_shield.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_shield.description"
+    }
+  },
+  "parent": "ee:kill_guilder",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:durable_shield"
+          }
+        ]
+      }
+    }
+  }
+}
