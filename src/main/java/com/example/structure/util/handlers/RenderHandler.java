@@ -1,6 +1,7 @@
 package com.example.structure.util.handlers;
 
 import com.example.structure.entity.*;
+import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -126,5 +127,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EndSeekerPrime.class, RenderSeekerPrime::new);
         //Friendly End King - Item Summon
         RenderingRegistry.registerEntityRenderingHandler(EntityFriendKing.class, RenderFriendKing::new);
+        //Barrend Golem - Mini-boss
+        RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGolem.class, RenderBarrendGolem::new);
     }
 }

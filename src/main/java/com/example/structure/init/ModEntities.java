@@ -3,6 +3,7 @@ package com.example.structure.init;
 import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.*;
+import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -142,6 +143,8 @@ public class ModEntities {
         registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, end_mobs);
         //End King Friendly - Item Summon
         registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
+        //Barrend Golem - Mini-boss
+        registerEntityWithID("barrend_golem", EntityBarrendGolem.class, ENTITY_START_ID++, 80, end_mobs);
 
     }
 

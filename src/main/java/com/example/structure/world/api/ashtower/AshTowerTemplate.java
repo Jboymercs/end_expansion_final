@@ -3,6 +3,7 @@ package com.example.structure.world.api.ashtower;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderKnight;
+import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
@@ -52,6 +53,22 @@ public class AshTowerTemplate extends ModStructureTemplate {
                 world.setBlockToAir(pos);
             }
         }
+
+
+        if(function.startsWith("boss")) {
+                world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER_ASH.getDefaultState(), 2);
+                TileEntity tileentity = world.getTileEntity(pos);
+                if (tileentity instanceof tileEntityMobSpawner) {
+                    ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
+                            new MobSpawnerLogic.MobSpawnData[]{
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityBarrendGolem.class), 1)
+                            },
+                            new int[]{1},
+                            1,
+                            16);
+                }
+        }
+
     }
 
 

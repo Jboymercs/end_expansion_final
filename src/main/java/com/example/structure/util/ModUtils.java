@@ -383,6 +383,57 @@ public class ModUtils {
         }
     }
 
+    public static void destroySpecificBlocks(AxisAlignedBB box, World world, Entity entity) {
+        int i = MathHelper.floor(box.minX);
+        int j = MathHelper.floor(box.minY);
+        int k = MathHelper.floor(box.minZ);
+        int l = MathHelper.floor(box.maxX);
+        int i1 = MathHelper.floor(box.maxY);
+        int j1 = MathHelper.floor(box.maxZ);
+
+        for (int x = i; x <= l; ++x) {
+            for (int y = j; y <= i1; ++y) {
+                for (int z = k; z <= j1; ++z) {
+                    BlockPos blockpos = new BlockPos(x, y, z);
+                    IBlockState iblockstate = world.getBlockState(blockpos);
+                    Block block = iblockstate.getBlock();
+
+                    if (!block.isAir(iblockstate, world, blockpos) && iblockstate.getMaterial() != Material.FIRE) {
+                        if (ForgeEventFactory.getMobGriefingEvent(world, entity)) {
+                            if(block == ModBlocks.BARE_LEAVES || block == ModBlocks.ASH_BRICK_PILLAR || block == ModBlocks.BARE_PLANT || block == ModBlocks.ASH_BRICK_HALF) {
+                                world.destroyBlock(blockpos, false);
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public static boolean collisionNearby(AxisAlignedBB box, World world, Entity entity) {
+        int i = MathHelper.floor(box.minX);
+        int j = MathHelper.floor(box.minY);
+        int k = MathHelper.floor(box.minZ);
+        int l = MathHelper.floor(box.maxX);
+        int i1 = MathHelper.floor(box.maxY);
+        int j1 = MathHelper.floor(box.maxZ);
+
+        for (int x = i; x <= l; ++x) {
+            for (int y = j; y <= i1; ++y) {
+                for (int z = k; z <= j1; ++z) {
+                    BlockPos blockpos = new BlockPos(x, y, z);
+                    IBlockState iblockstate = world.getBlockState(blockpos);
+                    Block block = iblockstate.getBlock();
+
+                    if (!block.isAir(iblockstate, world, blockpos) && iblockstate.getMaterial() != Material.FIRE) {
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public static String translateDesc(String key, Object... params) {
         return I18n.format(ModUtils.LANG_DESC + key, params);
     }
