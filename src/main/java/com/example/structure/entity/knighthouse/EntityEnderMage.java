@@ -70,7 +70,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
     public EntityEnderMage(World worldIn) {
         super(worldIn);
-        this.setSize(0.8f, 2.0f);
+        this.setSize(0.8f, 1.9f);
     }
 
 

@@ -8,6 +8,7 @@ import com.example.structure.util.ModRand;
 import com.example.structure.world.Biome.decorator.EEBiomeDecorator;
 import com.example.structure.world.Biome.generation.*;
 import com.example.structure.world.WorldGenStructure;
+import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.islands.WorldGenOutpost;
 import git.jbredwards.nether_api.api.audio.IMusicType;
@@ -16,6 +17,7 @@ import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import git.jbredwards.nether_api.mod.common.registry.NetherAPIRegistry;
 import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -74,6 +76,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     private static final IBlockState END_FLOOR = ModBlocks.END_ASH.getDefaultState();
     private static final IBlockState END_WASTES = ModBlocks.BROWN_END_STONE.getDefaultState();
 
+    public static final WorldGenAshTower ash_tower = new WorldGenAshTower();
 
     private Random random;
     public BiomeAshWasteland() {
@@ -83,6 +86,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
 
+        //Let's Try this again
+        this.spawnableCreatureList.add(new SpawnListEntry(EntitySnatcher.class, 1, 1, 1));
 
         this.topBlock = END_FLOOR;
         this.fillerBlock = END_WASTES;
@@ -144,7 +149,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             }
         }
         //Red Crystal Ore
-        if(rand.nextInt(7) == 1) {
+        if(rand.nextInt(9) == 1) {
             for (int k2 = 0; k2 < this.crystalSelect; ++k2) {
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
@@ -155,7 +160,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             }
         }
         //Ash Ruins
-        if(rand.nextInt(2) == 0) {
+        if(rand.nextInt(4) == 0) {
             for (int k2 = 0; k2 < this.ruinsPerChunk; ++k2) {
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
@@ -221,6 +226,11 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             this.canGenerateKnightFortress(chunkGenerator.getWorld(), pos);
         }
 
+        //Ashed Towers
+        if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 58) {
+            ash_tower.generate(chunkGenerator.getWorld(), random, pos);
+        }
+
     }
 
     public boolean canGenerateKnightFortress(World worldIn, BlockPos pos) {
@@ -233,6 +243,20 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         }
         return false;
     }
+
+    public static int getGroundFromAbove(World world, int x, int z)
+    {
+        int y = 255;
+        boolean foundGround = false;
+        while(!foundGround && y-- >= 31)
+        {
+            Block blockAt = world.getBlockState(new BlockPos(x,y,z)).getBlock();
+            foundGround =  blockAt == ModBlocks.END_ASH || blockAt == ModBlocks.BROWN_END_STONE;
+        }
+
+        return y;
+    }
+
     @Override
     public boolean generateIslands(@Nonnull INetherAPIChunkGenerator chunkGenerator, int chunkX, int chunkZ, float islandHeight) {
         return false;

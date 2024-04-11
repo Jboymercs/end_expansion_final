@@ -35,7 +35,6 @@ public class AshTower {
     }
 
     public void startBaseTower(BlockPos pos, Rotation rot) {
-        System.out.println("Generating Tower at" + pos);
         String[] base_types = {"base_1", "base_2"};
         AshTowerTemplate template = new AshTowerTemplate(manager, "base_2", pos, rot, 0, true);
         components.add(template);
@@ -65,7 +64,6 @@ public class AshTower {
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(lower_level_layers), rotation);
 
         if(template.isCollidingExcParent(manager, parent, components)) {
-            System.out.println("Colliding");
             return false;
         }
 
@@ -78,7 +76,6 @@ public class AshTower {
         AshTowerTemplate template = addAdjustedPiece(parent, pos, "walkway_1", rot);
 
         if(template.isCollidingExcParent(manager, parent, components)) {
-            System.out.println("Walkways are Colliding with Parent");
             return false;
         }
         components.add(template);
@@ -91,7 +88,6 @@ public class AshTower {
         String[] upper_level_layers = {"layer_3", "layer_4"};
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(upper_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
-            System.out.println("collided With Another Part");
             return false;
 
         }
@@ -111,7 +107,6 @@ public class AshTower {
         BlockPos posToo = pos.add(-21, 16, 0);
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(highest_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
-            System.out.println("collided With Another Part");
             return false;
 
         }
@@ -135,7 +130,6 @@ public class AshTower {
         String[] roof_level_layers = {"top_1", "top_2"};
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(roof_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
-            System.out.println("collided With Another Part");
             return false;
 
         }

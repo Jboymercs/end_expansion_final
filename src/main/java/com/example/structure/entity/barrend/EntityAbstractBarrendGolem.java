@@ -20,6 +20,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -93,11 +94,7 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
 
 
 
-    public EntityAbstractBarrendGolem(World worldIn, float x, float y, float z) {
-        super(worldIn, x, y, z);
-        this.hitboxParts = new MultiPartEntityPart[]{model, main_body, left_arm, right_arm, part_left_worm, part_right_worm, part_back_worm};
-        this.setSize(2.3f, 3.2f);
-    }
+
 
     @Override
     public boolean canBeCollidedWith() {
@@ -145,6 +142,10 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     protected boolean currentlyHasWormActive = false;
     protected int timeInBetweenWorms = ModRand.range(80, 120);
 
+    public void setPosition(BlockPos pos) {
+        this.setPosition(pos.getX(), pos.getY(), pos.getZ());
+    }
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -156,8 +157,6 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
             this.rotationPitch = 0;
             this.rotationYawHead = 0;
             this.rotationYaw = 0;
-            this.setImmovable(true);
-            this.setNoAI(true);
             this.setFullBodyUsage(true);
         }
 
@@ -183,6 +182,11 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
                 timeInBetweenWorms--;
             }
         }
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return false;
     }
 
     public void setTooAwaken() {
@@ -261,12 +265,12 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100D * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.barrend_golem_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.barrend_golem_attack_damage);
     }
 
 

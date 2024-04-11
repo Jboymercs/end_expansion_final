@@ -74,7 +74,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
 
     public EntityEnderShield(World worldIn) {
         super(worldIn);
-        this.setSize(0.8f, 2.0f);
+        this.setSize(0.8f, 1.9f);
     }
 
     @Override

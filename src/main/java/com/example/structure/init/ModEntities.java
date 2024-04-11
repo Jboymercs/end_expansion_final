@@ -141,10 +141,10 @@ public class ModEntities {
         registerEntityWithID("end_eye", EntityEnderEyeFly.class, ENTITY_START_ID++, 80, end_mobs);
         //End Seeker - Hidden Bosses
         registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, end_mobs);
+        //Barrend Golem - Hidden Bosses
+        registerEntityWithID("golem_b", EntityBarrendGolem.class, ENTITY_START_ID++, 80, end_mobs);
         //End King Friendly - Item Summon
         registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
-        //Barrend Golem - Mini-boss
-        registerEntityWithID("barrend_golem", EntityBarrendGolem.class, ENTITY_START_ID++, 80, end_mobs);
 
     }
 
@@ -161,7 +161,7 @@ public class ModEntities {
         if (ID_MAP.containsKey(entity)) {
             return ModReference.MOD_ID + ":" + ID_MAP.get(entity);
         }
-        throw new IllegalArgumentException("Mapping of an entity has not be registered for the maelstrom mod spawner system.");
+        throw new IllegalArgumentException("Mapping of an entity has not be registered for the end expansion mob spawner system.");
     }
 
     private static void registerEntityWithID(String name, Class<? extends Entity> entity, int id, int range, Vec3i eggColor) {

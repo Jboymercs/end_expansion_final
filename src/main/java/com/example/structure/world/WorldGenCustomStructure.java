@@ -92,9 +92,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
                 //Ashed Towers, a randomly procedural generated Tower with the chance of different challenges
                 //Spawns only in the Ash Wastelands
-                    if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
-                        ash_tower.generate(world, random, pos);
-                    }
+
 
 
         }

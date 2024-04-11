@@ -273,7 +273,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     @Override
     public boolean getCanSpawnHere()
     {
-        return this.world.rand.nextInt(6) == 0;
+        return this.world.rand.nextInt(12) == 0;
     }
 
     @Override

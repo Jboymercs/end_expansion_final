@@ -404,6 +404,21 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static int vault_distance = 200;
 
+    @Config.Name("Ashed Towers Chance to Spawn")
+    @Config.Comment("Change the chance to spawn the Ashed Towers, This is done by per chunk checking if the ground is atleast 58, modify carefully")
+    @Config.RequiresMcRestart
+    public static int ash_tower_distance = 150;
+
+    @Config.Name("Ashed Towers Mob Chance")
+    @Config.Comment("Change the chance of mob spawns in the Ashed Towers, Higher is better chance")
+    @Config.RangeInt(min = 0, max = 10)
+    public static int ashed_towers_mob_spawn = 7;
+
+    @Config.Name("Ashed Towers Chest Chance")
+    @Config.Comment("Change the chance of Chest Spawns in the Ashed Towers")
+    @Config.RangeInt(min = 0, max = 5)
+    public static int ashed_tower_chest_spawn = 3;
+
     @Config.Name("End Seekers Health")
     @Config.Comment("Change the Health of the End Seekers")
     @Config.RequiresMcRestart
@@ -425,6 +440,21 @@ public class ModConfig {
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
     public static double seeker_prime_attack_damage = 9D;
+
+    @Config.Name("Barrend Golem Health")
+    @Config.Comment("Change the Health of the Barrend Golem")
+    @Config.RequiresMcRestart
+    public static double barrend_golem_health = 150D;
+
+    @Config.Name("Barrend Golem Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Barrend Golem")
+    @Config.RequiresMcRestart
+    public static double barrend_golem_attack_damage = 10D;
+
+    @Config.Name("Barrend Golem Attack Multiplier")
+    @Config.Comment("Change X times base Attack Damage for specific abilities of the Barrend Golem, such as it's chage, and Slam Attacks")
+    @Config.RequiresMcRestart
+    public static double barrend_golem_attack_multiplier = 1.4D;
 
     @Config.Name("Seeker Gun Cooldown")
     @Config.Comment("Change the cooldown of the seeker gun in seconds")

@@ -1,8 +1,10 @@
 package com.example.structure.world.api.ashtower;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.BiomeRegister;
+import com.sun.jna.platform.win32.WinUser;
 import net.minecraft.block.Block;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -40,7 +42,7 @@ public class WorldGenAshTower extends WorldGenerator {
         boolean foundGround = false;
         while (!foundGround && y-- >= 31) {
             Block blockAt = world.getBlockState(new BlockPos(x, y, z)).getBlock();
-            foundGround = blockAt == Blocks.END_STONE;
+            foundGround = blockAt == ModBlocks.END_ASH || blockAt == ModBlocks.BROWN_END_STONE;
         }
 
         return y;
@@ -51,13 +53,14 @@ public class WorldGenAshTower extends WorldGenerator {
 
         int yHieght = getGroundFromAbove(world, pos.getX() + 2, pos.getZ() + 2);
         int yHieghtAdjust = getGroundFromAbove(world, pos.getX() + 16, pos.getZ() + 16);
-        if (yHieght > 57 && spacing > 150 && yHieghtAdjust > 57 ) { //&& world.getBiomeForCoordsBody(pos) == BiomeRegister.END_ASH_WASTELANDS
+        BlockPos modifiedPos = new BlockPos(pos.getX() + 17, pos.getY(), pos.getZ() + 17);
+        if (yHieght > 58 && spacing > ModConfig.ash_tower_distance && yHieghtAdjust > 58  && world.getBiomeForCoordsBody(pos) == BiomeRegister.END_ASH_WASTELANDS && world.getBiomeForCoordsBody(modifiedPos) == BiomeRegister.END_ASH_WASTELANDS) {
 
             getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 150, pos.getZ() - 150, pos.getX() + 150, pos.getZ() + 150));
             return true;
 
         }
-        System.out.println("Ashed Tower Spawn spacing at " + spacing);
+
         spacing++;
         return false;
     }
@@ -69,10 +72,13 @@ public class WorldGenAshTower extends WorldGenerator {
     }
 
 
+
     public static class Start extends StructureStart{
         public Start() {
 
         }
+
+
 
         public Start(World worldIn, Random rand, int chunkX, int chunkZ) {
         super(chunkX, chunkZ);
@@ -86,7 +92,7 @@ public class WorldGenAshTower extends WorldGenerator {
             BlockPos posI = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
             int yheight = getGroundFromAbove(worldIn, posI.getX(), posI.getZ());
 
-            if(yheight > 57) {
+            if(yheight > 58) {
                 for (int i = 0; i < 4; i++) {
                     Rotation rotation = Rotation.values()[(rand + i) % Rotation.values().length];
                     components.clear();
@@ -96,7 +102,6 @@ public class WorldGenAshTower extends WorldGenerator {
                     this.updateBoundingBox();
 
                     if (this.isSizeableStructure()) {
-                        System.out.println("Popped is Sizeable");
                         break;
                     }
                 }

@@ -149,7 +149,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     @Override
     public boolean getCanSpawnHere()
     {
-        return this.world.rand.nextInt(9) == 0;
+        return this.world.rand.nextInt(18) == 0;
     }
 
     protected int hibernationTimer = 500 + ModRand.range(50, ModConfig.stalker_hibernation * 20);
