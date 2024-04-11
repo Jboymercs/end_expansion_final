@@ -126,6 +126,8 @@ ee.dialog.king_talk_2=You and I have more in common than you think.
 ee.dialog.king_talk_3=This is where it ends for you...
 ee.dialog.king_talk_4=it's time to put your aspirations to the grave...
 ee.dialog.king_talk_5=traveller.
+
+
 #Advancements
 advancements.ee.root.title=End Expansion
 advancements.ee.root.description=Discover the End's new mysteries.
@@ -142,13 +144,15 @@ advancements.ee.kill_vault.description=Relish the threat that lies within the lo
 advancements.ee.kill_controller.title=You do what with blocks?
 advancements.ee.kill_controller.description=Slay a Ancient Guilder, they may have some useful drops
 advancements.ee.kill_stalker.title=Eyes on the prize!
-advancements.ee.kill_stalker.description=Slay and End Stalker, with best caution of course.
+advancements.ee.kill_stalker.description=Slay an End Stalker, with best caution of course.
 advancements.ee.kill_knight.title=Knight Slayer!
 advancements.ee.kill_knight.description=Acquire a Dark Ingot by slaying End Knights.
 advancements.ee.kill_king.title=The Dark Fortress
 advancements.ee.kill_king.description=Atop the fortress is the one who casts the shadow. Good luck.
 advancements.ee.kill_lord.title=What The Crystal Does
 advancements.ee.kill_lord.description=Slay an Unholy Knight, can be found in the Fortress or rarely in other structures.
+advancements.ee.kill_barrend.title=Long Ways Up
+advancements.ee.kill_barrend.description=Defeat the being that has taken over the Ashed Towers.
 
 
 

@@ -109,6 +109,44 @@
       }
     ]
   },
+  "entity.knight.hurt": {
+    "category": "entity",
+    "subtitle": "entity.knight.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/hurt_1",
+        "stream": true
+      }
+    ]
+  },
+  "entity.knight.idle": {
+    "category": "entity",
+    "subtitle": "entity.knight.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/idle_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/knight/idle_2",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/knight/idle_3",
+        "stream": true
+      }
+    ]
+  },
+  "entity.knight.death": {
+    "category": "entity",
+    "subtitle": "entity.knight.death",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/death",
+        "stream": true
+      }
+    ]
+  },
   "entity.seeker.shoot": {
     "category": "entity",
     "subtitle": "entity.seeker.shoot",
@@ -143,6 +181,62 @@
     "sounds": [
       {
         "name": "ee:entity/seeker/hurt",
+        "stream": true
+      }
+    ]
+  },
+  "block.crystal.glow": {
+    "category": "block",
+    "subtitle": "block.crystal.glow",
+    "sounds": [
+      {
+        "name": "ee:block/crystal/glow_1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/crystal/glow_2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/crystal/glow_3",
+        "stream": true
+      }
+    ]
+  },
+  "entity.parasite.idle": {
+    "category": "entity",
+    "subtitle": "entity.parasite.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/parasite/idle_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/parasite/idle_2",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/parasite/idle_3",
+        "stream": true
+      }
+    ]
+  },
+  "entity.parasite.hurt": {
+    "category": "entity",
+    "subtitle": "entity.parasite.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/parasite/hurt_1",
+        "stream": true
+      }
+    ]
+  },
+  "entity.parasite.death": {
+    "category": "entity",
+    "subtitle": "entity.parasite.death",
+    "sounds": [
+      {
+        "name": "ee:entity/parasite/death",
         "stream": true
       }
     ]

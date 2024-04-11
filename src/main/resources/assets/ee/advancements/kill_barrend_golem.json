@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:bare_plant"
+    },
+    "title": {
+      "translate": "advancements.ee.kill_barrend.title"
+    },
+    "description": {
+      "translate": "advancements.ee.kill_barrend.description"
+    },
+    "frame": "challenge"
+  },
+  "parent": "ee:kill_knights",
+  "criteria": {
+    "Boulderer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "ee:golem_b"
+        }
+      }
+    }
+  }
+}

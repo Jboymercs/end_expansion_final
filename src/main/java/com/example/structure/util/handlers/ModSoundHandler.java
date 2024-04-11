@@ -30,11 +30,22 @@ public class ModSoundHandler {
 
     //Knight Household
     public static SoundEvent KNIGHT_STEP;
+    public static SoundEvent KNIGHT_HURT;
+    public static SoundEvent KNIGHT_DEATH;
+    public static SoundEvent KNIGHT_IDLE;
 
     //End Seeker
     public static SoundEvent SEEKER_SHOOT;
     public static SoundEvent SEEKER_HOVER;
     public static SoundEvent SEEKER_HURT;
+
+    //Crystal HUM
+    public static SoundEvent RED_CRYSTAL_HUM;
+
+    //Ashed Parasite
+    public static SoundEvent PARASITE_IDLE;
+    public static SoundEvent PARASITE_HURT;
+    public static SoundEvent PARASITE_DEATH;
 
 
     public static void registerSounds() {
@@ -51,10 +62,21 @@ public class ModSoundHandler {
         KING_DASH = registerSound("king.dash", "entity");
 
         BOMB_EXPLODE = registerSound("king.explode", "entity");
+
         KNIGHT_STEP = registerSound("knight.step", "entity");
+        KNIGHT_HURT = registerSound("knight.hurt", "entity");
+        KNIGHT_DEATH = registerSound("knight.death", "entity");
+        KNIGHT_IDLE = registerSound("knight.idle", "entity");
+
         SEEKER_SHOOT = registerSound("seeker.shoot", "entity");
         SEEKER_HOVER = registerSound("seeker.hover", "entity");
         SEEKER_HURT = registerSound("seeker.hurt", "entity");
+
+        RED_CRYSTAL_HUM = registerSound("crystal.glow", "block");
+
+        PARASITE_IDLE = registerSound("parasite.idle", "entity");
+        PARASITE_HURT = registerSound("parasite.hurt", "entity");
+        PARASITE_DEATH = registerSound("parasite.death", "entity");
     }
 
 

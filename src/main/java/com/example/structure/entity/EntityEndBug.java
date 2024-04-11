@@ -12,6 +12,7 @@ import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -333,7 +334,17 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
             this.setHeadTwitch(true);
             addEvent(() -> this.setHeadTwitch(false), 20);
         }
-        return SoundEvents.ENTITY_SHULKER_AMBIENT;
+        return ModSoundHandler.PARASITE_IDLE;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.PARASITE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.PARASITE_DEATH;
     }
     private Consumer<EntityLivingBase> prevAttack;
     @Override

@@ -136,7 +136,17 @@ public abstract class EntityKnightBase extends EntityModBase {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.ENTITY_PLAYER_HURT;
+        return ModSoundHandler.KNIGHT_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.KNIGHT_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundHandler.KNIGHT_IDLE;
     }
 
 
