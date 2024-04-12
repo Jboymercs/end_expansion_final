@@ -153,7 +153,7 @@ public abstract class EntityKnightBase extends EntityModBase {
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(ModSoundHandler.KNIGHT_STEP, 0.7F, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+        this.playSound(ModSoundHandler.KNIGHT_STEP, 0.4F, 1.0f + ModRand.getFloat(0.3F));
     }
 
     private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "knighthouse");

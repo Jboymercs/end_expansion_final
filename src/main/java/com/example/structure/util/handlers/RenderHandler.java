@@ -74,7 +74,7 @@ public class RenderHandler {
         //Quake
         registerProjectileRenderer(ProjectileQuake.class);
         //Ender Knight
-        registerModEntityRenderer(EntityEnderKnight.class, RenderEnderKnight::new);
+       // registerModEntityRenderer(EntityEnderKnight.class, RenderEnderKnight::new);
         //End King
         RenderingRegistry.registerEntityRenderingHandler(EntityEndKing.class, RenderEntityKing::new);
         //Red Crystal
@@ -129,5 +129,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityFriendKing.class, RenderFriendKing::new);
         //Barrend Golem - Mini-boss
         RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGolem.class, RenderBarrendGolem::new);
+        //Redone End Knight
+        RenderingRegistry.registerEntityRenderingHandler(EntityEnderKnight.class, RenderEndKnightRedone::new);
     }
 }

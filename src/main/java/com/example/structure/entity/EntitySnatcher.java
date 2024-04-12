@@ -10,6 +10,8 @@ import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -24,6 +26,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -112,7 +116,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
 
     public void playSpottedAnim() {
         this.setSpotted(true);
-        addEvent(()-> this.playSound(SoundEvents.ENTITY_ENDERMEN_SCREAM,1.0f, 0.6f - ModRand.getFloat(0.3f) ), 5);
+        this.playSound(ModSoundHandler.STALKER_SPOTTED, 1.0f, 1.0f - ModRand.getFloat(0.3f));
         addEvent(()-> this.setSpotted(false), 25);
     }
 
@@ -276,6 +280,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
       this.setAttacking(true);
 
       addEvent(()-> {
+          this.playSound(ModSoundHandler.STALKER_SWING, 1.0f, 1.0f - ModRand.getFloat(0.3F));
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
           float damage = (float) (ModConfig.stalker_damage * ModConfig.biome_multiplier);
@@ -287,7 +292,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
 
     private Consumer<EntityLivingBase> fast_attack = (target) -> {
       this.setAttackQuick(true);
-
+      this.playSound(ModSoundHandler.STALKER_ATTACK_1, 1.0f, 1.0f - ModRand.getFloat(0.3F));
       //L
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
@@ -319,6 +324,22 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.STALKER_HURT;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn)
+    {
+        this.playSound(ModSoundHandler.STALKER_STEP, 0.5F, 1.0f / (rand.nextFloat() * 0.4F + 0.2f));
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.STALKER_HURT;
     }
 
     private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "snatcher");

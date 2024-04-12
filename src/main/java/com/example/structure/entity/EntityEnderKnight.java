@@ -31,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -44,7 +45,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
-public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, IAttack {
+public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
     private Vec3d chargeDir;
 
@@ -185,7 +186,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
     }
     private <E extends IAnimatable>PlayState predicateArms(AnimationEvent<E> event) {
     if(!this.isFightMode() && !this.isDeathKnight()) {
-        if (!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
+        if (!(event.getLimbSwingAmount() >= -0.10F && event.getLimbSwingAmount() <= 0.10F)) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALKING_ARMS, true));
             return PlayState.CONTINUE;
         }
@@ -193,7 +194,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
         return PlayState.STOP;
     }
     private <E extends IAnimatable>PlayState predicateLegs(AnimationEvent<E> event) {
-        if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F) && !this.isDeathKnight()) {
+        if(!(event.getLimbSwingAmount() >= -0.10F && event.getLimbSwingAmount() <= 0.10F) && !this.isDeathKnight()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALKING_LEGS, true));
             return PlayState.CONTINUE;
         }
@@ -202,7 +203,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         if(!this.isFightMode() && !this.isDeathKnight()) {
-            if (event.getLimbSwingAmount() > -0.09F && event.getLimbSwingAmount() < 0.09F) {
+            if (event.getLimbSwingAmount() >= -0.09F && event.getLimbSwingAmount() <= 0.09F) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE, true));
                 return PlayState.CONTINUE;
             }
@@ -358,7 +359,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
     private final Consumer<EntityLivingBase> dashAttack = (target) -> {
       this.setFightMode(true);
       this.setDashAttack(true);
-
+        this.playSound(ModSoundHandler.KNIGHT_DASH, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
       addEvent(()-> this.lockLook = true, 3);
       addEvent(()-> {
           //Used for the Initial Position this will dash too
@@ -410,7 +411,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
 
     @Override
     public void onDeath(DamageSource cause) {
-        if(world.rand.nextInt(6) == 0 || this.isMarkedForUnholy()) {
+        if(this.isMarkedForUnholy()) {
             this.setDeathKnight(true);
             this.setImmovable(true);
             this.setHealth(0.0001f);
@@ -431,4 +432,13 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
         super.onDeath(cause);
     }
 
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.ticksExisted;
+    }
 }

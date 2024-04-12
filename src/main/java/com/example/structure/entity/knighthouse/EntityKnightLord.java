@@ -34,6 +34,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.lwjgl.Sys;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -48,7 +49,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
-public class EntityKnightLord extends EntityKnightBase implements IAnimatable, IAttack {
+public class EntityKnightLord extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
     private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
@@ -536,5 +537,15 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.ticksExisted;
     }
 }

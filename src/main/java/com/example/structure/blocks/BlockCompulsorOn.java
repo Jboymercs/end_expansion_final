@@ -2,6 +2,7 @@ package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.TileEntityCompulsor;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
@@ -154,6 +155,9 @@ public class BlockCompulsorOn extends BlockBase{
             Vec3d vel = new Vec3d(facing.getDirectionVec()).scale(-0.5f);
             pos = pos.add(facing.getDirectionVec());
             worldIn.spawnParticle(EnumParticleTypes.CLOUD, false, facing.equals(EnumFacing.EAST) ? pos.getX() + 5 : facing.equals(EnumFacing.WEST) ? pos.getX() - 5 : pos.getX() + 0.5, facing.equals(EnumFacing.UP) ? pos.getY() + 5 : facing.equals(EnumFacing.DOWN) ? pos.getY() - 5 : pos.getY() + 0.5, facing.equals(EnumFacing.NORTH) ? pos.getZ() - 5 : facing.equals(EnumFacing.SOUTH) ? pos.getZ()  +5 : pos.getZ() + 0.5, vel.x, vel.y, vel.z);
+            if(rand.nextInt(5) == 0) {
+                worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSoundHandler.COMPULSOR_HUM, SoundCategory.NEUTRAL, 0.3f, 1.0f, true);
+            }
         }
     }
 

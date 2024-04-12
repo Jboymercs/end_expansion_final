@@ -31,6 +31,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -118,10 +119,6 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     public void onUpdate() {
         super.onUpdate();
 
-        //Plays the quiet hover of the Seeker's
-        if(rand.nextInt(3) == 0) {
-            this.playSound(ModSoundHandler.SEEKER_HOVER, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-        }
         if(rand.nextInt(5) == 0 && blinkCoolDown > 120) {
 
             this.setBlinkMode(true);
@@ -274,6 +271,9 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
 
       addEvent(()-> {
+          this.playSound(ModSoundHandler.SEEKER_DASH, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+      }, 18);
+      addEvent(()-> {
         Vec3d posToGo = target.getPositionVector();
           float distance = getDistance(target);
         this.lockLook = true;
@@ -412,8 +412,18 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     }
 
     @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.SEEKER_HURT;
+    }
+
+    @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return ModSoundHandler.SEEKER_HURT;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundHandler.SEEKER_HOVER;
     }
 
 

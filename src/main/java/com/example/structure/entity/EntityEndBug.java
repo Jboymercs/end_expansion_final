@@ -14,6 +14,7 @@ import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -346,6 +347,13 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     protected SoundEvent getDeathSound() {
         return ModSoundHandler.PARASITE_DEATH;
     }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn)
+    {
+        this.playSound(ModSoundHandler.PARASITE_STEP, 0.4F, 1.0f + ModRand.getFloat(0.3F));
+    }
+
     private Consumer<EntityLivingBase> prevAttack;
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {

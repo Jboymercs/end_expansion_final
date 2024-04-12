@@ -213,7 +213,7 @@ public class ModConfig {
     @Config.Name("Knighthouse Base Health")
     @Config.Comment("Base Health for the Ender Knight, Mage, Shielder")
     @Config.RequiresMcRestart
-    public static double knighthouse_health = 35.0D;
+    public static double knighthouse_health = 25.0D;
 
     @Config.Name("Ender Knight Base Attack Damage")
     @Config.Comment("Base Attack Damage for the Ender Knight")
@@ -444,7 +444,7 @@ public class ModConfig {
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_health = 150D;
+    public static double barrend_golem_health = 100D;
 
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")

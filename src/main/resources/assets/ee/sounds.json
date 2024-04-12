@@ -104,7 +104,7 @@
     "subtitle": "entity.knight.step",
     "sounds": [
       {
-        "name": "ee:entity/knight/step",
+        "name": "ee:entity/knight/step_1",
         "stream": true
       }
     ]
@@ -147,6 +147,36 @@
       }
     ]
   },
+  "entity.knight.dash": {
+    "category": "entity",
+    "subtitle": "entity.knight.dash",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/dash",
+        "stream": true
+      }
+    ]
+  },
+  "entity.knight.cast_heal": {
+    "category": "entity",
+    "subtitle": "entity.knight.cast_heal",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/cast_heal",
+        "stream": true
+      }
+    ]
+  },
+  "entity.knight.cast": {
+    "category": "entity",
+    "subtitle": "entity.knight.cast",
+    "sounds": [
+      {
+        "name": "ee:entity/knight/cast",
+        "stream": true
+      }
+    ]
+  },
   "entity.seeker.shoot": {
     "category": "entity",
     "subtitle": "entity.seeker.shoot",
@@ -185,6 +215,26 @@
       }
     ]
   },
+  "entity.seeker.hurt_elder": {
+    "category": "entity",
+    "subtitle": "entity.seeker.hurt_elder",
+    "sounds": [
+      {
+        "name": "ee:entity/seeker/hurt_elder",
+        "stream": true
+      }
+    ]
+  },
+  "entity.seeker.dash": {
+    "category": "entity",
+    "subtitle": "entity.seeker.dash",
+    "sounds": [
+      {
+        "name": "ee:entity/seeker/dash",
+        "stream": true
+      }
+    ]
+  },
   "block.crystal.glow": {
     "category": "block",
     "subtitle": "block.crystal.glow",
@@ -199,6 +249,16 @@
       },
       {
         "name": "ee:block/crystal/glow_3",
+        "stream": true
+      }
+    ]
+  },
+  "block.compulsor.sound": {
+    "category": "block",
+    "subtitle": "block.compulsor.on",
+    "sounds": [
+      {
+        "name": "ee:block/compulsor/compulsor_on",
         "stream": true
       }
     ]
@@ -231,12 +291,84 @@
       }
     ]
   },
+  "entity.parasite.step": {
+    "category": "entity",
+    "subtitle": "entity.parasite.step",
+    "sounds": [
+      {
+        "name": "ee:entity/parasite/step",
+        "stream": true
+      }
+    ]
+  },
   "entity.parasite.death": {
     "category": "entity",
     "subtitle": "entity.parasite.death",
     "sounds": [
       {
         "name": "ee:entity/parasite/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.stalker.hurt": {
+    "category": "entity",
+    "subtitle": "entity.stalker.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/stalker/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/stalker/hurt_2",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/stalker/hurt_3",
+        "stream": true
+      }
+    ]
+  },
+  "entity.stalker.spotted": {
+    "category": "entity",
+    "subtitle": "entity.stalker.spotted",
+    "sounds": [
+      {
+        "name": "ee:entity/stalker/spotted",
+        "stream": true
+      }
+    ]
+  },
+  "entity.stalker.attack": {
+    "category": "entity",
+    "subtitle": "entity.stalker.attack",
+    "sounds": [
+      {
+        "name": "ee:entity/stalker/attack",
+        "stream": true
+      }
+    ]
+  },
+  "entity.stalker.swing": {
+    "category": "entity",
+    "subtitle": "entity.stalker.swing",
+    "sounds": [
+      {
+        "name": "ee:entity/stalker/swing",
+        "stream": true
+      }
+    ]
+  },
+  "entity.stalker.step": {
+    "category": "entity",
+    "subtitle": "entity.stalker.step",
+    "sounds": [
+      {
+        "name": "ee:entity/stalker/step_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/stalker/step_2",
         "stream": true
       }
     ]

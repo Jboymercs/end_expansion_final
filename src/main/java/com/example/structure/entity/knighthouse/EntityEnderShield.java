@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -38,7 +39,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class EntityEnderShield extends EntityKnightBase implements IAnimatable, IAttack {
+public class EntityEnderShield extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
     private final String ANIM_WALKING_ARMS = "walk_upper";
     private final String ANIM_WALKING_LEGS = "walk_lower";
     private final String ANIM_WALKING_ARMS_SHIELD = "walk_upper_shield";
@@ -148,7 +149,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
 
     private <E extends IAnimatable> PlayState predicateArms(AnimationEvent<E> event) {
 
-        if (!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F) && !this.isFightMode() && !this.isStunned()) {
+        if (!(event.getLimbSwingAmount() >= -0.10F && event.getLimbSwingAmount() <= 0.10F) && !this.isFightMode() && !this.isStunned()) {
             if(this.isShielded()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALKING_ARMS_SHIELD, true));
             } else {
@@ -172,7 +173,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     }
 
     private <E extends IAnimatable>PlayState predicateLegs(AnimationEvent<E> event) {
-        if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
+        if(!(event.getLimbSwingAmount() >= -0.10F && event.getLimbSwingAmount() <= 0.10F)) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALKING_LEGS, true));
             return PlayState.CONTINUE;
         }
@@ -182,7 +183,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
 
-        if(event.getLimbSwingAmount() > -0.09F && event.getLimbSwingAmount() < 0.09F && !this.isFightMode() && !this.isStunned()) {
+        if(event.getLimbSwingAmount() >= -0.09F && event.getLimbSwingAmount() <= 0.09F && !this.isFightMode() && !this.isStunned()) {
             if(this.isShielded()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_SHIELD, true));
             } else {
@@ -431,5 +432,15 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.ticksExisted;
     }
 }

@@ -2,6 +2,7 @@ package com.example.structure.entity.model;
 
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
+import com.example.structure.entity.model.geo.GeoModelExtended;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -9,15 +10,9 @@ import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class ModelKnightLord extends AnimatedGeoModel<EntityKnightLord> {
-    @Override
-    public ResourceLocation getModelLocation(EntityKnightLord entityKnightLord) {
-        return new ResourceLocation(ModReference.MOD_ID, "geo/entity/endlord/geo.endlord.json");
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(EntityKnightLord entityKnightLord) {
-        return new ResourceLocation(ModReference.MOD_ID, "textures/entity/endlord.png");
+public class ModelKnightLord extends GeoModelExtended<EntityKnightLord> {
+    public ModelKnightLord(ResourceLocation model, ResourceLocation textureDefault, String entityName) {
+        super(model, textureDefault, entityName);
     }
 
     @Override

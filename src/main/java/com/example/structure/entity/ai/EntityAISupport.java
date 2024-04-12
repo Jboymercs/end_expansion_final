@@ -1,6 +1,7 @@
 package com.example.structure.entity.ai;
 
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -83,7 +84,7 @@ public class EntityAISupport extends EntityAIBase {
                 this.supporter.attackEntityWithRangedAttack(optimalMob, (float) this.supporter.getDistanceSq(optimalMob));
                 this.cooldown = supportCooldown;
             }
-            else if( this.cooldown >= 20) {
+            else if( this.cooldown > 60 && !supporter.isFightMode()) {
                 EntityLivingBase target = this.supporter.getAttackTarget();
                 if(target != null) {
                     this.supporter.startAttack(target, 16F, false);

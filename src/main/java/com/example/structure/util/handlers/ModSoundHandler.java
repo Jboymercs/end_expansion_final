@@ -3,6 +3,7 @@ package com.example.structure.util.handlers;
 import com.example.structure.util.ModReference;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -33,21 +34,35 @@ public class ModSoundHandler {
     public static SoundEvent KNIGHT_HURT;
     public static SoundEvent KNIGHT_DEATH;
     public static SoundEvent KNIGHT_IDLE;
+    public static SoundEvent KNIGHT_DASH;
+    public static SoundEvent KNIGHT_CAST_HEAL;
+    public static SoundEvent KNIGHT_CAST_ATTACK;
 
     //End Seeker
     public static SoundEvent SEEKER_SHOOT;
     public static SoundEvent SEEKER_HOVER;
     public static SoundEvent SEEKER_HURT;
+    public static SoundEvent SEEKER_ELDER_HURT;
+    public static SoundEvent SEEKER_DASH;
 
     //Crystal HUM
     public static SoundEvent RED_CRYSTAL_HUM;
+    //Compulsor On
+    public static SoundEvent COMPULSOR_HUM;
 
     //Ashed Parasite
     public static SoundEvent PARASITE_IDLE;
     public static SoundEvent PARASITE_HURT;
     public static SoundEvent PARASITE_DEATH;
+    public static SoundEvent PARASITE_STEP;
 
+    //Stalker
+    public static SoundEvent STALKER_HURT;
+    public static SoundEvent STALKER_ATTACK_1;
+    public static SoundEvent STALKER_SPOTTED;
+    public static SoundEvent STALKER_SWING;
 
+    public static SoundEvent STALKER_STEP;
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
         BOSS_HURT = registerSound("boss.hurt", "entity");
@@ -67,16 +82,30 @@ public class ModSoundHandler {
         KNIGHT_HURT = registerSound("knight.hurt", "entity");
         KNIGHT_DEATH = registerSound("knight.death", "entity");
         KNIGHT_IDLE = registerSound("knight.idle", "entity");
+        KNIGHT_DASH = registerSound("knight.dash", "entity");
+        KNIGHT_CAST_HEAL = registerSound("knight.cast_heal", "entity");
+        KNIGHT_CAST_ATTACK = registerSound("knight.cast", "entity");
 
         SEEKER_SHOOT = registerSound("seeker.shoot", "entity");
         SEEKER_HOVER = registerSound("seeker.hover", "entity");
         SEEKER_HURT = registerSound("seeker.hurt", "entity");
+        SEEKER_ELDER_HURT = registerSound("seeker.hurt_elder", "entity");
+        SEEKER_DASH = registerSound("seeker.dash", "entity");
 
         RED_CRYSTAL_HUM = registerSound("crystal.glow", "block");
+        COMPULSOR_HUM = registerSound("compulsor.sound", "block");
 
         PARASITE_IDLE = registerSound("parasite.idle", "entity");
         PARASITE_HURT = registerSound("parasite.hurt", "entity");
         PARASITE_DEATH = registerSound("parasite.death", "entity");
+        PARASITE_STEP = registerSound("parasite.step", "entity");
+
+        STALKER_HURT = registerSound("stalker.hurt", "entity");
+        STALKER_ATTACK_1 = registerSound("stalker.attack", "entity");
+        STALKER_SPOTTED = registerSound("stalker.spotted", "entity");
+        STALKER_SWING = registerSound("stalker.swing", "entity");
+        STALKER_STEP = registerSound("stalker.step", "entity");
+
     }
 
 

@@ -12,6 +12,7 @@ import com.example.structure.entity.util.IAttack;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,6 +31,7 @@ import net.minecraftforge.common.ticket.AABBTicket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -42,7 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IAttack {
+public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
     private final String ANIM_IDLE = "idle";
 
@@ -162,7 +164,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     public void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(4, new EntityAISupport(this, 1.2, 0, 10f, ModConfig.end_mage_cooldown * 20));
-        this.tasks.addTask(5, new EntityAITimedAttack<>(this, 1.5, 20, 16F, 0.4f));
+        this.tasks.addTask(5, new EntityAITimedAttack<>(this, 1.5, 60, 16F, 0.4f));
     }
 
 
@@ -175,7 +177,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     public boolean isMarked() {return this.dataManager.get(MARKED);}
     private <E extends IAnimatable> PlayState predicateArms(AnimationEvent<E> event) {
 
-        if (!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F) && !this.isFightMode()) {
+        if (!(event.getLimbSwingAmount() >= -0.10F && event.getLimbSwingAmount() <= 0.10F) && !this.isFightMode()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALKING_ARMS, true));
             return PlayState.CONTINUE;
         }
@@ -184,7 +186,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     }
 
     private <E extends IAnimatable>PlayState predicateLegs(AnimationEvent<E> event) {
-        if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
+        if(!(event.getLimbSwingAmount() >= -0.10F && event.getLimbSwingAmount() <= 0.10F)) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALKING_LEGS, true));
             return PlayState.CONTINUE;
         }
@@ -194,7 +196,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
 
-        if(event.getLimbSwingAmount() > -0.09F && event.getLimbSwingAmount() < 0.09F) {
+        if(event.getLimbSwingAmount() >= -0.09F && event.getLimbSwingAmount() <= 0.09F) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE, true));
             return PlayState.CONTINUE;
         }
@@ -232,12 +234,13 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
             prevAttack.accept(target);
         }
-        return 20;
+        return 60;
     }
 
     private final Consumer<EntityLivingBase> castSpell = (target) -> {
       this.setFightMode(true);
       this.setAttackMode(true);
+        this.playSound(ModSoundHandler.KNIGHT_CAST_ATTACK, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
       addEvent(() -> {
         ProjectileSpinSword sword = new ProjectileSpinSword(world, this, 6.0f);
         sword.setTravelRange(40f);
@@ -286,6 +289,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         if(maxhealth < 1) {
             this.setFightMode(true);
             this.setHealingMode(true);
+            this.playSound(ModSoundHandler.KNIGHT_CAST_HEAL, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
             this.addEvent(() -> {
                 if (!world.isRemote) {
                     EntityHealAura aura = new EntityHealAura(world, target);
@@ -301,5 +305,15 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
                 this.setHealingMode(false);
             }, 30);
         }
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.ticksExisted;
     }
 }

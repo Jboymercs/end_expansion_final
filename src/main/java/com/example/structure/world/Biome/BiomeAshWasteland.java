@@ -149,7 +149,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             }
         }
         //Red Crystal Ore
-        if(rand.nextInt(9) == 1) {
+        if(rand.nextInt(12) == 1) {
             for (int k2 = 0; k2 < this.crystalSelect; ++k2) {
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
