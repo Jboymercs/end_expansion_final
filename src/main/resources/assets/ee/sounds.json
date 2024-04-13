@@ -372,5 +372,24 @@
         "stream": true
       }
     ]
+  },
+  "biome.ambient.ambient": {
+    "category": "entity",
+    "subtitle": "biome.ambience",
+    "sounds": [
+      {
+        "name": "ee:biome/ambient/ambient_3",
+        "stream": true
+      },
+      {
+        "name": "ee:biome/ambient/ambient_2",
+        "stream": true
+      },
+      {
+        "name": "ee:biome/ambient/ambient_1",
+        "stream": true
+      }
+
+    ]
   }
 }

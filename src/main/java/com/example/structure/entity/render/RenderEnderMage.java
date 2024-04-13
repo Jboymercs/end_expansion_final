@@ -2,7 +2,6 @@ package com.example.structure.entity.render;
 
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
-import com.example.structure.entity.model.ModelEnderKnight;
 import com.example.structure.entity.model.ModelEnderMage;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
 import com.example.structure.entity.render.geo.RenderGeoExtended;

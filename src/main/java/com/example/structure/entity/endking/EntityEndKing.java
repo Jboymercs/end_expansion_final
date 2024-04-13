@@ -33,6 +33,7 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -50,7 +51,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable, IAttack, DirectionalRender {
+public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable, IAttack, DirectionalRender, IAnimationTickable {
 
     private final String ANIM_IDLE_LOWER = "idle_lower";
     private final String ANIM_IDLE_UPPER = "idle_upper";
@@ -917,5 +918,13 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     }
 
 
+    @Override
+    public void tick() {
 
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.ticksExisted;
+    }
 }

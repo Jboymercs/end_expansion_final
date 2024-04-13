@@ -18,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -30,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable, IAttack {
+public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable, IAttack, IAnimationTickable {
 
     private final String IDLE_ANIM = "idle";
     private final String MOVING_ARMS_ANIM = "movingArms";
@@ -228,5 +229,15 @@ public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable,
     public void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(4, new EntityAITimedAttack<>(this, 1.0, constructor_cooldown_one, 10F, 0.3f));
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public int tickTimer() {
+        return this.ticksExisted;
     }
 }

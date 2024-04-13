@@ -1,6 +1,7 @@
 package com.example.structure.entity.model;
 
 import com.example.structure.entity.EntityBuffker;
+import com.example.structure.entity.model.geo.GeoModelExtended;
 import com.example.structure.util.ModReference;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -11,15 +12,9 @@ import software.bernie.geckolib3.geo.raw.pojo.Bone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class ModelBuffker extends AnimatedGeoModel<EntityBuffker> {
-    @Override
-    public ResourceLocation getModelLocation(EntityBuffker entityBuffker) {
-        return new ResourceLocation(ModReference.MOD_ID, "geo/entity/buffker/buffker.geo.json");
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(EntityBuffker entityBuffker) {
-        return new ResourceLocation(ModReference.MOD_ID, "textures/entity/buffker.png");
+public class ModelBuffker extends GeoModelExtended<EntityBuffker> {
+    public ModelBuffker(ResourceLocation model, ResourceLocation textureDefault, String entityName) {
+        super(model, textureDefault, entityName);
     }
 
     @Override

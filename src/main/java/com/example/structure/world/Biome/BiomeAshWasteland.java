@@ -1,10 +1,9 @@
 package com.example.structure.world.Biome;
 
-import com.example.structure.entity.EntityEndBug;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.init.ModBlocks;
-import com.example.structure.util.IBiomeMisty;
 import com.example.structure.util.ModRand;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.world.Biome.decorator.EEBiomeDecorator;
 import com.example.structure.world.Biome.generation.*;
 import com.example.structure.world.WorldGenStructure;
@@ -12,18 +11,16 @@ import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.islands.WorldGenOutpost;
 import git.jbredwards.nether_api.api.audio.IMusicType;
+import git.jbredwards.nether_api.api.audio.ISoundAmbience;
+import git.jbredwards.nether_api.api.biome.IAmbienceBiome;
 import git.jbredwards.nether_api.api.biome.IEndBiome;
 import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
-import git.jbredwards.nether_api.mod.common.registry.NetherAPIRegistry;
-import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -31,24 +28,16 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.BiomeHell;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkGeneratorEnd;
-import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraftforge.client.IRenderHandler;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.collection.parallel.ParIterableLike;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
-public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INetherAPIRegistryListener {
+public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INetherAPIRegistryListener, IAmbienceBiome {
 
 
 
@@ -257,6 +246,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         return y;
     }
 
+
+
     @Override
     public boolean generateIslands(@Nonnull INetherAPIChunkGenerator chunkGenerator, int chunkX, int chunkZ, float islandHeight) {
         return false;
@@ -309,6 +300,27 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         k = k + random.nextInt(maxDistanceBetween - 8);
         l = l + random.nextInt(maxDistanceBetween - 8);
 
+
         return i == k && j == l;
     }
+
+
+
+    @Override
+    public ISoundAmbience getRandomAmbientSound() {
+        return new ISoundAmbience() {
+            @Nonnull
+            @Override
+            public SoundEvent getSoundEvent() {
+                return ModSoundHandler.BIOME_AMBIENCE;
+            }
+
+
+            @Override
+            public double getChancePerTick() {
+                return 0.001;
+            }
+        };
+    }
+
 }

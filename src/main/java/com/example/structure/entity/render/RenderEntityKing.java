@@ -2,25 +2,40 @@ package com.example.structure.entity.render;
 
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.endking.EntityEndKing;
+import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.model.ModelEndKing;
+import com.example.structure.entity.render.geo.GeoGlowingLayer;
+import com.example.structure.entity.render.geo.RenderGeoExtended;
 import com.example.structure.renderer.ITarget;
 import com.example.structure.util.ModColors;
+import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.RenderUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class RenderEntityKing extends GeoEntityRenderer<EntityEndKing> {
+public class RenderEntityKing extends RenderGeoExtended<EntityEndKing> {
+
+    private static final ResourceLocation MODEL_RESLOC = new ResourceLocation(ModReference.MOD_ID, "geo/entity/king/geo.king.json");
+
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ModReference.MOD_ID, "textures/entity/king.png");
     public RenderEntityKing(RenderManager renderManager) {
-        super(renderManager, new ModelEndKing());
+        super(renderManager, new ModelEndKing(MODEL_RESLOC, TEXTURE, "end_king"));
+
+        this.addLayer(new GeoGlowingLayer<EntityEndKing>(this, this.TEXTURE_GETTER, this.MODEL_ID_GETTER));
     }
     @Override
     public void doRender(EntityEndKing entity, double x, double y, double z, float entityYaw, float partialTicks) {
@@ -39,6 +54,49 @@ public class RenderEntityKing extends GeoEntityRenderer<EntityEndKing> {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
         GlStateManager.disableBlend();
         GlStateManager.disableNormalize();
+    }
+
+    @Nullable
+    @Override
+    protected ItemStack getHeldItemForBone(String boneName, EntityEndKing currentEntity) {
+        return null;
+    }
+
+    @Override
+    protected ItemCameraTransforms.TransformType getCameraTransformForItemAtBone(ItemStack boneItem, String boneName) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    protected IBlockState getHeldBlockForBone(String boneName, EntityEndKing currentEntity) {
+        return null;
+    }
+
+    @Override
+    protected void preRenderItem(ItemStack item, String boneName, EntityEndKing currentEntity) {
+
+    }
+
+    @Override
+    protected void preRenderBlock(IBlockState block, String boneName, EntityEndKing currentEntity) {
+
+    }
+
+    @Override
+    protected void postRenderItem(ItemStack item, String boneName, EntityEndKing currentEntity) {
+
+    }
+
+    @Override
+    protected void postRenderBlock(IBlockState block, String boneName, EntityEndKing currentEntity) {
+
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getTextureForBone(String boneName, EntityEndKing currentEntity) {
+        return null;
     }
 
     //Used for Lazer and V Rendering

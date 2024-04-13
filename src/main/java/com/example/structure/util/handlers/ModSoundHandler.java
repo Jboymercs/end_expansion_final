@@ -63,6 +63,10 @@ public class ModSoundHandler {
     public static SoundEvent STALKER_SWING;
 
     public static SoundEvent STALKER_STEP;
+
+    //Biome Ambience
+    public static SoundEvent BIOME_AMBIENCE;
+
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
         BOSS_HURT = registerSound("boss.hurt", "entity");
@@ -105,6 +109,8 @@ public class ModSoundHandler {
         STALKER_SPOTTED = registerSound("stalker.spotted", "entity");
         STALKER_SWING = registerSound("stalker.swing", "entity");
         STALKER_STEP = registerSound("stalker.step", "entity");
+
+        BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
 
     }
 

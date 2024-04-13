@@ -5,7 +5,7 @@ import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.ai.EntityAITimedKnight;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
-import com.example.structure.entity.model.ModelEnderKnight;
+
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;

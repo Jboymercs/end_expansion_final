@@ -2,6 +2,7 @@ package com.example.structure.entity.model;
 
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.endking.EntityEndKing;
+import com.example.structure.entity.model.geo.GeoModelExtended;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -9,10 +10,9 @@ import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class ModelEndKing extends AnimatedGeoModel<EntityEndKing> {
-    @Override
-    public ResourceLocation getModelLocation(EntityEndKing entityEndKing) {
-        return new ResourceLocation(ModReference.MOD_ID, "geo/entity/king/geo.king.json");
+public class ModelEndKing extends GeoModelExtended<EntityEndKing> {
+    public ModelEndKing(ResourceLocation model, ResourceLocation textureDefault, String entityName) {
+        super(model, textureDefault, entityName);
     }
 
     @Override

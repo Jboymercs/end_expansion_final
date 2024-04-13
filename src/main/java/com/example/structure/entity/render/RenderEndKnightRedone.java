@@ -1,8 +1,6 @@
 package com.example.structure.entity.render;
 
 import com.example.structure.entity.EntityEnderKnight;
-import com.example.structure.entity.EntitySnatcher;
-import com.example.structure.entity.model.ModelEnderKnight;
 import com.example.structure.entity.model.ModelEnderKnightRedone;
 import com.example.structure.entity.model.ModelSnatcher;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
