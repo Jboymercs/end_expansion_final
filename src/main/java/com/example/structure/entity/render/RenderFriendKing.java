@@ -1,9 +1,7 @@
 package com.example.structure.entity.render;
 
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
-import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.model.ModelFriendKing;
-import com.example.structure.entity.model.ModelPermanantGhost;
 import com.example.structure.renderer.ITarget;
 import com.example.structure.util.ModUtils;
 import net.minecraft.client.renderer.GlStateManager;

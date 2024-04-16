@@ -1,13 +1,10 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.Main;
-import com.example.structure.entity.EntityCrystalKnight;
+
 import com.example.structure.entity.EntityEndBug;
 import com.example.structure.entity.model.ModelEndBug;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
-import com.example.structure.entity.render.geo.RenderGeoExtended;
 import com.example.structure.entity.render.geo.RenderTamaebleGeoExtend;
-import com.example.structure.entity.util.LayerGenericGlow;
 import com.example.structure.util.ModReference;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,11 +12,8 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import javax.annotation.Nullable;
-import java.util.function.Function;
 
 public class RenderEndBug extends RenderTamaebleGeoExtend<EntityEndBug> {
 

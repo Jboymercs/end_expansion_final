@@ -1,45 +1,33 @@
 package com.example.structure.util.handlers;
 
 
-import com.example.structure.blocks.atlar.BlockAltar;
-import com.example.structure.entity.tileentity.TileEntityAltar;
 import com.example.structure.init.ModBlocks;
-import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.init.ModItems;
-import com.example.structure.items.CrystalBallItem;
 import com.example.structure.items.ItemAbstractMultiModel;
-import com.example.structure.items.Items;
 import com.example.structure.items.tools.CustomModelLoader;
 import com.example.structure.renderer.*;
 import com.example.structure.util.IHasModel;
 import com.example.structure.util.ModReference;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
-import software.bernie.example.registry.BlockRegistry;
-import software.bernie.geckolib3.GeckoLib;
 
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
 
     private static IForgeRegistry<Item> itemRegistry;
-    private static IForgeRegistry<Block> blockRegistry;
+
 
 
     @SubscribeEvent
@@ -61,13 +49,7 @@ public class RegistryHandler {
     }
 
 
-    public static void registerGeckoBlock(Block block, String name) {
-        registerGeckoBlock(block, new ResourceLocation(ModReference.MOD_ID, name));
-    }
 
-    public static void registerGeckoBlock(Block block, ResourceLocation name) {
-        blockRegistry.register(block.setRegistryName(name).setTranslationKey(name.toString().replace(":", ".")));
-    }
 
     public static <T extends Item> T registerItem(T item, String name) {
         registerItem(item, new ResourceLocation(ModReference.MOD_ID, name));

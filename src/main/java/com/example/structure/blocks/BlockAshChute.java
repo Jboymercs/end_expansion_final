@@ -1,17 +1,13 @@
 package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.TileEntityAshChute;
-import com.example.structure.entity.tileentity.TileEntityCompulsor;
-import com.example.structure.util.ModRand;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;

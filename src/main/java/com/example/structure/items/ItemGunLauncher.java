@@ -1,6 +1,5 @@
 package com.example.structure.items;
 
-import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ProjectilePurple;
 import com.example.structure.init.ModCreativeTabs;
@@ -13,10 +12,8 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;

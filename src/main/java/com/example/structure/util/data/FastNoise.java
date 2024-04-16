@@ -832,6 +832,7 @@ public class FastNoise {
         }
     }
 
+    //Make a function that records conclave when using Noise Perlin
     public float GetNoise(float x, float y)
     {
         x *= m_frequency;

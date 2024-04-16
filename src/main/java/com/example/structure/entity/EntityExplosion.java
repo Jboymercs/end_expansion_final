@@ -2,13 +2,9 @@ package com.example.structure.entity;
 
 import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.init.ModItems;
-import com.example.structure.items.Items;
-import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class EntityExplosion extends Projectile{

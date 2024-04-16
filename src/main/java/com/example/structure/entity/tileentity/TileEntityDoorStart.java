@@ -2,15 +2,10 @@ package com.example.structure.entity.tileentity;
 
 import com.example.structure.blocks.BlockDungeonDoor;
 import com.example.structure.init.ModBlocks;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-
-import java.util.List;
 
 public class TileEntityDoorStart extends TileEntity implements ITickable {
 

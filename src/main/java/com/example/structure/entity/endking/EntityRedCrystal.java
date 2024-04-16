@@ -1,8 +1,6 @@
 package com.example.structure.entity.endking;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.EntityGroundCrystal;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.util.ModDamageSource;
@@ -11,13 +9,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import scala.tools.nsc.backend.icode.Primitives;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;

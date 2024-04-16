@@ -1,30 +1,17 @@
 package com.example.structure.world.Biome.layer;
 
 import com.example.structure.init.ModBlocks;
-import com.example.structure.world.api.structures.MapGenKingFortress;
-import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
-import git.jbredwards.nether_api.api.structure.INetherAPIStructureEntry;
-import git.jbredwards.nether_api.api.structure.ISpawningStructure;
-import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.structure.MapGenStructure;
-
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 
 public class GenerateIsland extends MapGenBase{
     protected List<BlockPos> islands = new ArrayList<>();

@@ -1,7 +1,6 @@
 package com.example.structure.entity;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.ai.EntityAITimedKnight;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
@@ -13,14 +12,8 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
-import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;

@@ -4,14 +4,11 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.ActionDrawWalls;
 import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.util.IAttack;
-import com.example.structure.util.ModRand;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -21,7 +18,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.List;
 
 public class EntityEye extends EntityModBase implements IAnimatable, IAttack {
     private static final String ANIM_IDLE = "idle";

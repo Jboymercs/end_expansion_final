@@ -1,8 +1,6 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.endking.EntityEndKing;
-import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.model.ModelEndKing;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
 import com.example.structure.entity.render.geo.RenderGeoExtended;
@@ -20,8 +18,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

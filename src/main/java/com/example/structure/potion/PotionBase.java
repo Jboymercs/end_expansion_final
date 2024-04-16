@@ -1,6 +1,6 @@
 package com.example.structure.potion;
 
-import com.example.structure.util.ModReference;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;

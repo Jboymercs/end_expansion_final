@@ -1,6 +1,6 @@
 package com.example.structure.entity.model;
 
-import com.example.structure.entity.EntityEnderKnight;
+
 import com.example.structure.entity.EntityEye;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;

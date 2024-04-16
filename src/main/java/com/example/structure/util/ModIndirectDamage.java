@@ -2,14 +2,9 @@ package com.example.structure.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
-
-import javax.annotation.Nullable;
 
 public class ModIndirectDamage extends EntityDamageSourceIndirect implements IElement, IShieldArmorDamage {
     Element element;

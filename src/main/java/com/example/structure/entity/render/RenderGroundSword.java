@@ -1,9 +1,7 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.entity.endking.EntityGroundSword;
 import com.example.structure.entity.model.ModelGroundSword;
-import com.example.structure.entity.model.ModelSnatcher;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
 import com.example.structure.entity.render.geo.RenderGeoExtended;
 import com.example.structure.util.ModReference;
@@ -13,7 +11,6 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 import javax.annotation.Nullable;
 

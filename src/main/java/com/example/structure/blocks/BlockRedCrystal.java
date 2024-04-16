@@ -2,7 +2,6 @@ package com.example.structure.blocks;
 
 import com.example.structure.Main;
 import com.example.structure.util.handlers.ModSoundHandler;
-import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

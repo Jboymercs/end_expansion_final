@@ -10,7 +10,6 @@ import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
-import scala.tools.nsc.doc.model.Def;
 import com.google.common.collect.Lists;
 
 import java.util.Map;

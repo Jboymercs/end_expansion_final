@@ -1,9 +1,7 @@
 package com.example.structure.util.handlers;
 
 import com.example.structure.util.ModReference;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 

@@ -1,7 +1,6 @@
 package com.example.structure.entity.tileentity;
 
 import com.example.structure.init.ModBlocks;
-import net.minecraft.block.BlockRedstoneLight;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;

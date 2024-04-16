@@ -2,7 +2,6 @@ package com.example.structure.entity.barrend;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
-import com.example.structure.entity.EntityEye;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -15,7 +14,6 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;

@@ -1,8 +1,6 @@
 package com.example.structure.entity.ai;
 
 
-import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityKnightBase;

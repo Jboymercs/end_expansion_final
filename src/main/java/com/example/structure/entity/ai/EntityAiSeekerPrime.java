@@ -1,6 +1,5 @@
 package com.example.structure.entity.ai;
 
-import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.util.IAttack;
 import net.minecraft.entity.EntityLivingBase;

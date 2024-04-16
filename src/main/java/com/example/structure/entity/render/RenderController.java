@@ -1,31 +1,18 @@
 package com.example.structure.entity.render;
 
 import com.example.structure.entity.EntityController;
-import com.example.structure.entity.EntityEndBug;
 import com.example.structure.entity.model.ModelController;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
 import com.example.structure.entity.render.geo.RenderGeoExtended;
-import com.example.structure.init.ModItems;
 import com.example.structure.util.ModReference;
 import com.google.common.base.Optional;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
 import software.bernie.geckolib3.core.util.Color;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
 import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 

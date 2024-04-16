@@ -1,7 +1,6 @@
 package com.example.structure.entity.animation;
 
 import com.example.structure.entity.EntityModBase;
-import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 

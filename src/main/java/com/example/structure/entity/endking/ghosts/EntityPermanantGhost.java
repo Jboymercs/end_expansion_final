@@ -2,7 +2,6 @@ package com.example.structure.entity.endking.ghosts;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
 import com.example.structure.entity.endking.EndKingAction.ActionAOESimple;
@@ -30,7 +29,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;

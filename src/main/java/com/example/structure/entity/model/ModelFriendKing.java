@@ -1,7 +1,6 @@
 package com.example.structure.entity.model;
 
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
-import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;

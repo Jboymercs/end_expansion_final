@@ -13,7 +13,6 @@ import com.example.structure.entity.knighthouse.EntityKnightLord;
 import com.example.structure.entity.render.*;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
-import com.example.structure.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;

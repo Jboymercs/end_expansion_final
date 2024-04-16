@@ -5,37 +5,22 @@ import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.world.Biome.BiomeAshWasteland;
-import com.example.structure.world.Biome.generation.WorldGenAshRuins;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
-import com.example.structure.world.Biome.generation.WorldGenPurpleSpikes;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import com.example.structure.world.lamIslands.WorldGenBossArena;
 import net.minecraft.block.Block;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEnd;
-import net.minecraft.world.biome.BiomeEndDecorator;
-import net.minecraft.world.biome.BiomeOcean;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
-import org.lwjgl.Sys;
-
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class WorldGenCustomStructure implements IWorldGenerator {

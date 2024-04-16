@@ -1,9 +1,7 @@
 package com.example.structure.entity.ai;
 
 import com.example.structure.entity.endking.EntityAbstractEndKing;
-import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.util.IAttack;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 

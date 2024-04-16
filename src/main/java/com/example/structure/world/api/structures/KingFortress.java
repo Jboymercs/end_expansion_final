@@ -2,18 +2,14 @@ package com.example.structure.world.api.structures;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
-import com.example.structure.world.misc.GenUtils;
 import com.google.common.collect.Lists;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
-import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.List;

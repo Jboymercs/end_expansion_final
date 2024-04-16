@@ -1,8 +1,6 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityController;
 import com.example.structure.entity.EntitySnatcher;
-import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.model.ModelSnatcher;
 import com.example.structure.entity.render.geo.GeoGlowingLayer;
 import com.example.structure.entity.render.geo.RenderGeoExtended;
@@ -13,9 +11,6 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import scala.reflect.internal.Mode;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import javax.annotation.Nullable;
 

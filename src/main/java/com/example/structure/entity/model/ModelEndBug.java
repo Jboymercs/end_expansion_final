@@ -1,16 +1,11 @@
 package com.example.structure.entity.model;
 
-import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEndBug;
-import com.example.structure.entity.animation.IAnimatedEntity;
-import com.example.structure.entity.animation.ModelAnimator;
 import com.example.structure.entity.model.geo.GeoModelExtended;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class ModelEndBug extends GeoModelExtended<EntityEndBug> {

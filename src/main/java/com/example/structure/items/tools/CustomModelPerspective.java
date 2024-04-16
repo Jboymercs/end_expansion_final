@@ -15,6 +15,9 @@ import java.util.List;
 
 
 public class CustomModelPerspective implements IBakedModel {
+    /**
+     * Credit for this goes to UnOrignal from the Beast Slayer mod
+     */
     String name;
     ModelResourceLocation GUIMRL;
     ModelResourceLocation normalMRL;

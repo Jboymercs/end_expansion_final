@@ -1,8 +1,7 @@
 package com.example.structure.items.tools;
 
-import com.example.structure.config.ModConfig;
+
 import com.example.structure.init.ModCreativeTabs;
-import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,9 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 

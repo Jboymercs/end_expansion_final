@@ -1,19 +1,13 @@
 package com.example.structure.init;
 
 import com.example.structure.blocks.*;
-import com.example.structure.blocks.atlar.BlockAltar;
 import com.example.structure.blocks.slab.BlockDoubleSlab;
 import com.example.structure.blocks.slab.BlockHalfSlab;
-import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityExplosion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 import java.util.List;

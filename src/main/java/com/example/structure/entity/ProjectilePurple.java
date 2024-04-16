@@ -1,7 +1,6 @@
 package com.example.structure.entity;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;

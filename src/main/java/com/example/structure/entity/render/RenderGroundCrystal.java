@@ -1,11 +1,9 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityGroundCrystal;
 import com.example.structure.entity.model.ModelGroundCrystal;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RenderGroundCrystal extends RenderAbstractGeoEntity<EntityGroundCrystal>{
     public RenderGroundCrystal(RenderManager renderManager) {

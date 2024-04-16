@@ -13,6 +13,9 @@ import java.util.Collection;
 import java.util.function.Function;
 
 public class CustomModel implements IModel {
+    /**
+     * Credit for this goes to UnOrignal from the Beast Slayer mod
+     */
     private String name;
 
     public CustomModel(String name) {

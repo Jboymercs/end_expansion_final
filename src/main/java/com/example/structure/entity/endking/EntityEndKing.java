@@ -3,9 +3,7 @@ package com.example.structure.entity.endking;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.Projectile;
-import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.ai.EntityAerialTimedAttack;
 import com.example.structure.entity.ai.EntityFlyMoveHelper;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
@@ -13,7 +11,6 @@ import com.example.structure.entity.endking.EndKingAction.*;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.entity.util.TimedAttackIniator;
-import com.example.structure.renderer.ITarget;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.block.state.IBlockState;
@@ -29,8 +26,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -40,13 +35,11 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -321,13 +314,12 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         //The default usage of the End King PHASE ONE & PHASE TWO
         if(!this.isFullBodyUsage() && !this.isPhaseHandler() && !this.isBossStall() && !this.isBossStart()) {
-
-            if(event.isMoving()) {
+            //Fix 23 - End King deciding he doesn't want to stop walking, as there is no existing lower_idle Animation
+            if(!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALK_LOWER, true));
-            } else {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_LOWER, true));
+                return PlayState.CONTINUE;
             }
-            return PlayState.CONTINUE;
+
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;

@@ -1,8 +1,6 @@
 package com.example.structure.world.Biome;
 
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeFogged extends Biome {
 

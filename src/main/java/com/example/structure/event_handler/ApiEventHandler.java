@@ -4,9 +4,7 @@ package com.example.structure.event_handler;
 import com.example.structure.Main;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.api.structures.MapGenKingFortress;
 import git.jbredwards.nether_api.api.event.NetherAPIRegistryEvent;
-import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -22,7 +20,7 @@ public class ApiEventHandler {
     static void onNetherAPIRegistry(@Nonnull final NetherAPIRegistryEvent.End event)
     {
         event.registry.registerBiome(BiomeRegister.END_ASH_WASTELANDS, 80);
-        event.registry.registerBiome(BiomeRegister.END_BARREND_FOREST, 80);
+
         //King Fortress
         event.registry.registerStructure("EndKingsFortress", chunkGenerator -> Main.instance.fortress);
 

@@ -1,6 +1,5 @@
 package com.example.structure.entity.render.geo;
 
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.EntityModBaseTameable;
 import com.example.structure.util.misc.BlockRenderUtil;
 import com.example.structure.util.misc.MatrixUtil;

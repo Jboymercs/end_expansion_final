@@ -1,6 +1,5 @@
 package com.example.structure.world.lamIslands;
 
-import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
 import com.example.structure.entity.tileentity.tileEntityMobSpawner;

@@ -2,7 +2,6 @@ package com.example.structure.entity.endking.EndKingAction;
 
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.IAction;
-import com.example.structure.entity.endking.EntityRedCrystal;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;

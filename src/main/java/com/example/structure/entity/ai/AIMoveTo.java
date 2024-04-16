@@ -1,11 +1,8 @@
 package com.example.structure.entity.ai;
 
-import com.example.structure.entity.EntityBuffker;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.RayTraceResult;

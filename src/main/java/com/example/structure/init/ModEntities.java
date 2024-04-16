@@ -18,9 +18,7 @@ import com.example.structure.entity.tileentity.*;
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
 import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
 import com.example.structure.util.ModReference;
-import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.Biome.BiomeAshWasteland;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -73,8 +71,6 @@ public class ModEntities {
         registerTileEntity(TileEntityActivate.class, "door_activate");
         //Tile Entity - Utility
         registerTileEntity(TileEntityTrap.class, "floor_trap");
-        //Altar - Tile Entity
-        registerTileEntity(TileEntityAltar.class, "altar");
         //Reverse On
         registerTileEntity(TileEntityReverse.class, "reverse_on");
         //Reverse Off

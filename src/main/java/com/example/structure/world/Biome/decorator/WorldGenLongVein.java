@@ -2,7 +2,6 @@ package com.example.structure.world.Biome.decorator;
 
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
-import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

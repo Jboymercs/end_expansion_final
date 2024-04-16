@@ -1,26 +1,16 @@
 package com.example.structure.world.api.vaults;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.lamIslands.WorldGenLamentedIslands;
-import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
 import net.minecraft.block.Block;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEnd;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureStart;
-import org.lwjgl.Sys;
-import scala.reflect.api.Internals;
-
-import javax.annotation.Nonnull;
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;

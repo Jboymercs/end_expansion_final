@@ -3,8 +3,6 @@ package com.example.structure.entity.render;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.util.LayerGenericGlow;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;

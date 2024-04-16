@@ -1,13 +1,9 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityGhostArm;
 import com.example.structure.entity.model.ModelGhostArm;
-import com.example.structure.entity.render.geo.RenderAbstract;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import software.bernie.geckolib3.core.util.Color;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RenderGhostArm extends RenderAbstractGeoEntity<EntityGhostArm> {
 

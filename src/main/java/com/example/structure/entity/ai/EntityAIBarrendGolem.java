@@ -1,6 +1,5 @@
 package com.example.structure.entity.ai;
 
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.util.IAttack;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,11 +1,9 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityLamentedEye;
 import com.example.structure.entity.model.ModelLamentedEye;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RenderLamentedEye extends RenderAbstractGeoEntity<EntityLamentedEye>{
 

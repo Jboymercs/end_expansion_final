@@ -1,7 +1,6 @@
 package com.example.structure.items.tools;
 
 import com.example.structure.Main;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.IHasModel;
 import com.example.structure.util.ModUtils;

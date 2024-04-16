@@ -3,7 +3,6 @@ package com.example.structure.world.Biome.generation;
 import com.example.structure.world.WorldGenStructure;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 

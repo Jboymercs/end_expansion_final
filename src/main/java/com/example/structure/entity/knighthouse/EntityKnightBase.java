@@ -2,7 +2,6 @@ package com.example.structure.entity.knighthouse;
 
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.EntityAIAvoidCrowding;
 import com.example.structure.entity.ai.EntityAIWanderWithGroup;
@@ -14,14 +13,10 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -31,10 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import java.util.List;
 
 public abstract class EntityKnightBase extends EntityModBase {
 

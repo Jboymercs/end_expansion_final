@@ -1,7 +1,6 @@
 package com.example.structure.entity.model;
 
 import com.example.structure.entity.model.geo.GeoModelExtended;
-import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;

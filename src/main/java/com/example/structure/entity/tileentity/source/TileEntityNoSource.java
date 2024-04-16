@@ -1,16 +1,9 @@
 package com.example.structure.entity.tileentity.source;
 
-import com.example.structure.blocks.BlockPowerSource;
 import com.example.structure.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class TileEntityNoSource extends TileEntity implements ITickable {
     @Override

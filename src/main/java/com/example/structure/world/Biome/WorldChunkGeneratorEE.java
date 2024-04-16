@@ -1,12 +1,8 @@
 package com.example.structure.world.Biome;
 
 import com.example.structure.init.ModBlocks;
-import com.example.structure.util.MapGenModStructure;
 import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.Biome.altardungeon.MapGenAltarDungeon;
-import com.example.structure.world.Biome.bridgestructure.MapGenBridgeStructure;
 import com.example.structure.world.Biome.decorator.WorldGenLongVein;
-import com.example.structure.world.api.vaults.MapGenEndVaults;
 import net.minecraft.block.BlockChorusFlower;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -21,7 +17,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEnd;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.ChunkGeneratorEnd;
@@ -30,9 +25,6 @@ import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenEndGateway;
 import net.minecraft.world.gen.feature.WorldGenEndIsland;
 import net.minecraft.world.gen.structure.MapGenEndCity;
-import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;

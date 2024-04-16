@@ -1,12 +1,9 @@
 package com.example.structure.world.api.ashtower;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
-import com.example.structure.entity.seekers.EndSeeker;
-import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
 import com.example.structure.entity.tileentity.tileEntityMobSpawner;
 import com.example.structure.init.ModBlocks;

@@ -1,6 +1,6 @@
 package com.example.structure.world.api.ashtower;
 
-import com.example.structure.config.ModConfig;
+
 import com.example.structure.util.ModRand;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;

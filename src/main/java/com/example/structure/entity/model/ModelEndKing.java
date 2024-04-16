@@ -1,13 +1,11 @@
 package com.example.structure.entity.model;
 
-import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.model.geo.GeoModelExtended;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class ModelEndKing extends GeoModelExtended<EntityEndKing> {

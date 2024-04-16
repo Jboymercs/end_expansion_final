@@ -3,11 +3,8 @@ package com.example.structure.entity.ai.snatcher;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class EntityStalkAI<T extends EntitySnatcher & IAttack> extends EntityAIBase{

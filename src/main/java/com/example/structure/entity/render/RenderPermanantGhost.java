@@ -1,7 +1,5 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.model.ModelPermanantGhost;
 import com.example.structure.renderer.ITarget;
@@ -10,7 +8,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.math.Vec3d;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;

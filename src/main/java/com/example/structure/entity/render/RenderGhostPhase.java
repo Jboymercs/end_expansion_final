@@ -1,11 +1,9 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
 import com.example.structure.entity.model.ModelGhostPhase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RenderGhostPhase extends RenderAbstractGeoEntity<EntityGhostPhase>{
     public RenderGhostPhase(RenderManager renderManager) {

@@ -1,11 +1,9 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.endking.EntityFireBall;
 import com.example.structure.entity.endking.EntityNuclearExplosion;
 import com.example.structure.entity.model.ModelNuclearExplosion;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RenderNuclearExplosion extends RenderAbstractGeoEntity<EntityNuclearExplosion>{
     public RenderNuclearExplosion(RenderManager renderManager) {

@@ -2,7 +2,6 @@ package com.example.structure.entity.render.geo;
 
 import com.example.structure.util.EmissiveLighting;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.util.Color;

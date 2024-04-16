@@ -1,11 +1,11 @@
 package com.example.structure.entity.render;
 
-import com.example.structure.entity.EntityCrystalKnight;
+
 import com.example.structure.entity.EntityEnderEyeFly;
 import com.example.structure.entity.model.ModelEnderEyeFly;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+
 
 public class RenderEnderEyeFly extends RenderAbstractGeoEntity<EntityEnderEyeFly>{
     public RenderEnderEyeFly(RenderManager renderManager) {

@@ -2,8 +2,6 @@ package com.example.structure.entity.endking;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
-import com.example.structure.entity.EntityModBaseTameable;
-import com.example.structure.event_handler.ClientEvents;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
@@ -11,7 +9,6 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,7 +18,6 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -31,7 +27,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 import java.util.List;
 

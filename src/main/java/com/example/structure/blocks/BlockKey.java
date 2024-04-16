@@ -1,18 +1,14 @@
 package com.example.structure.blocks;
 
-import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityGroundCrystal;
-import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.tileentity.TileEntityUpdater;
 import com.example.structure.init.ModCreativeTabs;
-import com.example.structure.util.ModUtils;
 import com.google.common.base.Predicate;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -22,7 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 

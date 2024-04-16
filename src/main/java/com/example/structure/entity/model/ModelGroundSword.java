@@ -4,7 +4,6 @@ import com.example.structure.entity.endking.EntityGroundSword;
 import com.example.structure.entity.model.geo.GeoModelExtended;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class ModelGroundSword extends GeoModelExtended<EntityGroundSword> {
 

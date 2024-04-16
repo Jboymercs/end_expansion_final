@@ -1,31 +1,20 @@
 package com.example.structure.world.api.vaults;
 
-import com.example.structure.config.ModConfig;
+
 import com.example.structure.util.MapGenModStructure;
 import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.Biome.WorldChunkGeneratorEE;
-import com.example.structure.world.api.structures.KingFortress;
-import com.example.structure.world.misc.GenUtils;
 import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
 import git.jbredwards.nether_api.api.structure.INetherAPIStructureEntry;
 import git.jbredwards.nether_api.api.structure.ISpawningStructure;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEnd;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkGeneratorEnd;
-import net.minecraft.world.gen.ChunkProviderServer;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.structure.MapGenEndCity;
 import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureStart;
 
 import javax.annotation.Nonnull;

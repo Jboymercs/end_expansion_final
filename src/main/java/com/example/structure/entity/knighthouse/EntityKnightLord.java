@@ -1,8 +1,6 @@
 package com.example.structure.entity.knighthouse;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityGroundCrystal;
-import com.example.structure.entity.ai.ActionAerialTeleport;
 import com.example.structure.entity.ai.EntityAerialTimedAttack;
 import com.example.structure.entity.ai.EntityFlyMoveHelper;
 import com.example.structure.entity.endking.EntityRedCrystal;
@@ -12,9 +10,7 @@ import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
-import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
-import com.sun.jna.platform.win32.WinBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,7 +28,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;

@@ -1,6 +1,5 @@
 package com.example.structure.world;
 
-import com.example.structure.Main;
 import com.example.structure.util.IStructure;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;

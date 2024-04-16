@@ -3,7 +3,7 @@ package com.example.structure.util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureStart;
+
 
 public abstract class MapGenModStructure extends MapGenStructure {
     private int spacing;

@@ -1,21 +1,16 @@
 package com.example.structure.entity.endking.EndKingAction;
 
-import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityCrystalSpikeSmall;
-import com.example.structure.entity.EntityGroundCrystal;
+
 import com.example.structure.entity.EntityModBase;
-import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.IAction;
 import com.example.structure.entity.endking.EntityGroundSword;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 public class ActionSummonSwordAttacks implements IAction {
 

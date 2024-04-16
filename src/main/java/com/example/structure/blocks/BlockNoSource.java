@@ -1,7 +1,6 @@
 package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
-import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

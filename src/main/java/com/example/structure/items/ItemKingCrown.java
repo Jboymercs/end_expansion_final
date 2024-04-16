@@ -1,16 +1,12 @@
 package com.example.structure.items;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityLamentedEye;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.util.ModUtils;
-import com.example.structure.util.handlers.ModSoundHandler;
-import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;

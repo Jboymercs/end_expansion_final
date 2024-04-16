@@ -1,14 +1,11 @@
 package com.example.structure.items.tools;
 
 import com.example.structure.Main;
-import com.example.structure.entity.endking.ProjectileSpinSword;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.IHasModel;
-import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +16,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.*;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;

@@ -1,7 +1,6 @@
 package com.example.structure.entity.knighthouse;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModUtils;

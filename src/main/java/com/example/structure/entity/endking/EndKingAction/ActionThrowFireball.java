@@ -1,7 +1,6 @@
 package com.example.structure.entity.endking.EndKingAction;
 
 import com.example.structure.entity.EntityModBase;
-import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.IAction;
 import com.example.structure.entity.endking.EntityFireBall;
 import com.example.structure.util.ModRand;

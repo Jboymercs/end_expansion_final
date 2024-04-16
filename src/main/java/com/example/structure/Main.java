@@ -2,38 +2,22 @@ package com.example.structure;
 
 import com.example.structure.advancements.EEAdvancements;
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.tileentity.TileEntityAltar;
 import com.example.structure.init.ModEntities;
 import com.example.structure.proxy.CommonProxy;
-import com.example.structure.renderer.RenderAltarTile;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.util.handlers.FogHandler;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.StructureHandler;
-import com.example.structure.world.Biome.layer.GenerateIsland;
 import com.example.structure.world.WorldGenCustomStructure;
 import com.example.structure.world.api.structures.MapGenKingFortress;
-import com.example.structure.world.api.vaults.MapGenEndVaults;
-import com.example.structure.world.api.vaults.WorldGenEndVaults;
-import git.jbredwards.nether_api.api.event.NetherAPIRegistryEvent;
-import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
-import git.jbredwards.nether_api.mod.common.registry.NetherAPIRegistry;
-import git.jbredwards.nether_api.mod.common.world.biome.BiomeProviderTheEnd;
-import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -43,9 +27,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
-import javax.annotation.Nonnull;
-import java.util.Locale;
-import java.util.function.Function;
 
 @Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION)
 public class Main {

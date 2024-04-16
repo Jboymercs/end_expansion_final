@@ -3,9 +3,7 @@ package com.example.structure.entity.ai;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.EntityWall;
 import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.Random;

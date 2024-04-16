@@ -2,9 +2,7 @@ package com.example.structure.world.Biome.generation;
 
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 

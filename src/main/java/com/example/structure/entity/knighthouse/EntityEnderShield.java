@@ -3,7 +3,6 @@ package com.example.structure.entity.knighthouse;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
-import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.ai.EntityTimedAttackShield;
 import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.util.IAttack;
@@ -12,7 +11,6 @@ import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ParticleManager;
-import net.minecraft.block.BlockWall;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

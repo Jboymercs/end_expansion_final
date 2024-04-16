@@ -1,13 +1,11 @@
 package com.example.structure.util;
 
-import com.example.structure.config.ModConfig;
+
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
 import com.example.structure.init.ModBlocks;
-import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
@@ -27,7 +25,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.event.ForgeEventFactory;

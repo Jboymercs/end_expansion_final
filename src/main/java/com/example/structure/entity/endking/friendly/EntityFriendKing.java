@@ -1,15 +1,12 @@
 package com.example.structure.entity.endking.friendly;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityCrystalKnight;
-import com.example.structure.entity.EntityMiniNuke;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.EndKingAction.ActionAOESimple;
 import com.example.structure.entity.endking.EndKingAction.ActionHoldSwordAttack;
 import com.example.structure.entity.endking.EndKingAction.ActionSummonSwordAttacks;
-import com.example.structure.entity.endking.EndKingAction.ActionThrowFireball;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
@@ -19,7 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -6,6 +6,11 @@ import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 
 public class CustomModelLoader implements ICustomModelLoader {
+
+    /**
+     * Credit for this goes to UnOrignal from the Beast Slayer mod
+     */
+
     @Override
     public void onResourceManagerReload(IResourceManager resourceManager) {
 

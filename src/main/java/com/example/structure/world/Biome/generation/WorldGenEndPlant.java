@@ -1,7 +1,6 @@
 package com.example.structure.world.Biome.generation;
 
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

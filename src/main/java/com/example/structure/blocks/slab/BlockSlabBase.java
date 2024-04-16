@@ -2,7 +2,6 @@ package com.example.structure.blocks.slab;
 
 import com.example.structure.Main;
 import com.example.structure.init.ModBlocks;
-import com.example.structure.init.ModItems;
 import com.example.structure.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -12,7 +11,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;

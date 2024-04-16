@@ -1,8 +1,6 @@
 package com.example.structure.world.Biome.barrend;
 
-import com.example.structure.blocks.BlockCrystal;
 import com.example.structure.init.ModBlocks;
-import com.example.structure.util.ModRand;
 import com.example.structure.world.Biome.BiomeFogged;
 import com.example.structure.world.Biome.decorator.EEBiomeDecorator;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
@@ -10,8 +8,6 @@ import git.jbredwards.nether_api.api.audio.IMusicType;
 import git.jbredwards.nether_api.api.biome.IEndBiome;
 import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
-import net.minecraft.block.BlockStone;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +18,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class BiomeBarrendForest extends BiomeFogged implements IEndBiome, INetherAPIRegistryListener {

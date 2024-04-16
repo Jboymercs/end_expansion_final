@@ -1,7 +1,6 @@
 package com.example.structure.world.api.structures;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;

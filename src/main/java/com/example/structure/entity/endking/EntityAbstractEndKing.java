@@ -1,11 +1,8 @@
 package com.example.structure.entity.endking;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
 import com.example.structure.entity.EntityModBase;
-import com.example.structure.entity.ai.EntityAITimedAttack;
-import com.example.structure.entity.ai.EntityKingTimedAttack;
 import com.example.structure.entity.ai.IMultiAction;
 import com.example.structure.entity.endking.EndKingAction.ActionShootLazer;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -15,15 +12,8 @@ import com.example.structure.renderer.ITarget;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ParticleManager;
 import com.google.common.base.Predicate;
-import net.minecraft.client.renderer.entity.RenderDragon;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;

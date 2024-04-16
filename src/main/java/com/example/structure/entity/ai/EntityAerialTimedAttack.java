@@ -4,7 +4,6 @@ import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.util.IAttackInitiator;
 import com.example.structure.entity.util.IPitch;
 import com.example.structure.util.ModUtils;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.Vec3d;

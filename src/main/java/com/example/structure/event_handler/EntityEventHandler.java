@@ -1,13 +1,10 @@
 package com.example.structure.event_handler;
 
-import com.example.structure.entity.EntityModBase;
-import com.example.structure.items.tools.ISweepAttackOverride;
+
 import com.example.structure.util.ModIndirectDamage;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**

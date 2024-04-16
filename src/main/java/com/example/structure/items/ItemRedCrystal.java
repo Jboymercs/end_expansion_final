@@ -1,10 +1,7 @@
 package com.example.structure.items;
 
-import com.example.structure.blocks.BlockDoorActivation;
 import com.example.structure.entity.tileentity.TileEntityActivate;
-import com.example.structure.entity.tileentity.TileEntityDeactivate;
 import com.example.structure.init.ModBlocks;
-import com.example.structure.init.ModItems;
 import com.example.structure.util.ModUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;

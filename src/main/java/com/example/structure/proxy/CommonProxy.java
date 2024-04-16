@@ -2,16 +2,12 @@ package com.example.structure.proxy;
 
 import com.example.structure.Main;
 import com.example.structure.blocks.BlockLeavesBase;
-import com.example.structure.entity.tileentity.TileEntityAltar;
 import com.example.structure.event_handler.ModEvents;
-import com.example.structure.gui.book.GuiBook;
 import com.example.structure.packets.MessageDirectionForRender;
 import com.example.structure.packets.MessageModParticles;
-import com.example.structure.server.container.ContainterAltar;
 import com.example.structure.util.ModReference;
 import com.example.structure.world.Biome.WorldProviderEndEE;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,11 +67,7 @@ public class CommonProxy implements IGuiHandler {
         TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
         Entity entity = null;
         switch (ID) {
-            case GUI_ALTAR: {
-                if (tile instanceof TileEntityAltar)
-                    return new ContainterAltar(player, (TileEntityAltar) tile);
-                break;
-            }
+
         }
         return null;
     }

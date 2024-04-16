@@ -1,6 +1,5 @@
 package com.example.structure.entity.animation;
 
-import com.example.structure.Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;

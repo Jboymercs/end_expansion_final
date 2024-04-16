@@ -1,6 +1,5 @@
 package com.example.structure.world.islands;
 
-import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;

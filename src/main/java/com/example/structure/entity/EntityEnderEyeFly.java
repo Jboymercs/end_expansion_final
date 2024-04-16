@@ -1,17 +1,14 @@
 package com.example.structure.entity;
 
-import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.AIRandomFly;
 import com.example.structure.entity.ai.EntityFlyMoveHelper;
 import com.example.structure.entity.seekers.EndSeeker;
-import com.example.structure.renderer.ITarget;
 import com.example.structure.util.ModUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;

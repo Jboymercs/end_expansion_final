@@ -8,7 +8,6 @@ import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Supplier;
 

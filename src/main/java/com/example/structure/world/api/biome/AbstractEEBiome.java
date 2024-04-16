@@ -1,11 +1,9 @@
 package com.example.structure.world.api.biome;
 
 import git.jbredwards.nether_api.api.biome.IEndBiome;
-import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEnd;
 
 import javax.annotation.Nonnull;
 

@@ -2,12 +2,9 @@ package com.example.structure.world.misc;
 
 import com.example.structure.util.ModUtils;
 import com.example.structure.world.Biome.WorldChunkGeneratorEE;
-import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
-import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
 public class GenUtils {

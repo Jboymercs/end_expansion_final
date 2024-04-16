@@ -1,6 +1,5 @@
 package com.example.structure.entity.model;
 
-import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
 import com.example.structure.util.ModReference;
 import net.minecraft.util.ResourceLocation;

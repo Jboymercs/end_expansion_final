@@ -1,25 +1,20 @@
 package com.example.structure.world.api.structures;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.init.ModBlocks;
 import com.example.structure.util.MapGenModStructure;
 import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.Biome.BiomeAshWasteland;
 import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
 import git.jbredwards.nether_api.api.structure.INetherAPIStructureEntry;
 import git.jbredwards.nether_api.api.structure.ISpawningStructure;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
-import git.jbredwards.nether_api.mod.common.world.gen.ChunkGeneratorTheEnd;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
-import org.lwjgl.Sys;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;

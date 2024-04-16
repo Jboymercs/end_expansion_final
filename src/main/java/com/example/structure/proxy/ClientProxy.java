@@ -1,16 +1,11 @@
 package com.example.structure.proxy;
 
 import com.example.structure.blocks.BlockLeavesBase;
-import com.example.structure.entity.animation.IAnimatedEntity;
-import com.example.structure.entity.tileentity.TileEntityAltar;
 import com.example.structure.entity.util.data.GlowingMetadataSection;
 import com.example.structure.entity.util.data.GlowingMetadataSectionSerializer;
 import com.example.structure.event_handler.ClientRender;
-import com.example.structure.gui.GuiAltar;
 import com.example.structure.gui.book.GuiBook;
-import com.example.structure.server.container.ContainterAltar;
 import com.example.structure.util.handlers.RenderHandler;
-import ibxm.Player;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -80,12 +75,7 @@ public class ClientProxy extends CommonProxy {
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
         Entity entity = null;
-        switch (id) {
-            case GUI_ALTAR: {
-                if (tile instanceof TileEntityAltar)
-                    return new GuiAltar(player, (TileEntityAltar) tile);
-                break;
-            }
+        if (id == GUI_ALTAR) {
         }
         return null;
     }

@@ -10,7 +10,6 @@ import com.example.structure.world.WorldGenStructure;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.islands.WorldGenOutpost;
-import git.jbredwards.nether_api.api.audio.IMusicType;
 import git.jbredwards.nether_api.api.audio.ISoundAmbience;
 import git.jbredwards.nether_api.api.biome.IAmbienceBiome;
 import git.jbredwards.nether_api.api.biome.IEndBiome;
@@ -318,7 +317,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
 
             @Override
             public double getChancePerTick() {
-                return 0.001;
+                return 0.0005;
             }
         };
     }
