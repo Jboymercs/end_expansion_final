@@ -404,6 +404,15 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static int vault_distance = 200;
 
+    @Config.Name("Ashed Mines Chance to Spawn")
+    @Config.Comment("Change the chance of the Ashed Mines, these are the mineshafts that run throughout the Ashed Wastelands, modify Carefully")
+    @Config.RequiresMcRestart
+    public static int ashed_mines_distance = 55;
+
+    @Config.Name("Ashed Mines Size")
+    @Config.Comment("The size of the Ashed Mines")
+    @Config.RequiresMcRestart
+    public static int ashed_mines_size = 7;
     @Config.Name("Ashed Towers Chance to Spawn")
     @Config.Comment("Change the chance to spawn the Ashed Towers, This is done by per chunk checking if the ground is atleast 58, modify carefully")
     @Config.RequiresMcRestart

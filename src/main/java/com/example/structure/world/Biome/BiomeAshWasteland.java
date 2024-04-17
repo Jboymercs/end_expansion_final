@@ -8,6 +8,7 @@ import com.example.structure.world.Biome.decorator.EEBiomeDecorator;
 import com.example.structure.world.Biome.generation.*;
 import com.example.structure.world.WorldGenStructure;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
+import com.example.structure.world.api.mines.WorldGenMines;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.islands.WorldGenOutpost;
 import git.jbredwards.nether_api.api.audio.ISoundAmbience;
@@ -50,6 +51,9 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     public int crystalSelect = ModRand.range(1, 3);
 
     //Small usage of all the structures seen in the biome
+    public WorldGenStructure[] large_caves = {new WorldGenLargeCave("large_cave_1"), new WorldGenLargeCave("large_cave_2"), new WorldGenLargeCave("large_cave_3"),
+    new WorldGenLargeCave("large_cave_4"), new WorldGenLargeCave("large_cave_4")};
+    public WorldGenStructure[] small_caves = {new WorldGenSmallCaves("small_cave_1"), new WorldGenSmallCaves("small_cave_2"), new WorldGenSmallCaves("small_cave_3")};
     public WorldGenStructure[] ruins = {new WorldGenAshRuins("ash_ruins_1", -1), new WorldGenAshRuins("ash_ruins_2", -1),
     new WorldGenAshRuins("ash_ruins_3", -1), new WorldGenAshRuins("ash_ruins_4", -1), new WorldGenAshRuins("ash_ruins_5", -1),
     new WorldGenAshRuins("ash_ruins_6", -1), new WorldGenAshRuins("ash_ruins_7", -1), new WorldGenAshRuins("ash_ruins_8", -1)};
@@ -65,6 +69,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     private static final IBlockState END_WASTES = ModBlocks.BROWN_END_STONE.getDefaultState();
 
     public static final WorldGenAshTower ash_tower = new WorldGenAshTower();
+    public static final WorldGenMines ashed_mines = new WorldGenMines();
 
     private Random random;
     public BiomeAshWasteland() {
@@ -137,7 +142,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             }
         }
         //Red Crystal Ore
-        if(rand.nextInt(12) == 1) {
+        if(rand.nextInt(16) == 1) {
             for (int k2 = 0; k2 < this.crystalSelect; ++k2) {
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
@@ -158,6 +163,16 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
                     ruin.generate(world, rand, pos.add(l6, yHieght2, k10));
                 }
             }
+        }
+        //Small Caves
+        if(rand.nextInt(10) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 50) {
+            WorldGenStructure cave = ModRand.choice(small_caves);
+            cave.generate(world, rand, pos.add(0, ModRand.range(35, 45), 0));
+        }
+        //Large Custom Caves
+        if(rand.nextInt(2) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
+            WorldGenStructure largeCave = ModRand.choice(large_caves);
+            largeCave.generate(world, rand, pos.add(0, ModRand.range(25, 30), 0));
         }
     }
 
@@ -217,6 +232,11 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         //Ashed Towers
         if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 58) {
             ash_tower.generate(chunkGenerator.getWorld(), random, pos);
+        }
+
+        //Ashed Mines
+        if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 60) {
+            ashed_mines.generate(chunkGenerator.getWorld(), random, pos);
         }
 
     }

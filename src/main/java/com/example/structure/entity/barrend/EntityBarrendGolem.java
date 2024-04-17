@@ -7,6 +7,7 @@ import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -230,6 +231,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
         }, 15);
 
         addEvent(()-> {
+            this.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 0.7f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
             this.lockLook = true;
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,0.1,0)));
@@ -256,6 +258,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
         addEvent(()-> this.lockLook = true, 10);
         addEvent(()-> {
             this.setImmovable(true);
+            this.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 0.7f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,0.1,0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();

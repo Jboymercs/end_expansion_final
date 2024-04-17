@@ -24,7 +24,7 @@ public class ModSoundHandler {
     //King Action Sounds
     public static SoundEvent KING_DASH;
 
-    //NuclearBomb Souns
+    //NuclearBomb Sounds
     public static SoundEvent BOMB_EXPLODE;
 
     //Knight Household

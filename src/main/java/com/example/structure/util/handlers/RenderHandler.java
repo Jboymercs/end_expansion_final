@@ -130,5 +130,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGolem.class, RenderBarrendGolem::new);
         //Redone End Knight
         RenderingRegistry.registerEntityRenderingHandler(EntityEnderKnight.class, RenderEndKnightRedone::new);
+        //Chomper - Ashed Biome
+        RenderingRegistry.registerEntityRenderingHandler(EntityChomper.class, RenderChomper::new);
     }
 }

@@ -142,6 +142,8 @@ public class ModEntities {
         //End King Friendly - Item Summon
         registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
 
+        registerEntityWithID("chomper", EntityChomper.class, ENTITY_START_ID++, 80, ash_mobs);
+
     }
 
     public static void RegisterEntitySpawns() {

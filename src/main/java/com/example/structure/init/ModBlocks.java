@@ -4,10 +4,13 @@ import com.example.structure.blocks.*;
 import com.example.structure.blocks.slab.BlockDoubleSlab;
 import com.example.structure.blocks.slab.BlockHalfSlab;
 import com.example.structure.entity.EntityExplosion;
+import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,8 @@ public class ModBlocks {
     public static final float OBSIDIAN_HARDNESS = 50;
     public static final float OBSIDIAN_RESISTANCE = 2000;
 
+    public static final SoundType ASH = new SoundType(1.0F, 0.8F, SoundEvents.BLOCK_STONE_BREAK, SoundEvents.BLOCK_GRAVEL_STEP, SoundEvents.BLOCK_STONE_PLACE, SoundEvents.BLOCK_STONE_HIT, SoundEvents.BLOCK_STONE_FALL);
+
     //Lametend Islands Blocks
     public static final Block LAMENTED_END_STONE = new BlockBase("lamented_end_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_KEY_BLOCK = new BlockKey("key_block", ModItems.END_KEY, ((world, pos) -> new EntityExplosion(world, pos.getX(), pos.getY(), pos.getZ(), null, 1)));
@@ -34,7 +39,7 @@ public class ModBlocks {
     //Ash Wastelands Blocks
     public static final Block RED_CRYSTAL = new BlockRedCrystal("red_crystal", Material.ROCK, ModItems.RED_CRYSTAL_CHUNK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS).setLightLevel(0.5f);
     public static final Block RED_CRYSTAL_TOP = new BlockCrystalTopBase("red_crystal_top", Material.ROCK, ModItems.RED_CRYSTAL_CHUNK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS).setLightLevel(0.5F);
-    public static final Block END_ASH = new BlockAsh("end_ash", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block END_ASH = new BlockAsh("end_ash", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, ASH).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK = new BlockBase("ash_brick", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK_STAIRS = new BlockStairBase("ash_brick_stairs", ASH_BRICK.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
 

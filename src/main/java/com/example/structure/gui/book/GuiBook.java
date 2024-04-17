@@ -204,7 +204,7 @@ public class GuiBook extends GuiScreen {
                 drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 58, 115, 58, 115, 464);
                 this.createLeftPictureTitleFromString("title.pure_cry_0");
                 this.createRightPictureTitleFromString("title.pure_cry_1");
-                this.writeLeftFromString(6, 11, "desc.pure_cry_");
+                this.writeLeftFromString(6, 12, "desc.pure_cry_");
                 this.writeRightFromString(6, 9, "desc.cont_cry_");
                 GlStateManager.pushMatrix();
                 break;
