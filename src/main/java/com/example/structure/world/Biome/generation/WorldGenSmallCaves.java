@@ -1,5 +1,6 @@
 package com.example.structure.world.Biome.generation;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntityEnderEyeFly;
 import com.example.structure.entity.EntityEnderKnight;
@@ -9,9 +10,13 @@ import com.example.structure.entity.tileentity.tileEntityMobSpawner;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.init.ModEntities;
 import com.example.structure.util.ModRand;
+import com.example.structure.util.ModReference;
 import com.example.structure.world.WorldGenStructure;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -24,6 +29,8 @@ public class WorldGenSmallCaves extends WorldGenStructure {
      */
 
 
+    //CHANGE ME LATER
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "towers");
     public WorldGenSmallCaves(String name) {
         super("ashbiome/" + name);
     }
@@ -47,7 +54,24 @@ public class WorldGenSmallCaves extends WorldGenStructure {
 
     @Override
     protected void handleDataMarker(String function, BlockPos pos, World world, Random random) {
-        if(function.startsWith("mob") && generateMobSpawn()) {
+
+        if(function.startsWith("chest")) {
+            BlockPos blockPos = pos.down();
+            if(generateChestSpawn()) {
+
+                TileEntity tileEntity = world.getTileEntity(blockPos);
+                world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+                if (tileEntity instanceof TileEntityChest) {
+                    TileEntityChest chest = (TileEntityChest) tileEntity;
+                    chest.setLootTable(LOOT, random.nextLong());
+                }
+            } else {
+                world.setBlockToAir(pos);
+                world.setBlockToAir(pos.down());
+            }
+        }
+
+        else if(function.startsWith("mob") && generateMobSpawn()) {
             world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER_ASH.getDefaultState(), 2);
             TileEntity tileentity = world.getTileEntity(pos);
             if (tileentity instanceof tileEntityMobSpawner) {
@@ -68,7 +92,16 @@ public class WorldGenSmallCaves extends WorldGenStructure {
 
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= 7) {
+        if (randomNumberGenerator >= ModConfig.cave_spawn_rate) {
+            return false;
+        }
+        return true;
+    }
+
+    //Generator for Chests
+    public boolean generateChestSpawn() {
+        int randomNumberChestGenerator = ModRand.range(0, 5);
+        if(randomNumberChestGenerator >= ModConfig.cave_chest_chance) {
             return false;
         }
         return true;

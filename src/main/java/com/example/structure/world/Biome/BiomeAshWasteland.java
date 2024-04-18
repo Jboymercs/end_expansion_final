@@ -1,5 +1,8 @@
 package com.example.structure.world.Biome;
 
+import com.example.structure.blocks.BlockDepthsVines;
+import com.example.structure.config.ModConfig;
+import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
@@ -51,6 +54,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     public int crystalSelect = ModRand.range(1, 3);
 
     //Small usage of all the structures seen in the biome
+
     public WorldGenStructure[] large_caves = {new WorldGenLargeCave("large_cave_1"), new WorldGenLargeCave("large_cave_2"), new WorldGenLargeCave("large_cave_3"),
     new WorldGenLargeCave("large_cave_4"), new WorldGenLargeCave("large_cave_4")};
     public WorldGenStructure[] small_caves = {new WorldGenSmallCaves("small_cave_1"), new WorldGenSmallCaves("small_cave_2"), new WorldGenSmallCaves("small_cave_3")};
@@ -59,6 +63,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     new WorldGenAshRuins("ash_ruins_6", -1), new WorldGenAshRuins("ash_ruins_7", -1), new WorldGenAshRuins("ash_ruins_8", -1)};
     public WorldGenAshSpikes spikes = new WorldGenAshSpikes();
     public WorldGenerator ashHeights = new WorldGenAshHeights();
+
+    public WorldGenerator vines = new WorldGenVines();
     public WorldGenerator crystalOre = new WorldGenRedCrystals();
     public WorldGenerator outpost = new WorldGenOutpost();
 
@@ -67,7 +73,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     public MapGenStructure[] structures = {new MapGenKingFortress(20, 0,1)};
     private static final IBlockState END_FLOOR = ModBlocks.END_ASH.getDefaultState();
     private static final IBlockState END_WASTES = ModBlocks.BROWN_END_STONE.getDefaultState();
-
+    public static final WorldGenEndPlant depths_plants = new WorldGenEndPlant(ModBlocks.SPROUT_PLANT.getDefaultState());
     public static final WorldGenAshTower ash_tower = new WorldGenAshTower();
     public static final WorldGenMines ashed_mines = new WorldGenMines();
 
@@ -81,6 +87,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
 
         //Let's Try this again
         this.spawnableCreatureList.add(new SpawnListEntry(EntitySnatcher.class, 1, 1, 1));
+        this.spawnableCreatureList.add(new SpawnListEntry(EntityChomper.class, 1, 1, 3));
 
         this.topBlock = END_FLOOR;
         this.fillerBlock = END_WASTES;
@@ -164,15 +171,83 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
                 }
             }
         }
-        //Small Caves
-        if(rand.nextInt(10) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 50) {
-            WorldGenStructure cave = ModRand.choice(small_caves);
-            cave.generate(world, rand, pos.add(0, ModRand.range(35, 45), 0));
+
+        //Vines
+        for(int k2 = 0; k2< ModRand.range(30, 50); k2++) {
+            int l6 = random.nextInt(16) + 8;
+            int k10 = random.nextInt(16) + 8;
+            int depthSignature = 2;
+            int vineLength = ModRand.range(1, 4);
+            for(int y = 60; y > 5; y--) {
+                IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
+                if(depthSignature == 1) {
+                    world.setBlockState(pos.add(l6, y + 1, k10), ModBlocks.SPROUT_VINE.getDefaultState());
+                  //  for(int y2 = y - 1; y >= y - vineLength; y--) {
+                      //  boolean setInterrupted = false;
+                      //  if(!world.isAirBlock(pos.add(l6, y2, k10))) {
+                        //    setInterrupted = true;
+                      //  }
+                       // if(!setInterrupted) {
+                        //    world.setBlockState(pos.add(l6, y2, k10), ModBlocks.SPROUT_VINE.getDefaultState());
+                      //  }
+                   // }
+                }
+                if(currentBlock == Blocks.AIR.getDefaultState()) {
+                    depthSignature++;
+                } else if (currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState()) {
+                    depthSignature = 0;
+                }
+            }
         }
-        //Large Custom Caves
-        if(rand.nextInt(2) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
-            WorldGenStructure largeCave = ModRand.choice(large_caves);
-            largeCave.generate(world, rand, pos.add(0, ModRand.range(25, 30), 0));
+
+        //Plants
+        for(int k2 = 0; k2 < ModRand.range(30, 50);k2++) {
+            int l6 = random.nextInt(16) + 8;
+            int k10 = random.nextInt(16) + 8;
+            int depthSignature = 2;
+            for(int y = 40; y > 5; y--) {
+                IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
+                BlockPos posModified = new BlockPos(l6, y + 1, k10);
+                if(depthSignature == 1) {
+                    depths_plants.generate(world, rand, pos.add(l6, y + 1, k10));
+                }
+
+                if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState()) {
+                    depthSignature++;
+                } else if (currentBlock == Blocks.AIR.getDefaultState()) {
+                    depthSignature = 0;
+                }
+            }
+        }
+
+        //Corruption Blocks
+        for(int k2 = 0; k2 < ModRand.range(30, 50);k2++) {
+            int l6 = random.nextInt(16) + 8;
+            int k10 = random.nextInt(16) + 8;
+            for(int y = 40; y > 15; y--) {
+                IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
+                if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState() && world.rand.nextInt(2) == 0) {
+                    world.setBlockState(pos.add(l6, y, k10), ModBlocks.SPROUT_STONE.getDefaultState());
+                }
+            }
+        }
+
+
+
+        //Vines
+
+
+        if(!ModConfig.disable_large_caves) {
+            //Small Caves
+            if (rand.nextInt(10) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 50) {
+                WorldGenStructure cave = ModRand.choice(small_caves);
+                cave.generate(world, rand, pos.add(0, ModRand.range(35, 45), 0));
+            }
+            //Large Custom Caves
+            if (rand.nextInt(2) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 57) {
+                WorldGenStructure largeCave = ModRand.choice(large_caves);
+                largeCave.generate(world, rand, pos.add(0, ModRand.range(25, 30), 0));
+            }
         }
     }
 
@@ -193,6 +268,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     }
 
 
+
     @Override
     public void buildSurface(@Nonnull INetherAPIChunkGenerator chunkGenerator, int chunkX, int chunkZ, @Nonnull ChunkPrimer primer, int x, int z, double terrainNoise) {
         // copied from stygian end mod, to ensure terrain generates the same
@@ -203,12 +279,13 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             if(here.getMaterial() == Material.AIR) currDepth = -1;
             else if(here.getBlock() == Blocks.END_STONE) {
                 if(currDepth == -1) {
-                    currDepth = 36 + chunkGenerator.getRand().nextInt(2);
+                    currDepth = 40 + chunkGenerator.getRand().nextInt(2);
                         primer.setBlockState(x, y, z, topBlock);
                 }
                 else if(currDepth > 0) {
                     --currDepth;
-                    primer.setBlockState(x, y, z, fillerBlock);
+                        fillerBlock = ModBlocks.BROWN_END_STONE.getDefaultState();
+                        primer.setBlockState(x, y, z, fillerBlock);
                 }
             }
         }

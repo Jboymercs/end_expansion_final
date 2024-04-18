@@ -11,8 +11,12 @@ import com.example.structure.entity.tileentity.tileEntityMobSpawner;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.init.ModEntities;
 import com.example.structure.util.ModRand;
+import com.example.structure.util.ModReference;
 import com.example.structure.world.misc.ModStructureTemplate;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -26,6 +30,10 @@ public class MinesTemplate extends ModStructureTemplate {
     public MinesTemplate() {
 
     }
+
+    //CHANGE ME LATER
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "towers");
+
 
     public MinesTemplate(TemplateManager manager, String type, BlockPos pos, Rotation rot, int distance, boolean overWriteIn) {
         super(manager, type, pos,distance, rot, overWriteIn);
@@ -52,13 +60,38 @@ public class MinesTemplate extends ModStructureTemplate {
                 world.setBlockToAir(pos);
             }
         }
+
+        else if(function.startsWith("chest")) {
+            BlockPos blockPos = pos.down();
+            if(generateChestSpawn()  && sbb.isVecInside(blockPos)) {
+
+                TileEntity tileEntity = world.getTileEntity(blockPos);
+                world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+                if (tileEntity instanceof TileEntityChest) {
+                    TileEntityChest chest = (TileEntityChest) tileEntity;
+                    chest.setLootTable(LOOT, rand.nextLong());
+                }
+            } else {
+                world.setBlockToAir(pos);
+                world.setBlockToAir(pos.down());
+            }
+        }
     }
 
 
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= 3) {
+        if (randomNumberGenerator >= ModConfig.ashed_mines_mob_spawns) {
+            return false;
+        }
+        return true;
+    }
+
+    //Generator for Chests
+    public boolean generateChestSpawn() {
+        int randomNumberChestGenerator = ModRand.range(0, 5);
+        if(randomNumberChestGenerator >= ModConfig.ashed_mines_chest_spawns) {
             return false;
         }
         return true;

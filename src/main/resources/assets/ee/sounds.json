@@ -373,6 +373,72 @@
       }
     ]
   },
+  "entity.chomper.idle": {
+    "category": "entity",
+    "subtitle": "entity.chomper.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/chomper/idle_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/chomper/idle_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.chomper.hurt": {
+    "category": "entity",
+    "subtitle": "entity.chomper.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/chomper/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/chomper/hurt_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.chomper.warn": {
+    "category": "entity",
+    "subtitle": "entity.chomper.warn",
+    "sounds": [
+      {
+        "name": "ee:entity/chomper/warn_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/chomper/warn_2",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/chomper/warn_3",
+        "stream": true
+      }
+    ]
+  },
+  "entity.chomper.bite": {
+    "category": "entity",
+    "subtitle": "entity.chomper.bite",
+    "sounds": [
+      {
+        "name": "ee:entity/chomper/bite",
+        "stream": true
+      }
+    ]
+  },
+  "entity.chomper.leap": {
+    "category": "entity",
+    "subtitle": "entity.chomper.leap",
+    "sounds": [
+      {
+        "name": "ee:entity/chomper/leap",
+        "stream": true
+      }
+    ]
+  },
   "biome.ambient.ambient": {
     "category": "entity",
     "subtitle": "biome.ambience",

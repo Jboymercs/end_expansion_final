@@ -23,7 +23,7 @@ public class ModItems {
 
     private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 600, 8.0f, ModConfig.endfall_sword_damage, 40);
 
-    private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 5, 1000, 100, 4, 25);
+    private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 5, 1000, 8.0F, 4, 25);
 
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 800, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2);
 
@@ -61,7 +61,7 @@ public class ModItems {
     public static final Item MEDALLION = new ItemMedallion("medal", "medal_desc", ModCreativeTabs.ITEMS);
     public static final Item DURABLE_SHIELD = new DurableShield("durable_shield", ModCreativeTabs.ITEMS, "shield_desc");
     public static final Item ENDFALL_SWORD = new ToolEndFallSword("endfall_sword", "efsword_desc", END_FALL);
-    public static final Item ENDFALL_BOW = new ToolBowModded("bow", "bow_desc");
+    public static final Item ENDFALL_BOW = new ToolBowModded("end_bow", "bow_desc");
     public static final Item INFUSED_PICKAXE = new ToolPickaxe("endfall_pickaxe", ENDFALL_PICKAXE);
     public static final Item ENDFALL_STAFF = new ItemEndfallStaff("efstaff", ModCreativeTabs.ITEMS, "efstaff_desc");
     public static final Item PROJECTILE_PURPLE = new CrystalBallItem("projpurp", null);

@@ -3,10 +3,13 @@ package com.example.structure.config;
 
 import com.example.structure.util.ModReference;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.fml.common.Mod;
 
 @Config(modid = ModReference.MOD_ID, name = ModReference.NAME)
 public class ModConfig {
     //77 Configurable Items
+
+
     @Config.Name("Lamented Islands Structure Frequency")
     @Config.Comment("Raises and Lowers Frequency of Structure Spawns, Higher means more frequent")
     @Config.RangeInt(min = 0, max = 48)
@@ -275,6 +278,21 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static double stalker_distance = 2D;
 
+    @Config.Name("Depths Chomper Health")
+    @Config.Comment("Change the Health of the Depths Chomper")
+    @Config.RequiresMcRestart
+    public static double chomper_health = 20D;
+
+    @Config.Name("Depths Chomper Attack Damage")
+    @Config.Comment("Change the Chomper Attack Damage NOM NOM NOM!")
+    @Config.RequiresMcRestart
+    public static float chomper_attack_damange = 9F;
+
+    @Config.Name("Depths Chomper Spawn Rate")
+    @Config.Comment("This is additional spawns that happen below Y 40, if you are wanting them to not spawn entirely, change Cave SpawnRates to 0")
+    @Config.RequiresMcRestart
+    public static int chomper_spawn_rate = 2;
+
     @Config.Name("Red Rage Potion Effect Damage")
     @Config.Comment("Damage the Red Rage deals to entities near you when affected")
     @Config.RequiresMcRestart
@@ -394,6 +412,7 @@ public class ModConfig {
     @Config.RangeInt(min = 0, max = 10)
     public static int vault_mob_chance = 4;
 
+
     @Config.Name("End Vault Size")
     @Config.Comment("Change the size of the End Vaults, any bigger may result in buggy appliances")
     @Config.RequiresMcRestart
@@ -413,6 +432,36 @@ public class ModConfig {
     @Config.Comment("The size of the Ashed Mines")
     @Config.RequiresMcRestart
     public static int ashed_mines_size = 7;
+
+    @Config.Name("Ashed Mines Mob Spawns")
+    @Config.Comment("Change the Mob Spawn Rate in the Ashed Mines, spawns include Ender Knights/Ender Shielders")
+    @Config.RangeInt(min = 0, max = 10)
+    @Config.RequiresMcRestart
+    public static int ashed_mines_mob_spawns = 3;
+
+    @Config.Name("Ashed Mines Chest Spawns")
+    @Config.Comment("Change the Chest Spawns in the Ashed Mines")
+    @Config.RangeInt(min = 0, max = 5)
+    @Config.RequiresMcRestart
+    public static int ashed_mines_chest_spawns = 3;
+
+    @Config.Name("Caves Disable")
+    @Config.Comment("Disable End Expansions Caves that spawn in the Ash Wastelands, NOTE caves will still spawn there just won't be any small scenic structures/ruins/large caves, set to true to disable caves")
+    @Config.RequiresMcRestart
+    public static boolean disable_large_caves = false;
+
+    @Config.Name("Caves set Spawns")
+    @Config.Comment("This setting is allowing set spawns too occur in the caves, think one time spawners to make immediate entrace of caves more dangerous, what spawns are End Stalkers and Depths Chompers, set to 0 to disable")
+    @Config.RangeInt(min = 0, max = 10)
+    @Config.RequiresMcRestart
+    public static int cave_spawn_rate = 6;
+
+    @Config.Name("Caves Chest Spawns")
+    @Config.Comment("Change the chance of Chest spawns that occur in small ruins and caves")
+    @Config.RangeInt(min = 0, max = 5)
+    @Config.RequiresMcRestart
+    public static int cave_chest_chance = 2;
+
     @Config.Name("Ashed Towers Chance to Spawn")
     @Config.Comment("Change the chance to spawn the Ashed Towers, This is done by per chunk checking if the ground is atleast 58, modify carefully")
     @Config.RequiresMcRestart

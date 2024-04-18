@@ -151,6 +151,7 @@ public class ModEntities {
         spawnRate(EntityController.class, EnumCreatureType.MONSTER, ModConfig.guilder_spawn_rate, 1, 2, BiomeDictionary.Type.END);
         spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, ModConfig.parasite_spawn_rate, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, ModConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);
+        spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, ModConfig.chomper_spawn_rate, 1, 3, BiomeRegister.END_ASH_WASTELANDS);
     }
 
 

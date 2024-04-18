@@ -8,6 +8,7 @@ import com.example.structure.items.tools.CustomModelLoader;
 import com.example.structure.renderer.*;
 import com.example.structure.util.IHasModel;
 import com.example.structure.util.ModReference;
+import com.example.structure.util.data.AdvancedStateMap;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -87,6 +88,11 @@ public class RegistryHandler {
             }
         }
         for (Block block : ModBlocks.BLOCKS) {
+            if (block instanceof IStateMappedBlock) {
+                AdvancedStateMap.Builder builder = new AdvancedStateMap.Builder();
+                ((IStateMappedBlock) block).setStateMapper(builder);
+                ModelLoader.setCustomStateMapper(block, builder.build());
+            }
             if (block instanceof IHasModel) {
                 ((IHasModel) block).registerModels();
             }
@@ -95,5 +101,16 @@ public class RegistryHandler {
         ModelLoaderRegistry.registerLoader(new CustomModelLoader());
         ((ItemAbstractMultiModel)ModItems.GUN_LAUNCHER).registerModels();
 
+    }
+
+
+    public interface IStateMappedBlock {
+        /**
+         * Sets the statemap
+         *
+         * @param builder
+         */
+        @SideOnly(Side.CLIENT)
+        void setStateMapper(AdvancedStateMap.Builder builder);
     }
 }

@@ -5,10 +5,13 @@ import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.ai.snatcher.EntityStalkAI;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.util.IAttack;
+import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
+import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -20,6 +23,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -48,6 +52,8 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     private final String ANIM_DIG = "dig";
     private final String ANIM_DUG_LOOP = "dug_loop";
     private final String ANIM_POP_OUT = "pop_out";
+
+    private final String ANIM_CHOMP_CHOMP = "eat";
     private Consumer<EntityLivingBase> prevAttack;
 
     private static final DataParameter<Boolean> ATTACK = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
@@ -56,6 +62,8 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     private static final DataParameter<Boolean> DUG_IN = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> BITE = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> WARN = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
+
+    private static final DataParameter<Boolean> CHOMP = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
 
     public void setDigDown(boolean value) {this.dataManager.set(DIG_DOWN, Boolean.valueOf(value));}
     public boolean isDigDown() {return this.dataManager.get(DIG_DOWN);}
@@ -69,6 +77,8 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     public boolean isBite() {return this.dataManager.get(BITE);}
     public void setWarn(boolean value) {this.dataManager.set(WARN, Boolean.valueOf(value));}
     public boolean isWarn() {return this.dataManager.get(WARN);}
+    public void setChomp(boolean value) {this.dataManager.set(CHOMP, Boolean.valueOf(value));}
+    public boolean isChomp() {return this.dataManager.get(CHOMP);}
 
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityChomper(World worldIn, float x, float y, float z) {
@@ -99,16 +109,20 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         this.dataManager.register(DUG_IN, Boolean.valueOf(false));
         this.dataManager.register(BITE, Boolean.valueOf(false));
         this.dataManager.register(WARN, Boolean.valueOf(false));
+        this.dataManager.register(CHOMP, Boolean.valueOf(false));
     }
 
     public int timeTooDig = ModRand.range(120, 200);
-    public int warnAmount = 3;
+    public int warnAmount = 60;
 
-    public int warnCooldown = 80;
+    public int warnCooldown = 4;
     public boolean beginDigging = false;
     public boolean isCurrentlyDugIn = false;
 
     public boolean isJumping = false;
+
+    protected int chompCooldown = 10;
+    protected boolean chompAttack = false;
 
     @Override
     public void onUpdate() {
@@ -121,15 +135,50 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase base : nearbyEntities) {
                     if(base == target) {
-                        this.setTooBiteTarget(target);
+                        if(world.rand.nextInt(3) == 0) {
+                            stateChomp(target);
+                        } else {
+                            this.setTooBiteTarget(target);
+                        }
+
                     }
                 }
             }
         }
+
+        if(target != null && this.isChomp()) {
+            Vec3d targetPos = target.getPositionVector().add(ModUtils.yVec(target.getEyeHeight()));
+            ModUtils.setEntityPosition(this, targetPos);
+            if(chompCooldown <= 0 && !this.chompAttack) {
+                this.stateChompAttack(target);
+                this.chompAttack = true;
+            } else {
+                chompCooldown--;
+            }
+            if(target.getHealth() == 0) {
+
+                timeTooDig = ModRand.range(400, 500);
+                this.stateStopChomp();
+            }
+        }
+
+        if(target != null) {
+            if(target.getHealth() == 0) {
+                timeTooDig = ModRand.range(1000, 2000);
+            }
+        }
+
+        if(this.hurtTime > 0 && this.isDugIn()) {
+            if(target != null) {
+                statePopOut(this.getAttackingEntity());
+            }
+
+        }
+
         if(target == null && timeTooDig <= 0) {
             BlockPos setPos = this.getPosition().add(0, -1, 0);
             if(world.getBlockState(setPos).isFullBlock() && !beginDigging && !isCurrentlyDugIn) {
-                this.warnAmount = 3;
+                this.warnAmount = 4;
                 this.stateBeginDigging(setPos);
 
             }
@@ -144,32 +193,83 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
             this.rotationPitch = 0;
             this.rotationYaw = 0;
             this.rotationYawHead = 0;
-            warnAmount--;
-            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(10D), e -> !e.getIsInvulnerable());
+            warnCooldown--;
+            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(8D), e -> !e.getIsInvulnerable());
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase base : nearbyEntities) {
-                    if(base != this) {
-                        if (warnAmount <= 0) {
-                            this.statePopOut(base);
+                    if(!(base instanceof EntityChomper)) {
+                        if(base instanceof EntityPlayer) {
+                            if(!base.isSneaking()) {
+                                if (warnAmount <= 0) {
+                                    this.statePopOut(base);
+                                }
+
+                                if (this.getEntitySenses().canSee(base) && this.warnCooldown <= 0 && !this.isWarn() && this.warnAmount > 0) {
+                                    this.stateWarnNearby();
+                                }
+                            }
+                        } else {
+                            if (warnAmount <= 0) {
+                                this.statePopOut(base);
+                            }
+                            if (this.getEntitySenses().canSee(base) && this.warnCooldown <= 0 && !this.isWarn()  && this.warnAmount > 0) {
+                                this.stateWarnNearby();
+                            }
                         }
-                        if (this.getEntitySenses().canSee(base) && this.warnAmount <= 0 && !this.isWarn()) {
-                            this.stateWarnNearby();
-                        }
+
                     }
                 }
             }
 
-            List<EntityLivingBase> nearbyClose = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(5D), e -> !e.getIsInvulnerable());
+            List<EntityLivingBase> nearbyClose = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable());
             if(!nearbyClose.isEmpty()) {
                 for(EntityLivingBase base : nearbyClose) {
-                    if(base != this) {
-                        this.statePopOut(base);
+                    if(!(base instanceof EntityChomper)) {
+                            this.statePopOut(base);
+
+
                     }
                 }
             }
         }
     }
+    public void stateStopChomp() {
+        this.setAttackTarget(null);
+        this.noClip = false;
+        this.setNoGravity(false);
+        this.setChomp(false);
+    }
 
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        if(this.posY <= 40) {
+            return this.world.rand.nextInt(12) == 0;
+        }
+        return false;
+    }
+
+    public void stateChompAttack(EntityLivingBase target) {
+        this.playSound(ModSoundHandler.CHOMPER_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
+        Vec3d offset = target.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.0, 0.3, 0)));
+        DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
+        float damage = (float) ((ModConfig.chomper_attack_damange * 0.6) * ModConfig.biome_multiplier);
+        ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
+        addEvent(()-> {
+            this.chompCooldown = 10;
+            this.chompAttack = false;
+        }, 10);
+    }
+
+
+    public void stateChomp(EntityLivingBase target) {
+        this.setAttacking(false);
+        this.setChomp(true);
+        this.noClip = true;
+        this.setNoGravity(true);
+        this.isJumping = false;
+
+    }
     public void statePopOut(EntityLivingBase target) {
         this.setDugIn(false);
         this.setDigUp(true);
@@ -178,7 +278,9 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
           this.noClip = false;
           this.setNoGravity(false);
           this.setDigUp(false);
-          this.setAttackTarget(target);
+          if(target != this) {
+              this.setAttackTarget(target);
+          }
           this.isCurrentlyDugIn = false;
       }, 20);
     }
@@ -186,7 +288,9 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     public void stateWarnNearby() {
         this.setWarn(true);
         this.warnCooldown = 80;
+        this.playSound(ModSoundHandler.CHOMPER_WARN, 2.0f, 1.0f / rand.nextFloat() * 0.4f + 0.2f);
         this.warnAmount--;
+        addEvent(()-> world.setEntityState(this, ModUtils.PARTICLE_BYTE), 5);
         addEvent(()-> {
             this.setWarn(false);
         }, 15);
@@ -201,7 +305,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
             this.noClip = true;
             this.setNoGravity(true);
             this.setDugIn(true);
-            this.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
+            this.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
             this.setImmovable(true);
             this.beginDigging = false;
         }, 30);
@@ -212,15 +316,26 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(36D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20D * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.chomper_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.6D);
     }
 
     @Override
+    public void handleStatusUpdate(byte id) {
+        super.handleStatusUpdate(id);
+        if (id == ModUtils.PARTICLE_BYTE) {
+            ModUtils.circleCallback(1, 30, (pos)-> {
+                pos = new Vec3d(pos.x, 0, pos.y);
+                ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.0, 1.4, 0))), ModColors.AZURE, pos.normalize().scale(0.25).add(ModUtils.yVec(0)));
+            });
+        }
+    }
+
+    @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         double distance = Math.sqrt(distanceSq);
-        if(!this.isBite() && !this.isAttacking()) {
+        if(!this.isBite() && !this.isAttacking() && !this.isChomp()) {
             List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(jump_attack));
             double[] weights = {
                     (distance <= 9) ? 1/distance : 0 //Jump ATTACK
@@ -238,9 +353,10 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         this.setBite(true);
         this.isJumping = false;
         addEvent(()-> {
+            this.playSound(ModSoundHandler.CHOMPER_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 1.0, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) (9 * ModConfig.biome_multiplier);
+            float damage = (float) (ModConfig.chomper_attack_damange * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
         }, 3);
 
@@ -256,14 +372,16 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
             addEvent(()-> {
                 this.setImmovable(false);
                 this.isJumping = true;
+                this.playSound(ModSoundHandler.CHOMPER_LEAP, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
                 ModUtils.leapTowards(this, targetedPos, (float) (1.3 * Math.sqrt(distance)), 0.7f);
             }, 10);
         }, 2);
         addEvent(()-> {
             if(this.isJumping) {
+                this.playSound(ModSoundHandler.CHOMPER_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 1.0, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-                float damage = (float) (9 * ModConfig.biome_multiplier);
+                float damage = (float) (ModConfig.chomper_attack_damange * ModConfig.biome_multiplier);
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
             }
         }, 29);
@@ -284,6 +402,11 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     private <E extends IAnimatable> PlayState predicateLooped(AnimationEvent<E> event) {
         if(this.isDugIn() && !this.isDigDown() && !this.isDigUp()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DUG_LOOP, true));
+            return PlayState.CONTINUE;
+        }
+
+        if(this.isChomp()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CHOMP_CHOMP, true));
             return PlayState.CONTINUE;
         }
 
@@ -319,7 +442,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     }
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
-        if(!this.isWarn() && !this.isBite() && !this.isAttacking() && !this.isDigDown() && !this.isDigUp() && !this.isDugIn()) {
+        if(!this.isWarn() && !this.isBite() && !this.isAttacking() && !this.isDigDown() && !this.isDigUp() && !this.isDugIn() && !this.isChomp()) {
             if (!(event.getLimbSwingAmount() > -0.10F && event.getLimbSwingAmount() < 0.10F)) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WALK, true));
                 return PlayState.CONTINUE;
@@ -331,6 +454,30 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.CHOMPER_HURT;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if(!this.isDugIn()) {
+            return ModSoundHandler.CHOMPER_IDLE;
+        }
+        return null;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn)
+    {
+        this.playSound(ModSoundHandler.STALKER_STEP, 0.7F, 1.0f / (rand.nextFloat() * 0.4F + 0.2f));
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.CHOMPER_HURT;
     }
 
     @Override

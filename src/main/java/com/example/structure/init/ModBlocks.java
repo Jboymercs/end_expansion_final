@@ -62,6 +62,9 @@ public class ModBlocks {
     public static final Block BROWN_END_STONE = new BlockBase("brown_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BROWN_END_BRICK = new BlockBase("brown_brick", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BROWN_SMOOTH_STONE = new BlockBase("brown_smooth", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block SPROUT_PLANT = new BlockPlantSprout("sprout_plant", Material.PLANTS).setLightLevel(0.5F);
+    public static final Block SPROUT_VINE = new BlockDepthsVines("sprout_vine", Material.PLANTS).setLightLevel(0.5F);
+    public static final Block SPROUT_STONE = new BlockBase("sprout_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.PLANT).setCreativeTab(ModCreativeTabs.ITEMS);
     //Mini-nuke
     public static final Block BLOCK_MINI_NUKE = new BlockMiniNuke("mini_nuke", "nuke_desc");
 
