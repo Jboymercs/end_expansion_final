@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "B B",
+    "B B"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:amber_ingot"
+    },
+    "B": {
+      "item": "ee:plate"
+    }
+  },
+  "result": {
+    "item": "ee:amber_leggings"
+  }
+}

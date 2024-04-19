@@ -4,6 +4,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.snatcher.EntityStalkAI;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.util.IAttack;
+import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;
@@ -23,6 +24,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -153,12 +155,42 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     protected int hibernationTimer = 500 + ModRand.range(50, ModConfig.stalker_hibernation * 20);
     protected int aggroTimer = 400;
 
+    protected int checkForTorchTimer = 30;
+
+    protected int spottedATorchCooldown = 400;
+    public boolean spottedATorch = false;
     @Override
     public void onUpdate() {
         super.onUpdate();
         if(this.isDigUp()) {
             this.motionX = 0;
             this.motionZ = 0;
+        }
+
+        if(this.spottedATorch) {
+            if(this.spottedATorchCooldown < 0) {
+                this.spottedATorch = false;
+                this.spottedATorchCooldown = 400;
+            } else {
+                spottedATorchCooldown--;
+            }
+        }
+
+        if(!this.isCurrentlyinHibernation && checkForTorchTimer < 0) {
+            AxisAlignedBB box = getEntityBoundingBox().grow(7, 7, 7);
+            //A check for nearby Cordium Torches, will send awat these guys if set true
+            BlockPos posToo = ModUtils.searchForBlocks(box, world, this, ModBlocks.AMBER_TORCH.getDefaultState());
+            if(ModUtils.searchForBlocks(box, world, this, ModBlocks.AMBER_TORCH.getDefaultState()) != null) {
+                this.iAmPissedOff = false;
+                this.aggroTimer = 400;
+                this.spottedATorch = true;
+                Vec3d away = this.getPositionVector().subtract(new Vec3d(posToo.getX(), posToo.getY(), posToo.getZ())).normalize();
+                Vec3d pos = this.getPositionVector().add(away.scale(8)).add(ModRand.randVec().scale(4));
+                this.getNavigator().tryMoveToXYZ(pos.x, pos.y, pos.z, 1.5);
+
+            }
+        } else {
+            checkForTorchTimer--;
         }
 
         if(this.isCurrentlyinHibernation) {
@@ -330,6 +362,16 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     {
         this.playSound(ModSoundHandler.STALKER_STEP, 0.5F, 1.0f / (rand.nextFloat() * 0.4F + 0.2f));
     }
+
+
+    @Override
+    protected boolean canDespawn() {
+
+        // Edit this to restricting them not despawning in Dungeons
+        return this.ticksExisted > 20 * 60 * 20;
+
+    }
+
 
     @Override
     protected SoundEvent getDeathSound() {

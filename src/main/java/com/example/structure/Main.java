@@ -3,6 +3,7 @@ package com.example.structure;
 import com.example.structure.advancements.EEAdvancements;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModEntities;
+import com.example.structure.init.ModRecipes;
 import com.example.structure.proxy.CommonProxy;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
@@ -93,6 +94,7 @@ public class Main {
         BiomeRegister.registerBiomes();
         StructureHandler.handleStructureRegistries();
         ModSoundHandler.registerSounds();
+        ModRecipes.init();
 
     }
 

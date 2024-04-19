@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "ee:item/invisible"
+    "all": "ee:blocks/amber_ore"
   }
 }

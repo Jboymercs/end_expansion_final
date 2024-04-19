@@ -101,6 +101,20 @@ public class ModEvents {
             }
         }
 
+        if(base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.AMBER_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.AMBER_CHESTPLATE &&
+        base.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == ModItems.AMBER_LEGGINGS && base.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == ModItems.AMBER_BOOTS) {
+            if(!base.world.isRemote && base.ticksExisted % 40 == 0) {
+                base.addPotionEffect(new PotionEffect(MobEffects.HASTE, 60, 0));
+                List<EntityLivingBase> nearbyEntities = base.world.getEntitiesWithinAABB(EntityLivingBase.class, base.getEntityBoundingBox().grow(8D), entityLivingBase -> !(entityLivingBase.getIsInvulnerable()));
+                if(!nearbyEntities.isEmpty()) {
+                    for(EntityLivingBase base2 : nearbyEntities) {
+                        if(!(base2 instanceof EntityPlayer)) {
+                            base2.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 100, 0));
+                        }
+                    }
+                }
+            }
+        }
 
     }
 

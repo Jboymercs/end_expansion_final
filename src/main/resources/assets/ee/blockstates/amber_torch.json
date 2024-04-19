@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "facing=up": { "model": "ee:amber_torch" },
+    "facing=east": { "model": "ee:amber_torch_wall" },
+    "facing=south": { "model": "ee:amber_torch_wall", "y": 90 },
+    "facing=west": { "model": "ee:amber_torch_wall", "y": 180 },
+    "facing=north": { "model": "ee:amber_torch_wall", "y": 270 }
+  }
+}

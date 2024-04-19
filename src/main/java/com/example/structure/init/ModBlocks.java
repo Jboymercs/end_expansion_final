@@ -60,6 +60,8 @@ public class ModBlocks {
     public static final Block POWER_SOURCE_ON = new BlockPowerSource("source_on", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
     //BrownStone - Ash Wastelands
     public static final Block BROWN_END_STONE = new BlockBase("brown_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block AMBER_ORE = new BlockCoriumOre("amber_ore", STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block AMBER_TORCH = new BlockAmberTorch("amber_torch", "desc_amber_torch").setLightLevel(1.0F);
     public static final Block BROWN_END_BRICK = new BlockBase("brown_brick", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BROWN_SMOOTH_STONE = new BlockBase("brown_smooth", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block SPROUT_PLANT = new BlockPlantSprout("sprout_plant", Material.PLANTS).setLightLevel(0.5F);

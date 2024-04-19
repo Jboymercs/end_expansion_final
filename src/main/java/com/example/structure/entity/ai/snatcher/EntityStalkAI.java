@@ -73,7 +73,7 @@ public class EntityStalkAI<T extends EntitySnatcher & IAttack> extends EntityAIB
             this.entity.getNavigator().clearPath();
             currentlyHiding = true;
         }
-        if(currentlyHiding) {
+        if(currentlyHiding && !this.entity.spottedATorch) {
             if(stalkCooldown < distanceAwayCounter) {
                 Vec3d away = this.entity.getPositionVector().subtract(target.getPositionVector()).normalize();
                 pos = this.entity.getPositionVector().add(away.scale(4)).add(ModRand.randVec().scale(4));
@@ -92,7 +92,7 @@ public class EntityStalkAI<T extends EntitySnatcher & IAttack> extends EntityAIB
                 distanceAwayCounter = 600;
             }
         }
-        else {
+        else if(!this.entity.spottedATorch) {
             move(target, distSq, canSee);
         }
 

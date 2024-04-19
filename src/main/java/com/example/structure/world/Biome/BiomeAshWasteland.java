@@ -62,6 +62,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     new WorldGenAshRuins("ash_ruins_3", -1), new WorldGenAshRuins("ash_ruins_4", -1), new WorldGenAshRuins("ash_ruins_5", -1),
     new WorldGenAshRuins("ash_ruins_6", -1), new WorldGenAshRuins("ash_ruins_7", -1), new WorldGenAshRuins("ash_ruins_8", -1)};
     public WorldGenAshSpikes spikes = new WorldGenAshSpikes();
+    public WorldGenOre ore_gen = new WorldGenOre();
     public WorldGenerator ashHeights = new WorldGenAshHeights();
 
     public WorldGenerator vines = new WorldGenVines();
@@ -205,7 +206,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             int l6 = random.nextInt(16) + 8;
             int k10 = random.nextInt(16) + 8;
             int depthSignature = 2;
-            for(int y = 40; y > 5; y--) {
+            for(int y = 45; y > 14; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 BlockPos posModified = new BlockPos(l6, y + 1, k10);
                 if(depthSignature == 1) {
@@ -232,6 +233,17 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             }
         }
 
+        //Cordium Ore
+        for(int k2 = 0; k2 < ModRand.range(2, 5);k2++) {
+            int l6 = random.nextInt(16) + 8;
+            int k10 = random.nextInt(16) + 8;
+            for(int y = 40; y > 15; y--) {
+                IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
+                if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState() && world.rand.nextInt(5) == 0) {
+                    ore_gen.generateOreNearby(world, random, pos.add(l6, y, k10));
+                }
+            }
+        }
 
 
         //Vines

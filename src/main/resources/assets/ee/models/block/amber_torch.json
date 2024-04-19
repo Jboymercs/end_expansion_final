@@ -1,0 +1,6 @@
+{
+  "parent": "block/torch",
+  "textures": {
+    "torch": "ee:blocks/amber_torch"
+  }
+}

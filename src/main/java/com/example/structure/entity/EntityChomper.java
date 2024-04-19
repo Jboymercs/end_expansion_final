@@ -199,7 +199,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
                 for(EntityLivingBase base : nearbyEntities) {
                     if(!(base instanceof EntityChomper)) {
                         if(base instanceof EntityPlayer) {
-                            if(!base.isSneaking()) {
+                            if(!base.isSneaking() && !((EntityPlayer) base).isCreative()) {
                                 if (warnAmount <= 0) {
                                     this.statePopOut(base);
                                 }
@@ -219,6 +219,9 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
 
                     }
                 }
+            }
+            if(nearbyEntities.isEmpty()) {
+                this.warnAmount = 4;
             }
 
             List<EntityLivingBase> nearbyClose = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable());
@@ -248,6 +251,16 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         }
         return false;
     }
+
+
+    @Override
+    protected boolean canDespawn() {
+
+        // Edit this to restricting them not despawning in Dungeons
+        return this.ticksExisted > 20 * 60 * 20;
+
+    }
+
 
     public void stateChompAttack(EntityLivingBase target) {
         this.playSound(ModSoundHandler.CHOMPER_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);

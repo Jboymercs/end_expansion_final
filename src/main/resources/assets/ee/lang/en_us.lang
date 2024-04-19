@@ -83,9 +83,11 @@ tile.ash_chute.name=Ashed Geyser
 tile.sprout_plant.name=Depths Sprout
 tile.sprout_vine.name=Depths Vine
 tile.sprout_stone.name=Depths Covered Stone
+tile.amber_ore.name=Cordium Ore
 tile.ash_spawner.name=Disappearing Spawner Ash
 tile.disappearing_spawner.name=Disappearing Spawner
 tile.mega_structure_block.name=Mega Structure Block
+tile.amber_torch.name=Cordium Torch
 item.key.name=Lamented End Key
 item.red_crystal_item.name=Unholy Crystal
 item.purple_crystal_item.name=Pure Crystal
@@ -116,6 +118,14 @@ item.projpurp.name=Purple Projectile
 item.gun.name=Propulsion Gun
 item.heal_food.name=Turium Bulb
 item.king_crown.name=Crown of A Past Era
+item.amber_ingot.name=Cordium Ingot
+item.amber_raw.name=Raw Cordium
+item.amber_chestplate.name=Cordium Chestplate
+item.amber_helmet.name=Cordium Helmet
+item.amber_leggings.name=Cordium Leggings
+item.amber_boots.name=Cordium Boots
+item.brick_rod.name=Ashed Brick Rod
+item.amber_axe.name=Cordium Axe
 
 itemGroup.expansion=End Expansion
 
@@ -205,7 +215,7 @@ advancements.ee.craft_mini_nuke.title=Who Hurt You?
 advancements.ee.craft_mini_nuke.description=Craft a Mini-Nuke.
 
 
-
+ee.desc.amber_desc=Full set gives Haste, and allows you to see nearby creatures.
 ee.desc.dimensional_key=Right click on the key block to awaken the Lamentor
 ee.desc.lamented_eye=Right Click to enable Levitation 3 for a short period of time.
 ee.desc.sword_desc=The Lamentors Sword, a fast and deadly blade. Right click to find out
@@ -229,6 +239,7 @@ ee.desc.efstaff_desc=Right Click will launch enemies and apply the Red Rage, Lef
 ee.desc.gun_desc=A part of the Seekers body, the fun part that shoots crystals at least.
 ee.desc.hf_desc=Eating will apply short Regeneration 2, eating too many can cause bad things to happen
 ee.desc.crown_desc=With this treasure, I summon divine general of the wastelands, The Ender King!
+ee.desc.desc_amber_torch=While just a torch, this one wards away Stalkers that get close to them.
 death.attack.ee:maelstrom=%1$s succumbed to the void
 death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s
 death.attack.ee:playerMaelstrom=%1$s was killed by %2$s

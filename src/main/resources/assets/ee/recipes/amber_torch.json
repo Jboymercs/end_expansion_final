@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
-    " R ",
-    " R "
+    "#",
+    "R"
   ],
   "key": {
+    "#": {
+      "item": "ee:amber_ingot"
+    },
     "R": {
       "item": "ee:brick_rod"
-    },
-    "#": {
-      "item": "ee:infused_crystal"
     }
   },
   "result": {
-    "item": "ee:endfall_pickaxe"
+    "item": "ee:amber_torch",
+    "count": 4
   }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VRV",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:amber_ingot"
+    },
+    "V": {
+      "item": "ee:red_crystal_item"
+    },
+    "R": {
+      "item": "ee:plate"
+    }
+  },
+  "result": {
+    "item": "ee:amber_helmet"
+  }
+}

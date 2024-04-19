@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V V",
+    "V#V",
+    "VVV"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:red_crystal_item"
+    },
+    "V": {
+      "item": "ee:amber_ingot"
+    }
+  },
+  "result": {
+    "item": "ee:amber_chestplate"
+  }
+}
