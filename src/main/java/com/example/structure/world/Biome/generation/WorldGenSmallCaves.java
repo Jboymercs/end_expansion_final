@@ -30,7 +30,7 @@ public class WorldGenSmallCaves extends WorldGenStructure {
 
 
     //CHANGE ME LATER
-    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "towers");
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "ash_caves");
     public WorldGenSmallCaves(String name) {
         super("ashbiome/" + name);
     }

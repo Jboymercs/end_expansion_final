@@ -128,6 +128,7 @@ item.brick_rod.name=Ashed Brick Rod
 item.amber_axe.name=Cordium Axe
 item.chomper_tooth.name=Chomper Tooth
 item.amber_dagger.name=Cordium Dagger
+item.amber_pickaxe.name=Cordium Pickaxe
 
 itemGroup.expansion=End Expansion
 

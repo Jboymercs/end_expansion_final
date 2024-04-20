@@ -32,7 +32,7 @@ public class MinesTemplate extends ModStructureTemplate {
     }
 
     //CHANGE ME LATER
-    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "towers");
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "ash_mines");
 
 
     public MinesTemplate(TemplateManager manager, String type, BlockPos pos, Rotation rot, int distance, boolean overWriteIn) {

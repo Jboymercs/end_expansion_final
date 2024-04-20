@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VVV",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "ee:brick_rod"
+    },
+    "V": {
+      "item": "ee:amber_ingot"
+    }
+  },
+  "result": {
+    "item": "ee:amber_pickaxe"
+  }
+}

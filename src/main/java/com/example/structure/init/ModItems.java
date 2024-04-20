@@ -21,7 +21,7 @@ public class ModItems {
 
     private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 100, 8.0f, ModConfig.sword_damage, 20);
 
-    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 2, 250, 6.0F, ModConfig.dagger_damage, 20);
+    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 3, 250, 7.0F, ModConfig.dagger_damage, 20);
     private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 800, 8.0f, 6.0F, 30);
 
     private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 600, 8.0f, ModConfig.endfall_sword_damage, 40);
@@ -88,6 +88,7 @@ public class ModItems {
     public static final Item KING_CROWN = new ItemKingCrown("king_crown", ModCreativeTabs.ITEMS, "crown_desc");
 
     public static final Item AMBER_DAGGER = new ItemChomperDagger("amber_dagger", DAGGER_MATERIAL, "dagger_desc");
+    public static final Item AMBER_PICKAXE = new ItemAmberPickaxe("amber_pickaxe", DAGGER_MATERIAL);
 
     //Misc.
 
