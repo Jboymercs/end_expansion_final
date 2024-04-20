@@ -118,6 +118,16 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static float sword_velocity = 2.4f;
 
+    @Config.Name("Cordium Dagger")
+    @Config.Comment("Change the cooldown of the Cordium Dagger's ability, in seconds")
+    @Config.RequiresMcRestart
+    public static int dagger_cooldown = 3;
+
+    @Config.Name("Cordium Dagger Damage")
+    @Config.Comment("Change the Damage the Cordium Dagger does")
+    @Config.RequiresMcRestart
+    public static float dagger_damage = 5.0F;
+
     @Config.Name("Lamented Eye Cooldown")
     @Config.Comment("Change the cooldown Period of the Lamented Eye, in seconds")
     @Config.RequiresMcRestart
@@ -163,10 +173,15 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static float end_king_health = 500f;
 
+    @Config.Name("End King Scaled Attack Factor")
+    @Config.Comment("This value raises the attack damage of the End King the lower it's health is, to incentivize further punishment in not dodging the bosses moves later in the fight")
+    @Config.RequiresMcRestart
+    public static double king_scaled_factor = 0.4D;
+
     @Config.Name("End King Base Attack Damage")
     @Config.Comment("Change the base attack damage of the Ender King")
     @Config.RequiresMcRestart
-    public static double end_king_damage = 14D;
+    public static double end_king_damage = 12D;
 
     @Config.Name("End King Ghost Arm Damage Multiplier")
     @Config.Comment("Change the multiplier of ghost arm attacks * base damage")
@@ -507,7 +522,7 @@ public class ModConfig {
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_attack_damage = 10D;
+    public static double barrend_golem_attack_damage = 14D;
 
     @Config.Name("Barrend Golem Attack Multiplier")
     @Config.Comment("Change X times base Attack Damage for specific abilities of the Barrend Golem, such as it's chage, and Slam Attacks")
@@ -518,5 +533,21 @@ public class ModConfig {
     @Config.Comment("Change the cooldown of the seeker gun in seconds")
     @Config.RequiresMcRestart
     public static int seeker_gun_cooldown = 3;
+
+    @Config.Name("Mod Scaling Factor")
+    @Config.Comment("When more than 1 players are near, this factor will add on how much Health all bosses/mini-bosses has. Default Per more than one player is 50% more HP or 0.5. Example: There is " +
+            "2 Players around a boss that has a health of 200 by default. With there being a second player the bosses health is now 300")
+    @Config.RequiresMcRestart
+    public static double scale_mod_bosses = 0.5D;
+
+    @Config.Name("Mod Scaling Attack Damage Factor")
+    @Config.Comment("When more than 1 players are near, this factor will be multiplied by how many players are near and then by this bosses attack damage")
+    @Config.RequiresMcRestart
+    public static double scale_attack_damge = 0.2D;
+
+    @Config.Name("Disable Mod Scaling")
+    @Config.Comment("Disable scaling for Health of bosses when more than one players is nearby, set to true to disable")
+    @Config.RequiresMcRestart
+    public static boolean disable_scaling_mod = false;
 
 }

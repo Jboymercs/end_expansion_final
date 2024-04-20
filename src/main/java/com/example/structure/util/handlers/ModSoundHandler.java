@@ -71,6 +71,7 @@ public class ModSoundHandler {
     public static SoundEvent CHOMPER_BITE;
     public static SoundEvent CHOMPER_LEAP;
     public static SoundEvent CHOMPER_WARN;
+    public static SoundEvent CHOMPER_POP_OUT;
 
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
@@ -120,6 +121,7 @@ public class ModSoundHandler {
         CHOMPER_LEAP = registerSound("chomper.leap", "entity");
         CHOMPER_BITE = registerSound("chomper.bite", "entity");
         CHOMPER_WARN = registerSound("chomper.warn", "entity");
+        CHOMPER_POP_OUT = registerSound("chomper.pop_out", "entity");
 
         BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
 

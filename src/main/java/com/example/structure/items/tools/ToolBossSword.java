@@ -36,7 +36,7 @@ public class ToolBossSword extends ToolSword implements ISweepAttackOverride, IA
     public ToolBossSword(String name, String info_loc, ToolMaterial material) {
         super(name, material);
         super.setCreativeTab(ModCreativeTabs.ITEMS);
-        this.setMaxDamage(250);
+        this.setMaxDamage(500);
         this.info_loc = info_loc;
     }
 

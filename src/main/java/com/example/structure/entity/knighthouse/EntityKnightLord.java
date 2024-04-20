@@ -92,6 +92,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityKnightLord(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
+        this.iAmBossMob = true;
     }
 
     //Particle Call
@@ -187,6 +188,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         super(worldIn);
         this.setImmovable(true);
         this.setSize(0.8f, 2.0f);
+        this.iAmBossMob = true;
         this.playSound(SoundEvents.BLOCK_END_PORTAL_SPAWN, 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.3F));
         addEvent(()-> {
             this.setImmovable(false);

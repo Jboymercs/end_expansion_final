@@ -145,6 +145,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
     protected boolean hasPlayedPhaseAnimation = false;
 
+    protected boolean sendPing = false;
     public boolean isMeleeMode = false;
 
     public boolean isRangedMode = false;
@@ -155,6 +156,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.setSize(2.0f, 3.7f);
         this.isImmuneToFire = true;
         this.isImmuneToExplosions();
+        this.iAmBossMob = true;
 
     }
 
@@ -164,6 +166,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.setSize(2.0f, 3.7f);
         this.isImmuneToFire = true;
         this.isImmuneToExplosions();
+        this.iAmBossMob = true;
     }
 
     @Override

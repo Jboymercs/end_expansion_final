@@ -111,6 +111,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     public void onUpdate() {
         super.onUpdate();
 
+
         if(rand.nextInt(5) == 0 && blinkCoolDown > 120) {
 
             this.setBlinkMode(true);
@@ -121,6 +122,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
         }
 
         EntityLivingBase target = this.getAttackTarget();
+
         if(target != null) {
             //Selector for it's Movement
             if(this.isMeleeMode && !this.isRangedMode && switchTimer < 0) {

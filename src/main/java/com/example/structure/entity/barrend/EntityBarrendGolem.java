@@ -71,6 +71,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
     public EntityBarrendGolem(World worldIn) {
         super(worldIn);
         this.setStill(true);
+        this.iAmBossMob = true;
         addEvent(()-> {
             this.setNoAI(true);
             this.setImmovable(true);

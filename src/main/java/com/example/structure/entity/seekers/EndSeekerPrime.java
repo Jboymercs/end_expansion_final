@@ -89,11 +89,13 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     public EndSeekerPrime(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
         this.isMeleeMode = true;
+        this.iAmBossMob = true;
     }
 
     public EndSeekerPrime(World worldIn) {
         super(worldIn);
         this.isMeleeMode = true;
+        this.iAmBossMob = true;
     }
 
     @Override

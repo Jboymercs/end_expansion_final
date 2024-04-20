@@ -320,6 +320,7 @@ public class FastNoise {
             new Float2(0.368047306f, 0.2589231171f), new Float2(0.2451436949f, 0.3773652989f),
             new Float2(-0.4314509715f, 0.12786735f), };
 
+    //KILL ME
     private static final Float3[] CELL_3D = { new Float3(0.1453787434f, -0.4149781685f, -0.0956981749f),
             new Float3(-0.01242829687f, -0.1457918398f, -0.4255470325f),
             new Float3(0.2877979582f, -0.02606483451f, -0.3449535616f),

@@ -58,7 +58,7 @@ public class EntityRedCrystal extends EntityModBase implements IAnimatable {
                     .directEntity(this)
                     .build();
             float damage = this.getAttack();
-            ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.2F, 0, false );
+            ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0F, 0, false );
         }
         if(ticksExisted > 70) {
             this.setDead();

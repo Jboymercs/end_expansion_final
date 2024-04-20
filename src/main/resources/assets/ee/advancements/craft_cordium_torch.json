@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "ee:end_bow"
+      "item": "ee:amber_torch"
     },
     "title": {
-      "translate": "advancements.ee.craft_end_bow.title"
+      "translate": "advancements.ee.craft_amber_torch.title"
     },
     "description": {
-      "translate": "advancements.ee.craft_end_bow.description"
+      "translate": "advancements.ee.craft_amber_torch.description"
     }
   },
-  "parent": "ee:find_soul",
+  "parent": "ee:find_cordium",
   "criteria": {
     "guidebook": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "ee:end_bow"
+            "item": "ee:amber_torch"
           }
         ]
       }

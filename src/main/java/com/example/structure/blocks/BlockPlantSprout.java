@@ -19,10 +19,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockPlantSprout extends BlockBush implements IHasModel {
 
     /**
-     * Plant for the Barrend Concept
+     * Plant for the Underground Concept
      */
 
     protected static final AxisAlignedBB CRYSTAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
@@ -43,6 +46,12 @@ public class BlockPlantSprout extends BlockBush implements IHasModel {
             this.dropBlockAsItem(worldIn, pos, state, 0);
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
         }
+    }
+
+    @Override
+    @Nullable
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return null;
     }
 
     @Override

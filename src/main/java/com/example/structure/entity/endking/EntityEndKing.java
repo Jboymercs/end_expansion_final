@@ -7,6 +7,7 @@ import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityAerialTimedAttack;
 import com.example.structure.entity.ai.EntityFlyMoveHelper;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
+import com.example.structure.entity.ai.MobGroundNavigate;
 import com.example.structure.entity.endking.EndKingAction.*;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.util.IAttack;
@@ -21,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -100,7 +102,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
 
     public EntityEndKing(World world) {
         super(world);
-        this.healthScaledAttackFactor = 0.8F;
+        this.healthScaledAttackFactor = ModConfig.king_scaled_factor;
     }
 
     @Override
@@ -117,6 +119,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public int switchTimer = 400;
 
 
+    public int waitTimer = 60;
 
 
     @Override
@@ -126,12 +129,21 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
             playPhase3Animation(this.world);
         }
 
+        //This is a check for if the boss has enter Phase 3 and then healed back into phase two
+        if(this.IPhaseTwo && !this.IPhaseThree && this.sendPing && !this.hasSwitchedStates) {
+            if(waitTimer < 0) {
+                this.switchBackTooOtherStates();
+            } else {
+                waitTimer--;
+            }
+        }
+
         if(this.IPhaseThree && !this.IPhaseTwo) {
 
                 //When Phase 3 and currently not in Phase Animation, this timer will alter the boss
                 //Between a melee mode and a ranged mode while the ghost mimics opposite attacks
                 //This timer has been taken from the Lamentor
-            if(!this.isDeathBoss()) {
+            if(!this.isDeathBoss() && !this.isPhaseIntro()) {
                 if (this.isRangedMode && switchTimer < 0 && renderLazerPos == null) {
                     //Switch to Melee Mode
                     this.isMeleeMode = true;
@@ -200,6 +212,15 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         }
     }
 
+    protected boolean hasSwitchedStates = false;
+    protected void switchBackTooOtherStates() {
+        //This is too switch the boss back to other default instances incase the player dies during phase 3 when the boss is healing back it's health
+        this.navigator = new MobGroundNavigate(this, world);
+        this.hasSwitchedStates = true;
+        this.sendPing = false;
+        waitTimer = 60;
+    }
+
     protected void playPhase3Animation(World world) {
         this.hasPlayedPhaseAnimation = true;
         this.setPhaseIntro(true);
@@ -217,6 +238,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
             this.setFullBodyUsage(true);
             this.setPhaseIntro(false);
             this.setImmovable(false);
+            this.sendPing = true;
+            this.hasSwitchedStates = false;
             //Set Initial Change to Ranged
             this.isRangedMode = true;
             this.tasks.addTask(4, flyattackAi);

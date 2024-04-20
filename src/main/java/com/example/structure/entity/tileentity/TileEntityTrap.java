@@ -21,7 +21,7 @@ public class TileEntityTrap extends TileEntity implements ITickable {
 
         AxisAlignedBB box = new AxisAlignedBB(pos, pos.add(1,2,1));
         List<EntityLivingBase> players = this.world.getEntitiesWithinAABB(EntityLivingBase.class, box, e -> !e.getIsInvulnerable() && (!(e instanceof EntityEndKing || e instanceof EntityRedCrystal || e instanceof EntityKnightBase)));
-        if(!players.isEmpty() && cooldown >= 120) {
+        if(!players.isEmpty() && cooldown >= 200) {
             if(!world.isRemote) {
                 EntityRedCrystal spike = new EntityRedCrystal(this.world);
                 Vec3d modifiedPos = new Vec3d(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);

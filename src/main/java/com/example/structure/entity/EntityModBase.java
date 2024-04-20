@@ -2,23 +2,28 @@ package com.example.structure.entity;
 
 import com.example.structure.entity.ai.MobGroundNavigate;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.ServerScaleUtil;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
 import java.util.PriorityQueue;
 import com.google.common.base.Predicate;
 
@@ -30,9 +35,13 @@ public abstract class EntityModBase extends EntityCreature {
 
     public boolean lockLook = false;
 
+    public boolean iAmBossMob = false;
+
     public EntityModBase(World worldIn, float x, float y, float z) {
         super(worldIn);
         this.setPosition(x, y, z);
+
+        //Initial check for Nearby Players to scale the bosses Health Accordingly
     }
 
     protected double healthScaledAttackFactor = 0.0; // Factor that determines how much attack is affected by health
@@ -98,8 +107,34 @@ public abstract class EntityModBase extends EntityCreature {
         }
     }
 
+    protected boolean hasStartedScaling = false;
+    protected int checkNearbyPlayers = 250;
     @Override
     public void onLivingUpdate() {
+        EntityLivingBase target = this.getAttackTarget();
+
+        if(this.iAmBossMob && target != null) {
+            if(!this.hasStartedScaling && target instanceof EntityPlayer && !this.world.isRemote) {
+                double changeAttackDamage = ServerScaleUtil.scaleAttackDamageInAccordanceWithPlayers(this, world);
+                float healthCurrently = ServerScaleUtil.changeHealthAccordingToPlayers(this, world);
+                double maxHealthCurrently = ServerScaleUtil.setMaxHealthWithPlayers(this, world);
+                //This is change the Health in accordance with how many players are currently nearby // TEST
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealthCurrently);
+                this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(changeAttackDamage);
+                this.setHealth(this.getMaxHealth());
+                hasStartedScaling = true;
+            }
+        }
+        //This is where target Switching occurs for bosses
+        if(this.iAmBossMob && checkNearbyPlayers <= 0 && target != null) {
+                if(target instanceof EntityPlayer) {
+                    //Makes sure it's a player for the second time in here, just as a double check.
+                    this.setAttackTarget(ServerScaleUtil.targetSwitcher(this, world));
+                    this.checkNearbyPlayers = 250;
+            }
+        } else {
+            checkNearbyPlayers--;
+        }
 
         if (!isDead && this.getHealth() > 0) {
             boolean foundEvent = true;

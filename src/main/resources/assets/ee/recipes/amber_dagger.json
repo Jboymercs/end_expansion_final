@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V",
+    "#",
+    "R"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:brick_rod"
+    },
+    "V": {
+      "item": "ee:chomper_tooth"
+    },
+    "R": {
+      "item": "ee:amber_ingot"
+    }
+  },
+  "result": {
+    "item": "ee:amber_dagger"
+  }
+}

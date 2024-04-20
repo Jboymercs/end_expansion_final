@@ -126,6 +126,8 @@ item.amber_leggings.name=Cordium Leggings
 item.amber_boots.name=Cordium Boots
 item.brick_rod.name=Ashed Brick Rod
 item.amber_axe.name=Cordium Axe
+item.chomper_tooth.name=Chomper Tooth
+item.amber_dagger.name=Cordium Dagger
 
 itemGroup.expansion=End Expansion
 
@@ -165,6 +167,8 @@ advancements.ee.kill_lord.title=What The Crystal Does
 advancements.ee.kill_lord.description=Slay an Unholy Knight, can be found in the Fortress or rarely in other structures.
 advancements.ee.kill_barrend.title=Long Ways Up
 advancements.ee.kill_barrend.description=Defeat the being that has taken over the Ashed Towers.
+advancements.ee.kill_chomper.title=Fine I'll let you sleep
+advancements.ee.kill_chomper.description=Slay a Depths Chomper
 
 
 
@@ -213,6 +217,13 @@ advancements.ee.craft_end_bow.title=Can't Touch This!
 advancements.ee.craft_end_bow.description=Craft an Endfall Bow.
 advancements.ee.craft_mini_nuke.title=Who Hurt You?
 advancements.ee.craft_mini_nuke.description=Craft a Mini-Nuke.
+advancements.ee.find_cordium.title=The Depths of the Wastelands
+advancements.ee.find_cordium.decription=Discover the new ore in the Depths of the Wastelands.
+advancements.ee.craft_amber_armor.title=Can't hide from me now!
+advancements.ee.craft_amber_armor.description=Craft the full set of Cordium Armor.
+advancements.ee.craft_amber_torch.title=I'm safe now, right?
+advancements.ee.craft_amber_torch.description=Craft Cordium Torches.
+
 
 
 ee.desc.amber_desc=Full set gives Haste, and allows you to see nearby creatures.
@@ -239,6 +250,7 @@ ee.desc.efstaff_desc=Right Click will launch enemies and apply the Red Rage, Lef
 ee.desc.gun_desc=A part of the Seekers body, the fun part that shoots crystals at least.
 ee.desc.hf_desc=Eating will apply short Regeneration 2, eating too many can cause bad things to happen
 ee.desc.crown_desc=With this treasure, I summon divine general of the wastelands, The Ender King!
+ee.desc.dagger_desc=On right click provides a short boost backwards and Speed II for a short time
 ee.desc.desc_amber_torch=While just a torch, this one wards away Stalkers that get close to them.
 death.attack.ee:maelstrom=%1$s succumbed to the void
 death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s

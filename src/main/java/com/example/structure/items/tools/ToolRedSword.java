@@ -21,7 +21,7 @@ public class ToolRedSword extends ToolSword implements ISweepAttackOverride{
     public ToolRedSword(String name, String info_loc, ToolMaterial material) {
         super(name, material);
         this.setCreativeTab(ModCreativeTabs.ITEMS);
-        this.setMaxDamage(800);
+        this.setMaxDamage(700);
         this.info_loc = info_loc;
     }
 

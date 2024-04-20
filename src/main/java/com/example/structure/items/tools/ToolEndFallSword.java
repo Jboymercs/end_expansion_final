@@ -37,7 +37,7 @@ public class ToolEndFallSword extends ToolSword implements IAnimatable {
         super(name, material);
         super.setCreativeTab(ModCreativeTabs.ITEMS);
         this.info_loc = info_loc;
-        this.setMaxDamage(600);
+        this.setMaxDamage(800);
     }
 
     @Override

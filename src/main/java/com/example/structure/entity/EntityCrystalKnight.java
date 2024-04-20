@@ -114,6 +114,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         this.meleeSwitch = true;
         this.moveHelper = new EntityFlyMoveHelper(this);
         this.navigator = new PathNavigateFlying(this, worldIn);
+        this.iAmBossMob = true;
         if(!world.isRemote) {
             initBossAI();
         }
@@ -335,6 +336,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 world.setEntityState(this, ModUtils.FOURTH_PARTICLE_BYTE);
             }
         }
+
     }
     //Particle Handler for the boss
     @Override

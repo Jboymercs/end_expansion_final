@@ -5,10 +5,7 @@ import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.ai.snatcher.EntityStalkAI;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.util.IAttack;
-import com.example.structure.util.ModColors;
-import com.example.structure.util.ModDamageSource;
-import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
+import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.block.Block;
@@ -23,6 +20,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -124,6 +122,8 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     protected int chompCooldown = 10;
     protected boolean chompAttack = false;
 
+    protected boolean hasStartedPopOut = false;
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -200,8 +200,9 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
                     if(!(base instanceof EntityChomper)) {
                         if(base instanceof EntityPlayer) {
                             if(!base.isSneaking() && !((EntityPlayer) base).isCreative()) {
-                                if (warnAmount <= 0) {
+                                if (warnAmount <= 0 && !this.hasStartedPopOut) {
                                     this.statePopOut(base);
+                                    this.hasStartedPopOut = true;
                                 }
 
                                 if (this.getEntitySenses().canSee(base) && this.warnCooldown <= 0 && !this.isWarn() && this.warnAmount > 0) {
@@ -209,8 +210,9 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
                                 }
                             }
                         } else {
-                            if (warnAmount <= 0) {
+                            if (warnAmount <= 0 && !this.hasStartedPopOut) {
                                 this.statePopOut(base);
+                                this.hasStartedPopOut = true;
                             }
                             if (this.getEntitySenses().canSee(base) && this.warnCooldown <= 0 && !this.isWarn()  && this.warnAmount > 0) {
                                 this.stateWarnNearby();
@@ -227,8 +229,9 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
             List<EntityLivingBase> nearbyClose = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable());
             if(!nearbyClose.isEmpty()) {
                 for(EntityLivingBase base : nearbyClose) {
-                    if(!(base instanceof EntityChomper)) {
+                    if(!(base instanceof EntityChomper) && this.getEntitySenses().canSee(base) && !this.hasStartedPopOut) {
                             this.statePopOut(base);
+                            this.hasStartedPopOut = true;
 
 
                     }
@@ -286,6 +289,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     public void statePopOut(EntityLivingBase target) {
         this.setDugIn(false);
         this.setDigUp(true);
+        this.playSound(ModSoundHandler.CHOMPER_POP_OUT, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
       addEvent(()-> {
           this.setImmovable(false);
           this.noClip = false;
@@ -294,6 +298,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
           if(target != this) {
               this.setAttackTarget(target);
           }
+          this.hasStartedPopOut = false;
           this.isCurrentlyDugIn = false;
       }, 20);
     }
@@ -486,6 +491,17 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(ModSoundHandler.STALKER_STEP, 0.7F, 1.0f / (rand.nextFloat() * 0.4F + 0.2f));
+    }
+
+
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "chomper");
+    @Override
+    protected ResourceLocation getLootTable() {
+        return LOOT;
+    }
+    @Override
+    protected boolean canDropLoot() {
+        return true;
     }
 
     @Override

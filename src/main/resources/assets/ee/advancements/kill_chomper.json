@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:chomper_tooth"
+    },
+    "title": {
+      "translate": "advancements.ee.kill_chomper.title"
+    },
+    "description": {
+      "translate": "advancements.ee.kill_chomper.description"
+    }
+  },
+  "parent": "ee:find_cordium",
+  "criteria": {
+    "Boulderer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "ee:chomper"
+        }
+      }
+    }
+  }
+}

@@ -429,6 +429,16 @@
       }
     ]
   },
+  "entity.chomper.pop_out": {
+    "category": "entity",
+    "subtitle": "entity.chomper.pop_out",
+    "sounds": [
+      {
+        "name": "ee:entity/chomper/pop_out",
+        "stream": true
+      }
+    ]
+  },
   "entity.chomper.leap": {
     "category": "entity",
     "subtitle": "entity.chomper.leap",
