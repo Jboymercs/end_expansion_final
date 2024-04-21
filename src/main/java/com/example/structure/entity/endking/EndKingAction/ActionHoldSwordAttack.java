@@ -40,7 +40,7 @@ public class ActionHoldSwordAttack implements IAction {
             }
 
             actor.addEvent(() -> {
-                Vec3d vel = target.getPositionVector().add(ModUtils.yVec(1)).subtract(projectile.getPositionVector());
+                Vec3d vel = target.getPositionVector().add(ModUtils.yVec(1.5)).subtract(projectile.getPositionVector());
 
                     projectile.shoot(vel.x, vel.y, vel.z, 1.5f, 0f);
 

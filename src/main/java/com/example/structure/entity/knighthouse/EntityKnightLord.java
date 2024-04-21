@@ -10,6 +10,7 @@ import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -92,6 +95,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityKnightLord(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
+        addEvent(()-> this.playSound(ModSoundHandler.LORD_SUMMON, 1.5F, 1.0F), 5);
         this.iAmBossMob = true;
     }
 
@@ -111,6 +115,8 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             ParticleManager.spawnColoredSmoke(world, getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 1.5, 0))), ModColors.RED, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
         }
     }
+
+    int flyTimer = 20;
 
     @Override
     public void onUpdate() {
@@ -132,6 +138,16 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             this.moveHelper = new EntityFlyMoveHelper(this);
             this.navigator = new PathNavigateFlying(this, world);
             this.setFlyingMode(true);
+        }
+
+        if(this.isFlyingMode()) {
+            if(flyTimer == 20) {
+                this.playFlySound();
+            }
+            flyTimer--;
+            if(flyTimer <= 0) {
+                flyTimer = 20;
+            }
         }
 
         //If no enemy is present after awhile it will switch back to ground
@@ -160,6 +176,12 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
 
     }
 
+    public void playFlySound() {
+        addEvent(()-> {
+            Vec3d currentPos = this.getPositionVector();
+            world.playSound(currentPos.x, currentPos.y, currentPos.z, ModSoundHandler.LORD_KNIGHT_FLY, SoundCategory.HOSTILE, 0.7f, 0.9F, true);
+        }, 10);
+    }
     public void blockCurrentTarget() {
         this.setFightMode(true);
         this.setBlocking(true);
@@ -189,7 +211,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.setImmovable(true);
         this.setSize(0.8f, 2.0f);
         this.iAmBossMob = true;
-        this.playSound(SoundEvents.BLOCK_END_PORTAL_SPAWN, 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.3F));
+        addEvent(()-> this.playSound(ModSoundHandler.LORD_SUMMON, 1.5F, 1.0F), 5);
         addEvent(()-> {
             this.setImmovable(false);
             this.setSummonKnight(false);
@@ -529,6 +551,16 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         }
 
         return false;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.LORD_KNIGHT_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.LORD_KNIGHT_DEATH;
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ee:item/bow"
+    "layer0": "ee:item/end_bow"
   },
   "display": {
     "thirdperson_righthand": {
@@ -30,21 +30,21 @@
       "predicate": {
         "pulling": 1
       },
-      "model": "ee:item/bow_pulling_0"
+      "model": "ee:item/end_bow_pulling_0"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.65
       },
-      "model": "ee:item/bow_pulling_1"
+      "model": "ee:item/end_bow_pulling_1"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.9
       },
-      "model": "ee:item/bow_pulling_2"
+      "model": "ee:item/end_bow_pulling_2"
     }
   ]
 }

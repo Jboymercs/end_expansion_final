@@ -2,7 +2,7 @@
   {
     "modid": "ee",
     "name": "End Expansion",
-    "description": "A mod adding new creatures, blocks, items, and biomes within the End",
+    "description": "A mod adding a plethora of content to the End with a new end game meaning of difficult bosses and unique items",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "modpage",

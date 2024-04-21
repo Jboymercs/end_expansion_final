@@ -81,7 +81,7 @@ public class ProjectileQuake extends Projectile{
                         .directEntity(this)
                         .stoppedByArmorNotShields().build();
 
-                entity.attackEntityFrom(source, 4.0f);
+                entity.attackEntityFrom(source, 15.0f);
 
             }
         }

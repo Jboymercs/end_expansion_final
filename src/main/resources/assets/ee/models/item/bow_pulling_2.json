@@ -1,6 +1,0 @@
-{
-  "parent": "ee:item/bow",
-  "textures": {
-    "layer0": "ee:item/bow_pulling_2"
-  }
-}

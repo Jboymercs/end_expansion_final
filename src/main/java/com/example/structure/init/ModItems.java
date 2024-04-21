@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +22,18 @@ public class ModItems {
 
     private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 100, 8.0f, ModConfig.sword_damage, 20);
 
-    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 3, 250, 7.0F, ModConfig.dagger_damage, 20);
-    private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 800, 8.0f, 6.0F, 30);
+    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 3, 300, 7.0F, ModConfig.dagger_damage, 25);
+    private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 600, 8.0f, 8.0F, 20);
 
-    private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 600, 8.0f, ModConfig.endfall_sword_damage, 40);
+    private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1300, 8.0f, ModConfig.endfall_sword_damage, 50);
 
     private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 5, 1000, 8.0F, 4, 25);
 
-    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 1200, 7.0F, 10.0F, 30);
-    private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 800, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2F);
+    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 900, 7.0F, 10.0F, 40);
+    private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
-    private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 1200, new int[]{3, 6, 8, 3}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3F);
-    private static final ItemArmor.ArmorMaterial ENDFALL_ARMOR = EnumHelper.addArmorMaterial("endfall", ModReference.MOD_ID + ":endfallarmor", 1500, new int[]{5, 8, 10, 5}, 80, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 6F);
+    private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
+    private static final ItemArmor.ArmorMaterial ENDFALL_ARMOR = EnumHelper.addArmorMaterial("endfall", ModReference.MOD_ID + ":endfallarmor", 650, new int[]{(int) (6 * ModConfig.fall_armor_scale), (int) (9 * ModConfig.fall_armor_scale), (int) (12 * ModConfig.fall_armor_scale), (int) (6 * ModConfig.fall_armor_scale)}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, (float)(6F * ModConfig.fall_armor_scale));
 
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
@@ -66,7 +67,7 @@ public class ModItems {
     public static final Item AMBER_LEGGINGS = new ModArmorBase("amber_leggings", AMBER_ARMOR, 2, EntityEquipmentSlot.LEGS, "amber", "amber_desc");
     public static final Item AMBER_BOOTS = new ModArmorBase("amber_boots", AMBER_ARMOR, 1, EntityEquipmentSlot.FEET, "amber", "amber_desc");
     public static final Item AMBER_RAW_ORE = new ItemBase("amber_raw", ModCreativeTabs.ITEMS);
-    public static final ItemAxe AMBER_AXE = new ItemAmberAxe("amber_axe", AMBER_SET, 9.0F, -2.8F);
+    public static final ItemAxe AMBER_AXE = new ItemAmberAxe("amber_axe", AMBER_SET, ModConfig.cordium_axe_damage, -2.8F);
     public static final Item CHOMPER_TOOTH = new ItemBase("chomper_tooth", ModCreativeTabs.ITEMS);
 
     public static final Item BRICK_ROD = new ItemBase("brick_rod", ModCreativeTabs.ITEMS);

@@ -9,6 +9,7 @@ import com.example.structure.init.ModItems;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
@@ -56,6 +57,9 @@ public class ProjectileSpinSword extends Projectile {
     public void onUpdate() {
         super.onUpdate();
 
+        if(this.ticksExisted == 2) {
+            this.playSound(ModSoundHandler.SWORD_SUMMON, 0.8F, 1.0F / (rand.nextFloat() * 0.3F + 0.2F));
+        }
         List<EntityEndKing> nearbyBoss = this.world.getEntitiesWithinAABB(EntityEndKing.class, this.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable());
         if(!nearbyBoss.isEmpty()) {
             hasShot = false;
@@ -85,7 +89,7 @@ public class ProjectileSpinSword extends Projectile {
             List<EntityLivingBase> nearbyPlayer = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(8D), e -> !e.getIsInvulnerable() || !(e instanceof EntityEndKing || e instanceof EntityKnightBase || e instanceof EntityRedCrystal || e instanceof EntityGhostArm || e instanceof EntityGhostPhase));
             if(!nearbyPlayer.isEmpty() && hasShot) {
                 for(EntityLivingBase player: nearbyPlayer) {
-                    Vec3d playerPos = player.getPositionVector().add(ModUtils.yVec(1));
+                    Vec3d playerPos = player.getPositionVector().add(ModUtils.yVec(1.5));
                     Vec3d currentPos = this.getPositionVector();
                     this.motionX = (playerPos.x - currentPos.x) * 0.2;
                     double d1 = (playerPos.y - currentPos.y) * 0.008;
@@ -151,7 +155,7 @@ public class ProjectileSpinSword extends Projectile {
                 .type(ModDamageSource.EXPLOSION)
                 .stoppedByArmorNotShields().build();
         ModUtils.handleAreaImpact(1, (e) -> this.getDamage(), this.shootingEntity, this.getPositionVector(), source, 0.2f, 0);
-        this.playSound(SoundEvents.BLOCK_GLASS_BREAK, 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.4F));
+        this.playSound(ModSoundHandler.SWORD_IMPACT, 0.7F, 1.0F / (rand.nextFloat() * 0.4F + 0.4F));
         if(rand.nextInt(8) == 0) {
 
 

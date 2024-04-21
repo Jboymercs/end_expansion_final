@@ -1,5 +1,6 @@
 package com.example.structure.event_handler;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModUtils;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import net.minecraft.client.Minecraft;
@@ -41,14 +42,14 @@ public class DarkFogHandler {
     public static void onFogDensityRender(EntityViewRenderEvent.RenderFogEvent event) {
         Entity entity = event.getEntity();
         World world = entity.world;
-        if(entity instanceof EntityPlayer) {
+        if(entity instanceof EntityPlayer && !ModConfig.isDarkFogDisabled) {
             int playerX = MathHelper.floor(entity.posX);
             int playerY = MathHelper.floor(entity.posY);
             int playerZ = MathHelper.floor(entity.posZ);
             Biome fpDis = world.getBiomeForCoordsBody(new BlockPos(playerX, playerY, playerZ));
             if (fpDis instanceof BiomeAshWasteland) {
                 GlStateManager.setFog(GlStateManager.FogMode.EXP);
-                GlStateManager.setFogDensity(0.085f);
+                GlStateManager.setFogDensity(ModConfig.dark_fog_variable);
             }
         }
     }

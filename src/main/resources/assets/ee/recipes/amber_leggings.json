@@ -3,7 +3,7 @@
   "pattern": [
     "###",
     "B B",
-    "B B"
+    "V V"
   ],
   "key": {
     "#": {
@@ -11,6 +11,9 @@
     },
     "B": {
       "item": "ee:plate"
+    },
+    "V": {
+      "item": "ee:stalker_hide"
     }
   },
   "result": {

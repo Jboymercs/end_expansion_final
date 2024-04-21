@@ -177,6 +177,84 @@
       }
     ]
   },
+  "entity.lord.hurt": {
+    "category": "entity",
+    "subtitle": "entity.lord.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/lord/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/lord/hurt_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.lord.death": {
+    "category": "entity",
+    "subtitle": "entity.lord.death",
+    "sounds": [
+      {
+        "name": "ee:entity/lord/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.lord.fly": {
+    "category": "entity",
+    "subtitle": "entity.lord.fly",
+    "sounds": [
+      {
+        "name": "ee:entity/lord/fly",
+        "stream": true
+      }
+    ]
+  },
+  "entity.lord.summon": {
+    "category": "entity",
+    "subtitle": "entity.lord.summon",
+    "sounds": [
+      {
+        "name": "ee:entity/lord/summon",
+        "stream": true
+      }
+    ]
+  },
+  "entity.projectile.hover": {
+    "category": "entity",
+    "subtitle": "entity.projectile.hover",
+    "sounds": [
+      {
+        "name": "ee:entity/projectile/hover_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/projectile/hover_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.projectile.impact": {
+    "category": "entity",
+    "subtitle": "entity.projectile.impact",
+    "sounds": [
+      {
+        "name": "ee:entity/projectile/impact",
+        "stream": true
+      }
+    ]
+  },
+  "entity.projectile.summon": {
+    "category": "entity",
+    "subtitle": "entity.projectile.summon",
+    "sounds": [
+      {
+        "name": "ee:entity/projectile/summon",
+        "stream": true
+      }
+    ]
+  },
   "entity.seeker.shoot": {
     "category": "entity",
     "subtitle": "entity.seeker.shoot",

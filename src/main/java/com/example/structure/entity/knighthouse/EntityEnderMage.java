@@ -235,9 +235,9 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
       addEvent(() -> {
         ProjectileSpinSword sword = new ProjectileSpinSword(world, this, 6.0f);
         sword.setTravelRange(40f);
-        Vec3d pos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.8,2.0,0)));
+        Vec3d pos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.8,3.0,0)));
         sword.setPosition(pos.x, pos.y, pos.z);
-          Vec3d vel = target.getPositionVector().add(ModUtils.yVec(1)).subtract(sword.getPositionVector());
+          Vec3d vel = target.getPositionVector().add(ModUtils.yVec(1.5)).subtract(sword.getPositionVector());
           sword.shoot(vel.x, vel.y, vel.z, 1.5f, 0f);
           this.world.spawnEntity(sword);
       }, 23);

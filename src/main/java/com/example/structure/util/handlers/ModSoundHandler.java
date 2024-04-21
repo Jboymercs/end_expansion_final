@@ -73,6 +73,17 @@ public class ModSoundHandler {
     public static SoundEvent CHOMPER_WARN;
     public static SoundEvent CHOMPER_POP_OUT;
 
+    //Unholy Knight
+    public static SoundEvent LORD_KNIGHT_HURT;
+    public static SoundEvent LORD_KNIGHT_DEATH;
+    public static SoundEvent LORD_KNIGHT_FLY;
+    public static SoundEvent LORD_SUMMON;
+
+    //Thousand Sword Projectiles
+    public static SoundEvent SWORD_HUM;
+    public static SoundEvent SWORD_IMPACT;
+    public static SoundEvent SWORD_SUMMON;
+
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
         BOSS_HURT = registerSound("boss.hurt", "entity");
@@ -95,6 +106,15 @@ public class ModSoundHandler {
         KNIGHT_DASH = registerSound("knight.dash", "entity");
         KNIGHT_CAST_HEAL = registerSound("knight.cast_heal", "entity");
         KNIGHT_CAST_ATTACK = registerSound("knight.cast", "entity");
+
+        LORD_KNIGHT_HURT = registerSound("lord.hurt", "entity");
+        LORD_KNIGHT_DEATH = registerSound("lord.death", "entity");
+        LORD_KNIGHT_FLY = registerSound("lord.fly", "entity");
+        LORD_SUMMON = registerSound("lord.summon", "entity");
+
+        SWORD_HUM = registerSound("projectile.hover", "entity");
+        SWORD_IMPACT = registerSound("projectile.impact", "entity");
+        SWORD_SUMMON = registerSound("projectile.summon", "entity");
 
         SEEKER_SHOOT = registerSound("seeker.shoot", "entity");
         SEEKER_HOVER = registerSound("seeker.hover", "entity");

@@ -5,17 +5,17 @@ item.lamented.name= Lamented Eye
 item.sword.name= Lamented Sword
 item.endfall_sword.name=End Fall Sword
 item.info_book.name=Guide to the End
-entity.end_king.name=The Unholy Ender King
-entity.red_crystal.name=Ender Lord's spikes
+entity.end_king.name=The Ashed King
+entity.red_crystal.name=Unholy Spike
 entity.red_sword.name=Unholy Sword
 entity.fire_ball_red.name=Unholy Fireball
 entity.nuke.name=Unholy Nuke
 entity.crystal_boss.name=The Lamentor
-entity.end_knight.name=Ender Knight
-entity.end_mage.name=Ender Mage
-entity.end_shield.name=Ender Shield
+entity.end_knight.name=Fell Knight
+entity.end_mage.name=Fell Mage
+entity.end_shield.name=Fell Shield
 entity.snatcher.name=End Stalker
-entity.end_lord.name=Unholy Ender Knight
+entity.end_lord.name=Unholy Knight
 entity.heal_aura.name=Heal Aura
 entity.buffker.name=Constructor
 entity.crystal_ball.name=Spike Crystal
@@ -23,7 +23,7 @@ entity.purple_ball.name=Infused Crystal
 entity.crytsal_ground.name=Lamentor's Spikes
 entity.entity_idle.name=idle
 entity.end_bug.name=Ashed Parasite
-entity.ghost_king_phase.name=End King's Ghost
+entity.ghost_king_phase.name=Ashed King's Ghost
 entity.ring_eye.name=King's Gaze
 entity.controller.name= Ancient Guilder
 entity.lame_eye.name=Lamented Eye
@@ -34,7 +34,7 @@ entity.end_seeker.name=End Seeker
 entity.end_seeker_prime.name=Elder End Seeker
 entity.end_eye.name=Ender Eye
 entity.sword_attack.name=King's Sword
-entity.friend_king.name=End King's Ghost
+entity.friend_king.name=Ashed King's Ghost
 entity.golem_b.name=Barrend Golem
 entity.chomper.name=Depths Chomper
 tile.lamented_end_stone.name=Lamented End Stone
@@ -245,12 +245,12 @@ ee.desc.shield_name_desc=Guilded Shield
 ee.desc.shield_desc=When blocking, you will summon a circle of spikes around you.
 ee.desc.dark_desc=Full Set Bonus ignores any Red Rage Effects
 ee.desc.compulsor_desc=When powered, this machine will suck any items/entities to it's location. Great for Mob farming!
-ee.desc.ash_key_desc=Right Click on the Fortresses key block to awaken the End King
+ee.desc.ash_key_desc=Right Click on the Fortresses key block to awaken the Ashed King
 ee.desc.ef_desc=Full Set gives Speed I, Jump Boost I
 ee.desc.efstaff_desc=Right Click will launch enemies and apply the Red Rage, Left click will shoot a projectile
 ee.desc.gun_desc=A part of the Seekers body, the fun part that shoots crystals at least.
 ee.desc.hf_desc=Eating will apply short Regeneration 2, eating too many can cause bad things to happen
-ee.desc.crown_desc=With this treasure, I summon divine general of the wastelands, The Ender King!
+ee.desc.crown_desc=With this treasure, I summon divine general of the wastelands, The Ashed King!
 ee.desc.dagger_desc=On right click provides a short boost backwards and Speed II for a short time
 ee.desc.desc_amber_torch=While just a torch, this one wards away Stalkers that get close to them.
 death.attack.ee:maelstrom=%1$s succumbed to the void
@@ -286,9 +286,30 @@ desc.pure_cry_11=the End Vaults or on the Lamented
 desc.pure_cry_12=Islands.
 
 desc.cont_cry_6=After collecting many chunks of it,
-desc.cont_cry_7=you will want to combine four of them
+desc.cont_cry_7=you will want to combine nine of them
 desc.cont_cry_8=together to create a stronger source
 desc.cont_cry_9=of the crystal.
+
+#End Vaults
+title.vaults_0=The End Vaults
+desc.vaults_0=These structures are found
+desc.vaults_1=hidden within the islands. However,
+desc.vaults_2=the best way to spot one is by
+desc.vaults_3=looking for it's entrance. Which will
+desc.vaults_4=look like a well if it was made in
+desc.vaults_5=the End. These vaults is where you'll
+desc.vaults_6=find all the Pure Crystals usually
+desc.vaults_7=locked away as they are considered
+desc.vaults_8=a rare resource by the locals.
+
+#End Seeker Desc
+desc.seeker_6=The main troop guardian of the End
+desc.seeker_7=Vaults. They give fallen Constructors
+desc.seeker_8=another chance as you'll see the lone
+desc.seeker_9=eyes of the Seeker try to reach a
+desc.seeker_10=Constructor before they have fallen.
+desc.seeker_11=Sometimes however, it can cause
+desc.seeker_12=a mutation due to the ????? material.
 
 #Ancient Guilder Desc
 
@@ -299,6 +320,7 @@ desc.guilder_9=them, it will change the block within
 desc.guilder_10=there head. They will then search for
 desc.guilder_11=that block and change it into a set
 desc.guilder_12=different block.
+
 # The Lamented islands
 title.lame_0=The Lamented Islands
 desc.lame_0=Found as a structure in the base
@@ -328,7 +350,7 @@ desc.cboss_6=These guardians we're once the
 desc.cboss_7=original overseers of the End.
 desc.cboss_8=There sword skills and agile movement
 desc.cboss_9=proved to be a massive threat to the
-desc.cboss_10=Ender King's armies. However, they
+desc.cboss_10=Ashed King's armies. However, they
 desc.cboss_11=eventually lost in the cataclysmic
 desc.cboss_12=event that created the Ash
 desc.cboss_13=Wastelands.
@@ -381,6 +403,8 @@ block.cmp_9=entities making it quite useful for
 block.cmp_10=transportation and mob farms. It
 block.cmp_11=can also be found as a foundation
 block.cmp_12=of traps in certain structures.
+
+
 #Ash Wastelands Biome
 title.biome_0=Ash Wastelands
 
@@ -421,7 +445,7 @@ desc.red_11=on there bodies. There is many
 desc.red_12=uses for this crystal however.
 
 desc.cont_red_6=Likewise with Pure Crystals
-desc.cont_red_7=you can combine four chunks to
+desc.cont_red_7=you can combine nine chunks to
 desc.cont_red_8=create an Unholy Crystal with
 desc.cont_red_9=greater power imbued into it.
 
@@ -451,9 +475,55 @@ desc.trap_6=Ever wanted to have your base
 desc.trap_7=protected? These devices don't
 desc.trap_8=require redstone to be activated.
 desc.trap_9=They instead when any creature with
-desc.trap_10=the exception of the Ender Knights,
+desc.trap_10=the exception of the Fell Knights,
 desc.trap_11=will launch a spike from the floor
 desc.trap_12=when stepped on. Ouch!
+
+#Brick Rod
+desc.brick_rod_6=A common material used in weapon
+desc.brick_rod_7=crafting and other misc. items
+desc.brick_rod_8=that you may come across.
+
+#Amber Ore
+desc.amber_ore_6=This ore is only found below Y
+desc.amber_ore_7=level 40 in the Depths part of
+desc.amber_ore_8=the Wastelands. It's properties
+desc.amber_ore_9=are quite unique as all weapons
+desc.amber_ore_10=made from this perform vastly
+desc.amber_ore_11=different.
+
+#Amber Torches
+desc.amber_torch_6=If you're having a problem
+desc.amber_torch_7=with Stalker's sneaking up
+desc.amber_torch_8=on you or you'd like to not
+desc.amber_torch_9=get spooked in a base you make.
+desc.amber_torch_10=These torches for some reason,
+desc.amber_torch_11=cause Stalker's to run away.
+desc.amber_torch_12=Maybe it's to bright for them?
+
+#Amber Pickaxe
+desc.amber_pickaxe_6=A great option for those
+desc.amber_pickaxe_7=who don't wish to expand
+desc.amber_pickaxe_8=there more precious tools
+desc.amber_pickaxe_9=while mining in the
+desc.amber_pickaxe_10=wastelands.
+
+#Amber Axe
+desc.amber_axe_6=While there may not be any
+desc.amber_axe_7=Trees in the End, as of
+desc.amber_axe_8=currently. This axe proves
+desc.amber_axe_9=superior with it's quicker
+desc.amber_axe_10=attack speed and slightly
+desc.amber_axe_11=more damage to other
+desc.amber_axe_12=axes.
+
+#Amber Dagger
+desc.amber_dagger_6=Not the highest of
+desc.amber_dagger_7=durability, but this
+desc.amber_dagger_8=fiesty dagger provides a
+desc.amber_dagger_9=nice dashing away from foes
+desc.amber_dagger_10=along with Speed II for
+desc.amber_dagger_11=a short period of time.
 
 #Infused Crystals
 desc.if_cry_6=By combining both, you unlock a
@@ -471,6 +541,27 @@ desc.pick_7=pickaxe offering quick mining speed.
 desc.pick_8=Let this be a taste of the power of
 desc.pick_9=using Infused Crystals in your
 desc.pick_10=equipment.
+
+#Amber Armor Set
+title.amber_armor_0=The Cordium Armor Set
+title.amber_armor_0_cont=Cordium Armor Set Cont.
+
+desc.amber_armor_6=Probably the greatest set for
+desc.amber_armor_7=mining expeditions and making
+desc.amber_armor_8=some of the weapons from this
+desc.amber_armor_9=material can make you a
+desc.amber_armor_10=tricky traveller to catch.
+desc.amber_armor_11=Full set provides Haste I,
+desc.amber_armor_12=and nearby entities glow.
+
+#Depths Chomper
+desc.chomper_6=Only found in the Depths part
+desc.chomper_7=of the wastelands, digging in
+desc.chomper_8=the ground and warning anyone
+desc.chomper_9=who comes close. If you do wake
+desc.chomper_10=them up they might try to
+desc.chomper_11=latch onto your head and bite
+desc.chomper_12=it off, literally.
 
 #Ashed Parasite
 desc.bug_6= These critters occasionally dig up
@@ -493,7 +584,7 @@ desc.stal_12=they attack, they'll run back into
 desc.stal_13=the darkness only to disappear again.
 
 #End Fortress and other Structures
-title.end_fort_0=The End King's Fortress
+title.end_fort_0=The Ashed King's Fortress
 
 desc.fort_0=The mighty fortress that shrouds atop
 desc.fort_1=the Wastelands. Could what's up there
@@ -508,14 +599,14 @@ desc.fort_8=traveller. It's time to end this.
 title.ot_str_0=Other Structures
 
 desc.ot_0=Theres many other structures that lie
-desc.ot_1=within the Ash Wastelands. Most of
-desc.ot_2=them being ruins, but can offer
-desc.ot_3=great loot from what remains. Such
-desc.ot_4=structures as outposts, and small
-desc.ot_5=fortresses on lone islands. If you
-desc.ot_6=don't feel equipped or prepared
-desc.ot_7=enough, hunting for these ruins in
-desc.ot_8=the wastelands can prove beneficial.
+desc.ot_1=within the Ash Wastelands. Such as
+desc.ot_2=The Ashed Towers that can prove
+desc.ot_3=a pre-test to the actual Fortress.
+desc.ot_4=There are other structures such as
+desc.ot_5=Ashed Mines that are underground,
+desc.ot_6=and outposts out in the distance.
+desc.ot_7=Hunting for these ruins in the
+desc.ot_8=wastelands can prove beneficial.
 
 #House of Knights
 title.knights_0=The Unholy Household
@@ -599,7 +690,7 @@ desc.end_cont_13=and Jump Boost I.
 desc.ef_arm=End Fall Leggings & Boots
 
 #Mini-Nuke
-desc.mn_6=harnessing the End King's power
+desc.mn_6=harnessing the Ashed King's power
 desc.mn_7=inside of one block. Just make
 desc.mn_8=sure you keep your distance when
 desc.mn_9=igniting this explosive.
@@ -608,7 +699,7 @@ desc.mn_9=igniting this explosive.
 skill.sword_6=Forever rotating it's crystals
 skill.sword_7=around the blade. This lethal
 skill.sword_8=swords ability allows the user
-skill.sword_9=to summon the End King's ghost
+skill.sword_9=to summon the Ashed King's ghost
 skill.sword_10=arm in front of them. Dealing
 skill.sword_11=1.5x damage to anyone in stands
 skill.sword_12=against you.
