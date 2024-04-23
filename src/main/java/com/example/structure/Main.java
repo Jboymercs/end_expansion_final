@@ -3,6 +3,7 @@ package com.example.structure;
 import com.example.structure.advancements.EEAdvancements;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModEntities;
+import com.example.structure.init.ModProfressions;
 import com.example.structure.init.ModRecipes;
 import com.example.structure.proxy.CommonProxy;
 import com.example.structure.util.ModReference;
@@ -12,6 +13,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.StructureHandler;
 import com.example.structure.world.WorldGenCustomStructure;
 import com.example.structure.world.api.structures.MapGenKingFortress;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -95,9 +97,15 @@ public class Main {
         StructureHandler.handleStructureRegistries();
         ModSoundHandler.registerSounds();
         ModRecipes.init();
+        ModProfressions.associateCareersAndTrades();
 
     }
 
+
+    public static ResourceLocation locate(String location)
+    {
+        return new ResourceLocation(ModReference.MOD_ID, location);
+    }
 
 
 

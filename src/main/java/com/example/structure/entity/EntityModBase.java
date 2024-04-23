@@ -11,6 +11,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -30,6 +31,7 @@ import com.google.common.base.Predicate;
 public abstract class EntityModBase extends EntityCreature {
 
     private float regenTimer;
+
 
     protected float sizeScaling = 1.0F;
 

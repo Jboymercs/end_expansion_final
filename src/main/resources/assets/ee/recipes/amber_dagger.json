@@ -2,13 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "V",
-    "#",
+    "V",
     "R"
   ],
   "key": {
-    "#": {
-      "item": "ee:brick_rod"
-    },
     "V": {
       "item": "ee:chomper_tooth"
     },

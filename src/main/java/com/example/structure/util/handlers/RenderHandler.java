@@ -1,6 +1,8 @@
 package com.example.structure.util.handlers;
 
 import com.example.structure.entity.*;
+import com.example.structure.entity.arrow.EntityChomperArrow;
+import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
@@ -11,8 +13,10 @@ import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
 import com.example.structure.entity.render.*;
+import com.example.structure.entity.render.arrow.RenderArrowBase;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.trader.EntityAvalon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
@@ -132,5 +136,15 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityEnderKnight.class, RenderEndKnightRedone::new);
         //Chomper - Ashed Biome
         RenderingRegistry.registerEntityRenderingHandler(EntityChomper.class, RenderChomper::new);
+        //Large AOE - Utility
+        RenderingRegistry.registerEntityRenderingHandler(EntityLargeAOEEffect.class, RenderLargeAOEEffect::new);
+        //Unholy Arrow
+        RenderingRegistry.registerEntityRenderingHandler(EntityUnholyArrow.class, RenderArrowBase::new);
+        //Chomper Arrow
+        RenderingRegistry.registerEntityRenderingHandler(EntityChomperArrow.class, RenderArrowBase::new);
+        //Sword Spike
+        RenderingRegistry.registerEntityRenderingHandler(EntitySwordSpike.class, RenderSwordSpike::new);
+        //Avalon Trader
+        RenderingRegistry.registerEntityRenderingHandler(EntityAvalon.class, RenderAvalon::new);
     }
 }

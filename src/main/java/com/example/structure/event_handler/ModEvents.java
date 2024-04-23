@@ -38,8 +38,9 @@ public class ModEvents {
             if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.DARK_HELMET&& base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.DARK_CHESTPLATE) {
                 base.removeActivePotionEffect(ModPotions.CORRUPTED);
             } else {
-                if(base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_ITEM ||
-                        base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK && rand.nextInt(20) == 0) {
+                if(base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD && rand.nextInt(20) == 0|| base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_ITEM && rand.nextInt(20) == 0||
+                        base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_AXE && rand.nextInt(20) == 0
+                        || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0) {
 
                     if (timeTillRage < 0) {
                         base.getHeldItemMainhand().damageItem(5, base);

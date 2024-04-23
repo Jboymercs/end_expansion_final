@@ -84,6 +84,18 @@ public class ModSoundHandler {
     public static SoundEvent SWORD_IMPACT;
     public static SoundEvent SWORD_SUMMON;
 
+    //Summon Sword Entity
+    public static SoundEvent TARGET_SUMMON;
+    public static SoundEvent TARGET_IMPACT;
+
+    //The Avalon
+    public static SoundEvent AVALON_IDLE;
+
+    public static SoundEvent AVALON_AGREE;
+
+    public static SoundEvent AVALON_DISAGREE;
+
+
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
         BOSS_HURT = registerSound("boss.hurt", "entity");
@@ -111,6 +123,9 @@ public class ModSoundHandler {
         LORD_KNIGHT_DEATH = registerSound("lord.death", "entity");
         LORD_KNIGHT_FLY = registerSound("lord.fly", "entity");
         LORD_SUMMON = registerSound("lord.summon", "entity");
+
+        TARGET_SUMMON = registerSound("sword.summon", "entity");
+        TARGET_IMPACT = registerSound("sword.impact", "entity");
 
         SWORD_HUM = registerSound("projectile.hover", "entity");
         SWORD_IMPACT = registerSound("projectile.impact", "entity");
@@ -142,6 +157,10 @@ public class ModSoundHandler {
         CHOMPER_BITE = registerSound("chomper.bite", "entity");
         CHOMPER_WARN = registerSound("chomper.warn", "entity");
         CHOMPER_POP_OUT = registerSound("chomper.pop_out", "entity");
+
+        AVALON_IDLE = registerSound("avalon.idle", "entity");
+        AVALON_AGREE = registerSound("avalon.agree", "entity");
+        AVALON_DISAGREE = registerSound("avalon.disagree", "entity");
 
         BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
 

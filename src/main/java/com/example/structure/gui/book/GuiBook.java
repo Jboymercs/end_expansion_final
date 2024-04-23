@@ -396,7 +396,7 @@ public class GuiBook extends GuiScreen {
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
                 drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 58, 115, 58, 115, 464);
                 this.createLeftPictureTitleFromString("title.amber_armor_0_cont");
-                this.createRightPictureTitleFromString("entity.chomper.name");
+                this.createRightPictureTitleFromString("entity.depths_chomper.name");
                 this.writeRightFromString(6, 12, "desc.chomper_");
                 GlStateManager.popMatrix();
                 break;

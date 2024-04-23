@@ -1,0 +1,27 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "Ground",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-24, 0, -24], "size": [8, 6, 48], "uv": [0, 54]},
+						{"origin": [-16, 0, -24], "size": [32, 6, 8], "uv": [64, 14]},
+						{"origin": [16, 0, -24], "size": [8, 6, 48], "uv": [0, 0]},
+						{"origin": [-16, 0, 16], "size": [32, 6, 8], "uv": [64, 0]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,8 +1,11 @@
 package com.example.structure.init;
 
+import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
 import com.example.structure.items.*;
 import com.example.structure.items.armor.ModArmorBase;
+import com.example.structure.items.arrow.ItemArrowBase;
+import com.example.structure.items.arrow.ItemUnholyArrow;
 import com.example.structure.items.tools.*;
 import com.example.structure.util.ModReference;
 import net.minecraft.init.SoundEvents;
@@ -12,6 +15,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,7 @@ public class ModItems {
 
     private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 5, 1000, 8.0F, 4, 25);
 
-    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 900, 7.0F, 10.0F, 40);
+    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 900, 7.0F, 7.0F, 40);
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
     private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
@@ -68,6 +72,8 @@ public class ModItems {
     public static final Item AMBER_BOOTS = new ModArmorBase("amber_boots", AMBER_ARMOR, 1, EntityEquipmentSlot.FEET, "amber", "amber_desc");
     public static final Item AMBER_RAW_ORE = new ItemBase("amber_raw", ModCreativeTabs.ITEMS);
     public static final ItemAxe AMBER_AXE = new ItemAmberAxe("amber_axe", AMBER_SET, ModConfig.cordium_axe_damage, -2.8F);
+    public static final Item UNHOLY_AXE = new ItemRedAxe("red_axe", RED_SWORD, ModConfig.cordium_axe_damage, -3.0F, "red_axe_desc");
+    public static final Item AMBER_SWORD = new ToolAmberSword("amber_sword", AMBER_SET, "amber_sword_desc");
     public static final Item CHOMPER_TOOTH = new ItemBase("chomper_tooth", ModCreativeTabs.ITEMS);
 
     public static final Item BRICK_ROD = new ItemBase("brick_rod", ModCreativeTabs.ITEMS);
@@ -83,6 +89,7 @@ public class ModItems {
     public static final Item ENDFALL_STAFF = new ItemEndfallStaff("efstaff", ModCreativeTabs.ITEMS, "efstaff_desc");
     public static final Item PROJECTILE_PURPLE = new CrystalBallItem("projpurp", null);
 
+    public static final Item OBSIDIAN_COIN = new ItemObiCoin("obi_coin", ModCreativeTabs.ITEMS, "coin_desc");
     public static final Item GUN_LAUNCHER = new ItemGunLauncher("gun", "gun_desc");
     public static final Item HEAL_FOOD = new ItemHealFood("heal_food", 2, 1, false, "hf_desc");
 
@@ -90,6 +97,12 @@ public class ModItems {
 
     public static final Item AMBER_DAGGER = new ItemChomperDagger("amber_dagger", DAGGER_MATERIAL, "dagger_desc");
     public static final Item AMBER_PICKAXE = new ItemAmberPickaxe("amber_pickaxe", DAGGER_MATERIAL);
+
+
+    public static final Item UNHOLY_ARROW = new ItemUnholyArrow("mod_arrow_unholy");
+    public static final Item CHOMPER_ARROW = new ItemArrowBase("mod_arrow_chomper");
+
+
 
     //Misc.
 

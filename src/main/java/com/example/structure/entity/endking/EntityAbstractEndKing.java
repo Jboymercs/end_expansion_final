@@ -13,6 +13,7 @@ import com.example.structure.util.*;
 import com.example.structure.util.handlers.ParticleManager;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -87,10 +88,13 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
     protected static final DataParameter<Boolean> DEATH_BOSS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> FLY_DASH_MOVE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SLAM_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     //
     protected static final DataParameter<Boolean> TOP_HP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
+
+
     public void setTopHp(boolean value) {this.dataManager.set(TOP_HP, Boolean.valueOf(value));}
     public boolean isTopHP() {return this.dataManager.get(TOP_HP);}
     public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
@@ -137,6 +141,8 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     public void setDeathBoss(boolean value) {this.dataManager.set(DEATH_BOSS, Boolean.valueOf(value));}
     public boolean isFlyDashMove() {return this.dataManager.get(FLY_DASH_MOVE);}
     public void setFlyDashMove(boolean value) {this.dataManager.set(FLY_DASH_MOVE, Boolean.valueOf(value));}
+    public boolean isSlamAttack() {return this.dataManager.get(SLAM_ATTACK);}
+    public void setSlamAttack(boolean value) {this.dataManager.set(SLAM_ATTACK, Boolean.valueOf(value));}
     private final MultiPartEntityPart[] hitboxParts;
     private final MultiPartEntityPart model = new MultiPartEntityPart(this, "model", 0f, 0f);
     private final MultiPartEntityPart legsWhole = new MultiPartEntityPart(this, "legsWhole", 1.0f, 1.1f);
@@ -196,6 +202,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.dataManager.register(BOSS_START, Boolean.valueOf(false));
         this.dataManager.register(FLY_DASH_MOVE, Boolean.valueOf(false));
         this.dataManager.register(DEATH_BOSS, Boolean.valueOf(false));
+        this.dataManager.register(SLAM_ATTACK, Boolean.valueOf(false));
         super.entityInit();
 
     }

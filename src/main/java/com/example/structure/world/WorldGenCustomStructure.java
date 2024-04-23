@@ -7,6 +7,7 @@ import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
+import com.example.structure.world.api.trader.WorldGenTraderOutcamp;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import com.example.structure.world.lamIslands.WorldGenBossArena;
 import net.minecraft.block.Block;
@@ -30,7 +31,9 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
-    public static final WorldGenAshTower ash_tower = new WorldGenAshTower();
+
+    private int trader_spacing = ModConfig.avalon_trader_spacing;
+
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
     public int plantsPerChunk = ModRand.range(8, 19);
 
@@ -61,6 +64,17 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
                 }
 
+                //The Avalon Trader, rarely found throughout the End in it's entirety
+                if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 58 && getGroundFromAbove(world, pos.getX() + 15, pos.getZ() + 15) > 58) {
+                    if(trader_spacing <= 0) {
+                        int yHiegh = getGroundFromAbove(world, pos.getX() + 7, pos.getZ() + 7);
+                        new WorldGenTraderOutcamp("trader/eye_trader").generateStructure(world, pos.add(0, yHiegh - 1, 0), Rotation.NONE);
+                        trader_spacing = ModConfig.avalon_trader_spacing;
+                    } else {
+                        trader_spacing--;
+                    }
+                }
+
                 //End Plants, the Turium plant, can only be found in any End Biome that has End Stone
                 //Cannot spawn in the Ash Wastelands
                 if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS &&
@@ -75,8 +89,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                     }
                 }
 
-                //Ashed Towers, a randomly procedural generated Tower with the chance of different challenges
-                //Spawns only in the Ash Wastelands
+
 
 
 

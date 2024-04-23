@@ -26,6 +26,7 @@ import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -57,6 +58,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     private final String SUMMON_AOE_CRYSTALS = "crystals";
 
     private final String ANIM_CAST_SWORD = "cast_sword";
+    private final String ANIM_SLAM_ATTACK = "slam";
 
     //PHASE TWO
     private final String ANIM_SIDE_SWIPE = "side_attack";
@@ -183,6 +185,12 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         super.onLivingUpdate();
 
         EntityLivingBase target = this.getAttackTarget();
+
+        //Destroys Blocks while this is Dashing
+        if(this.isFlyDashMove()) {
+            AxisAlignedBB box = getEntityBoundingBox().grow(1.1, 0.1, 1.1).offset(0, -0.1, 0);
+            ModUtils.destroyBlocksInAABB(box, world, this);
+        }
 
         //This is used in Phase 3 for when the boss is flying
         if(this.IPhaseThree && target != null && !this.isBeingRidden() && !this.isMeleeMode && !this.isDeathBoss()) {
@@ -370,6 +378,9 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
             if(this.isSummonCrystalsAttack()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(SUMMON_AOE_CRYSTALS, false));
             }
+            if(this.isSlamAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SLAM_ATTACK, false));
+            }
             if(this.isSummonFireBallsAttack()) {
                 if(this.isPhaseHandler()) {
                     event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_FIRE_BALL, false));
@@ -473,7 +484,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         //Phase One
         if(!this.isFightMode() && !this.IPhaseTwo && !this.IPhaseThree && !this.isPhaseIntro() && !this.isBossStall() && !this.isBossStart()) {
             //attacks
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(sweepLeap, crystalSelfAOE, projectileSwords,throwFireball, castArenaAttack, summon_ground_swords));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(sweepLeap, crystalSelfAOE, projectileSwords,throwFireball, castArenaAttack, summon_ground_swords, slam_Attack));
             //weights
             double[] weights = {
                     (distance < 24 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
@@ -481,7 +492,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                     (distance > 5 && !hasSwordsNearby) ? distance * 0.02 : 0, // Projectile Swords Attack
                    (distance > 8 && prevAttack != throwFireball) ? distance * 0.02 : 0, //Throw Fireball Attack
                     (distance < 25 && HealthChange < 0.9 && !hasEyesNearby && prevAttack != castArenaAttack) ? distance * 0.02 : 0, //Cast Arena Eye Attack
-                    (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.03 : 0 //Summon Ground Swords
+                    (distance < 25 && prevAttack != summon_ground_swords) ? distance * 0.03 : 0, //Summon Ground Swords
+                    (distance < 9 && prevAttack != slam_Attack) ? 1/distance : 0 //Slam Ground Attack
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
             prevAttack.accept(target);
@@ -489,7 +501,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         //Phase Two
         if(!this.isFightMode() && this.IPhaseTwo && !this.IPhaseThree && !this.isPhaseIntro()) {
             //attacks
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(sweepLeap, summonGhosts, upperAttack, sideAttack, regularAttack));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(sweepLeap, summonGhosts, upperAttack, sideAttack, regularAttack, slam_Attack));
             //weights
             double[] weights = {
                     (distance < 25 && prevAttack != sweepLeap) ? distance * 0.02 : 0, //LeapAttack
@@ -497,6 +509,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                     (distance < 13 && distance > 5 && prevAttack != upperAttack) ? distance * 0.02 : 0,  //Upper Attack
                     (distance < 7 && prevAttack != sideAttack) ? distance * 0.02 : 0,   //Side Swipe
                     (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack
+                    (distance < 9 && prevAttack != slam_Attack) ? 1/distance : 0 //Slam Ground Attack
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
             prevAttack.accept(target);
@@ -571,6 +584,37 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       }
     };
 
+    //SLam Attack
+    private final Consumer<EntityLivingBase> slam_Attack = (target) -> {
+      this.setFightMode(true);
+      this.setSlamAttack(true);
+      this.setFullBodyUsage(true);
+      this.setImmovable(true);
+
+      addEvent(()-> {
+          Vec3d targetedPos = target.getPositionVector();
+          float distance = getDistance(target);
+          this.setImmovable(false);
+          ModUtils.leapTowards(this, targetedPos, (float) (0.6 * Math.sqrt(distance)), 0.5f);
+      }, 22);
+      addEvent(()-> {
+          Vec3d position = this.getPositionVector();
+          EntityLargeAOEEffect effect = new EntityLargeAOEEffect(world);
+          effect.setPosition(position.x, position.y, position.z);
+          world.spawnEntity(effect);
+          Vec3d offset = this.getPositionVector().add(ModUtils.yVec(1.0f));
+          DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+          float damage = (float) (this.getAttack());
+          ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 1.8f, 0, false);
+      }, 35);
+
+      addEvent(()-> {
+        this.setFullBodyUsage(false);
+        this.setFightMode(false);
+        this.setSlamAttack(false);
+        this.setImmovable(false);
+      }, 45);
+    };
     //A simple Fly Move towards it's Target
     private final Consumer<EntityLivingBase> flyDash = (target)-> {
       this.setFightMode(true);

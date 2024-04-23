@@ -41,12 +41,10 @@ public class WorldGenSmallCaves extends WorldGenStructure {
         BlockPos modified = position.add(15, 0, 15);
         if(getGroundFromAbove(worldIn, position.getX(), position.getZ()) > 50 && getGroundFromAbove(worldIn, modified.getX(), modified.getZ()) > 50 &&
         !worldIn.isAirBlock(position) && !worldIn.isAirBlock(modified)) {
-            System.out.println("Generated cave at " + position);
             return super.generate(worldIn, rand, position);
 
         }
         else {
-            System.out.println("returned False");
             return false;
         }
     }

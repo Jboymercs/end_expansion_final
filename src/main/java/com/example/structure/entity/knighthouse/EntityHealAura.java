@@ -74,14 +74,14 @@ public class EntityHealAura extends EntityModBase implements IAnimatable {
                 for (EntityKnightBase knight : nearbyEnderKnights) {
                     float maxHealth = knight.getHealth() / knight.getMaxHealth();
                     if (maxHealth < 1) {
-                        knight.heal((float) (5F * ModConfig.biome_multiplier));
+                        knight.heal((float) (3F * ModConfig.biome_multiplier));
                     }
 
                 }
             }
         }
 
-        if(this.ticksExisted > 20 && this.ticksExisted <= 50) {
+        if(this.ticksExisted > 20 && this.ticksExisted <= 50 && world.rand.nextInt(2) == 0) {
            world.setEntityState(this, ModUtils.PARTICLE_BYTE);
         }
         if(ticksExisted == 60) {

@@ -52,7 +52,6 @@ public class AshedMines {
     public void startMines(BlockPos pos, Rotation rot) {
         yAxel = pos.getY() - 1;
         yAxel = pos.getY() - 10;
-        System.out.println("Spawned Mines at" + pos);
         MinesTemplate template = new MinesTemplate(manager, "start", pos, rot, 0, true);
         components.add(template);
         generateCross(template, BlockPos.ORIGIN, rot);
@@ -76,7 +75,6 @@ public class AshedMines {
         MinesTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
 
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) == 0) {
-            System.out.println("Colliding via Parent");
             return false;
         }
 

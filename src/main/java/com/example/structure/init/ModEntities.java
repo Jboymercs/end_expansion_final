@@ -3,6 +3,8 @@ package com.example.structure.init;
 import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.*;
+import com.example.structure.entity.arrow.EntityChomperArrow;
+import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
@@ -17,6 +19,7 @@ import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.*;
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
 import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
+import com.example.structure.entity.trader.EntityAvalon;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
 import net.minecraft.entity.Entity;
@@ -138,11 +141,17 @@ public class ModEntities {
         //End Seeker - Hidden Bosses
         registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, end_mobs);
         //Barrend Golem - Hidden Bosses
-        registerEntityWithID("golem_b", EntityBarrendGolem.class, ENTITY_START_ID++, 80, end_mobs);
+        registerEntityWithID("golem_b", EntityBarrendGolem.class, ENTITY_START_ID++, 80, ash_mobs);
         //End King Friendly - Item Summon
         registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
 
         registerEntityWithID("chomper", EntityChomper.class, ENTITY_START_ID++, 80, ash_mobs);
+        registerEntity("large_aoe", EntityLargeAOEEffect.class, ENTITY_START_ID++, 80);
+        registerEntity("unholy_arrow", EntityUnholyArrow.class, ENTITY_START_ID++, 80);
+        registerEntity("chomper_arrow", EntityChomperArrow.class, ENTITY_START_ID++, 90);
+        registerEntity("sword_spike", EntitySwordSpike.class, ENTITY_START_ID++, 90);
+        //Avalon Trader
+        registerEntityWithID("avalon", EntityAvalon.class, ENTITY_START_ID++, 90, end_mobs);
 
     }
 

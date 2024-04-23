@@ -196,12 +196,12 @@ public class ModConfig {
     @Config.Name("Ashed King Scaled Attack Factor")
     @Config.Comment("This value raises the attack damage of the Ashed King the lower it's health is, to incentivize further punishment in not dodging the bosses moves later in the fight")
     @Config.RequiresMcRestart
-    public static double king_scaled_factor = 0.4D;
+    public static double king_scaled_factor = 0.2D;
 
     @Config.Name("Ashed King Base Attack Damage")
     @Config.Comment("Change the base attack damage of the Ashed King")
     @Config.RequiresMcRestart
-    public static double end_king_damage = 13D;
+    public static double end_king_damage = 12D;
 
     @Config.Name("Ashed King Ghost Arm Damage Multiplier")
     @Config.Comment("Change the multiplier of ghost arm attacks * base damage")
@@ -424,7 +424,7 @@ public class ModConfig {
     @Config.Name("End King Fortress")
     @Config.Comment("Change the spacing of the End King Fortress in chunks away from another, this is applied in chunks that are Ash Wastelands not every chunk")
     @Config.RequiresMcRestart
-    public static int fortress_spacing = 50;
+    public static int fortress_spacing = 75;
 
     @Config.Name("End King Fortress Odds")
     @Config.Comment("Change the odds of this structure spawning, take in mind the fortress has few structure to compete with for odds of spawning")
@@ -458,10 +458,25 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static int vault_distance = 200;
 
+    @Config.Name("Avalon Trader Spacing")
+    @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")
+    @Config.RequiresMcRestart
+    public static int avalon_trader_spacing = 500;
+
+    @Config.Name("Avalon Health")
+    @Config.Comment("Change the Health of the Avalon Trader")
+    @Config.RequiresMcRestart
+    public static double avalon_health = 200D;
+
+    @Config.Name("Avalon Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Avalan Trader")
+    @Config.RequiresMcRestart
+    public static double avalon_attack_damage = 16D;
+
     @Config.Name("Ashed Mines Chance to Spawn")
     @Config.Comment("Change the chance of the Ashed Mines, these are the mineshafts that run throughout the Ashed Wastelands, modify Carefully")
     @Config.RequiresMcRestart
-    public static int ashed_mines_distance = 45;
+    public static int ashed_mines_distance = 50;
 
     @Config.Name("Ashed Mines Size")
     @Config.Comment("The size of the Ashed Mines")
@@ -500,7 +515,7 @@ public class ModConfig {
     @Config.Name("Ashed Towers Chance to Spawn")
     @Config.Comment("Change the chance to spawn the Ashed Towers, This is done by per chunk checking if the ground is atleast 58, modify carefully")
     @Config.RequiresMcRestart
-    public static int ash_tower_distance = 100;
+    public static int ash_tower_distance = 160;
 
     @Config.Name("Ashed Towers Mob Chance")
     @Config.Comment("Change the chance of mob spawns in the Ashed Towers, Higher is better chance")

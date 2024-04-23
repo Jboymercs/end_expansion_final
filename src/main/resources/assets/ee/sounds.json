@@ -255,6 +255,26 @@
       }
     ]
   },
+  "entity.sword.summon": {
+    "category": "entity",
+    "subtitle": "entity.sword.summon",
+    "sounds": [
+      {
+        "name": "ee:entity/sword/summon",
+        "stream": true
+      }
+    ]
+  },
+  "entity.sword.impact": {
+    "category": "entity",
+    "subtitle": "entity.sword.impact",
+    "sounds": [
+      {
+        "name": "ee:entity/sword/impact",
+        "stream": true
+      }
+    ]
+  },
   "entity.seeker.shoot": {
     "category": "entity",
     "subtitle": "entity.seeker.shoot",
@@ -523,6 +543,40 @@
     "sounds": [
       {
         "name": "ee:entity/chomper/leap",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.idle": {
+    "category": "entity",
+    "subtitle": "entity.avalon.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/idle_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/avalon/idle_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.disagree": {
+    "category": "entity",
+    "subtitle": "entity.avalon.disagree",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/disagree",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.agree": {
+    "category": "entity",
+    "subtitle": "entity.avalon.agree",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/agree",
         "stream": true
       }
     ]

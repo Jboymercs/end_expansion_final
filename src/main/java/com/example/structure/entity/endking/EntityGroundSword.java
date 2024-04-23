@@ -6,6 +6,7 @@ import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -76,6 +77,7 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
 
     public EntityGroundSword(World worldIn, boolean isFast) {
         super(worldIn);
+
         this.Fast = isFast;
         if(this.Fast) {
             //Set the DataManager to true
@@ -95,6 +97,10 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
     public void onUpdate() {
         super.onUpdate();
 
+
+        if(this.ticksExisted == 3) {
+            this.playSound(ModSoundHandler.TARGET_SUMMON, 0.8F, 1.0f / rand.nextFloat() * 0.4f + 0.8f);
+        }
         this.motionX = 0;
         this.motionZ = 0;
         this.rotationYaw = 0;
@@ -104,7 +110,9 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
         List<EntityLivingBase> targets = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable() && (!(e instanceof EntityEndKing || e instanceof EntityRedCrystal || e instanceof EntityKnightBase || e instanceof EntityGroundSword)));
         //There is two different modes for the Sword, the regular and the faster one. Used for Phase 3
         if(this.Fast) {
-
+            if(ticksExisted == 26) {
+                this.playSound(ModSoundHandler.TARGET_IMPACT, 1.0F, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
+            }
             if(ticksExisted > 25 && ticksExisted < 30) {
                 if(!targets.isEmpty()) {
                     Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.5));
@@ -122,6 +130,9 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
             }
         } else {
 
+            if(ticksExisted == 40) {
+                this.playSound(ModSoundHandler.TARGET_IMPACT, 1.0F, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
+            }
             if(ticksExisted > 40 && ticksExisted < 45) {
                 if(!targets.isEmpty()) {
                     Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.5));
