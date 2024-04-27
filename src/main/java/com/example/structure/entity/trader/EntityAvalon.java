@@ -1,14 +1,17 @@
 package com.example.structure.entity.trader;
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.entity.EntityChomper;
-import com.example.structure.entity.EntityEye;
+import com.example.structure.entity.ai.EntityAIAvalon;
+import com.example.structure.entity.trader.action.ActionFarRange;
+import com.example.structure.entity.trader.action.ActionLineAOE;
+import com.example.structure.entity.trader.action.ActionMediumRangeAOE;
+import com.example.structure.entity.trader.action.ActionShortRangeAOE;
+import com.example.structure.entity.util.IAttack;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.init.ModItems;
-import com.example.structure.init.ModProfressions;
-import com.example.structure.items.ItemObiCoin;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
+import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
@@ -16,13 +19,9 @@ import com.example.structure.world.api.trader.WorldGenTraderArena;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -44,56 +43,49 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimationTickable {
+public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, IAnimationTickable, IAttack {
+
+
     /**
      * The Rare and mysterious trader found in the End, that may or may not be a boss
      */
-
     private final BossInfoServer bossInfo = (new BossInfoServer(this.getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.NOTCHED_6));
     private final String ANIM_IDLE_HIDDEN = "idle_hidden";
     private final String ANIM_IDLE_OPEN = "idle_open";
     private final String ANIM_OPEN = "state_expand";
     private final String ANIM_CLOSE = "state_close";
 
-    private static final DataParameter<Boolean> OPEN = EntityDataManager.createKey(EntityAvalon.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CLOSE = EntityDataManager.createKey(EntityAvalon.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> OPEN_STATE = EntityDataManager.createKey(EntityAvalon.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> I_AM_BOSS = EntityDataManager.createKey(EntityAvalon.class, DataSerializers.BOOLEAN);
-    public void setOpen(boolean value) {this.dataManager.set(OPEN, Boolean.valueOf(value));}
-    public boolean isOpen() {return this.dataManager.get(OPEN);}
-    public void setClose(boolean value) {this.dataManager.set(CLOSE, Boolean.valueOf(value));}
-    public boolean isClose() {return this.dataManager.get(CLOSE);}
-    public void setOpenState(boolean value) {this.dataManager.set(OPEN_STATE, Boolean.valueOf(value));}
-    public boolean isOpenState() {return this.dataManager.get(OPEN_STATE);}
-    public void setIAmBoss(boolean value) {this.dataManager.set(I_AM_BOSS, Boolean.valueOf(value));}
-    public boolean isIAmBoss() {return this.dataManager.get(I_AM_BOSS);}
+    private final String ANIM_CAST_LAZERS = "summon_lazer";
+    private final String ANIM_CAST_AOE = "cast";
+    private final String ANIM_SMASH_ATTACK = "smash";
+
+    private Consumer<EntityLivingBase> prevAttack;
+    public EntityLivingBase thisIsMyTarget;
 
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityAvalon(World worldIn) {
         super(worldIn);
-        this.setImmovable(true);
-        this.setNoGravity(true);
-        this.setSize(1.3F, 2.3F);
-        this.iAmBossMob = true;
     }
 
-    public boolean IAmAggroed = false;
+
 
     @Override
     protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(4, new EntityAIAvalon<>(this, 1.0, 80, 19F, 0F));
         this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 5.0F, 1.0F));
-    }
-
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        return false;
     }
 
     public boolean transitionTooOpen = false;
     public boolean hasSelectedTarget = false;
     public int tickTime = 60;
+
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -110,6 +102,7 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
             if(!nearbyPlayers.isEmpty() && !hasSelectedTarget) {
                 for(EntityPlayer player : nearbyPlayers) {
                     this.setAttackTarget(player);
+                    this.thisIsMyTarget = player;
                     BlockPos posToo = new BlockPos(this.posX, this.posY, this.posZ);
                     stateChangeTooAggro(posToo, player);
                     hasSelectedTarget = true;
@@ -171,21 +164,21 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
         if (id == ModUtils.PARTICLE_BYTE) {
             ModUtils.circleCallback(1, 40, (pos)-> {
                 pos = new Vec3d(pos.x, 0, pos.y);
-                ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 1.0, 0))), ModColors.MAELSTROM, pos.normalize().scale(4).add(ModUtils.yVec(0)));
+                ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 1.0, 0))), ModColors.MAELSTROM, pos.normalize().scale(3).add(ModUtils.yVec(0)));
             });
         }
         super.handleStatusUpdate(id);
     }
 
     public void stateChangeTooAggro(BlockPos pos, EntityPlayer target) {
-
+        this.setIAmBoss(true);
         addEvent(()-> ClientRender.SCREEN_SHAKE = 2f, 30);
 
 
         addEvent(()-> {
+            this.canBeCollidedWith();
             this.world.newExplosion(this, this.posX, this.posY -1, this.posZ, 0, false, false);
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
-
             addEvent(()-> {
                 Vec3d posToo = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 0, 0)));
                 DamageSource source = ModDamageSource.builder()
@@ -197,9 +190,16 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
             }, 5);
         }, 60);
 
-        addEvent(()-> new WorldGenTraderArena("trader/eye_arena").generateStructure(world, pos, Rotation.NONE), 85);
+        addEvent(()-> new WorldGenTraderArena("trader/eye_arena").generateStructure(world, pos, Rotation.NONE), 70);
     }
 
+    @Override
+    public boolean canBeCollidedWith() {
+        if(this.isIAmBoss()) {
+            return false;
+        }
+     return true;
+    }
 
     /**
      * When the entity is right clicked
@@ -252,25 +252,6 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
 
 
     @Override
-    public void entityInit() {
-        super.entityInit();
-        this.dataManager.register(OPEN_STATE, Boolean.valueOf(false));
-        this.dataManager.register(CLOSE, Boolean.valueOf(false));
-        this.dataManager.register(OPEN, Boolean.valueOf(false));
-        this.dataManager.register(I_AM_BOSS, Boolean.valueOf(false));
-    }
-
-    @Override
-    protected List<EntityVillager.ITradeList> getTrades() {
-        return ModProfressions.AVALON_TRADER.getTrades(0);
-    }
-
-    @Override
-    protected String getVillagerName() {
-        return "The Avalon";
-    }
-
-    @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
         if(this.IAmAggroed) {
             super.removeTrackingPlayer(player);
@@ -294,6 +275,8 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "idle_controller", 0, this::predicateIdle));
         data.addAnimationController(new AnimationController(this, "transition_controller", 0, this::predicateTransitions));
+        data.addAnimationController(new AnimationController(this, "fight_idle_controller", 0, this::predicateFightIdle));
+        data.addAnimationController(new AnimationController(this, "attack_controller", 0, this::predicateFight));
     }
     private<E extends IAnimatable> PlayState predicateTransitions(AnimationEvent<E> event) {
         if(this.isOpen()) {
@@ -310,12 +293,47 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
     }
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
-        if(!this.isOpen() && !this.isClose()) {
+        //We are just going to disable this controller if the mob is Aggroed
+        if(!this.isOpen() && !this.isClose() && !this.isIAmBoss()) {
             if(this.isOpenState()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_OPEN, true));
                 return PlayState.CONTINUE;
-            } else if(!this.isIAmBoss()){
+            } else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_HIDDEN, true));
+                return PlayState.CONTINUE;
+            }
+        }
+        event.getController().markNeedsReload();
+        return PlayState.STOP;
+    }
+
+    private <E extends IAnimatable> PlayState predicateFightIdle(AnimationEvent<E> event) {
+        if(!this.isFightMode() && this.isIAmBoss()) {
+            if(this.isOpenState()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_OPEN, true));
+                return PlayState.CONTINUE;
+            }
+            else if(this.isCloseState()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_HIDDEN, true));
+                return PlayState.STOP;
+            }
+        }
+        event.getController().markNeedsReload();
+        return PlayState.STOP;
+    }
+
+    private <E extends IAnimatable> PlayState predicateFight(AnimationEvent<E> event) {
+        if(this.isFightMode()) {
+            if(this.isCastAOE()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_AOE, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isCastLazers()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_LAZERS, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isSmashAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SMASH_ATTACK, false));
                 return PlayState.CONTINUE;
             }
         }
@@ -344,4 +362,97 @@ public class EntityAvalon extends EntityTrader implements IAnimatable, IAnimatio
     public int tickTimer() {
         return this.ticksExisted;
     }
+
+    @Override
+    public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
+        double distance = Math.sqrt(distanceSq);
+        double HealthChange = this.getHealth() / this.getMaxHealth();
+        if(!this.isFightMode() && this.isIAmBoss()) {
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(summonLazerMinions, AOE_attack, AOE_line, smash_attack));
+
+            double[] weights = {
+                    (distance < 20 && !this.hasLazerMinions) ? 1/distance : 0, //Summon Lazer Minions
+                    (distance < 20 && HealthChange > 0.75) ? 1/distance : (distance < 20 && prevAttack != AOE_attack) ? 1/distance : 0, //AOE Ranged Attack Can be spammed while above 0.75 Health
+                    (distance < 20 && prevAttack != AOE_line && HealthChange <= 0.75) ? 1/distance : 0, //AOE Attack Line
+                    (distance <= 4 && prevAttack != smash_attack && HealthChange <= 0.75 && !this.isCloseState()) ? 50 : 0   // Smash Attack
+            };
+            prevAttack = ModRand.choice(attacks, rand, weights).next();
+            prevAttack.accept(target);
+        }
+
+        //This decreases the attack timer past each Health chunk it loses, making it progressively faster
+        return (HealthChange > 0.75) ? 135 : (HealthChange <= 0.75 && HealthChange > 0.5) ? 115 : (HealthChange <= 0.5 && HealthChange > 0.25) ? 95 : 70;
+    }
+
+    private final Consumer<EntityLivingBase> smash_attack = (target) -> {
+        this.setSmashAttack(true);
+        this.setFightMode(true);
+
+        addEvent(()-> {
+            Vec3d posToo = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, -2, 0)));
+            DamageSource source = ModDamageSource.builder()
+                    .type(ModDamageSource.MOB)
+                    .directEntity(this)
+                    .build();
+            float damage = (float) ((this.getAttack() - 10) * ModConfig.biome_multiplier);
+            ModUtils.handleAreaImpact(2.5f, (e) -> damage, this, posToo, source, 0.9F, 0, false );
+        }, 23);
+        addEvent(()-> {
+            this.setFightMode(false);
+            this.setSmashAttack(false);
+        }, 40);
+    };
+    private final Consumer<EntityLivingBase> AOE_attack = (target) -> {
+      this.setCastAOE(true);
+      this.setFightMode(true);
+
+      addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 15);
+
+
+      addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 40);
+
+      addEvent(()-> new ActionFarRange().performAction(this, target), 65);
+      addEvent(()-> {
+        this.setFightMode(false);
+        this.setCastAOE(false);
+      }, 60);
+    };
+
+    private final Consumer<EntityLivingBase> AOE_line = (target) -> {
+      this.setCastAOE(true);
+      this.setFightMode(true);
+
+      addEvent(()-> {
+        new ActionLineAOE().performAction(this, target);
+      }, 25);
+      addEvent(()-> {
+          this.setFightMode(false);
+          this.setCastAOE(false);
+      }, 60);
+    };
+    private final Consumer<EntityLivingBase> summonLazerMinions = (target) -> {
+      this.setCastLazers(true);
+      this.setFightMode(true);
+      double healthFactor = this.getHealth()/this.getMaxHealth();
+
+      //summons the lazer minions
+      addEvent(()-> {
+        if(healthFactor >= 0.75) {
+            EntityMiniValon valon = new EntityMiniValon(world, rand.nextBoolean());
+            valon.setPosition(this.posX, this.posY -2, this.posZ);
+            world.spawnEntity(valon);
+        } else if(healthFactor < 0.75) {
+            EntityMiniValon valon = new EntityMiniValon(world, rand.nextBoolean());
+            valon.setPosition(this.posX, this.posY -2, this.posZ);
+            world.spawnEntity(valon);
+            EntityMiniValon valon2 = new EntityMiniValon(world, rand.nextBoolean());
+            valon2.setPosition(this.posX, this.posY -1, this.posZ);
+            world.spawnEntity(valon2);
+        }
+      }, 27);
+      addEvent(()-> {
+        this.setCastLazers(false);
+        this.setFightMode(false);
+      }, 40);
+    };
 }

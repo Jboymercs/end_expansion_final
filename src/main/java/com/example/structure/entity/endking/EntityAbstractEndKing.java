@@ -164,6 +164,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.isImmuneToExplosions();
         this.iAmBossMob = true;
 
+
     }
 
     public EntityAbstractEndKing(World world, float x, float y, float z) {

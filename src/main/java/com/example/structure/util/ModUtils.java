@@ -277,6 +277,32 @@ public class ModUtils {
         return null;
     }
 
+
+    public static BlockPos avalonSearchForBlocks(AxisAlignedBB box, World world, Entity entity, IBlockState block) {
+        int i = MathHelper.floor(box.minX);
+        int j = MathHelper.floor(box.minY);
+        int k = MathHelper.floor(box.minZ);
+        int l = MathHelper.floor(box.maxX);
+        int i1 = MathHelper.floor(box.maxY);
+        int j1 = MathHelper.floor(box.maxZ);
+        for (int x = i; x <= l; ++x) {
+            for (int y = j; y <= i1; ++y) {
+                for (int z = k; z <= j1; ++z) {
+                    BlockPos blockpos = new BlockPos(x, y, z);
+                    IBlockState iblockstate = world.getBlockState(blockpos);
+
+
+                    if(iblockstate == block && world.getBlockState(blockpos.up()) != ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState()) {
+                        System.out.println("Found BlockPos for Changing");
+                        return blockpos;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
     public static double getBlastPower(double dist, double radius){
         double decay_rd = radius * 0.95;
         if(dist < decay_rd){

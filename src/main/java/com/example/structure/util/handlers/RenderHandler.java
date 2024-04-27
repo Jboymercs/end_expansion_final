@@ -16,7 +16,9 @@ import com.example.structure.entity.render.*;
 import com.example.structure.entity.render.arrow.RenderArrowBase;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.trader.EntityAOEArena;
 import com.example.structure.entity.trader.EntityAvalon;
+import com.example.structure.entity.trader.EntityMiniValon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
@@ -146,5 +148,9 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntitySwordSpike.class, RenderSwordSpike::new);
         //Avalon Trader
         RenderingRegistry.registerEntityRenderingHandler(EntityAvalon.class, RenderAvalon::new);
+        //Mini-Avalon
+        RenderingRegistry.registerEntityRenderingHandler(EntityMiniValon.class, RenderValon::new);
+        //AOE Avalon
+        RenderingRegistry.registerEntityRenderingHandler(EntityAOEArena.class, RenderAvalonAOE::new);
     }
 }

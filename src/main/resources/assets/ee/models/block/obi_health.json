@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ee:blocks/eyed_obi_top",
+    "side": "ee:blocks/obi_health"
+  }
+}
