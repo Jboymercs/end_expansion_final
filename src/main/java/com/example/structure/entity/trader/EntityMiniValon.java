@@ -9,8 +9,11 @@ import com.example.structure.util.DirectionalRender;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -63,6 +66,7 @@ public class EntityMiniValon extends EntityModBase implements IAnimatable, ITarg
 
     public void onUpdate() {
         super.onUpdate();
+
 
         Vec3d modifyPosToo = this.getLookVec();
         Vec3d tooFrom = new Vec3d(this.posX + modifyPosToo.x * 10, this.posY + modifyPosToo.y, this.posZ + modifyPosToo.z * 10);
@@ -159,5 +163,10 @@ public class EntityMiniValon extends EntityModBase implements IAnimatable, ITarg
             this.prevRenderLazerPos = dir;
         }
         this.renderLazerPos = dir;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundHandler.MINI_AVALON_SHOOT;
     }
 }

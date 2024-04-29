@@ -1,6 +1,7 @@
 package com.example.structure.entity.trader;
 
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.ai.EntityAIAvalon;
 import com.example.structure.entity.endking.ProjectileSpinSword;
 import com.example.structure.entity.util.IPitch;
 import com.example.structure.init.ModBlocks;
@@ -11,7 +12,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.MultiPartEntityPart;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -55,6 +59,10 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     private static final DataParameter<Boolean> CAST_AOE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CAST_LAZERS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SMASH_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PROJECTILE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> TELEPORT_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DEATH_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
     public boolean IAmAggroed = false;
@@ -79,7 +87,14 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     public boolean isCastLazers() {return this.dataManager.get(CAST_LAZERS);}
     public void setSmashAttack(boolean value) {this.dataManager.set(SMASH_ATTACK, Boolean.valueOf(value));}
     public boolean isSmashAttack() {return this.dataManager.get(SMASH_ATTACK);}
-
+    public void setProjectileAttack(boolean value) {this.dataManager.set(PROJECTILE_ATTACK, Boolean.valueOf(value));}
+    public boolean isProjectileAttack() {return this.dataManager.get(PROJECTILE_ATTACK);}
+    public void setTeleportAttack(boolean value) {this.dataManager.set(TELEPORT_ATTACK, Boolean.valueOf(value));}
+    public boolean isTeleportAttack() {return this.dataManager.get(TELEPORT_ATTACK);}
+    public void setSummonState(boolean value) {this.dataManager.set(SUMMON_STATE, Boolean.valueOf(value));}
+    public boolean isSummonState() {return this.dataManager.get(SUMMON_STATE);}
+    public void setDeathState(boolean value) {this.dataManager.set(DEATH_STATE, Boolean.valueOf(value));}
+    public boolean isDeathState() {return this.dataManager.get(DEATH_STATE);}
     protected boolean hasLazerMinions = false;
 
 
@@ -119,6 +134,10 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         this.dataManager.register(CAST_LAZERS, Boolean.valueOf(false));
         this.dataManager.register(CAST_AOE, Boolean.valueOf(false));
         this.dataManager.register(SMASH_ATTACK, Boolean.valueOf(false));
+        this.dataManager.register(PROJECTILE_ATTACK, Boolean.valueOf(false));
+        this.dataManager.register(TELEPORT_ATTACK, Boolean.valueOf(false));
+        this.dataManager.register(SUMMON_STATE, Boolean.valueOf(false));
+        this.dataManager.register(DEATH_STATE, Boolean.valueOf(false));
         super.entityInit();
     }
 
@@ -140,7 +159,25 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     protected boolean hasLaunchedBlocksTwo = false;
     protected boolean hasLaunchedBlocksThree = false;
     public double stateLine = 0.75;
+    public boolean hasSelectedTarget = false;
+    protected boolean stateClose = false;
+    protected boolean stateOpen = true;
 
+    protected boolean ableTooDisableWhenTargetsAreGone = false;
+    protected boolean hasRemovedAITasks;
+
+    //Removes the tasks if there is no current target, this basically helps with the reset back to a Trader for players that lose the fight
+    public void removeTasksOfBoss() {
+        ModUtils.removeTaskOfType(this.tasks, EntityAIAvalon.class);
+        ModUtils.removeTaskOfType(this.tasks, EntityAINearestAttackableTarget.class);
+        ModUtils.removeTaskOfType(this.tasks, EntityAIHurtByTarget.class);
+        hasRemovedAITasks = true;
+
+        this.setDead();
+        EntityAvalon avalon = new EntityAvalon(world);
+        avalon.copyLocationAndAnglesFrom(this);
+        world.spawnEntity(avalon);
+    }
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -153,64 +190,132 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
             this.hasLazerMinions = false;
         }
 
+        EntityLivingBase target = this.getAttackTarget();
+        if(target == null && this.ableTooDisableWhenTargetsAreGone) {
+            if(!hasRemovedAITasks) {
+                this.setAttackTarget(null);
+                this.setIAmBoss(false);
+                removeTasksOfBoss();
+                this.IAmAggroed = false;
+                this.hasSelectedTarget = false;
+            }
+        }
+
+        //This keeps the Players inside the arena basically forcefully pushing them back in
+        if(this.isIAmBoss()) {
+            if(target != null) {
+                double distance = getDistance(target);
+                double HealthFactor = this.getHealth() / this.getMaxHealth();
+                if(distance > 16) {
+                    //Heals The Avalon if you decide to leave it's arena. Only to the stat line point though
+                    if(HealthFactor < stateLine + 0.23) {
+                        this.heal(1.0F);
+                    }
+
+                    if(this.stateOpen && !this.stateClose) {
+                        this.changeAggroSTateToClose();
+                    }
+                } else {
+                    if(!this.stateOpen && this.stateClose && !this.isClose()) {
+                        this.changeAggroSTateToOpen();
+                    }
+                }
+            }
+
+
+        }
+
+        if(this.isCloseState()) {
+            //This will lock the Avalon into a heal if the current target is out of range of it
+            this.motionX = 0;
+            this.motionY = 0;
+            this.motionZ = 0;
+            this.setImmovable(true);
+
+        }
 
         double currentHealth = this.getHealth() / this.getMaxHealth();
 
         //Initiates Blocks at 75% Health to heal the Entity
-        if(currentHealth < 0.75 && !hasLaunchedBlocksOne) {
-            for(int i = 0; i < 4; i++) {
-                AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-                BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
-                if(setTooPos != null) {
-                    world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
-                    this.hasLaunchedBlocksOne = true;
-                }
-            }
-        }
-       else if(hasLaunchedBlocksOne) {
-            AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-            BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
-            if(setTooPos == null) {
-            stateLine = 0.5;
-            }
-        }
+  if(this.isIAmBoss()) {
+      if (currentHealth < 0.75 && !hasLaunchedBlocksOne) {
+          for (int i = 0; i < 4; i++) {
+              AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
+              BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
+              if (setTooPos != null) {
+                  world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+                  this.hasLaunchedBlocksOne = true;
+              }
+          }
+      } else if (hasLaunchedBlocksOne) {
+          AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
+          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+          if (setTooPos == null) {
+              stateLine = 0.5;
+          }
+      }
+      //Initiates Blocks at 50% Health to heal the Entity
+      if (currentHealth < 0.5 && !hasLaunchedBlocksTwo) {
+          for (int i = 0; i < 8; i++) {
+              AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
+              BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
+              if (setTooPos != null) {
+                  world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+                  this.hasLaunchedBlocksTwo = true;
+              }
+          }
+      } else if (hasLaunchedBlocksTwo) {
+          AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
+          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+          if (setTooPos == null) {
+              stateLine = 0.25;
+          }
+      }
+      //Initiates Blocks at 25% Health to heal the Entity
+      if (currentHealth < 0.25 && !hasLaunchedBlocksThree) {
+          for (int i = 0; i < 12; i++) {
+              AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
+              BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
+              if (setTooPos != null) {
+                  world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+                  this.hasLaunchedBlocksThree = true;
+              }
+          }
+      } else if (hasLaunchedBlocksThree) {
+          AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
+          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+          if (setTooPos == null) {
+              stateLine = 0;
+          }
+      }
 
-       if(currentHealth < 0.5 && !hasLaunchedBlocksTwo) {
-           for(int i = 0; i < 8; i++) {
-               AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-               BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
-               if(setTooPos != null) {
-                   world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
-                   this.hasLaunchedBlocksTwo = true;
-               }
-           }
-       }        else if(hasLaunchedBlocksTwo) {
-           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-           BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
-           if(setTooPos == null) {
-               stateLine = 0.25;
-           }
-       }
-
-       if(currentHealth < 0.25 && !hasLaunchedBlocksThree) {
-           for(int i = 0; i < 12; i++) {
-               AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-               BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
-               if(setTooPos != null) {
-                   world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
-                   this.hasLaunchedBlocksThree = true;
-               }
-           }
-       }        else if(hasLaunchedBlocksThree) {
-           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-           BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
-           if(setTooPos == null) {
-               stateLine = 0;
-           }
-       }
+  }
 
 
+    }
 
+
+    public void changeAggroSTateToClose() {
+        this.setOpenState(false);
+        this.setClose(true);
+        this.stateClose = true;
+
+        addEvent(()-> {
+            this.setClose(false);
+            this.stateOpen = false;
+            this.setCloseState(true);
+        }, 25);
+    }
+
+    public void changeAggroSTateToOpen() {
+        this.setCloseState(false);
+        this.setOpen(true);
+        this.stateOpen = true;
+        addEvent(()-> {
+        this.setOpen(false);
+        this.stateClose = false;
+        this.setOpenState(true);
+        }, 60);
     }
 
     @Override
@@ -271,7 +376,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     @Override
     public boolean attackEntityFromPart(@Nonnull MultiPartEntityPart part, @Nonnull DamageSource source, float damage) {
 
-        if(!this.isCloseState() && this.isIAmBoss()) {
+        if(!this.isCloseState() && this.isIAmBoss() && !this.isDeathState()) {
             if(part == this.hit_part_1 || part == this.hit_part_2 || part == this.hit_part_3 || part == this.hit_part_4 || part == this.hit_part_5) {
                 damageViable = true;
                 return this.attackEntityFrom(source, damage);

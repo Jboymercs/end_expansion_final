@@ -581,6 +581,100 @@
       }
     ]
   },
+  "entity.avalon.hurt": {
+    "category": "entity",
+    "subtitle": "entity.avalon.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/avalon/hurt_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.death": {
+    "category": "entity",
+    "subtitle": "entity.avalon.death",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.shoot": {
+    "category": "entity",
+    "subtitle": "entity.avalon.shoot",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/shoot",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.smash": {
+    "category": "entity",
+    "subtitle": "entity.avalon.smash",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/smash",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.delay_smash": {
+    "category": "entity",
+    "subtitle": "entity.avalon.delay_smash",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/delay_smash",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.lazer": {
+    "category": "entity",
+    "subtitle": "entity.avalon.lazer",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/lazer",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.cast": {
+    "category": "entity",
+    "subtitle": "entity.avalon.cast",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/cast",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.speak": {
+    "category": "entity",
+    "subtitle": "entity.avalon.speak",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/speak",
+        "stream": true
+      }
+    ]
+  },
+  "entity.avalon.lazer_shoot": {
+    "category": "entity",
+    "subtitle": "entity.avalon.lazer_shoot",
+    "sounds": [
+      {
+        "name": "ee:entity/avalon/lazer_shoot",
+        "stream": true
+      }
+    ]
+  },
   "biome.ambient.ambient": {
     "category": "entity",
     "subtitle": "biome.ambience",

@@ -90,10 +90,17 @@ public class ModSoundHandler {
 
     //The Avalon
     public static SoundEvent AVALON_IDLE;
-
     public static SoundEvent AVALON_AGREE;
-
     public static SoundEvent AVALON_DISAGREE;
+    public static SoundEvent AVALON_HURT;
+    public static SoundEvent AVALON_DEATH;
+    public static SoundEvent AVALON_SHOOT;
+    public static SoundEvent AVALON_TELEPORT_SMASH;
+    public static SoundEvent AVALON_SMASH;
+    public static SoundEvent AVALON_LAZER;
+    public static SoundEvent AVALON_CAST;
+    public static SoundEvent AVALON_SPEAK;
+    public static SoundEvent MINI_AVALON_SHOOT;
 
 
     public static void registerSounds() {
@@ -161,6 +168,15 @@ public class ModSoundHandler {
         AVALON_IDLE = registerSound("avalon.idle", "entity");
         AVALON_AGREE = registerSound("avalon.agree", "entity");
         AVALON_DISAGREE = registerSound("avalon.disagree", "entity");
+        AVALON_HURT = registerSound("avalon.hurt", "entity");
+        AVALON_DEATH = registerSound("avalon.death", "entity");
+        AVALON_SHOOT = registerSound("avalon.shoot", "entity");
+        AVALON_SMASH = registerSound("avalon.smash", "entity");
+        AVALON_TELEPORT_SMASH = registerSound("avalon.delay_smash", "entity");
+        AVALON_LAZER = registerSound("avalon.lazer", "entity");
+        AVALON_CAST = registerSound("avalon.cast", "entity");
+        AVALON_SPEAK = registerSound("avalon.speak", "entity");
+        MINI_AVALON_SHOOT = registerSound("avalon.lazer_shoot", "entity");
 
         BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
 

@@ -461,17 +461,22 @@ public class ModConfig {
     @Config.Name("Avalon Trader Spacing")
     @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")
     @Config.RequiresMcRestart
-    public static int avalon_trader_spacing = 500;
+    public static int avalon_trader_spacing = 400;
 
     @Config.Name("Avalon Health")
     @Config.Comment("Change the Health of the Avalon Trader")
     @Config.RequiresMcRestart
-    public static double avalon_health = 200D;
+    public static double avalon_health = 350D;
 
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 16D;
+    public static double avalon_attack_damage = 17D;
+
+    @Config.Name("Avalon Lazer Damage Multiplier")
+    @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
+    @Config.RequiresMcRestart
+    public static double avalon_lazer_multiplier = 1.3;
 
     @Config.Name("Ashed Mines Chance to Spawn")
     @Config.Comment("Change the chance of the Ashed Mines, these are the mineshafts that run throughout the Ashed Wastelands, modify Carefully")

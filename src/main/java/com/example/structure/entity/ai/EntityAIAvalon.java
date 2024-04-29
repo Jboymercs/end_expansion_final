@@ -73,7 +73,7 @@ public class EntityAIAvalon <T extends EntityAvalon & IAttack> extends EntityAIB
         this.entity.getLookHelper().setLookPositionWithEntity(target, this.lookSpeed, this.lookSpeed);
         this.entity.faceEntity(target, this.lookSpeed, this.lookSpeed);
 
-        if (distSq <= this.maxAttackDistSq && canSee) {
+        if (distSq <= this.maxAttackDistSq) {
             this.attackTime--;
             if (this.attackTime <= 0) {
                 this.attackTime = this.entity.startAttack(target, (float) distSq, this.strafingBackwards);

@@ -19,6 +19,11 @@
         },
         {
           "type": "item",
+          "name": "ee:obi_coin",
+          "weight": 1
+        },
+        {
+          "type": "item",
           "name": "minecraft:diamond",
           "weight": 5
         },

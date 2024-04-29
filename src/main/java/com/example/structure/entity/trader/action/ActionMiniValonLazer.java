@@ -87,7 +87,7 @@ public class ActionMiniValonLazer implements IMultiAction {
                                 .type(ModDamageSource.MAGIC)
                                 .build();
                         //Damage
-                        target.attackEntityFrom(source, (float) (8.0F * ModConfig.lazer_damage_multiplier));
+                        target.attackEntityFrom(source, (float) (ModConfig.avalon_attack_damage * ModConfig.avalon_lazer_multiplier));
                     }
 
                     Main.network.sendToAllTracking(new MessageDirectionForRender(entity, lazerPos), entity);

@@ -158,6 +158,11 @@
         },
         {
           "type": "item",
+          "name": "ee:obi_coin",
+          "weight": 1
+        },
+        {
+          "type": "item",
           "name": "minecraft:chorus_fruit",
           "weight": 20,
           "functions": [

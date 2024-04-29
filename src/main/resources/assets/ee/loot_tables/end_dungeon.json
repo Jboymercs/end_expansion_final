@@ -47,7 +47,11 @@
             }
           ]
         },
-
+        {
+          "type": "item",
+          "name": "ee:obi_coin",
+          "weight": 2
+        },
 
         {
           "type": "item",

@@ -9,25 +9,23 @@ import com.example.structure.entity.trader.action.ActionShortRangeAOE;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.init.ModItems;
-import com.example.structure.util.ModColors;
-import com.example.structure.util.ModDamageSource;
-import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
+import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.example.structure.world.api.trader.WorldGenTraderArena;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
@@ -63,13 +61,24 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     private final String ANIM_CAST_LAZERS = "summon_lazer";
     private final String ANIM_CAST_AOE = "cast";
     private final String ANIM_SMASH_ATTACK = "smash";
+    private final String ANIM_PROJECTILE_BOMB = "shoot";
 
+    private final String ANIM_DELAY_SMASH = "delay_smash";
+
+
+    //Other ANIMS
+    private final String ANIM_SUMMON = "summon";
+    private final String ANIM_DEATH = "death";
+    protected Vec3d positionStarted = this.getPositionVector();
     private Consumer<EntityLivingBase> prevAttack;
     public EntityLivingBase thisIsMyTarget;
 
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityAvalon(World worldIn) {
         super(worldIn);
+
+        this.setSummonState(true);
+        addEvent(()-> this.setSummonState(false), 50);
     }
 
 
@@ -77,12 +86,11 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new EntityAIAvalon<>(this, 1.0, 80, 19F, 0F));
         this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 5.0F, 1.0F));
     }
 
     public boolean transitionTooOpen = false;
-    public boolean hasSelectedTarget = false;
+
     public int tickTime = 60;
 
 
@@ -112,7 +120,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
 
 
         if(target == null) {
-            if (!this.isOpenState()) {
+            if (!this.isOpenState() && !this.isSummonState() && !this.isDeathState()) {
                 this.motionX = 0;
                 this.motionZ = 0;
                 this.rotationYaw = 0;
@@ -131,7 +139,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
                 }
             }
 
-            if (nearbyPlayers.isEmpty()) {
+            if (nearbyPlayers.isEmpty() && !this.isSummonState() && !this.isDeathState()) {
                 if (this.isOpenState() && tickTime < 0 && !this.transitionTooOpen) {
                     stateTransitionTooClose();
                 } else {
@@ -167,11 +175,26 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
                 ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 1.0, 0))), ModColors.MAELSTROM, pos.normalize().scale(3).add(ModUtils.yVec(0)));
             });
         }
+        if(id == ModUtils.SECOND_PARTICLE_BYTE) {
+            ModUtils.circleCallback(2, 50, (pos)-> {
+                pos = new Vec3d(pos.x, 0, pos.y);
+                Vec3d vel = pos.normalize().scale(0.5).add(ModUtils.yVec(0.0));
+                Vec3d currentPos = this.getPositionVector().add(ModUtils.yVec(0.1));
+                world.spawnParticle(EnumParticleTypes.CLOUD, currentPos.x, currentPos.y - 2, currentPos.z, vel.x, vel.y, vel.z);
+
+            });
+        }
+
+        if(id == ModUtils.THIRD_PARTICLE_BYTE) {
+            Vec3d pos = new Vec3d(this.posX + ModRand.range(-1 , 1), this.posY + 2, this.posZ + ModRand.range(-1, 1));
+            ParticleManager.spawnColoredSmoke(world, pos, ModColors.PURPLE, new Vec3d(0, 0.05, 0));
+        }
         super.handleStatusUpdate(id);
     }
 
     public void stateChangeTooAggro(BlockPos pos, EntityPlayer target) {
         this.setIAmBoss(true);
+        this.playSound(ModSoundHandler.AVALON_SPEAK, 1.4f, 1.0f / (rand.nextFloat() * 0.4f + 0.6f));
         addEvent(()-> ClientRender.SCREEN_SHAKE = 2f, 30);
 
 
@@ -187,10 +210,23 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
                         .build();
                 float damage = (float) ((this.getAttack() - 10) * ModConfig.biome_multiplier);
                 ModUtils.handleAreaImpact(5.0f, (e) -> damage, this, posToo, source, 1.2F, 0, false );
+                this.initBossAI();
+
             }, 5);
         }, 60);
 
-        addEvent(()-> new WorldGenTraderArena("trader/eye_arena").generateStructure(world, pos, Rotation.NONE), 70);
+        if(!world.isRemote) {
+            addEvent(() -> new WorldGenTraderArena("trader/eye_arena").generateStructure(this.world, pos, Rotation.NONE), 70);
+        }
+        addEvent(()-> this.ableTooDisableWhenTargetsAreGone = true, 200);
+    }
+
+    //Adds the AI for the boss
+    public void initBossAI() {
+        this.tasks.addTask(4, new EntityAIAvalon<>(this, 1.0, 80, 17F, 0F));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
+        this.targetTasks.addTask(5, new EntityAIHurtByTarget(this, false));
+        this.hasRemovedAITasks = false;
     }
 
     @Override
@@ -253,10 +289,8 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
 
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
-        if(this.IAmAggroed) {
             super.removeTrackingPlayer(player);
             this.bossInfo.removePlayer(player);
-        }
     }
 
     public void setPosition(BlockPos pos) {
@@ -265,10 +299,8 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
 
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
-        if(this.IAmAggroed) {
             super.addTrackingPlayer(player);
             this.bossInfo.addPlayer(player);
-        }
     }
 
     @Override
@@ -294,7 +326,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         //We are just going to disable this controller if the mob is Aggroed
-        if(!this.isOpen() && !this.isClose() && !this.isIAmBoss()) {
+        if(!this.isOpen() && !this.isClose() && !this.isIAmBoss() && !this.isSummonState()) {
             if(this.isOpenState()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_OPEN, true));
                 return PlayState.CONTINUE;
@@ -308,7 +340,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     }
 
     private <E extends IAnimatable> PlayState predicateFightIdle(AnimationEvent<E> event) {
-        if(!this.isFightMode() && this.isIAmBoss()) {
+        if(!this.isFightMode() && this.isIAmBoss() && !this.isDeathState()) {
             if(this.isOpenState()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE_OPEN, true));
                 return PlayState.CONTINUE;
@@ -323,7 +355,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     }
 
     private <E extends IAnimatable> PlayState predicateFight(AnimationEvent<E> event) {
-        if(this.isFightMode()) {
+        if(this.isFightMode() && !this.isSummonState() && !this.isDeathState()) {
             if(this.isCastAOE()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_AOE, false));
                 return PlayState.CONTINUE;
@@ -336,6 +368,22 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SMASH_ATTACK, false));
                 return PlayState.CONTINUE;
             }
+            if(this.isProjectileAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PROJECTILE_BOMB, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isTeleportAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DELAY_SMASH, false));
+                return PlayState.CONTINUE;
+            }
+        }
+        if(this.isSummonState()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON, false));
+            return PlayState.CONTINUE;
+        }
+        if(this.isDeathState()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DEATH, false));
+            return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;
@@ -367,35 +415,123 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         double distance = Math.sqrt(distanceSq);
         double HealthChange = this.getHealth() / this.getMaxHealth();
-        if(!this.isFightMode() && this.isIAmBoss()) {
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(summonLazerMinions, AOE_attack, AOE_line, smash_attack));
+        if(!this.isFightMode() && this.isIAmBoss() && !this.isCloseState()) {
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(summonLazerMinions, AOE_attack, AOE_line, smash_attack, projectile_Attack, teleportSlam));
 
             double[] weights = {
-                    (distance < 20 && !this.hasLazerMinions) ? 1/distance : 0, //Summon Lazer Minions
-                    (distance < 20 && HealthChange > 0.75) ? 1/distance : (distance < 20 && prevAttack != AOE_attack) ? 1/distance : 0, //AOE Ranged Attack Can be spammed while above 0.75 Health
-                    (distance < 20 && prevAttack != AOE_line && HealthChange <= 0.75) ? 1/distance : 0, //AOE Attack Line
-                    (distance <= 4 && prevAttack != smash_attack && HealthChange <= 0.75 && !this.isCloseState()) ? 50 : 0   // Smash Attack
+                    (distance < 18 && !this.hasLazerMinions) ? 1/distance : 0, //Summon Lazer Minions
+                    (distance < 18 && HealthChange > 0.75) ? 1/distance : (distance < 20 && prevAttack != AOE_attack) ? 1/distance : 0, //AOE Ranged Attack Can be spammed while above 0.75 Health
+                    (distance < 18 && prevAttack != AOE_line && HealthChange <= 0.75) ? 1/distance : 0, //AOE Attack Line
+                    (distance <= 4 && prevAttack != smash_attack && HealthChange <= 0.75 && !this.isCloseState()) ? 50 : 0,   // Smash Attack
+                    (distance < 18 && distance >= 4 && prevAttack != projectile_Attack) ? 1/distance : 0, //Projectile Attack Test
+                    (distance < 18 && this.posY > target.posY && prevAttack != teleportSlam && HealthChange <= 0.5) ? 1/distance : 0 // Teleport Slam
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
             prevAttack.accept(target);
         }
 
         //This decreases the attack timer past each Health chunk it loses, making it progressively faster
-        return (HealthChange > 0.75) ? 135 : (HealthChange <= 0.75 && HealthChange > 0.5) ? 115 : (HealthChange <= 0.5 && HealthChange > 0.25) ? 95 : 70;
+        return (HealthChange > 0.75) ? 130 : (HealthChange <= 0.75 && HealthChange > 0.5) ? 110 : (HealthChange <= 0.5 && HealthChange > 0.25) ? 90 : 70;
     }
 
-    private final Consumer<EntityLivingBase> smash_attack = (target) -> {
-        this.setSmashAttack(true);
+    protected final Consumer<EntityLivingBase> teleportSlam = (target) -> {
         this.setFightMode(true);
+        this.setTeleportAttack(true);
+        this.playSound(ModSoundHandler.AVALON_TELEPORT_SMASH, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.5f));
+        Vec3d posToGoBackToo = this.getPositionVector();
+        for(int i = 0; i < 20; i++) {
+            world.setEntityState(this, ModUtils.THIRD_PARTICLE_BYTE);
+        }
 
         addEvent(()-> {
+            this.setImmovable(false);
+            ModUtils.attemptTeleport(new Vec3d(target.posX, this.posY, target.posZ), this);
+            this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.4F, 1.0f / rand.nextFloat() * 0.4f + 0.6f);
+        }, 20);
+
+        addEvent(()-> {
+            world.setEntityState(this, ModUtils.SECOND_PARTICLE_BYTE);
+            this.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.6f);
             Vec3d posToo = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, -2, 0)));
             DamageSource source = ModDamageSource.builder()
                     .type(ModDamageSource.MOB)
                     .directEntity(this)
                     .build();
-            float damage = (float) ((this.getAttack() - 10) * ModConfig.biome_multiplier);
-            ModUtils.handleAreaImpact(2.5f, (e) -> damage, this, posToo, source, 0.9F, 0, false );
+            float damage = (float) ((this.getAttack() - 2));
+            ModUtils.handleAreaImpact(3.5f, (e) -> damage, this, posToo, source, 0.9F, 0, false );
+        }, 30);
+
+        addEvent(()-> {
+            this.setTeleportAttack(false);
+            ModUtils.attemptTeleport(posToGoBackToo, this);
+            this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.4F, 1.0f / rand.nextFloat() * 0.4f + 0.6f);
+        }, 50);
+
+        addEvent(() -> {
+            this.setImmovable(true);
+        }, 55);
+        addEvent(()-> {
+            this.setFightMode(false);
+        }, 65);
+    };
+
+    private final Consumer<EntityLivingBase> projectile_Attack = (target) -> {
+    this.setProjectileAttack(true);
+    this.setFightMode(true);
+        this.playSound(ModSoundHandler.AVALON_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.5f));
+    //Randomly and accurately spawns projectiles above the Player's head
+    addEvent(()-> {
+        for(int y = 0; y < 45; y +=5) {
+            addEvent(()-> {
+                Vec3d randomImpact = new Vec3d(target.posX + ModRand.range(-6, 6), this.posY, target.posZ + ModRand.range(-6, 6));
+            ProjectileBomb bomb = new ProjectileBomb(world, this, this.getAttack(), randomImpact);
+            bomb.setNoGravity(false);
+            bomb.setPosition(randomImpact.x, randomImpact.y + 18, randomImpact.z);
+            this.world.spawnEntity(bomb);
+            }, y);
+        }
+        addEvent(()-> {
+            Vec3d randomImpact = new Vec3d(target.posX, this.posY, target.posZ);
+            ProjectileBomb bomb = new ProjectileBomb(world, this, this.getAttack(), randomImpact);
+            bomb.setNoGravity(false);
+            bomb.setPosition(randomImpact.x, randomImpact.y + 18, randomImpact.z);
+            this.world.spawnEntity(bomb);
+        }, 10);
+
+        addEvent(()-> {
+            Vec3d randomImpact = new Vec3d(target.posX, this.posY, target.posZ);
+            ProjectileBomb bomb = new ProjectileBomb(world, this, this.getAttack(), randomImpact);
+            bomb.setNoGravity(false);
+            bomb.setPosition(randomImpact.x, randomImpact.y + 18, randomImpact.z);
+            this.world.spawnEntity(bomb);
+        }, 25);
+        addEvent(()-> {
+            Vec3d randomImpact = new Vec3d(target.posX, this.posY, target.posZ);
+            ProjectileBomb bomb = new ProjectileBomb(world, this, this.getAttack(), randomImpact);
+            bomb.setNoGravity(false);
+            bomb.setPosition(randomImpact.x, randomImpact.y + 18, randomImpact.z);
+            this.world.spawnEntity(bomb);
+        }, 40);
+    }, 25);
+    addEvent(()-> {
+        this.setFightMode(false);
+        this.setProjectileAttack(false);
+    }, 80);
+    };
+    private final Consumer<EntityLivingBase> smash_attack = (target) -> {
+        this.setSmashAttack(true);
+        this.setFightMode(true);
+        this.playSound(ModSoundHandler.AVALON_SMASH, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.5f));
+        addEvent(()-> {
+            this.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.6f);
+            world.setEntityState(this, ModUtils.SECOND_PARTICLE_BYTE);
+            Vec3d posToo = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, -2, 0)));
+            DamageSource source = ModDamageSource.builder()
+                    .type(ModDamageSource.MOB)
+                    .directEntity(this)
+                    .build();
+            float damage = (float) ((this.getAttack() - 2));
+            ModUtils.handleAreaImpact(3.5f, (e) -> damage, this, posToo, source, 0.9F, 0, false );
         }, 23);
         addEvent(()-> {
             this.setFightMode(false);
@@ -405,13 +541,36 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     private final Consumer<EntityLivingBase> AOE_attack = (target) -> {
       this.setCastAOE(true);
       this.setFightMode(true);
+        this.playSound(ModSoundHandler.AVALON_CAST, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.5f));
+      double HealthFactor = this.getHealth()/this.getMaxHealth();
+      int randomInterval = ModRand.range(1, 4);
 
-      addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 15);
-
-
-      addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 40);
-
-      addEvent(()-> new ActionFarRange().performAction(this, target), 65);
+      if(HealthFactor > 0.50) {
+          addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 15);
+          addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 40);
+          addEvent(()-> new ActionFarRange().performAction(this, target), 65);
+      } else {
+          if(randomInterval == 1) {
+              addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 15);
+              addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 40);
+              addEvent(()-> new ActionFarRange().performAction(this, target), 65);
+          } else if (randomInterval == 2) {
+              //Does Outer layers first then inner
+              addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 15);
+              addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 40);
+              addEvent(()-> new ActionFarRange().performAction(this, target), 15);
+          }else if(randomInterval == 3) {
+              //Does inner layer first then outer
+              addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 40);
+              addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 15);
+              addEvent(()-> new ActionFarRange().performAction(this, target), 40);
+          }
+          else {
+              addEvent(()-> new ActionShortRangeAOE().performAction(this, target), 15);
+              addEvent(()-> new ActionMediumRangeAOE().performAction(this, target), 40);
+              addEvent(()-> new ActionFarRange().performAction(this, target), 65);
+          }
+      }
       addEvent(()-> {
         this.setFightMode(false);
         this.setCastAOE(false);
@@ -419,6 +578,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     };
 
     private final Consumer<EntityLivingBase> AOE_line = (target) -> {
+        this.playSound(ModSoundHandler.AVALON_CAST, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.5f));
       this.setCastAOE(true);
       this.setFightMode(true);
 
@@ -434,7 +594,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
       this.setCastLazers(true);
       this.setFightMode(true);
       double healthFactor = this.getHealth()/this.getMaxHealth();
-
+        this.playSound(ModSoundHandler.AVALON_LAZER, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.5f));
       //summons the lazer minions
       addEvent(()-> {
         if(healthFactor >= 0.75) {
@@ -455,4 +615,53 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
         this.setFightMode(false);
       }, 40);
     };
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.AVALON_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.AVALON_DEATH;
+    }
+    private static final ResourceLocation LOOT_BOSS = new ResourceLocation(ModReference.MOD_ID, "avalon");
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return LOOT_BOSS;
+    }
+
+    @Override
+    protected boolean canDropLoot() {
+        return true;
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        if(this.isIAmBoss()) {
+            this.setDeathState(true);
+            this.setHealth(0.0001f);
+            if(this.isDeathState()) {
+                List<EntityMiniValon> nearbySwords = this.world.getEntitiesWithinAABB(EntityMiniValon.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
+                if(!nearbySwords.isEmpty()) {
+                    for(EntityMiniValon valon : nearbySwords) {
+                        valon.setDead();
+                    }
+                }
+                addEvent(()-> this.playSound(ModSoundHandler.AVALON_DEATH, 1.5f, 1.0f), 0);
+                addEvent(()-> this.setDeathState(false), 100);
+                addEvent(this::setDead, 100);
+                addEvent(()-> this.setDropItemsWhenDead(true), 90);
+                addEvent(()-> {
+                    if(!world.isRemote) {
+                        EntityAvalon avalon = new EntityAvalon(world);
+                        avalon.copyLocationAndAnglesFrom(this);
+                        world.spawnEntity(avalon);
+                    }
+                }, 98);
+            }
+        }
+        super.onDeath(cause);
+    }
 }

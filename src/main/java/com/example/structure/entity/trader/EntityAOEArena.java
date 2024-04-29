@@ -1,10 +1,12 @@
 package com.example.structure.entity.trader;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -35,6 +37,18 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
         this.setSize(0.8F, 9.0F);
     }
 
+    private Entity player;
+
+    public EntityAOEArena(World worldIn, Entity playerIn) {
+        super(worldIn);
+        this.player = playerIn;
+        this.setNoAI(true);
+        this.setImmovable(true);
+        this.setNoGravity(true);
+        this.noClip = true;
+        this.setSize(0.8F, 9.0F);
+    }
+
   @Override
     public void onUpdate() {
         super.onUpdate();
@@ -47,24 +61,50 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
       this.rotationYawHead = 0;
       this.renderYawOffset = 0;
 
-      if(this.ticksExisted >= 19 && this.ticksExisted <= 25) {
-          world.setEntityState(this, ModUtils.PARTICLE_BYTE);
-      }
+      if(player != null) {
+          //Player Summoned Entity
+          if (this.ticksExisted >= 19 && this.ticksExisted <= 25) {
+              world.setEntityState(this, ModUtils.PARTICLE_BYTE);
+          }
 
-      if(this.ticksExisted == 22) {
-          List<EntityLivingBase> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable());
-          this.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.50f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
+          if (this.ticksExisted == 22) {
+              List<EntityLivingBase> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable());
+              this.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.50f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
 
-          if(!nearbyPlayers.isEmpty()) {
-              for(EntityLivingBase base : nearbyPlayers) {
-                  if(!(base instanceof EntityAOEArena) && !(base instanceof EntityMiniValon) && !(base instanceof EntityAvalon)) {
-                      Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
-                      DamageSource source = ModDamageSource.builder()
-                              .type(ModDamageSource.MOB)
-                              .directEntity(this)
-                              .build();
-                      float damage = 8.0F;
-                      ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false );
+              if (!nearbyPlayers.isEmpty()) {
+                  for (EntityLivingBase base : nearbyPlayers) {
+                      if (!(base instanceof EntityAOEArena) && base != player) {
+                          Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
+                          DamageSource source = ModDamageSource.builder()
+                                  .type(ModDamageSource.MOB)
+                                  .directEntity(this)
+                                  .build();
+                          float damage = (float) (ModConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
+                          ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
+                      }
+                  }
+              }
+          }
+      } else {
+          if (this.ticksExisted >= 19 && this.ticksExisted <= 25) {
+              world.setEntityState(this, ModUtils.PARTICLE_BYTE);
+          }
+
+          if (this.ticksExisted == 22) {
+              List<EntityLivingBase> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable());
+              this.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.50f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
+
+              if (!nearbyPlayers.isEmpty()) {
+                  for (EntityLivingBase base : nearbyPlayers) {
+                      if (!(base instanceof EntityAOEArena) && !(base instanceof EntityMiniValon) && !(base instanceof EntityAvalon)) {
+                          Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
+                          DamageSource source = ModDamageSource.builder()
+                                  .type(ModDamageSource.MOB)
+                                  .directEntity(this)
+                                  .build();
+                          float damage = (float) (ModConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
+                          ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
+                      }
                   }
               }
           }

@@ -267,7 +267,7 @@ public class ModUtils {
 
 
                     if(iblockstate == block) {
-                        System.out.println("Found BlockPos for Changing");
+
                         return blockpos;
                     }
                 }
@@ -293,7 +293,7 @@ public class ModUtils {
 
 
                     if(iblockstate == block && world.getBlockState(blockpos.up()) != ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState()) {
-                        System.out.println("Found BlockPos for Changing");
+
                         return blockpos;
                     }
                 }
