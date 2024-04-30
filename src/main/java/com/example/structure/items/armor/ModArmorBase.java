@@ -57,9 +57,10 @@ private String texture;
 
             // Override armor toughness to make is adjustable in game
             //Come back to Re-use when needed IF needed
-           // multimap.put(SharedMonsterAttributes.ARMOR_TOUGHNESS.getName(), new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Armor toughness", ModConfig.balance.armor_toughness, 0));
+            multimap.put(SharedMonsterAttributes.ARMOR_TOUGHNESS.getName(), new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Armor toughness", 3.0F, 0));
 
         }
+
 
         return multimap;
     }

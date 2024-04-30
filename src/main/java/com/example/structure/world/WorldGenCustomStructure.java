@@ -35,7 +35,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
     private int trader_spacing = ModConfig.avalon_trader_spacing;
 
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
-    public int plantsPerChunk = ModRand.range(8, 19);
+    public int plantsPerChunk = ModRand.range(8, 12);
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -78,7 +78,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                 //End Plants, the Turium plant, can only be found in any End Biome that has End Stone
                 //Cannot spawn in the Ash Wastelands
                 if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS &&
-                canStructureSpawn(chunkX, chunkZ, world, 68) && world.getBiomeForCoordsBody(pos).getClass() == BiomeEnd.class) {
+                canStructureSpawn(chunkX, chunkZ, world, 34) && world.getBiomeForCoordsBody(pos).getClass() == BiomeEnd.class) {
                     for (int k2 = 0; k2 < this.plantsPerChunk; ++k2) {
                         int l6 = random.nextInt(16) + 8;
                         int k10 = random.nextInt(16) + 8;

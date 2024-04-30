@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -40,6 +41,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class EntityChomper extends EntityModBase implements IAnimationTickable, IAnimatable, IAttack {
+
 
     private final String ANIM_WALK = "walk";
     private final String ANIM_IDLE = "idle";

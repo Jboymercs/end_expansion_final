@@ -19,10 +19,7 @@ import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.*;
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
 import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
-import com.example.structure.entity.trader.EntityAOEArena;
-import com.example.structure.entity.trader.EntityAvalon;
-import com.example.structure.entity.trader.EntityMiniValon;
-import com.example.structure.entity.trader.ProjectileBomb;
+import com.example.structure.entity.trader.*;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
 import net.minecraft.entity.Entity;
@@ -161,6 +158,8 @@ public class ModEntities {
         registerEntity("aoe_avalon", EntityAOEArena.class, ENTITY_START_ID++, 100);
         //Bomb Projectile used by the Avalon
         registerEntity("bomb_proj", ProjectileBomb.class, ENTITY_START_ID++, 100);
+        //Controller Lift
+        registerEntity("controller_lift", EntityControllerLift.class, ENTITY_START_ID++, 100);
 
     }
 

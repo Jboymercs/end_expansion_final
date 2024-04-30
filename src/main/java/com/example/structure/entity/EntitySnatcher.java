@@ -92,7 +92,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     @Override
     public void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(3, new EntityStalkAI<>(this, 1.0, 20, 10, 2, 0.6f, 10, true));
+        this.tasks.addTask(3, new EntityStalkAI<>(this, 1.0, 20, 30, 2, 0.6f, 10, true));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
@@ -292,14 +292,14 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
         if(!this.isAttacking() && !this.isAttackQuick()) {
             List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(basic_attack, fast_attack));
             double[] weights = {
-                    (distance < 3) ? 1/distance : 0, //Regular Attack
-                    (distance < 3 && prevAttack != fast_attack) ? 1/distance : 0 //Fast Attack
+                    (distance <= 4) ? 1/distance : 0, //Regular Attack
+                    (distance <= 4) ? 1/distance : 0 //Fast Attack
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
 
             prevAttack.accept(target);
         }
-        return 10;
+        return 30;
     }
 
     private Consumer<EntityLivingBase> basic_attack = (target)-> {

@@ -1,6 +1,7 @@
 package com.example.structure.util.handlers;
 
 import com.example.structure.util.ModReference;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -88,6 +89,12 @@ public class ModSoundHandler {
     public static SoundEvent TARGET_SUMMON;
     public static SoundEvent TARGET_IMPACT;
 
+    //Ancient Guilder
+    public static SoundEvent GUILDER_IDLE;
+    public static SoundEvent GUILDER_HURT;
+    public static SoundEvent GUILDER_AGGRO;
+    public static SoundEvent GUILDER_CHANGE;
+
     //The Avalon
     public static SoundEvent AVALON_IDLE;
     public static SoundEvent AVALON_AGREE;
@@ -157,6 +164,11 @@ public class ModSoundHandler {
         STALKER_SPOTTED = registerSound("stalker.spotted", "entity");
         STALKER_SWING = registerSound("stalker.swing", "entity");
         STALKER_STEP = registerSound("stalker.step", "entity");
+
+        GUILDER_HURT = registerSound("controller.hurt", "entity");
+        GUILDER_IDLE = registerSound("controller.idle", "entity");
+        GUILDER_AGGRO = registerSound("controller.aggro", "entity");
+        GUILDER_CHANGE = registerSound("controller.change", "entity");
 
         CHOMPER_IDLE = registerSound("chomper.idle", "entity");
         CHOMPER_HURT = registerSound("chomper.hurt", "entity");

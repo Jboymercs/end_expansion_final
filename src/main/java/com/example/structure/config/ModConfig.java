@@ -81,7 +81,7 @@ public class ModConfig {
     @Config.Name("Constructor ShockWave Damage")
     @Config.Comment("damage dealt by the Constructor when doing it's ground shock wave attack as a mutliplier, base damage * shockwave damage")
     @Config.RequiresMcRestart
-    public static float constructor_shockwave_damage= 2.0f;
+    public static float constructor_shockwave_damage= 2.5f;
 
     @Config.Name("Constructor Structure Spawn Chance")
     @Config.Comment("Change the chance of how many Constructors will spawn on the Lamented Islands dungeon")
@@ -92,6 +92,16 @@ public class ModConfig {
     @Config.Comment("Change the weights at which the Constructors naturally spawn in the End, or disable it entirely, lower value means less spawns, higher means more common")
     @Config.RequiresMcRestart
     public static int constructor_weights = 1;
+
+    @Config.Name("Ancient Guilder Health")
+    @Config.Comment("Change the Health of the Ancient Guilder")
+    @Config.RequiresMcRestart
+    public static double guilder_health = 35D;
+
+    @Config.Name("Ancient Guilder Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Anicent Guilder")
+    @Config.RequiresMcRestart
+    public static float guilder_attack_damage = 15F;
 
     @Config.Name("End Biome Structure Spawning Enabled/Disabled")
     @Config.Comment("Change the value to enable or disable structure spawning in the regular End Biome, this includes plants, End Vaults, Lamented islands, and other ruins")
@@ -201,7 +211,7 @@ public class ModConfig {
     @Config.Name("Ashed King Base Attack Damage")
     @Config.Comment("Change the base attack damage of the Ashed King")
     @Config.RequiresMcRestart
-    public static double end_king_damage = 12D;
+    public static double end_king_damage = 13D;
 
     @Config.Name("Ashed King Ghost Arm Damage Multiplier")
     @Config.Comment("Change the multiplier of ghost arm attacks * base damage")
@@ -246,7 +256,7 @@ public class ModConfig {
     @Config.Name("Knighthouse Projectile Swords Base Damage")
     @Config.Comment("Base damage of the projectile swords used by the Knights and End King")
     @Config.RequiresMcRestart
-    public static float projectile_sword_damage = 10.0f;
+    public static float projectile_sword_damage = 12.0f;
 
     @Config.Name("Knighthouse Base Health")
     @Config.Comment("Base Health for the Ender Knight, Mage, Shielder")
@@ -291,7 +301,7 @@ public class ModConfig {
     @Config.Name("Ashed Parasite Base Attack Damage")
     @Config.Comment("Change the base damage of the Ashed Parasite")
     @Config.RequiresMcRestart
-    public static float parasite_damage = 10.0f;
+    public static float parasite_damage = 16.0f;
 
     @Config.Name("End Stalker Base Health")
     @Config.Comment("Change the base health of the End Stalker")
@@ -301,7 +311,7 @@ public class ModConfig {
     @Config.Name("End Stalker Base Attack Damage")
     @Config.Comment("Change the Base Attack Damage of the End Stalker")
     @Config.RequiresMcRestart
-    public static float stalker_damage = 8.0f;
+    public static float stalker_damage = 12.0f;
 
     @Config.Name("End Stalker Hibernation Timer")
     @Config.Comment("After being spotted and hiding, this timer will start in which it will go out of hiding once ended, in seconds")
@@ -321,7 +331,7 @@ public class ModConfig {
     @Config.Name("Depths Chomper Attack Damage")
     @Config.Comment("Change the Chomper Attack Damage NOM NOM NOM!")
     @Config.RequiresMcRestart
-    public static float chomper_attack_damange = 16F;
+    public static float chomper_attack_damange = 20F;
 
     @Config.Name("Depths Chomper Spawn Rate")
     @Config.Comment("This is additional spawns that happen below Y 40, if you are wanting them to not spawn entirely, change Cave SpawnRates to 0")
@@ -366,7 +376,7 @@ public class ModConfig {
     public static int minion_lifeTime = 240;
 
     @Config.Name("Crown of A Past Era Minion Attack Damage")
-    @Config.Comment("Change the Attack Damage of the End King summoned by the Crown of A Past Era")
+    @Config.Comment("Change the Attack Damage of the Ashed King summoned by the Crown of A Past Era")
     @Config.RequiresMcRestart
     public static double minion_attack_damage = 18D;
 
@@ -378,7 +388,7 @@ public class ModConfig {
     @Config.Name("End Staff Projectile Damage")
     @Config.Comment("Change the Damage of the Projectile that End Fall staff shoots")
     @Config.RequiresMcRestart
-    public static float purp_projectile = 7.0f;
+    public static float purp_projectile = 14.0f;
 
     @Config.Name("End Staff Projectile Cooldown")
     @Config.Comment("Change the Cooldown of the projectile the End Fall staff shoots, in seconds")
@@ -461,7 +471,7 @@ public class ModConfig {
     @Config.Name("Avalon Trader Spacing")
     @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")
     @Config.RequiresMcRestart
-    public static int avalon_trader_spacing = 400;
+    public static int avalon_trader_spacing = 300;
 
     @Config.Name("Avalon Health")
     @Config.Comment("Change the Health of the Avalon Trader")
@@ -471,7 +481,7 @@ public class ModConfig {
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 17D;
+    public static double avalon_attack_damage = 18D;
 
     @Config.Name("Avalon Lazer Damage Multiplier")
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
@@ -540,7 +550,7 @@ public class ModConfig {
     @Config.Name("End Seeker Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker")
     @Config.RequiresMcRestart
-    public static double seeker_attack_damage = 9D;
+    public static double seeker_attack_damage = 11D;
 
 
 
@@ -552,7 +562,7 @@ public class ModConfig {
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 12D;
+    public static double seeker_prime_attack_damage = 14D;
 
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")
@@ -562,7 +572,7 @@ public class ModConfig {
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_attack_damage = 22D;
+    public static double barrend_golem_attack_damage = 29D;
 
     @Config.Name("Barrend Golem Attack Multiplier")
     @Config.Comment("Change X times base Attack Damage for specific abilities of the Barrend Golem, such as it's charge, and Slam Attacks")

@@ -99,7 +99,7 @@ public class EntityStalkAI<T extends EntitySnatcher & IAttack> extends EntityAIB
 
         if (distSq <= this.maxAttackDistSq && canSee) {
             this.attackTime--;
-            if (this.attackTime <= 0) {
+            if (this.attackTime <= 0 && this.entity.iAmPissedOff) {
                 this.attackTime = this.entity.startAttack(target, (float) distSq, this.strafingBackwards);
             }
         }

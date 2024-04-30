@@ -79,7 +79,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     private final String ANIM_TAKE_ITEM = "take_item";
     protected int buttTwitchTimer = 200 + (int) ModRand.getFloat(200);
 
-    protected int digTimer = 6000 + (int) ModRand.getFloat(1000);
+    protected int digTimer = 20000 + (int) ModRand.range(2000, 15000);
 
     protected int tamedDigTimer = 3000 + (int) ModRand.getFloat(1000);
     private EntityAISit aiSit;
@@ -194,7 +194,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
                             this.dropItem(ModItems.INFUSION_CORE, 1);
                             this.playSound(SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
                         }, 15);
-                        digTimer = 6000 + (int) ModRand.getFloat(1000);
+                        digTimer = 20000 + (int) ModRand.range(2000, 15000);
 
                     } else {
                         digTimer--;

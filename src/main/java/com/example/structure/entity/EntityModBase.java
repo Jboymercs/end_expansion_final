@@ -11,6 +11,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
@@ -125,6 +126,15 @@ public abstract class EntityModBase extends EntityCreature {
                 this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(changeAttackDamage);
                 this.setHealth(this.getMaxHealth());
                 hasStartedScaling = true;
+            }
+        }
+        //Deletion of Certain Entites due to there spamming
+        if(this.iAmBossMob) {
+            List<EntityEnderCrystal> nearbyEyes = this.world.getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
+            if(!nearbyEyes.isEmpty()) {
+                for(EntityEnderCrystal eye: nearbyEyes) {
+                    eye.setDead();
+                }
             }
         }
         //This is where target Switching occurs for bosses

@@ -79,6 +79,54 @@
       }
     ]
   },
+  "entity.controller.idle": {
+    "category": "entity",
+    "subtitle": "entity.controller.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/controller/idle_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/controller/idle_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.controller.hurt": {
+    "category": "entity",
+    "subtitle": "entity.controller.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/controller/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/controller/hurt_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.controller.aggro": {
+    "category": "entity",
+    "subtitle": "entity.controller.aggro",
+    "sounds": [
+      {
+        "name": "ee:entity/controller/aggro",
+        "stream": true
+      }
+    ]
+  },
+  "entity.controller.change": {
+    "category": "entity",
+    "subtitle": "entity.controller.change",
+    "sounds": [
+      {
+        "name": "ee:entity/controller/change",
+        "stream": true
+      }
+    ]
+  },
   "entity.king.dash": {
     "category": "entity",
     "subtitle": "entity.king.dash",

@@ -23,7 +23,7 @@ public class GuiBook extends GuiScreen {
     protected static final int Y = 180;
     private int currentPage;
     private int prevPage = -1;
-    private final int totalPages = 26;
+    private final int totalPages = 27;
     private static final ResourceLocation GUI_BASE_BOOK_BACKGROUND = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/book_default.png");
     private static final ResourceLocation GUI_INDEX_BUTTON = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button.png");
     private static final ResourceLocation GUI_INDEX_BUTTON_2 = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button_2.png");
@@ -74,10 +74,10 @@ public class GuiBook extends GuiScreen {
         this.buttonNextPage = this.addButton(new NextPageButton(1, t + 240, 154, true));
         this.buttonPrevPage = this.addButton(new NextPageButton(2, t + 12, 154, false));
         this.indexButtons = this.addButton(new IndexButtonTest(3, t + 151, 18, 1)); //End Resources and Creatures
-        this.indexButtons2 = this.addButton(new IndexButtonTest2(4, t + 151, 38, 4)); // Lamented Islands
-        this.indexButtons3 = this.addButton(new IndexButtonTest3(5, t + 151, 58, 7)); // Ash Wastelands
-        this.indexButtons4 = this.addButton(new IndexButtonTest4(6, t + 151, 78, 18)); //End King's Fortress
-        this.indexButtons5 = this.addButton(new IndexButtonTest5(7, t + 151, 98, 22)); //End Game Gear
+        this.indexButtons2 = this.addButton(new IndexButtonTest2(4, t + 151, 38, 5)); // Lamented Islands
+        this.indexButtons3 = this.addButton(new IndexButtonTest3(5, t + 151, 58, 8)); // Ash Wastelands
+        this.indexButtons4 = this.addButton(new IndexButtonTest4(6, t + 151, 78, 19)); //End King's Fortress
+        this.indexButtons5 = this.addButton(new IndexButtonTest5(7, t + 151, 98, 23)); //End Game Gear
 
         this.updateButtons();
     }
@@ -238,7 +238,21 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 12, "desc.guilder_");
                 GlStateManager.popMatrix();
                 break;
+
             case 4:
+                //Conversion Charts
+                GlStateManager.pushMatrix();
+                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 232, 115, 58, 115, 464);
+                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
+                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 91, 0, 348, 115, 58, 115, 464);
+                this.createLeftPictureTitleFromString("title.chart_1");
+                this.createRightPictureTitleFromString("title.chart_1_cont");
+                this.writeLeftFromString(6, 12, "desc.chart_");
+                GlStateManager.popMatrix();
+                break;
+
+            case 5:
                 //Lamented Islands + Constructor
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(MOB_PICTURES);
@@ -250,7 +264,7 @@ public class GuiBook extends GuiScreen {
           GlStateManager.popMatrix();
                 break;
 
-            case 5:
+            case 6:
                 //The Lamentor
 
                 GlStateManager.pushMatrix();
@@ -263,7 +277,7 @@ public class GuiBook extends GuiScreen {
                 GlStateManager.popMatrix();
                 break;
 
-            case 6:
+            case 7:
                 //Lamented Eye Trinket + End Compulsor
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
@@ -275,7 +289,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 13, "skill.shield_");
                 GlStateManager.popMatrix();
                 break;
-            case 7:
+            case 8:
                 //Ash Wastelands Biome + End Ash + Ash Brick
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
@@ -286,7 +300,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 12, "desc.ash_block_");
                 GlStateManager.popMatrix();
                 break;
-            case 8:
+            case 9:
                 //Unholy Crystals + Red Lamp
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
@@ -299,7 +313,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 9, "desc.cont_red_");
                 GlStateManager.popMatrix();
                 break;
-            case 9:
+            case 10:
                 //Door KeyHole + Door Creator
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
@@ -311,7 +325,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 10, "desc.crea_");
                 GlStateManager.popMatrix();
                 break;
-            case 10:
+            case 11:
                 //Ash Trap + Start of Ash Items
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
@@ -323,7 +337,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 7, "desc.lamp_");
                 GlStateManager.popMatrix();
                 break;
-            case 11:
+            case 12:
                 //Brick Rods + Amber Ore
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
@@ -336,7 +350,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 11, "desc.amber_ore_");
                 GlStateManager.popMatrix();
                 break;
-            case 12:
+            case 13:
                 //Amber Torches + Amber Pickaxe
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
@@ -349,7 +363,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 10, "desc.amber_pickaxe_");
                 GlStateManager.popMatrix();
                 break;
-            case 13:
+            case 14:
                 //Amber Axe + Amber Dagger
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
@@ -362,7 +376,7 @@ public class GuiBook extends GuiScreen {
                 GlStateManager.popMatrix();
                 break;
 
-            case 14:
+            case 15:
                 //Infused Crystals + Infused Pickaxe
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
@@ -375,7 +389,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 10, "desc.pick_");
                 GlStateManager.popMatrix();
                 break;
-            case 15:
+            case 16:
                 //Amber Armor Set + Helmet + Chestplate + leggings
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
@@ -388,7 +402,7 @@ public class GuiBook extends GuiScreen {
                 this.writeLeftFromString(6, 12, "desc.amber_armor_");
                 GlStateManager.popMatrix();
                 break;
-            case 16:
+            case 17:
                 //Amber Armor Set Boots + Depths Chomper
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
@@ -400,7 +414,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 12, "desc.chomper_");
                 GlStateManager.popMatrix();
                 break;
-            case 17:
+            case 18:
                 //Ashed Parasite + End Stalker
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(MOB_PICTURES);
@@ -414,7 +428,7 @@ public class GuiBook extends GuiScreen {
                 GlStateManager.popMatrix();
                 break;
 
-            case 18:
+            case 19:
                 //End King's Fortress plus other structures
                 GlStateManager.pushMatrix();
                 this.createLeftTitleFromString("title.end_fort_0");
@@ -424,7 +438,7 @@ public class GuiBook extends GuiScreen {
                 GlStateManager.popMatrix();
                 break;
 
-            case 19:
+            case 20:
                 //Ender Knights
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(MOB_PICTURES);
@@ -436,7 +450,7 @@ public class GuiBook extends GuiScreen {
                 GlStateManager.popMatrix();
                 break;
 
-            case 20:
+            case 21:
                 //Dark Armour Set
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
@@ -448,7 +462,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 9, "desc.dd_cont_");
                 GlStateManager.popMatrix();
                 break;
-            case 21:
+            case 22:
                 //Ender King + End Chad
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(MOB_PICTURES);
@@ -460,7 +474,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 13, "desc.king_");
                 GlStateManager.popMatrix();
                 break;
-            case 22:
+            case 23:
                 //Endfall Helmet, Chestplate
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
@@ -472,7 +486,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 12, "desc.end_cont_");
                 GlStateManager.popMatrix();
                 break;
-            case 23:
+            case 24:
                 //Endfall Leggings, Boots, and the Mini-Nuke
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
@@ -484,7 +498,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 9, "desc.mn_");
                 GlStateManager.popMatrix();
                 break;
-            case 24:
+            case 25:
                 //Endfall Sword & Bow
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
@@ -496,7 +510,7 @@ public class GuiBook extends GuiScreen {
                 this.writeRightFromString(6, 11, "skill.ef_bow_");
                 GlStateManager.popMatrix();
                 break;
-            case 25:
+            case 26:
                 //EndFall Staff
                 GlStateManager.pushMatrix();
                 this.mc.renderEngine.bindTexture(BLOCK_PICTURES);

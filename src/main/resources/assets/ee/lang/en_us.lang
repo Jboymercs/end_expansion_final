@@ -145,6 +145,7 @@ item.amber_sword.name=Cordium Sword
 item.obi_coin.name=Avalon's Bane
 item.bomb_proj.name=Avalon Projectile
 entity.bomb_proj.name=Avalon's Bomb
+entity.controller_lift.name=Guilder Lift
 entity.chomper_arrow.name=Chomper Arrow
 entity.unholy_arrow.name=Unholy Arrow
 
@@ -188,6 +189,8 @@ advancements.ee.kill_barrend.title=Long Ways Up
 advancements.ee.kill_barrend.description=Defeat the being that has taken over the Ashed Towers.
 advancements.ee.kill_chomper.title=Fine I'll let you sleep
 advancements.ee.kill_chomper.description=Slay a Depths Chomper
+advancements.ee.kill_avalon.title=Slay the Avalon
+advancements.ee.kill_avalon.description=located on the surface surrounded by obsidian pillars.
 
 
 
@@ -242,6 +245,8 @@ advancements.ee.craft_amber_armor.title=Can't hide from me now!
 advancements.ee.craft_amber_armor.description=Craft the full set of Cordium Armor.
 advancements.ee.craft_amber_torch.title=I'm safe now, right?
 advancements.ee.craft_amber_torch.description=Craft Cordium Torches.
+advancements.ee.find_coin.title=The End's Secrets
+advancements.ee.find_coin.description=Find an Avalon's Coin
 
 
 
@@ -342,6 +347,18 @@ desc.guilder_9=them, it will change the block within
 desc.guilder_10=there head. They will then search for
 desc.guilder_11=that block and change it into a set
 desc.guilder_12=different block.
+
+title.chart_1=Guilder Conversion Charts
+title.chart_1_cont=Conversion Charts Cont.
+
+#Chart of Conversions
+desc.chart_6=Here are the conversion charts for
+desc.chart_7=the Ancient Guilder. First slot is
+desc.chart_8=what you must interact with. The
+desc.chart_9=Second slot is what the Guilder
+desc.chart_10=needs to convert the block. Lastly,
+desc.chart_11=the third slot is what the block
+desc.chart_12=is converted into.
 
 # The Lamented islands
 title.lame_0=The Lamented Islands

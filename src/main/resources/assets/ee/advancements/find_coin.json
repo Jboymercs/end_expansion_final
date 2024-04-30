@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:obi_coin"
+    },
+    "title": {
+      "translate": "advancements.ee.find_coin.title"
+    },
+    "description": {
+      "translate": "advancements.ee.find_coin.description"
+    }
+  },
+  "parent": "ee:find_purple",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:obi_coin"
+          }
+        ]
+      }
+    }
+  }
+}
