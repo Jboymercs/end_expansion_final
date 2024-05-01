@@ -49,7 +49,7 @@ public class EndVaults {
 
     public void startVault(BlockPos pos, Rotation rot) {
             yAxel = pos.getY();
-            yAxel2Level = pos.getY() - 9;
+            yAxel2Level = pos.getY() - 10;
             VaultTemplate templateAdjusted = new VaultTemplate(manager, "start", pos, rot, 0, true);
             components.add(templateAdjusted);
         generateCross(templateAdjusted, BlockPos.ORIGIN, rot);
@@ -73,7 +73,7 @@ public class EndVaults {
 
 
     public boolean generateCross(VaultTemplate parent, BlockPos pos, Rotation rot) {
-        String[] cross_types = {"cross_1", "cross_2", "cross_3"};
+        String[] cross_types = {"cross_1", "cross_2", "cross_3", "cross_4"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) < yAxel) {
             return false;
@@ -102,7 +102,7 @@ public class EndVaults {
 
     private boolean generateHall(VaultTemplate parent, BlockPos pos, Rotation rot) {
         //Basic Hallway
-        String[] hall_types = {"straight_1", "straight_2", "straight_3", "straight_4"};
+        String[] hall_types = {"straight_1", "straight_2", "straight_3", "straight_4", "straight_5", "straight_6", "straight_7"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(hall_types), rot);
 
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel) {
@@ -153,7 +153,7 @@ public class EndVaults {
 
     private boolean generate2Start(VaultTemplate parent, BlockPos pos, Rotation rot) {
         VaultTemplate template = addAdjustedPiece(parent, pos, "2_start", rot);
-        VaultTemplate templateConnect = addAdjustedPiece(parent, pos.add(0, -10, 0), "2_connect", rot);
+        VaultTemplate templateConnect = addAdjustedPiece(parent, pos.add(0, -11, 0), "2_connect", rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SECOND_SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel
         || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level || getGroundFromAbove(world, pos.getX() + 8, pos.getZ() + 8) <= yAxel2Level) {
             return false;
@@ -166,7 +166,7 @@ public class EndVaults {
 
         int failedSTarts = 0;
         for(Tuple<Rotation, BlockPos> tuple : CROSS_POS) {
-            if(!generateCrossLevel(template, tuple.getSecond().add(0, -10, 0), rot.add(tuple.getFirst())) || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level) {
+            if(!generateCrossLevel(template, tuple.getSecond().add(0, -11, 0), rot.add(tuple.getFirst())) || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level) {
                 failedSTarts++;
             }
 
@@ -175,7 +175,7 @@ public class EndVaults {
         if(failedSTarts > 3) {
             components.clear();
             components.addAll(structures);
-            generateEndLevel(template, pos.add(0, -10, 0), rot);
+            generateEndLevel(template, pos.add(0, -11, 0), rot);
         }
         return true;
     }
@@ -236,7 +236,7 @@ public class EndVaults {
     }
 
     public boolean generateCrossLevel(VaultTemplate parent, BlockPos pos, Rotation rot) {
-        String[] cross_types = {"2_cross_1", "2_cross_2", "2_cross_3", "2_cross_4"};
+        String[] cross_types = {"2_cross_1", "2_cross_2", "2_cross_3", "2_cross_4", "2_cross_5"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SECOND_SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level) {
             return false;
@@ -264,7 +264,7 @@ public class EndVaults {
 
     private boolean generateHallLevel(VaultTemplate parent, BlockPos pos, Rotation rot) {
         //Basic Hallway
-        String[] hall_types = {"2_straight_1", "2_straight_2", "2_straight_3", "2_straight_4"};
+        String[] hall_types = {"2_straight_1", "2_straight_2", "2_straight_3", "2_straight_4", "2_straight_5", "2_straight_6"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(hall_types), rot);
 
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SECOND_SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level) {

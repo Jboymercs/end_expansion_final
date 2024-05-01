@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockReverseOff extends BlockBase implements ITileEntityProvider {
+public class BlockReverseOff extends BlockBase implements ITileEntityProvider, IBlockUpdater {
     public BlockReverseOff(String name, Material material) {
         super(name, material);
     }
@@ -57,5 +57,10 @@ public class BlockReverseOff extends BlockBase implements ITileEntityProvider {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityReverseOff();
+    }
+
+    @Override
+    public void update(World world, BlockPos pos) {
+
     }
 }

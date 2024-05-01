@@ -2,6 +2,7 @@ package com.example.structure.entity;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.arrow.EntityModArrow;
+import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.endking.EntityGroundSword;
 import com.example.structure.entity.endking.EntityRedCrystal;
@@ -79,7 +80,7 @@ public class EntitySwordSpike extends EntityModBase implements IAnimatable {
         if(this.ticksExisted > 5 && this.ticksExisted <= 20) {
             if(!targets.isEmpty()) {
                 for(EntityLivingBase base : targets) {
-                    if (base != owner) {
+                    if (base != owner && !(base instanceof EntityBarrendGolem)) {
                         Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.5));
                         DamageSource source = ModDamageSource.builder()
                                 .type(ModDamageSource.MOB)

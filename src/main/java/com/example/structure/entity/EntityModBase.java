@@ -38,7 +38,10 @@ public abstract class EntityModBase extends EntityCreature {
 
     public boolean lockLook = false;
 
+    //This setting is for all the bosses in the mod, where scaling will take place
     public boolean iAmBossMob = false;
+    //This setting is for all non-targetable Entities, things like AOE rings and such
+    public boolean iAmEffectMob = false;
 
     public EntityModBase(World worldIn, float x, float y, float z) {
         super(worldIn);
@@ -65,6 +68,8 @@ public abstract class EntityModBase extends EntityCreature {
     private static float regenStartTimer = 20;
 
     private Vec3d initialPosition = null;
+
+
 
     protected static final DataParameter<Boolean> IMMOVABLE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 

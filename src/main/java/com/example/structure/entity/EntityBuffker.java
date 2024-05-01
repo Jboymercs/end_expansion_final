@@ -75,11 +75,11 @@ public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable,
     @Override
     public boolean getCanSpawnHere() {
         // Middle end island check
-        if (this.world.provider.getDimension() == 1  && this.world.rand.nextInt(28) == 0) {
-            return ModConfig.does_spawn_middle || this.posX > 500 || this.posX < -500 || this.posZ > 500 || this.posZ < -500;
+        if (this.world.provider.getDimension() == 1 && world.rand.nextInt(28) == 0) {
+            return !ModConfig.does_spawn_middle ? Math.abs(this.posX) > 500 || Math.abs(this.posZ) > 500 : true;
         }
-
         return super.getCanSpawnHere();
+
     }
 
     @Override

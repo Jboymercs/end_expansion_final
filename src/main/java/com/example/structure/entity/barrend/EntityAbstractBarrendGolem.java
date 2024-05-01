@@ -8,12 +8,14 @@ import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.util.IPitch;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -21,6 +23,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -28,6 +32,7 @@ import java.util.List;
 
 public abstract class EntityAbstractBarrendGolem extends EntityModBase implements IEntityMultiPart, IPitch {
 
+    private final BossInfoServer bossInfo = (new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.NOTCHED_6));
     private final MultiPartEntityPart[] hitboxParts;
     private final MultiPartEntityPart model = new MultiPartEntityPart(this, "model", 0f, 0f);
     private final MultiPartEntityPart main_body = new MultiPartEntityPart(this, "main_body", 1.0f, 3.0f);
@@ -57,6 +62,9 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     protected static final DataParameter<Boolean> LEAP_SLAM = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> AWAKEN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> STILL = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+
+    protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SUMMON_MINIONS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
 
     public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
@@ -89,8 +97,10 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     public boolean isAwaken() {return this.dataManager.get(AWAKEN);}
     public void setStill(boolean value) {this.dataManager.set(STILL, Boolean.valueOf(value));}
     public boolean isStill() {return this.dataManager.get(STILL);}
-
-
+    public void setShootProjectiles(boolean value) {this.dataManager.set(SHOOT_PROJECTILES, Boolean.valueOf(value));}
+    public boolean isShootProjectiles() {return this.dataManager.get(SHOOT_PROJECTILES);}
+    public void setSummonMinions(boolean value) {this.dataManager.set(SUMMON_MINIONS, Boolean.valueOf(value));}
+    public boolean isSummonMinions() {return this.dataManager.get(SUMMON_MINIONS);}
 
 
 
@@ -124,6 +134,8 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         this.dataManager.register(LEAP_SLAM, Boolean.valueOf(false));
         this.dataManager.register(AWAKEN, Boolean.valueOf(false));
         this.dataManager.register(STILL, Boolean.valueOf(false));
+        this.dataManager.register(SUMMON_MINIONS, Boolean.valueOf(false));
+        this.dataManager.register(SHOOT_PROJECTILES, Boolean.valueOf(false));
         super.entityInit();
     }
 
@@ -147,6 +159,8 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     @Override
     public void onUpdate() {
         super.onUpdate();
+
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 
         if(this.isStill() || this.isAwaken()) {
             this.motionX = 0;
@@ -190,7 +204,7 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     public void setTooAwaken() {
         this.setStill(false);
         this.setAwaken(true);
-
+        this.playSound(ModSoundHandler.BARREND_AWAKEN, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.2f);
         addEvent(()-> {
         this.setAwaken(false);
         this.setNoAI(false);
@@ -231,20 +245,20 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         if(this.isWormBack()) {
             this.setHitBoxPos(part_back_worm, new Vec3d(0.7, 1.7, 0));
         } else {
-            this.setHitBoxPos(part_back_worm, new Vec3d(0, 0.5, 0).scale(0));
+            this.setHitBoxPos(part_back_worm, new Vec3d(0, 2.5, 0).scale(0));
         }
 
 
         if(this.isWormLeft()) {
             this.setHitBoxPos(part_left_worm, new Vec3d(0, 2.8, 0.9));
         } else {
-            this.setHitBoxPos(part_left_worm, new Vec3d(0, 0.5, 0).scale(0));
+            this.setHitBoxPos(part_left_worm, new Vec3d(0, 2.5, 0).scale(0));
         }
 
         if(this.isWormRight()) {
             this.setHitBoxPos(part_right_worm, new Vec3d(0, 2.3, -1.5));
         } else {
-            this.setHitBoxPos(part_right_worm, new Vec3d(0, 0.5, 0).scale(0));
+            this.setHitBoxPos(part_right_worm, new Vec3d(0, 2.5, 0).scale(0));
         }
 
 
@@ -265,7 +279,7 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.barrend_golem_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.barrend_golem_attack_damage);
@@ -314,6 +328,17 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         return this.hitboxParts;
     }
 
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
+    }
 
     @Override
     public void setPitch(Vec3d look) {

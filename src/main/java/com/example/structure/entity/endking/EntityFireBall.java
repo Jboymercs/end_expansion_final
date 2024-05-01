@@ -111,7 +111,7 @@ public class EntityFireBall extends EntityModBase implements IAnimatable {
     public void onGroundTouch() {
         this.hasSpawnedExplosion = true;
         if(!world.isRemote) {
-            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 1, true, false);
+            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 1, false, false);
             addEvent(this::setDead, 5);
         }
     }

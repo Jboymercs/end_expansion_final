@@ -145,7 +145,7 @@ public class ModEntities {
         //End King Friendly - Item Summon
         registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
 
-        registerEntityWithID("chomper", EntityChomper.class, ENTITY_START_ID++, 80, ash_mobs);
+        registerEntityWithID("depths_chomper", EntityChomper.class, ENTITY_START_ID++, 80, ash_mobs);
         registerEntity("large_aoe", EntityLargeAOEEffect.class, ENTITY_START_ID++, 80);
         registerEntity("unholy_arrow", EntityUnholyArrow.class, ENTITY_START_ID++, 80);
         registerEntity("chomper_arrow", EntityChomperArrow.class, ENTITY_START_ID++, 90);
@@ -160,6 +160,10 @@ public class ModEntities {
         registerEntity("bomb_proj", ProjectileBomb.class, ENTITY_START_ID++, 100);
         //Controller Lift
         registerEntity("controller_lift", EntityControllerLift.class, ENTITY_START_ID++, 100);
+        //Projectile Acid - Barrend Golem
+        registerEntity("acid_proj", ProjectileAcid.class, ENTITY_START_ID++, 100);
+        //Barrend Parasite
+        registerEntity("barrend_parasite", EntityBarrendParasite.class, ENTITY_START_ID++, 100);
 
     }
 

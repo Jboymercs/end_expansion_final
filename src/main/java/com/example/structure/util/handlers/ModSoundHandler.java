@@ -94,6 +94,21 @@ public class ModSoundHandler {
     public static SoundEvent GUILDER_HURT;
     public static SoundEvent GUILDER_AGGRO;
     public static SoundEvent GUILDER_CHANGE;
+    //Barrend Golem and Parasite
+    public static SoundEvent PARASITE_GROUND;
+    public static SoundEvent BARREND_PARASITE_BITE;
+    public static SoundEvent BARREND_HIT;
+    public static SoundEvent BARREND_RAISE_ARM;
+    public static SoundEvent BARREND_SLAM;
+    public static SoundEvent BARREND_SLAM_JUMP;
+    public static SoundEvent BARREND_STRIKE;
+    public static SoundEvent BARREND_SHOOT;
+    public static SoundEvent BARREND_CHARGE;
+    public static SoundEvent BARREND_COLLIDE;
+    public static SoundEvent BARREND_SHORT_RAISE;
+    public static SoundEvent BARREND_AWAKEN;
+    public static SoundEvent BARREND_HURT;
+    public static SoundEvent BARREND_IDLE;
 
     //The Avalon
     public static SoundEvent AVALON_IDLE;
@@ -169,6 +184,21 @@ public class ModSoundHandler {
         GUILDER_IDLE = registerSound("controller.idle", "entity");
         GUILDER_AGGRO = registerSound("controller.aggro", "entity");
         GUILDER_CHANGE = registerSound("controller.change", "entity");
+
+        PARASITE_GROUND = registerSound("parasite.ground", "entity");
+        BARREND_PARASITE_BITE = registerSound("barrend.bite", "entity");
+        BARREND_HIT = registerSound("barrend.hit", "entity");
+        BARREND_RAISE_ARM = registerSound("barrend.raise_arm", "entity");
+        BARREND_SLAM = registerSound("barrend.slam", "entity");
+        BARREND_SLAM_JUMP = registerSound("barrend.slam_jump", "entity");
+        BARREND_STRIKE = registerSound("barrend.strike", "entity");
+        BARREND_SHOOT = registerSound("barrend.shoot", "entity");
+        BARREND_CHARGE = registerSound("barrend.charge", "entity");
+        BARREND_COLLIDE = registerSound("barrend.collide", "entity");
+        BARREND_SHORT_RAISE = registerSound("barrend.short_raise", "entity");
+        BARREND_AWAKEN = registerSound("barrend.awaken", "entity");
+        BARREND_IDLE = registerSound("barrend.idle", "entity");
+        BARREND_HURT = registerSound("barrend.hurt", "entity");
 
         CHOMPER_IDLE = registerSound("chomper.idle", "entity");
         CHOMPER_HURT = registerSound("chomper.hurt", "entity");

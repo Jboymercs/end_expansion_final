@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockDungeonDoor extends BlockBase{
+public class BlockDungeonDoor extends BlockBase implements IBlockUpdater, ITileEntityProvider{
     public static final PropertyDirection FACING = BlockDirectional.FACING;
     public static final PropertyBool TRIGGERED = PropertyBool.create("triggered");
 
@@ -165,9 +165,13 @@ public class BlockDungeonDoor extends BlockBase{
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityDoorStart();
+    public void update(World world, BlockPos pos) {
+
     }
 
-
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityDoorStart();
+    }
 }

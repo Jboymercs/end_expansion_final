@@ -793,7 +793,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 float damage = this.getAttack() * ModConfig.hammer_multiplier;
                 float explostionFactor = ModConfig.explosion_size;
                 ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.9f, 1, false);
-                this.world.newExplosion(this, offset.x, offset.y, offset.z, explostionFactor, true, true);
+                this.world.newExplosion(this, offset.x, offset.y, offset.z, explostionFactor, false, true);
             }, 20);
 
             addEvent(() -> this.setFightMode(false), 40);

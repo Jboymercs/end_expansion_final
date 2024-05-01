@@ -24,17 +24,17 @@ public class ModItems {
 
 
 
-    private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 100, 8.0f, ModConfig.sword_damage, 20);
+    private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 450, 8.0f, ModConfig.sword_damage, 20);
 
-    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 3, 300, 7.0F, ModConfig.dagger_damage, 25);
-    private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 600, 8.0f, 8.0F, 20);
+    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 5, 300, 7.0F, ModConfig.dagger_damage, 25);
+    private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 974, 8.0f, 8.0F, 20);
 
-    private static final Item.ToolMaterial PURE_AXE_MATERIAL = EnumHelper.addToolMaterial("pure", 3, 525, 7.0F, 7.0F, 40);
+    private static final Item.ToolMaterial PURE_AXE_MATERIAL = EnumHelper.addToolMaterial("pure", 3, 625, 7.0F, 7.0F, 40);
     private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1300, 8.0f, ModConfig.endfall_sword_damage, 50);
 
-    private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 5, 1000, 8.0F, 4, 25);
+    private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 6, 1781, 10.0F, 4, 25);
 
-    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 900, 7.0F, 7.0F, 40);
+    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, 7.0F, 40);
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
     private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
@@ -98,7 +98,7 @@ public class ModItems {
     public static final Item KING_CROWN = new ItemKingCrown("king_crown", ModCreativeTabs.ITEMS, "crown_desc");
 
     public static final Item AMBER_DAGGER = new ItemChomperDagger("amber_dagger", DAGGER_MATERIAL, "dagger_desc");
-    public static final Item AMBER_PICKAXE = new ItemAmberPickaxe("amber_pickaxe", DAGGER_MATERIAL);
+    public static final Item AMBER_PICKAXE = new ItemAmberPickaxe("amber_pickaxe", AMBER_SET);
 
 
     public static final Item UNHOLY_ARROW = new ItemUnholyArrow("mod_arrow_unholy");
@@ -106,6 +106,7 @@ public class ModItems {
 
     public static final Item BOMB_PROJECTILE = new ItemBase("bomb_proj", null);
 
+    public static final Item ACID_PROJECTILE = new ItemBase("green_orb", null);
 
 
     //Misc.

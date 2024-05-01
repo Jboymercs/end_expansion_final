@@ -43,7 +43,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
         int z = chunkZ * 16;
         BlockPos pos = new BlockPos(x + 8, 0, z + 8);
         //End Expansion Structures - Mostly just the base ones, can't spawn within radius of the Ender Dragon Island
-        if(world.provider.getDimension() == 1  || pos.getX() > 500 || pos.getX() < -500 || pos.getZ() > 500 || pos.getZ() < -500) {
+        if(world.provider.getDimension() == 1  && Math.abs(pos.getX()) > 600 || world.provider.getDimension() == 1 && Math.abs(pos.getZ()) > 600 ) {
             if (ModConfig.does_structure_spawn) {
 
                 // Lamented Islands, the first major boss Arena and dungeon of the mod

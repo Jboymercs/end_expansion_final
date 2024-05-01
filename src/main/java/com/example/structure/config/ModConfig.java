@@ -19,7 +19,7 @@ public class ModConfig {
     @Config.Name("Lamentor Boss Health")
     @Config.Comment("Change the Health of the Lamentor")
     @Config.RequiresMcRestart
-    public static float health = 350f;
+    public static float health = 400f;
 
     @Config.Name("Lamentor Attack Speed")
     @Config.Comment("Change the speed at which the Lamentor attacks in seconds, smaller number means quicker, larger number means slower, warning 0 might be buggy")
@@ -30,17 +30,17 @@ public class ModConfig {
     @Config.Name("Lamentor Attack Damage")
     @Config.Comment("Change the Attack Damage of the Lamentor")
     @Config.RequiresMcRestart
-    public static double attack_damage= 13D;
+    public static double attack_damage= 15D;
 
     @Config.Name("Lamentor Ranged Crystal Damage")
     @Config.Comment("Change the damage of the flying Crystals")
     @Config.RequiresMcRestart
-    public static float crystal_damage= 15.0f;
+    public static float crystal_damage= 19.0f;
 
     @Config.Name("Lamentor Pierce Damage")
     @Config.Comment("Change the multiplier of the Lamentor's Pierce attacks, base damage * pierce multiplier")
     @Config.RequiresMcRestart
-    public static float pierce_multiplier = 1.8f;
+    public static float pierce_multiplier = 1.7f;
 
     @Config.Name("Lamentor Circle Attack Multiplier")
     @Config.Comment("Change the multiplier of the Lamentor's Circle Attack, base damage * circle attack multiplier")
@@ -50,7 +50,7 @@ public class ModConfig {
     @Config.Name("Lamentor Hammer Attack Multiplier")
     @Config.Comment("Change the multiplier of the Lamentors Hammer Attack, base damage * hammer attack multiplier")
     @Config.RequiresMcRestart
-    public static float hammer_multiplier = 1.4f;
+    public static float hammer_multiplier = 1.8f;
 
     @Config.Name("Lamentor Explosion Size")
     @Config.Comment("Change the size of explosion for the Lamentors Hammer Attack")
@@ -61,7 +61,7 @@ public class ModConfig {
     @Config.Name("Ground Crystal Damage")
     @Config.Comment("Change the damage done by Ground Crystals")
     @Config.RequiresMcRestart
-    public static float ground_crystal_damage= 12f;
+    public static float ground_crystal_damage= 17f;
 
     @Config.Name("Constructor Health")
     @Config.Comment("Change the Health of the Constructor")
@@ -201,7 +201,7 @@ public class ModConfig {
     @Config.Name("Ashed King Health")
     @Config.Comment("Change the Health of the Ashed King")
     @Config.RequiresMcRestart
-    public static float end_king_health = 650f;
+    public static float end_king_health = 600f;
 
     @Config.Name("Ashed King Scaled Attack Factor")
     @Config.Comment("This value raises the attack damage of the Ashed King the lower it's health is, to incentivize further punishment in not dodging the bosses moves later in the fight")
@@ -211,7 +211,7 @@ public class ModConfig {
     @Config.Name("Ashed King Base Attack Damage")
     @Config.Comment("Change the base attack damage of the Ashed King")
     @Config.RequiresMcRestart
-    public static double end_king_damage = 13D;
+    public static double end_king_damage = 28D;
 
     @Config.Name("Ashed King Ghost Arm Damage Multiplier")
     @Config.Comment("Change the multiplier of ghost arm attacks * base damage")
@@ -221,22 +221,22 @@ public class ModConfig {
     @Config.Name("Ashed King Leap Attack Multiplier")
     @Config.Comment("Change the multiplier of the Ashed Kings Leap attack")
     @Config.RequiresMcRestart
-    public static double end_king_leap_attack = 1.5D;
+    public static double end_king_leap_attack = 1.3D;
 
     @Config.Name("Ashed King Red Ground Crystal Damage")
     @Config.Comment("Change the damage of the red Crystals the Ashed King summons")
     @Config.RequiresMcRestart
-    public static double red_crystal_damage = 15D;
+    public static double red_crystal_damage = 19D;
 
     @Config.Name("Ashed King Ground Sword Damage")
     @Config.Comment("Change the damage of the Swords that hit the ground in the Ashed King boss fight")
     @Config.RequiresMcRestart
-    public static double ground_sword_damage = 17D;
+    public static double ground_sword_damage = 27D;
 
     @Config.Name("Ashed King lazer Damage")
     @Config.Comment("Change the Damage Multiplier of the Lazer Beam shot by the End King")
     @Config.RequiresMcRestart
-    public static double lazer_damage_multiplier = 1.6;
+    public static double lazer_damage_multiplier = 1.3;
 
     @Config.Name("Ashed King Lazer Explosion Size")
     @Config.Comment("Change the Explosion size of the Lazer Beam")
@@ -311,7 +311,7 @@ public class ModConfig {
     @Config.Name("End Stalker Base Attack Damage")
     @Config.Comment("Change the Base Attack Damage of the End Stalker")
     @Config.RequiresMcRestart
-    public static float stalker_damage = 12.0f;
+    public static float stalker_damage = 19.0f;
 
     @Config.Name("End Stalker Hibernation Timer")
     @Config.Comment("After being spotted and hiding, this timer will start in which it will go out of hiding once ended, in seconds")
@@ -331,7 +331,7 @@ public class ModConfig {
     @Config.Name("Depths Chomper Attack Damage")
     @Config.Comment("Change the Chomper Attack Damage NOM NOM NOM!")
     @Config.RequiresMcRestart
-    public static float chomper_attack_damange = 20F;
+    public static float chomper_attack_damange = 30F;
 
     @Config.Name("Depths Chomper Spawn Rate")
     @Config.Comment("This is additional spawns that happen below Y 40, if you are wanting them to not spawn entirely, change Cave SpawnRates to 0")
@@ -341,7 +341,7 @@ public class ModConfig {
     @Config.Name("Red Rage Potion Effect Damage")
     @Config.Comment("Damage the Red Rage deals to entities near you when affected")
     @Config.RequiresMcRestart
-    public static float potion_damage = 13.0f;
+    public static float potion_damage = 17.0f;
 
     @Config.Name("Nuke Base Damage")
     @Config.Comment("If caught inside the nuke, it will deal X damage while in it. Used by the End King")
@@ -378,7 +378,7 @@ public class ModConfig {
     @Config.Name("Crown of A Past Era Minion Attack Damage")
     @Config.Comment("Change the Attack Damage of the Ashed King summoned by the Crown of A Past Era")
     @Config.RequiresMcRestart
-    public static double minion_attack_damage = 18D;
+    public static double minion_attack_damage = 28D;
 
     @Config.Name("Guilded Shield Cooldown")
     @Config.Comment("Change the cooldown for the Guilded shield, in seconds")
@@ -434,7 +434,7 @@ public class ModConfig {
     @Config.Name("End King Fortress")
     @Config.Comment("Change the spacing of the End King Fortress in chunks away from another, this is applied in chunks that are Ash Wastelands not every chunk")
     @Config.RequiresMcRestart
-    public static int fortress_spacing = 75;
+    public static int fortress_spacing = 70;
 
     @Config.Name("End King Fortress Odds")
     @Config.Comment("Change the odds of this structure spawning, take in mind the fortress has few structure to compete with for odds of spawning")
@@ -455,7 +455,7 @@ public class ModConfig {
     @Config.Name("End Vaults Mob Chance")
     @Config.Comment("Change the chance of mob spawns in the End Vaults, Higher is better chance")
     @Config.RangeInt(min = 0, max = 10)
-    public static int vault_mob_chance = 4;
+    public static int vault_mob_chance = 7;
 
 
     @Config.Name("End Vault Size")
@@ -476,12 +476,12 @@ public class ModConfig {
     @Config.Name("Avalon Health")
     @Config.Comment("Change the Health of the Avalon Trader")
     @Config.RequiresMcRestart
-    public static double avalon_health = 350D;
+    public static double avalon_health = 400D;
 
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 18D;
+    public static double avalon_attack_damage = 34D;
 
     @Config.Name("Avalon Lazer Damage Multiplier")
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
@@ -547,10 +547,10 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static double seeker_health = 40D;
 
-    @Config.Name("End Seeker Attack Damaage")
+    @Config.Name("End Seeker Attack Damage")
     @Config.Comment("Change the Attack Damage of the End Seeker")
     @Config.RequiresMcRestart
-    public static double seeker_attack_damage = 11D;
+    public static double seeker_attack_damage = 13D;
 
 
 
@@ -562,17 +562,17 @@ public class ModConfig {
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 14D;
+    public static double seeker_prime_attack_damage = 16D;
 
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_health = 125D;
+    public static double barrend_golem_health = 85D;
 
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_attack_damage = 29D;
+    public static double barrend_golem_attack_damage = 32D;
 
     @Config.Name("Barrend Golem Attack Multiplier")
     @Config.Comment("Change X times base Attack Damage for specific abilities of the Barrend Golem, such as it's charge, and Slam Attacks")

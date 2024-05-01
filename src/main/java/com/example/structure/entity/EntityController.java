@@ -108,8 +108,8 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     @Override
     public boolean getCanSpawnHere() {
         // Middle end island check
-        if (this.world.provider.getDimension() == 1 && this.world.rand.nextInt(28) == 0) {
-            return ModConfig.does_spawn_middle || this.posX > 500 || this.posX < -500 || this.posZ > 500 || this.posZ < -500;
+        if (this.world.provider.getDimension() == 1 && world.rand.nextInt(28) == 0) {
+            return !ModConfig.does_spawn_middle ? Math.abs(this.posX) > 500 || Math.abs(this.posZ) > 500 : true;
         }
 
         return super.getCanSpawnHere();
@@ -243,8 +243,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
                     for(EntityPlayer player : nearbyEntities) {
                         if (!player.isCreative() && !player.isSpectator()) {
                             if (player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.DARK_HELMET || player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.DARK_CHESTPLATE ||
-                                    player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_AXE || player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_ITEM ||
-                                    player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK || player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD) {
+                                    player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_AXE || player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK || player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD) {
                                 this.setAttackTarget(player);
                                 this.playSound(ModSoundHandler.GUILDER_AGGRO, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.2f));
                             }

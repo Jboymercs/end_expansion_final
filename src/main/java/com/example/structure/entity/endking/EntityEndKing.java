@@ -14,6 +14,7 @@ import com.example.structure.entity.util.IAttack;
 import com.example.structure.entity.util.TimedAttackIniator;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -179,6 +180,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
 
     }
 
+
+
     protected boolean beginAI = false;
     @Override
     public void onLivingUpdate() {
@@ -190,6 +193,13 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         if(this.isFlyDashMove()) {
             AxisAlignedBB box = getEntityBoundingBox().grow(1.1, 0.1, 1.1).offset(0, -0.1, 0);
             ModUtils.destroyBlocksInAABB(box, world, this);
+        }
+
+        if(this.hurtTime > 0 && world.getBlockState(this.getPosition()).isFullBlock() && world.getBlockState(this.getPosition().up()).isFullBlock() &&
+        world.getBlockState(this.getPosition().add(0, 2,0)).isFullBlock()) {
+            AxisAlignedBB box = getEntityBoundingBox().grow(1.1, 0.1, 1.1).offset(0, -0.1, 0);
+            ModUtils.destroyBlocksInAABB(box, world, this);
+            this.setPosition(this.getPosition());
         }
 
         //This is used in Phase 3 for when the boss is flying
@@ -893,7 +903,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
             Vec3d enemyPosToo = target.getPositionVector().add(ModUtils.yVec(1));
             addEvent(()-> {
             this.playSound(ModSoundHandler.KING_DASH, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-            int randomDeterminedDistance = ModRand.range(4, 6);
+            int randomDeterminedDistance = 8;
             Vec3d enemyPos = enemyPosToo;
 
             Vec3d startPos = this.getPositionVector().add(ModUtils.yVec(getEyeHeight()));
@@ -907,7 +917,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                 boolean safeLanding = ModUtils.cubePoints(0, -2, 0, 1, 0, 1).stream()
                         .anyMatch(off -> world.getBlockState(new BlockPos(pos.add(off)))
                                 .isSideSolid(world, new BlockPos(pos.add(off)).down(), EnumFacing.UP));
-                boolean notOpen = ModUtils.cubePoints(0, 1, 0, 2, 3, 2).stream()
+                boolean notOpen = ModUtils.cubePoints(-2, 1, -2, 2, 4, 2).stream()
                         .anyMatch(off -> world.getBlockState(new BlockPos(pos.add(off)))
                                 .causesSuffocation());
 
@@ -924,6 +934,12 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                     this.damageViable = false;
             }   , 30);
         addEvent(()-> setPhaseMode(false), 35);
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn)
+    {
+        this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 0.6F, 0.7f + ModRand.getFloat(0.3F));
     }
 
     /**

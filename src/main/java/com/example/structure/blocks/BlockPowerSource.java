@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockPowerSource extends BlockBase implements ITileEntityProvider {
+public class BlockPowerSource extends BlockBase implements ITileEntityProvider, IBlockUpdater {
 
 
 
@@ -58,4 +58,8 @@ public class BlockPowerSource extends BlockBase implements ITileEntityProvider {
     }
 
 
+    @Override
+    public void update(World world, BlockPos pos) {
+
+    }
 }

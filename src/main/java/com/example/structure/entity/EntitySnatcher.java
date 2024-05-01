@@ -292,8 +292,8 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
         if(!this.isAttacking() && !this.isAttackQuick()) {
             List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(basic_attack, fast_attack));
             double[] weights = {
-                    (distance <= 4) ? 1/distance : 0, //Regular Attack
-                    (distance <= 4) ? 1/distance : 0 //Fast Attack
+                    (distance <= 4) ? 10 : 0, //Regular Attack
+                    (distance <= 4) ? 10 : 0 //Fast Attack
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
 

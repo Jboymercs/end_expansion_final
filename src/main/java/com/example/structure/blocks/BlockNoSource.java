@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockNoSource extends BlockBase implements ITileEntityProvider {
+public class BlockNoSource extends BlockBase implements ITileEntityProvider, IBlockUpdater {
     public BlockNoSource(String name, Material material, float hardness, float resistance, SoundType soundType) {
         super(name, material, hardness, resistance, soundType);
     }
@@ -51,5 +51,10 @@ public class BlockNoSource extends BlockBase implements ITileEntityProvider {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityNoSource();
+    }
+
+    @Override
+    public void update(World world, BlockPos pos) {
+
     }
 }

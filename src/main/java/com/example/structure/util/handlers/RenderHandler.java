@@ -154,5 +154,9 @@ public class RenderHandler {
         registerProjectileRenderer(ProjectileBomb.class);
         //Controller Lift
         RenderingRegistry.registerEntityRenderingHandler(EntityControllerLift.class, RenderControllerLift::new);
+        //Projectile Acid
+        registerProjectileRenderer(ProjectileAcid.class);
+        //Barrend Parasite
+        RenderingRegistry.registerEntityRenderingHandler(EntityBarrendParasite.class, RenderBarrendParasite::new);
     }
 }

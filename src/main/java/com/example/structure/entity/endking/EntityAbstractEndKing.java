@@ -154,6 +154,8 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     protected boolean sendPing = false;
     public boolean isMeleeMode = false;
 
+
+
     public boolean isRangedMode = false;
     public float variable_distance = 10f;
     public EntityAbstractEndKing(World world) {

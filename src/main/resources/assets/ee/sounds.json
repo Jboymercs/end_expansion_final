@@ -127,6 +127,158 @@
       }
     ]
   },
+  "entity.parasite.ground": {
+    "category": "entity",
+    "subtitle": "entity.parasite.ground",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/bite",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.bite": {
+    "category": "entity",
+    "subtitle": "entity.barrend.bite",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/bite_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.hit": {
+    "category": "entity",
+    "subtitle": "entity.barrend.hit",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/hit",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.raise_arm": {
+    "category": "entity",
+    "subtitle": "entity.barrend.raise_arm",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/raise_arm",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.slam": {
+    "category": "entity",
+    "subtitle": "entity.barrend.slam",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/slam",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.slam_jump": {
+    "category": "entity",
+    "subtitle": "entity.barrend.slam_jump",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/slam_jump",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.strike": {
+    "category": "entity",
+    "subtitle": "entity.barrend.strike",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/strike",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.shoot": {
+    "category": "entity",
+    "subtitle": "entity.barrend.shoot",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/shoot",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.charge": {
+    "category": "entity",
+    "subtitle": "entity.barrend.charge",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/charge",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.collide": {
+    "category": "entity",
+    "subtitle": "entity.barrend.collide",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/collide",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.awaken": {
+    "category": "entity",
+    "subtitle": "entity.barrend.awaken",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/awaken",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.short_raise": {
+    "category": "entity",
+    "subtitle": "entity.barrend.short_raise",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/short_raise",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.idle": {
+    "category": "entity",
+    "subtitle": "entity.barrend.idle",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/idle_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/barrend/idle_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.barrend.hurt": {
+    "category": "entity",
+    "subtitle": "entity.barrend.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/barrend/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/barrend/hurt_2",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/barrend/hurt_3",
+        "stream": true
+      }
+    ]
+  },
   "entity.king.dash": {
     "category": "entity",
     "subtitle": "entity.king.dash",

@@ -60,7 +60,7 @@ public class AshTower {
 
     public boolean generateLayer(AshTowerTemplate parent, BlockPos pos, Rotation rotation) {
         BlockPos posToo = pos.add(-21, 16, 0);
-        String[] lower_level_layers = {"layer_1", "layer_2"};
+        String[] lower_level_layers = {"layer_1", "layer_2", "layer_7", "layer_8"};
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(lower_level_layers), rotation);
 
         if(template.isCollidingExcParent(manager, parent, components)) {
@@ -85,7 +85,7 @@ public class AshTower {
 
     public boolean generateSecondLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
         BlockPos posToo = pos.add(-21, 16, 0);
-        String[] upper_level_layers = {"layer_3", "layer_4"};
+        String[] upper_level_layers = {"layer_3", "layer_4", "layer_6", "layer_8"};
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(upper_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
@@ -103,7 +103,7 @@ public class AshTower {
     }
 
     public boolean generateThirdLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
-        String[] highest_level_layers = {"layer_5", "layer_3"};
+        String[] highest_level_layers = {"layer_5", "layer_3", "layer_7", "layer_6"};
         BlockPos posToo = pos.add(-21, 16, 0);
         AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(highest_level_layers), rot);
         if(template.isCollidingExcParent(manager, parent, components)) {

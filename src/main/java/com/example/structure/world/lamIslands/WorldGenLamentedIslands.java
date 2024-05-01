@@ -50,7 +50,7 @@ public class WorldGenLamentedIslands extends WorldGenStructure {
     public boolean doesPlatformGenerate() {
         int randomNumberGenerator = ModRand.range(0, 5);
 
-            if(randomNumberGenerator >= 3) {
+            if(randomNumberGenerator >= 4) {
                 return true;
             }
             return false;
