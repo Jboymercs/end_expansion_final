@@ -471,7 +471,7 @@ public class ModConfig {
     @Config.Name("Avalon Trader Spacing")
     @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")
     @Config.RequiresMcRestart
-    public static int avalon_trader_spacing = 300;
+    public static int avalon_trader_spacing = 400;
 
     @Config.Name("Avalon Health")
     @Config.Comment("Change the Health of the Avalon Trader")

@@ -24,6 +24,9 @@ public class ModSoundHandler {
 
     //King Action Sounds
     public static SoundEvent KING_DASH;
+    public static SoundEvent KING_IMPACT;
+    public static SoundEvent KING_DRAW_SWORD;
+    public static SoundEvent KING_SUMMON_EYE;
 
     //NuclearBomb Sounds
     public static SoundEvent BOMB_EXPLODE;
@@ -124,6 +127,9 @@ public class ModSoundHandler {
     public static SoundEvent AVALON_SPEAK;
     public static SoundEvent MINI_AVALON_SHOOT;
 
+    //Door Creator
+    public static SoundEvent DOOR_POWER_UP;
+
 
     public static void registerSounds() {
         BOSS_IDLE = registerSound("boss.idle", "entity");
@@ -137,8 +143,10 @@ public class ModSoundHandler {
         BOSS_CAST_AMBIENT = registerSound("boss.cast", "entity");
 
         KING_DASH = registerSound("king.dash", "entity");
-
+        KING_IMPACT = registerSound("king.impact", "entity");
         BOMB_EXPLODE = registerSound("king.explode", "entity");
+        KING_DRAW_SWORD = registerSound("king.draw", "entity");
+        KING_SUMMON_EYE = registerSound("king.summon_eye", "entity");
 
         KNIGHT_STEP = registerSound("knight.step", "entity");
         KNIGHT_HURT = registerSound("knight.hurt", "entity");
@@ -221,6 +229,8 @@ public class ModSoundHandler {
         MINI_AVALON_SHOOT = registerSound("avalon.lazer_shoot", "entity");
 
         BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
+
+        DOOR_POWER_UP = registerSound("door.power", "block");
 
     }
 

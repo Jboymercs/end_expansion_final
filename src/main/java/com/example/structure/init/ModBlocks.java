@@ -29,6 +29,7 @@ public class ModBlocks {
     public static final float OBSIDIAN_RESISTANCE = 2000;
 
     public static final SoundType ASH = new SoundType(1.0F, 0.8F, SoundEvents.BLOCK_STONE_BREAK, SoundEvents.BLOCK_GRAVEL_STEP, SoundEvents.BLOCK_STONE_PLACE, SoundEvents.BLOCK_STONE_HIT, SoundEvents.BLOCK_STONE_FALL);
+    public static final SoundType DOOR_CREATOR = new SoundType(1.0f, 0.9F, SoundEvents.BLOCK_STONE_BREAK, SoundEvents.BLOCK_STONE_STEP, ModSoundHandler.DOOR_POWER_UP, SoundEvents.BLOCK_STONE_HIT, SoundEvents.BLOCK_STONE_FALL);
 
     //Lametend Islands Blocks
     public static final Block LAMENTED_END_STONE = new BlockBase("lamented_end_stone", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);

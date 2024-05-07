@@ -107,9 +107,9 @@ public class EntityAIBarrendGolem <T extends EntityBarrendGolem & IAttack> exten
                 }
 
                 this.entity.getMoveHelper().strafe((this.strafingBackwards ? -1 : 1) * this.strafeAmount, (this.strafingClockwise ? 1 : -1) * this.strafeAmount);
-                this.entity.faceEntity(target, this.lookSpeed, this.lookSpeed);
+                this.entity.faceEntity(target, (float) (this.lookSpeed * 0.5), (float) (this.lookSpeed * 0.5));
             } else {
-                this.entity.getLookHelper().setLookPositionWithEntity(target, this.lookSpeed, this.lookSpeed);
+                this.entity.getLookHelper().setLookPositionWithEntity(target, (float) (this.lookSpeed * 0.5), (float) (this.lookSpeed * 0.5));
             }
         }
     }

@@ -27,6 +27,7 @@ import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -568,6 +569,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       addEvent(()-> {
           this.lockLook = true;
           this.setImmovable(false);
+          this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
       }, 10);
       addEvent(()-> {
 
@@ -608,6 +610,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
           ModUtils.leapTowards(this, targetedPos, (float) (0.6 * Math.sqrt(distance)), 0.5f);
       }, 22);
       addEvent(()-> {
+          this.playSound(ModSoundHandler.KING_IMPACT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
           Vec3d position = this.getPositionVector();
           EntityLargeAOEEffect effect = new EntityLargeAOEEffect(world);
           effect.setPosition(position.x, position.y, position.z);
@@ -654,6 +657,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setImmovable(true);
 
       addEvent(()-> {
+          this.playSound(ModSoundHandler.KING_SUMMON_EYE, 1.4f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
           EntityEye eye = new EntityEye(world);
           Vec3d position = this.getPositionVector().add(ModUtils.yVec(9));
           eye.setPosition(position.x, position.y, position.z);
@@ -730,6 +734,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setComboAttack(true);
       this.setFightMode(true);
       this.setSwingingArms(true);
+      addEvent(()-> this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 5);
 
       addEvent(()-> {
           this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
@@ -941,6 +946,25 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     {
         this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 0.6F, 0.7f + ModRand.getFloat(0.3F));
     }
+
+
+    //TIME TO DO SOUNDS
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return ModSoundHandler.KNIGHT_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundHandler.KNIGHT_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundHandler.KNIGHT_IDLE;
+    }
+
 
     /**
      * Add a bit of brightness to the entity, because otherwise it looks pretty black

@@ -299,6 +299,36 @@
       }
     ]
   },
+  "entity.king.impact": {
+    "category": "entity",
+    "subtitle": "entity.king.impact",
+    "sounds": [
+      {
+        "name": "ee:entity/king/impact",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.draw": {
+    "category": "entity",
+    "subtitle": "entity.king.draw",
+    "sounds": [
+      {
+        "name": "ee:entity/king/draw",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.summon_eye": {
+    "category": "entity",
+    "subtitle": "entity.king.summon_eye",
+    "sounds": [
+      {
+        "name": "ee:entity/king/summon_eye",
+        "stream": true
+      }
+    ]
+  },
   "entity.knight.step": {
     "category": "entity",
     "subtitle": "entity.knight.step",
@@ -871,6 +901,17 @@
     "sounds": [
       {
         "name": "ee:entity/avalon/lazer_shoot",
+        "stream": true
+      }
+
+    ]
+  },
+  "block.door.power": {
+    "category": "block",
+    "subtitle": "block.door.power",
+    "sounds": [
+      {
+        "name": "ee:block/door/power",
         "stream": true
       }
     ]
