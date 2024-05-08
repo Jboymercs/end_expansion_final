@@ -56,7 +56,6 @@ public class LamentedIslandsTemplate extends ModStructureTemplate {
                 world.setBlockToAir(pos);
             }
         }
-
         //Chests
         if(function.startsWith("chest")) {
             if(generateChestSpawn()) {

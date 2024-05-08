@@ -2,8 +2,11 @@ package com.example.structure.entity;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.*;
+import com.example.structure.entity.lamentorUtil.ActionCircleAOE;
+import com.example.structure.entity.lamentorUtil.ActionWaveAOE;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.entity.util.TimedAttackIniator;
+import com.example.structure.init.ModBlocks;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
@@ -128,9 +131,13 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     }
 
 
+    public BlockPos centerPos;
+
 
     public void onSummon(BlockPos Pos, Projectile actor) {
         BlockPos offset = Pos.add(new BlockPos(0,3,0));
+        //we're trying to set up the AOE attack and the reset key block if the player doesn't kill the Lamentor
+        centerPos = Pos.add(0, -1, 0);
         this.setPosition(offset);
         world.spawnEntity(this);
         actor.setDead();
@@ -547,7 +554,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         double HealthChange = this.getHealth() / this.getMaxHealth();
         if(!this.isFightMode() && !this.isDeathAnim() && !this.isSummoned()) {
             //Begin Attacks REPEATED
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeStrike, summonCrystals, dashPierce, circleDash, circleAttack, summonGroundCrystals, hammerSLAM, hammerExplosion, animeStrike, summonShulkers, hammerProjectile));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeStrike, summonCrystals, dashPierce, circleDash, circleAttack, summonGroundCrystals, hammerSLAM, hammerExplosion, animeStrike, hammerProjectile, summonAOEAttack));
             double[] weights = {
                     //Phase One Abilities
                     (distance < 3 && prevAttack != meleeStrike) ? 1/distance : 0, //Melee Strike
@@ -561,8 +568,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                     (distance < 9 && prevAttack != hammerSLAM && HealthChange < 0.5) ? 1/distance : 0, //Hammer Slam Attack
                     (prevAttack == hammerSLAM) ? 100 : 0, // 2 Part Hammer Attack
                     (distance < 9 && prevAttack != animeStrike && HealthChange < 0.60) ? 1/distance : 0, //Summon Shulkers
-                    (distance > 10 && HealthChange < 0.75) ? distance * 0.02 : 0, // Summon Shulkers
-                    (distance > 7) ? distance * 0.02 : 0 //Hammer Projectile Attack
+                    (distance > 7) ? distance * 0.02 : 0, //Hammer Projectile Attack
+                    (distance > 8 && prevAttack != summonAOEAttack && HealthChange < 0.75) ? distance * 0.02 : 0 //Summon an Arena AOE
                     //Possibly one more Attack
 
             };
@@ -920,6 +927,28 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 this.setShulkerAttack(false);
             }, 50);
         }
+    };
+
+    private Consumer<EntityLivingBase> summonAOEAttack = (target) -> {
+      this.setFightMode(true);
+      this.setShulkerAttack(true);
+      //Summons an AOE wave
+
+        addEvent(() -> this.playSound(ModSoundHandler.BOSS_CAST_AMBIENT, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f)), 25);
+
+      addEvent(()-> {
+          if(centerPos != null && rand.nextInt(2) == 0) {
+              new ActionWaveAOE(centerPos).performAction(this, target);
+          }
+          else {
+              new ActionCircleAOE().performAction(this, target);
+          }
+      }, 30);
+
+      addEvent(()-> {
+          this.setFightMode(false);
+          this.setShulkerAttack(false);
+      }, 50);
     };
     //Summon Crystals with Hammer
     private Consumer<EntityLivingBase> hammerProjectile = (target)-> {

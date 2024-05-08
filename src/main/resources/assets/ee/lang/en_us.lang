@@ -43,6 +43,7 @@ entity.avalon.name=The Avalon Trader
 entity.mini_avalon.name=Mini-Valon
 entity.aoe_avalon.name=Avalon's AOE
 entity.barrend_parasite.name=Barrend Parasite
+entity.lamentor_wave.name=Lamentor Wave Attack
 tile.lamented_end_stone.name=Lamented End Stone
 tile.end_ash.name=Ashed End Stone
 tile.ash_brick.name=Ashed Brick

@@ -14,7 +14,13 @@ public class ModConfig {
     @Config.Comment("Raises and Lowers Frequency of Structure Spawns, Higher means more frequent")
     @Config.RangeInt(min = 0, max = 48)
     @Config.RequiresMcRestart
-    public static int structureFrequency = 25;
+    public static int structureFrequency = 28;
+
+    @Config.Name("Lamented Islands Size")
+    @Config.Comment("Changes the size of the Lamented Islands")
+    @Config.RangeInt(min = 1, max = 10)
+    @Config.RequiresMcRestart
+    public static int islands_size = 3;
 
     @Config.Name("Lamentor Boss Health")
     @Config.Comment("Change the Health of the Lamentor")
@@ -30,7 +36,7 @@ public class ModConfig {
     @Config.Name("Lamentor Attack Damage")
     @Config.Comment("Change the Attack Damage of the Lamentor")
     @Config.RequiresMcRestart
-    public static double attack_damage= 15D;
+    public static double attack_damage= 18D;
 
     @Config.Name("Lamentor Ranged Crystal Damage")
     @Config.Comment("Change the damage of the flying Crystals")

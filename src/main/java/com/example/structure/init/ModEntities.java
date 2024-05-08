@@ -14,6 +14,7 @@ import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
+import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.*;
@@ -164,6 +165,8 @@ public class ModEntities {
         registerEntity("acid_proj", ProjectileAcid.class, ENTITY_START_ID++, 100);
         //Barrend Parasite
         registerEntity("barrend_parasite", EntityBarrendParasite.class, ENTITY_START_ID++, 100);
+        //Lamentor Wave
+        registerEntity("lamentor_wave", EntityLamentorWave.class, ENTITY_START_ID++, 100);
 
     }
 

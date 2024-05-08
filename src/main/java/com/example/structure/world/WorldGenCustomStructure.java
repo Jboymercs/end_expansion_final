@@ -6,10 +6,9 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
-import com.example.structure.world.api.ashtower.WorldGenAshTower;
+import com.example.structure.world.api.lamentedIslands.WorldGenLamentedIslands;
 import com.example.structure.world.api.trader.WorldGenTraderOutcamp;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
-import com.example.structure.world.lamIslands.WorldGenBossArena;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Rotation;
@@ -31,7 +30,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
-
+    public static final WorldGenLamentedIslands the_islands = new WorldGenLamentedIslands();
     private int trader_spacing = ModConfig.avalon_trader_spacing;
 
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
@@ -49,9 +48,8 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                 // Lamented Islands, the first major boss Arena and dungeon of the mod
                 //Cannot spawn in the Ash Wastelands
                 if (canStructureSpawn(chunkX, chunkZ, world, ModConfig.structureFrequency)) {
-                    BlockPos posAdded = new BlockPos(x, 90, z);
                     if(world.provider.getBiomeForCoords(pos).getClass() != BiomeAshWasteland.class && world.provider.getBiomeForCoords(pos).getClass() == BiomeEnd.class) {
-                         new WorldGenBossArena().generateStructure(world, posAdded, Rotation.NONE);
+                         the_islands.generate(world, random, pos);
                     }
                 }
 

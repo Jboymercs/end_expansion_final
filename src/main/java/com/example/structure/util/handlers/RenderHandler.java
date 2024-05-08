@@ -12,6 +12,7 @@ import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
+import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
 import com.example.structure.entity.render.*;
 import com.example.structure.entity.render.arrow.RenderArrowBase;
 import com.example.structure.entity.seekers.EndSeeker;
@@ -158,5 +159,7 @@ public class RenderHandler {
         registerProjectileRenderer(ProjectileAcid.class);
         //Barrend Parasite
         RenderingRegistry.registerEntityRenderingHandler(EntityBarrendParasite.class, RenderBarrendParasite::new);
+        //Lamentor Wave
+        RenderingRegistry.registerEntityRenderingHandler(EntityLamentorWave.class, RenderLamentorWave::new);
     }
 }
