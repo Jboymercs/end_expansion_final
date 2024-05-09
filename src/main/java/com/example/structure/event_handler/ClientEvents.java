@@ -1,6 +1,14 @@
 package com.example.structure.event_handler;
 
+import com.example.structure.event_handler.client.EndBiomeMusic;
 import com.example.structure.util.ModReference;
+import com.example.structure.util.handlers.BiomeRegister;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiScreenWorking;
+import net.minecraft.util.SoundCategory;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

@@ -154,7 +154,7 @@ public class BlockCompulsorOn extends BlockBase{
             pos = pos.add(facing.getDirectionVec());
             worldIn.spawnParticle(EnumParticleTypes.CLOUD, false, facing.equals(EnumFacing.EAST) ? pos.getX() + 5 : facing.equals(EnumFacing.WEST) ? pos.getX() - 5 : pos.getX() + 0.5, facing.equals(EnumFacing.UP) ? pos.getY() + 5 : facing.equals(EnumFacing.DOWN) ? pos.getY() - 5 : pos.getY() + 0.5, facing.equals(EnumFacing.NORTH) ? pos.getZ() - 5 : facing.equals(EnumFacing.SOUTH) ? pos.getZ()  +5 : pos.getZ() + 0.5, vel.x, vel.y, vel.z);
             if(rand.nextInt(5) == 0) {
-                worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSoundHandler.COMPULSOR_HUM, SoundCategory.NEUTRAL, 0.3f, 1.0f, true);
+                worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSoundHandler.COMPULSOR_HUM, SoundCategory.AMBIENT, 0.3f, 1.0f, true);
             }
         }
     }

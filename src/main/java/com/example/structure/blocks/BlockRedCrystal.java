@@ -29,7 +29,7 @@ public class BlockRedCrystal extends BlockBase {
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if(rand.nextInt(7) == 0) {
-            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSoundHandler.RED_CRYSTAL_HUM, SoundCategory.NEUTRAL, 0.5f, 1.0f, true);
+            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSoundHandler.RED_CRYSTAL_HUM, SoundCategory.AMBIENT, 0.5f, 1.0f, true);
         }
     }
 

@@ -917,19 +917,26 @@
     ]
   },
   "biome.ambient.ambient": {
-    "category": "entity",
+    "category": "biome",
     "subtitle": "biome.ambience",
     "sounds": [
-      {
-        "name": "ee:biome/ambient/ambient_3",
-        "stream": true
-      },
       {
         "name": "ee:biome/ambient/ambient_2",
         "stream": true
       },
       {
         "name": "ee:biome/ambient/ambient_1",
+        "stream": true
+      }
+
+    ]
+  },
+  "biome.ambient.music": {
+    "category": "biome",
+    "subtitle": "biome.music",
+    "sounds": [
+      {
+        "name": "ee:biome/music/ambient_3",
         "stream": true
       }
 

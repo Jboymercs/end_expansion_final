@@ -68,6 +68,7 @@ public class ModSoundHandler {
 
     //Biome Ambience
     public static SoundEvent BIOME_AMBIENCE;
+    public static SoundEvent BIOME_MUSIC;
 
     //Chomper
     public static SoundEvent CHOMPER_IDLE;
@@ -229,6 +230,7 @@ public class ModSoundHandler {
         MINI_AVALON_SHOOT = registerSound("avalon.lazer_shoot", "entity");
 
         BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
+        BIOME_MUSIC = registerSound("ambient.music", "biome");
 
         DOOR_POWER_UP = registerSound("door.power", "block");
 

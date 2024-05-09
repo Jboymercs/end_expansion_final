@@ -19,6 +19,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,6 +37,12 @@ public class CommonProxy implements IGuiHandler {
     public void registerItemRenderer(Item item, int meta, String id) {
     }
 
+    @SuppressWarnings("deprecation")
+    public static void registerEvent(Object event)
+    {
+        FMLCommonHandler.instance().bus().register(event);
+        MinecraftForge.EVENT_BUS.register(event);
+    }
 
     public void setCustomState(Block block, IStateMapper mapper) {
     }

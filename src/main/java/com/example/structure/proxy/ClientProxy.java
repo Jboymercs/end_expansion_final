@@ -4,6 +4,7 @@ import com.example.structure.blocks.BlockLeavesBase;
 import com.example.structure.entity.util.data.GlowingMetadataSection;
 import com.example.structure.entity.util.data.GlowingMetadataSectionSerializer;
 import com.example.structure.event_handler.ClientRender;
+import com.example.structure.event_handler.client.MusicHandlerEE;
 import com.example.structure.gui.book.GuiBook;
 import com.example.structure.util.handlers.RenderHandler;
 import net.minecraft.client.Minecraft;
@@ -49,7 +50,8 @@ public class ClientProxy extends CommonProxy {
 
         // Add custom metadataserializers
         mc.metadataSerializer.registerMetadataSectionType(new GlowingMetadataSectionSerializer(), GlowingMetadataSection.class);
-
+        //Music handler for the Ash Wastelands
+        registerEvent(new MusicHandlerEE());
         //Registers Geckolib Entities
         RenderHandler.registerGeoEntityRenderers();
         super.init();
