@@ -84,7 +84,7 @@ public class Main {
     @Mod.EventHandler
     public void registerRenderers(FMLPreInitializationEvent event) {
         //Specific for blocks handling geckolib data
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new RenderAltarTile());
+
 
     }
 

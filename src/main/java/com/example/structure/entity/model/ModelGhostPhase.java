@@ -11,12 +11,12 @@ import software.bernie.geckolib3.model.provider.data.EntityModelData;
 public class ModelGhostPhase extends AnimatedGeoModel<EntityGhostPhase> {
     @Override
     public ResourceLocation getModelLocation(EntityGhostPhase object) {
-        return new ResourceLocation(ModReference.MOD_ID, "geo/entity/king/geo.ghost_king.json");
+        return new ResourceLocation(ModReference.MOD_ID, "geo/entity/king/geo.king.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityGhostPhase object) {
-        return new ResourceLocation(ModReference.MOD_ID, "textures/entity/ghost_king.png");
+        return new ResourceLocation(ModReference.MOD_ID, "textures/entity/king_1.png");
     }
 
     @Override

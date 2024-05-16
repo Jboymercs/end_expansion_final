@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:end_bricks"
+    }
+  },
+  "result": {
+    "item": "ee:end_stone_stairs",
+    "data": 0,
+    "count": 4
+  }
+}

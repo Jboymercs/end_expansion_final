@@ -971,7 +971,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
      */
     @Override
     public int getBrightnessForRender() {
-        return Math.min(super.getBrightnessForRender() + 60, 200);
+        return Math.min(super.getBrightnessForRender() + 30, 200);
     }
 
     private static final ResourceLocation LOOT_BOSS = new ResourceLocation(ModReference.MOD_ID, "end_king");

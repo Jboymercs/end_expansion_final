@@ -38,6 +38,22 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static double attack_damage= 18D;
 
+    @Config.Name("Stronghold Replacement")
+    @Config.Comment("Replaces the vanilla Stronghold with my own")
+    @Config.RequiresMcRestart
+    public static boolean replace_stronghold = true;
+
+    @Config.Name("Stronghold Mob Additions")
+    @Config.Comment("Set to false if you don't wish for the beefed up zombie, skeleton, and cave spider spawners to be in the Better Stronghold")
+    @Config.RequiresMcRestart
+    public static boolean mob_additions_stronghold = true;
+
+    @Config.Name("Stronghold Size")
+    @Config.Comment("Change the size of the Stronghold in tiles, minimum of 2 and maximum of 12")
+    @Config.RangeInt(min = 2, max = 12)
+    @Config.RequiresMcRestart
+    public static int stronghold_size = 6;
+
     @Config.Name("Lamentor Ranged Crystal Damage")
     @Config.Comment("Change the damage of the flying Crystals")
     @Config.RequiresMcRestart
@@ -379,7 +395,7 @@ public class ModConfig {
     @Config.Name("Crown of A Past Era Minion Lifetime")
     @Config.Comment("Change the life time of the End King summoned by the Crown of A Past Era in seconds")
     @Config.RequiresMcRestart
-    public static int minion_lifeTime = 240;
+    public static int minion_lifeTime = 120;
 
     @Config.Name("Crown of A Past Era Minion Attack Damage")
     @Config.Comment("Change the Attack Damage of the Ashed King summoned by the Crown of A Past Era")

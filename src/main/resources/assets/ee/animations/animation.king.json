@@ -2521,7 +2521,7 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"BonePoint": {
+				"Halo": {
 					"scale": {
 						"vector": [0, 0, 0]
 					}
@@ -5240,7 +5240,7 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"BonePoint": {
+				"Halo": {
 					"scale": {
 						"vector": [0, 0, 0]
 					}
@@ -5598,7 +5598,7 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"BonePoint": {
+				"Halo": {
 					"scale": {
 						"vector": [0, 0, 0]
 					}
@@ -5735,11 +5735,6 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"BonePoint": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
 				"RArmElbowJ": {
 					"rotation": {
 						"1.0833": {
@@ -5770,6 +5765,11 @@
 						"2.25": {
 							"vector": [0, 0, 0]
 						}
+					}
+				},
+				"Halo": {
+					"scale": {
+						"vector": [0, 0, 0]
 					}
 				}
 			}
@@ -6328,7 +6328,7 @@
 						"vector": [0, 0, 0]
 					}
 				},
-				"BonePoint": {
+				"Halo": {
 					"scale": {
 						"vector": [0, 0, 0]
 					}

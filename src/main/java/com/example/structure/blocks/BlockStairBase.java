@@ -20,7 +20,8 @@ public class BlockStairBase extends BlockStairs implements IHasModel {
         super(modelState);
         setTranslationKey(name);
         setRegistryName(name);
-
+        this.setLightOpacity(255);
+        this.useNeighborBrightness = true;
         // Add both an item as a block and the block itself
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
@@ -31,6 +32,8 @@ public class BlockStairBase extends BlockStairs implements IHasModel {
         setHardness(hardness);
         setResistance(resistance);
         setSoundType(soundType);
+        this.setLightOpacity(255);
+        this.useNeighborBrightness = true;
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.structure.util.handlers;
 
 
+import com.example.structure.event_handler.EventStronghold;
 import com.example.structure.world.api.ashtower.AshTowerTemplate;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.lamentedIslands.LamentedIslandsTemplate;
@@ -11,8 +12,10 @@ import com.example.structure.world.api.structures.FortressTemplate;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.api.vaults.VaultTemplate;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
+import com.example.structure.world.stronghold.BetterStrongholdTemplate;
+import com.example.structure.world.stronghold.MapGenBetterStronghold;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-
+import net.minecraftforge.common.MinecraftForge;
 
 
 public class StructureHandler {
@@ -33,6 +36,10 @@ public class StructureHandler {
         //Lamented Islands
         MapGenStructureIO.registerStructure(WorldGenLamentedIslands.Start.class, "LamentedIslands");
         MapGenStructureIO.registerStructureComponent(LamentedIslandsTemplate.class, "LIP");
+        //Replaced Stronghold
+        MinecraftForge.TERRAIN_GEN_BUS.register(new EventStronghold());
+        MapGenStructureIO.registerStructure(MapGenBetterStronghold.Start.class, "BetterStronghold");
+        MapGenStructureIO.registerStructureComponent(BetterStrongholdTemplate.class, "BSP");
 
     }
 }

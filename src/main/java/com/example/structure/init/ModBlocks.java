@@ -9,6 +9,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 
@@ -43,10 +45,16 @@ public class ModBlocks {
     public static final Block END_ASH = new BlockAsh("end_ash", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, ASH).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK = new BlockBase("ash_brick", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block ASH_BRICK_STAIRS = new BlockStairBase("ash_brick_stairs", ASH_BRICK.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block END_STONE_STAIRS = new BlockStairBase("end_stone_stairs", Blocks.END_STONE.getDefaultState(), STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
     public static final BlockSlab ASH_BRICK_DOUBLE = new BlockDoubleSlab("ash_brick_double", Material.ROCK, ModCreativeTabs.ITEMS, ModBlocks.ASH_BRICK_HALF, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
     public static final BlockSlab ASH_BRICK_HALF = new BlockHalfSlab("ash_brick_half", Material.ROCK, ModCreativeTabs.ITEMS, ModBlocks.ASH_BRICK_HALF, ModBlocks.ASH_BRICK_DOUBLE, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
+    public static final BlockSlab END_STONE_DOUBLE = new BlockDoubleSlab("end_brick_double", Material.ROCK, CreativeTabs.BUILDING_BLOCKS, ModBlocks.END_STONE_HALF, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
+    public static final BlockSlab END_STONE_HALF = new BlockHalfSlab("end_brick_half", Material.ROCK, CreativeTabs.BUILDING_BLOCKS, ModBlocks.END_STONE_HALF, ModBlocks.END_STONE_DOUBLE, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
+
     public static final Block ASH_BRICK_WALL = new BlockModWall("ash_brick_wall", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
+    public static final Block STONE_BRICK_WALL = new BlockModWall("stone_brick_wall", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
+    public static final Block END_STONE_WALL = new BlockModWall("end_stone_wall", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
     public static final Block ASH_BRICK_PILLAR = new BlockPillarBase("ash_brick_pillar", Material.ROCK).setHardness(STONE_HARDNESS).setResistance(STONE_RESISTANCE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_ASH_CHISLE = new BlockBase("ash_chisle", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block END_ASH_SKULL = new BlockBase("ash_skull", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);

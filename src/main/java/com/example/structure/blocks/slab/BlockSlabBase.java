@@ -27,7 +27,7 @@ public abstract class BlockSlabBase extends BlockSlab implements IHasModel {
         setTranslationKey(name);
         setRegistryName(name);
         this.useNeighborBrightness = !this.isDouble();
-
+        this.setLightOpacity(255);
         IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, Variant.DEFAULT);
         if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
