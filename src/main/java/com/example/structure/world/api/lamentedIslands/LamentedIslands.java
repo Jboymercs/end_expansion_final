@@ -29,8 +29,8 @@ public class LamentedIslands {
     private static final int SIZE = ModConfig.islands_size;
 
 
-    private static final List<Tuple<Rotation, BlockPos>> CROSS_POS_MAIN = Lists.newArrayList(new Tuple(Rotation.NONE, new BlockPos(0, 38, 0)),
-            new Tuple(Rotation.CLOCKWISE_90, new BlockPos(36, 38, 0)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, 38, 36)));
+    private static final List<Tuple<Rotation, BlockPos>> CROSS_POS_MAIN = Lists.newArrayList(new Tuple(Rotation.NONE, new BlockPos(0, 30, 0)),
+            new Tuple(Rotation.CLOCKWISE_90, new BlockPos(36, 30, 0)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, 30, 36)));
 
     private static final List<Tuple<Rotation, BlockPos>> CROSS_POS = Lists.newArrayList(new Tuple(Rotation.NONE, new BlockPos(0, 0, 0)),
             new Tuple(Rotation.CLOCKWISE_90, new BlockPos(30, 0, 0)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, 0, 30)));
@@ -65,8 +65,9 @@ public class LamentedIslands {
     }
 
     public boolean generateSpecialCross(LamentedIslandsTemplate parent, BlockPos pos, Rotation rot) {
-        LamentedIslandsTemplate template = addAdjustedPiece(parent, pos.add(0, 38, 0), "special_cross", rot);
-        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 41, 0), "tile_3", rot);
+        LamentedIslandsTemplate template = addAdjustedPiece(parent, pos.add(0, 30, 0), "cross_2", rot);
+        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 41, 0), "special_tile", rot);
+        LamentedIslandsTemplate template3 = addAdjustedPieceBuilding(parent, pos.add(0, 62, 0), "top_2", rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
         }
@@ -74,6 +75,7 @@ public class LamentedIslands {
         List<StructureComponent> structures = new ArrayList<>(components);
         components.add(template);
         components.add(template2);
+        components.add(template3);
 
         int failedHalls = 0;
         for(Tuple<Rotation, BlockPos> tuple : CROSS_POS) {
@@ -94,8 +96,8 @@ public class LamentedIslands {
     public boolean generateCross(LamentedIslandsTemplate parent, BlockPos pos, Rotation rot) {
         String[] cross_types = {"cross_1", "cross_2"};
         LamentedIslandsTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
-        String[] building_types = {"tile_1", "tile_2","tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9", "tile_10"};
-        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 3, 0), ModRand.choice(building_types), rot);
+        String[] building_types = {"tile_1", "tile_2","tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9"};
+        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 11, 0), ModRand.choice(building_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE) {
             return false;
         }
@@ -122,9 +124,10 @@ public class LamentedIslands {
     }
 
     public boolean generateStraight(LamentedIslandsTemplate parent, BlockPos pos, Rotation rot) {
-        LamentedIslandsTemplate template = addAdjustedPiece(parent, pos, "straight_1", rot);
-        String[] building_types = {"tile_1", "tile_2","tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9", "tile_10"};
-        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 3, 0), ModRand.choice(building_types), rot);
+        String[] straight_types = {"straight_1", "straight_2"};
+        LamentedIslandsTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(straight_types), rot);
+        String[] building_types = {"tile_1", "tile_2","tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9"};
+        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 11, 0), ModRand.choice(building_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE) {
             return false;
         }
@@ -149,9 +152,10 @@ public class LamentedIslands {
     }
 
     public boolean generateEnd(LamentedIslandsTemplate parent, BlockPos pos, Rotation rot) {
-        LamentedIslandsTemplate template = addAdjustedPiece(parent, pos, "end_1", rot);
-        String[] building_types = {"tile_1", "tile_2","tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9", "tile_10"};
-        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 3, 0), ModRand.choice(building_types), rot);
+        String[] end_types = {"end_1", "end_2"};
+        LamentedIslandsTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(end_types), rot);
+        String[] building_types = {"tile_1", "tile_2","tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9"};
+        LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 11, 0), ModRand.choice(building_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE) {
             return false;
         }
