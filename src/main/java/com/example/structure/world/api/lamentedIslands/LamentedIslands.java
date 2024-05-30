@@ -67,7 +67,6 @@ public class LamentedIslands {
     public boolean generateSpecialCross(LamentedIslandsTemplate parent, BlockPos pos, Rotation rot) {
         LamentedIslandsTemplate template = addAdjustedPiece(parent, pos.add(0, 30, 0), "cross_2", rot);
         LamentedIslandsTemplate template2 = addAdjustedPieceBuilding(parent, pos.add(0, 41, 0), "special_tile", rot);
-        LamentedIslandsTemplate template3 = addAdjustedPieceBuilding(parent, pos.add(0, 62, 0), "top_2", rot);
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
         }
@@ -75,7 +74,7 @@ public class LamentedIslands {
         List<StructureComponent> structures = new ArrayList<>(components);
         components.add(template);
         components.add(template2);
-        components.add(template3);
+
 
         int failedHalls = 0;
         for(Tuple<Rotation, BlockPos> tuple : CROSS_POS) {

@@ -22,7 +22,9 @@ public class BetterStrongholdTemplate extends ModStructureTemplate {
 
     private WorldGenStructure[] structures = {new WorldGenStructure("stronghold/tile_1"), new WorldGenStructure("stronghold/tile_2"),
     new WorldGenStructure("stronghold/tile_3"), new WorldGenStructure("stronghold/tile_4"), new WorldGenStructure("stronghold/tile_5")};
-    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "stronghold");
+    private static final ResourceLocation LOOT = new ResourceLocation("minecraft:", "loot_tables/chests/stronghold_corridor");
+    private static final ResourceLocation LOOT_LIBRARY = new ResourceLocation("minecraft:", "stronghold_library");
+    private static final ResourceLocation LOOT_CROSSING = new ResourceLocation("minecraft:", "stronghold_crossing");
 
     private static final ResourceLocation BOOK = new ResourceLocation(ModReference.MOD_ID, "library_book");
 
@@ -72,6 +74,19 @@ public class BetterStrongholdTemplate extends ModStructureTemplate {
             } else {
                 world.setBlockToAir(pos);
                 world.setBlockToAir(pos.down());
+            }
+        }
+
+        else if(function.startsWith("chest_cross")) {
+            BlockPos blockPos = pos.down();
+            if(generateChestSpawn() && sbb.isVecInside(blockPos)) {
+                TileEntity tileEntity = world.getTileEntity(blockPos);
+                world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+                if(tileEntity instanceof TileEntityChest) {
+                    TileEntityChest chest = (TileEntityChest) tileEntity;
+                    chest.setLootTable(LOOT_CROSSING, rand.nextLong());
+
+                }
             }
         }
         //mini-structure spawns

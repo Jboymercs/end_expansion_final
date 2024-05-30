@@ -14,7 +14,7 @@ public class ModConfig {
     @Config.Comment("Raises and Lowers Frequency of Structure Spawns, Higher means more frequent")
     @Config.RangeInt(min = 0, max = 48)
     @Config.RequiresMcRestart
-    public static int structureFrequency = 28;
+    public static int structureFrequency = 30;
 
     @Config.Name("Lamented Islands Size")
     @Config.Comment("Changes the size of the Lamented Islands")
@@ -52,7 +52,7 @@ public class ModConfig {
     @Config.Comment("Change the size of the Stronghold in tiles, minimum of 2 and maximum of 12")
     @Config.RangeInt(min = 2, max = 12)
     @Config.RequiresMcRestart
-    public static int stronghold_size = 6;
+    public static int stronghold_size = 5;
 
     @Config.Name("Lamentor Ranged Crystal Damage")
     @Config.Comment("Change the damage of the flying Crystals")
@@ -108,7 +108,7 @@ public class ModConfig {
     @Config.Name("Constructor Structure Spawn Chance")
     @Config.Comment("Change the chance of how many Constructors will spawn on the Lamented Islands dungeon")
     @Config.RangeInt(min = 1, max = 10)
-    public static int structure_spawns = 5;
+    public static int structure_spawns = 8;
 
     @Config.Name("Constructor Natural Spawn Weight")
     @Config.Comment("Change the weights at which the Constructors naturally spawn in the End, or disable it entirely, lower value means less spawns, higher means more common")
@@ -503,12 +503,12 @@ public class ModConfig {
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 34D;
+    public static double avalon_attack_damage = 32D;
 
     @Config.Name("Avalon Lazer Damage Multiplier")
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
     @Config.RequiresMcRestart
-    public static double avalon_lazer_multiplier = 1.3;
+    public static double avalon_lazer_multiplier = 1.2;
 
     @Config.Name("Ashed Mines Chance to Spawn")
     @Config.Comment("Change the chance of the Ashed Mines, these are the mineshafts that run throughout the Ashed Wastelands, modify Carefully")

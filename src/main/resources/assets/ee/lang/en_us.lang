@@ -70,10 +70,10 @@ tile.source_on.name=Source Block Activated
 tile.source_off.name=Source Block
 tile.ash_trap_floor.name=Ash Trap Block
 tile.ash_chisle.name=Chiseled Ashed Brick
-tile.end_barrier.name=Unholy Barrier
+tile.end_barrier.name=Lustrian Barrier
 tile.end_door.name=Ashed Door Creator
-tile.red_crystal.name=Unholy Crystal Block
-tile.red_crystal_top.name=Small Unholy Crystal Block
+tile.red_crystal.name=Lustrian Crystal Block
+tile.red_crystal_top.name=Small Lustrian Crystal Block
 tile.red_lamp.name=Ash Powered Lamp
 tile.key_block.name=End Dungeon Key Block
 tile.end_pillar.name=End Stone Brick Alternative
@@ -104,7 +104,7 @@ tile.eyed_obi.name=Ancient Eyed Obsidian
 tile.obi_health.name=Avalon's Health Orb
 tile.stone_brick_wall.name=Stone Brick Wall
 item.key.name=Lamented End Key
-item.red_crystal_item.name=Unholy Crystal
+item.red_crystal_item.name=Lustrian Crystal
 item.purple_crystal_item.name=Pure Crystal
 item.infused_crystal.name=Infused Crystal
 item.infusion_core.name=Infusion Core
@@ -114,12 +114,12 @@ item.soul.name=Stalled Soul
 item.plate.name=Guilder Plate
 item.medal.name= Forgotten Medallion
 item.dark_ingot.name=Dark Ingot
-item.red_sword.name=Unholy Sword
+item.red_sword.name=Lustrian Sword
 item.dark_helmet.name=Dark Helmet
 item.dark_chestplate.name=Dark Chestplate
 item.bug_food.name=Parasite Flesh
 item.end_bow.name=End Fall Bow
-item.red_chunk.name=Unholy Crystal Chunk
+item.red_chunk.name=Lustrian Crystal Chunk
 item.purple_chunk.name=Pure Crystal Chunk
 item.endfall_helmet.name=End Fall Helmet
 item.endfall_chestplate.name=End Fall Chestplate
@@ -145,8 +145,8 @@ item.chomper_tooth.name=Chomper Tooth
 item.amber_dagger.name=Cordium Dagger
 item.amber_pickaxe.name=Cordium Pickaxe
 item.mod_arrow_chomper.name=Chomper Arrow
-item.mod_arrow_unholy.name=Unholy Tipped Arrow
-item.red_axe.name=Unholy Axe
+item.mod_arrow_unholy.name=Lustrian Tipped Arrow
+item.red_axe.name=Lustrian Axe
 item.pure_axe.name=The End's Revolt
 item.amber_sword.name=Cordium Sword
 item.obi_coin.name=Avalon's Bane
@@ -156,7 +156,7 @@ entity.acid_proj.name=Parasite Acid
 entity.bomb_proj.name=Avalon's Bomb
 entity.controller_lift.name=Guilder Lift
 entity.chomper_arrow.name=Chomper Arrow
-entity.unholy_arrow.name=Unholy Arrow
+entity.unholy_arrow.name=Lustrian Arrow
 
 itemGroup.expansion=End Expansion
 
@@ -193,7 +193,7 @@ advancements.ee.kill_knight.description=Acquire a Dark Ingot by slaying End Knig
 advancements.ee.kill_king.title=The Dark Fortress
 advancements.ee.kill_king.description=Atop the fortress is the one who casts the shadow. Good luck.
 advancements.ee.kill_lord.title=What The Crystal Does
-advancements.ee.kill_lord.description=Slay an Unholy Knight, can be found in the Fortress or rarely in other structures.
+advancements.ee.kill_lord.description=Slay a Fell Knight, can be found in the Fortress or rarely in other structures.
 advancements.ee.kill_barrend.title=Long Ways Up
 advancements.ee.kill_barrend.description=Defeat the being that has taken over the Ashed Towers.
 advancements.ee.kill_chomper.title=Fine I'll let you sleep
@@ -271,7 +271,7 @@ ee.desc.guide=A small handbook covering End Expansion's contents.
 ee.desc.unholy_sword_desc=Cursed with the Red Rage
 ee.desc.medal_desc=Using this medallion will summon an eye that when mobs are near they will teleport them randomly away from you.
 ee.desc.efsword_desc=Calibrated and Perfected, Right clicking will summon forth a ghost arm to swing in front of you.
-ee.desc.nuke_desc=A Nuclear device created from raw Unholy energy, results might be chaotic.
+ee.desc.nuke_desc=A Nuclear device created from raw unholy energy, results might be chaotic.
 ee.desc.bow_desc=When in your main hand, any creatures that get too close will be attacked by the Thousand swords.
 ee.desc.shield_name_desc=Guilded Shield
 ee.desc.shield_desc=When blocking, you will summon a circle of spikes around you.
@@ -468,7 +468,7 @@ desc.ash_8=enter. However, life finds a way,
 desc.ash_9=and creatures have mutated to
 desc.ash_10=adopt this new environment and
 desc.ash_11=is also birth of many new
-desc.ash_12=creations such as Unholy
+desc.ash_12=creations such as Lustrian
 desc.ash_13=crystals.
 
 #Ashed Bricks
@@ -480,9 +480,9 @@ desc.ash_block_10=used within some of the
 desc.ash_block_11=contraptions that can be made
 desc.ash_block_12=from the biome's resources.
 
-#Unholy Crystals
+#Lustrian Crystals
 
-title.cont_red=Unholy Crystals Cont.
+title.cont_red=Lustrian Crystals Cont.
 
 desc.red_6=Found in Ash Wastelands, these
 desc.red_7=crystals are empowered with an
@@ -494,7 +494,7 @@ desc.red_12=uses for this crystal however.
 
 desc.cont_red_6=Likewise with Pure Crystals
 desc.cont_red_7=you can combine nine chunks to
-desc.cont_red_8=create an Unholy Crystal with
+desc.cont_red_8=create an Lustrian Crystal with
 desc.cont_red_9=greater power imbued into it.
 
 #Red Lamp
@@ -504,7 +504,7 @@ desc.lamp_7=in the Ash Wastelands.
 #Ash Door Keyhole
 desc.hole_6=These devices work in tandem
 desc.hole_7=with Door Creators, upon entering
-desc.hole_8=a Unholy crystal in it. It will
+desc.hole_8=a Lustrian crystal in it. It will
 desc.hole_9=de-activate any Door Creators within
 desc.hole_10=7 blocks of each of it's axis.
 desc.hole_11=Used commonly in structures as a
@@ -614,7 +614,7 @@ desc.chomper_12=it off, literally.
 #Ashed Parasite
 desc.bug_6= These critters occasionally dig up
 desc.bug_7=Infusion Cores, and will do it faster
-desc.bug_8=if given Unholy Crystals and it will
+desc.bug_8=if given Lustrian Crystals and it will
 desc.bug_9=pacify them for the time being, also
 desc.bug_10=they will try to attack you while
 desc.bug_11=attempting to pacify them. They also
@@ -657,18 +657,18 @@ desc.ot_7=Hunting for these ruins in the
 desc.ot_8=wastelands can prove beneficial.
 
 #House of Knights
-title.knights_0=The Unholy Household
+title.knights_0=The Fell Household
 desc.knig_6=Although not native to the end, the
 desc.knig_7=knights are far from what they once
 desc.knig_8=we're. These crazed power hungry
 desc.knig_9=fanatics invaded the End just to
 desc.knig_10=feel their love for war again.
-desc.knig_11=However, following using Unholy
+desc.knig_11=However, following using Lustrian
 desc.knig_12=Crystals they have seemed to lost
 desc.knig_13=there sentience and only seek more.
 
 #House of Knights Cont.
-title.knights_1=The Unholy Household Cont.
+title.knights_1=The Fell Household Cont.
 desc.mage_0=These knights have specializations,
 desc.mage_1=and have different methods of combat.
 desc.mage_2=Mages, cast spells, heal there allies,
@@ -693,8 +693,8 @@ desc.dd_helm_10=immunity to the Red Rage
 desc.dd_helm_11=potion effect.
 
 desc.dd_cont_6=In other words, basically allowing
-desc.dd_cont_7=you to carry Unholy Crystals, Chunks,
-desc.dd_cont_8=and the Unholy sword and any attacks
+desc.dd_cont_7=you to carry Lustrian Crystals, Chunks,
+desc.dd_cont_8=and the Lustrian sword and any attacks
 desc.dd_cont_9=that deliver the Red Rage.
 
 #Chad Knight

@@ -2,6 +2,7 @@ package com.example.structure.world.api.lamentedIslands;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityBuffker;
+import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
 import com.example.structure.entity.tileentity.tileEntityMobSpawner;
 import com.example.structure.init.ModBlocks;
@@ -46,9 +47,10 @@ public class LamentedIslandsTemplate extends ModStructureTemplate {
                 if (tileentity instanceof tileEntityMobSpawner) {
                     ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
                             new MobSpawnerLogic.MobSpawnData[]{
-                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityBuffker.class), 1)
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityBuffker.class), 1),
+                                    new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EndSeeker.class), 1)
                             },
-                            new int[]{1},
+                            new int[]{4, 1},
                             1,
                             24);
                 }
