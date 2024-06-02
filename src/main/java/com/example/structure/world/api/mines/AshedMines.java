@@ -97,7 +97,7 @@ public class AshedMines {
     }
 
     private boolean generateHall(MinesTemplate parent, BlockPos pos, Rotation rot) {
-        String[] hall_types = {"straight_1", "straight_2", "straight_3", "straight_4", "straight_5", "straight_6", "straight_1"};
+        String[] hall_types = {"straight_1", "straight_2", "straight_3", "straight_4", "straight_5", "straight_6", "straight_7", "straight_8", "straight_9"};
         MinesTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(hall_types), rot);
 
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) == 0) {

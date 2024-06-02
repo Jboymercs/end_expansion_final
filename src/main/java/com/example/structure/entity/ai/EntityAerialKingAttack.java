@@ -1,6 +1,7 @@
 package com.example.structure.entity.ai;
 
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.endking.EntityEndKing;
 import com.example.structure.entity.util.IAttackInitiator;
 import com.example.structure.entity.util.IPitch;
 import com.example.structure.util.ModUtils;
@@ -8,8 +9,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.Vec3d;
 
-public class EntityAerialTimedAttack extends EntityAIBase {
-    private final EntityModBase entity;
+public class EntityAerialKingAttack extends EntityAIBase {
+    private final EntityEndKing entity;
     private final float maxAttackDistSq;
     private final float lookSpeed;
     private final IAttackInitiator attackInitiator;
@@ -18,7 +19,7 @@ public class EntityAerialTimedAttack extends EntityAIBase {
 
     private static final int MEMORY = 100;
 
-    public EntityAerialTimedAttack(EntityModBase entity, float maxAttackDistance, float idealAttackDistance, float lookSpeed, IAttackInitiator attackInitiator) {
+    public EntityAerialKingAttack(EntityEndKing entity, float maxAttackDistance, float idealAttackDistance, float lookSpeed, IAttackInitiator attackInitiator) {
         this.entity = entity;
         this.maxAttackDistSq = maxAttackDistance * maxAttackDistance;
         this.lookSpeed = lookSpeed;
@@ -47,7 +48,7 @@ public class EntityAerialTimedAttack extends EntityAIBase {
     public void updateTask() {
         EntityLivingBase target = this.entity.getAttackTarget();
 
-        if (target == null) {
+        if (target == null || this.entity.isDeathBoss()) {
             return;
         }
 

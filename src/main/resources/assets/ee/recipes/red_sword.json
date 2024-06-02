@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V",
+    "V",
+    "R"
+  ],
+  "key": {
+    "V": {
+      "item": "ee:red_crystal_item"
+    },
+    "R": {
+      "item": "ee:brick_rod"
+    }
+  },
+  "result": {
+    "item": "ee:red_sword"
+  }
+}

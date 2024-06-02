@@ -4,10 +4,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
 import com.example.structure.entity.Projectile;
-import com.example.structure.entity.ai.EntityAerialTimedAttack;
-import com.example.structure.entity.ai.EntityFlyMoveHelper;
-import com.example.structure.entity.ai.EntityKingTimedAttack;
-import com.example.structure.entity.ai.MobGroundNavigate;
+import com.example.structure.entity.ai.*;
 import com.example.structure.entity.endking.EndKingAction.*;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.util.IAttack;
@@ -73,6 +70,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     //PHASE THREE
 
     private final String ANIM_FLY = "fly";
+    private final String ANIM_FLY_ARMS = "fly_arms";
     private final String ANIM_HALO = "halo";
     private final String ANIM_PHASE_INTRO = "phase_intro";
 
@@ -100,7 +98,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
 
     private final String ANIM_DEATH_BOSS = "death";
 
-    private final EntityAIBase flyattackAi = new EntityAerialTimedAttack(this, 24, 1, 30, new TimedAttackIniator<>(this, 20));
+    private final EntityAIBase flyattackAi = new EntityAerialKingAttack(this, 24, 1, 30, new TimedAttackIniator<>(this, 20));
     private final EntityAIBase basAttackAi = new EntityKingTimedAttack<>(this, 1.0, 60, 24.0f, 0.4f);
     private Consumer<EntityLivingBase> prevAttack;
 
@@ -118,6 +116,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         animationData.addAnimationController(new AnimationController(this, "fly_phase_3_controller", 0, this::predicateFly));
         animationData.addAnimationController(new AnimationController(this, "predicate_hale_controller", 0, this::predicateHaloe));
         animationData.addAnimationController(new AnimationController(this, "predicate_starting", 0, this::predicateBossStart));
+        animationData.addAnimationController(new AnimationController(this, "predicate_fly_arm_h", 0, this::predicateFlyArms));
     }
 
     public int switchTimer = 400;
@@ -324,10 +323,23 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     }
     private <E extends IAnimatable>PlayState predicateFly(AnimationEvent<E> event) {
         //Phase 3 - Change to Flight
-        if(this.isPhaseHandler() && !this.isPhaseIntro()) {
+
+        if(this.isPhaseHandler() && !this.isPhaseIntro() && !this.isDeathBoss()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_FLY, true));
 
             return PlayState.CONTINUE;
+        }
+        event.getController().markNeedsReload();
+        return PlayState.STOP;
+    }
+
+    //Small handler for the arms of the King
+    private  <E extends IAnimatable>PlayState predicateFlyArms(AnimationEvent<E> event) {
+        if(!this.isDeathBoss()) {
+            if (this.isPhaseHandler() && !this.isSwingingArms() && !this.isFullBodyUsage()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_FLY_ARMS, true));
+                return PlayState.CONTINUE;
+            }
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;
@@ -628,6 +640,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.setImmovable(false);
       }, 45);
     };
+
+
     //A simple Fly Move towards it's Target
     private final Consumer<EntityLivingBase> flyDash = (target)-> {
       this.setFightMode(true);
@@ -639,6 +653,15 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
           Vec3d targetPos = target.getPositionVector();
           float distance = getDistance(target);
           ModUtils.leapTowards(this, targetPos, (float) (0.45 * Math.sqrt(distance)), 0.3f);
+            //hahahah this boss is gonna kill youuuuuuu
+          for(int i = 0; i < 15; i += 5) {
+              addEvent(()-> {
+                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0,1.4,0)));
+                DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+                float damage = (float) (this.getAttack());
+                ModUtils.handleAreaImpact(1.5F, (e)-> damage, this, offset, source, 0.8F, 0, false);
+              }, i);
+          }
       }, 15);
 
       addEvent(()-> {
@@ -1007,10 +1030,10 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.isMeleeMode = false;
         this.isRangedMode = false;
         if(this.isDeathBoss()) {
-            addEvent(()-> this.setImmovable(false), 120);
-            addEvent(()-> this.setDeathBoss(false), 120);
-            addEvent(this::setDead, 120);
-            addEvent(()-> this.setDropItemsWhenDead(true), 120);
+            addEvent(()-> this.setImmovable(false), 77);
+            addEvent(()-> this.setDeathBoss(false), 77);
+            addEvent(this::setDead, 77);
+            addEvent(()-> this.setDropItemsWhenDead(true), 75);
 
         }
         super.onDeath(cause);

@@ -927,8 +927,15 @@
       {
         "name": "ee:biome/ambient/ambient_1",
         "stream": true
+      },
+      {
+        "name": "ee:biome/ambient/ambient_3",
+        "stream": true
+      },
+      {
+        "name": "ee:biome/ambient/ambient_4",
+        "stream": true
       }
-
     ]
   },
   "biome.ambient.music": {
