@@ -421,6 +421,11 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         return true;
     }
 
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE, true));
         return PlayState.CONTINUE;

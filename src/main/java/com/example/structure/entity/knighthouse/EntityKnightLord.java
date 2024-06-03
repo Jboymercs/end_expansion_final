@@ -569,6 +569,11 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     }
 
     @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    @Override
     public void tick() {
 
     }

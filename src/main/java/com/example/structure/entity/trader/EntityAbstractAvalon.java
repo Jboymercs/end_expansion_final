@@ -178,6 +178,8 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         avalon.copyLocationAndAnglesFrom(this);
         world.spawnEntity(avalon);
     }
+
+    protected int setTooDeathTimer = 800;
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -192,13 +194,18 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
 
         EntityLivingBase target = this.getAttackTarget();
         if(target == null && this.ableTooDisableWhenTargetsAreGone) {
-            if(!hasRemovedAITasks) {
+            //Hopefully this fixes any weird shenanigans with the boss just outright respawning a new one
+            if(!hasRemovedAITasks && setTooDeathTimer < 0) {
                 this.setAttackTarget(null);
                 this.setIAmBoss(false);
                 removeTasksOfBoss();
                 this.IAmAggroed = false;
                 this.hasSelectedTarget = false;
+            } else {
+                setTooDeathTimer--;
             }
+        } else {
+            setTooDeathTimer = 800;
         }
 
         //This keeps the Players inside the arena basically forcefully pushing them back in

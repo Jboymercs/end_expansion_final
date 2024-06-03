@@ -997,6 +997,11 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     }
 
     @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    @Override
     protected void updateFallState(double y, boolean onGroundIn, @Nonnull IBlockState state, @Nonnull BlockPos pos) {
     }
 

@@ -1001,6 +1001,11 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         return 1F;
     }
 
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
     //TIME TO DO SOUNDS
 
     @Override
