@@ -2,7 +2,6 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"idle": {
-			"loop": true,
 			"animation_length": 2,
 			"bones": {
 				"Torso": {
@@ -39,11 +38,30 @@
 					"scale": {
 						"vector": [0, 0, 0]
 					}
+				},
+				"SwordTrail": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"Halo": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"RWingJ": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"LWingJ": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
 				}
 			}
 		},
 		"leap_attack": {
-			"loop": "hold_on_last_frame",
 			"animation_length": 4,
 			"bones": {
 				"Torso": {
@@ -287,11 +305,30 @@
 							"easing": "easeInQuad"
 						}
 					}
+				},
+				"SwordTrail": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"Halo": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"RWingJ": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"LWingJ": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
 				}
 			}
 		},
 		"close_attack": {
-			"loop": "hold_on_last_frame",
 			"animation_length": 3,
 			"bones": {
 				"Torso": {
@@ -492,6 +529,42 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInQuad"
 						}
+					}
+				},
+				"SwordTrail": {
+					"scale": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.625": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [1, 1, 1],
+							"easing": "easeInBack"
+						},
+						"1.0": {
+							"vector": [1, 1, 1]
+						},
+						"1.125": {
+							"vector": [0, 0, 0],
+							"easing": "easeInCirc"
+						}
+					}
+				},
+				"Halo": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"RWingJ": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"LWingJ": {
+					"scale": {
+						"vector": [0, 0, 0]
 					}
 				}
 			}

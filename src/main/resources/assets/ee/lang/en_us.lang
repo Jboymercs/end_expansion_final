@@ -170,6 +170,11 @@ ee.dialog.king_talk_3=This is where it ends for you...
 ee.dialog.king_talk_4=it's time to put your aspirations to the grave...
 ee.dialog.king_talk_5=traveller.
 
+#Phase 3
+ee.dialog.king_transform_1=May thy rage enlighten me once more.
+
+#Death Dialog
+ee.dialog.king_death_1=This is your cursed land to handle now... Traveller...
 
 #Advancements
 advancements.ee.root.title=End Expansion

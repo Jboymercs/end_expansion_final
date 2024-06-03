@@ -45,7 +45,7 @@ public class ActionThrowFireball implements IAction {
                 projectile.shoot(vel.x, vel.y, vel.z, 2.5f, 0f);
 
                 ModUtils.addEntityVelocity(actor, vel.normalize());
-            }, 25);
+            }, 20);
 
         };
         actor.addEvent(missile.apply(ModUtils.getRelativeOffset(actor, new Vec3d(0, 0, 0))),0);

@@ -16,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
@@ -28,6 +29,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -203,7 +207,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         }
 
         //This is used in Phase 3 for when the boss is flying
-        if(this.IPhaseThree && target != null && !this.isBeingRidden() && !this.isMeleeMode && !this.isDeathBoss()) {
+        if(this.IPhaseThree && target != null && !this.isBeingRidden() && !this.isMeleeMode && !this.isDeathBoss() && !this.isPhaseIntro()) {
             double distSq = this.getDistanceSq(target.posX, target.getEntityBoundingBox().minY, target.posZ);
             double distance = Math.sqrt(distSq);
             if(distance < 12) {
@@ -244,6 +248,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.setPhaseIntro(true);
         this.setImmovable(true);
         this.setFullBodyUsage(true);
+        this.playSound(ModSoundHandler.KING_TRANSFORM, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         //Rid of any previous ghosts in the area
         List<EntityPermanantGhost> nearbyGhosts = this.world.getEntitiesWithinAABB(EntityPermanantGhost.class, this.getEntityBoundingBox().grow(50D), e -> !e.getIsInvulnerable());
         if(!nearbyGhosts.isEmpty()) {
@@ -251,6 +256,16 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                 ghost.setDead();
             }
         }
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_transform_1")));
+            }
+            //Transform Dialog
+        }, 30);
+
+
         //After Playing the Animation, It will basically set itself to flight attack methods and as well remove previous tasks
         addEvent(()-> {
             this.setFullBodyUsage(true);
@@ -532,7 +547,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
                     (distance < 13 && distance > 5 && prevAttack != upperAttack) ? distance * 0.02 : 0,  //Upper Attack
                     (distance < 7 && prevAttack != sideAttack) ? distance * 0.02 : 0,   //Side Swipe
                     (distance < 3 && prevAttack != regularAttack) ? 1/distance : 0,  //Close Regular Attack
-                    (distance < 9 && prevAttack != slam_Attack) ? 1/distance : 0 //Slam Ground Attack
+                    (distance < 9 && prevAttack != slam_Attack) ? distance * 0.02 : 0 //Slam Ground Attack
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
             prevAttack.accept(target);
@@ -614,6 +629,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setSlamAttack(true);
       this.setFullBodyUsage(true);
       this.setImmovable(true);
+        this.playSound(ModSoundHandler.KING_PREPARE_SLAM, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
 
       addEvent(()-> {
           Vec3d targetedPos = target.getPositionVector();
@@ -647,6 +663,9 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setFightMode(true);
       this.setFullBodyUsage(true);
       this.setFlyDashMove(true);
+
+      addEvent(()-> this.playSound(ModSoundHandler.KING_DASH, 1.4f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 15);
+
       addEvent(()-> this.lockLook = true, 10);
       addEvent(()-> {
         //Leap Forward
@@ -702,6 +721,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setSummonCrystalsAttack(true);
       this.setSwingingArms(true);
 
+      addEvent(()-> this.playSound(ModSoundHandler.KING_CAST, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 15);
       addEvent(()-> new ActionAOESimple().performAction(this, target), 20);
 
       addEvent(()-> this.setSummonCrystalsAttack(false), 23);
@@ -729,6 +749,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setSummonFireballsAttack(true);
       this.setFullBodyUsage(true);
       this.setImmovable(true);
+        this.playSound(ModSoundHandler.KING_FIREBALL, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
     new ActionThrowFireball(fireBallSupplier, 2.5f).performAction(this, target);
 
         addEvent(()-> this.setImmovable(false), 35);
@@ -744,7 +765,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setSwingingArms(true);
 
       addEvent(()-> new ActionSummonGhosts().performAction(this, target), 13);
-
+        addEvent(()-> this.playSound(ModSoundHandler.KING_CAST, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 15);
       addEvent(()-> {
           this.setSwingingArms(false);
         this.setSummonGhostsAttack(false);
@@ -782,7 +803,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setFightMode(true);
       this.setFullBodyUsage(true);
       this.setImmovable(true);
-
+        this.playSound(ModSoundHandler.KING_TOP_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
       addEvent(()-> this.lockLook = true, 15);
       addEvent(()-> {
           Vec3d targetPos = target.getPositionVector();
@@ -822,7 +843,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setSwingingArms(true);
       this.setSideAttack(true);
       this.setFightMode(true);
-
+        this.playSound(ModSoundHandler.KING_SIDE_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
       addEvent(()-> this.lockLook = true, 10);
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
@@ -845,7 +866,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setFightMode(true);
       this.setSwingingArms(true);
         this.lockLook =true;
-
+        this.playSound(ModSoundHandler.KING_THROW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> {
             //Summon Ground Sword Variant
             if(this.isPhaseHandler()) {
@@ -868,6 +889,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setSwingingArms(true);
       this.setFightMode(true);
       this.setMultipleStrikes(true);
+        this.playSound(ModSoundHandler.KING_DOUBLE_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
       addEvent(()-> this.lockLook = true, 15);
       addEvent(()-> {
         Vec3d targetPos = target.getPositionVector();
@@ -905,7 +927,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       this.setFightMode(true);
       this.setSwingingArms(true);
       this.setLazerAttack(true);
-
+        this.playSound(ModSoundHandler.KING_LAZER, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
       //Lazer Attack
       addEvent(()-> {
           this.performLazerAttack =true;
@@ -970,17 +992,20 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 0.6F, 0.7f + ModRand.getFloat(0.3F));
     }
 
+    @Override
+    protected float playFlySound(float p_191954_1_)
+    {
+        if(this.isPhaseHandler()) {
+            this.playSound(ModSoundHandler.KING_FLY, 0.8F, 1.0F);
+        }
+        return 1F;
+    }
 
     //TIME TO DO SOUNDS
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSoundHandler.KNIGHT_HURT;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return ModSoundHandler.KNIGHT_DEATH;
+        return ModSoundHandler.KING_HURT;
     }
 
     @Override
@@ -1021,7 +1046,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.bossInfo.removePlayer(player);
     }
 
-
+protected boolean setDeathTooActive = false;
     @Override
     public void onDeath(DamageSource cause) {
         this.setHealth(0.0001f);
@@ -1029,12 +1054,22 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         this.setImmovable(true);
         this.isMeleeMode = false;
         this.isRangedMode = false;
-        if(this.isDeathBoss()) {
-            addEvent(()-> this.setImmovable(false), 77);
-            addEvent(()-> this.setDeathBoss(false), 77);
-            addEvent(this::setDead, 77);
-            addEvent(()-> this.setDropItemsWhenDead(true), 75);
 
+        if(this.isDeathBoss() && !setDeathTooActive) {
+            this.playSound(ModSoundHandler.KING_DEATH, 1.0f, 1.0f);
+
+            addEvent(()-> {
+                for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                    player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
+                            .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_death_1")));
+                }
+                //Death
+            }, 20);
+            addEvent(()-> this.setImmovable(false), 72);
+            addEvent(()-> this.setDeathBoss(false), 72);
+            addEvent(this::setDead, 72);
+            addEvent(()-> this.setDropItemsWhenDead(true), 70);
+            setDeathTooActive = true;
         }
         super.onDeath(cause);
     }

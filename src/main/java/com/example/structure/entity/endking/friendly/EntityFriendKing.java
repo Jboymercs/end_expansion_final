@@ -214,23 +214,6 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
 
 
-    private final Consumer<EntityLivingBase> crystalSelfAOE = (target)-> {
-        this.setFightMode(true);
-        this.setImmovable(true);
-        this.setSummonCrystalsAttack(true);
-        this.setSwingingArms(true);
-
-        addEvent(()-> new ActionAOESimple().performAction(this, target), 20);
-
-        addEvent(()-> this.setSummonCrystalsAttack(false), 23);
-        addEvent(()-> this.setImmovable(false),23);
-        addEvent(()-> this.setSwingingArms(false), 23);
-        addEvent(()-> this.setFightMode(false), 25);
-
-
-    };
-
-
     Supplier<Projectile> projectileSupplierSpinSword = () -> new ProjectileSpinSword(world, this, 6.0f);
 
     private final Consumer<EntityLivingBase> projectileSwords = (target) -> {
@@ -246,7 +229,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         this.setFightMode(true);
         this.setFullBodyUsage(true);
         this.setImmovable(true);
-
+        this.playSound(ModSoundHandler.KING_TOP_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> this.lockLook = true, 15);
         addEvent(()-> {
             Vec3d targetPos = target.getPositionVector();
@@ -288,6 +271,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         addEvent(()-> {
             this.lockLook = true;
             this.setImmovable(false);
+            this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         }, 10);
         addEvent(()-> {
 
@@ -319,7 +303,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         this.setFightMode(true);
         this.setSwingingArms(true);
         this.lockLook =true;
-
+        this.playSound(ModSoundHandler.KING_THROW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> {
             //Summon Ground Sword Variant
             //Makes them faster
@@ -338,9 +322,9 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         this.setFightMode(true);
         this.setSwingingArms(true);
 
-        addEvent(()-> {
-            this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-        }, 21);
+        addEvent(()-> this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 5);
+
+        addEvent(()-> this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f)), 21);
 
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(2, 1.5, 0)));
@@ -361,7 +345,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         this.setSwingingArms(true);
         this.setSideAttack(true);
         this.setFightMode(true);
-
+        this.playSound(ModSoundHandler.KING_SIDE_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> this.lockLook = true, 10);
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));

@@ -99,7 +99,7 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
 
 
         if(this.ticksExisted == 3) {
-            this.playSound(ModSoundHandler.TARGET_SUMMON, 0.8F, 1.0f / rand.nextFloat() * 0.4f + 0.8f);
+            this.playSound(ModSoundHandler.TARGET_SUMMON, 0.8F, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
         }
         this.motionX = 0;
         this.motionZ = 0;
@@ -118,7 +118,7 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
                     Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.5));
                     DamageSource source = ModDamageSource.builder()
                             .type(ModDamageSource.MOB)
-                            .directEntity(this).disablesShields()
+                            .directEntity(this)
                             .build();
                     float damage = this.getAttack();
                     ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.7F, 0, false );
@@ -138,7 +138,7 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
                     Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.5));
                     DamageSource source = ModDamageSource.builder()
                             .type(ModDamageSource.MOB)
-                            .directEntity(this).disablesShields()
+                            .directEntity(this)
                             .build();
                     float damage = this.getAttack();
                     ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.7F, 0, false );

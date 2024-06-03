@@ -329,6 +329,140 @@
       }
     ]
   },
+  "entity.king.prepare_slam": {
+    "category": "entity",
+    "subtitle": "entity.king.prepare_slam",
+    "sounds": [
+      {
+        "name": "ee:entity/king/prepare_slam",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.cast": {
+    "category": "entity",
+    "subtitle": "entity.king.cast",
+    "sounds": [
+      {
+        "name": "ee:entity/king/cast",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.fireball": {
+    "category": "entity",
+    "subtitle": "entity.king.fireball",
+    "sounds": [
+      {
+        "name": "ee:entity/king/fireball",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.side_swipe": {
+    "category": "entity",
+    "subtitle": "entity.king.side_swipe",
+    "sounds": [
+      {
+        "name": "ee:entity/king/side_swipe",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.top_swipe": {
+    "category": "entity",
+    "subtitle": "entity.king.top_swipe",
+    "sounds": [
+      {
+        "name": "ee:entity/king/top_swipe",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.double_swipe": {
+    "category": "entity",
+    "subtitle": "entity.king.double_swipe",
+    "sounds": [
+      {
+        "name": "ee:entity/king/double_swipe",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.throw_sword": {
+    "category": "entity",
+    "subtitle": "entity.king.throw_sword",
+    "sounds": [
+      {
+        "name": "ee:entity/king/throw_sword",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.lazer": {
+    "category": "entity",
+    "subtitle": "entity.king.lazer",
+    "sounds": [
+      {
+        "name": "ee:entity/king/lazer",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.hurt": {
+    "category": "entity",
+    "subtitle": "entity.king.hurt",
+    "sounds": [
+      {
+        "name": "ee:entity/king/hurt_1",
+        "stream": true
+      },
+      {
+        "name": "ee:entity/king/hurt_2",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.death": {
+    "category": "entity",
+    "subtitle": "entity.king.death",
+    "sounds": [
+      {
+        "name": "ee:entity/king/death",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.fly": {
+    "category": "entity",
+    "subtitle": "entity.king.fly",
+    "sounds": [
+      {
+        "name": "ee:entity/king/fly",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.intro": {
+    "category": "entity",
+    "subtitle": "entity.king.intro",
+    "sounds": [
+      {
+        "name": "ee:entity/king/intro",
+        "stream": true
+      }
+    ]
+  },
+  "entity.king.transform": {
+    "category": "entity",
+    "subtitle": "entity.king.transform",
+    "sounds": [
+      {
+        "name": "ee:entity/king/transform",
+        "stream": true
+      }
+    ]
+  },
   "entity.knight.step": {
     "category": "entity",
     "subtitle": "entity.knight.step",

@@ -14,6 +14,7 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
 
 import java.util.Random;
 
@@ -30,7 +31,7 @@ public class ModProfressions {
 
     public static void associateCareersAndTrades() {
         //Input Textures later
-        AVALON_NULL_PROFESSION = new VillagerRegistry.VillagerProfession("avalon", ModReference.MOD_ID + "", ModReference.MOD_ID + "");
+        AVALON_NULL_PROFESSION = new VillagerProfession("avalon", ModReference.MOD_ID + "", ModReference.MOD_ID + "");
 
         AVALON_TRADER = new VillagerRegistry.VillagerCareer(AVALON_NULL_PROFESSION, "avalon_trader");
 

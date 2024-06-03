@@ -156,7 +156,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
             this.setDead();
         } else {
             for(EntityEndKing king : nearbyBoss) {
-                if(!king.IPhaseThree) {
+                if(!king.IPhaseThree || king.isDeathBoss()) {
                     this.setDead();
                 }
             }
@@ -222,6 +222,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.setSummonFireballsAttack(true);
         this.setFullBodyUsage(true);
         this.setImmovable(true);
+        this.playSound(ModSoundHandler.KING_FIREBALL, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         new ActionThrowFireball(fireBallSupplier, 2.5f).performAction(this, target);
 
         addEvent(()-> this.setImmovable(false), 35);
@@ -235,7 +236,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.setImmovable(true);
         this.setSummonCrystalsAttack(true);
         this.setSwingingArms(true);
-
+        addEvent(()-> this.playSound(ModSoundHandler.KING_CAST, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 15);
         addEvent(()-> new ActionAOESimple().performAction(this, target), 20);
 
         addEvent(()-> this.setSummonCrystalsAttack(false), 23);
@@ -262,7 +263,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.setFightMode(true);
         this.setFullBodyUsage(true);
         this.setImmovable(true);
-
+        this.playSound(ModSoundHandler.KING_TOP_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> this.lockLook = true, 15);
         addEvent(()-> {
             Vec3d targetPos = target.getPositionVector();
@@ -304,6 +305,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         addEvent(()-> {
             this.lockLook = true;
             this.setImmovable(false);
+            this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         }, 10);
         addEvent(()-> {
 
@@ -335,7 +337,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.setFightMode(true);
         this.setSwingingArms(true);
         this.lockLook =true;
-
+        this.playSound(ModSoundHandler.KING_THROW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> {
             //Summon Ground Sword Variant
                 //Makes them faster
@@ -353,10 +355,8 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.setComboAttack(true);
         this.setFightMode(true);
         this.setSwingingArms(true);
-
-        addEvent(()-> {
-            this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-        }, 21);
+        addEvent(()-> this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f)), 5);
+        addEvent(()-> this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f)), 21);
 
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(2, 1.5, 0)));
@@ -377,7 +377,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.setSwingingArms(true);
         this.setSideAttack(true);
         this.setFightMode(true);
-
+        this.playSound(ModSoundHandler.KING_SIDE_SWIPE, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> this.lockLook = true, 10);
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));

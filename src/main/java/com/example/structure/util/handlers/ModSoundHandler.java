@@ -27,6 +27,19 @@ public class ModSoundHandler {
     public static SoundEvent KING_IMPACT;
     public static SoundEvent KING_DRAW_SWORD;
     public static SoundEvent KING_SUMMON_EYE;
+    public static SoundEvent KING_PREPARE_SLAM;
+    public static SoundEvent KING_CAST;
+    public static SoundEvent KING_FIREBALL;
+    public static SoundEvent KING_SIDE_SWIPE;
+    public static SoundEvent KING_TOP_SWIPE;
+    public static SoundEvent KING_DOUBLE_SWIPE;
+    public static SoundEvent KING_THROW_SWORD;
+    public static SoundEvent KING_LAZER;
+    public static SoundEvent KING_HURT;
+    public static SoundEvent KING_DEATH;
+    public static SoundEvent KING_FLY;
+    public static SoundEvent KING_INTRO;
+    public static SoundEvent KING_TRANSFORM;
 
     //NuclearBomb Sounds
     public static SoundEvent BOMB_EXPLODE;
@@ -148,6 +161,19 @@ public class ModSoundHandler {
         BOMB_EXPLODE = registerSound("king.explode", "entity");
         KING_DRAW_SWORD = registerSound("king.draw", "entity");
         KING_SUMMON_EYE = registerSound("king.summon_eye", "entity");
+        KING_PREPARE_SLAM = registerSound("king.prepare_slam", "entity");
+        KING_CAST = registerSound("king.cast", "entity");
+        KING_FIREBALL = registerSound("king.fireball", "entity");
+        KING_SIDE_SWIPE = registerSound("king.side_swipe", "entity");
+        KING_TOP_SWIPE = registerSound("king.top_swipe", "entity");
+        KING_DOUBLE_SWIPE = registerSound("king.double_swipe", "entity");
+        KING_THROW_SWORD = registerSound("king.throw_sword", "entity");
+        KING_LAZER = registerSound("king.lazer", "entity");
+        KING_HURT = registerSound("king.hurt", "entity");
+        KING_DEATH = registerSound("king.death", "entity");
+        KING_FLY = registerSound("king.fly", "entity");
+        KING_INTRO = registerSound("king.intro", "entity");
+        KING_TRANSFORM = registerSound("king.transform", "entity");
 
         KNIGHT_STEP = registerSound("knight.step", "entity");
         KNIGHT_HURT = registerSound("knight.hurt", "entity");

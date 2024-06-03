@@ -22,9 +22,9 @@ public class BetterStrongholdTemplate extends ModStructureTemplate {
 
     private WorldGenStructure[] structures = {new WorldGenStructure("stronghold/tile_1"), new WorldGenStructure("stronghold/tile_2"),
     new WorldGenStructure("stronghold/tile_3"), new WorldGenStructure("stronghold/tile_4"), new WorldGenStructure("stronghold/tile_5")};
-    private static final ResourceLocation LOOT = new ResourceLocation("minecraft:", "loot_tables/chests/stronghold_corridor");
-    private static final ResourceLocation LOOT_LIBRARY = new ResourceLocation("minecraft:", "stronghold_library");
-    private static final ResourceLocation LOOT_CROSSING = new ResourceLocation("minecraft:", "stronghold_crossing");
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "stronghold_c");
+    private static final ResourceLocation LOOT_LIBRARY = new ResourceLocation(ModReference.MOD_ID, "stronghold_l");
+    private static final ResourceLocation LOOT_CROSSING = new ResourceLocation(ModReference.MOD_ID, "stronghold");
 
     private static final ResourceLocation BOOK = new ResourceLocation(ModReference.MOD_ID, "library_book");
 

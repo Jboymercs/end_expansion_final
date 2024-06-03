@@ -10,6 +10,7 @@ import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.util.IPitch;
 import com.example.structure.renderer.ITarget;
 import com.example.structure.util.*;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.*;
@@ -349,9 +350,10 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     protected boolean hasStartedBossFight = false;
     public void startBossFight() {
         hasStartedBossFight = true;
+        this.playSound(ModSoundHandler.KING_INTRO, 0.8f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
-                player.sendMessage(new TextComponentString(TextFormatting.RED + "End King: " + TextFormatting.WHITE)
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
                         .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_talk_0")));
             }
             //Dialog 1
@@ -360,7 +362,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
-                player.sendMessage(new TextComponentString(TextFormatting.RED + "End King: " + TextFormatting.WHITE)
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
                         .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_talk_1")));
             }
             //Dialog 2
@@ -368,7 +370,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
-                player.sendMessage(new TextComponentString(TextFormatting.RED + "End King: " + TextFormatting.WHITE)
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
                         .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_talk_2")));
             }
             //Dialog 3
@@ -376,7 +378,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
-                player.sendMessage(new TextComponentString(TextFormatting.RED + "End King: " + TextFormatting.WHITE)
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
                         .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_talk_3")));
             }
             //Dialog 4
@@ -385,7 +387,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
-                player.sendMessage(new TextComponentString(TextFormatting.RED + "End King: " + TextFormatting.WHITE)
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
                         .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_talk_4")));
             }
             //Dialog 5
@@ -394,11 +396,15 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         addEvent(()-> {
             this.setBossStall(false);
             this.setBossStart(true);
+            addEvent(()-> {
+                this.playSound(ModSoundHandler.KING_DRAW_SWORD, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.6f));
+            }, 30);
         }, 485);
+
 
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
-                player.sendMessage(new TextComponentString(TextFormatting.RED + "End King: " + TextFormatting.WHITE)
+                player.sendMessage(new TextComponentString(TextFormatting.RED + "Ashed King: " + TextFormatting.WHITE)
                         .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "king_talk_5")));
             }
             //Dialog 6
