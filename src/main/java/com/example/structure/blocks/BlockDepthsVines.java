@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockDepthsVines extends BlockBush implements IHasModel, RegistryHandler.IStateMappedBlock {
@@ -68,6 +69,12 @@ public class BlockDepthsVines extends BlockBush implements IHasModel, RegistryHa
             this.dropBlockAsItem(worldIn, pos, state, 0);
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
         }
+    }
+
+    @Override
+    @Nullable
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return null;
     }
 
     protected boolean isValidBlock(World world, BlockPos pos, IBlockState blockState) {

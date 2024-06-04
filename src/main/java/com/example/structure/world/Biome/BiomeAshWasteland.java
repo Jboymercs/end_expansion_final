@@ -153,7 +153,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             }
         }
         //Red Crystal Ore
-        if(rand.nextInt(16) == 1) {
+        if(rand.nextInt(30) == 1) {
             for (int k2 = 0; k2 < this.crystalSelect; ++k2) {
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
@@ -242,7 +242,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
             int k10 = random.nextInt(16) + 8;
             for(int y = 40; y > 15; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
-                if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState() && world.rand.nextInt(5) == 0) {
+                if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState() && world.rand.nextInt(7) == 0) {
                     ore_gen.generateOreNearby(world, random, pos.add(l6, y, k10));
                 }
             }

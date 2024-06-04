@@ -58,24 +58,8 @@ public class AshTowerTemplate extends ModStructureTemplate {
                 world.setBlockToAir(pos);
             }
         }
-
-        //Boss Spawn PLEASE WORK
-       else if(function.startsWith("boss")) {
-           world.setBlockState(pos, ModBlocks.DISAPPEARING_SPAWNER_ASH.getDefaultState(), 2);
-           TileEntity tileentity = world.getTileEntity(pos);
-           if (tileentity instanceof tileEntityMobSpawner) {
-               ((tileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setData(
-                       new MobSpawnerLogic.MobSpawnData[]{
-                               new MobSpawnerLogic.MobSpawnData(ModEntities.getID(EntityBarrendGolem.class), 1)
-                       },
-                       new int[]{1},
-                       1,
-                       16);
-           }
-           else {
-               world.setBlockToAir(pos);
-           }
-       } else if(function.startsWith("chest")) {
+       
+         else if(function.startsWith("chest")) {
            BlockPos blockPos = pos.down();
            if(generateChestSpawn() && sbb.isVecInside(blockPos)) {
 

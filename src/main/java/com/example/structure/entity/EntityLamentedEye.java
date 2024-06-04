@@ -1,5 +1,9 @@
 package com.example.structure.entity;
 
+import com.example.structure.entity.barrend.EntityBarrendGolem;
+import com.example.structure.entity.endking.EntityEndKing;
+import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.trader.EntityAvalon;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
@@ -71,10 +75,13 @@ public class EntityLamentedEye extends EntityModBase implements IAnimatable {
 
         if(!nearbyTargets.isEmpty()) {
             for(EntityLivingBase entity : nearbyTargets) {
-                Vec3d currentPos = entity.getPositionVector();
-                Vec3d newRandPos = new Vec3d(currentPos.x + ModRand.range(-16 ,16), currentPos.y + ModRand.range(1, 16), currentPos.z + ModRand.range(-16, 16));
-                ModUtils.attemptTeleport(newRandPos, entity);
-                this.setDead();
+                //Checking nerf for preventing any of the below bosses being exploited
+                if(!(entity instanceof EntityEndKing) && !(entity instanceof EntityBarrendGolem) && !(entity instanceof EndSeekerPrime) && !(entity instanceof EntityAvalon)) {
+                    Vec3d currentPos = entity.getPositionVector();
+                    Vec3d newRandPos = new Vec3d(currentPos.x + ModRand.range(-16, 16), currentPos.y + ModRand.range(1, 16), currentPos.z + ModRand.range(-16, 16));
+                    ModUtils.attemptTeleport(newRandPos, entity);
+                    this.setDead();
+                }
             }
         }
 

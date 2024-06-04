@@ -34,7 +34,7 @@ public class ModItems {
 
     private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 6, 1781, 10.0F, 4, 25);
 
-    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, 7.0F, 40);
+    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, 6.0F, 40);
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
     private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
