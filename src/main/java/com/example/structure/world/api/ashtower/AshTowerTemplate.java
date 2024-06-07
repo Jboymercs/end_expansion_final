@@ -58,7 +58,7 @@ public class AshTowerTemplate extends ModStructureTemplate {
                 world.setBlockToAir(pos);
             }
         }
-       
+
          else if(function.startsWith("chest")) {
            BlockPos blockPos = pos.down();
            if(generateChestSpawn() && sbb.isVecInside(blockPos)) {
