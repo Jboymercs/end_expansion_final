@@ -48,12 +48,12 @@ import java.util.function.Consumer;
  */
 public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
     public void setBlinkMode(boolean value) {this.dataManager.set(BLINK_MODE, Boolean.valueOf(value));}
@@ -85,6 +85,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
     public EndSeeker(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
+        this.experienceValue = 20;
         if(rand.nextInt(2) == 0) {
             this.isRangedMode = true;
         } else {
@@ -95,6 +96,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
     public EndSeeker(World worldIn) {
         super(worldIn);
+        this.experienceValue = 20;
         if(rand.nextInt(2) == 0) {
             this.isRangedMode = true;
         } else {

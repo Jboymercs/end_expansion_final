@@ -105,6 +105,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         this.setSize(3F, 3F);
         this.iAmBossMob = true;
         this.hitboxParts = new MultiPartEntityPart[]{model, hit_part_1, shield_1, shield_2, shield_3, shield_4, hit_part_2, hit_part_3, hit_part_4, hit_part_5};
+        this.experienceValue = 900;
     }
 
     @Override

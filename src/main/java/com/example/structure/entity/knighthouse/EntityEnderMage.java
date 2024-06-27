@@ -3,6 +3,7 @@ package com.example.structure.entity.knighthouse;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
+import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.EntityAISupport;
 import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.endking.ProjectileSpinSword;
@@ -52,9 +53,9 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     private final String ANIM_MARKED = "mark";
 
     public int randomMarkTimer = 800 + ModRand.range(50, (ModConfig.end_mage_ritual * 20));
-    private static final DataParameter<Boolean> HEALING_MODE =EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK_MODE = EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MARKED = EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HEALING_MODE =EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MARKED = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityEnderMage(World worldIn, float x, float y, float z) {

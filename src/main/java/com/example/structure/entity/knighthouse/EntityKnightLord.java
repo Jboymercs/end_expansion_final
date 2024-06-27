@@ -1,6 +1,7 @@
 package com.example.structure.entity.knighthouse;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.EntityAerialTimedAttack;
 import com.example.structure.entity.ai.EntityFlyMoveHelper;
 import com.example.structure.entity.endking.EntityRedCrystal;
@@ -49,13 +50,13 @@ import java.util.function.Consumer;
 
 public class EntityKnightLord extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     public void setFlyingMode(boolean value) {this.dataManager.set(FLYING_MODE, Boolean.valueOf(value));}
     public boolean isFlyingMode() {return this.dataManager.get(FLYING_MODE);}
     public void setPierce(boolean value) {this.dataManager.set(PIERCE, Boolean.valueOf(value));}
@@ -211,6 +212,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.setImmovable(true);
         this.setSize(0.8f, 2.0f);
         this.iAmBossMob = true;
+        this.experienceValue = 400;
         addEvent(()-> this.playSound(ModSoundHandler.LORD_SUMMON, 1.5F, 1.0F), 5);
         addEvent(()-> {
             this.setImmovable(false);
@@ -254,7 +256,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
 
             prevAttack.accept(target);
         }
-        return (this.isBlocking()) ? 40 : 10;
+        return (this.isBlocking()) ? 60 : 10;
     }
 
     private final Consumer<EntityLivingBase> randomTeleport = (target) -> {
@@ -277,22 +279,24 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
           Vec3d dir = targetPosition.subtract(throwerPosition).normalize();
           AtomicReference<Vec3d> spawnPos = new AtomicReference<>(throwerPosition);
 
-          for (int t = 0; t < 7; t += 1) {
-              int additive = t;
-              addEvent(() -> {
-                  ModUtils.lineCallback(throwerPosition.add(dir), throwerPosition.add(dir.scale(additive)), additive * 2, (pos, r) -> {
-                      spawnPos.set(pos);
-                  });
-                  Vec3d initPos = spawnPos.get();
-                  EntityRedCrystal crystal = new EntityRedCrystal(this.world);
-                  BlockPos blockPos = new BlockPos(initPos.x, initPos.y, initPos.z);
-                  crystal.setPosition(blockPos);
-                  crystal.playSound(SoundEvents.EVOCATION_FANGS_ATTACK, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-                  this.world.spawnEntity(crystal);
+            addEvent(()-> {
+                for (int t = 0; t < 7; t += 1) {
+                    int additive = t;
+                    addEvent(() -> {
+                        ModUtils.lineCallback(throwerPosition.add(dir), throwerPosition.add(dir.scale(additive)), additive * 2, (pos, r) -> {
+                            spawnPos.set(pos);
+                        });
+                        Vec3d initPos = spawnPos.get();
+                        EntityRedCrystal crystal = new EntityRedCrystal(this.world);
+                        BlockPos blockPos = new BlockPos(initPos.x, initPos.y, initPos.z);
+                        crystal.setPosition(blockPos);
+                        crystal.playSound(SoundEvents.EVOCATION_FANGS_ATTACK, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+                        this.world.spawnEntity(crystal);
 
-              }, t);
-          }
-      }, 18);
+                    }, t);
+                }
+            }, 10);
+      }, 8);
       addEvent(()-> {
           this.setImmovable(false);
           this.setFightMode(false);
@@ -429,7 +433,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     }
 
     private <E extends IAnimatable> PlayState predicateBlock(AnimationEvent<E> event) {
-        if(!this.isSummonCrystals() && !this.isMultiStrike() && !this.isMultiAttack() && !this.isPierce() && !this.isSummonKnight()) {
+        if(!this.isSummonKnight()) {
             if (this.isBlocking()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLOCK, false));
                 return PlayState.CONTINUE;

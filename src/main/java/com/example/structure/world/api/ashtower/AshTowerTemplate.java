@@ -59,6 +59,12 @@ public class AshTowerTemplate extends ModStructureTemplate {
             }
         }
 
+       if(function.startsWith("boss")) {
+           EntityBarrendGolem golem = new EntityBarrendGolem(world);
+           golem.setPosition(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+           world.spawnEntity(golem);
+           world.setBlockToAir(pos);
+       }
          else if(function.startsWith("chest")) {
            BlockPos blockPos = pos.down();
            if(generateChestSpawn() && sbb.isVecInside(blockPos)) {

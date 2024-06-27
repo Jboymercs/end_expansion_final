@@ -5,7 +5,9 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModEntities;
 import com.example.structure.init.ModProfressions;
 import com.example.structure.init.ModRecipes;
+import com.example.structure.items.gecko.AmberArmorSet;
 import com.example.structure.proxy.CommonProxy;
+import com.example.structure.renderer.armor.AmberArmorRenderer;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.util.handlers.FogHandler;
@@ -29,6 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 
 @Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION)
@@ -83,8 +86,8 @@ public class Main {
     @SideOnly(Side.CLIENT)
     @Mod.EventHandler
     public void registerRenderers(FMLPreInitializationEvent event) {
-        //Specific for blocks handling geckolib data
-
+        //Specific for blocks/Armor handling geckolib data
+        //GeoArmorRenderer.registerArmorRenderer(AmberArmorSet.class, new AmberArmorRenderer());
 
     }
 

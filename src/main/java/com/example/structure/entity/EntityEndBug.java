@@ -90,12 +90,13 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     public EntityEndBug(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
         this.setSize(1.5f, 1.0f);
+        this.experienceValue = 13;
     }
 
     public EntityEndBug(World worldIn) {
         super(worldIn);
         this.setSize(1.5f, 1.0f);
-
+        this.experienceValue = 13;
     }
 
     @Override

@@ -51,7 +51,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     public EntityAbstractBuffker(World worldIn) {
         super(worldIn);
-
+        this.experienceValue = 33;
         this.hitboxParts = new MultiPartEntityPart[]{model, head, torso};
         this.setSize(2.0f, 2.8f);
     }

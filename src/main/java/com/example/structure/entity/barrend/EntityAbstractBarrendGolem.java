@@ -113,6 +113,7 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         super(worldIn);
         this.hitboxParts = new MultiPartEntityPart[]{model, main_body, left_arm, right_arm, part_left_worm, part_right_worm, part_back_worm};
         this.setSize(2.3f, 3.2f);
+        this.experienceValue = 320;
     }
 
 

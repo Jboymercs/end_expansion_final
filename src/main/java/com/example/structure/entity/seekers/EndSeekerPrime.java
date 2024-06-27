@@ -44,13 +44,13 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
-    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
     public void setBlinkMode(boolean value) {this.dataManager.set(BLINK_MODE, Boolean.valueOf(value));}
@@ -90,12 +90,14 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         super(worldIn, x, y, z);
         this.isMeleeMode = true;
         this.iAmBossMob = true;
+        this.experienceValue = 150;
     }
 
     public EndSeekerPrime(World worldIn) {
         super(worldIn);
         this.isMeleeMode = true;
         this.iAmBossMob = true;
+        this.experienceValue = 150;
     }
 
     @Override

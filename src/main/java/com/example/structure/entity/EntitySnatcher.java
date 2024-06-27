@@ -58,11 +58,11 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
 
     public boolean iAmPissedOff = false;
 
-    private static final DataParameter<Boolean> SPOTTED = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DIG_DOWN = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DIG_UP = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK_QUICK = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SPOTTED = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DIG_DOWN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DIG_UP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK_QUICK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     public void setSpotted(boolean value) {this.dataManager.set(SPOTTED, Boolean.valueOf(value));}
     public boolean isSpotted() {return this.dataManager.get(SPOTTED);}
     public void setDigDown(boolean value) {this.dataManager.set(DIG_DOWN, Boolean.valueOf(value));}
@@ -77,6 +77,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     private AnimationFactory factory = new AnimationFactory(this);
     public EntitySnatcher(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
+        this.experienceValue = 35;
     }
 
     @Override

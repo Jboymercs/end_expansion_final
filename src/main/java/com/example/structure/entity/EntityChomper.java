@@ -84,11 +84,13 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     public EntityChomper(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
         this.setSize(1.0f, 1.3f);
+        this.experienceValue = 30;
     }
 
     public EntityChomper(World worldIn) {
         super(worldIn);
         this.setSize(1.0f, 1.3f);
+        this.experienceValue = 30;
     }
 
     @Override

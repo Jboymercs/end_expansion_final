@@ -7,20 +7,21 @@ import net.minecraftforge.fml.common.Mod;
 
 @Config(modid = ModReference.MOD_ID, name = ModReference.NAME)
 public class ModConfig {
-    //77 Configurable Items
 
+//123 Configurable Items
 
     @Config.Name("Lamented Islands Structure Frequency")
-    @Config.Comment("Raises and Lowers Frequency of Structure Spawns, Higher means more frequent")
-    @Config.RangeInt(min = 0, max = 48)
+    @Config.Comment("Change the spacing between Lamented Islands, lower means more frequent, higher means less")
     @Config.RequiresMcRestart
-    public static int structureFrequency = 30;
+    public static int structureFrequency = 290;
 
     @Config.Name("Lamented Islands Size")
     @Config.Comment("Changes the size of the Lamented Islands")
     @Config.RangeInt(min = 1, max = 10)
     @Config.RequiresMcRestart
     public static int islands_size = 3;
+
+
 
     @Config.Name("Lamentor Boss Health")
     @Config.Comment("Change the Health of the Lamentor")
@@ -392,6 +393,11 @@ public class ModConfig {
     @Config.RangeInt(min = 1, max = 9000)
     public static int crown_cooldown = 600;
 
+    @Config.Name("Crown of A Past Era Summon")
+    @Config.Comment("Change if the Ashed King summoned by the crown is friendly to the user who summoned it, default: false")
+    @Config.RequiresMcRestart
+    public static boolean crown_is_friendly = false;
+
     @Config.Name("Crown of A Past Era Minion Lifetime")
     @Config.Comment("Change the life time of the End King summoned by the Crown of A Past Era in seconds")
     @Config.RequiresMcRestart
@@ -441,29 +447,29 @@ public class ModConfig {
     @Config.Comment("Change spawnrate of Ashed Parasite")
     public static int parasite_spawn_rate = 3;
 
-    @Config.Name("End King's Fortress Chest Spawn Chance")
+    @Config.Name("Ashed King's Fortress Chest Spawn Chance")
     @Config.Comment("Chance for chests to spawn throughout the dungeon, Lower value is higher chances")
     @Config.RangeInt(min = 0, max = 5)
     @Config.RequiresMcRestart
     public static int dungeon_chest_chance = 3;
 
-    @Config.Name("End King's Fortress Mob Spawn Chance")
+    @Config.Name("Ashed King's Fortress Mob Spawn Chance")
     @Config.Comment("Chance for mobs to spawn throughout the dungeon, Lower value is higher chances")
     @Config.RangeInt(min = 1, max = 10)
     @Config.RequiresMcRestart
     public static int dungeon_mob_chance = 7;
 
-    @Config.Name("End King Fortress")
+    @Config.Name("Ashed King Fortress")
     @Config.Comment("Change the spacing of the End King Fortress in chunks away from another, this is applied in chunks that are Ash Wastelands not every chunk")
     @Config.RequiresMcRestart
     public static int fortress_spacing = 70;
 
-    @Config.Name("End King Fortress Odds")
+    @Config.Name("Ashed King Fortress Odds")
     @Config.Comment("Change the odds of this structure spawning, take in mind the fortress has few structure to compete with for odds of spawning")
     @Config.RequiresMcRestart
     public static int fortress_odds = 1;
 
-    @Config.Name("End King Fortress Size")
+    @Config.Name("Ashed King Fortress Size")
     @Config.Comment("Change the size of the fortress that generates")
     @Config.RangeInt(min = 1, max = 10)
     @Config.RequiresMcRestart
@@ -488,7 +494,7 @@ public class ModConfig {
     @Config.Name("End Vault Chance to Spawn")
     @Config.Comment("Change the chance to spawn the End Vaults, WARNING putting it low will result in buggy and or over spawning, as this is not determined in chunks apart, it's by each time the surface is above 55")
     @Config.RequiresMcRestart
-    public static int vault_distance = 200;
+    public static int vault_distance = 175;
 
     @Config.Name("Avalon Trader Spacing")
     @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")

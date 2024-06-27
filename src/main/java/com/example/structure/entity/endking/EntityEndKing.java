@@ -109,6 +109,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public EntityEndKing(World world) {
         super(world);
         this.healthScaledAttackFactor = ModConfig.king_scaled_factor;
+        this.experienceValue = 4500;
     }
 
     @Override

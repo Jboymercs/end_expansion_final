@@ -6,6 +6,8 @@ import com.example.structure.items.*;
 import com.example.structure.items.armor.ModArmorBase;
 import com.example.structure.items.arrow.ItemArrowBase;
 import com.example.structure.items.arrow.ItemUnholyArrow;
+import com.example.structure.items.gecko.AmberArmorSet;
+import com.example.structure.items.gecko.GeckoArmorBase;
 import com.example.structure.items.tools.*;
 import com.example.structure.util.ModReference;
 import net.minecraft.init.SoundEvents;
@@ -71,6 +73,10 @@ public class ModItems {
     public static final Item AMBER_CHESTPLATE = new ModArmorBase("amber_chestplate", AMBER_ARMOR, 1, EntityEquipmentSlot.CHEST, "amber", "amber_desc");
     public static final Item AMBER_LEGGINGS = new ModArmorBase("amber_leggings", AMBER_ARMOR, 2, EntityEquipmentSlot.LEGS, "amber", "amber_desc");
     public static final Item AMBER_BOOTS = new ModArmorBase("amber_boots", AMBER_ARMOR, 1, EntityEquipmentSlot.FEET, "amber", "amber_desc");
+
+    //redone Amber Armor via Geckolib
+
+    //public static final Item AMBER_REDONE_HELMET = new AmberArmorSet("amber_helmet", AMBER_ARMOR, 0, EntityEquipmentSlot.HEAD, "amber", "amber_desc");
     public static final Item AMBER_RAW_ORE = new ItemBase("amber_raw", ModCreativeTabs.ITEMS);
     public static final ItemAxe AMBER_AXE = new ItemAmberAxe("amber_axe", AMBER_SET, ModConfig.cordium_axe_damage, -2.8F);
     public static final Item PURE_AXE = new ItemPureAxe("pure_axe", PURE_AXE_MATERIAL, 7F, -2.4F, "pure_axe_desc");

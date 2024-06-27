@@ -49,11 +49,13 @@ public abstract class EntityKnightBase extends EntityModBase {
 
     public EntityKnightBase(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
+        this.experienceValue = 40;
     }
 
 
     public EntityKnightBase(World worldIn) {
         super(worldIn);
+        this.experienceValue = 40;
     }
 
 

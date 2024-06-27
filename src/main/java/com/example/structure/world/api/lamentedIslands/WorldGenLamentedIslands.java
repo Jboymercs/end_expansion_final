@@ -45,7 +45,12 @@ public class WorldGenLamentedIslands extends WorldGenerator {
 
     @Override
     public boolean generate(World world, Random random, BlockPos pos) {
-        getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 350, pos.getZ() - 350, pos.getX() + 350, pos.getZ() + 350));
+
+        if((spacing/2) > ModConfig.structureFrequency) {
+            getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 350, pos.getZ() - 350, pos.getX() + 350, pos.getZ() + 350));
+        }
+        System.out.println("Lamented Islands Gen Spacing at " + spacing);
+        spacing++;
         return false;
     }
 

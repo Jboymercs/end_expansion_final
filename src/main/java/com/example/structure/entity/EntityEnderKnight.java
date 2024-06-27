@@ -58,14 +58,14 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
     private final String ANIM_INTERACT_TWO = "interact_2";
 
 
-    private static final DataParameter<Boolean> STRIKE_ATTACK = EntityDataManager.createKey(EntityEnderKnight.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> RUNNING_CHECK = EntityDataManager.createKey(EntityEnderKnight.class, DataSerializers.BOOLEAN);
-     private static final DataParameter<Boolean> DASH_ATTACK = EntityDataManager.createKey(EntityEnderKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> STRIKE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> RUNNING_CHECK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+     private static final DataParameter<Boolean> DASH_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
-     private static final DataParameter<Boolean> SECOND_STRIKE = EntityDataManager.createKey(EntityEnderKnight.class, DataSerializers.BOOLEAN);
+     private static final DataParameter<Boolean> SECOND_STRIKE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
-     private static final DataParameter<Boolean> THIRD_STRIKE = EntityDataManager.createKey(EntityEnderKnight.class, DataSerializers.BOOLEAN);
-     private static final DataParameter<Boolean> DEATH_KNIGHT = EntityDataManager.createKey(EntityEnderKnight.class, DataSerializers.BOOLEAN);
+     private static final DataParameter<Boolean> THIRD_STRIKE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+     private static final DataParameter<Boolean> DEATH_KNIGHT = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     private AnimationFactory factory = new AnimationFactory(this);
 

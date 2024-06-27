@@ -34,7 +34,7 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
         this.setImmovable(true);
         this.setNoGravity(true);
         this.noClip = true;
-        this.setSize(0.8F, 9.0F);
+        this.setSize(0.8F, 7.0F);
     }
 
     private Entity player;

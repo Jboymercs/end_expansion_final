@@ -145,7 +145,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         }
 
 
-        System.out.println(currentlyHasTarget);
+
 
         //A simple function to allow the Ghost King to attack anything except the Owner
 
@@ -154,6 +154,18 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase target : nearbyEntities) {
+
+                    //Configuration option to allow the player who summoned it not being targeted
+                    if(ModConfig.crown_is_friendly) {
+
+                    } else {
+                        if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
+                            if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing) && target != owner) {
+                                this.setAttackTarget(target);
+                            }
+
+                        }
+                    }
                     if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
                         if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing)) {
                             this.setAttackTarget(target);
