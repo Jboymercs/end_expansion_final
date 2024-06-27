@@ -55,11 +55,11 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     private Consumer<EntityLivingBase> prevAttack;
     private AnimationFactory factory = new AnimationFactory(this);
 
-    private static final DataParameter<Boolean> SHIELDED = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> REGULAR_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHIELD_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> STUNNED = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHIELDED = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> REGULAR_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHIELD_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> STUNNED = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
 
     public void setShielded(boolean value) {this.dataManager.set(SHIELDED, Boolean.valueOf(value));}
     public boolean isShielded() {return this.dataManager.get(SHIELDED);}

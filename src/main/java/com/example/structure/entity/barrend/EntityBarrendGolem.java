@@ -92,14 +92,14 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
     public void onUpdate() {
         super.onUpdate();
 
-        if(this.isParasiteAttack() || this.isCollide() || this.isPrepareCharge()) {
+        if(this.isParasiteAttack() && !world.isRemote || this.isCollide() && !world.isRemote || this.isPrepareCharge() && !world.isRemote) {
             this.motionY = 0;
             this.motionX = 0;
             this.motionZ = 0;
         }
 
         //Minor Helper with jumping
-        if(this.isLeapSlam()) {
+        if(this.isLeapSlam() && !world.isRemote) {
             verticalMovementTick++;
 
             //Bring the entity quicker to the ground in case it is still in the air

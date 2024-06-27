@@ -50,13 +50,13 @@ import java.util.function.Consumer;
 
 public class EntityKnightLord extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
     public void setFlyingMode(boolean value) {this.dataManager.set(FLYING_MODE, Boolean.valueOf(value));}
     public boolean isFlyingMode() {return this.dataManager.get(FLYING_MODE);}
     public void setPierce(boolean value) {this.dataManager.set(PIERCE, Boolean.valueOf(value));}
