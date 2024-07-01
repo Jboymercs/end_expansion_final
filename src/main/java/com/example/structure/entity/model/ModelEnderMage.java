@@ -22,6 +22,10 @@ public class ModelEnderMage extends GeoModelExtended<EntityEnderMage> {
         }
         else if(entityEnderMage.getSkin() == 2) {
             return new ResourceLocation(ModReference.MOD_ID, "textures/entity/mage/endmage_3.png");
+        } else if(entityEnderMage.getSkin() == 3) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/mage/endmage_4.png");
+        } else if(entityEnderMage.getSkin() == 4) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/mage/endmage_5.png");
         }
         return new ResourceLocation(ModReference.MOD_ID, "textures/entity/mage/endmage.png");
     }

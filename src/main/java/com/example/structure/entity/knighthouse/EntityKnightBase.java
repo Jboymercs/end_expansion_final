@@ -74,7 +74,7 @@ public abstract class EntityKnightBase extends EntityModBase {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.getDataManager().register(SKIN_TYPE, Integer.valueOf(this.rand.nextInt(3)));
+        this.getDataManager().register(SKIN_TYPE, Integer.valueOf(this.rand.nextInt(5)));
         this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
         this.dataManager.register(MARKED_FOR_UNHOLY, Boolean.valueOf(false));
     }

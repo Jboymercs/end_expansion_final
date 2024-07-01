@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class RenderEnderMage extends RenderGeoExtended<EntityEnderMage> {
 
-    public static final ResourceLocation MODEL_RESLOC = new ResourceLocation(ModReference.MOD_ID, "geo/entity/endknight/geo.endknight.json");
+    public static final ResourceLocation MODEL_RESLOC = new ResourceLocation(ModReference.MOD_ID, "geo/entity/endknight/geo.endmage.json");
 
     public static final ResourceLocation TEXTURE = new ResourceLocation(ModReference.MOD_ID, "textures/entity/endmage_1.png");
     public RenderEnderMage(RenderManager renderManager) {

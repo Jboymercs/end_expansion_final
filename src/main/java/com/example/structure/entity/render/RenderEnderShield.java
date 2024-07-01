@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class RenderEnderShield extends RenderGeoExtended<EntityEnderShield> {
 
-    public static final ResourceLocation MODEL_RESLOC = new ResourceLocation(ModReference.MOD_ID, "geo/entity/endknight/geo.endknight.json");
+    public static final ResourceLocation MODEL_RESLOC = new ResourceLocation(ModReference.MOD_ID, "geo/entity/endknight/geo.endshield.json");
     public static final ResourceLocation TEXTURE = new ResourceLocation(ModReference.MOD_ID, "textures/entity/endshield_1.png");
     public RenderEnderShield(RenderManager renderManager) {
         super(renderManager, new ModelEnderShield(MODEL_RESLOC, TEXTURE, "end_shield"));
