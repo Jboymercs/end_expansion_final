@@ -45,7 +45,7 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
 
     private final MultiPartEntityPart part_back_worm = new MultiPartEntityPart(this, "part_back_worm", 0.6F, 0.6F);
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
-    protected static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BARREND_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     protected static final DataParameter<Boolean> WORM_BACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> WORM_LEFT = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
@@ -67,8 +67,8 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     protected static final DataParameter<Boolean> SUMMON_MINIONS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
 
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(BARREND_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(BARREND_MODE);}
     public void setWormBack(boolean value) {this.dataManager.set(WORM_BACK, Boolean.valueOf(value));}
     public boolean isWormBack() {return this.dataManager.get(WORM_BACK);}
     public void setWormLeft(boolean value) {this.dataManager.set(WORM_LEFT, Boolean.valueOf(value));}
@@ -120,7 +120,7 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     @Override
     public void entityInit() {
         this.dataManager.register(LOOK, 0f);
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(BARREND_MODE, Boolean.valueOf(false));
         this.dataManager.register(WORM_BACK, Boolean.valueOf(false));
         this.dataManager.register(WORM_LEFT, Boolean.valueOf(false));
         this.dataManager.register(WORM_RIGHT, Boolean.valueOf(false));

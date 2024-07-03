@@ -54,7 +54,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     private static final DataParameter<Boolean> OPEN_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> I_AM_BOSS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
-    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> AVALON_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CLOSE_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CAST_AOE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CAST_LAZERS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
@@ -76,9 +76,9 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     public void setIAmBoss(boolean value) {this.dataManager.set(I_AM_BOSS, Boolean.valueOf(value));}
     public boolean isIAmBoss() {return this.dataManager.get(I_AM_BOSS);}
 
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
+    public void setFightMode(boolean value) {this.dataManager.set(AVALON_MODE, Boolean.valueOf(value));}
 
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public boolean isFightMode() {return this.dataManager.get(AVALON_MODE);}
     public void setCloseState(boolean value) {this.dataManager.set(CLOSE_STATE, Boolean.valueOf(value));}
     public boolean isCloseState() {return this.dataManager.get(CLOSE_STATE);}
     public void setCastAOE(boolean value) {this.dataManager.set(CAST_AOE, Boolean.valueOf(value));}
@@ -131,7 +131,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         this.dataManager.register(OPEN, Boolean.valueOf(false));
         this.dataManager.register(I_AM_BOSS, Boolean.valueOf(false));
         this.dataManager.register(CLOSE_STATE, Boolean.valueOf(false));
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(AVALON_MODE, Boolean.valueOf(false));
         this.dataManager.register(CAST_LAZERS, Boolean.valueOf(false));
         this.dataManager.register(CAST_AOE, Boolean.valueOf(false));
         this.dataManager.register(SMASH_ATTACK, Boolean.valueOf(false));

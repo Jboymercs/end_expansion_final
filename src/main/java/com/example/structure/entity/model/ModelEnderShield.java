@@ -22,6 +22,10 @@ public class ModelEnderShield extends GeoModelExtended<EntityEnderShield> {
         }
         else if(entityEnderShield.getSkin() == 2) {
             return new ResourceLocation(ModReference.MOD_ID, "textures/entity/shield/endshield_3.png");
+        } else if(entityEnderShield.getSkin() == 3) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/shield/endshield_4.png");
+        } else if(entityEnderShield.getSkin() == 4) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/shield/endshield_5.png");
         }
         return new ResourceLocation(ModReference.MOD_ID, "textures/entity/shield/endshield.png");
     }

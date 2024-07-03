@@ -88,7 +88,7 @@
 		},
 		"walk_upper": {
 			"loop": true,
-			"animation_length": 0.66667,
+			"animation_length": 0.6667,
 			"bones": {
 				"ShieldArm": {
 					"scale": {
@@ -151,7 +151,7 @@
 		},
 		"walk_lower": {
 			"loop": true,
-			"animation_length": 0.66667,
+			"animation_length": 0.6667,
 			"bones": {
 				"BeltPiece": {
 					"rotation": {

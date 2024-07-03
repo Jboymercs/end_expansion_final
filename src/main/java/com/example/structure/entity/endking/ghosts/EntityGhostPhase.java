@@ -45,7 +45,7 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
     private final String ANIM_LEAP_ATTACK = "leap_attack";
     private final String ANIM_CLOSE_ATTACK = "close_attack";
     private AnimationFactory factory = new AnimationFactory(this);
-    protected static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> COMBAT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final  DataParameter<Boolean> LEAP_SWEEP_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     protected static final DataParameter<Boolean> CLOSE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
@@ -56,8 +56,8 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
 
     public boolean turnOnParticles = false;
 
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(COMBAT_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(COMBAT_MODE);}
     public void setLeapSweepAttack(boolean value) {this.dataManager.set(LEAP_SWEEP_ATTACK, Boolean.valueOf(value));}
     public boolean isLeapSweepAttack() {return this.dataManager.get(LEAP_SWEEP_ATTACK);}
     public void setCloseAttack(boolean value) {this.dataManager.set(CLOSE_ATTACK, Boolean.valueOf(value));}
@@ -71,7 +71,7 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
 
     @Override
     public void entityInit() {
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(COMBAT_MODE, Boolean.valueOf(false));
         this.dataManager.register(LEAP_SWEEP_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(CLOSE_ATTACK, Boolean.valueOf(false));
         super.entityInit();

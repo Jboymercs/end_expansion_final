@@ -78,7 +78,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     private final String RANGED_HAMMER_ANIM = "hammerProjectile";
     private final String SUMMON_BOSS_ANIM = "summon";
     private final String DEATH_BOSS_ANIM = "death";
-    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> LAMENTOR_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> STRIKE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CRYSTAL_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SPIN_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
@@ -148,7 +148,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     @Override
     public void entityInit() {
         super.entityInit();
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(LAMENTOR_MODE, Boolean.valueOf(false));
         this.dataManager.register(STRIKE_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(CRYSTAL_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(SPIN_START, Boolean.valueOf(false));
@@ -171,8 +171,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     }
 
 
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(LAMENTOR_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(LAMENTOR_MODE);}
     public void setStrikeAttack(boolean value) {this.dataManager.set(STRIKE_ATTACK, Boolean.valueOf(value));}
     public boolean isStrikeAttack() {return this.dataManager.get(STRIKE_ATTACK);}
     public void setCrystalAttack(boolean value){this.dataManager.set(CRYSTAL_ATTACK, Boolean.valueOf(value));}

@@ -59,18 +59,18 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     public boolean iAmPissedOff = false;
 
     private static final DataParameter<Boolean> SPOTTED = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DIG_DOWN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DIG_UP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SNATCH_DOWN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SNATCH_UP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK_SLOW = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACK_QUICK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     public void setSpotted(boolean value) {this.dataManager.set(SPOTTED, Boolean.valueOf(value));}
     public boolean isSpotted() {return this.dataManager.get(SPOTTED);}
-    public void setDigDown(boolean value) {this.dataManager.set(DIG_DOWN, Boolean.valueOf(value));}
-    public boolean isDigDown() {return this.dataManager.get(DIG_DOWN);}
-    public void setDigUp(boolean value) {this.dataManager.set(DIG_UP, Boolean.valueOf(value));}
-    public boolean isDigUp() {return this.dataManager.get(DIG_UP);}
-    public void setAttacking(boolean value) {this.dataManager.set(ATTACK, Boolean.valueOf(value));}
-    public boolean isAttacking() {return this.dataManager.get(ATTACK);}
+    public void setDigDown(boolean value) {this.dataManager.set(SNATCH_DOWN, Boolean.valueOf(value));}
+    public boolean isDigDown() {return this.dataManager.get(SNATCH_DOWN);}
+    public void setDigUp(boolean value) {this.dataManager.set(SNATCH_UP, Boolean.valueOf(value));}
+    public boolean isDigUp() {return this.dataManager.get(SNATCH_UP);}
+    public void setAttacking(boolean value) {this.dataManager.set(ATTACK_SLOW, Boolean.valueOf(value));}
+    public boolean isAttacking() {return this.dataManager.get(ATTACK_SLOW);}
     public boolean isAttackQuick() {return this.dataManager.get(ATTACK_QUICK);}
     public void setAttackQuick(boolean  value) {this.dataManager.set(ATTACK_QUICK, Boolean.valueOf(value));}
     private Consumer<EntityLivingBase> prevAttack;
@@ -104,9 +104,9 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     public void entityInit() {
         super.entityInit();
         this.dataManager.register(SPOTTED, Boolean.valueOf(false));
-        this.dataManager.register(DIG_DOWN, Boolean.valueOf(false));
-        this.dataManager.register(DIG_UP, Boolean.valueOf(false));
-        this.dataManager.register(ATTACK, Boolean.valueOf(false));
+        this.dataManager.register(SNATCH_DOWN, Boolean.valueOf(false));
+        this.dataManager.register(SNATCH_UP, Boolean.valueOf(false));
+        this.dataManager.register(ATTACK_SLOW, Boolean.valueOf(false));
         this.dataManager.register(ATTACK_QUICK, Boolean.valueOf(false));
     }
 

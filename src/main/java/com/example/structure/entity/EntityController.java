@@ -66,13 +66,13 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     public boolean isHuntingBlock = false;
     private static final DataParameter<Optional<IBlockState>> BLOCK_HEAD = EntityDataManager.<Optional<IBlockState>>createKey(EntityController.class, DataSerializers.OPTIONAL_BLOCK_STATE);
 
-    protected static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> CONTROLLER_MODE = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> INTERACT = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SUMMON_LIFT_ATTACK = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
 
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(CONTROLLER_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(CONTROLLER_MODE);}
     public void setInteract(boolean value) {this.dataManager.set(INTERACT, Boolean.valueOf(value));}
     public boolean isInteract() {return this.dataManager.get(INTERACT);}
     public void setShootProjectiles(boolean value) {this.dataManager.set(SHOOT_PROJECTILES, Boolean.valueOf(value));}
@@ -170,7 +170,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     protected void entityInit() {
         super.entityInit();
     this.dataManager.register(BLOCK_HEAD,  Optional.of(Blocks.BARRIER.getDefaultState()));
-    this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+    this.dataManager.register(CONTROLLER_MODE, Boolean.valueOf(false));
     this.dataManager.register(INTERACT, Boolean.valueOf(false));
     this.dataManager.register(SUMMON_LIFT_ATTACK, Boolean.valueOf(false));
     this.dataManager.register(SHOOT_PROJECTILES, Boolean.valueOf(false));

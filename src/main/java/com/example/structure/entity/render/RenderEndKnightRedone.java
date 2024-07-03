@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 
 public class RenderEndKnightRedone extends RenderGeoExtended<EntityEnderKnight> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(ModReference.MOD_ID, "textures/entity/endknight_1.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(ModReference.MOD_ID, "textures/entity/knight/endknight_1.png");
 
     public static final ResourceLocation MODEL_RESLOC = new ResourceLocation(ModReference.MOD_ID, "geo/entity/endknight/geo.endknight.json");
 

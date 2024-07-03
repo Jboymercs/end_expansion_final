@@ -56,7 +56,7 @@
 		},
 		"walk_upper": {
 			"loop": true,
-			"animation_length": 0.66667,
+			"animation_length": 0.6667,
 			"bones": {
 				"ShieldArm": {
 					"scale": {
@@ -114,7 +114,7 @@
 		},
 		"walk_lower": {
 			"loop": true,
-			"animation_length": 0.66667,
+			"animation_length": 0.6667,
 			"bones": {
 				"BeltPiece": {
 					"rotation": {
@@ -268,7 +268,7 @@
 			}
 		},
 		"swing_upper": {
-			"animation_length": 1.08333,
+			"animation_length": 1.0833,
 			"bones": {
 				"Torso": {
 					"rotation": {
@@ -279,7 +279,7 @@
 							"vector": [10, -10, 0]
 						},
 						"0.4167": {
-							"vector": [10, -10, 0]
+							"vector": [0, -10, 0]
 						},
 						"0.6667": {
 							"vector": [-5, 5, 0]
@@ -402,11 +402,25 @@
 					"scale": {
 						"vector": [0, 0, 0]
 					}
+				},
+				"BeltPiece": {
+					"rotation": {
+						"0.25": {
+							"vector": [0, 0, 0]
+						},
+						"0.4167": {
+							"vector": [11, 0, 0],
+							"easing": "easeInQuart"
+						},
+						"0.6667": {
+							"vector": [0, 0, 0]
+						}
+					}
 				}
 			}
 		},
 		"swing_upper_two": {
-			"animation_length": 1.08333,
+			"animation_length": 1.0833,
 			"bones": {
 				"Torso": {
 					"rotation": {
@@ -538,7 +552,7 @@
 			}
 		},
 		"dash": {
-			"animation_length": 1.08333,
+			"animation_length": 1.0833,
 			"bones": {
 				"Torso": {
 					"rotation": {
@@ -724,7 +738,7 @@
 			}
 		},
 		"swing_upper_three": {
-			"animation_length": 1.08333,
+			"animation_length": 1.0833,
 			"bones": {
 				"Torso": {
 					"rotation": {
@@ -1134,7 +1148,7 @@
 			}
 		},
 		"death": {
-			"animation_length": 2.54167,
+			"animation_length": 2.5417,
 			"bones": {
 				"UpperTorso": {
 					"rotation": {

@@ -34,7 +34,7 @@ import javax.annotation.Nonnull;
 public abstract class EntityAbstractBuffker extends EntityModBase implements IEntityMultiPart, IPitch {
 
 
-    protected static final DataParameter<Boolean> FIGHT_MODES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> GOLEM_MODES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SHOOT_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SHOCKWAVE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
@@ -65,7 +65,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
     @Override
     public void entityInit() {
         this.dataManager.register(LOOK, 0f);
-        this.dataManager.register(FIGHT_MODES, Boolean.valueOf(false));
+        this.dataManager.register(GOLEM_MODES, Boolean.valueOf(false));
         this.dataManager.register(BLINK_MODE, Boolean.valueOf(false));
         this.dataManager.register(SHOOT_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(SHOCKWAVE_ATTACK, Boolean.valueOf(false));
@@ -105,8 +105,8 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
     }
 
 
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODES);}
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODES, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(GOLEM_MODES);}
+    public void setFightMode(boolean value) {this.dataManager.set(GOLEM_MODES, Boolean.valueOf(value));}
 
     public void setBlinkMode(boolean value) {this.dataManager.set(BLINK_MODE, Boolean.valueOf(value));}
     public boolean isBlinkMode() {return this.dataManager.get(BLINK_MODE);}

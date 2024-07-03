@@ -60,7 +60,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     public boolean IPhaseThree = false;
     //A call for if damage will be done in the selected area by the attack sorter
     protected boolean damageViable = false;
-    protected static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> KING_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     //Used for Full Bones usage of the body
     protected static final DataParameter<Boolean> FULL_BODY_USAGE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     //Used for Upper Body only attacks
@@ -98,8 +98,8 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
     public void setTopHp(boolean value) {this.dataManager.set(TOP_HP, Boolean.valueOf(value));}
     public boolean isTopHP() {return this.dataManager.get(TOP_HP);}
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(KING_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(KING_MODE);}
     public void setSwingingArms(boolean value) {this.dataManager.set(SWINGING_ARMS, Boolean.valueOf(value));}
     public boolean isSwingingArms() {return this.dataManager.get(SWINGING_ARMS);}
     public void setFullBodyUsage(boolean value) {this.dataManager.set(FULL_BODY_USAGE, Boolean.valueOf(value));}
@@ -183,7 +183,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     public void entityInit() {
 
         this.dataManager.register(LOOK, 0f);
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(KING_MODE, Boolean.valueOf(false));
         this.dataManager.register(FULL_BODY_USAGE, Boolean.valueOf(false));
         this.dataManager.register(SWINGING_ARMS, Boolean.valueOf(false));
         this.dataManager.register(PHASE_MODE, Boolean.valueOf(false));

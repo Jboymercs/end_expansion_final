@@ -48,14 +48,14 @@ import java.util.function.Consumer;
  */
 public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SEEKER_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(SEEKER_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(SEEKER_MODE);}
     public void setBlinkMode(boolean value) {this.dataManager.set(BLINK_MODE, Boolean.valueOf(value));}
     public boolean isBlinkMode() {return this.dataManager.get(BLINK_MODE);}
     public void setMeleeStrikeOne(boolean value) {this.dataManager.set(MELEE_STRIKE_ONE, Boolean.valueOf(value));}
@@ -184,7 +184,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     @Override
     public void entityInit() {
         super.entityInit();
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(SEEKER_MODE, Boolean.valueOf(false));
         this.dataManager.register(BLINK_MODE, Boolean.valueOf(false));
         this.dataManager.register(MELEE_STRIKE_ONE, Boolean.valueOf(false));
         this.dataManager.register(MELEE_STRIKE_TWO, Boolean.valueOf(false));

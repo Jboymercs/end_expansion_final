@@ -55,7 +55,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     private int animationTick;
 
     private static final Set<Item> TAME_ITEMS = Sets.newHashSet(ModItems.RED_CRYSTAL_ITEM);
-    protected static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BUG_MODE = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> HEAD_TWITCH = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> BUTT_TWITCH = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
 
@@ -64,8 +64,8 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     public boolean isHeadTwitch() {return this.dataManager.get(HEAD_TWITCH);}
     public void setButtTwitch(boolean value) {this.dataManager.set(BUTT_TWITCH, Boolean.valueOf(value));}
     public boolean isButtTwitch() {return this.dataManager.get(BUTT_TWITCH);}
-    public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
-    public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setFightMode(boolean value) {this.dataManager.set(BUG_MODE, Boolean.valueOf(value));}
+    public boolean isFightMode() {return this.dataManager.get(BUG_MODE);}
     public void setDigging(boolean value) {this.dataManager.set(DIGGING, Boolean.valueOf(value));}
     public boolean isDigging() {return this.dataManager.get(DIGGING);}
     private final String ANIM_LEGS_IDLE = "legs_idle";
@@ -104,7 +104,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         super.entityInit();
         this.dataManager.register(HEAD_TWITCH, Boolean.valueOf(false));
         this.dataManager.register(BUTT_TWITCH, Boolean.valueOf(false));
-        this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(BUG_MODE, Boolean.valueOf(false));
         this.dataManager.register(DIGGING, Boolean.valueOf(false));
     }
 
