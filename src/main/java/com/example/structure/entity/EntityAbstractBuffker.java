@@ -183,7 +183,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
             Entity entity = damageSource.getImmediateSource();
 
             if (entity instanceof EntityLivingBase) {
-                this.blockUsingShield((EntityLivingBase) entity);
+               // this.blockUsingShield((EntityLivingBase) entity);
             }
 
              }

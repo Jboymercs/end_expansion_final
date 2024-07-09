@@ -14,6 +14,11 @@
         },
         {
           "type": "item",
+          "name": "ee:lamented_islands_item",
+          "weight": 15
+        },
+        {
+          "type": "item",
           "name": "minecraft:chorus_fruit",
           "weight": 25
         },

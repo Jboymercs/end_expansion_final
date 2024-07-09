@@ -152,11 +152,13 @@ item.amber_sword.name=Cordium Sword
 item.obi_coin.name=Avalon's Bane
 item.bomb_proj.name=Avalon Projectile
 item.green_orb.name=Barrend Projectile
+item.lamented_islands_item.name=Lamented Islands Painting
 entity.acid_proj.name=Parasite Acid
 entity.bomb_proj.name=Avalon's Bomb
 entity.controller_lift.name=Guilder Lift
 entity.chomper_arrow.name=Chomper Arrow
 entity.unholy_arrow.name=Lustrian Arrow
+enitty.lamented_islands_painting.name=Lamented Islands Painting
 
 itemGroup.expansion=End Expansion
 
@@ -294,6 +296,7 @@ ee.desc.red_axe_desc=Cursed with the Red Rage, Right Clicking will apply Strengt
 ee.desc.pure_axe_desc=A rare relic lost to time, Right Clicking will launch you in the air the longer you are in the air, the larger the impact.
 ee.desc.amber_sword_desc=Right Clicking will summon Spikes on entities close to you.
 ee.desc.coin_desc=When thrown in front of the Avalon, this will earn you a special reward.
+ee.desc.painting_desc=The Lamentor's place of self imprisonment that is long lost and forgotten.
 death.attack.ee:maelstrom=%1$s succumbed to the void
 death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s
 death.attack.ee:playerMaelstrom=%1$s was killed by %2$s

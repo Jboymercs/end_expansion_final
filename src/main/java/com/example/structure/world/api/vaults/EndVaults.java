@@ -102,7 +102,7 @@ public class EndVaults {
 
     private boolean generateHall(VaultTemplate parent, BlockPos pos, Rotation rot) {
         //Basic Hallway
-        String[] hall_types = {"straight_1", "straight_2", "straight_3", "straight_4", "straight_5", "straight_6", "straight_7"};
+        String[] hall_types = {"straight_1", "straight_2", "straight_3", "straight_4", "straight_5", "straight_6", "straight_7", "straight_8"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(hall_types), rot);
 
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel) {
@@ -209,7 +209,7 @@ public class EndVaults {
     }
 
     public boolean generateCrossLevelAfterBoss(VaultTemplate parent, BlockPos pos, Rotation rot) {
-        String[] cross_types = {"2_cross_1", "2_cross_2", "2_cross_3", "2_cross_4"};
+        String[] cross_types = {"2_cross_1", "2_cross_2", "2_cross_3", "2_cross_4", "2_cross_6"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SECOND_SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level) {
             return false;
@@ -236,7 +236,7 @@ public class EndVaults {
     }
 
     public boolean generateCrossLevel(VaultTemplate parent, BlockPos pos, Rotation rot) {
-        String[] cross_types = {"2_cross_1", "2_cross_2", "2_cross_3", "2_cross_4", "2_cross_5"};
+        String[] cross_types = {"2_cross_1", "2_cross_2", "2_cross_3", "2_cross_4", "2_cross_5", "2_cross_6"};
         VaultTemplate template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
         if(template.isCollidingExcParent(manager, parent, components) || template.getDistance() > SECOND_SIZE || getGroundFromAbove(world, pos.getX(), pos.getZ()) <= yAxel2Level) {
             return false;

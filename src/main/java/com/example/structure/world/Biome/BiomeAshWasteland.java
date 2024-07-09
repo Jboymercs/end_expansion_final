@@ -1,6 +1,6 @@
 package com.example.structure.world.Biome;
 
-import com.example.structure.blocks.BlockDepthsVines;
+
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntitySnatcher;

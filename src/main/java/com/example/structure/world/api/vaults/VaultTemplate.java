@@ -3,6 +3,7 @@ package com.example.structure.world.api.vaults;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderEyeFly;
+import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
@@ -15,6 +16,7 @@ import com.example.structure.world.misc.ModStructureTemplate;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -110,6 +112,17 @@ public class VaultTemplate extends ModStructureTemplate {
                             1,
                             16);
                 }
+            } else {
+                world.setBlockToAir(pos);
+            }
+        }
+        else if (function.startsWith("painting")) {
+            EnumFacing facing = EnumFacing.getFacingFromVector(pos.getX(), pos.getY() + 1, pos.getZ());
+            EntityEEPainting painting = new EntityEEPainting(world, pos.add(0,1,0), facing);
+            if(painting.onValidSurface()) {
+                painting.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                world.spawnEntity(painting);
+                world.setBlockToAir(pos);
             } else {
                 world.setBlockToAir(pos);
             }

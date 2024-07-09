@@ -13,6 +13,8 @@ import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
 import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
+import com.example.structure.entity.painting.EntityEEPainting;
+import com.example.structure.entity.painting.RenderEEPainting;
 import com.example.structure.entity.render.*;
 import com.example.structure.entity.render.arrow.RenderArrowBase;
 import com.example.structure.entity.seekers.EndSeeker;
@@ -63,6 +65,7 @@ public class RenderHandler {
             }
         });
     }
+
 
     public static void registerGeoEntityRenderers() {
         //Crystal Knight Boss
@@ -161,5 +164,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityBarrendParasite.class, RenderBarrendParasite::new);
         //Lamentor Wave
         RenderingRegistry.registerEntityRenderingHandler(EntityLamentorWave.class, RenderLamentorWave::new);
+        //End Expansion Painting
+        RenderingRegistry.registerEntityRenderingHandler(EntityEEPainting.class, RenderEEPainting::new);
     }
 }

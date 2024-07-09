@@ -119,9 +119,11 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
     public void handleStatusUpdate(byte id) {
         super.handleStatusUpdate(id);
         if(id == ModUtils.PARTICLE_BYTE) {
-            ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(0.5D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
             ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(1.5D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
-            ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(3.0D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
+            if(ModConfig.enableAvalonParticles) {
+                ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(0.5D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
+                ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(3.0D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
+            }
         }
     }
 

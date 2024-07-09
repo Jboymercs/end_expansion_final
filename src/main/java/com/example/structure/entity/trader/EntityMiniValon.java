@@ -68,9 +68,6 @@ public class EntityMiniValon extends EntityModBase implements IAnimatable, ITarg
         super.onUpdate();
 
 
-        Vec3d modifyPosToo = this.getLookVec();
-        Vec3d tooFrom = new Vec3d(this.posX + modifyPosToo.x * 10, this.posY + modifyPosToo.y, this.posZ + modifyPosToo.z * 10);
-        System.out.println("Look Vec at" + tooFrom);
 
         //setting Look to use this instead
         if(ticksExisted == 2) {

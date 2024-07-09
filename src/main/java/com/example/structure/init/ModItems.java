@@ -1,13 +1,11 @@
 package com.example.structure.init;
 
-import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
+import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.items.*;
 import com.example.structure.items.armor.ModArmorBase;
 import com.example.structure.items.arrow.ItemArrowBase;
 import com.example.structure.items.arrow.ItemUnholyArrow;
-import com.example.structure.items.gecko.AmberArmorSet;
-import com.example.structure.items.gecko.GeckoArmorBase;
 import com.example.structure.items.tools.*;
 import com.example.structure.util.ModReference;
 import net.minecraft.init.SoundEvents;
@@ -16,8 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +69,8 @@ public class ModItems {
     public static final Item AMBER_CHESTPLATE = new ModArmorBase("amber_chestplate", AMBER_ARMOR, 1, EntityEquipmentSlot.CHEST, "amber", "amber_desc");
     public static final Item AMBER_LEGGINGS = new ModArmorBase("amber_leggings", AMBER_ARMOR, 2, EntityEquipmentSlot.LEGS, "amber", "amber_desc");
     public static final Item AMBER_BOOTS = new ModArmorBase("amber_boots", AMBER_ARMOR, 1, EntityEquipmentSlot.FEET, "amber", "amber_desc");
+
+    public static final Item MOD_PAINTING = new ItemPainting(EntityEEPainting.class, "lamented_islands_item", ModCreativeTabs.ITEMS, "painting_desc");
 
     //redone Amber Armor via Geckolib
 

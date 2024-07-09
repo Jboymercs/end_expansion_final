@@ -305,7 +305,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
-               Vec3d vel2 = target.getPositionVector().subtract(offset);
+               Vec3d vel2 = target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
                 projectilePurple.shoot(vel2.x, vel2.y, vel2.z, 1.3f, 1.0f);
                 projectilePurple.setTravelRange(20F);
@@ -320,7 +320,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
-                Vec3d vel2 = target.getPositionVector().subtract(offset);
+                Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
                 projectilePurple.shoot(vel2.x, vel2.y, vel2.z, 1.3f, 1.0f);
                 projectilePurple.setTravelRange(20F);
@@ -335,7 +335,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
-                Vec3d vel2 = target.getPositionVector().subtract(offset);
+                Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
                 projectilePurple.shoot(vel2.x, vel2.y, vel2.z, 1.3f, 1.0f);
                 projectilePurple.setTravelRange(20F);

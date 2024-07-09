@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -36,6 +37,7 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 @Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION)
 public class Main {
+
     /**
      * I'd like to give a huge thank you to Barribob, for the spectacular work done on Maelstrom and this project
      * exsisting cause of it. Credit to a lot of the code modified from Maelstrom source. Yes, I am revamping that mod but
@@ -103,6 +105,8 @@ public class Main {
         ModProfressions.associateCareersAndTrades();
 
     }
+
+
 
 
     public static ResourceLocation locate(String location)

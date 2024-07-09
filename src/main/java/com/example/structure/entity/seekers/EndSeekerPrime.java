@@ -8,6 +8,7 @@ import com.example.structure.entity.ai.EntityAiSeekerPrime;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.util.IAttack;
+import com.example.structure.init.ModBlocks;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
@@ -19,6 +20,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -26,6 +28,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -118,6 +121,15 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         super.onUpdate();
 
 
+        if(ticksExisted > 20 && ticksExisted < 100) {
+            AxisAlignedBB box = getEntityBoundingBox().grow(15, 7, 15);
+            BlockPos posToo = ModUtils.searchForBlocks(box, world, this, Blocks.IRON_BARS.getDefaultState());
+            if(ModUtils.searchForBlocks(box, world, this, Blocks.IRON_BARS.getDefaultState()) != null) {
+                if(posToo != null) {
+                    world.setBlockToAir(posToo);
+                }
+            }
+        }
 
 
         if(rand.nextInt(5) == 0 && blinkCoolDown > 120) {
@@ -328,7 +340,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
-                Vec3d vel2 = target.getPositionVector().subtract(offset);
+                Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
                 projectilePurple.shoot(vel2.x, vel2.y, vel2.z, 1.3f, 1.0f);
                 projectilePurple.setTravelRange(20F);
@@ -343,7 +355,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
-                Vec3d vel2 = target.getPositionVector().subtract(offset);
+                Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
                 projectilePurple.shoot(vel2.x, vel2.y, vel2.z, 1.3f, 1.0f);
                 projectilePurple.setTravelRange(20F);
@@ -358,7 +370,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
-                Vec3d vel2 = target.getPositionVector().subtract(offset);
+                Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
                 projectilePurple.shoot(vel2.x, vel2.y, vel2.z, 1.3f, 1.0f);
                 projectilePurple.setTravelRange(20F);

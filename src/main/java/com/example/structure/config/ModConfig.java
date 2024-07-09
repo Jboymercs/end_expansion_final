@@ -13,7 +13,7 @@ public class ModConfig {
     @Config.Name("Lamented Islands Structure Frequency")
     @Config.Comment("Change the spacing between Lamented Islands, lower means more frequent, higher means less")
     @Config.RequiresMcRestart
-    public static int structureFrequency = 290;
+    public static int structureFrequency = 300;
 
     @Config.Name("Lamented Islands Size")
     @Config.Comment("Changes the size of the Lamented Islands")
@@ -393,6 +393,11 @@ public class ModConfig {
     @Config.RangeInt(min = 1, max = 9000)
     public static int crown_cooldown = 600;
 
+    @Config.Name("Crown of A Past Era Durability")
+    @Config.Comment("Change the Durability of the Crown of a Past Era")
+    @Config.RequiresMcRestart
+    public static int crown_durability = 1;
+
     @Config.Name("Crown of A Past Era Summon")
     @Config.Comment("Change if the Ashed King summoned by the crown is friendly to the user who summoned it, default: false")
     @Config.RequiresMcRestart
@@ -494,7 +499,7 @@ public class ModConfig {
     @Config.Name("End Vault Chance to Spawn")
     @Config.Comment("Change the chance to spawn the End Vaults, WARNING putting it low will result in buggy and or over spawning, as this is not determined in chunks apart, it's by each time the surface is above 55")
     @Config.RequiresMcRestart
-    public static int vault_distance = 175;
+    public static int vault_distance = 150;
 
     @Config.Name("Avalon Trader Spacing")
     @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")
@@ -515,6 +520,11 @@ public class ModConfig {
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
     @Config.RequiresMcRestart
     public static double avalon_lazer_multiplier = 1.2;
+
+    @Config.Name("Avalin Particle Reducer")
+    @Config.Comment("When set to true Particles will be more relevant for any AOE attacks the Avalon does, default is false")
+    @Config.RequiresMcRestart
+    public static boolean enableAvalonParticles = false;
 
     @Config.Name("Ashed Mines Chance to Spawn")
     @Config.Comment("Change the chance of the Ashed Mines, these are the mineshafts that run throughout the Ashed Wastelands, modify Carefully")
@@ -585,12 +595,12 @@ public class ModConfig {
     @Config.Name("End Seekers Prime Health")
     @Config.Comment("Change the Health of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_health = 160D;
+    public static double seeker_prime_health = 180D;
 
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 16D;
+    public static double seeker_prime_attack_damage = 18D;
 
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")

@@ -22,7 +22,7 @@ public class ItemKingCrown extends ItemBase {
     public ItemKingCrown(String name, CreativeTabs tab, String info_loc) {
         super(name, tab);
         this.info_loc = info_loc;
-        this.setMaxDamage(1);
+        this.setMaxDamage(ModConfig.crown_durability);
         this.setMaxStackSize(1);
     }
 
@@ -48,7 +48,7 @@ public class ItemKingCrown extends ItemBase {
             worldIn.spawnEntity(kingGhost);
             player.getCooldownTracker().setCooldown(this, crownCoolDown);
         }
-        stack.damageItem(10, player);
+        stack.damageItem(2, player);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 }
