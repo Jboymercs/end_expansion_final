@@ -28,6 +28,8 @@ public class WorldGenEndVaults extends WorldGenerator {
 
 
 
+
+
     public String getStructureName() {
         return "end_vault";
     }

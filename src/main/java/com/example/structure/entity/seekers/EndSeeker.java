@@ -20,6 +20,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -54,6 +55,43 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Seeker_Mode", this.dataManager.get(SEEKER_MODE));
+     //   nbt.setBoolean("Blink_Mode", this.dataManager.get(BLINK_MODE));
+     //   nbt.setBoolean("Melee_Strike_One", this.dataManager.get(MELEE_STRIKE_ONE));
+     //   nbt.setBoolean("Melee_Strike_Two", this.dataManager.get(MELEE_STRIKE_TWO));
+    //    nbt.setBoolean("Pierce_Attack", this.dataManager.get(PIERCE_ATTACK));
+    //    nbt.setBoolean("Shoot_Gun", this.dataManager.get(SHOOT_GUN));
+
+        nbt.setBoolean("Seeker_Mode", this.isFightMode());
+        nbt.setBoolean("Blink_Mode", this.isBlinkMode());
+        nbt.setBoolean("Melee_Strike_One", this.isMeleeStrikeOne());
+        nbt.setBoolean("Melee_Strike_Two", this.isMeleeStrikeTwo());
+        nbt.setBoolean("Pierce_Attack", this.isPierceAttack());
+        nbt.setBoolean("Shoot_Gun", this.isShootGun());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+      //  this.dataManager.set(SEEKER_MODE, nbt.getBoolean("Seeker_Mode"));
+     //   this.dataManager.set(BLINK_MODE, nbt.getBoolean("Blink_Mode"));
+     //   this.dataManager.set(MELEE_STRIKE_ONE, nbt.getBoolean("Melee_Strike_One"));
+      //  this.dataManager.set(MELEE_STRIKE_TWO, nbt.getBoolean("Melee_Strike_Two"));
+      //  this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
+     //   this.dataManager.set(SHOOT_GUN, nbt.getBoolean("Shoot_Gun"));
+
+        this.setFightMode(nbt.getBoolean("Seeker_Mode"));
+        this.setBlinkMode(nbt.getBoolean("Blink_Mode"));
+        this.setMeleeStrikeOne(nbt.getBoolean("Melee_Strike_One"));
+        this.setMeleeStrikeTwo(nbt.getBoolean("Melee_Strike_Two"));
+        this.setPierceAttack(nbt.getBoolean("Pierce_Attack"));
+        this.setShootGun(nbt.getBoolean("Shoot_Gun"));
+    }
     public void setFightMode(boolean value) {this.dataManager.set(SEEKER_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(SEEKER_MODE);}
     public void setBlinkMode(boolean value) {this.dataManager.set(BLINK_MODE, Boolean.valueOf(value));}
@@ -196,12 +234,12 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.seeker_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.seeker_health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.seeker_attack_damage * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(7.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(7.0D * ModConfig.lamented_multiplier);
     }
 
     @Override

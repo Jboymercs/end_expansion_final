@@ -54,6 +54,11 @@ public class EntityGroundCrystal extends EntityModBase implements IAnimatable {
         this.setSize(0.9f, 2.0f);
 
     }
+
+    //this is a nerf to the shield summoning crystals
+    int crystal_cooldown = 25;
+
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -68,7 +73,7 @@ public class EntityGroundCrystal extends EntityModBase implements IAnimatable {
             List<EntityLivingBase> targets = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable() && (!( e instanceof EntityGroundCrystal)));
 
             //Specifically used for the shield
-            if(!targets.isEmpty()) {
+            if(!targets.isEmpty() && crystal_cooldown >= 30) {
                 for(EntityLivingBase target: targets) {
                     if(target != doNotTarget) {
                         Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.7));
@@ -78,8 +83,11 @@ public class EntityGroundCrystal extends EntityModBase implements IAnimatable {
                                 .build();
                         float damage = this.getAttack();
                         ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.2F, 0, false );
+                        crystal_cooldown = 0;
                     }
                 }
+            } else {
+                crystal_cooldown++;
             }
         } else {
             List<EntityLivingBase> targets = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable() && (!(e instanceof EntityCrystalKnight || e instanceof EntityGroundCrystal)));

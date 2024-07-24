@@ -10,6 +10,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -48,6 +49,7 @@ public class ItemChomperDagger extends ToolSword{
         int SwordCoolDown = ModConfig.dagger_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
            player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 140, 1));
+            worldIn.playSound(null, player.posX, player.posY, player.posZ, ModSoundHandler.LORD_KNIGHT_FLY, SoundCategory.PLAYERS, 0.7F, 1.3F);
             Vec3d moveVec = player.getLookVec().scale(-((ModConfig.sword_velocity * 0.5) + 0.1D));
             if(player.canBePushed()) {
                 player.motionX = moveVec.x;

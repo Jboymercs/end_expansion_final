@@ -16,6 +16,7 @@ import com.google.common.base.Predicate;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -95,6 +96,65 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
 
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("King_Mode", this.dataManager.get(KING_MODE));
+        nbt.setBoolean("Full_Body_Usage", this.dataManager.get(FULL_BODY_USAGE));
+        nbt.setBoolean("Swinging_Arms", this.dataManager.get(SWINGING_ARMS));
+        nbt.setBoolean("Phase_Mode", this.dataManager.get(PHASE_MODE));
+        nbt.setBoolean("Leap_Sweep_Attack", this.dataManager.get(LEAP_SWEEP_ATTACK));
+        nbt.setBoolean("Summon_Crystals_Attack", this.dataManager.get(SUMMON_CRYSTALS_ATTACK));
+        nbt.setBoolean("Summon_Fireballs_Attack", this.dataManager.get(SUMMON_FIREBALLS_ATTACK));
+        nbt.setBoolean("Summon_Ghosts_Attack", this.dataManager.get(SUMMON_GHOSTS_ATTACK));
+        nbt.setBoolean("Upper_Attack", this.dataManager.get(UPPER_ATTACK));
+        nbt.setBoolean("Side_Attack", this.dataManager.get(SIDE_ATTACK));
+        nbt.setBoolean("Combo_Attack", this.dataManager.get(COMBO_ATTACK));
+        nbt.setBoolean("Cast_Arena", this.dataManager.get(CAST_ARENA));
+        nbt.setBoolean("Phase_Intro", this.dataManager.get(PHASE_INTRO));
+        nbt.setBoolean("Phase_Handler", this.dataManager.get(PHASE_HANDLER));
+        nbt.setBoolean("Ground_Sword", this.dataManager.get(GROUND_SWORD));
+        nbt.setBoolean("Multiple_Strikes", this.dataManager.get(MULTIPLE_STRIKES));
+        nbt.setBoolean("Lazer_Attack", this.dataManager.get(LAZER_ATTACK));
+        nbt.setBoolean("Boss_Start", this.dataManager.get(BOSS_START));
+        nbt.setBoolean("Boss_Stall", this.dataManager.get(BOSS_STALL));
+        nbt.setBoolean("Ghost_Summon", this.dataManager.get(GHOST_SUMMON));
+        nbt.setBoolean("Death_Boss", this.dataManager.get(DEATH_BOSS));
+        nbt.setBoolean("Fly_Dash_Move", this.dataManager.get(FLY_DASH_MOVE));
+        nbt.setBoolean("Slam_Attack", this.dataManager.get(SLAM_ATTACK));
+        nbt.setBoolean("Top_Hp", this.dataManager.get(TOP_HP));
+        nbt.setFloat("Look", this.dataManager.get(LOOK));
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(KING_MODE, nbt.getBoolean("King_Mode"));
+        this.dataManager.set(FULL_BODY_USAGE, nbt.getBoolean("Full_Body_Usage"));
+        this.dataManager.set(SWINGING_ARMS, nbt.getBoolean("Swinging_Arms"));
+        this.dataManager.set(PHASE_MODE, nbt.getBoolean("Phase_Mode"));
+        this.dataManager.set(LEAP_SWEEP_ATTACK, nbt.getBoolean("Leap_Sweep_Attack"));
+        this.dataManager.set(SUMMON_CRYSTALS_ATTACK, nbt.getBoolean("Summon_Crystals_Attack"));
+        this.dataManager.set(SUMMON_FIREBALLS_ATTACK, nbt.getBoolean("Summon_Fireballs_Attack"));
+        this.dataManager.set(SUMMON_GHOSTS_ATTACK, nbt.getBoolean("Summon_Ghosts_Attack"));
+        this.dataManager.set(UPPER_ATTACK, nbt.getBoolean("Upper_Attack"));
+        this.dataManager.set(SIDE_ATTACK, nbt.getBoolean("Side_Attack"));
+        this.dataManager.set(COMBO_ATTACK, nbt.getBoolean("Combo_Attack"));
+        this.dataManager.set(CAST_ARENA, nbt.getBoolean("Cast_Arena"));
+        this.dataManager.set(PHASE_INTRO, nbt.getBoolean("Phase_Intro"));
+        this.dataManager.set(PHASE_HANDLER, nbt.getBoolean("Phase_Handler"));
+        this.dataManager.set(GROUND_SWORD, nbt.getBoolean("Ground_Sword"));
+        this.dataManager.set(MULTIPLE_STRIKES, nbt.getBoolean("Multiple_Strikes"));
+        this.dataManager.set(LAZER_ATTACK, nbt.getBoolean("Lazer_Attack"));
+        this.dataManager.set(BOSS_START, nbt.getBoolean("Boss_Start"));
+        this.dataManager.set(BOSS_STALL, nbt.getBoolean("Boss_Stall"));
+        this.dataManager.set(GHOST_SUMMON, nbt.getBoolean("Ghost_Summon"));
+        this.dataManager.set(DEATH_BOSS, nbt.getBoolean("Death_Boss"));
+        this.dataManager.set(FLY_DASH_MOVE, nbt.getBoolean("Fly_Dash_Move"));
+        this.dataManager.set(SLAM_ATTACK, nbt.getBoolean("Slam_Attack"));
+        this.dataManager.set(TOP_HP, nbt.getBoolean("Top_Hp"));
+        this.dataManager.set(LOOK, nbt.getFloat("Look"));
+    }
 
     public void setTopHp(boolean value) {this.dataManager.set(TOP_HP, Boolean.valueOf(value));}
     public boolean isTopHP() {return this.dataManager.get(TOP_HP);}
@@ -424,12 +484,12 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.end_king_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) ModConfig.end_king_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ModConfig.end_king_armor * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.end_king_armor_toughness * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.end_king_damage * ModConfig.biome_multiplier);
     }
 

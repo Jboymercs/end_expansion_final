@@ -19,8 +19,7 @@ public class ModelEnderKnightRedone extends GeoModelExtended<EntityEnderKnight> 
     public ResourceLocation getTextureLocation(EntityEnderKnight entityEnderKnight) {
         if(entityEnderKnight.getSkin() == 1) {
             return new ResourceLocation(ModReference.MOD_ID, "textures/entity/knight/endknight_2.png");
-       }
-       else if(entityEnderKnight.getSkin() == 2) {
+       } else if(entityEnderKnight.getSkin() == 2) {
            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/knight/endknight_3.png");
        } else if(entityEnderKnight.getSkin() == 3) {
            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/knight/endknight_4.png");

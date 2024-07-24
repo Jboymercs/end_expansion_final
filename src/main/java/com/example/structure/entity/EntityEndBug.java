@@ -13,6 +13,7 @@ import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.google.common.collect.Sets;
+import com.ibm.icu.text.DateIntervalInfo;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -60,6 +62,36 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     protected static final DataParameter<Boolean> BUTT_TWITCH = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
 
     protected static final DataParameter<Boolean> DIGGING = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+      //  nbt.setBoolean("Bug_Mode", this.dataManager.get(BUG_MODE));
+     //   nbt.setBoolean("Head_Twitch", this.dataManager.get(HEAD_TWITCH));
+      //  nbt.setBoolean("Butt_Twitch", this.dataManager.get(BUTT_TWITCH));
+     //   nbt.setBoolean("Digging", this.dataManager.get(DIGGING));
+
+        nbt.setBoolean("Bug_Mode", this.isFightMode());
+        nbt.setBoolean("Head_Twitch", this.isHeadTwitch());
+        nbt.setBoolean("Butt_Twitch", this.isButtTwitch());
+        nbt.setBoolean("Digging", this.isDigging());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(BUG_MODE, nbt.getBoolean("Bug_Mode"));
+    //    this.dataManager.set(HEAD_TWITCH, nbt.getBoolean("Head_Twitch"));
+    //    this.dataManager.set(BUTT_TWITCH, nbt.getBoolean("Butt_Twitch"));
+    //    this.dataManager.set(DIGGING, nbt.getBoolean("Digging"));
+
+        this.setFightMode(nbt.getBoolean("Bug_Mode"));
+        this.setHeadTwitch(nbt.getBoolean("Head_Twitch"));
+        this.setButtTwitch(nbt.getBoolean("Butt_Twitch"));
+        this.setDigging(nbt.getBoolean("Digging"));
+    }
+
+
     public void setHeadTwitch(boolean value) {this.dataManager.set(HEAD_TWITCH, Boolean.valueOf(value));}
     public boolean isHeadTwitch() {return this.dataManager.get(HEAD_TWITCH);}
     public void setButtTwitch(boolean value) {this.dataManager.set(BUTT_TWITCH, Boolean.valueOf(value));}
@@ -115,7 +147,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D * ModConfig.biome_multiplier);
     }
 
 

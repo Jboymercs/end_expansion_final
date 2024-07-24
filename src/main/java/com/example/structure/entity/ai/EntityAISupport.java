@@ -106,7 +106,7 @@ public class EntityAISupport extends EntityAIBase {
             else if (this.supporter.getAttackTarget() != null) {
                 EntityLivingBase target = this.supporter.getAttackTarget();
                 double healthValue = this.supporter.getHealth() / this.supporter.getMaxHealth();
-                if(target != null && healthValue < 0.5 ) {
+                if(target != null && healthValue < 0.5  && !this.supporter.isFightMode()) {
                     this.supporter.startAttack(target, 16F, true);
                 }
                 Vec3d away = this.supporter.getPositionVector().subtract(this.supporter.getAttackTarget().getPositionVector()).normalize();

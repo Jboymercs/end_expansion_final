@@ -6,16 +6,19 @@ import com.example.structure.init.ModPotions;
 import com.example.structure.util.IHasModel;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -62,6 +65,7 @@ public class ItemEndfallStaff extends ItemBase implements IAnimatable, IHasModel
         ItemStack stack = playerIn.getHeldItem(handIn);
         if(!worldIn.isRemote && !playerIn.getCooldownTracker().hasCooldown(this)) {
             List<EntityLivingBase> nearbyEntities = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, playerIn.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable());
+            worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_ILLAGER_CAST_SPELL, SoundCategory.PLAYERS, 0.7F, 0.7F);
             if(!nearbyEntities.isEmpty()) {
                 //Send Entities Away
                 for(EntityLivingBase entity : nearbyEntities) {
@@ -87,10 +91,10 @@ public class ItemEndfallStaff extends ItemBase implements IAnimatable, IHasModel
 
 
     protected void doParticleEffects(World world, EntityPlayer player) {
-        ModUtils.circleCallback(1, 30, (pos)-> {
-            pos = new Vec3d(pos.x, 0, pos.y);
-            ParticleManager.spawnColoredSmoke(world, player.getPositionVector().add(ModUtils.getRelativeOffset(player, new Vec3d(0.5, 0.1, 0))), ModColors.RED, pos.normalize().scale(0.5).add(ModUtils.yVec(0)));
-        });
+            ModUtils.circleCallback(1, 30, (pos) -> {
+                pos = new Vec3d(pos.x, 0, pos.y);
+                ParticleManager.spawnColoredSmoke(world, player.getPositionVector().add(ModUtils.getRelativeOffset(player, new Vec3d(0.5, 0.1, 0))), ModColors.RED, pos.normalize().scale(0.5).add(ModUtils.yVec(0)));
+            });
     }
     private <E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
         event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_IDLE, true));

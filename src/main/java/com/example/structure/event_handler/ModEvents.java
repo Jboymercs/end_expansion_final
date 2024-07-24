@@ -10,6 +10,7 @@ import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -69,12 +71,15 @@ public class ModEvents {
                 Vec3d playerLookVec = base.getLookVec();
                 Vec3d playerPos = new Vec3d(base.posX + playerLookVec.x * 1.4D,base.posY + playerLookVec.y + base.getEyeHeight(), base. posZ + playerLookVec.z * 1.4D);
                 ProjectilePurple projectile = new ProjectilePurple(base.world, base, ModConfig.purp_projectile);
+                base.world.playSound(null, base.posX, base.posY, base.posZ, ModSoundHandler.SEEKER_SHOOT, SoundCategory.PLAYERS, 0.7F, 1.0f / (base.world.rand.nextFloat() * 0.4F + 0.3f));
                 ModUtils.setEntityPosition(projectile, playerPos);
                 base.world.spawnEntity(projectile);
                 projectile.setTravelRange(20f);
                 projectile.shoot(playerLookVec.x, playerLookVec.y, playerLookVec.z, 1.5f, 1.0f);
                 mainhand.getItem().setDamage(mainhand, 1);
-                doParticleEffects(base.world, base);
+                if(base.world.isRemote) {
+                    doParticleEffects(base.world, base);
+                }
                 ProjectileCooldown = ModConfig.purp_cooldown * 20;
             } else {
                 ProjectileCooldown--;
@@ -130,7 +135,7 @@ public class ModEvents {
         if(entity.isPotionActive(ModPotions.CORRUPTED)) {
             World world = event.getEntityLiving().getEntityWorld();
             //Spawns the Red Particles
-            if(rand.nextInt(3) == 0) {
+            if(rand.nextInt(3) == 0 && world.isRemote) {
                 ParticleManager.spawnColoredSmoke(entity.world, pos.add(ModUtils.getRelativeOffset(entity, new Vec3d(0, 1.2, 0))), ModColors.RED, new Vec3d(ModRand.getFloat(1) * 0.1, ModRand.getFloat(1) * 0.1, ModRand.getFloat(1) * 0.1));
             }
 

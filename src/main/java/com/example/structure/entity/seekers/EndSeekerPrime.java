@@ -22,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -54,6 +55,48 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Prime_Mode", this.dataManager.get(PRIME_MODE));
+     //   nbt.setBoolean("Blink_Mode", this.dataManager.get(BLINK_MODE));
+     //   nbt.setBoolean("Melee_Strike_One", this.dataManager.get(MELEE_STRIKE_ONE));
+     //   nbt.setBoolean("Melee_Strike_Two", this.dataManager.get(MELEE_STRIKE_TWO));
+     //   nbt.setBoolean("Pierce_Attack", this.dataManager.get(PIERCE_ATTACK));
+     //   nbt.setBoolean("Shoot_Gun", this.dataManager.get(SHOOT_GUN));
+    //    nbt.setBoolean("Combo_Attack", this.dataManager.get(COMBO_ATTACK));
+
+        nbt.setBoolean("Prime_Mode", this.isFightMode());
+        nbt.setBoolean("Blink_Mode", this.isBlinkMode());
+        nbt.setBoolean("Melee_Strike_One", this.isMeleeStrikeOne());
+        nbt.setBoolean("Melee_Strike_Two", this.isMeleeStrikeTwo());
+        nbt.setBoolean("Pierce_Attack", this.isPierceAttack());
+        nbt.setBoolean("Shoot_Gun", this.isShootGun());
+        nbt.setBoolean("Combo_Attack", this.isComboAttack());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+    //    this.dataManager.set(PRIME_MODE, nbt.getBoolean("Prime_Mode"));
+    //    this.dataManager.set(BLINK_MODE, nbt.getBoolean("Blink_Mode"));
+    //    this.dataManager.set(MELEE_STRIKE_ONE, nbt.getBoolean("Melee_Strike_One"));
+   //     this.dataManager.set(MELEE_STRIKE_TWO, nbt.getBoolean("Melee_Strike_Two"));
+   //     this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
+   //     this.dataManager.set(SHOOT_GUN, nbt.getBoolean("Shoot_Gun"));
+   //     this.dataManager.set(COMBO_ATTACK, nbt.getBoolean("Combo_Attack"));
+
+        this.setFightMode(nbt.getBoolean("Prime_Mode"));
+        this.setBlinkMode(nbt.getBoolean("Blink_Mode"));
+        this.setMeleeStrikeOne(nbt.getBoolean("Melee_Strike_One"));
+        this.setMeleeStrikeTwo(nbt.getBoolean("Melee_Strike_Two"));
+        this.setPierceAttack(nbt.getBoolean("Pierce_Attack"));
+        this.setShootGun(nbt.getBoolean("Shoot_Gun"));
+        this.setComboAttack(nbt.getBoolean("Combo_Attack"));
+    }
+
     public void setFightMode(boolean value) {this.dataManager.set(PRIME_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(PRIME_MODE);}
     public void setBlinkMode(boolean value) {this.dataManager.set(BLINK_MODE, Boolean.valueOf(value));}
@@ -189,12 +232,13 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.seeker_prime_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) ModConfig.seeker_prime_health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.seeker_prime_attack_damage * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ModConfig.seeker_prime_armor * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.seeker_prime_armor_toughness * ModConfig.lamented_multiplier);
     }
 
     @Override

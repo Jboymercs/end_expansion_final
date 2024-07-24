@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -41,6 +42,38 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
 
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+      //  nbt.setBoolean("Golem_Modes", this.dataManager.get(GOLEM_MODES));
+      //  nbt.setBoolean("Blink_Mode", this.dataManager.get(BLINK_MODE));
+     //   nbt.setBoolean("Shoot_Attack", this.dataManager.get(SHOOT_ATTACK));
+     //   nbt.setBoolean("Shockwave_Attack", this.dataManager.get(SHOCKWAVE_ATTACK));
+     //   nbt.setFloat("Look", this.dataManager.get(LOOK));
+
+        nbt.setBoolean("Golem_Modes", this.isFightMode());
+        nbt.setBoolean("Blink_Mode", this.isBlinkMode());
+        nbt.setBoolean("Shoot_Attack", this.isShootAttack());
+        nbt.setBoolean("Shockwave_Attack", this.isShockWaveAttack());
+        nbt.setFloat("Look", this.getPitch());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(GOLEM_MODES, nbt.getBoolean("Golem_Modes"));
+     ///   this.dataManager.set(BLINK_MODE, nbt.getBoolean("Blink_Mode"));
+      //  this.dataManager.set(SHOOT_ATTACK, nbt.getBoolean("Shoot_Attack"));
+     //   this.dataManager.set(SHOCKWAVE_ATTACK, nbt.getBoolean("Shockwave_Attack"));
+      //  this.dataManager.set(LOOK, nbt.getFloat("Look"));
+
+        this.setFightMode(nbt.getBoolean("Golem_Modes"));
+        this.setBlinkMode(nbt.getBoolean("Blink_Mode"));
+        this.setShootAttack(nbt.getBoolean("Shoot_Attack"));
+        this.setShockwaveAttack(nbt.getBoolean("Shockwave_Attack"));
+        this.dataManager.set(LOOK, nbt.getFloat("Look"));
+    }
     private final MultiPartEntityPart[] hitboxParts;
     private final MultiPartEntityPart model = new MultiPartEntityPart(this, "model", 0f, 0f);
     private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", 1.0f, 1.0f);
@@ -121,11 +154,11 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.constructor_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.constructor_health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D * ModConfig.lamented_multiplier);
     }
 
     @Override

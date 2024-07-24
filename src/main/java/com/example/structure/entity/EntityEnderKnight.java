@@ -15,6 +15,7 @@ import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -68,6 +69,46 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
      private static final DataParameter<Boolean> DEATH_KNIGHT = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
 
     private AnimationFactory factory = new AnimationFactory(this);
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Strike_Attack", this.dataManager.get(STRIKE_ATTACK));
+     //   nbt.setBoolean("Running_Check", this.dataManager.get(RUNNING_CHECK));
+      //  nbt.setBoolean("Dash_Attack", this.dataManager.get(DASH_ATTACK));
+       // nbt.setBoolean("Second_Strike", this.dataManager.get(SECOND_STRIKE));
+      //  nbt.setBoolean("Third_Strike", this.dataManager.get(THIRD_STRIKE));
+      //  nbt.setBoolean("Death_Knight", this.dataManager.get(DEATH_KNIGHT));
+
+        //
+        nbt.setBoolean("Death_Knight", this.isDeathKnight());
+        nbt.setBoolean("Strike_Attack", this.isStrikeAttack());
+        nbt.setBoolean("Running_Check", this.isRunningCheck());
+        nbt.setBoolean("Dash_Attack", this.isDashAttack());
+        nbt.setBoolean("Second_Strike", this.isSecondStrike());
+        nbt.setBoolean("Third_Strike", this.isThirdStrike());
+
+    }
+
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(STRIKE_ATTACK, nbt.getBoolean("Strike_Attack"));
+     //   this.dataManager.set(RUNNING_CHECK, nbt.getBoolean("Running_Check"));
+      //  this.dataManager.set(DASH_ATTACK, nbt.getBoolean("Dash_Attack"));
+      //  this.dataManager.set(SECOND_STRIKE, nbt.getBoolean("Second_Strike"));
+     //   this.dataManager.set(THIRD_STRIKE, nbt.getBoolean("Third_Strike"));
+     //   this.dataManager.set(DEATH_KNIGHT, nbt.getBoolean("Death_Knight"));
+
+        //
+        this.setStrikeAttack(nbt.getBoolean("Strike_Attack"));
+        this.setRunningCheck(nbt.getBoolean("Running_Check"));
+        this.setDashAttack(nbt.getBoolean("Dash_Attack"));
+        this.setSecondStrike(nbt.getBoolean("Second_Strike"));
+        this.setThirdStrike(nbt.getBoolean("Third_Strike"));
+        this.setDeathKnight(nbt.getBoolean("Death_Knight"));
+    }
 
     public EntityEnderKnight(World worldIn) {
         super(worldIn);
@@ -159,8 +200,8 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.knighthouse_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.knighthouse_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 

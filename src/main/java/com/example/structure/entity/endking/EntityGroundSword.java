@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -50,6 +51,18 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
 
     protected static final DataParameter<Boolean> FAST = EntityDataManager.createKey(EntityGroundSword.class, DataSerializers.BOOLEAN);
 
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Fast", this.dataManager.get(FAST));
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(FAST, nbt.getBoolean("Fast"));
+    }
     public void setFast(boolean value) {this.dataManager.set(FAST, Boolean.valueOf(value));}
     public boolean isFast() {return this.dataManager.get(FAST);}
     protected boolean Fast = false;

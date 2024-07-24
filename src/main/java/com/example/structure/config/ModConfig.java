@@ -26,8 +26,17 @@ public class ModConfig {
     @Config.Name("Lamentor Boss Health")
     @Config.Comment("Change the Health of the Lamentor")
     @Config.RequiresMcRestart
-    public static float health = 400f;
+    public static float health = 400;
 
+    @Config.Name("Lamentor Base Armor")
+    @Config.Comment("Change the Armor Value of the Lamentor")
+    @Config.RequiresMcRestart
+    public static double lamentor_armor = 18;
+
+    @Config.Name("Lamentor Base Armor Toughness")
+    @Config.Comment("Change the Armor Toughness Value of the Lamentor")
+    @Config.RequiresMcRestart
+    public static double lamentor_toughness_armor = 2;
     @Config.Name("Lamentor Attack Speed")
     @Config.Comment("Change the speed at which the Lamentor attacks in seconds, smaller number means quicker, larger number means slower, warning 0 might be buggy")
     @Config.RangeInt(min = 0, max = 10)
@@ -37,7 +46,7 @@ public class ModConfig {
     @Config.Name("Lamentor Attack Damage")
     @Config.Comment("Change the Attack Damage of the Lamentor")
     @Config.RequiresMcRestart
-    public static double attack_damage= 18D;
+    public static double attack_damage= 18;
 
     @Config.Name("Stronghold Replacement")
     @Config.Comment("Replaces the vanilla Stronghold with my own")
@@ -58,7 +67,7 @@ public class ModConfig {
     @Config.Name("Lamentor Ranged Crystal Damage")
     @Config.Comment("Change the damage of the flying Crystals")
     @Config.RequiresMcRestart
-    public static float crystal_damage= 19.0f;
+    public static float crystal_damage= 19;
 
     @Config.Name("Lamentor Pierce Damage")
     @Config.Comment("Change the multiplier of the Lamentor's Pierce attacks, base damage * pierce multiplier")
@@ -84,12 +93,12 @@ public class ModConfig {
     @Config.Name("Ground Crystal Damage")
     @Config.Comment("Change the damage done by Ground Crystals")
     @Config.RequiresMcRestart
-    public static float ground_crystal_damage= 17f;
+    public static float ground_crystal_damage= 17;
 
     @Config.Name("Constructor Health")
     @Config.Comment("Change the Health of the Constructor")
     @Config.RequiresMcRestart
-    public static float constructor_health = 55f;
+    public static float constructor_health = 55;
 
     @Config.Name("Constructor Attack Speed Value 1")
     @Config.Comment("Constructor Speed #1, this value in seconds, smaller means quicker, larger means slower speed of attacks")
@@ -119,12 +128,12 @@ public class ModConfig {
     @Config.Name("Ancient Guilder Health")
     @Config.Comment("Change the Health of the Ancient Guilder")
     @Config.RequiresMcRestart
-    public static double guilder_health = 35D;
+    public static double guilder_health = 35;
 
     @Config.Name("Ancient Guilder Attack Damage")
     @Config.Comment("Change the Attack Damage of the Anicent Guilder")
     @Config.RequiresMcRestart
-    public static float guilder_attack_damage = 15F;
+    public static float guilder_attack_damage = 15;
 
     @Config.Name("End Biome Structure Spawning Enabled/Disabled")
     @Config.Comment("Change the value to enable or disable structure spawning in the regular End Biome, this includes plants, End Vaults, Lamented islands, and other ruins")
@@ -134,12 +143,12 @@ public class ModConfig {
     @Config.Name("Lamented Sword Damage")
     @Config.Comment("Change the damage done by the Lamented Sword")
     @Config.RequiresMcRestart
-    public static float sword_damage = 7.0f;
+    public static float sword_damage = 7;
 
     @Config.Name("Lamented Sword Dash Damage")
     @Config.Comment("Change the damage done by the dash ability upon initially dashing to nearby entities")
     @Config.RequiresMcRestart
-    public static float sword_dash_damage = 4.0f;
+    public static float sword_dash_damage = 4;
 
     @Config.Name("Lamented Sword Cooldown")
     @Config.Comment("Change the cooldown time for using the dash ability on the Lamented Sword, in seconds")
@@ -159,17 +168,17 @@ public class ModConfig {
     @Config.Name("Cordium Dagger Damage")
     @Config.Comment("Change the Damage the Cordium Dagger does")
     @Config.RequiresMcRestart
-    public static float dagger_damage = 6.0F;
+    public static float dagger_damage = 6;
 
     @Config.Name("Unholy Sword Damage")
     @Config.Comment("Change the Damage of the Unholy Sword")
     @Config.RequiresMcRestart
-    public static float unholy_sword_damage = 8.0F;
+    public static float unholy_sword_damage = 8;
 
     @Config.Name("Cordium Axe Damage")
     @Config.Comment("Change the Damage of the Cordium Axe")
     @Config.RequiresMcRestart
-    public static float cordium_axe_damage = 9.0F;
+    public static float cordium_axe_damage = 9;
 
     @Config.Name("Lamented Eye Cooldown")
     @Config.Comment("Change the cooldown Period of the Lamented Eye, in seconds")
@@ -195,7 +204,7 @@ public class ModConfig {
     @Config.Name("Lamentor Scaling Attack Damage")
     @Config.Comment("This value raises the attack damage of the Lamentor the lower it's health is, to incentivize further punishment in not dodging the bosses moves later in the fight")
     @Config.RequiresMcRestart
-    public static double lamentor_scaled_attack = 0.4f;
+    public static double lamentor_scaled_attack = 0.4;
 
     @Config.Name("Ash Fog Disable/Enable")
     @Config.Comment("When set to true, it will disable the dark fog found in the Ash Wastelands")
@@ -208,14 +217,19 @@ public class ModConfig {
     public static float dark_fog_variable = 0.085F;
 
     @Config.Name("Ash Biome Difficulty")
-    @Config.Comment("A Universal config option that multiplies all base health, attack damage, and abilities by this value to all Ashed Wastelands Entities (Parasites, Stalkers, Knight Household, Ashed King")
+    @Config.Comment("A Universal config option that multiplies all base health, attack damage, armor, and abilities by this value to all Ashed Wastelands Entities (Parasites, Stalkers, Knight Household, Ashed King")
     @Config.RequiresMcRestart
-    public static double biome_multiplier = 1D;
+    public static double biome_multiplier = 1;
+
+    @Config.Name("Ash Wastelands Biome Weight")
+    @Config.Comment("Change the weight of the Ash Wastelands Biome spawn")
+    @Config.RequiresMcRestart
+    public static int biome_weight = 80;
 
     @Config.Name("Lamented End Difficulty")
-    @Config.Comment("A Universal config option that multiplies all base health, attack damage, and abilities for all mobs pertaining to the base End Biome, Lamentor, Constructor, Guilder, Seeker")
+    @Config.Comment("A Universal config option that multiplies all base health, attack damage, armor, and abilities for all mobs pertaining to the base End Biome, Lamentor, Constructor, Guilder, Seeker")
     @Config.RequiresMcRestart
-    public static double lamented_multiplier = 1D;
+    public static double lamented_multiplier = 1;
 
     @Config.Name("End Ash Particle Turn off")
     @Config.Comment("Change to turn on or off the particles from the End Ash, use this to improve performance")
@@ -224,37 +238,47 @@ public class ModConfig {
     @Config.Name("Ashed King Health")
     @Config.Comment("Change the Health of the Ashed King")
     @Config.RequiresMcRestart
-    public static float end_king_health = 600f;
+    public static float end_king_health = 600;
+
+    @Config.Name("Ashed King Base Armor")
+    @Config.Comment("Change the base armor value of the Ashed King")
+    @Config.RequiresMcRestart
+    public static double end_king_armor = 16;
+
+    @Config.Name("Ashed King Armor Toughness")
+    @Config.Comment("Change the Armor Toughness of the Ashed King")
+    @Config.RequiresMcRestart
+    public static double end_king_armor_toughness = 3;
 
     @Config.Name("Ashed King Scaled Attack Factor")
     @Config.Comment("This value raises the attack damage of the Ashed King the lower it's health is, to incentivize further punishment in not dodging the bosses moves later in the fight")
     @Config.RequiresMcRestart
-    public static double king_scaled_factor = 0.2D;
+    public static double king_scaled_factor = 0.2;
 
     @Config.Name("Ashed King Base Attack Damage")
     @Config.Comment("Change the base attack damage of the Ashed King")
     @Config.RequiresMcRestart
-    public static double end_king_damage = 28D;
+    public static double end_king_damage = 28;
 
     @Config.Name("Ashed King Ghost Arm Damage Multiplier")
     @Config.Comment("Change the multiplier of ghost arm attacks * base damage")
     @Config.RequiresMcRestart
-    public static double end_king_ghost_damage = 1.5D;
+    public static double end_king_ghost_damage = 1.5;
 
     @Config.Name("Ashed King Leap Attack Multiplier")
     @Config.Comment("Change the multiplier of the Ashed Kings Leap attack")
     @Config.RequiresMcRestart
-    public static double end_king_leap_attack = 1.3D;
+    public static double end_king_leap_attack = 1.3;
 
     @Config.Name("Ashed King Red Ground Crystal Damage")
     @Config.Comment("Change the damage of the red Crystals the Ashed King summons")
     @Config.RequiresMcRestart
-    public static double red_crystal_damage = 19D;
+    public static double red_crystal_damage = 19;
 
     @Config.Name("Ashed King Ground Sword Damage")
     @Config.Comment("Change the damage of the Swords that hit the ground in the Ashed King boss fight")
     @Config.RequiresMcRestart
-    public static double ground_sword_damage = 27D;
+    public static double ground_sword_damage = 27;
 
     @Config.Name("Ashed King lazer Damage")
     @Config.Comment("Change the Damage Multiplier of the Lazer Beam shot by the End King")
@@ -279,22 +303,22 @@ public class ModConfig {
     @Config.Name("Knighthouse Projectile Swords Base Damage")
     @Config.Comment("Base damage of the projectile swords used by the Knights and End King")
     @Config.RequiresMcRestart
-    public static float projectile_sword_damage = 12.0f;
+    public static float projectile_sword_damage = 12;
 
     @Config.Name("Knighthouse Base Health")
     @Config.Comment("Base Health for the Ender Knight, Mage, Shielder")
     @Config.RequiresMcRestart
-    public static double knighthouse_health = 45.0D;
+    public static double knighthouse_health = 45;
 
     @Config.Name("Fell Knight Base Attack Damage")
     @Config.Comment("Base Attack Damage for the Fell Knight")
     @Config.RequiresMcRestart
-    public static float end_knight_damage = 13.0f;
+    public static float end_knight_damage = 13;
 
     @Config.Name("Fell Shielder Base Attack Damage")
     @Config.Comment("Base Attack Damage for the Fell Shielder")
     @Config.RequiresMcRestart
-    public static float end_shielder_damage = 17.0f;
+    public static float end_shielder_damage = 17;
 
     @Config.Name("Fell Mage Heal Cooldown")
     @Config.Comment("Cooldown before an Fell Mage can cast a heal to a friendly knight, in seconds")
@@ -309,32 +333,42 @@ public class ModConfig {
     @Config.Name("Unholy Knight Base Health")
     @Config.Comment("Change the Base Health of the Unholy Knight")
     @Config.RequiresMcRestart
-    public static double unholy_knight_health = 200D;
+    public static double unholy_knight_health = 200;
+
+    @Config.Name("Unholy Knight Base Armor")
+    @Config.Comment("Change the base armor value of the Unholy Knight")
+    @Config.RequiresMcRestart
+    public static double unholy_knight_armor = 10;
+
+    @Config.Name("Unholy Knight Base Armor Toughness")
+    @Config.Comment("Change the base armor toughness value of the Unholy Knight")
+    @Config.RequiresMcRestart
+    public static double unholy_knight_armor_toughness = 1;
 
     @Config.Name("Unholy Knight Base Attack Damage")
     @Config.Comment("Change the Base attack damage of the Unholy knight")
     @Config.RequiresMcRestart
-    public static float unholy_knight_damage = 22.0f;
+    public static float unholy_knight_damage = 22;
 
     @Config.Name("Ashed Parasite Base Health")
     @Config.Comment("Change the base Health of the Ashed Parasite")
     @Config.RequiresMcRestart
-    public static double parasite_health = 40D;
+    public static double parasite_health = 40;
 
     @Config.Name("Ashed Parasite Base Attack Damage")
     @Config.Comment("Change the base damage of the Ashed Parasite")
     @Config.RequiresMcRestart
-    public static float parasite_damage = 16.0f;
+    public static float parasite_damage = 16;
 
     @Config.Name("End Stalker Base Health")
     @Config.Comment("Change the base health of the End Stalker")
     @Config.RequiresMcRestart
-    public static double stalker_health = 40D;
+    public static double stalker_health = 40;
 
     @Config.Name("End Stalker Base Attack Damage")
     @Config.Comment("Change the Base Attack Damage of the End Stalker")
     @Config.RequiresMcRestart
-    public static float stalker_damage = 19.0f;
+    public static float stalker_damage = 19;
 
     @Config.Name("End Stalker Hibernation Timer")
     @Config.Comment("After being spotted and hiding, this timer will start in which it will go out of hiding once ended, in seconds")
@@ -344,17 +378,17 @@ public class ModConfig {
     @Config.Name("End Stalker Trigger Distance")
     @Config.Comment("After reaching within this distance, the End Stalker will enrage and go into attack mode")
     @Config.RequiresMcRestart
-    public static double stalker_distance = 2D;
+    public static double stalker_distance = 2;
 
     @Config.Name("Depths Chomper Health")
     @Config.Comment("Change the Health of the Depths Chomper")
     @Config.RequiresMcRestart
-    public static double chomper_health = 50D;
+    public static double chomper_health = 50;
 
     @Config.Name("Depths Chomper Attack Damage")
     @Config.Comment("Change the Chomper Attack Damage NOM NOM NOM!")
     @Config.RequiresMcRestart
-    public static float chomper_attack_damange = 30F;
+    public static float chomper_attack_damange = 30;
 
     @Config.Name("Depths Chomper Spawn Rate")
     @Config.Comment("This is additional spawns that happen below Y 40, if you are wanting them to not spawn entirely, change Cave SpawnRates to 0")
@@ -364,17 +398,17 @@ public class ModConfig {
     @Config.Name("Red Rage Potion Effect Damage")
     @Config.Comment("Damage the Red Rage deals to entities near you when affected")
     @Config.RequiresMcRestart
-    public static float potion_damage = 17.0f;
+    public static float potion_damage = 17;
 
     @Config.Name("Nuke Base Damage")
     @Config.Comment("If caught inside the nuke, it will deal X damage while in it. Used by the End King")
     @Config.RequiresMcRestart
-    public static float nuke_damage = 200f;
+    public static float nuke_damage = 200;
 
     @Config.Name("EndFall Sword Damage")
     @Config.Comment("Change the base damage of the EndFall Sword, this will also affect the Ghost arm as it is 1.5x Base Damage of the Sword")
     @Config.RequiresMcRestart
-    public static float endfall_sword_damage = 9.0f;
+    public static float endfall_sword_damage = 9;
 
     @Config.Name("EndFall Sword Cooldown")
     @Config.Comment("Change the cooldown after using the ghost Arm, in seconds")
@@ -406,12 +440,12 @@ public class ModConfig {
     @Config.Name("Crown of A Past Era Minion Lifetime")
     @Config.Comment("Change the life time of the End King summoned by the Crown of A Past Era in seconds")
     @Config.RequiresMcRestart
-    public static int minion_lifeTime = 120;
+    public static int minion_lifeTime = 90;
 
     @Config.Name("Crown of A Past Era Minion Attack Damage")
     @Config.Comment("Change the Attack Damage of the Ashed King summoned by the Crown of A Past Era")
     @Config.RequiresMcRestart
-    public static double minion_attack_damage = 28D;
+    public static double minion_attack_damage = 28;
 
     @Config.Name("Guilded Shield Cooldown")
     @Config.Comment("Change the cooldown for the Guilded shield, in seconds")
@@ -421,7 +455,7 @@ public class ModConfig {
     @Config.Name("End Staff Projectile Damage")
     @Config.Comment("Change the Damage of the Projectile that End Fall staff shoots")
     @Config.RequiresMcRestart
-    public static float purp_projectile = 14.0f;
+    public static float purp_projectile = 14;
 
     @Config.Name("End Staff Projectile Cooldown")
     @Config.Comment("Change the Cooldown of the projectile the End Fall staff shoots, in seconds")
@@ -509,12 +543,21 @@ public class ModConfig {
     @Config.Name("Avalon Health")
     @Config.Comment("Change the Health of the Avalon Trader")
     @Config.RequiresMcRestart
-    public static double avalon_health = 400D;
+    public static double avalon_health = 400;
 
+    @Config.Name("Avalon Base Armor")
+    @Config.Comment("Change the base armor of the Avalon")
+    @Config.RequiresMcRestart
+    public static double avalon_armor = 18;
+
+    @Config.Name("Avalon Base Armor Toughness")
+    @Config.Comment("Change the base armor toughness of the Avalon")
+    @Config.RequiresMcRestart
+    public static double avalon_toughness = 2;
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 32D;
+    public static double avalon_attack_damage = 32;
 
     @Config.Name("Avalon Lazer Damage Multiplier")
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
@@ -583,39 +626,59 @@ public class ModConfig {
     @Config.Name("End Seekers Health")
     @Config.Comment("Change the Health of the End Seekers")
     @Config.RequiresMcRestart
-    public static double seeker_health = 40D;
+    public static double seeker_health = 40;
 
     @Config.Name("End Seeker Attack Damage")
     @Config.Comment("Change the Attack Damage of the End Seeker")
     @Config.RequiresMcRestart
-    public static double seeker_attack_damage = 13D;
+    public static double seeker_attack_damage = 13;
 
 
 
     @Config.Name("End Seekers Prime Health")
     @Config.Comment("Change the Health of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_health = 180D;
+    public static double seeker_prime_health = 180;
+
+    @Config.Name("End Seeker Prime Armor")
+    @Config.Comment("Change the base armor value of the End Seeker")
+    @Config.RequiresMcRestart
+    public static double seeker_prime_armor = 14;
+
+    @Config.Name("End Seeker Prime Armor Toughness")
+    @Config.Comment("Change the base armor toughness value of the End Seeker")
+    @Config.RequiresMcRestart
+    public static double seeker_prime_armor_toughness = 0;
 
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 18D;
+    public static double seeker_prime_attack_damage = 18;
 
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_health = 85D;
+    public static double barrend_golem_health = 85;
 
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_attack_damage = 32D;
+    public static double barrend_golem_attack_damage = 32;
+
+    @Config.Name("Barrend Golem Base Armor")
+    @Config.Comment("Change the base armor value of the Barrend Golem")
+    @Config.RequiresMcRestart
+    public static double barrend_golem_armor = 4;
+
+    @Config.Name("Barrend Golem Base Armor Toughness")
+    @Config.Comment("Change the Armor Toughness of the Barrend Golem")
+    @Config.RequiresMcRestart
+    public static double barrend_golem_armor_toughness = 0;
 
     @Config.Name("Barrend Golem Attack Multiplier")
     @Config.Comment("Change X times base Attack Damage for specific abilities of the Barrend Golem, such as it's charge, and Slam Attacks")
     @Config.RequiresMcRestart
-    public static double barrend_golem_attack_multiplier = 1.4D;
+    public static double barrend_golem_attack_multiplier = 1.4;
 
     @Config.Name("Seeker Gun Cooldown")
     @Config.Comment("Change the cooldown of the seeker gun in seconds")
@@ -626,12 +689,12 @@ public class ModConfig {
     @Config.Comment("When more than 1 players are near, this factor will add on how much Health all bosses/mini-bosses has. Default Per more than one player is 50% more HP or 0.5. Example: There is " +
             "2 Players around a boss that has a health of 200 by default. With there being a second player the bosses health is now 300")
     @Config.RequiresMcRestart
-    public static double scale_mod_bosses = 0.5D;
+    public static double scale_mod_bosses = 0.5;
 
     @Config.Name("Mod Scaling Attack Damage Factor")
     @Config.Comment("When more than 1 players are near, this factor will be multiplied by how many players are near and then by this bosses attack damage")
     @Config.RequiresMcRestart
-    public static double scale_attack_damge = 0.23D;
+    public static double scale_attack_damge = 0.23;
 
     @Config.Name("Disable Mod Scaling")
     @Config.Comment("Disable scaling for Health of bosses when more than one players is nearby, set to true to disable")
@@ -643,16 +706,16 @@ public class ModConfig {
     @Config.Name("Scale Cordium Armor set")
     @Config.Comment("Scale the Cordium Armor set, putting anything above 1 will times the base values of the armor by this amount, useful for modpack creators")
     @Config.RequiresMcRestart
-    public static double cordium_armor_scale = 1.0D;
+    public static double cordium_armor_scale = 1.0;
 
     @Config.Name("Scale Dark Amor Set")
     @Config.Comment("Scale the Dark Amor set, putting anything above 1 will times the base values of the armor by this amount, useful for modpack creators")
     @Config.RequiresMcRestart
-    public static double dark_armor_scale = 1.0D;
+    public static double dark_armor_scale = 1.0;
 
     @Config.Name("Scale End Fall Armor Set")
     @Config.Comment("Scale the End Fall Armor set, putting anything above 1 will times the base values of the armor by this amount, useful for modpack creators")
     @Config.RequiresMcRestart
-    public static double fall_armor_scale = 1.0D;
+    public static double fall_armor_scale = 1.0;
 
 }

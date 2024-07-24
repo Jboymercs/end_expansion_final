@@ -13,6 +13,7 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
+import com.sun.jna.platform.win32.WinBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -57,6 +59,48 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Flying_Mode", this.dataManager.get(FLYING_MODE));
+     //   nbt.setBoolean("Pierce", this.dataManager.get(PIERCE));
+     //   nbt.setBoolean("Multi_Attack", this.dataManager.get(MULTI_ATTACK));
+     //   nbt.setBoolean("Blocking", this.dataManager.get(BLOCKING));
+     //   nbt.setBoolean("Multi_Strike", this.dataManager.get(MULTI_STRIKE));
+     //   nbt.setBoolean("Summon_Crystals", this.dataManager.get(SUMMON_CRYSTALS));
+      //  nbt.setBoolean("Summon", this.dataManager.get(SUMMON));
+
+        nbt.setBoolean("Flying_Mode", this.isFlyingMode());
+        nbt.setBoolean("Pierce", this.isPierce());
+        nbt.setBoolean("Multi_Attack", this.isMultiAttack());
+        nbt.setBoolean("Blocking", this.isBlocking());
+        nbt.setBoolean("Multi_Strike", this.isMultiStrike());
+        nbt.setBoolean("Summon_Crystals", this.isSummonCrystals());
+        nbt.setBoolean("Summon", this.isSummonKnight());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(FLYING_MODE, nbt.getBoolean("Flying_Mode"));
+     //   this.dataManager.set(PIERCE, nbt.getBoolean("Pierce"));
+     //   this.dataManager.set(MULTI_ATTACK, nbt.getBoolean("Multi_Attack"));
+     //   this.dataManager.set(BLOCKING, nbt.getBoolean("Blocking"));
+     //   this.dataManager.set(MULTI_STRIKE, nbt.getBoolean("Multi_Strike"));
+      //  this.dataManager.set(SUMMON_CRYSTALS, nbt.getBoolean("Summon_Crystals"));
+      //  this.dataManager.set(SUMMON, nbt.getBoolean("Summon"));
+
+        this.setFlyingMode(nbt.getBoolean("Flying_Mode"));
+        this.setPierce(nbt.getBoolean("Pierce"));
+        this.setMultiAttack(nbt.getBoolean("Multi_Attack"));
+        this.setBlocking(nbt.getBoolean("Blocking"));
+        this.setMultiStrike(nbt.getBoolean("Multi_Strike"));
+        this.setSummonCrystals(nbt.getBoolean("Summon_Crystals"));
+        this.setSummonKnight(nbt.getBoolean("Summon"));
+
+    }
     public void setFlyingMode(boolean value) {this.dataManager.set(FLYING_MODE, Boolean.valueOf(value));}
     public boolean isFlyingMode() {return this.dataManager.get(FLYING_MODE);}
     public void setPierce(boolean value) {this.dataManager.set(PIERCE, Boolean.valueOf(value));}
@@ -226,9 +270,10 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.34D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.unholy_knight_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) ModConfig.unholy_knight_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((double) ModConfig.unholy_knight_armor * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.7D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.unholy_knight_armor_toughness * ModConfig.biome_multiplier);
     }
 
     @Override

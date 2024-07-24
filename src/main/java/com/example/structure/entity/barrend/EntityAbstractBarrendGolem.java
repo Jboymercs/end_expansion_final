@@ -16,6 +16,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -66,6 +67,52 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SUMMON_MINIONS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setFloat("Look", this.dataManager.get(LOOK));
+        nbt.setBoolean("Barrend_Mode", this.dataManager.get(BARREND_MODE));
+        nbt.setBoolean("Worm_Back", this.dataManager.get(WORM_BACK));
+        nbt.setBoolean("Worm_Left", this.dataManager.get(WORM_LEFT));
+        nbt.setBoolean("Worm_Right", this.dataManager.get(WORM_RIGHT));
+        nbt.setBoolean("Full_Body_Usage", this.dataManager.get(FULL_BODY_USAGE));
+        nbt.setBoolean("Parasite_Attack", this.dataManager.get(PARASITE_ATTACK));
+        nbt.setBoolean("Swing_Left", this.dataManager.get(SWING_LEFT));
+        nbt.setBoolean("Swing_Right", this.dataManager.get(SWING_RIGHT));
+        nbt.setBoolean("Prepare_Charg", this.dataManager.get(PREPARE_CHARG));
+        nbt.setBoolean("Charge", this.dataManager.get(CHARGE));
+        nbt.setBoolean("Collide", this.dataManager.get(COLLIDE));
+        nbt.setBoolean("Slam", this.dataManager.get(SLAM));
+        nbt.setBoolean("Leap_Slam", this.dataManager.get(LEAP_SLAM));
+        nbt.setBoolean("Awaken", this.dataManager.get(AWAKEN));
+        nbt.setBoolean("Still", this.dataManager.get(STILL));
+        nbt.setBoolean("Shoot_Projectiles", this.dataManager.get(SHOOT_PROJECTILES));
+        nbt.setBoolean("Summon_Minions", this.dataManager.get(SUMMON_MINIONS));
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(LOOK, nbt.getFloat("Look"));
+        this.dataManager.set(BARREND_MODE, nbt.getBoolean("Barrend_Mode"));
+        this.dataManager.set(WORM_BACK, nbt.getBoolean("Worm_Back"));
+        this.dataManager.set(WORM_LEFT, nbt.getBoolean("Worm_Left"));
+        this.dataManager.set(WORM_RIGHT, nbt.getBoolean("Worm_Right"));
+        this.dataManager.set(FULL_BODY_USAGE, nbt.getBoolean("Full_Body_Usage"));
+        this.dataManager.set(PARASITE_ATTACK, nbt.getBoolean("Parasite_Attack"));
+        this.dataManager.set(SWING_LEFT, nbt.getBoolean("Swing_Left"));
+        this.dataManager.set(SWING_RIGHT, nbt.getBoolean("Swing_Right"));
+        this.dataManager.set(PREPARE_CHARG, nbt.getBoolean("Prepare_Charg"));
+        this.dataManager.set(CHARGE, nbt.getBoolean("Charge"));
+        this.dataManager.set(COLLIDE, nbt.getBoolean("Collide"));
+        this.dataManager.set(SLAM, nbt.getBoolean("Slam"));
+        this.dataManager.set(LEAP_SLAM, nbt.getBoolean("Leap_Slam"));
+        this.dataManager.set(AWAKEN, nbt.getBoolean("Awaken"));
+        this.dataManager.set(STILL, nbt.getBoolean("Still"));
+        this.dataManager.set(SHOOT_PROJECTILES, nbt.getBoolean("Shoot_Projectiles"));
+        this.dataManager.set(SUMMON_MINIONS, nbt.getBoolean("Summon_Minions"));
+    }
 
     public void setFightMode(boolean value) {this.dataManager.set(BARREND_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(BARREND_MODE);}
@@ -278,12 +325,13 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.barrend_golem_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.barrend_golem_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.barrend_golem_attack_damage);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.barrend_golem_attack_damage * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ModConfig.barrend_golem_armor * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.barrend_golem_armor_toughness * ModConfig.biome_multiplier);
     }
 
 

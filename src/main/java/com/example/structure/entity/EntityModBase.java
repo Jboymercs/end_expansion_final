@@ -84,7 +84,8 @@ public abstract class EntityModBase extends EntityCreature {
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0);
-
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(1.0D);
     }
     protected boolean isImmovable() {
         return this.dataManager == null ? false : this.dataManager.get(IMMOVABLE);

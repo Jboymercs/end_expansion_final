@@ -12,6 +12,7 @@ import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -37,6 +38,17 @@ public class EntityNuclearExplosion extends EntityModBase implements IAnimatable
 
     protected static final DataParameter<Boolean> DAMAGE_MODE = EntityDataManager.createKey(EntityNuclearExplosion.class, DataSerializers.BOOLEAN);
 
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Damage_Mode", this.dataManager.get(DAMAGE_MODE));
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(DAMAGE_MODE, nbt.getBoolean("Damage_Mode"));
+    }
     public void setFightMode(boolean value) {this.dataManager.set(DAMAGE_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(DAMAGE_MODE);}
     private AnimationFactory factory = new AnimationFactory(this);

@@ -31,6 +31,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -70,6 +71,35 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     protected static final DataParameter<Boolean> INTERACT = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SUMMON_LIFT_ATTACK = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
+
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Controller_Mode", this.dataManager.get(CONTROLLER_MODE));
+      //  nbt.setBoolean("Interact", this.dataManager.get(INTERACT));
+     //   nbt.setBoolean("Shoot_Projectiles", this.dataManager.get(SHOOT_PROJECTILES));
+     //   nbt.setBoolean("Summon_Lift_Attack", this.dataManager.get(SUMMON_LIFT_ATTACK));
+
+        nbt.setBoolean("Controller_Mode", this.isFightMode());
+        nbt.setBoolean("Interact", this.isInteract());
+        nbt.setBoolean("Shoot_Projectiles", this.isShootProjectiles());
+        nbt.setBoolean("Summon_Lift_Attack", this.isSummonLiftAttack());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(CONTROLLER_MODE, nbt.getBoolean("Controller_Mode"));
+     //   this.dataManager.set(INTERACT, nbt.getBoolean("Interact"));
+     //   this.dataManager.set(SHOOT_PROJECTILES, nbt.getBoolean("Shoot_Projectiles"));
+      //  this.dataManager.set(SUMMON_LIFT_ATTACK, nbt.getBoolean("Summon_Lift_Attack"));
+
+        this.setFightMode(nbt.getBoolean("Controller_Mode"));
+        this.setInteract(nbt.getBoolean("Interact"));
+        this.setShootProjectiles(nbt.getBoolean("Shoot_Projectiles"));
+        this.setSummonLiftAttack(nbt.getBoolean("Summon_Lift_Attack"));
+    }
 
     public void setFightMode(boolean value) {this.dataManager.set(CONTROLLER_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(CONTROLLER_MODE);}
@@ -201,11 +231,11 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.guilder_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.guilder_health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D * ModConfig.lamented_multiplier);
     }
 
     public int startBlockSearch = 80;

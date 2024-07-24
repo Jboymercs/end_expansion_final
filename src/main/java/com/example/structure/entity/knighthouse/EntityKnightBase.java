@@ -1,5 +1,6 @@
 package com.example.structure.entity.knighthouse;
 
+import akka.japi.pf.FI;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityModBase;
@@ -13,6 +14,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -25,13 +27,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 
 public abstract class EntityKnightBase extends EntityModBase {
 
     private static final DataParameter<Integer> SKIN_TYPE = EntityDataManager.<Integer>createKey(EntityKnightBase.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> INTERACT = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MARKED_FOR_UNHOLY = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
 
@@ -74,7 +78,7 @@ public abstract class EntityKnightBase extends EntityModBase {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.getDataManager().register(SKIN_TYPE, Integer.valueOf(this.rand.nextInt(5)));
+        this.getDataManager().register(SKIN_TYPE, Integer.valueOf(0));
         this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
         this.dataManager.register(MARKED_FOR_UNHOLY, Boolean.valueOf(false));
     }
@@ -100,6 +104,15 @@ public abstract class EntityKnightBase extends EntityModBase {
         return this.dataManager.get(SKIN_TYPE).intValue();
     }
 
+    //Hopefully this will fix the weird skin issues going across the models
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData entityLivingData) {
+        if(!(this instanceof EntityKnightLord)) {
+            this.setSkin(rand.nextInt(5));
+        }
+        return super.onInitialSpawn(difficulty, entityLivingData);
+    }
+
     public void setSkin(int skinType)
     {
         this.dataManager.set(SKIN_TYPE, Integer.valueOf(skinType));
@@ -110,12 +123,22 @@ public abstract class EntityKnightBase extends EntityModBase {
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setInteger("Variant", getSkin());
+      //  nbt.setBoolean("Fight_Mode", this.dataManager.get(FIGHT_MODE));
+     //   nbt.setBoolean("Marked_For_Unholy", this.dataManager.get(MARKED_FOR_UNHOLY));
+
+        nbt.setBoolean("Fight_Mode", this.isFightMode());
+        nbt.setBoolean("Marked_For_Unholy", this.isMarkedForUnholy());
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
         setSkin(nbt.getInteger("Variant"));
+      //  this.dataManager.set(FIGHT_MODE, nbt.getBoolean("Fight_Mode"));
+       // this.dataManager.set(MARKED_FOR_UNHOLY, nbt.getBoolean("Marked_For_Unholy"));
+
+        this.setFightMode(nbt.getBoolean("Fight_Mode"));
+        this.setMarkedForUnholy(nbt.getBoolean("Marked_For_Unholy"));
     }
 
     @Override

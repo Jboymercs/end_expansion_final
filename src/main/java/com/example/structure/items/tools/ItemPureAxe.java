@@ -10,12 +10,14 @@ import com.example.structure.util.ModUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -51,6 +53,7 @@ public class ItemPureAxe extends ItemAxe implements IHasModel {
         ItemStack stack = player.getHeldItem(hand);
         int SwordCoolDown = 13 * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
+            worldIn.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.PLAYERS, 1.0F, 0.5F);
             Vec3d moveVec = player.getLookVec().scale(1.1);
             if(player.canBePushed()) {
                 setTooHasAir = true;

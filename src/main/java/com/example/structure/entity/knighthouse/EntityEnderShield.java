@@ -16,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -61,6 +62,38 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     private static final DataParameter<Boolean> SHIELD_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> STUNNED = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
 
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Shielded", this.dataManager.get(SHIELDED));
+     //   nbt.setBoolean("Pierce_Attack", this.dataManager.get(PIERCE_ATTACK));
+      //  nbt.setBoolean("Regular_Attack", this.dataManager.get(REGULAR_ATTACK));
+      //  nbt.setBoolean("Shield_Attack", this.dataManager.get(SHIELD_ATTACK));
+     //   nbt.setBoolean("Stunned", this.dataManager.get(STUNNED));
+
+        nbt.setBoolean("Shielded", this.isShielded());
+        nbt.setBoolean("Pierce_Attack", this.isPierceAttack());
+        nbt.setBoolean("Regular_Attack", this.isRegularAttack());
+        nbt.setBoolean("Shield_Attack", this.isShieldAttack());
+        nbt.setBoolean("Stunned", this.isStunned());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(SHIELDED, nbt.getBoolean("Shielded"));
+     //   this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
+     //   this.dataManager.set(REGULAR_ATTACK, nbt.getBoolean("Regular_Attack"));
+     //   this.dataManager.set(SHIELD_ATTACK, nbt.getBoolean("Shield_Attack"));
+     //   this.dataManager.set(STUNNED, nbt.getBoolean("Stunned"));
+
+        this.setShielded(nbt.getBoolean("Shielded"));
+        this.setPierceAttack(nbt.getBoolean("Pierce_Attack"));
+        this.setRegularAttack(nbt.getBoolean("Regular_Attack"));
+        this.setShieldAttack(nbt.getBoolean("Shield_Attack"));
+        this.setStunned(nbt.getBoolean("Stunned"));
+    }
     public void setShielded(boolean value) {this.dataManager.set(SHIELDED, Boolean.valueOf(value));}
     public boolean isShielded() {return this.dataManager.get(SHIELDED);}
     public void setPierceAttack(boolean value) {this.dataManager.set(PIERCE_ATTACK, Boolean.valueOf(value));}
@@ -92,8 +125,8 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.17D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.knighthouse_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.knighthouse_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 

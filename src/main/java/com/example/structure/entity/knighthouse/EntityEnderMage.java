@@ -15,6 +15,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -65,6 +66,28 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     public EntityEnderMage(World worldIn) {
         super(worldIn);
         this.setSize(0.8f, 1.9f);
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Healing_Mode", this.dataManager.get(HEALING_MODE));
+     //   nbt.setBoolean("Attack_Mode", this.dataManager.get(ATTACK_MODE));
+      //  nbt.setBoolean("Marked", this.dataManager.get(MARKED));
+        nbt.setBoolean("Healing_Mode", this.isHealingMode());
+        nbt.setBoolean("Attack_Mode", this.isAttackMode());
+        nbt.setBoolean("Marked", this.isMarked());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+    //    this.dataManager.set(HEALING_MODE, nbt.getBoolean("Healing_Mode"));
+    //    this.dataManager.set(ATTACK_MODE, nbt.getBoolean("Attack_Mode"));
+    //    this.dataManager.set(MARKED, nbt.getBoolean("Marked"));
+        this.setHealingMode(nbt.getBoolean("Healing_Mode"));
+        this.setAttackMode(nbt.getBoolean("Attack_Mode"));
+        this.setMarked(nbt.getBoolean("Marked"));
     }
 
 
@@ -132,7 +155,9 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
                 final float yOff = i * 0.5f;
                 ModUtils.circleCallback(1, 20, (pos)-> {
                     pos = new Vec3d(pos.x, yOff, pos.y);
-                    ParticleManager.spawnColoredSmoke(world, pos.add(knight.getPositionVector().add(ModUtils.yVec(0.3D))), ModColors.RED, ModUtils.yVec(0.1));
+                    if(!world.isRemote) {
+                        ParticleManager.spawnColoredSmoke(world, pos.add(knight.getPositionVector().add(ModUtils.yVec(0.3D))), ModColors.RED, ModUtils.yVec(0.1));
+                    }
                 });
             }
         }, 20);
@@ -148,8 +173,8 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.knighthouse_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.knighthouse_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
     }
 
@@ -201,11 +226,11 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_HEAL, false));
         return PlayState.CONTINUE;
     }
-    if(this.isAttackMode()) {
+     else if(this.isAttackMode()) {
         event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_ATTACK, false));
         return PlayState.CONTINUE;
     }
-    if(this.isMarked()) {
+     else if(this.isMarked()) {
         event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MARKED, false));
         return PlayState.CONTINUE;
     }
@@ -227,7 +252,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
             prevAttack.accept(target);
         }
-        return 60;
+        return 70;
     }
 
     private final Consumer<EntityLivingBase> castSpell = (target) -> {

@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -63,6 +64,38 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
     private static final DataParameter<Boolean> SNATCH_UP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACK_SLOW = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACK_QUICK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+    //    nbt.setBoolean("Spotted", this.dataManager.get(SPOTTED));
+    //    nbt.setBoolean("Snatch_Down", this.dataManager.get(SNATCH_DOWN));
+    //    nbt.setBoolean("Snatch_Up", this.dataManager.get(SNATCH_UP));
+    //    nbt.setBoolean("Attack_Slow", this.dataManager.get(ATTACK_SLOW));
+    //    nbt.setBoolean("Attack_Quick", this.dataManager.get(ATTACK_QUICK));
+
+        nbt.setBoolean("Spotted", this.isSpotted());
+        nbt.setBoolean("Snatch_Down", this.isDigDown());
+        nbt.setBoolean("Snatch_Up", this.isDigUp());
+        nbt.setBoolean("Attack_Slow", this.isAttacking());
+        nbt.setBoolean("Attack_Quick", this.isAttackQuick());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   this.dataManager.set(SPOTTED, nbt.getBoolean("Spotted"));
+     //   this.dataManager.set(SNATCH_DOWN, nbt.getBoolean("Snatch_Down"));
+     //   this.dataManager.set(SNATCH_UP, nbt.getBoolean("Snatch_Up"));
+    //    this.dataManager.set(ATTACK_SLOW, nbt.getBoolean("Attack_Slow"));
+    //    this.dataManager.set(ATTACK_QUICK, nbt.getBoolean("Attack_Quick"));
+
+        this.setSpotted(nbt.getBoolean("Spotted"));
+        this.setDigDown(nbt.getBoolean("Snatch_Down"));
+        this.setDigUp(nbt.getBoolean("Snatch_Up"));
+        this.setAttacking(nbt.getBoolean("Attack_Slow"));
+        this.setAttackQuick(nbt.getBoolean("Attack_Quick"));
+    }
     public void setSpotted(boolean value) {this.dataManager.set(SPOTTED, Boolean.valueOf(value));}
     public boolean isSpotted() {return this.dataManager.get(SPOTTED);}
     public void setDigDown(boolean value) {this.dataManager.set(SNATCH_DOWN, Boolean.valueOf(value));}
@@ -86,7 +119,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.stalker_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -66,6 +67,44 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
 
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
     public boolean IAmAggroed = false;
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Open", this.dataManager.get(OPEN));
+        nbt.setBoolean("Close", this.dataManager.get(CLOSE));
+        nbt.setBoolean("Open_State", this.dataManager.get(OPEN_STATE));
+        nbt.setBoolean("I_Am_Boss", this.dataManager.get(I_AM_BOSS));
+        nbt.setBoolean("Avalon_Mode", this.dataManager.get(AVALON_MODE));
+        nbt.setBoolean("Close_State", this.dataManager.get(CLOSE_STATE));
+        nbt.setBoolean("Cast_Aoe", this.dataManager.get(CAST_AOE));
+        nbt.setBoolean("Cast_Lazers", this.dataManager.get(CAST_LAZERS));
+        nbt.setBoolean("Smash_Attack", this.dataManager.get(SMASH_ATTACK));
+        nbt.setBoolean("Projectile_Attack", this.dataManager.get(PROJECTILE_ATTACK));
+        nbt.setBoolean("Teleport_Attack", this.dataManager.get(TELEPORT_ATTACK));
+        nbt.setBoolean("Summon_State", this.dataManager.get(SUMMON_STATE));
+        nbt.setBoolean("Death_State", this.dataManager.get(DEATH_STATE));
+        nbt.setFloat("Look", this.dataManager.get(LOOK));
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(OPEN, nbt.getBoolean("Open"));
+        this.dataManager.set(CLOSE, nbt.getBoolean("Close"));
+        this.dataManager.set(OPEN_STATE, nbt.getBoolean("Open_State"));
+        this.dataManager.set(I_AM_BOSS, nbt.getBoolean("I_Am_Boss"));
+        this.dataManager.set(AVALON_MODE, nbt.getBoolean("Avalon_Mode"));
+        this.dataManager.set(CLOSE_STATE, nbt.getBoolean("Close_State"));
+        this.dataManager.set(CAST_AOE, nbt.getBoolean("Cast_Aoe"));
+        this.dataManager.set(CAST_LAZERS, nbt.getBoolean("Cast_Lazers"));
+        this.dataManager.set(SMASH_ATTACK, nbt.getBoolean("Smash_Attack"));
+        this.dataManager.set(PROJECTILE_ATTACK, nbt.getBoolean("Projectile_Attack"));
+        this.dataManager.set(TELEPORT_ATTACK, nbt.getBoolean("Teleport_Attack"));
+        this.dataManager.set(SUMMON_STATE, nbt.getBoolean("Summon_State"));
+        this.dataManager.set(DEATH_STATE, nbt.getBoolean("Death_State"));
+        this.dataManager.set(LOOK, nbt.getFloat("Look"));
+    }
 
     public void setOpen(boolean value) {this.dataManager.set(OPEN, Boolean.valueOf(value));}
     public boolean isOpen() {return this.dataManager.get(OPEN);}

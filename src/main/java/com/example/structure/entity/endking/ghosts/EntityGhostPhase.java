@@ -18,6 +18,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -49,6 +50,23 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
     protected static final  DataParameter<Boolean> LEAP_SWEEP_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
     protected static final DataParameter<Boolean> CLOSE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Combat_Mode", this.dataManager.get(COMBAT_MODE));
+        nbt.setBoolean("Leap_Sweep_Attack", this.dataManager.get(LEAP_SWEEP_ATTACK));
+        nbt.setBoolean("Close_Attack", this.dataManager.get(CLOSE_ATTACK));
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(COMBAT_MODE, nbt.getBoolean("Combat_Mode"));
+        this.dataManager.set(LEAP_SWEEP_ATTACK, nbt.getBoolean("Leap_Sweep_Attack"));
+        this.dataManager.set(CLOSE_ATTACK, nbt.getBoolean("Close_Attack"));
+    }
 
     public boolean hasSelectedAttack = false;
     public int attackTimer = 10 + ModRand.range(40, 100);

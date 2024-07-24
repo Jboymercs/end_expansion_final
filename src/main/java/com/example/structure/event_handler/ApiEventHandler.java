@@ -2,6 +2,7 @@ package com.example.structure.event_handler;
 
 
 import com.example.structure.Main;
+import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
 import git.jbredwards.nether_api.api.event.NetherAPIRegistryEvent;
@@ -19,7 +20,7 @@ public class ApiEventHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     static void onNetherAPIRegistry(@Nonnull final NetherAPIRegistryEvent.End event)
     {
-        event.registry.registerBiome(BiomeRegister.END_ASH_WASTELANDS, 80);
+        event.registry.registerBiome(BiomeRegister.END_ASH_WASTELANDS, ModConfig.biome_weight);
 
         //King Fortress
         event.registry.registerStructure("EndKingsFortress", chunkGenerator -> Main.instance.fortress);

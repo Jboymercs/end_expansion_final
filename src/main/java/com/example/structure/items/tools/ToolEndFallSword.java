@@ -4,12 +4,14 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityGhostArm;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.AnimationState;
@@ -52,6 +54,7 @@ public class ToolEndFallSword extends ToolSword implements IAnimatable {
         int SwordCoolDown = ModConfig.endfall_sword_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
             AnimationController<?> controller = GeckoLibUtil.getControllerForStack(this.factory, stack, controllerName);
+            worldIn.playSound(null, player.posX, player.posY, player.posZ, ModSoundHandler.KING_TOP_SWIPE, SoundCategory.PLAYERS, 1.0F, 1.0F);
             EntityGhostArm eyeTooSummon = new EntityGhostArm(worldIn, (float) player.posX,(float) player.posY, (float) player.posZ, player);
             eyeTooSummon.setPosition(player.posX, player.posY, player.posZ);
             worldIn.spawnEntity(eyeTooSummon);

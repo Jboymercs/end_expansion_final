@@ -17,6 +17,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -64,6 +65,46 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
     private static final DataParameter<Boolean> WARN = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Boolean> CHOMP = EntityDataManager.createKey(EntityChomper.class, DataSerializers.BOOLEAN);
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+     //   nbt.setBoolean("Attack", this.dataManager.get(ATTACK));
+    //    nbt.setBoolean("Dig_Down", this.dataManager.get(DIG_DOWN));
+     //   nbt.setBoolean("Dig_Up", this.dataManager.get(DIG_UP));
+     //   nbt.setBoolean("Dug_In", this.dataManager.get(DUG_IN));
+     //   nbt.setBoolean("Bite", this.dataManager.get(BITE));
+     //   nbt.setBoolean("Warn", this.dataManager.get(WARN));
+     //   nbt.setBoolean("Chomp", this.dataManager.get(CHOMP));
+
+        nbt.setBoolean("Attack", this.isAttacking());
+        nbt.setBoolean("Dig_Down", this.isDigDown());
+        nbt.setBoolean("Dig_Up", this.isDigUp());
+        nbt.setBoolean("Dug_In", this.isDugIn());
+        nbt.setBoolean("Bite", this.isBite());
+        nbt.setBoolean("Warn", this.isWarn());
+        nbt.setBoolean("Chomp", this.isChomp());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+    //    this.dataManager.set(ATTACK, nbt.getBoolean("Attack"));
+    //    this.dataManager.set(DIG_DOWN, nbt.getBoolean("Dig_Down"));
+    //    this.dataManager.set(DIG_UP, nbt.getBoolean("Dig_Up"));
+    //    this.dataManager.set(DUG_IN, nbt.getBoolean("Dug_In"));
+    //    this.dataManager.set(BITE, nbt.getBoolean("Bite"));
+    //    this.dataManager.set(WARN, nbt.getBoolean("Warn"));
+    //    this.dataManager.set(CHOMP, nbt.getBoolean("Chomp"));
+
+        this.setAttacking(nbt.getBoolean("Attack"));
+        this.setDigDown(nbt.getBoolean("Dig_Down"));
+        this.setDigUp(nbt.getBoolean("Dig_Up"));
+        this.setDugIn(nbt.getBoolean("Dug_In"));
+        this.setBite(nbt.getBoolean("Bite"));
+        this.setWarn(nbt.getBoolean("Warn"));
+        this.setChomp(nbt.getBoolean("Chomp"));
+    }
 
     public void setDigDown(boolean value) {this.dataManager.set(DIG_DOWN, Boolean.valueOf(value));}
     public boolean isDigDown() {return this.dataManager.get(DIG_DOWN);}
@@ -338,8 +379,8 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(36D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.chomper_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.chomper_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.6D);
     }
 

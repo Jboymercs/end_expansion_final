@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -95,6 +96,49 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     private static final DataParameter<Boolean> SUMMON_BOOLEAN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DEATH_BOOLEAN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Lamentor_Mode", this.dataManager.get(LAMENTOR_MODE));
+        nbt.setBoolean("Strike_Attack", this.dataManager.get(STRIKE_ATTACK));
+        nbt.setBoolean("Crystal_Attack", this.dataManager.get(CRYSTAL_ATTACK));
+        nbt.setBoolean("Spin_Attack", this.dataManager.get(SPIN_ATTACK));
+        nbt.setBoolean("Spin_Start", this.dataManager.get(SPIN_START));
+        nbt.setBoolean("Spin_Cycle", this.dataManager.get(SPIN_CYCLE));
+        nbt.setBoolean("Pierce_Attack", this.dataManager.get(PIERCE_ATTACK));
+        nbt.setBoolean("Summon_Attack", this.dataManager.get(SUMMON_ATTACK));
+        nbt.setBoolean("Hammer_Start", this.dataManager.get(HAMMER_START));
+        nbt.setBoolean("Hammer_Cycle", this.dataManager.get(HAMMER_CYCLE));
+        nbt.setBoolean("Hammer_Attack", this.dataManager.get(HAMMER_ATTACK));
+        nbt.setBoolean("Multi_Pierce_Attack", this.dataManager.get(MULTI_PIERCE_ATTACK));
+        nbt.setBoolean("Shulker_Attack", this.dataManager.get(SHULKER_ATTACK));
+        nbt.setBoolean("Hammer_Projectile", this.dataManager.get(HAMMER_PROJECTILE));
+        nbt.setBoolean("Summon_Boolean", this.dataManager.get(SUMMON_BOOLEAN));
+        nbt.setBoolean("Death_Boolean", this.dataManager.get(DEATH_BOOLEAN));
+    }
+
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        this.dataManager.set(LAMENTOR_MODE, nbt.getBoolean("Lamentor_Mode"));
+        this.dataManager.set(STRIKE_ATTACK, nbt.getBoolean("Strike_Attack"));
+        this.dataManager.set(CRYSTAL_ATTACK, nbt.getBoolean("Crystal_Attack"));
+        this.dataManager.set(SPIN_ATTACK, nbt.getBoolean("Spin_Attack"));
+        this.dataManager.set(SPIN_START, nbt.getBoolean("Spin_Start"));
+        this.dataManager.set(SPIN_CYCLE, nbt.getBoolean("Spin_Cycle"));
+        this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
+        this.dataManager.set(SUMMON_ATTACK, nbt.getBoolean("Summon_Attack"));
+        this.dataManager.set(HAMMER_START, nbt.getBoolean("Hammer_Start"));
+        this.dataManager.set(HAMMER_CYCLE, nbt.getBoolean("Hammer_Cycle"));
+        this.dataManager.set(HAMMER_ATTACK, nbt.getBoolean("Hammer_Attack"));
+        this.dataManager.set(MULTI_PIERCE_ATTACK, nbt.getBoolean("Multi_Pierce_Attack"));
+        this.dataManager.set(SHULKER_ATTACK, nbt.getBoolean("Shulker_Attack"));
+        this.dataManager.set(HAMMER_PROJECTILE, nbt.getBoolean("Hammer_Projectile"));
+        this.dataManager.set(SUMMON_BOOLEAN, nbt.getBoolean("Summon_Boolean"));
+        this.dataManager.set(DEATH_BOOLEAN, nbt.getBoolean("Death_Boolean"));
+    }
     public boolean rangeSwitch;
     public boolean meleeSwitch;
 
@@ -258,12 +302,12 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.39590D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(18.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.lamentor_toughness_armor * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ModConfig.lamentor_armor * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.attack_damage * ModConfig.lamented_multiplier);
     }
 
