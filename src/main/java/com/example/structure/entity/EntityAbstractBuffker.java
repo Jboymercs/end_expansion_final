@@ -4,6 +4,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.util.IPitch;
+import com.example.structure.items.tools.ToolPickaxe;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
@@ -13,7 +14,9 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -35,13 +38,16 @@ import javax.annotation.Nonnull;
 public abstract class EntityAbstractBuffker extends EntityModBase implements IEntityMultiPart, IPitch {
 
 
-    protected static final DataParameter<Boolean> GOLEM_MODES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SHOOT_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SHOCKWAVE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> GOLEM_MODES = EntityDataManager.createKey(EntityAbstractBuffker.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityAbstractBuffker.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SHOOT_ATTACK = EntityDataManager.createKey(EntityAbstractBuffker.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SHOCKWAVE_ATTACK = EntityDataManager.createKey(EntityAbstractBuffker.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
+    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityAbstractBuffker.class, DataSerializers.FLOAT);
 
+    public int destroyShellProgress = 0;
+
+    public boolean canBeDamagedInHead = false;
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -135,7 +141,13 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
             this.hitboxParts[l].prevPosY = avec3d[l].y;
             this.hitboxParts[l].prevPosZ = avec3d[l].z;
         }
+
+
+        if(destroyShellProgress > 4 && !canBeDamagedInHead) {
+            canBeDamagedInHead = true;
+        }
     }
+
 
 
     public boolean isFightMode() {return this.dataManager.get(GOLEM_MODES);}
@@ -206,20 +218,29 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     @Override
     public boolean attackEntityFromPart(@Nonnull MultiPartEntityPart multiPartEntityPart,@Nonnull DamageSource damageSource, float damage) {
-        if(multiPartEntityPart == this.head  && this.isFightMode()) {
+        EntityPlayer sourceAt = (EntityPlayer) damageSource.getImmediateSource();
+
+        if(sourceAt != null) {
+            ItemStack stack = sourceAt.inventory.getCurrentItem();
+
+            if(stack.getItem().canHarvestBlock(Blocks.STONE.getDefaultState())) {
+                destroyShellProgress++;
+                this.damageConstructor = true;
+                return this.attackEntityFrom(damageSource, (float) (damage * 0.25));
+            }
+        }
+
+        if(multiPartEntityPart == this.head && canBeDamagedInHead) {
+            this.damageConstructor = true;
+            return this.attackEntityFrom(damageSource, damage);
+        }
+
+        if(multiPartEntityPart == this.head  && this.isFightMode() && !canBeDamagedInHead) {
             this.damageConstructor = true;
             return this.attackEntityFrom(damageSource, damage);
 
         }
         if (damage > 0.0F && !damageSource.isUnblockable()) {
-        if (!damageSource.isProjectile()) {
-            Entity entity = damageSource.getImmediateSource();
-
-            if (entity instanceof EntityLivingBase) {
-               // this.blockUsingShield((EntityLivingBase) entity);
-            }
-
-             }
             this.playSound(SoundEvents.ENTITY_SHULKER_HURT_CLOSED, 1.0f, 0.6f + ModRand.getFloat(0.2f));
             return false;
         }
@@ -230,6 +251,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     @Override
     public final boolean attackEntityFrom(DamageSource source, float amount) {
+
         if(!this.damageConstructor && !source.isUnblockable()) {
             return false;
 

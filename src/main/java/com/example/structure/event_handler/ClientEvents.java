@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiScreenWorking;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,12 +22,16 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(ClientRender.SCREEN_SHAKE>0) {
+
+
+        if(ClientRender.SCREEN_SHAKE>0 && event.player != null) {
             event.player.rotationPitch += ClientRender.getScreenShake(screenShakePositive);
             screenShakePositive = !screenShakePositive;
             ClientRender.SCREEN_SHAKE-=0.01f;
         }
     }
+
+
 
 
 }

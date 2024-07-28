@@ -46,10 +46,10 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
     private final String ANIM_LEAP_ATTACK = "leap_attack";
     private final String ANIM_CLOSE_ATTACK = "close_attack";
     private AnimationFactory factory = new AnimationFactory(this);
-    protected static final DataParameter<Boolean> COMBAT_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final  DataParameter<Boolean> LEAP_SWEEP_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> COMBAT_MODE = EntityDataManager.createKey(EntityGhostPhase.class, DataSerializers.BOOLEAN);
+    protected static final  DataParameter<Boolean> LEAP_SWEEP_ATTACK = EntityDataManager.createKey(EntityGhostPhase.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> CLOSE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> CLOSE_ATTACK = EntityDataManager.createKey(EntityGhostPhase.class, DataSerializers.BOOLEAN);
 
 
     @Override

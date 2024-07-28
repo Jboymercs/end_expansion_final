@@ -133,6 +133,23 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     @Override
     public void onUpdate() {
         super.onUpdate();
+
+        if(this.getSpawnLocation() != null) {
+            Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
+
+            double distSq = this.getDistanceSq(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+            double distance = Math.sqrt(distSq);
+            //This basically makes it so if the Ashed King is too far away from the Arena, he will teleport back
+            if(!world.isRemote) {
+                if (distance > 30) {
+                    this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+                    //Also teleport the King if his position gets too Low from the Spawn Point
+                } else if (SpawnLoc.x - 14 > this.posY) {
+                    this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+                }
+            }
+        }
+
         if(this.IPhaseThree && !this.hasPlayedPhaseAnimation && !world.isRemote) {
             playPhase3Animation(this.world);
         }
@@ -186,6 +203,11 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     }
 
 
+    public void teleportTarget(double x, double y, double z) {
+        this.setPosition(x , y, z);
+
+    }
+
 
     protected boolean beginAI = false;
     @Override
@@ -194,12 +216,13 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
 
         EntityLivingBase target = this.getAttackTarget();
 
-        //Destroys Blocks while this is Dashing
-        if(this.isFlyDashMove()) {
+        //Destroys Blocks while this is Dashing if the config option enables it
+        if(this.isFlyDashMove() && ModConfig.bosses_of_mass_destruction) {
             AxisAlignedBB box = getEntityBoundingBox().grow(1.1, 0.1, 1.1).offset(0, -0.1, 0);
             ModUtils.destroyBlocksInAABB(box, world, this);
         }
 
+        //Suffocation check
         if(this.hurtTime > 0 && world.getBlockState(this.getPosition()).isFullBlock() && world.getBlockState(this.getPosition().up()).isFullBlock() &&
         world.getBlockState(this.getPosition().add(0, 2,0)).isFullBlock()) {
             AxisAlignedBB box = getEntityBoundingBox().grow(1.1, 0.1, 1.1).offset(0, -0.1, 0);
@@ -290,6 +313,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public void onSummon(BlockPos Pos, Projectile actor) {
         BlockPos offset = Pos.add(new BlockPos(0,0,0));
         this.setPosition(offset);
+        this.setSpawnLocation(offset);
         world.spawnEntity(this);
         double healthChange = this.getHealth() / this.getMaxHealth();
         if(healthChange == 1) {

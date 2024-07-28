@@ -45,33 +45,33 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     private final MultiPartEntityPart part_right_worm = new MultiPartEntityPart(this, "part_right_worm", 0.6F, 0.5F);
 
     private final MultiPartEntityPart part_back_worm = new MultiPartEntityPart(this, "part_back_worm", 0.6F, 0.6F);
-    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
-    protected static final DataParameter<Boolean> BARREND_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.FLOAT);
+    protected static final DataParameter<Boolean> BARREND_MODE = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> WORM_BACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> WORM_LEFT = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> WORM_RIGHT = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> FULL_BODY_USAGE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> WORM_BACK = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> WORM_LEFT = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> WORM_RIGHT = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> FULL_BODY_USAGE = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> PARASITE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SWING_LEFT = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SWING_RIGHT = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> PREPARE_CHARG = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> CHARGE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> COLLIDE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SLAM = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> LEAP_SLAM = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> AWAKEN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> STILL = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> PARASITE_ATTACK = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SWING_LEFT = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SWING_RIGHT = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> PREPARE_CHARG = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> CHARGE = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> COLLIDE = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SLAM = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> LEAP_SLAM = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> AWAKEN = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> STILL = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SUMMON_MINIONS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SUMMON_MINIONS = EntityDataManager.createKey(EntityAbstractBarrendGolem.class, DataSerializers.BOOLEAN);
 
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-        nbt.setFloat("Look", this.dataManager.get(LOOK));
+        nbt.setFloat("Look", this.getPitch());
         nbt.setBoolean("Barrend_Mode", this.dataManager.get(BARREND_MODE));
         nbt.setBoolean("Worm_Back", this.dataManager.get(WORM_BACK));
         nbt.setBoolean("Worm_Left", this.dataManager.get(WORM_LEFT));

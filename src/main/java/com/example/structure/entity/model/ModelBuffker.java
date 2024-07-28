@@ -15,7 +15,23 @@ public class ModelBuffker extends GeoModelExtended<EntityBuffker> {
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityBuffker entityBuffker) {
+
         return new ResourceLocation(ModReference.MOD_ID, "animations/animation.buffker.json");
+    }
+
+
+    @Override
+    public ResourceLocation getTextureLocation(EntityBuffker entity) {
+        if (entity.canBeDamagedInHead) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/buffker_open.png");
+        }
+        else if(entity.destroyShellProgress == 1 || entity.destroyShellProgress == 2) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/buffker_1.png");
+        } else if (entity.destroyShellProgress == 3 || entity.destroyShellProgress == 4) {
+            return new ResourceLocation(ModReference.MOD_ID, "textures/entity/buffker_2.png");
+        }
+
+        return new ResourceLocation(ModReference.MOD_ID, "textures/entity/buffker.png");
     }
 
     @Override

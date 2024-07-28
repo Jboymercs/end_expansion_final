@@ -4,6 +4,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ProjectilePurple;
+import com.example.structure.entity.ai.EntityAISeeker;
 import com.example.structure.entity.ai.EntityAiSeekerPrime;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -48,13 +49,13 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
-    private static final DataParameter<Boolean> PRIME_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PRIME_MODE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
 
 
     @Override

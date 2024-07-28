@@ -1,6 +1,7 @@
 package com.example.structure.entity.endking;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.IMultiAction;
@@ -61,40 +62,42 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     public boolean IPhaseThree = false;
     //A call for if damage will be done in the selected area by the attack sorter
     protected boolean damageViable = false;
-    protected static final DataParameter<Boolean> KING_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> KING_MODE = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
     //Used for Full Bones usage of the body
-    protected static final DataParameter<Boolean> FULL_BODY_USAGE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> FULL_BODY_USAGE = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
     //Used for Upper Body only attacks
-    protected static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> PHASE_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final  DataParameter<Boolean> LEAP_SWEEP_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SUMMON_CRYSTALS_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SUMMON_FIREBALLS_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SUMMON_GHOSTS_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> UPPER_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SIDE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> CAST_ARENA = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> PHASE_INTRO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> PHASE_MODE = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final  DataParameter<Boolean> LEAP_SWEEP_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SUMMON_CRYSTALS_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SUMMON_FIREBALLS_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SUMMON_GHOSTS_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> UPPER_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SIDE_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> CAST_ARENA = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> PHASE_INTRO = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> PHASE_HANDLER = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> PHASE_HANDLER = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> GROUND_SWORD = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> MULTIPLE_STRIKES = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> GROUND_SWORD = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> MULTIPLE_STRIKES = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> LAZER_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> LAZER_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> BOSS_START = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> BOSS_STALL = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> GHOST_SUMMON = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BOSS_START = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BOSS_STALL = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> GHOST_SUMMON = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> DEATH_BOSS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> FLY_DASH_MOVE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> SLAM_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> DEATH_BOSS = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> FLY_DASH_MOVE = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> SLAM_ATTACK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
     //
-    protected static final DataParameter<Boolean> TOP_HP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> TOP_HP = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
+    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.FLOAT);
+
+    public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BLOCK_POS);
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -123,7 +126,10 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         nbt.setBoolean("Fly_Dash_Move", this.dataManager.get(FLY_DASH_MOVE));
         nbt.setBoolean("Slam_Attack", this.dataManager.get(SLAM_ATTACK));
         nbt.setBoolean("Top_Hp", this.dataManager.get(TOP_HP));
-        nbt.setFloat("Look", this.dataManager.get(LOOK));
+        nbt.setFloat("Look", this.getPitch());
+        nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
+        nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
+        nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
     }
 
     @Override
@@ -154,6 +160,7 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.dataManager.set(SLAM_ATTACK, nbt.getBoolean("Slam_Attack"));
         this.dataManager.set(TOP_HP, nbt.getBoolean("Top_Hp"));
         this.dataManager.set(LOOK, nbt.getFloat("Look"));
+        this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
     }
 
     public void setTopHp(boolean value) {this.dataManager.set(TOP_HP, Boolean.valueOf(value));}
@@ -204,6 +211,15 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     public void setFlyDashMove(boolean value) {this.dataManager.set(FLY_DASH_MOVE, Boolean.valueOf(value));}
     public boolean isSlamAttack() {return this.dataManager.get(SLAM_ATTACK);}
     public void setSlamAttack(boolean value) {this.dataManager.set(SLAM_ATTACK, Boolean.valueOf(value));}
+
+    public void setSpawnLocation(BlockPos pos) {
+        this.dataManager.set(SPAWN_LOCATION, pos);
+    }
+
+    public BlockPos getSpawnLocation() {
+        return this.dataManager.get(SPAWN_LOCATION);
+    }
+
     private final MultiPartEntityPart[] hitboxParts;
     private final MultiPartEntityPart model = new MultiPartEntityPart(this, "model", 0f, 0f);
     private final MultiPartEntityPart legsWhole = new MultiPartEntityPart(this, "legsWhole", 1.0f, 1.1f);
@@ -267,6 +283,8 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.dataManager.register(FLY_DASH_MOVE, Boolean.valueOf(false));
         this.dataManager.register(DEATH_BOSS, Boolean.valueOf(false));
         this.dataManager.register(SLAM_ATTACK, Boolean.valueOf(false));
+        //
+        this.dataManager.register(SPAWN_LOCATION, null);
         super.entityInit();
 
     }

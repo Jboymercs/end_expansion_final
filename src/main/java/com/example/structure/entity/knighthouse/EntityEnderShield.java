@@ -56,11 +56,11 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     private Consumer<EntityLivingBase> prevAttack;
     private AnimationFactory factory = new AnimationFactory(this);
 
-    private static final DataParameter<Boolean> SHIELDED = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> REGULAR_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHIELD_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> STUNNED = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHIELDED = EntityDataManager.createKey(EntityEnderShield.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityEnderShield.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> REGULAR_ATTACK = EntityDataManager.createKey(EntityEnderShield.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHIELD_ATTACK = EntityDataManager.createKey(EntityEnderShield.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> STUNNED = EntityDataManager.createKey(EntityEnderShield.class, DataSerializers.BOOLEAN);
 
 
     @Override
@@ -274,11 +274,22 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
                 ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.1, 0))), ModColors.RED, pos.normalize().scale(0.5).add(ModUtils.yVec(0)));
             });
         }
+
+        if(id == ModUtils.SECOND_PARTICLE_BYTE && impactLocation != null ) {
+            Vec3d vec3d1 = impactLocation.add(ModUtils.yVec(1.4));
+            ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
+            ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
+            ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
+            ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
+            ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
+            ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
+        }
         super.handleStatusUpdate(id);
     }
 
     public boolean isRandomGetAway = false;
 
+    public Vec3d impactLocation;
     private final Consumer<EntityLivingBase> randomGetBack = (target) -> {
       this.setFightMode(true);
       this.isRandomGetAway = true;
@@ -423,16 +434,6 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
         }, 60);
     }
 
-    @SideOnly(Side.CLIENT)
-    protected void spawnImpactParticles(Vec3d vec3d) {
-        Vec3d vec3d1 = vec3d.add(ModUtils.yVec(1.4));
-        ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
-        ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
-        ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
-        ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
-        ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
-        ParticleManager.spawnColoredSmoke(this.world, vec3d1, ModColors.YELLOW, new Vec3d(ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1,ModRand.getFloat(1) * 0.1));
-    }
 
     private boolean canBlockDamageSource(DamageSource damageSourceIn) {
         if (!damageSourceIn.isUnblockable() && !this.shieldLowered && this.isShielded() && !this.isStunned()) {
@@ -443,7 +444,8 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
                 Vec3d vec3d2 = vec3d.subtractReverse(new Vec3d(this.posX, this.posY, this.posZ)).normalize();
                 vec3d2 = new Vec3d(vec3d2.x, 0.0D, vec3d2.z);
                 this.knightIsStunned();
-                this.spawnImpactParticles(vec3d);
+                impactLocation = vec3d;
+                world.setEntityState(this, ModUtils.SECOND_PARTICLE_BYTE);
                 return vec3d2.dotProduct(vec3d1) < 0.0D;
             }
             //Handler for other

@@ -7,6 +7,7 @@ import com.example.structure.entity.trader.action.ActionLineAOE;
 import com.example.structure.entity.trader.action.ActionMediumRangeAOE;
 import com.example.structure.entity.trader.action.ActionShortRangeAOE;
 import com.example.structure.entity.util.IAttack;
+import com.example.structure.event_handler.ClientEvents;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.*;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -189,13 +191,22 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
             Vec3d pos = new Vec3d(this.posX + ModRand.range(-1 , 1), this.posY + 2, this.posZ + ModRand.range(-1, 1));
             ParticleManager.spawnColoredSmoke(world, pos, ModColors.PURPLE, new Vec3d(0, 0.05, 0));
         }
+
+        if(id == ModUtils.FOURTH_PARTICLE_BYTE) {
+            List<EntityPlayer> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(25D), e -> !e.getIsInvulnerable());
+            for(EntityPlayer player : nearbyPlayers) {
+              //  ClientRender.SCREEN_SHAKE = 2F;
+
+            }
+        }
         super.handleStatusUpdate(id);
     }
 
     public void stateChangeTooAggro(BlockPos pos, EntityPlayer target) {
         this.setIAmBoss(true);
         this.playSound(ModSoundHandler.AVALON_SPEAK, 1.4f, 1.0f / (rand.nextFloat() * 0.4f + 0.6f));
-        addEvent(()-> ClientRender.SCREEN_SHAKE = 2f, 30);
+
+        addEvent(()-> world.setEntityState(this, ModUtils.FOURTH_PARTICLE_BYTE), 30);
 
 
         addEvent(()-> {

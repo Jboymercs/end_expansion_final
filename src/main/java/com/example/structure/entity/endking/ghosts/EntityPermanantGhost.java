@@ -73,6 +73,10 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
     public void onSummon(BlockPos pos, EntityEndKing parentEntity) {
         BlockPos offset = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
         this.setPosition(offset);
+        if(parentEntity != null && parentEntity.getSpawnLocation() != null) {
+            BlockPos spawnLoc = parentEntity.getSpawnLocation();
+            this.setSpawnLocation(spawnLoc);
+        }
         this.setPGhostSummon(true);
         addEvent(()-> this.setPGhostSummon(false), 50);
         world.spawnEntity(this);
@@ -128,6 +132,24 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         super.onUpdate();
         //This is to hopefully hook the two together for reading off each other
 
+
+        if(this.getSpawnLocation() != null) {
+            Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
+
+            double distSq = this.getDistanceSq(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+            double distance = Math.sqrt(distSq);
+            //This basically makes it so if the Ghost is too far away from the Arena, he will teleport back
+            if(!world.isRemote) {
+                if (distance > 30) {
+                    this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+                    //Also teleport the Ghost if his position gets too Low from the Spawn Point
+                } else if (SpawnLoc.x - 14 > this.posY) {
+                    this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+                }
+            }
+        }
+
+
         if(this.isPGhostSummon()) {
             this.motionZ = 0;
             this.motionY = 0;
@@ -172,6 +194,12 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
             this.renderYawOffset = this.rotationYaw;
 
         }
+
+    }
+
+
+    public void teleportTarget(double x, double y, double z) {
+        this.setPosition(x , y, z);
 
     }
 

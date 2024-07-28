@@ -53,10 +53,12 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     private final String ANIM_CAST_ATTACK = "attack";
     private final String ANIM_MARKED = "mark";
 
+    protected EntityEnderKnight marked_knight;
+
     public int randomMarkTimer = 800 + ModRand.range(50, (ModConfig.end_mage_ritual * 20));
-    private static final DataParameter<Boolean> HEALING_MODE =EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK_MODE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MARKED = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HEALING_MODE =EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK_MODE = EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MARKED = EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
 
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityEnderMage(World worldIn, float x, float y, float z) {
@@ -101,6 +103,8 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
     }
 
+
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -131,6 +135,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         if(!nearbyCurses.isEmpty() && target == null && randomMarkTimer < 0 && !this.nearbyMarked) {
             for(EntityEnderKnight knight : nearbyCurses) {
                 if(!knight.isMarkedForUnholy() && !this.selectEntity) {
+                    marked_knight = knight;
                     castUnholyMarking(knight);
                 }
             }
@@ -150,16 +155,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
             if(!world.isRemote) {
                 knight.setMarkedForUnholy(true);
             }
-
-            for (int i = -5; i < 2; i++) {
-                final float yOff = i * 0.5f;
-                ModUtils.circleCallback(1, 20, (pos)-> {
-                    pos = new Vec3d(pos.x, yOff, pos.y);
-                    if(!world.isRemote) {
-                        ParticleManager.spawnColoredSmoke(world, pos.add(knight.getPositionVector().add(ModUtils.yVec(0.3D))), ModColors.RED, ModUtils.yVec(0.1));
-                    }
-                });
-            }
+            world.setEntityState(this, ModUtils.THIRD_PARTICLE_BYTE);
         }, 20);
         addEvent(()-> {
             this.setMarked(false);
@@ -296,7 +292,17 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         if (id == ModUtils.SECOND_PARTICLE_BYTE) {
             ParticleManager.spawnSwirl2(world, this.getPositionVector(), ModColors.RED, Vec3d.ZERO);
         }
-
+        if(id == ModUtils.THIRD_PARTICLE_BYTE) {
+            for (int i = -5; i < 2; i++) {
+                final float yOff = i * 0.5f;
+                ModUtils.circleCallback(1, 20, (pos)-> {
+                    pos = new Vec3d(pos.x, yOff, pos.y);
+                    if(!world.isRemote && marked_knight != null) {
+                               ParticleManager.spawnColoredSmoke(world, pos.add(marked_knight.getPositionVector().add(ModUtils.yVec(0.3D))), ModColors.RED, ModUtils.yVec(0.1));
+                    }
+                });
+            }
+        }
 
         super.handleStatusUpdate(id);
     }

@@ -52,13 +52,13 @@ import java.util.function.Consumer;
 
 public class EntityKnightLord extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityKnightBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FLYING_MODE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
 
 
     @Override

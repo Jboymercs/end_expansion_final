@@ -15,6 +15,11 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static int structureFrequency = 300;
 
+    @Config.Name("Bosses of Destruction")
+    @Config.Comment("When enabled, The Lamentor and the Ashed King will break more blocks while doing there attacks, default false")
+    @Config.RequiresMcRestart
+    public static boolean bosses_of_mass_destruction = false;
+
     @Config.Name("Lamented Islands Size")
     @Config.Comment("Changes the size of the Lamented Islands")
     @Config.RangeInt(min = 1, max = 10)
@@ -26,7 +31,7 @@ public class ModConfig {
     @Config.Name("Lamentor Boss Health")
     @Config.Comment("Change the Health of the Lamentor")
     @Config.RequiresMcRestart
-    public static float health = 400;
+    public static float health = 375;
 
     @Config.Name("Lamentor Base Armor")
     @Config.Comment("Change the Armor Value of the Lamentor")
@@ -98,7 +103,7 @@ public class ModConfig {
     @Config.Name("Constructor Health")
     @Config.Comment("Change the Health of the Constructor")
     @Config.RequiresMcRestart
-    public static float constructor_health = 55;
+    public static float constructor_health = 45;
 
     @Config.Name("Constructor Attack Speed Value 1")
     @Config.Comment("Constructor Speed #1, this value in seconds, smaller means quicker, larger means slower speed of attacks")
@@ -308,17 +313,17 @@ public class ModConfig {
     @Config.Name("Knighthouse Base Health")
     @Config.Comment("Base Health for the Ender Knight, Mage, Shielder")
     @Config.RequiresMcRestart
-    public static double knighthouse_health = 45;
+    public static double knighthouse_health = 40;
 
     @Config.Name("Fell Knight Base Attack Damage")
     @Config.Comment("Base Attack Damage for the Fell Knight")
     @Config.RequiresMcRestart
-    public static float end_knight_damage = 13;
+    public static float end_knight_damage = 12;
 
     @Config.Name("Fell Shielder Base Attack Damage")
     @Config.Comment("Base Attack Damage for the Fell Shielder")
     @Config.RequiresMcRestart
-    public static float end_shielder_damage = 17;
+    public static float end_shielder_damage = 16;
 
     @Config.Name("Fell Mage Heal Cooldown")
     @Config.Comment("Cooldown before an Fell Mage can cast a heal to a friendly knight, in seconds")
@@ -353,7 +358,7 @@ public class ModConfig {
     @Config.Name("Ashed Parasite Base Health")
     @Config.Comment("Change the base Health of the Ashed Parasite")
     @Config.RequiresMcRestart
-    public static double parasite_health = 40;
+    public static double parasite_health = 35;
 
     @Config.Name("Ashed Parasite Base Attack Damage")
     @Config.Comment("Change the base damage of the Ashed Parasite")
@@ -496,7 +501,7 @@ public class ModConfig {
     @Config.Comment("Chance for mobs to spawn throughout the dungeon, Lower value is higher chances")
     @Config.RangeInt(min = 1, max = 10)
     @Config.RequiresMcRestart
-    public static int dungeon_mob_chance = 7;
+    public static int dungeon_mob_chance = 5;
 
     @Config.Name("Ashed King Fortress")
     @Config.Comment("Change the spacing of the End King Fortress in chunks away from another, this is applied in chunks that are Ash Wastelands not every chunk")
@@ -557,7 +562,7 @@ public class ModConfig {
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 32;
+    public static double avalon_attack_damage = 24;
 
     @Config.Name("Avalon Lazer Damage Multiplier")
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
@@ -689,12 +694,12 @@ public class ModConfig {
     @Config.Comment("When more than 1 players are near, this factor will add on how much Health all bosses/mini-bosses has. Default Per more than one player is 50% more HP or 0.5. Example: There is " +
             "2 Players around a boss that has a health of 200 by default. With there being a second player the bosses health is now 300")
     @Config.RequiresMcRestart
-    public static double scale_mod_bosses = 0.5;
+    public static double scale_mod_bosses = 0.4;
 
     @Config.Name("Mod Scaling Attack Damage Factor")
     @Config.Comment("When more than 1 players are near, this factor will be multiplied by how many players are near and then by this bosses attack damage")
     @Config.RequiresMcRestart
-    public static double scale_attack_damge = 0.23;
+    public static double scale_attack_damge = 0.18;
 
     @Config.Name("Disable Mod Scaling")
     @Config.Comment("Disable scaling for Health of bosses when more than one players is nearby, set to true to disable")

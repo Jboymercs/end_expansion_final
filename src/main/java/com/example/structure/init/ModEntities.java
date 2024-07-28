@@ -174,7 +174,6 @@ public class ModEntities {
     }
 
     public static void RegisterEntitySpawns() {
-        spawnRate(EntityBuffker.class, EnumCreatureType.MONSTER, ModConfig.constructor_weights, 1 ,2, BiomeDictionary.Type.END);
         spawnRate(EntityController.class, EnumCreatureType.MONSTER, ModConfig.guilder_spawn_rate, 1, 2, BiomeDictionary.Type.END);
         spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, ModConfig.parasite_spawn_rate, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, ModConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);

@@ -49,12 +49,12 @@ import java.util.function.Consumer;
  */
 public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    private static final DataParameter<Boolean> SEEKER_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SEEKER_MODE = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MELEE_STRIKE_TWO = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EndSeeker.class, DataSerializers.BOOLEAN);
 
 
     @Override

@@ -50,22 +50,23 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     private final MultiPartEntityPart shield_3 = new MultiPartEntityPart(this, "shield_3", 0.6F, 2.5F);
     private final MultiPartEntityPart shield_4 = new MultiPartEntityPart(this, "shield_4", 0.6F, 2.5F);
 
-    private static final DataParameter<Boolean> OPEN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CLOSE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> OPEN_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> I_AM_BOSS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> OPEN = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CLOSE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> OPEN_STATE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> I_AM_BOSS = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
 
-    private static final DataParameter<Boolean> AVALON_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CLOSE_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CAST_AOE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CAST_LAZERS = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SMASH_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PROJECTILE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> TELEPORT_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DEATH_STATE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> AVALON_MODE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CLOSE_STATE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CAST_AOE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CAST_LAZERS = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SMASH_ATTACK = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PROJECTILE_ATTACK = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> TELEPORT_ATTACK = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_STATE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DEATH_STATE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> STAT_LINE = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.FLOAT);
+    protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityAbstractAvalon.class, DataSerializers.FLOAT);
     public boolean IAmAggroed = false;
 
     @Override
@@ -84,7 +85,8 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         nbt.setBoolean("Teleport_Attack", this.dataManager.get(TELEPORT_ATTACK));
         nbt.setBoolean("Summon_State", this.dataManager.get(SUMMON_STATE));
         nbt.setBoolean("Death_State", this.dataManager.get(DEATH_STATE));
-        nbt.setFloat("Look", this.dataManager.get(LOOK));
+        nbt.setFloat("Look", this.getPitch());
+        nbt.setFloat("Stat_Line", this.getStatLine());
     }
 
     @Override
@@ -104,6 +106,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         this.dataManager.set(SUMMON_STATE, nbt.getBoolean("Summon_State"));
         this.dataManager.set(DEATH_STATE, nbt.getBoolean("Death_State"));
         this.dataManager.set(LOOK, nbt.getFloat("Look"));
+        this.setStateLine(nbt.getFloat("Stat_Line"));
     }
 
     public void setOpen(boolean value) {this.dataManager.set(OPEN, Boolean.valueOf(value));}
@@ -134,6 +137,13 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     public boolean isSummonState() {return this.dataManager.get(SUMMON_STATE);}
     public void setDeathState(boolean value) {this.dataManager.set(DEATH_STATE, Boolean.valueOf(value));}
     public boolean isDeathState() {return this.dataManager.get(DEATH_STATE);}
+
+    public void setStateLine(float value) {
+        this.dataManager.set(STAT_LINE, Float.valueOf(value));
+    }
+    public float getStatLine() {
+        return this.dataManager.get(STAT_LINE);
+    }
     protected boolean hasLazerMinions = false;
 
 
@@ -178,6 +188,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         this.dataManager.register(TELEPORT_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(SUMMON_STATE, Boolean.valueOf(false));
         this.dataManager.register(DEATH_STATE, Boolean.valueOf(false));
+        this.dataManager.register(STAT_LINE,  0.75F);
         super.entityInit();
     }
 
@@ -198,7 +209,6 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     protected boolean hasLaunchedBlocksOne = false;
     protected boolean hasLaunchedBlocksTwo = false;
     protected boolean hasLaunchedBlocksThree = false;
-    public double stateLine = 0.75;
     public boolean hasSelectedTarget = false;
     protected boolean stateClose = false;
     protected boolean stateOpen = true;
@@ -255,7 +265,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
                 double HealthFactor = this.getHealth() / this.getMaxHealth();
                 if(distance > 16) {
                     //Heals The Avalon if you decide to leave it's arena. Only to the stat line point though
-                    if(HealthFactor < stateLine + 0.23) {
+                    if(HealthFactor < this.getStatLine() + 0.23) {
                         this.heal(1.0F);
                     }
 
@@ -289,7 +299,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           for (int i = 0; i < 4; i++) {
               AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
               BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
-              if (setTooPos != null) {
+              if (setTooPos != null && !world.isRemote) {
                   world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
                   this.hasLaunchedBlocksOne = true;
               }
@@ -298,7 +308,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
           BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
           if (setTooPos == null) {
-              stateLine = 0.5;
+              this.setStateLine(0.5F);
           }
       }
       //Initiates Blocks at 50% Health to heal the Entity
@@ -306,7 +316,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           for (int i = 0; i < 8; i++) {
               AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
               BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
-              if (setTooPos != null) {
+              if (setTooPos != null && !world.isRemote) {
                   world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
                   this.hasLaunchedBlocksTwo = true;
               }
@@ -315,7 +325,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
           BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
           if (setTooPos == null) {
-              stateLine = 0.25;
+              this.setStateLine(0.25F);
           }
       }
       //Initiates Blocks at 25% Health to heal the Entity
@@ -323,7 +333,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           for (int i = 0; i < 12; i++) {
               AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
               BlockPos setTooPos = ModUtils.avalonSearchForBlocks(box, world, this, ModBlocks.EYED_OBSIDIEAN.getDefaultState());
-              if (setTooPos != null) {
+              if (setTooPos != null && !world.isRemote) {
                   world.setBlockState(setTooPos.add(0, 1, 0), ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
                   this.hasLaunchedBlocksThree = true;
               }
@@ -332,7 +342,8 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
           BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
           if (setTooPos == null) {
-              stateLine = 0;
+
+              this.setStateLine(0F);
           }
       }
 

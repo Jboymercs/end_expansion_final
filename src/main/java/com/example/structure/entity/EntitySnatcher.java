@@ -59,11 +59,11 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
 
     public boolean iAmPissedOff = false;
 
-    private static final DataParameter<Boolean> SPOTTED = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SNATCH_DOWN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SNATCH_UP = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK_SLOW = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACK_QUICK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SPOTTED = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SNATCH_DOWN = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SNATCH_UP = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK_SLOW = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACK_QUICK = EntityDataManager.createKey(EntitySnatcher.class, DataSerializers.BOOLEAN);
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {

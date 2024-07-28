@@ -12,6 +12,7 @@ public class WorldGenTraderArena extends WorldGenStructure {
 
     @Override
     public void generateStructure(World world, BlockPos pos, Rotation rotation) {
+
         super.generateStructure(world, pos.add(-14, -3, -14), Rotation.NONE);
     }
 }

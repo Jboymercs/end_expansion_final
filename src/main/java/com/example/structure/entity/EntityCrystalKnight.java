@@ -79,43 +79,47 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     private final String RANGED_HAMMER_ANIM = "hammerProjectile";
     private final String SUMMON_BOSS_ANIM = "summon";
     private final String DEATH_BOSS_ANIM = "death";
-    private static final DataParameter<Boolean> LAMENTOR_MODE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> STRIKE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CRYSTAL_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SPIN_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SPIN_START = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SPIN_CYCLE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAMMER_START = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAMMER_CYCLE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAMMER_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> MULTI_PIERCE_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SHULKER_ATTACK = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAMMER_PROJECTILE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SUMMON_BOOLEAN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DEATH_BOOLEAN = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> LAMENTOR_MODE = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> STRIKE_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CRYSTAL_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SPIN_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SPIN_START = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SPIN_CYCLE = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAMMER_START = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAMMER_CYCLE = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAMMER_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> MULTI_PIERCE_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHULKER_ATTACK = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAMMER_PROJECTILE = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_BOOLEAN = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DEATH_BOOLEAN = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
 
+    public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BLOCK_POS);
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setBoolean("Lamentor_Mode", this.dataManager.get(LAMENTOR_MODE));
-        nbt.setBoolean("Strike_Attack", this.dataManager.get(STRIKE_ATTACK));
-        nbt.setBoolean("Crystal_Attack", this.dataManager.get(CRYSTAL_ATTACK));
+       nbt.setBoolean("Strike_Attack", this.dataManager.get(STRIKE_ATTACK));
+       nbt.setBoolean("Crystal_Attack", this.dataManager.get(CRYSTAL_ATTACK));
         nbt.setBoolean("Spin_Attack", this.dataManager.get(SPIN_ATTACK));
         nbt.setBoolean("Spin_Start", this.dataManager.get(SPIN_START));
         nbt.setBoolean("Spin_Cycle", this.dataManager.get(SPIN_CYCLE));
         nbt.setBoolean("Pierce_Attack", this.dataManager.get(PIERCE_ATTACK));
         nbt.setBoolean("Summon_Attack", this.dataManager.get(SUMMON_ATTACK));
-        nbt.setBoolean("Hammer_Start", this.dataManager.get(HAMMER_START));
+       nbt.setBoolean("Hammer_Start", this.dataManager.get(HAMMER_START));
         nbt.setBoolean("Hammer_Cycle", this.dataManager.get(HAMMER_CYCLE));
-        nbt.setBoolean("Hammer_Attack", this.dataManager.get(HAMMER_ATTACK));
+       nbt.setBoolean("Hammer_Attack", this.dataManager.get(HAMMER_ATTACK));
         nbt.setBoolean("Multi_Pierce_Attack", this.dataManager.get(MULTI_PIERCE_ATTACK));
         nbt.setBoolean("Shulker_Attack", this.dataManager.get(SHULKER_ATTACK));
         nbt.setBoolean("Hammer_Projectile", this.dataManager.get(HAMMER_PROJECTILE));
         nbt.setBoolean("Summon_Boolean", this.dataManager.get(SUMMON_BOOLEAN));
         nbt.setBoolean("Death_Boolean", this.dataManager.get(DEATH_BOOLEAN));
+        nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
+        nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
+        nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
     }
 
 
@@ -125,19 +129,20 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         this.dataManager.set(LAMENTOR_MODE, nbt.getBoolean("Lamentor_Mode"));
         this.dataManager.set(STRIKE_ATTACK, nbt.getBoolean("Strike_Attack"));
         this.dataManager.set(CRYSTAL_ATTACK, nbt.getBoolean("Crystal_Attack"));
-        this.dataManager.set(SPIN_ATTACK, nbt.getBoolean("Spin_Attack"));
+       this.dataManager.set(SPIN_ATTACK, nbt.getBoolean("Spin_Attack"));
         this.dataManager.set(SPIN_START, nbt.getBoolean("Spin_Start"));
         this.dataManager.set(SPIN_CYCLE, nbt.getBoolean("Spin_Cycle"));
-        this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
+       this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
         this.dataManager.set(SUMMON_ATTACK, nbt.getBoolean("Summon_Attack"));
         this.dataManager.set(HAMMER_START, nbt.getBoolean("Hammer_Start"));
         this.dataManager.set(HAMMER_CYCLE, nbt.getBoolean("Hammer_Cycle"));
-        this.dataManager.set(HAMMER_ATTACK, nbt.getBoolean("Hammer_Attack"));
+       this.dataManager.set(HAMMER_ATTACK, nbt.getBoolean("Hammer_Attack"));
         this.dataManager.set(MULTI_PIERCE_ATTACK, nbt.getBoolean("Multi_Pierce_Attack"));
         this.dataManager.set(SHULKER_ATTACK, nbt.getBoolean("Shulker_Attack"));
         this.dataManager.set(HAMMER_PROJECTILE, nbt.getBoolean("Hammer_Projectile"));
         this.dataManager.set(SUMMON_BOOLEAN, nbt.getBoolean("Summon_Boolean"));
         this.dataManager.set(DEATH_BOOLEAN, nbt.getBoolean("Death_Boolean"));
+        this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
     }
     public boolean rangeSwitch;
     public boolean meleeSwitch;
@@ -180,6 +185,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
     public void onSummon(BlockPos Pos, Projectile actor) {
         BlockPos offset = Pos.add(new BlockPos(0,3,0));
+        this.setSpawnLocation(offset);
         //we're trying to set up the AOE attack and the reset key block if the player doesn't kill the Lamentor
         centerPos = Pos.add(0, -1, 0);
         this.setPosition(offset);
@@ -210,7 +216,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         //States
         this.dataManager.register(DEATH_BOOLEAN, Boolean.valueOf(false));
         this.dataManager.register(SUMMON_BOOLEAN, Boolean.valueOf(false));
-
+        //
+        this.dataManager.register(SPAWN_LOCATION, null);
 
     }
 
@@ -297,6 +304,14 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         return this.dataManager.get(DEATH_BOOLEAN);
     }
 
+    public void setSpawnLocation(BlockPos pos) {
+        this.dataManager.set(SPAWN_LOCATION, pos);
+    }
+
+    public BlockPos getSpawnLocation() {
+        return this.dataManager.get(SPAWN_LOCATION);
+    }
+
 
     @Override
     protected void applyEntityAttributes() {
@@ -332,6 +347,22 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
         }
 
+        //Spawn Telporting Location
+        //This is too keep the boss at it's starting location and keep it from getting too far away
+
+        if(this.getSpawnLocation() != null) {
+            Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
+
+            double distSq = this.getDistanceSq(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+            double distance = Math.sqrt(distSq);
+            //This basically makes it so the Lamentor will be teleported if they are too far away from the Arena
+            if(!world.isRemote) {
+                if (distance > 40) {
+                    this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
+                }
+            }
+        }
+
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         if(meleeSwitch && SwitchCoolDown == 500) {
             rangeSwitch = true;
@@ -363,10 +394,16 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             this.setImmovable(false);
         }
         //Allows boss to destory blocks while quick dashing
-        if(this.isSpinCycle() || this.isPierceAttack() || this.isMultiPierceAttack()) {
+        if(ModConfig.bosses_of_mass_destruction) {
+            if(this.isSpinCycle() || this.isPierceAttack() || this.isMultiPierceAttack()) {
+                AxisAlignedBB box = getEntityBoundingBox().grow(1.25, 0.1, 1.25).offset(0, 0.1, 0);
+                ModUtils.destroyBlocksInAABB(box, world, this);
+            }
+        } else if (this.isMultiPierceAttack()) {
             AxisAlignedBB box = getEntityBoundingBox().grow(1.25, 0.1, 1.25).offset(0, 0.1, 0);
             ModUtils.destroyBlocksInAABB(box, world, this);
         }
+
 
     }
     //Particle Call
