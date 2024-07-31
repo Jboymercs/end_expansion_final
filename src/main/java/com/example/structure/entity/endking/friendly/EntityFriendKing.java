@@ -154,24 +154,32 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase target : nearbyEntities) {
-
-                    //Configuration option to allow the player who summoned it not being targeted
-                    if(ModConfig.crown_is_friendly) {
-
-                    } else {
-                        if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
+                    //If PVP Item abilities are enabled
+                    if(ModConfig.enable_pvp_abilities) {
+                        //If the crown has the friendly to owner only
+                        if(ModConfig.crown_is_friendly) {
                             if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing) && target != owner) {
+                                if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
+                                    this.setAttackTarget(target);
+                                }
+                            }
+                        } else {
+                            //Target Everything
+                            if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing)) {
+                                if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
+                                    this.setAttackTarget(target);
+                                }
+                            }
+                        }
+                    } else {
+                        //Target Everything Except Players
+                        if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing) && target != owner && !(target instanceof EntityPlayer)) {
+                            if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
                                 this.setAttackTarget(target);
                             }
-
                         }
                     }
-                    if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
-                        if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing)) {
-                            this.setAttackTarget(target);
-                        }
 
-                    }
                 }
             }
 

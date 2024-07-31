@@ -86,7 +86,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     private final MultiPartEntityPart torso = new MultiPartEntityPart(this, "torso", 1.3f, 1.2f);
 
-
+    protected boolean initiateShellRepair = false;
 
     public EntityAbstractBuffker(World worldIn) {
         super(worldIn);
@@ -147,6 +147,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
             canBeDamagedInHead = true;
         }
     }
+
 
 
 
@@ -218,29 +219,33 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     @Override
     public boolean attackEntityFromPart(@Nonnull MultiPartEntityPart multiPartEntityPart,@Nonnull DamageSource damageSource, float damage) {
-        EntityPlayer sourceAt = (EntityPlayer) damageSource.getImmediateSource();
 
-        if(sourceAt != null) {
-            ItemStack stack = sourceAt.inventory.getCurrentItem();
-
-            if(stack.getItem().canHarvestBlock(Blocks.STONE.getDefaultState())) {
-                destroyShellProgress++;
-                this.damageConstructor = true;
-                return this.attackEntityFrom(damageSource, (float) (damage * 0.25));
-            }
-        }
 
         if(multiPartEntityPart == this.head && canBeDamagedInHead) {
             this.damageConstructor = true;
             return this.attackEntityFrom(damageSource, damage);
         }
 
-        if(multiPartEntityPart == this.head  && this.isFightMode() && !canBeDamagedInHead) {
-            this.damageConstructor = true;
-            return this.attackEntityFrom(damageSource, damage);
-
-        }
         if (damage > 0.0F && !damageSource.isUnblockable()) {
+
+            Entity sourceAt = damageSource.getImmediateSource();
+
+            if(sourceAt != null && !damageSource.isProjectile() && sourceAt instanceof EntityPlayer) {
+
+                ItemStack stack =  ((EntityPlayer) sourceAt).inventory.getCurrentItem();
+
+                if(stack.getItem().canHarvestBlock(Blocks.STONE.getDefaultState())) {
+                        destroyShellProgress++;
+                    this.damageConstructor = true;
+                    return this.attackEntityFrom(damageSource, (float) (damage * 0.25));
+
+                } else if(multiPartEntityPart == this.head  && this.isFightMode() && !canBeDamagedInHead) {
+                    this.damageConstructor = true;
+                    return this.attackEntityFrom(damageSource, damage);
+
+                }
+            }
+
             this.playSound(SoundEvents.ENTITY_SHULKER_HURT_CLOSED, 1.0f, 0.6f + ModRand.getFloat(0.2f));
             return false;
         }

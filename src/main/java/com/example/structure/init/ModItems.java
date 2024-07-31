@@ -28,7 +28,7 @@ public class ModItems {
     private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 974, 8.0f, 8.0F, 20);
 
     private static final Item.ToolMaterial PURE_AXE_MATERIAL = EnumHelper.addToolMaterial("pure", 3, 625, 7.0F, 7.0F, 40);
-    private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1300, 8.0f, ModConfig.endfall_sword_damage, 50);
+    private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1800, 8.0f, ModConfig.endfall_sword_damage, 50);
 
     private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 6, 1781, 10.0F, 4, 25);
 

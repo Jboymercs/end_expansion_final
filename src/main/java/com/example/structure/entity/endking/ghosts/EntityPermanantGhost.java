@@ -143,7 +143,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
                 if (distance > 30) {
                     this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
                     //Also teleport the Ghost if his position gets too Low from the Spawn Point
-                } else if (SpawnLoc.x - 14 > this.posY) {
+                } else if (SpawnLoc.y - 20 > this.posY) {
                     this.teleportTarget(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
                 }
             }

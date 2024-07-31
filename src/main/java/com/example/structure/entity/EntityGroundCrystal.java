@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -76,14 +77,26 @@ public class EntityGroundCrystal extends EntityModBase implements IAnimatable {
             if(!targets.isEmpty() && crystal_cooldown >= 30) {
                 for(EntityLivingBase target: targets) {
                     if(target != doNotTarget) {
-                        Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.7));
-                        DamageSource source = ModDamageSource.builder()
-                                .type(ModDamageSource.MOB)
-                                .directEntity(this)
-                                .build();
-                        float damage = this.getAttack();
-                        ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.2F, 0, false );
-                        crystal_cooldown = 0;
+                        if(ModConfig.enable_pvp_abilities) {
+                            Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.7));
+                            DamageSource source = ModDamageSource.builder()
+                                    .type(ModDamageSource.MOB)
+                                    .directEntity(this)
+                                    .build();
+                            float damage = this.getAttack();
+                            ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.2F, 0, false);
+                            crystal_cooldown = 0;
+                            //with the setting set to false, the crystal will not damage players
+                        } else if(!(target instanceof EntityPlayer)) {
+                            Vec3d pos = this.getPositionVector().add(ModUtils.yVec(0.7));
+                            DamageSource source = ModDamageSource.builder()
+                                    .type(ModDamageSource.MOB)
+                                    .directEntity(this)
+                                    .build();
+                            float damage = this.getAttack();
+                            ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.2F, 0, false);
+                            crystal_cooldown = 0;
+                        }
                     }
                 }
             } else {

@@ -20,6 +20,10 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean bosses_of_mass_destruction = false;
 
+    @Config.Name("Items abilities affect other players")
+    @Config.Comment("This setting when enabled makes any of the weapons abilities affect players, Example: the Cordium sword will summon spikes on nearby players except the owner with it's ability")
+    @Config.RequiresMcRestart
+    public static boolean enable_pvp_abilities = false;
     @Config.Name("Lamented Islands Size")
     @Config.Comment("Changes the size of the Lamented Islands")
     @Config.RangeInt(min = 1, max = 10)

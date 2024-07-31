@@ -157,7 +157,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
                 this.setShielded(false);
             }
 
-            if(this.isRandomGetAway) {
+            if(this.isRandomGetAway && distance < 6) {
                 double d0 = (this.posX - target.posX) * 0.030;
                 double d1 = (this.posY - target.posY) * 0.01;
                 double d2 = (this.posZ - target.posZ) * 0.030;

@@ -399,7 +399,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 AxisAlignedBB box = getEntityBoundingBox().grow(1.25, 0.1, 1.25).offset(0, 0.1, 0);
                 ModUtils.destroyBlocksInAABB(box, world, this);
             }
-        } else if (this.isMultiPierceAttack()) {
+        } else if (this.isMultiPierceAttack() || this.isPierceAttack()) {
             AxisAlignedBB box = getEntityBoundingBox().grow(1.25, 0.1, 1.25).offset(0, 0.1, 0);
             ModUtils.destroyBlocksInAABB(box, world, this);
         }
@@ -635,7 +635,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         double HealthChange = this.getHealth() / this.getMaxHealth();
         if(!this.isFightMode() && !this.isDeathAnim() && !this.isSummoned()) {
             //Begin Attacks REPEATED
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeStrike, summonCrystals, dashPierce, circleDash, circleAttack, summonGroundCrystals, hammerSLAM, hammerExplosion, animeStrike, hammerProjectile, summonAOEAttack));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeStrike, summonCrystals, dashPierce, circleDash, circleAttack, summonGroundCrystals, hammerSLAM, hammerExplosion, animeStrike, hammerProjectile, summonAOEAttack, summonShulkers));
             double[] weights = {
                     //Phase One Abilities
                     (distance < 3 && prevAttack != meleeStrike) ? 1/distance : 0, //Melee Strike
@@ -648,9 +648,10 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
                     (distance < 9 && prevAttack != hammerSLAM && HealthChange < 0.5) ? 1/distance : 0, //Hammer Slam Attack
                     (prevAttack == hammerSLAM) ? 100 : 0, // 2 Part Hammer Attack
-                    (distance < 9 && prevAttack != animeStrike && HealthChange < 0.60) ? 1/distance : 0, //Summon Shulkers
+                    (distance < 9 && prevAttack != animeStrike && HealthChange < 0.5) ? 1/distance : 0, //Multi Strike
                     (distance > 7) ? distance * 0.02 : 0, //Hammer Projectile Attack
-                    (distance > 8 && prevAttack != summonAOEAttack && HealthChange < 0.75) ? distance * 0.02 : 0 //Summon an Arena AOE
+                    (distance > 8 && prevAttack != summonAOEAttack && HealthChange < 0.75) ? distance * 0.02 : 0, //Summon an Arena AOE
+                    (distance > 7 && prevAttack != summonShulkers && prevAttack != summonAOEAttack && HealthChange < 0.75) ? distance * 0.02 : 0 //Summon Shulker Attack
                     //Possibly one more Attack
 
             };
@@ -851,7 +852,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         }
     };
     //Hammer Slam Attack
-    private Consumer<EntityLivingBase> hammerSLAM = (target)-> {
+    private final Consumer<EntityLivingBase> hammerSLAM = (target)-> {
         if(!this.isDeathAnim()) {
             this.setFightMode(true);
             this.setHammerStart(true);
@@ -873,7 +874,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         }
     };
     //Hammer PT 2 Attack
-    private Consumer<EntityLivingBase> hammerExplosion = (target) -> {
+    private final Consumer<EntityLivingBase> hammerExplosion = (target) -> {
         if(!this.isDeathAnim()) {
             this.setFightMode(true);
             this.setHammerAttack(true);
@@ -893,7 +894,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         }
     };
     //Anime Pierce Strike
-    private Consumer<EntityLivingBase> animeStrike = (target)-> {
+    private final Consumer<EntityLivingBase> animeStrike = (target)-> {
         if(!this.isDeathAnim()) {
             this.setFightMode(true);
             targetFloating = true;
@@ -988,7 +989,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     };
 
     //Summon Shulkers
-    private Consumer<EntityLivingBase> summonShulkers = (target)-> {
+    private final Consumer<EntityLivingBase> summonShulkers = (target)-> {
         if(!this.isDeathAnim()) {
             this.setFightMode(true);
             this.setShulkerAttack(true);
@@ -996,7 +997,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 this.playSound(ModSoundHandler.BOSS_CAST_AMBIENT, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
             }, 25);
             addEvent(() -> {
-                for (int i = 0; i < 25; i += 5) {
+                //Changing this to be slower but longer
+                for (int i = 0; i < 60; i += 10) {
                     addEvent(() -> {
                         EntityShulkerBullet projectile = new EntityShulkerBullet(this.world);
                         Vec3d targetPos = target.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 12, 0)));
@@ -1013,7 +1015,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         }
     };
 
-    private Consumer<EntityLivingBase> summonAOEAttack = (target) -> {
+    private final Consumer<EntityLivingBase> summonAOEAttack = (target) -> {
       this.setFightMode(true);
       this.setShulkerAttack(true);
       //Summons an AOE wave
@@ -1021,12 +1023,9 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         addEvent(() -> this.playSound(ModSoundHandler.BOSS_CAST_AMBIENT, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f)), 25);
 
       addEvent(()-> {
-          if(centerPos != null && rand.nextInt(2) == 0) {
-              new ActionWaveAOE(centerPos).performAction(this, target);
-          }
-          else {
+            //commented out other variant due to lag issues and overall being to OP
               new ActionCircleAOE().performAction(this, target);
-          }
+
       }, 30);
 
       addEvent(()-> {

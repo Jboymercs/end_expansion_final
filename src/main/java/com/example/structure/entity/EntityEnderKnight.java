@@ -184,7 +184,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
                 dashMeter++;
             }
 
-            if(this.isRandomGetAway) {
+            if(this.isRandomGetAway && distance < 6) {
                 double d0 = (this.posX - target.posX) * 0.035;
                 double d1 = (this.posY - target.posY) * 0.01;
                 double d2 = (this.posZ - target.posZ) * 0.035;
@@ -323,7 +323,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
 
             prevAttack.accept(target);
         }
-        return 10;
+        return prevAttack == strikeTwo ? 25 : prevAttack == strikeThree ? 10 : 15;
     }
 
     private final Consumer<EntityLivingBase> randomGetBack = (target) -> {

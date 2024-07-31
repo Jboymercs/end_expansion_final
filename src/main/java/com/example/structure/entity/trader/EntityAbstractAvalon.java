@@ -242,7 +242,9 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
             this.hasLazerMinions = false;
         }
 
+
         EntityLivingBase target = this.getAttackTarget();
+         /**
         if(target == null && this.ableTooDisableWhenTargetsAreGone) {
             //Hopefully this fixes any weird shenanigans with the boss just outright respawning a new one
             if(!hasRemovedAITasks && setTooDeathTimer < 0) {
@@ -257,6 +259,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         } else {
             setTooDeathTimer = 800;
         }
+         */
 
         //This keeps the Players inside the arena basically forcefully pushing them back in
         if(this.isIAmBoss()) {

@@ -198,7 +198,7 @@ public class TileEntityMegaStructure extends TileEntityStructure {
 
     @Override
     public void setSize(BlockPos sizeIn) {
-        this.size = new BlockPos(31, 38, 31);
+        this.size = new BlockPos(37, 72, 37);
     }
 
     @Override

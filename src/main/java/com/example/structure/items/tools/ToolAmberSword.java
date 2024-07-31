@@ -19,6 +19,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import org.w3c.dom.Entity;
 
 import java.util.List;
 
@@ -59,13 +60,27 @@ public class ToolAmberSword extends ToolSword{
             List<EntityLivingBase> targets = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().grow(6D), e -> !e.getIsInvulnerable() && (!(e == player)));
             worldIn.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLAGER_CAST_SPELL, SoundCategory.PLAYERS, 0.7F, 0.7F);
             if(!targets.isEmpty()) {
-                for(EntityLivingBase base : targets) {
-                    howManyEntities++;
-                    hasDamagedEntities = true;
-                    Vec3d pos = base.getPositionVector();
-                    EntitySwordSpike spike = new EntitySwordSpike(worldIn, player, base);
-                    spike.setPosition(pos.x, pos.y,pos.z);
-                    worldIn.spawnEntity(spike);
+                if(ModConfig.enable_pvp_abilities) {
+                    for (EntityLivingBase base : targets) {
+                        howManyEntities++;
+                        hasDamagedEntities = true;
+                        Vec3d pos = base.getPositionVector();
+                        EntitySwordSpike spike = new EntitySwordSpike(worldIn, player, base);
+                        spike.setPosition(pos.x, pos.y, pos.z);
+                        worldIn.spawnEntity(spike);
+                    }
+                } else {
+                    for (EntityLivingBase base : targets) {
+                        //Makes sure to not target players if the setting for pvp is disabled
+                        if(!(base instanceof EntityPlayer)){
+                            howManyEntities++;
+                            hasDamagedEntities = true;
+                            Vec3d pos = base.getPositionVector();
+                            EntitySwordSpike spike = new EntitySwordSpike(worldIn, player, base);
+                            spike.setPosition(pos.x, pos.y, pos.z);
+                            worldIn.spawnEntity(spike);
+                        }
+                    }
                 }
             }
 

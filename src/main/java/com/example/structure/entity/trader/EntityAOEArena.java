@@ -73,7 +73,18 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
 
               if (!nearbyPlayers.isEmpty()) {
                   for (EntityLivingBase base : nearbyPlayers) {
-                      if (!(base instanceof EntityAOEArena) && base != player) {
+                      if (ModConfig.enable_pvp_abilities) {
+                          if (!(base instanceof EntityAOEArena) && base != player) {
+                              Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
+                              DamageSource source = ModDamageSource.builder()
+                                      .type(ModDamageSource.MOB)
+                                      .directEntity(this)
+                                      .build();
+                              float damage = (float) (ModConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
+                              ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
+                          }
+                          //For NON PVP
+                      } else if (!(base instanceof EntityAOEArena) && base != player && !(base instanceof EntityPlayer)){
                           Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
                           DamageSource source = ModDamageSource.builder()
                                   .type(ModDamageSource.MOB)
