@@ -6,6 +6,7 @@ import com.example.structure.entity.util.data.GlowingMetadataSectionSerializer;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.event_handler.client.MusicHandlerEE;
 import com.example.structure.gui.book.GuiBook;
+import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.handlers.RenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -17,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -64,6 +66,11 @@ public class ClientProxy extends CommonProxy {
             case 1: return ClientRender.SCREEN_SHAKE;
             default: return defaultVal;
         }
+    }
+
+    @Override
+    public void registerEventHandlers() {
+        MinecraftForge.EVENT_BUS.register(EndSkyHandler.class);
     }
 
     //Will come back to this and clean it up and put it in with the other GUI's

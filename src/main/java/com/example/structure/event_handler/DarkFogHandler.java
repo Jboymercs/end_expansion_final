@@ -1,6 +1,7 @@
 package com.example.structure.event_handler;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.ModUtils;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEnd;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,7 +34,7 @@ public class DarkFogHandler {
 
 
     private static Method setupFog;
-
+    private final EndSkyHandler skyHandler = new EndSkyHandler();
     /**
      * Altering the fog density through the render fog event because the fog density
      * event is a pain because you have to override it for some reason
@@ -52,7 +54,9 @@ public class DarkFogHandler {
                 GlStateManager.setFogDensity(ModConfig.dark_fog_variable);
             }
         }
+
     }
+
 
     private static Vec3d interpolateFogColor(Entity renderEntity, Vec3d fog1, Vec3d fog2, float transitionStart, float transitionLength) {
         float alpha = ModUtils.clamp((renderEntity.posY - transitionStart) / transitionLength, 0, 1);

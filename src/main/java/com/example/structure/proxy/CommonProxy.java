@@ -6,8 +6,8 @@ import com.example.structure.event_handler.ModEvents;
 import com.example.structure.packets.MessageDirectionForRender;
 import com.example.structure.packets.MessageModParticles;
 import com.example.structure.util.ModReference;
-import com.example.structure.world.Biome.WorldProviderEndEE;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,17 +55,15 @@ public class CommonProxy implements IGuiHandler {
     }
     public void init() {
         MinecraftForge.EVENT_BUS.register(new ModEvents());
-       // addnewBiome();
         Main.network = NetworkRegistry.INSTANCE.newSimpleChannel(ModReference.CHANNEL_NETWORK_NAME);
         int packetID = 0;
         Main.network.registerMessage(MessageModParticles.MessageHandler.class, MessageModParticles.class, packetID++, Side.CLIENT);
         Main.network.registerMessage(MessageDirectionForRender.Handler.class, MessageDirectionForRender.class, packetID++, Side.CLIENT);
     }
 
-    public void addnewBiome() {
-        DimensionManager.unregisterDimension(1);
-        DimensionType endBiomes = DimensionType.register("End", "_end", 1, WorldProviderEndEE.class, false);
-        DimensionManager.registerDimension(1, endBiomes);
+
+    public void registerEventHandlers() {
+
     }
 
     @Nullable

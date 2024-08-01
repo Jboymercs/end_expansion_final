@@ -220,6 +220,11 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean isDarkFogDisabled = false;
 
+    @Config.Name("End Sky Box")
+    @Config.Comment("When set to false, the sky box inside the End will be disabled")
+    @Config.RequiresMcRestart
+    public static boolean isSkyBoxEnalbed = true;
+
     @Config.Name("Ash Fog Variable")
     @Config.Comment("Change the variable of the fog, this basically changes the distance for how far the fog goes. If you wish to disable the fog, the option above does that")
     @Config.RequiresMcRestart
@@ -573,7 +578,7 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static double avalon_lazer_multiplier = 1.2;
 
-    @Config.Name("Avalin Particle Reducer")
+    @Config.Name("Avalon Particle Reducer")
     @Config.Comment("When set to true Particles will be more relevant for any AOE attacks the Avalon does, default is false")
     @Config.RequiresMcRestart
     public static boolean enableAvalonParticles = false;
