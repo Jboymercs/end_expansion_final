@@ -17,6 +17,7 @@ import com.example.structure.util.handlers.StructureHandler;
 import com.example.structure.world.Biome.WorldProviderEndEE;
 import com.example.structure.world.WorldGenCustomStructure;
 import com.example.structure.world.api.structures.MapGenKingFortress;
+import git.jbredwards.nether_api.mod.NetherAPI;
 import git.jbredwards.nether_api.mod.common.compat.stygian_end.StygianEndHandler;
 import git.jbredwards.nether_api.mod.common.world.WorldProviderNether;
 import git.jbredwards.nether_api.mod.common.world.WorldProviderTheEnd;
@@ -25,13 +26,13 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -57,6 +58,8 @@ public class Main {
      *
      * FakeDrayn for sound design, and animation work
      *
+     * Sir Squidly for Recreation of the Lamented Islands
+     *
      * Lastly, this mod is for the ModJam 2023 Summer for the 1.12.2 Modded Coalition Discord Server
      * link - https://discord.gg/Hmvek4Axrv
      */
@@ -65,6 +68,7 @@ public class Main {
     public static CommonProxy proxy;
     public static SimpleNetworkWrapper network;
 
+    public static final boolean isNetherAPILoaded = Loader.isModLoaded("nether_api");
     public static final Logger LOGGER = LogManager.getLogger(ModReference.MOD_ID);
 
     @Mod.Instance
@@ -97,10 +101,15 @@ public class Main {
         proxy.init();
     }
 
+
+
+
+
     // Register dimension overrides
     @Mod.EventHandler
-    static void serverAboutToStart(@Nonnull final FMLServerAboutToStartEvent event) {
-        if(ModConfig.isSkyBoxEnalbed) {
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    static void serverAboutToStart(@Nonnull final FMLServerStartingEvent event) {
+        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded) {
             DimensionManager.unregisterDimension(1);
             DimensionType END = DimensionType.register("End", "_end", 1, WorldProviderEndEE.class, false);
             DimensionManager.registerDimension(1, END);
@@ -128,7 +137,7 @@ public class Main {
         ModRecipes.init();
         ModProfressions.associateCareersAndTrades();
 
-        if(ModConfig.isSkyBoxEnalbed) {
+        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded) {
             //Sky Stuff
             proxy.registerEventHandlers();
         }
