@@ -12,7 +12,6 @@ public class EndSkyHandler extends IRenderHandler {
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
         RenderCustomEndSky renderer = new RenderCustomEndSky(mc, world);
-        System.out.println("Calling SkyBox From Handler");
         renderer.renderFlatSky(mc, false);
     }
 }

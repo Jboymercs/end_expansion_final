@@ -71,9 +71,9 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     //Other ANIMS
     private final String ANIM_SUMMON = "summon";
     private final String ANIM_DEATH = "death";
-    protected Vec3d positionStarted = this.getPositionVector();
+
     private Consumer<EntityLivingBase> prevAttack;
-    public EntityLivingBase thisIsMyTarget;
+
 
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityAvalon(World worldIn) {
@@ -100,10 +100,16 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     public void onUpdate() {
         super.onUpdate();
         EntityLivingBase target = this.getAttackTarget();
+        //checks to see if a coin has been thrown and is currently not in Aggro STate
+       if(this.isIAmBoss() && !IAmAggroed) {
+           List<EntityPlayer> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
+           if(!nearbyPlayers.isEmpty()) {
+               //Re-intiate the AI and set AggoState to true
+               initBossAI();
+               this.IAmAggroed = true;
+           }
+       }
 
-        if(this.IAmAggroed) {
-            this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        }
         if(IAmAggroed) {
             List<EntityPlayer> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
             if(nearbyPlayers.isEmpty()) {
@@ -111,8 +117,6 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
             }
             if(!nearbyPlayers.isEmpty() && !hasSelectedTarget) {
                 for(EntityPlayer player : nearbyPlayers) {
-                    this.setAttackTarget(player);
-                    this.thisIsMyTarget = player;
                     BlockPos posToo = new BlockPos(this.posX, this.posY, this.posZ);
                     stateChangeTooAggro(posToo, player);
                     hasSelectedTarget = true;
@@ -121,7 +125,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
         }
 
 
-        if(target == null) {
+        if(target == null && !this.isIAmBoss()) {
             if (!this.isOpenState() && !this.isSummonState() && !this.isDeathState()) {
                 this.motionX = 0;
                 this.motionZ = 0;
@@ -157,7 +161,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
                     ItemStack stackIn = item.getItem();
                     if (stackIn.getItem() == ModItems.OBSIDIAN_COIN) {
                         item.setDead();
-                        System.out.println("Found A COIN!");
+                  //      System.out.println("Found A COIN!");
                         IAmAggroed = true;
                     }
                 }
@@ -242,10 +246,7 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
 
     @Override
     public boolean canBeCollidedWith() {
-        if(this.isIAmBoss()) {
             return false;
-        }
-     return true;
     }
 
     /**

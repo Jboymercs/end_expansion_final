@@ -233,6 +233,5 @@ public class RenderCustomEndSky {
         GlStateManager.depthMask(true);
         GlStateManager.enableTexture2D();
         GlStateManager.enableAlpha();
-        System.out.println("Rendered SkyBox!");
     }
 }

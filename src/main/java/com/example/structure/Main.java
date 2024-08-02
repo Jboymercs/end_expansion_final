@@ -144,13 +144,6 @@ public class Main {
     }
 
 
-    public static void addSkyBoxTooOverride() {
-        DimensionManager.unregisterDimension(1);
-        DimensionType END = DimensionType.register("End", "_end", 1, WorldProviderEndEE.class, false);
-        System.out.println("Registering Sky Box in Main");
-        DimensionManager.registerDimension(1, END);
-    }
-
 
     public static ResourceLocation locate(String location)
     {
