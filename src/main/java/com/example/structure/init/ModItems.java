@@ -41,7 +41,7 @@ public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
     //Guide Book
-    public static final Item EE_BOOK = new ItemModBook("info_book", "guide", ModCreativeTabs.ITEMS);
+    public static final Item EE_BOOK = new ItemModBook("end_info_book", "guide", ModCreativeTabs.ITEMS);
     //Lamented Islands Items
     public static final Item END_KEY = new ItemKey("key", "dimensional_key", ModCreativeTabs.ITEMS, false);
     public static final Item END_ASH_KEY = new ItemKey("ash_key", "ash_key_desc", ModCreativeTabs.ITEMS, true);
