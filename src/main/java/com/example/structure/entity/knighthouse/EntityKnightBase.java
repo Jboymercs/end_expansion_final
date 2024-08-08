@@ -2,12 +2,15 @@ package com.example.structure.entity.knighthouse;
 
 import akka.japi.pf.FI;
 import com.example.structure.entity.EntityBuffker;
+import com.example.structure.entity.EntityController;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.EntityAIAvoidCrowding;
 import com.example.structure.entity.ai.EntityAIWanderWithGroup;
 import com.example.structure.entity.endking.EntityAbstractEndKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
+import com.example.structure.entity.seekers.EndSeeker;
+import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.ModSoundHandler;
@@ -72,7 +75,10 @@ public abstract class EntityKnightBase extends EntityModBase {
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityCrystalKnight>(this, EntityCrystalKnight.class, 1, true, false, null));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityBuffker>(this, EntityBuffker.class, 1, true, false, null));
-        this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<EndSeeker>(this, EndSeeker.class, 1, true, false, null));
+        this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<EndSeekerPrime>(this, EndSeekerPrime.class, 1, true, false, null));
+        this.targetTasks.addTask(6, new EntityAINearestAttackableTarget<EntityController>(this, EntityController.class, 1, true, false, null));
+        this.targetTasks.addTask(7, new EntityAIHurtByTarget(this, true));
     }
 
     @Override

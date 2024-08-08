@@ -21,6 +21,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +34,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -49,6 +52,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
+
+    private final BossInfoServer bossInfo = (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.NOTCHED_6));
     private static final DataParameter<Boolean> PRIME_MODE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> BLINK_MODE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MELEE_STRIKE_ONE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
@@ -56,18 +61,12 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     private static final DataParameter<Boolean> PIERCE_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SHOOT_GUN = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> WIND_SWEEP_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
 
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-     //   nbt.setBoolean("Prime_Mode", this.dataManager.get(PRIME_MODE));
-     //   nbt.setBoolean("Blink_Mode", this.dataManager.get(BLINK_MODE));
-     //   nbt.setBoolean("Melee_Strike_One", this.dataManager.get(MELEE_STRIKE_ONE));
-     //   nbt.setBoolean("Melee_Strike_Two", this.dataManager.get(MELEE_STRIKE_TWO));
-     //   nbt.setBoolean("Pierce_Attack", this.dataManager.get(PIERCE_ATTACK));
-     //   nbt.setBoolean("Shoot_Gun", this.dataManager.get(SHOOT_GUN));
-    //    nbt.setBoolean("Combo_Attack", this.dataManager.get(COMBO_ATTACK));
 
         nbt.setBoolean("Prime_Mode", this.isFightMode());
         nbt.setBoolean("Blink_Mode", this.isBlinkMode());
@@ -76,18 +75,12 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         nbt.setBoolean("Pierce_Attack", this.isPierceAttack());
         nbt.setBoolean("Shoot_Gun", this.isShootGun());
         nbt.setBoolean("Combo_Attack", this.isComboAttack());
+        nbt.setBoolean("Wind_Sweep_Attack", this.isWindSweepAttack());
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-    //    this.dataManager.set(PRIME_MODE, nbt.getBoolean("Prime_Mode"));
-    //    this.dataManager.set(BLINK_MODE, nbt.getBoolean("Blink_Mode"));
-    //    this.dataManager.set(MELEE_STRIKE_ONE, nbt.getBoolean("Melee_Strike_One"));
-   //     this.dataManager.set(MELEE_STRIKE_TWO, nbt.getBoolean("Melee_Strike_Two"));
-   //     this.dataManager.set(PIERCE_ATTACK, nbt.getBoolean("Pierce_Attack"));
-   //     this.dataManager.set(SHOOT_GUN, nbt.getBoolean("Shoot_Gun"));
-   //     this.dataManager.set(COMBO_ATTACK, nbt.getBoolean("Combo_Attack"));
 
         this.setFightMode(nbt.getBoolean("Prime_Mode"));
         this.setBlinkMode(nbt.getBoolean("Blink_Mode"));
@@ -96,6 +89,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         this.setPierceAttack(nbt.getBoolean("Pierce_Attack"));
         this.setShootGun(nbt.getBoolean("Shoot_Gun"));
         this.setComboAttack(nbt.getBoolean("Combo_Attack"));
+        this.setWindSweepAttack(nbt.getBoolean("Wind_Sweep_Attack"));
     }
 
     public void setFightMode(boolean value) {this.dataManager.set(PRIME_MODE, Boolean.valueOf(value));}
@@ -112,6 +106,8 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     public boolean isShootGun() {return this.dataManager.get(SHOOT_GUN);}
     public void setComboAttack(boolean value) {this.dataManager.set(COMBO_ATTACK, Boolean.valueOf(value));}
     public boolean isComboAttack() {return this.dataManager.get(COMBO_ATTACK);}
+    public void setWindSweepAttack(boolean value) {this.dataManager.set(WIND_SWEEP_ATTACK, Boolean.valueOf(value));}
+    public boolean isWindSweepAttack() {return this.dataManager.get(WIND_SWEEP_ATTACK);}
     private Consumer<EntityLivingBase> prevAttack;
 
     //Idle Animations
@@ -128,6 +124,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     private final String ANIM_DASH_ATTACK = "pierce_dash";
 
     private final String ANIM_COMBO_ATTACK = "combo_1";
+    private final String ANIM_WIND_SWEEP_ATTACK = "wind_sweep";
     private AnimationFactory factory = new AnimationFactory(this);
     public int blinkCoolDown = 0;
     public boolean isMeleeMode = false;
@@ -164,6 +161,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     public void onUpdate() {
         super.onUpdate();
 
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 
         if(ticksExisted > 20 && ticksExisted < 100) {
             AxisAlignedBB box = getEntityBoundingBox().grow(15, 7, 15);
@@ -173,6 +171,11 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
                     world.setBlockToAir(posToo);
                 }
             }
+        }
+
+        if(this.setFlameParticles) {
+            AxisAlignedBB box = getEntityBoundingBox().grow(1.25, 0.1, 1.25).offset(0, 0.1, 0);
+            ModUtils.destroyBlocksInAABB(box, world, this);
         }
 
 
@@ -207,6 +210,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         this.dataManager.register(PIERCE_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(SHOOT_GUN, Boolean.valueOf(false));
         this.dataManager.register(COMBO_ATTACK, Boolean.valueOf(false));
+        this.dataManager.register(WIND_SWEEP_ATTACK, Boolean.valueOf(false));
     }
 
     //Particle Call
@@ -218,14 +222,25 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
         }
 
+        if(setFlameParticles) {
+            world.setEntityState(this, ModUtils.SECOND_PARTICLE_BYTE);
+        }
+
     }
 
+    private boolean setFlameParticles = false;
 
     //Particle Handler for the boss
     @Override
     public void handleStatusUpdate(byte id) {
         if (id == ModUtils.PARTICLE_BYTE) {
             ParticleManager.spawnColoredSmoke(world, getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0, 1.1, 0))), ModColors.WHITE, new Vec3d(ModRand.getFloat(1) * -0.05, -0.3, ModRand.getFloat(1) * -0.05));
+        }
+         if(id == ModUtils.SECOND_PARTICLE_BYTE) {
+                 ModUtils.circleCallback(2, 30, (pos)-> {
+                     pos = new Vec3d(pos.x, 0, pos.y);
+                     ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 1.1, 0))), ModColors.RED, new Vec3d(pos.x * 0.3, -0.2, pos.z * 0.3));
+                 });
         }
         super.handleStatusUpdate(id);
     }
@@ -245,14 +260,16 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         double distance = Math.sqrt(distanceSq);
+        double HealthChange = this.getHealth() / this.getMaxHealth();
         if(!this.isFightMode()) {
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeAttackOne, meleeAttackTwo, dashAttack, shootGunAttack, comboAttack));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeAttackOne, meleeAttackTwo, dashAttack, shootGunAttack, comboAttack, wind_sweep));
             double[] weights = {
-                    (distance < 2 && prevAttack != meleeAttackOne) ? 2/distance : 0, // Second Melee Attack
+                    (distance < 2 && prevAttack != meleeAttackOne) ? 2/distance : 0, // First Melee Attack
                     (distance < 2 && prevAttack != meleeAttackTwo) ? 2/distance : 0, // Second Melee Attack
                     (distance <= 9) ? 1/distance : 0, //Dash Attack
                     (distance > 9) ? distance * 0.02 : 0, //Shoot Gun Attack
-                    (distance < 6 && prevAttack != comboAttack) ? 1.5/distance : 0 //Combo Attack
+                    (distance < 6 && prevAttack != comboAttack) ? 1.5/distance : 0, //Combo Attack
+                    (distance < 7 && prevAttack != wind_sweep && HealthChange <= 0.5) ? 1.5/distance : 0 // Wind Sweep
             };
 
             prevAttack = ModRand.choice(attacks, rand, weights).next();
@@ -262,6 +279,70 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         return prevAttack == comboAttack || prevAttack == shootGunAttack || prevAttack == dashAttack ? 40 : 20;
     }
 
+    private final Consumer<EntityLivingBase> wind_sweep = (target) -> {
+      this.setFightMode(true);
+      this.setWindSweepAttack(true);
+
+      //first jump
+      addEvent(()-> {
+        this.lockLook = true;
+        Vec3d playerPos = new Vec3d(target.posX, target.posY, target.posZ);
+          float distance = getDistance(target);
+          //Intial Frontal Attack
+        addEvent(() -> {
+            this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.4,1.3,0)));
+            DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
+            float damage = this.getAttack();
+            ModUtils.handleAreaImpact(1.5f, (e)-> damage, this, offset, source, 0.7f, 0, false);
+        }, 10);
+        //First leap
+        addEvent(()-> ModUtils.leapTowards(this, playerPos,(float) (0.45 * Math.sqrt(distance + 5)), 0.2f ), 17);
+        //Circle Attack 1
+          addEvent(() -> {
+              this.setFlameParticles = true;
+              this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+              Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,0.5,0)));
+              DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+              float damage = this.getAttack();
+              ModUtils.handleAreaImpact(1.8f, (e)-> damage, this, offset, source, 0.7f, 0, false);
+              this.lockLook = false;
+              addEvent(()-> this.setFlameParticles = false, 2);
+          }, 26);
+
+      }, 10);
+
+
+        //Second jump
+        addEvent(()-> {
+            this.lockLook = true;
+            Vec3d playerPos = new Vec3d(target.posX, target.posY, target.posZ);
+            float distance = getDistance(target);
+            //Second leap
+            addEvent(()-> ModUtils.leapTowards(this, playerPos,(float) (0.45 * Math.sqrt(distance + 5)), 0.2f ), 5);
+            //Circle Attack 2
+            addEvent(() -> {
+                this.setFlameParticles = true;
+                this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,0.5,0)));
+                DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+                float damage = this.getAttack();
+                ModUtils.handleAreaImpact(1.8f, (e)-> damage, this, offset, source, 0.7f, 0, false);
+                this.lockLook = false;
+                addEvent(()-> this.setFlameParticles = false, 2);
+            }, 12);
+
+        }, 40);
+
+
+        addEvent(()-> this.lockLook = false, 65);
+
+
+      addEvent(()-> {
+        this.setFightMode(false);
+        this.setWindSweepAttack(false);
+      }, 75);
+    };
     private final Consumer<EntityLivingBase> comboAttack = (target) -> {
         this.setComboAttack(true);
         this.setFightMode(true);
@@ -356,7 +437,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
             this.setImmovable(true);
             addEvent(()-> {
                 this.setImmovable(false);
-                ModUtils.leapTowards(this, posToGo, (float) (0.45 * Math.sqrt(distance)), 0.1f);
+                ModUtils.leapTowards(this, posToGo, (float) (0.45 * Math.sqrt(distance + 5)), 0.1f);
                 for(int i = 0; i < 15; i+=5) {
                     addEvent(()-> {
                         Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5,1.3,0)));
@@ -429,7 +510,17 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         }, 65);
     };
 
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
 
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
+    }
 
     @Override
     public void registerControllers(AnimationData animationData) {
@@ -514,6 +605,9 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
             }
             if(this.isComboAttack()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_ATTACK, false));
+            }
+            if(this.isWindSweepAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WIND_SWEEP_ATTACK, false));
             }
 
             return PlayState.CONTINUE;

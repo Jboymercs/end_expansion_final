@@ -547,7 +547,7 @@ public class ModConfig {
     @Config.Name("End Vault Chance to Spawn")
     @Config.Comment("Change the chance to spawn the End Vaults, WARNING putting it low will result in buggy and or over spawning, as this is not determined in chunks apart, it's by each time the surface is above 55")
     @Config.RequiresMcRestart
-    public static int vault_distance = 150;
+    public static int vault_distance = 125;
 
     @Config.Name("Avalon Trader Spacing")
     @Config.Comment("Change the spacing of the Avalon Trader, lower is more frequent, higher is less")
