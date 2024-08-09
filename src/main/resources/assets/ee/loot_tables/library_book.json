@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "ee:info_book",
+          "name": "ee:end_info_book",
           "weight": 10,
           "functions": [
             {
