@@ -186,15 +186,6 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 if(depthSignature == 1) {
                     world.setBlockState(pos.add(l6, y + 1, k10), ModBlocks.SPROUT_VINE.getDefaultState());
-                  //  for(int y2 = y - 1; y >= y - vineLength; y--) {
-                      //  boolean setInterrupted = false;
-                      //  if(!world.isAirBlock(pos.add(l6, y2, k10))) {
-                        //    setInterrupted = true;
-                      //  }
-                       // if(!setInterrupted) {
-                        //    world.setBlockState(pos.add(l6, y2, k10), ModBlocks.SPROUT_VINE.getDefaultState());
-                      //  }
-                   // }
                 }
                 if(currentBlock == Blocks.AIR.getDefaultState()) {
                     depthSignature++;

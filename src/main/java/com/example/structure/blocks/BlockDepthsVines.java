@@ -150,4 +150,5 @@ public class BlockDepthsVines extends BlockBush implements IHasModel, RegistryHa
     public void setStateMapper(AdvancedStateMap.Builder builder) {
         builder.ignore(CAN_GROW);
     }
+
 }

@@ -9,6 +9,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.Random;
 
 public class WorldGenAshSpikes extends WorldGenerator {
+
+
     @Override
     public boolean generate(World worldIn, Random rand, BlockPos position) {
         this.generateASpike(worldIn, rand, position);
