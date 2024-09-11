@@ -12,7 +12,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.util.SoundEvent;
 
 import java.util.ArrayList;
 import java.util.List;

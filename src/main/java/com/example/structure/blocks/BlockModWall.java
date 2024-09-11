@@ -145,13 +145,6 @@ public class BlockModWall extends Block implements IHasModel {
         return Block.isExceptBlockForAttachWithPiston(p_194143_0_) || p_194143_0_ == Blocks.BARRIER || p_194143_0_ == Blocks.MELON_BLOCK || p_194143_0_ == Blocks.PUMPKIN || p_194143_0_ == Blocks.LIT_PUMPKIN;
     }
 
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
-    {
-        for (BlockWall.EnumType blockwall$enumtype : BlockWall.EnumType.values())
-        {
-            items.add(new ItemStack(this, 1, blockwall$enumtype.getMetadata()));
-        }
-    }
 
     public int damageDropped(IBlockState state)
     {

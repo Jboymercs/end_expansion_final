@@ -12,6 +12,7 @@ import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -44,6 +45,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
      * This is a Friendly Version of the King, where it will not hurt the User
      *
      */
+
 
     private final String ANIM_IDLE_LOWER = "idle_lower";
     private final String ANIM_IDLE_UPPER = "idle_upper";
