@@ -1,5 +1,6 @@
 package com.example.structure.entity.endking;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
@@ -191,7 +192,7 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.ground_sword_damage * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.ground_sword_damage * ModConfig.biome_multiplier);
     }
 
 

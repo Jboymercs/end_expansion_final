@@ -1,5 +1,6 @@
 package com.example.structure.items;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ProjectilePurple;
 import com.example.structure.init.ModCreativeTabs;
@@ -39,13 +40,13 @@ public class ItemGunLauncher extends ItemAbstractMultiModel implements IHasModel
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int SwordCoolDown = ModConfig.seeker_gun_cooldown * 20;
+        int SwordCoolDown = ItemConfig.seeker_gun_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this) && !hasFired) {
             //Summon Crystals
             worldIn.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, ModSoundHandler.SEEKER_SHOOT, SoundCategory.NEUTRAL, 1.0f, 1.0f / (worldIn.rand.nextFloat() * 0.4F + 0.4f));
             Vec3d playerLookVec = player.getLookVec();
             Vec3d playerPos = new Vec3d(player.posX + playerLookVec.x * 1.4D,player.posY + playerLookVec.y + player.getEyeHeight(), player. posZ + playerLookVec.z * 1.4D);
-            ProjectilePurple projectile = new ProjectilePurple(player.world, player, (float) (ModConfig.purp_projectile * 2));
+            ProjectilePurple projectile = new ProjectilePurple(player.world, player, (float) (ItemConfig.purp_projectile * 2));
             ModUtils.setEntityPosition(projectile, playerPos);
             player.world.spawnEntity(projectile);
             projectile.setTravelRange(20f);
@@ -92,7 +93,7 @@ public class ItemGunLauncher extends ItemAbstractMultiModel implements IHasModel
             world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, ModSoundHandler.SEEKER_SHOOT, SoundCategory.NEUTRAL, 1.0f, 1.0f / (world.rand.nextFloat() * 0.4F + 0.4f));
                     Vec3d playerLookVec2 = player.getLookVec();
                     Vec3d playerPos2 = new Vec3d(player.posX + playerLookVec2.x * 1.4D, player.posY + playerLookVec2.y + player.getEyeHeight(), player.posZ + playerLookVec2.z * 1.4D);
-                    ProjectilePurple projectile2 = new ProjectilePurple(player.world, player, (float) (ModConfig.purp_projectile * 2));
+                    ProjectilePurple projectile2 = new ProjectilePurple(player.world, player, (float) (ItemConfig.purp_projectile * 2));
                     ModUtils.setEntityPosition(projectile2, playerPos2);
                     player.world.spawnEntity(projectile2);
                     projectile2.setTravelRange(20f);

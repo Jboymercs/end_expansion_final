@@ -1,5 +1,6 @@
 package com.example.structure.entity.trader;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.util.ModColors;
@@ -59,7 +60,7 @@ public class EntityControllerLift extends EntityModBase implements IAnimatable {
                                 .type(ModDamageSource.MOB)
                                 .directEntity(this)
                                 .build();
-                        float damage = (float) ((ModConfig.guilder_attack_damage * 0.75) * ModConfig.lamented_multiplier);
+                        float damage = (float) ((MobConfig.guilder_attack_damage * 0.75) * ModConfig.lamented_multiplier);
                         ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 1.5F, 0, false);
                     }
                 }

@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModColors;
@@ -27,7 +28,7 @@ public class ProjectilePurple extends Projectile{
 
     EntityLivingBase master;
     public ProjectilePurple(World worldIn, EntityLivingBase throwerIn, float damage) {
-        super(worldIn, throwerIn, ModConfig.purp_projectile);
+        super(worldIn, throwerIn, ItemConfig.purp_projectile);
         this.setNoGravity(true);
         this.master = throwerIn;
     }
@@ -98,7 +99,7 @@ public class ProjectilePurple extends Projectile{
         if (isShootingEntity || isPartOfShootingEntity) {
             return;
         }
-        float damage = ModConfig.purp_projectile;
+        float damage = ItemConfig.purp_projectile;
         DamageSource source = ModDamageSource.builder()
                 .indirectEntity(shootingEntity)
                 .directEntity(this)

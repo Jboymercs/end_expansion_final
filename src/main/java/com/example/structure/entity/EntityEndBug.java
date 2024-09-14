@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.animation.Animation;
@@ -143,7 +144,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.parasite_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MobConfig.parasite_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
@@ -402,7 +403,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1, 1, 0)));
             DamageSource damageSource = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (ModConfig.parasite_damage * ModConfig.biome_multiplier);
+            float damage = (float) (MobConfig.parasite_damage * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, offset, damageSource, 0.5f, 0, false);
         }, 8);
         addEvent(()-> this.setFightMode(false), 10);

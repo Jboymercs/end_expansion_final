@@ -1,5 +1,6 @@
 package com.example.structure.items;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityLamentedEye;
 import com.example.structure.util.ModUtils;
@@ -39,7 +40,7 @@ public class ItemMedallion extends ItemBase{
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int SwordCoolDown = ModConfig.medal_cooldown * 20;
+        int SwordCoolDown = ItemConfig.medal_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
             EntityLamentedEye eyeTooSummon = new EntityLamentedEye(worldIn, (float) player.posX,(float) player.posY, (float) player.posZ, player);
             worldIn.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLAGER_CAST_SPELL, SoundCategory.PLAYERS, 1.0F, 1.0F);

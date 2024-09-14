@@ -2,6 +2,7 @@ package com.example.structure.world.Biome;
 
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.init.ModBlocks;
@@ -243,7 +244,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         //Vines
 
 
-        if(!ModConfig.disable_large_caves) {
+        if(!WorldConfig.disable_large_caves) {
             //Small Caves
             if (rand.nextInt(10) == 0 && getGroundFromAbove(world, pos.getX(), pos.getZ()) > 50) {
                 WorldGenStructure cave = ModRand.choice(small_caves);

@@ -1,6 +1,7 @@
 package com.example.structure.world.api.lamentedIslands;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.tileentity.MobSpawnerLogic;
@@ -87,7 +88,7 @@ public class LamentedIslandsTemplate extends ModStructureTemplate {
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.structure_spawns) {
+        if (randomNumberGenerator >= WorldConfig.structure_spawns) {
             return false;
         }
         return true;
@@ -96,7 +97,7 @@ public class LamentedIslandsTemplate extends ModStructureTemplate {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.lamentedIslandsLootChance) {
+        if(randomNumberChestGenerator >= WorldConfig.lamentedIslandsLootChance) {
             return false;
         }
         return true;

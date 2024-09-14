@@ -1,5 +1,6 @@
 package com.example.structure.entity.trader;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.util.ModColors;
@@ -80,7 +81,7 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
                                       .type(ModDamageSource.MOB)
                                       .directEntity(this)
                                       .build();
-                              float damage = (float) (ModConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
+                              float damage = (float) (MobConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
                               ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
                           }
                           //For NON PVP
@@ -90,7 +91,7 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
                                   .type(ModDamageSource.MOB)
                                   .directEntity(this)
                                   .build();
-                          float damage = (float) (ModConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
+                          float damage = (float) (MobConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
                           ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
                       }
                   }
@@ -113,7 +114,7 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
                                   .type(ModDamageSource.MOB)
                                   .directEntity(this)
                                   .build();
-                          float damage = (float) (ModConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
+                          float damage = (float) (MobConfig.avalon_attack_damage * ModConfig.lamented_multiplier);
                           ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
                       }
                   }
@@ -130,7 +131,7 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
     public void handleStatusUpdate(byte id) {
         super.handleStatusUpdate(id);
         if(id == ModUtils.PARTICLE_BYTE) {
-            if(ModConfig.enableAvalonParticles) {
+            if(MobConfig.enableAvalonParticles) {
                 ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(1.5D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
                 ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(0.5D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));
                 ParticleManager.spawnColoredSmoke(world, this.getPositionVector().add(ModUtils.yVec(3.0D)), ModColors.MAELSTROM, new Vec3d(0,0.1,0));

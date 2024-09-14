@@ -1,6 +1,7 @@
 package com.example.structure.world;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.BiomeRegister;
@@ -31,7 +32,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
     public static final WorldGenLamentedIslands the_islands = new WorldGenLamentedIslands();
-    private int trader_spacing = ModConfig.avalon_trader_spacing;
+    private int trader_spacing = WorldConfig.avalon_trader_spacing;
 
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
     public int plantsPerChunk = ModRand.range(8, 12);
@@ -43,7 +44,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
         BlockPos pos = new BlockPos(x + 8, 0, z + 8);
         //End Expansion Structures - Mostly just the base ones, can't spawn within radius of the Ender Dragon Island
         if(world.provider.getDimension() == 1  && Math.abs(pos.getX()) > 600 || world.provider.getDimension() == 1 && Math.abs(pos.getZ()) > 600 ) {
-            if (ModConfig.does_structure_spawn) {
+            if (WorldConfig.does_structure_spawn) {
 
                 // Lamented Islands, the first major boss Arena and dungeon of the mod
                 //Cannot spawn in the Ash Wastelands
@@ -68,7 +69,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                     if(trader_spacing <= 0) {
                         int yHiegh = getGroundFromAbove(world, pos.getX() + 7, pos.getZ() + 7);
                         new WorldGenTraderOutcamp("trader/eye_trader").generateStructure(world, pos.add(0, yHiegh - 1, 0), Rotation.NONE);
-                        trader_spacing = ModConfig.avalon_trader_spacing;
+                        trader_spacing = WorldConfig.avalon_trader_spacing;
                     } else {
                         trader_spacing--;
                     }

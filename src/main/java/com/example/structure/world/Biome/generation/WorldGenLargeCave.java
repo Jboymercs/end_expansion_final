@@ -1,6 +1,7 @@
 package com.example.structure.world.Biome.generation;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntityEnderEyeFly;
 import com.example.structure.entity.EntitySnatcher;
@@ -77,7 +78,7 @@ public class WorldGenLargeCave extends WorldGenStructure {
 
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.cave_spawn_rate) {
+        if (randomNumberGenerator >= WorldConfig.cave_spawn_rate) {
             return false;
         }
         return true;

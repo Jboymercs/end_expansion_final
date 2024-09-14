@@ -1,5 +1,6 @@
 package com.example.structure.items;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityGroundCrystal;
 import com.example.structure.init.ModItems;
@@ -92,7 +93,7 @@ public class DurableShield extends ItemShield implements IAnimatable {
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
         Vec3d playerPos = playerIn.getPositionVector();
-        int SwordCoolDown = ModConfig.shield_cooldown * 20;
+        int SwordCoolDown = ItemConfig.shield_cooldown * 20;
         if( !worldIn.isRemote && !playerIn.getCooldownTracker().hasCooldown(this)) {
             AnimationController<?> controller = GeckoLibUtil.getControllerForStack(this.factory, stack, controllerName);
             ModUtils.circleCallback(2, 8, (pos)-> {

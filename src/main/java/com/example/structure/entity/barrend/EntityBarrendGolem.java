@@ -1,5 +1,6 @@
 package com.example.structure.entity.barrend;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ProjectileAcid;
 import com.example.structure.entity.ai.ActionBarrendSummon;
@@ -121,7 +122,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
                 for(EntityLivingBase base : nearbyEntities) {
                     Vec3d offset = base.getPositionVector().add(ModUtils.getRelativeOffset(base, new Vec3d(0.3, 0.3, 0)));
                     DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-                    float damage = (float) ((ModConfig.barrend_golem_attack_damage * ModConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
+                    float damage = (float) ((MobConfig.barrend_golem_attack_damage * MobConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
                     ModUtils.handleAreaImpact(0.7f, (e)-> damage, this, offset, source, 1.2f, 0, false);
                 }
             }
@@ -262,7 +263,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,0.1,0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) ((ModConfig.barrend_golem_attack_damage * ModConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
+            float damage = (float) ((MobConfig.barrend_golem_attack_damage * MobConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(3.0f, (e)-> damage, this, offset, source, 0.8f, 0, false);
         }, 40);
 
@@ -288,7 +289,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,0.1,0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) ((ModConfig.barrend_golem_attack_damage * ModConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
+            float damage = (float) ((MobConfig.barrend_golem_attack_damage * MobConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(3.0f, (e)-> damage, this, offset, source, 0.8f, 0, false);
         }, 36);
 
@@ -361,7 +362,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
             this.playSound(ModSoundHandler.BARREND_HIT, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.2f);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5,1.5,0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) (ModConfig.barrend_golem_attack_damage * ModConfig.biome_multiplier);
+            float damage = (float) (MobConfig.barrend_golem_attack_damage * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(1.2f, (e)-> damage, this, offset, source, 0.8f, 0, false);
         }, 29);
 
@@ -412,7 +413,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
       addEvent(()-> {
         for(int i = 2; i < 30; i++ ) {
             addEvent(()-> {
-                ProjectileAcid acid = new ProjectileAcid(world, this, (float)((ModConfig.barrend_golem_attack_damage * 0.6) * ModConfig.biome_multiplier));
+                ProjectileAcid acid = new ProjectileAcid(world, this, (float)((MobConfig.barrend_golem_attack_damage * 0.6) * ModConfig.biome_multiplier));
                 Vec3d offsetShoot = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5,2.3,0)));
                 acid.setPosition(offsetShoot.x, offsetShoot.y, offsetShoot.z);
                 acid.setNoGravity(true);
@@ -446,7 +447,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
           this.playSound(ModSoundHandler.BARREND_PARASITE_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.7f);
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(2,1.5,0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-          float damage = (float) (ModConfig.barrend_golem_attack_damage * ModConfig.biome_multiplier);
+          float damage = (float) (MobConfig.barrend_golem_attack_damage * ModConfig.biome_multiplier);
           ModUtils.handleAreaImpact(1.5f, (e)-> damage, this, offset, source, 0.9f, 0, false);
       }, 31);
 

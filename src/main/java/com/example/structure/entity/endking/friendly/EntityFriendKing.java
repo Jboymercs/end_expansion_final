@@ -1,5 +1,7 @@
 package com.example.structure.entity.endking.friendly;
 
+import com.example.structure.config.ItemConfig;
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityKingTimedAttack;
@@ -15,9 +17,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
@@ -84,9 +84,10 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         super(worldIn);
         this.IisGhost = true;
         this.isMeleeMode =true;
+
     }
 
-    public EntityFriendKing(World worldIn, EntityPlayer player) {
+    public EntityFriendKing(World worldIn, EntityPlayer player, BlockPos pos) {
         super(worldIn);
         this.IisGhost = true;
         this.isMeleeMode =true;
@@ -111,7 +112,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
     protected boolean currentlyHasTarget = false;
 
 
-    protected int killCountdown = ModConfig.minion_lifeTime * 20;
+    protected int killCountdown = ItemConfig.minion_lifeTime * 20;
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -149,6 +150,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
 
 
+
         //A simple function to allow the Ghost King to attack anything except the Owner
 
             //Checks to make sure the Owner is not dead or not there
@@ -159,7 +161,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
                     //If PVP Item abilities are enabled
                     if(ModConfig.enable_pvp_abilities) {
                         //If the crown has the friendly to owner only
-                        if(ModConfig.crown_is_friendly) {
+                        if(ItemConfig.crown_is_friendly) {
                             if(!(target instanceof EntityGroundSword) && !(target instanceof EntityRedCrystal) && !(target instanceof EntityFriendKing) && target != owner) {
                                 if(!currentlyHasTarget && this.getEntitySenses().canSee(target)) {
                                     this.setAttackTarget(target);
@@ -202,6 +204,10 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
 
     }
 
+    public void teleportTarget(double x, double y, double z) {
+        this.setPosition(x , y, z);
+
+    }
 
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
@@ -231,7 +237,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.minion_attack_damage * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ItemConfig.minion_attack_damage * ModConfig.biome_multiplier);
     }
 
 
@@ -266,7 +272,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
             this.setImmovable(true);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+            float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
             ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.7f, 0, false);
         }, 30);
 
@@ -301,7 +307,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
                 addEvent(()-> {
                     Vec3d offset = this.getPositionVector().add(ModUtils.yVec(1.5f));
                     DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                    float damage = (float) (this.getAttack() * ModConfig.end_king_leap_attack);
+                    float damage = (float) (this.getAttack() * MobConfig.end_king_leap_attack);
                     ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.6f, 0, false);
                 }, i);
             }
@@ -372,7 +378,7 @@ public class EntityFriendKing extends EntityAbstractEndKing implements IAnimatab
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+            float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
             ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
 
         }, 21);

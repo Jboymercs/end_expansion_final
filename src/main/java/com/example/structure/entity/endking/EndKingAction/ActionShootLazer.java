@@ -1,6 +1,7 @@
 package com.example.structure.entity.endking.EndKingAction;
 
 import com.example.structure.Main;
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.IMultiAction;
@@ -27,9 +28,9 @@ public class ActionShootLazer implements IMultiAction {
 
     public ActionShootLazer(EntityModBase actorIn, byte stopLaserByte, Consumer<Vec3d> onLaserImpact) {
     this.entity = actorIn;
-    this.laserExplosionSize = ModConfig.lazer_explosion_size;
-    this.maxLaserDistance = ModConfig.lazer_distance;
-    this.beamLag = ModConfig.lazer_beam_lag;
+    this.laserExplosionSize = MobConfig.lazer_explosion_size;
+    this.maxLaserDistance = MobConfig.lazer_distance;
+    this.beamLag = MobConfig.lazer_beam_lag;
     this.stopLaserByte = stopLaserByte;
     this.onLaserImpact = onLaserImpact;
     }
@@ -74,7 +75,7 @@ public class ActionShootLazer implements IMultiAction {
                                 .stoppedByArmorNotShields()
                                 .type(ModDamageSource.MAGIC)
                                 .build();
-                        target.attackEntityFrom(source, (float) (entity.getAttack() * ModConfig.lazer_damage_multiplier));
+                        target.attackEntityFrom(source, (float) (entity.getAttack() * MobConfig.lazer_damage_multiplier));
                     }
 
                     ModUtils.addEntityVelocity(entity, laserDirection.scale(-0.03f));

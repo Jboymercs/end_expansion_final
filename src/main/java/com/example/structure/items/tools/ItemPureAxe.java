@@ -1,6 +1,7 @@
 package com.example.structure.items.tools;
 
 import com.example.structure.Main;
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.trader.action.player.ActionWaveFromPlayer;
 import com.example.structure.init.ModCreativeTabs;
@@ -51,7 +52,7 @@ public class ItemPureAxe extends ItemAxe implements IHasModel {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int SwordCoolDown = 13 * 20;
+        int SwordCoolDown = ItemConfig.pure_axe_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
             worldIn.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.PLAYERS, 1.0F, 0.5F);
             Vec3d moveVec = player.getLookVec().scale(1.1);

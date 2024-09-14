@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -167,7 +168,7 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.constructor_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.constructor_health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
@@ -185,8 +186,8 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityEnderShield>(this, EntityEnderShield.class, 1, true, false, null));
         this.targetTasks.addTask(5, new EntityAIHurtByTarget(this, false));
     }
-    public static int constructor_cooldown_one = ModConfig.constructor_speed_one * 20;
-    public static int constructor_cooldown_two = ModConfig.constructor_speed_two * 20;
+    public static int constructor_cooldown_one = MobConfig.constructor_speed_one * 20;
+    public static int constructor_cooldown_two = MobConfig.constructor_speed_two * 20;
 
 
 

@@ -1,5 +1,6 @@
 package com.example.structure.items.tools;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.util.ModUtils;
@@ -46,11 +47,11 @@ public class ItemChomperDagger extends ToolSword{
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int SwordCoolDown = ModConfig.dagger_cooldown * 20;
+        int SwordCoolDown = ItemConfig.dagger_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
            player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 140, 1));
             worldIn.playSound(null, player.posX, player.posY, player.posZ, ModSoundHandler.LORD_KNIGHT_FLY, SoundCategory.PLAYERS, 0.7F, 1.3F);
-            Vec3d moveVec = player.getLookVec().scale(-((ModConfig.sword_velocity * 0.5) + 0.1D));
+            Vec3d moveVec = player.getLookVec().scale(-((ItemConfig.sword_velocity * 0.5) + 0.1D));
             if(player.canBePushed()) {
                 player.motionX = moveVec.x;
                 player.motionY = moveVec.y * 0.5;

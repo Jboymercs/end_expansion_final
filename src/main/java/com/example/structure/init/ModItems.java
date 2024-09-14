@@ -1,5 +1,6 @@
 package com.example.structure.init;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.items.*;
@@ -22,17 +23,17 @@ public class ModItems {
 
 
 
-    private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 450, 8.0f, ModConfig.sword_damage, 20);
+    private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 450, 8.0f, ItemConfig.sword_damage, 20);
 
-    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 5, 300, 7.0F, ModConfig.dagger_damage, 25);
-    private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 974, 8.0f, 8.0F, 20);
+    private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 5, 300, 7.0F, ItemConfig.dagger_damage, 25);
+    private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 974, 8.0f, ItemConfig.unholy_sword_damage, 20);
 
-    private static final Item.ToolMaterial PURE_AXE_MATERIAL = EnumHelper.addToolMaterial("pure", 3, 625, 7.0F, 7.0F, 40);
-    private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1800, 8.0f, ModConfig.endfall_sword_damage, 50);
+    private static final Item.ToolMaterial PURE_AXE_MATERIAL = EnumHelper.addToolMaterial("pure", 3, 625, 7.0F, ItemConfig.pure_axe_damage, 40);
+    private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1800, 8.0f, ItemConfig.endfall_sword_damage, 50);
 
     private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 6, 1781, 10.0F, 4, 25);
 
-    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, 6.0F, 40);
+    private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, ItemConfig.cordium_sword_damage, 40);
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
     private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
@@ -76,9 +77,9 @@ public class ModItems {
 
     //public static final Item AMBER_REDONE_HELMET = new AmberArmorSet("amber_helmet", AMBER_ARMOR, 0, EntityEquipmentSlot.HEAD, "amber", "amber_desc");
     public static final Item AMBER_RAW_ORE = new ItemBase("amber_raw", ModCreativeTabs.ITEMS);
-    public static final ItemAxe AMBER_AXE = new ItemAmberAxe("amber_axe", AMBER_SET, ModConfig.cordium_axe_damage, -2.8F);
-    public static final Item PURE_AXE = new ItemPureAxe("pure_axe", PURE_AXE_MATERIAL, 7F, -2.4F, "pure_axe_desc");
-    public static final Item UNHOLY_AXE = new ItemRedAxe("red_axe", RED_SWORD, ModConfig.cordium_axe_damage, -3.0F, "red_axe_desc");
+    public static final ItemAxe AMBER_AXE = new ItemAmberAxe("amber_axe", AMBER_SET, ItemConfig.cordium_axe_damage, -2.8F);
+    public static final Item PURE_AXE = new ItemPureAxe("pure_axe", PURE_AXE_MATERIAL, ItemConfig.pure_axe_damage, -2.4F, "pure_axe_desc");
+    public static final Item UNHOLY_AXE = new ItemRedAxe("red_axe", RED_SWORD, ItemConfig.cordium_axe_damage, -3.0F, "red_axe_desc");
     public static final Item AMBER_SWORD = new ToolAmberSword("amber_sword", AMBER_SET, "amber_sword_desc");
     public static final Item CHOMPER_TOOTH = new ItemBase("chomper_tooth", ModCreativeTabs.ITEMS);
 

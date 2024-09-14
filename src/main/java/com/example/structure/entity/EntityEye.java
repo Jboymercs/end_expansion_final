@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.ActionDrawWalls;
 import com.example.structure.entity.ai.EntityAITimedAttack;
@@ -50,7 +51,7 @@ public class EntityEye extends EntityModBase implements IAnimatable, IAttack {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.attack_damage);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.attack_damage);
     }
 
 

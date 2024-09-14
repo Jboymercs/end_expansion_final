@@ -1,5 +1,6 @@
 package com.example.structure.items.tools;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntitySwordSpike;
 import com.example.structure.init.ModCreativeTabs;
@@ -84,7 +85,7 @@ public class ToolAmberSword extends ToolSword{
                 }
             }
 
-            int SwordCoolDown = (hasDamagedEntities) ? (howManyEntities + 8) * 20 : 60;
+            int SwordCoolDown = (hasDamagedEntities) ? (howManyEntities + ItemConfig.cordium_sword_cooldown + 2) * 20 : ItemConfig.cordium_sword_cooldown * 20;
             player.getCooldownTracker().setCooldown(this, SwordCoolDown);
             stack.damageItem(howManyEntities * 2, player);
         }

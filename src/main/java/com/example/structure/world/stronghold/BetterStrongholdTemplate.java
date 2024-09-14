@@ -1,6 +1,7 @@
 package com.example.structure.world.stronghold;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModReference;
 import com.example.structure.world.WorldGenStructure;
@@ -96,7 +97,7 @@ public class BetterStrongholdTemplate extends ModStructureTemplate {
 
         } //Custom Mob Spawners
         else if(function.startsWith("mob")) {
-            if(!ModConfig.mob_additions_stronghold) {
+            if(!WorldConfig.mob_additions_stronghold) {
                 world.setBlockToAir(pos);
                 world.setBlockToAir(pos.down());
             } else if (world.rand.nextInt(3) == 0) {

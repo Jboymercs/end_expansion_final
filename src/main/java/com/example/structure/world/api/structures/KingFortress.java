@@ -1,6 +1,7 @@
 package com.example.structure.world.api.structures;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.util.ModRand;
 import com.google.common.collect.Lists;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
@@ -21,7 +22,7 @@ public class KingFortress {
     private INetherAPIChunkGenerator provider;
 
 
-    private static final int SIZE = ModConfig.fortress_size;
+    private static final int SIZE = WorldConfig.fortress_size;
 
     private static int BUILDINGS = 0;
 

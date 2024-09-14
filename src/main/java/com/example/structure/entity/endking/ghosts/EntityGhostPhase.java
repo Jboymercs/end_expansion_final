@@ -1,5 +1,6 @@
 package com.example.structure.entity.endking.ghosts;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityModBase;
@@ -149,7 +150,7 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(2.0, 1.4, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (ModConfig.end_king_damage * ModConfig.biome_multiplier);
+            float damage = (float) (MobConfig.end_king_damage * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.6f, 0, false);
             this.setImmovable(true);
         }, 18);
@@ -168,7 +169,7 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
                     addEvent(() -> {
                         Vec3d offset = this.getPositionVector().add(ModUtils.yVec(1.5f));
                         DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                        float damage = (float) ((ModConfig.end_king_damage * 1.5) * ModConfig.biome_multiplier);
+                        float damage = (float) ((MobConfig.end_king_damage * 1.5) * ModConfig.biome_multiplier);
                         ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.6f, 0, false);
                     }, i);
                 }
@@ -205,7 +206,7 @@ public class EntityGhostPhase extends EntityModBase implements IAnimatable {
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.attack_damage);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.attack_damage);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.structure.items.tools;
 
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.util.ModUtils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -33,11 +34,11 @@ public class ToolRedSword extends ToolSword implements ISweepAttackOverride{
     @Override
     public void doSweepAttack(EntityPlayer player, EntityLivingBase target) {
         ModUtils.doSweepAttack(player, target, (e) -> {
-            e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 10, 1));
+            e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, ItemConfig.unholy_sword_potion * 20, 1));
         });
 
         if (target != null) {
-            target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 10, 1));
+            target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, ItemConfig.unholy_sword_potion * 20, 1));
 
         }
     }

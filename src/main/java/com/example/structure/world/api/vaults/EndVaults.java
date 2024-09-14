@@ -1,6 +1,7 @@
 package com.example.structure.world.api.vaults;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.util.ModRand;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -28,7 +29,7 @@ public class EndVaults {
 
     private int yAxel2Level = 0;
 
-    private static final int SIZE = ModConfig.vault_size;
+    private static final int SIZE = WorldConfig.vault_size;
 
     private static final int SECOND_SIZE = SIZE * 2;
 

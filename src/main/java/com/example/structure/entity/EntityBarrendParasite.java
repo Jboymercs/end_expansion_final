@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.endking.EntityEndKing;
@@ -86,7 +87,7 @@ public class EntityBarrendParasite extends EntityModBase implements IAnimatable 
                             .type(ModDamageSource.MOB)
                             .directEntity(this)
                             .build();
-                    float damage = (float) ((ModConfig.barrend_golem_attack_damage * ModConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
+                    float damage = (float) ((MobConfig.barrend_golem_attack_damage * MobConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
                     ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0F, 0, false);
                 }
             }

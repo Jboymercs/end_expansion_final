@@ -1,6 +1,7 @@
 package com.example.structure.world.api.mines;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.world.WorldGenStructure;
 import com.example.structure.world.api.vaults.EndVaults;
@@ -48,7 +49,7 @@ public class WorldGenMines extends WorldGenerator {
         int yHieght2 = getGroundFromAbove(world, pos.getX(), pos.getZ());
         int yHieght = getGroundFromAbove(world, pos.getX() + 15, pos.getZ() + 15);
 
-        if(yHieght > 60 && yHieght2 > 60 && spacing >= ModConfig.ashed_mines_distance) {
+        if(yHieght > 60 && yHieght2 > 60 && spacing >= WorldConfig.ashed_mines_distance) {
             getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 200, pos.getZ() - 200, pos.getX() + 200, pos.getZ() + 200));
         }
         spacing++;
@@ -107,7 +108,7 @@ public class WorldGenMines extends WorldGenerator {
 
         @Override
         public boolean isSizeableStructure() {
-            return components.size() > ModConfig.ashed_mines_size;
+            return components.size() > WorldConfig.ashed_mines_size;
         }
     }
 }

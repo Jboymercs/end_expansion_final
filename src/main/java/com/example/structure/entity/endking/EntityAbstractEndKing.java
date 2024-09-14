@@ -1,5 +1,6 @@
 package com.example.structure.entity.endking;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
@@ -97,8 +98,6 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
 
     protected static final DataParameter<Float> LOOK = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.FLOAT);
 
-    public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityAbstractEndKing.class, DataSerializers.BLOCK_POS);
-
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
@@ -127,14 +126,11 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         nbt.setBoolean("Slam_Attack", this.dataManager.get(SLAM_ATTACK));
         nbt.setBoolean("Top_Hp", this.dataManager.get(TOP_HP));
         nbt.setFloat("Look", this.getPitch());
-        nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
-        nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
-        nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
+        super.readEntityFromNBT(nbt);
         this.dataManager.set(KING_MODE, nbt.getBoolean("King_Mode"));
         this.dataManager.set(FULL_BODY_USAGE, nbt.getBoolean("Full_Body_Usage"));
         this.dataManager.set(SWINGING_ARMS, nbt.getBoolean("Swinging_Arms"));
@@ -160,7 +156,6 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.dataManager.set(SLAM_ATTACK, nbt.getBoolean("Slam_Attack"));
         this.dataManager.set(TOP_HP, nbt.getBoolean("Top_Hp"));
         this.dataManager.set(LOOK, nbt.getFloat("Look"));
-        this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
     }
 
     public void setTopHp(boolean value) {this.dataManager.set(TOP_HP, Boolean.valueOf(value));}
@@ -211,14 +206,6 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     public void setFlyDashMove(boolean value) {this.dataManager.set(FLY_DASH_MOVE, Boolean.valueOf(value));}
     public boolean isSlamAttack() {return this.dataManager.get(SLAM_ATTACK);}
     public void setSlamAttack(boolean value) {this.dataManager.set(SLAM_ATTACK, Boolean.valueOf(value));}
-
-    public void setSpawnLocation(BlockPos pos) {
-        this.dataManager.set(SPAWN_LOCATION, pos);
-    }
-
-    public BlockPos getSpawnLocation() {
-        return this.dataManager.get(SPAWN_LOCATION);
-    }
 
     private final MultiPartEntityPart[] hitboxParts;
     private final MultiPartEntityPart model = new MultiPartEntityPart(this, "model", 0f, 0f);
@@ -283,8 +270,6 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
         this.dataManager.register(FLY_DASH_MOVE, Boolean.valueOf(false));
         this.dataManager.register(DEATH_BOSS, Boolean.valueOf(false));
         this.dataManager.register(SLAM_ATTACK, Boolean.valueOf(false));
-        //
-        this.dataManager.register(SPAWN_LOCATION, null);
         super.entityInit();
 
     }
@@ -502,13 +487,13 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) ModConfig.end_king_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.end_king_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ModConfig.end_king_armor * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.end_king_armor_toughness * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.end_king_damage * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.end_king_armor * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.end_king_armor_toughness * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.end_king_damage * ModConfig.biome_multiplier);
     }
 
 

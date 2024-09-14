@@ -1,5 +1,7 @@
 package com.example.structure.event_handler;
 
+import com.example.structure.config.ItemConfig;
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ProjectilePurple;
 import com.example.structure.entity.endking.ProjectileSpinSword;
@@ -57,7 +59,7 @@ public class ModEvents {
         }
     }
 
-    public int ProjectileCooldown = ModConfig.purp_cooldown * 20;
+    public int ProjectileCooldown = ItemConfig.purp_cooldown * 20;
 
 
     @SubscribeEvent
@@ -70,7 +72,7 @@ public class ModEvents {
             if(base.isSwingInProgress && !base.world.isRemote && ProjectileCooldown < 0) {
                 Vec3d playerLookVec = base.getLookVec();
                 Vec3d playerPos = new Vec3d(base.posX + playerLookVec.x * 1.4D,base.posY + playerLookVec.y + base.getEyeHeight(), base. posZ + playerLookVec.z * 1.4D);
-                ProjectilePurple projectile = new ProjectilePurple(base.world, base, ModConfig.purp_projectile);
+                ProjectilePurple projectile = new ProjectilePurple(base.world, base, ItemConfig.purp_projectile);
                 base.world.playSound(null, base.posX, base.posY, base.posZ, ModSoundHandler.SEEKER_SHOOT, SoundCategory.PLAYERS, 0.7F, 1.0f / (base.world.rand.nextFloat() * 0.4F + 0.3f));
                 ModUtils.setEntityPosition(projectile, playerPos);
                 base.world.spawnEntity(projectile);
@@ -80,7 +82,7 @@ public class ModEvents {
                 if(base.world.isRemote) {
                     doParticleEffects(base.world, base);
                 }
-                ProjectileCooldown = ModConfig.purp_cooldown * 20;
+                ProjectileCooldown = ItemConfig.purp_cooldown * 20;
             } else {
                 ProjectileCooldown--;
             }
@@ -184,7 +186,7 @@ public class ModEvents {
                     if(!(entity instanceof EntityPlayer)) {
                         if(base.world.rand.nextInt(35)==0 && !base.world.isRemote) {
                             Vec3d baseOffset = entity.getPositionVector();
-                            ProjectileSpinSword swords = new ProjectileSpinSword(base.world, base, ModConfig.projectile_sword_damage,base);
+                            ProjectileSpinSword swords = new ProjectileSpinSword(base.world, base, MobConfig.projectile_sword_damage,base);
                             swords.setPosition(baseOffset.x + ModRand.range(-4, 4), baseOffset.y + ModRand.range(1, 4), baseOffset.z + ModRand.range(-4, 4));
                             swords.setTravelRange(20);
                             Vec3d vel = baseOffset.add(ModUtils.yVec(1)).subtract(swords.getPositionVector());

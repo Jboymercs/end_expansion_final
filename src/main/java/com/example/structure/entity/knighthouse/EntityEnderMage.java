@@ -1,6 +1,7 @@
 package com.example.structure.entity.knighthouse;
 
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
@@ -55,7 +56,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
     protected EntityEnderKnight marked_knight;
 
-    public int randomMarkTimer = 800 + ModRand.range(50, (ModConfig.end_mage_ritual * 20));
+    public int randomMarkTimer = 800 + ModRand.range(50, (MobConfig.end_mage_ritual * 20));
     private static final DataParameter<Boolean> HEALING_MODE =EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACK_MODE = EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MARKED = EntityDataManager.createKey(EntityEnderMage.class, DataSerializers.BOOLEAN);
@@ -169,7 +170,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.knighthouse_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.knighthouse_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
     }
@@ -177,7 +178,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
     @Override
     public void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new EntityAISupport(this, 1.2, 0, 10f, ModConfig.end_mage_cooldown * 20));
+        this.tasks.addTask(4, new EntityAISupport(this, 1.2, 0, 10f, MobConfig.end_mage_cooldown * 20));
         this.tasks.addTask(5, new EntityAITimedAttack<>(this, 1.5, 60, 16F, 0.4f));
     }
 

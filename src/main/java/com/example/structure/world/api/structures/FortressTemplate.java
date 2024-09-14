@@ -1,6 +1,7 @@
 package com.example.structure.world.api.structures;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -177,7 +178,7 @@ public class FortressTemplate extends ModStructureTemplate {
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.dungeon_mob_chance) {
+        if (randomNumberGenerator >= WorldConfig.dungeon_mob_chance) {
             return false;
         }
         return true;
@@ -185,7 +186,7 @@ public class FortressTemplate extends ModStructureTemplate {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.dungeon_chest_chance) {
+        if(randomNumberChestGenerator >= WorldConfig.dungeon_chest_chance) {
             return false;
         }
         return true;

@@ -1,6 +1,7 @@
 package com.example.structure.world.api.lamentedIslands;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.world.api.mines.AshedMines;
 import net.minecraft.block.Block;
@@ -46,7 +47,7 @@ public class WorldGenLamentedIslands extends WorldGenerator {
     @Override
     public boolean generate(World world, Random random, BlockPos pos) {
 
-        if((spacing/2) > ModConfig.structureFrequency) {
+        if((spacing/2) > WorldConfig.structureFrequency) {
             getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 350, pos.getZ() - 350, pos.getX() + 350, pos.getZ() + 350));
         }
         spacing++;
@@ -93,7 +94,7 @@ public class WorldGenLamentedIslands extends WorldGenerator {
 
         @Override
         public boolean isSizeableStructure() {
-            return components.size() > ModConfig.islands_size;
+            return components.size() > WorldConfig.islands_size;
         }
     }
 }

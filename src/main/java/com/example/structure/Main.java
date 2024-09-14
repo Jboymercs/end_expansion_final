@@ -2,6 +2,7 @@ package com.example.structure;
 
 import com.example.structure.advancements.EEAdvancements;
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModDimensions;
 import com.example.structure.init.ModEntities;
 import com.example.structure.init.ModProfressions;
@@ -125,7 +126,7 @@ public class Main {
 
     }
 
-    public MapGenStructure fortress = new MapGenKingFortress(ModConfig.fortress_spacing, 0, ModConfig.fortress_odds);
+    public MapGenStructure fortress = new MapGenKingFortress(WorldConfig.fortress_spacing, 0, WorldConfig.fortress_odds);
 
 
     @Mod.EventHandler

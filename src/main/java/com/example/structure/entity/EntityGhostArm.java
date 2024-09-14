@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
@@ -63,7 +64,7 @@ public class EntityGhostArm extends EntityModBase implements IAnimatable {
             //Arm at max swing, here it will deal damage at this cord
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3, 1.3, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (ModConfig.endfall_sword_damage * 1.5);
+            float damage = (float) (ItemConfig.endfall_sword_damage * 1.5);
             ModUtils.handleAreaImpact(2.2f, (e) -> damage, this, offset, source, 0.9f, 0, false);
         }
 

@@ -1,6 +1,7 @@
 package com.example.structure.world.Biome.generation;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntityEnderEyeFly;
 import com.example.structure.entity.EntityEnderKnight;
@@ -90,7 +91,7 @@ public class WorldGenSmallCaves extends WorldGenStructure {
 
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.cave_spawn_rate) {
+        if (randomNumberGenerator >= WorldConfig.cave_spawn_rate) {
             return false;
         }
         return true;
@@ -99,7 +100,7 @@ public class WorldGenSmallCaves extends WorldGenStructure {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.cave_chest_chance) {
+        if(randomNumberChestGenerator >= WorldConfig.cave_chest_chance) {
             return false;
         }
         return true;

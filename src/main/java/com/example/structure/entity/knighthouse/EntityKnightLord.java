@@ -1,5 +1,6 @@
 package com.example.structure.entity.knighthouse;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.EntityAerialTimedAttack;
@@ -270,10 +271,10 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.34D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) ModConfig.unholy_knight_health * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((double) ModConfig.unholy_knight_armor * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.unholy_knight_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((double) MobConfig.unholy_knight_armor * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.7D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.unholy_knight_armor_toughness * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.unholy_knight_armor_toughness * ModConfig.biome_multiplier);
     }
 
     @Override
@@ -374,7 +375,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = (float) (ModConfig.unholy_knight_damage * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
             }, 18);
@@ -404,7 +405,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = (float) (ModConfig.unholy_knight_damage * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
         }, 10);
@@ -420,7 +421,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = (float) (ModConfig.unholy_knight_damage * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
         }, 30);
@@ -449,7 +450,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                     if(!this.isBlocking()) {
                         Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.3, 1.3, 0)));
                         DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                        float damage = (float) ((ModConfig.unholy_knight_damage + 1) * ModConfig.biome_multiplier);
+                        float damage = (float) ((MobConfig.unholy_knight_damage + 1) * ModConfig.biome_multiplier);
                         ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
                     }
                 }, i);

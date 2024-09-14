@@ -1,5 +1,6 @@
 package com.example.structure.entity.endking.ghosts;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.Projectile;
@@ -24,6 +25,10 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -45,6 +50,10 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnimatable, IAttack {
+
+    public static DataParameter<Boolean> SET_SPAWN_LOC_KING = EntityDataManager.createKey(EntityPermanantGhost.class, DataSerializers.BOOLEAN);
+
+    public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityPermanantGhost.class, DataSerializers.BLOCK_POS);
 
     /**
      * This is the Permanant Ghost, This will be active in Phase 3
@@ -70,12 +79,27 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
 
     protected EntityEndKing parentEntity;
 
+    public boolean isSetSpawnLoc() {
+        return this.dataManager.get(SET_SPAWN_LOC_KING);
+    }
+    public void setSetSpawnLoc(boolean value) {
+        this.dataManager.set(SET_SPAWN_LOC_KING, Boolean.valueOf(value));
+    }
+
+    public void setSpawnLocation(BlockPos pos) {
+        this.dataManager.set(SPAWN_LOCATION, pos);
+    }
+
+    public BlockPos getSpawnLocation() {
+        return this.dataManager.get(SPAWN_LOCATION);
+    }
+
     public void onSummon(BlockPos pos, EntityEndKing parentEntity) {
         BlockPos offset = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
         this.setPosition(offset);
         if(parentEntity != null && parentEntity.getSpawnLocation() != null) {
-            BlockPos spawnLoc = parentEntity.getSpawnLocation();
-            this.setSpawnLocation(spawnLoc);
+            this.setSetSpawnLoc(true);
+            this.setSpawnLocation(offset);
         }
         this.setPGhostSummon(true);
         addEvent(()-> this.setPGhostSummon(false), 50);
@@ -97,6 +121,29 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         this.IisGhost = true;
     }
 
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Set_Spawn_Loc_King", this.dataManager.get(SET_SPAWN_LOC_KING));
+        nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
+        nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
+        nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
+        this.dataManager.set(SET_SPAWN_LOC_KING, nbt.getBoolean("Set_Spawn_Loc_King"));
+        this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
+    }
+
+    @Override
+    public void entityInit() {
+        super.entityInit();
+        this.dataManager.register(SET_SPAWN_LOC_KING, Boolean.valueOf(false));
+        //
+        this.dataManager.register(SPAWN_LOCATION, new BlockPos(this.getPositionVector().x, this.getPositionVector().y, this.getPositionVector().z));
+    }
 
 
     @Override
@@ -133,7 +180,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         //This is to hopefully hook the two together for reading off each other
 
 
-        if(this.getSpawnLocation() != null) {
+        if(this.getSpawnLocation() != null && this.isSetSpawnLoc()) {
             Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
 
             double distSq = this.getDistanceSq(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
@@ -306,7 +353,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
             this.setImmovable(true);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+            float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
             ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.7f, 0, false);
         }, 30);
 
@@ -341,7 +388,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
                 addEvent(()-> {
                     Vec3d offset = this.getPositionVector().add(ModUtils.yVec(1.5f));
                     DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                    float damage = (float) (this.getAttack() * ModConfig.end_king_leap_attack);
+                    float damage = (float) (this.getAttack() * MobConfig.end_king_leap_attack);
                     ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.6f, 0, false);
                 }, i);
             }
@@ -410,7 +457,7 @@ public class EntityPermanantGhost extends EntityAbstractEndKing implements IAnim
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+            float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
             ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
 
         }, 21);

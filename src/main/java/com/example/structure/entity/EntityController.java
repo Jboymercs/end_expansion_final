@@ -1,6 +1,8 @@
 package com.example.structure.entity;
 
 
+import com.example.structure.config.MobConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.ai.EntityAIRandomFly;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -139,7 +141,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     public boolean getCanSpawnHere() {
         // Middle end island check
         if (this.world.provider.getDimension() == 1 && world.rand.nextInt(28) == 0) {
-            return !ModConfig.does_spawn_middle ? Math.abs(this.posX) > 500 || Math.abs(this.posZ) > 500 : true;
+            return !WorldConfig.does_spawn_middle ? Math.abs(this.posX) > 500 || Math.abs(this.posZ) > 500 : true;
         }
 
         return super.getCanSpawnHere();
@@ -231,7 +233,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.guilder_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.guilder_health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
@@ -434,7 +436,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
             for (int i = 0; i < 40; i += 4) {
                 addEvent(() -> {
                     this.playSound(SoundEvents.ENTITY_BLAZE_SHOOT, 0.4f, 1.0f + ModRand.getFloat(0.2F));
-                    float damage =ModConfig.guilder_attack_damage;
+                    float damage =MobConfig.guilder_attack_damage;
                     ProjectilePurple projectile = new ProjectilePurple(this.world, this, damage);
                     Vec3d pos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(ModRand.getFloat(2), 3, ModRand.getFloat(2))));
                     Vec3d targetPos = new Vec3d(target.posX + ModRand.getFloat(3) - 1, target.posY, target.posZ + ModRand.getFloat(3) - 1);

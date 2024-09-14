@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
@@ -130,7 +131,7 @@ public class EntityGroundCrystal extends EntityModBase implements IAnimatable {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.ground_crystal_damage * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.ground_crystal_damage * ModConfig.lamented_multiplier);
     }
 
     @Override

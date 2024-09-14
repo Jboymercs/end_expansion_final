@@ -1,6 +1,7 @@
 package com.example.structure.world.stronghold;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.util.ModRand;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
@@ -22,8 +23,8 @@ public class BetterStronghold {
     private World world;
     private TemplateManager manager;
 
-    private static final int SIZE = ModConfig.stronghold_size;
-    private static final int SECOND_SIZE = ModConfig.stronghold_size * 2;
+    private static final int SIZE = WorldConfig.stronghold_size;
+    private static final int SECOND_SIZE = WorldConfig.stronghold_size * 2;
     protected boolean hasGeneratedLibrary = false;
     protected boolean hasSpawnedSecondLevel = false;
     private static final List<Tuple<Rotation, BlockPos>> CROSS_POS = Lists.newArrayList(new Tuple(Rotation.NONE, new BlockPos(0, 0, 0)),

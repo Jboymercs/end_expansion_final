@@ -1,6 +1,7 @@
 package com.example.structure.world.api.vaults;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import net.minecraft.block.Block;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -53,7 +54,7 @@ public class WorldGenEndVaults extends WorldGenerator {
 
         int yHieght = getGroundFromAbove(world, pos.getX() + 2, pos.getZ() + 2);
         int yHieghtAdjust = getGroundFromAbove(world, pos.getX() + 16, pos.getZ() + 16);
-        if(yHieght > 60 && spacing > ModConfig.vault_distance && yHieghtAdjust > 57) {
+        if(yHieght > 60 && spacing > WorldConfig.vault_distance && yHieghtAdjust > 57) {
             getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 150, pos.getZ() - 150, pos.getX() + 150, pos.getZ() + 150));
             return true;
 
@@ -115,7 +116,7 @@ public class WorldGenEndVaults extends WorldGenerator {
 
         @Override
         public boolean isSizeableStructure() {
-            return components.size() > ModConfig.vault_size;
+            return components.size() > WorldConfig.vault_size;
         }
 
 

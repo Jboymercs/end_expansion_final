@@ -1,6 +1,7 @@
 package com.example.structure.world.api.lamentedIslands;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.google.common.collect.Lists;
@@ -26,7 +27,7 @@ public class LamentedIslands {
     private World world;
     private TemplateManager manager;
 
-    private static final int SIZE = ModConfig.islands_size;
+    private static final int SIZE = WorldConfig.islands_size;
 
 
     private static final List<Tuple<Rotation, BlockPos>> CROSS_POS_MAIN = Lists.newArrayList(new Tuple(Rotation.NONE, new BlockPos(0, 30, 0)),

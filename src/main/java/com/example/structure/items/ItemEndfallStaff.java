@@ -1,6 +1,7 @@
 package com.example.structure.items;
 
 import com.example.structure.Main;
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModPotions;
 import com.example.structure.util.IHasModel;
@@ -61,7 +62,7 @@ public class ItemEndfallStaff extends ItemBase implements IAnimatable, IHasModel
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        int StaffCoolDown = ModConfig.staff_cooldown * 20;
+        int StaffCoolDown = ItemConfig.staff_cooldown * 20;
         ItemStack stack = playerIn.getHeldItem(handIn);
         if(!worldIn.isRemote && !playerIn.getCooldownTracker().hasCooldown(this)) {
             List<EntityLivingBase> nearbyEntities = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, playerIn.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable());

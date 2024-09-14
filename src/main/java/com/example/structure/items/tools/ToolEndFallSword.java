@@ -1,5 +1,6 @@
 package com.example.structure.items.tools;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityGhostArm;
 import com.example.structure.init.ModCreativeTabs;
@@ -51,7 +52,7 @@ public class ToolEndFallSword extends ToolSword implements IAnimatable {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int SwordCoolDown = ModConfig.endfall_sword_cooldown * 20;
+        int SwordCoolDown = ItemConfig.endfall_sword_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
             AnimationController<?> controller = GeckoLibUtil.getControllerForStack(this.factory, stack, controllerName);
             worldIn.playSound(null, player.posX, player.posY, player.posZ, ModSoundHandler.KING_TOP_SWIPE, SoundCategory.PLAYERS, 1.0F, 1.0F);

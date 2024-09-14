@@ -1,5 +1,6 @@
 package com.example.structure.items.tools;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.util.ModDamageSource;
@@ -61,10 +62,10 @@ public class ToolBossSword extends ToolSword implements ISweepAttackOverride, IA
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int SwordCoolDown = ModConfig.sword_cooldown * 20;
+        int SwordCoolDown = ItemConfig.sword_cooldown * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
             worldIn.playSound(null, player.posX, player.posY, player.posZ, ModSoundHandler.BOSS_DASH, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            Vec3d moveVec = player.getLookVec().scale(ModConfig.sword_velocity);
+            Vec3d moveVec = player.getLookVec().scale(ItemConfig.sword_velocity);
             if(player.canBePushed()) {
                 player.motionX = moveVec.x;
                 player.motionY = moveVec.y * 0.5;
@@ -85,7 +86,7 @@ public class ToolBossSword extends ToolSword implements ISweepAttackOverride, IA
                 if (entitylivingbase != player && (entitylivingbase.getPassengers().isEmpty() || !(entitylivingbase.getPassengers().get(0) == player))) {
                     Vec3d offset = player.getPositionVector().add(ModUtils.getRelativeOffset(player, new Vec3d(0,1.2,0)));
                     DamageSource source = ModDamageSource.builder().type(ModDamageSource.PLAYER).directEntity(player).build();
-                    float damage = ModConfig.sword_dash_damage;
+                    float damage = ItemConfig.sword_dash_damage;
                     ModUtils.handleAreaImpact(2.0f, (e)-> damage, player, offset, source, 0.8f, 0, false);
                     i++;
                 }

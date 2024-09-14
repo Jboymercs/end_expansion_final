@@ -1,6 +1,7 @@
 package com.example.structure.world.api.ashtower;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
@@ -102,7 +103,7 @@ public class AshTowerTemplate extends ModStructureTemplate {
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.ashed_towers_mob_spawn) {
+        if (randomNumberGenerator >= WorldConfig.ashed_towers_mob_spawn) {
             return false;
         }
         return true;
@@ -110,7 +111,7 @@ public class AshTowerTemplate extends ModStructureTemplate {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.ashed_tower_chest_spawn) {
+        if(randomNumberChestGenerator >= WorldConfig.ashed_tower_chest_spawn) {
             return false;
         }
         return true;

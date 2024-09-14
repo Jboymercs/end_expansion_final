@@ -1,5 +1,6 @@
 package com.example.structure.entity.endking;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityGhostArm;
 import com.example.structure.entity.Projectile;
@@ -28,7 +29,7 @@ public class ProjectileSpinSword extends Projectile {
     private static final int PARTICLE_AMOUNT = 1;
 
     public ProjectileSpinSword(World worldIn, EntityLivingBase throwerIn, float damage) {
-        super(worldIn, throwerIn, (float) (ModConfig.projectile_sword_damage * ModConfig.biome_multiplier));
+        super(worldIn, throwerIn, (float) (MobConfig.projectile_sword_damage * ModConfig.biome_multiplier));
         this.setNoGravity(true);
         this.noClip = true;
     }
@@ -40,7 +41,7 @@ public class ProjectileSpinSword extends Projectile {
     EntityLivingBase doNotTarget;
 
     public ProjectileSpinSword(World worldIn, EntityLivingBase throwerIn, float damage, EntityLivingBase free) {
-        super(worldIn, throwerIn, (float) (ModConfig.projectile_sword_damage * ModConfig.biome_multiplier));
+        super(worldIn, throwerIn, (float) (MobConfig.projectile_sword_damage * ModConfig.biome_multiplier));
         this.doNotTarget = free;
     }
 

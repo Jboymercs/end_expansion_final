@@ -1,6 +1,7 @@
 package com.example.structure.world.api.mines;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.endking.EntityEndKing;
@@ -82,7 +83,7 @@ public class MinesTemplate extends ModStructureTemplate {
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.ashed_mines_mob_spawns) {
+        if (randomNumberGenerator >= WorldConfig.ashed_mines_mob_spawns) {
             return false;
         }
         return true;
@@ -91,7 +92,7 @@ public class MinesTemplate extends ModStructureTemplate {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.ashed_mines_chest_spawns) {
+        if(randomNumberChestGenerator >= WorldConfig.ashed_mines_chest_spawns) {
             return false;
         }
         return true;

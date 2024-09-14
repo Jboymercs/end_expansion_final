@@ -1,5 +1,6 @@
 package com.example.structure.entity.lamentorUtil;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityModBase;
@@ -69,7 +70,7 @@ public class EntityLamentorWave extends EntityModBase implements IAnimatable {
                                 .type(ModDamageSource.MOB)
                                 .directEntity(this)
                                 .build();
-                        float damage = (float) ((ModConfig.attack_damage * 0.75) * ModConfig.lamented_multiplier);
+                        float damage = (float) ((MobConfig.attack_damage * 0.75) * ModConfig.lamented_multiplier);
                         ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 1.5F, 0, false);
                     }
                 }

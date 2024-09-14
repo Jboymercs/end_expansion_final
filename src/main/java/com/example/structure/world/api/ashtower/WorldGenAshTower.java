@@ -1,6 +1,7 @@
 package com.example.structure.world.api.ashtower;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.handlers.BiomeRegister;
 import net.minecraft.block.Block;
@@ -45,7 +46,7 @@ public class WorldGenAshTower extends WorldGenerator {
         int yHieght = getGroundFromAbove(world, pos.getX() + 2, pos.getZ() + 2);
         int yHieghtAdjust = getGroundFromAbove(world, pos.getX() + 16, pos.getZ() + 16);
         BlockPos modifiedPos = new BlockPos(pos.getX() + 17, pos.getY(), pos.getZ() + 17);
-        if (yHieght > 58 && spacing > ModConfig.ash_tower_distance && yHieghtAdjust > 58  && world.getBiomeForCoordsBody(pos) == BiomeRegister.END_ASH_WASTELANDS && world.getBiomeForCoordsBody(modifiedPos) == BiomeRegister.END_ASH_WASTELANDS
+        if (yHieght > 58 && spacing > WorldConfig.ash_tower_distance && yHieghtAdjust > 58  && world.getBiomeForCoordsBody(pos) == BiomeRegister.END_ASH_WASTELANDS && world.getBiomeForCoordsBody(modifiedPos) == BiomeRegister.END_ASH_WASTELANDS
         && yHieght < 70 && yHieghtAdjust < 70) {
 
             getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 150, pos.getZ() - 150, pos.getX() + 150, pos.getZ() + 150));

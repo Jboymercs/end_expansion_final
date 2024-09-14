@@ -1,6 +1,7 @@
 package com.example.structure.entity.trader.action;
 
 import com.example.structure.Main;
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.ai.IAction;
@@ -28,7 +29,7 @@ public class ActionMiniValonLazer implements IMultiAction {
 
     public ActionMiniValonLazer(EntityModBase actor, byte stopLaserByte, Consumer<Vec3d> onLaserImpact) {
         this.entity = actor;
-        this.laserExplosionSize = ModConfig.lazer_explosion_size;
+        this.laserExplosionSize = MobConfig.lazer_explosion_size;
         this.maxLaserDistance = 18;
         this.beamLag = 1;
         this.stopLaserByte = stopLaserByte;
@@ -87,7 +88,7 @@ public class ActionMiniValonLazer implements IMultiAction {
                                 .type(ModDamageSource.MAGIC)
                                 .build();
                         //Damage
-                        target.attackEntityFrom(source, (float) (ModConfig.avalon_attack_damage * ModConfig.avalon_lazer_multiplier));
+                        target.attackEntityFrom(source, (float) (MobConfig.avalon_attack_damage * MobConfig.avalon_lazer_multiplier));
                     }
 
                     Main.network.sendToAllTracking(new MessageDirectionForRender(entity, lazerPos), entity);

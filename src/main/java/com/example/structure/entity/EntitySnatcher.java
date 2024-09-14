@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.snatcher.EntityStalkAI;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
@@ -118,7 +119,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ModConfig.stalker_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MobConfig.stalker_health * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
@@ -186,7 +187,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
         return this.world.rand.nextInt(18) == 0;
     }
 
-    protected int hibernationTimer = 500 + ModRand.range(50, ModConfig.stalker_hibernation * 20);
+    protected int hibernationTimer = 500 + ModRand.range(50, MobConfig.stalker_hibernation * 20);
     protected int aggroTimer = 400;
 
     protected int checkForTorchTimer = 30;
@@ -229,7 +230,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
 
         if(this.isCurrentlyinHibernation) {
             //Incase Players want to try to mine him up you'll regret it
-            List<EntityPlayer> closeplayers = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(ModConfig.stalker_distance), e -> !e.getIsInvulnerable());
+            List<EntityPlayer> closeplayers = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(MobConfig.stalker_distance), e -> !e.getIsInvulnerable());
 
             //This is to keep it in hibernation if theres no players around, and they'll pop out with time
 
@@ -240,14 +241,14 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
 
             if(!closeplayers.isEmpty() && !this.setOnaggro) {
                 this.endHiberntaion();
-                hibernationTimer = 500 + ModRand.range(50, ModConfig.stalker_hibernation * 20);
+                hibernationTimer = 500 + ModRand.range(50, MobConfig.stalker_hibernation * 20);
                 this.iAmPissedOff = true;
                 setOnaggro = true;
             }
         }
         if(hibernationTimer < 0) {
             this.endHiberntaion();
-            hibernationTimer = 500 + ModRand.range(50, ModConfig.stalker_hibernation * 20);
+            hibernationTimer = 500 + ModRand.range(50, MobConfig.stalker_hibernation * 20);
         }
         if(this.iAmPissedOff) {
             aggroTimer--;
@@ -343,7 +344,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
           this.playSound(ModSoundHandler.STALKER_SWING, 1.0f, 1.0f - ModRand.getFloat(0.3F));
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-          float damage = (float) (ModConfig.stalker_damage * ModConfig.biome_multiplier);
+          float damage = (float) (MobConfig.stalker_damage * ModConfig.biome_multiplier);
           ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
       }, 9);
 
@@ -357,14 +358,14 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-          float damage = (float) ((ModConfig.stalker_damage -2) * ModConfig.biome_multiplier);
+          float damage = (float) ((MobConfig.stalker_damage -2) * ModConfig.biome_multiplier);
           ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
       }, 10);
       //R
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) ((ModConfig.stalker_damage -2) * ModConfig.biome_multiplier);
+            float damage = (float) ((MobConfig.stalker_damage -2) * ModConfig.biome_multiplier);
             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
         }, 20);
 

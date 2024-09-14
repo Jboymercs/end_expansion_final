@@ -2,6 +2,7 @@ package com.example.structure.world.stronghold;
 
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -75,7 +76,7 @@ public class MapGenBetterStronghold extends MapGenStronghold {
 
         @Override
         public boolean isSizeableStructure() {
-            return components.size() > ModConfig.stronghold_size;
+            return components.size() > WorldConfig.stronghold_size;
         }
     }
 }

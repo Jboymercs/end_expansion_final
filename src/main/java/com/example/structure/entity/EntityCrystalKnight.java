@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.*;
 import com.example.structure.entity.lamentorUtil.ActionCircleAOE;
@@ -45,6 +46,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,6 +99,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     private static final DataParameter<Boolean> DEATH_BOOLEAN = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
 
     public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BLOCK_POS);
+    public static DataParameter<Boolean> SET_SPAWN_LOC = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -120,12 +123,14 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
         nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
         nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
+        nbt.setBoolean("Set_Spawn_Loc", this.dataManager.get(SET_SPAWN_LOC));
+
     }
 
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
+        super.readEntityFromNBT(nbt);
         this.dataManager.set(LAMENTOR_MODE, nbt.getBoolean("Lamentor_Mode"));
         this.dataManager.set(STRIKE_ATTACK, nbt.getBoolean("Strike_Attack"));
         this.dataManager.set(CRYSTAL_ATTACK, nbt.getBoolean("Crystal_Attack"));
@@ -142,6 +147,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         this.dataManager.set(HAMMER_PROJECTILE, nbt.getBoolean("Hammer_Projectile"));
         this.dataManager.set(SUMMON_BOOLEAN, nbt.getBoolean("Summon_Boolean"));
         this.dataManager.set(DEATH_BOOLEAN, nbt.getBoolean("Death_Boolean"));
+        this.dataManager.set(SET_SPAWN_LOC, nbt.getBoolean("Set_Spawn_Loc"));
         this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
     }
     public boolean rangeSwitch;
@@ -162,7 +168,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         this.setSize(0.8f, 2.2f);
         this.isImmuneToFire = true;
         this.isImmuneToExplosions();
-        this.healthScaledAttackFactor = ModConfig.lamentor_scaled_attack;
+        this.healthScaledAttackFactor = MobConfig.lamentor_scaled_attack;
         this.meleeSwitch = true;
         this.moveHelper = new EntityFlyMoveHelper(this);
         this.navigator = new PathNavigateFlying(this, worldIn);
@@ -186,13 +192,13 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     public void onSummon(BlockPos Pos, Projectile actor) {
         BlockPos offset = Pos.add(new BlockPos(0,3,0));
         this.setSpawnLocation(offset);
+        this.setSetSpawnLoc(true);
         //we're trying to set up the AOE attack and the reset key block if the player doesn't kill the Lamentor
         centerPos = Pos.add(0, -1, 0);
         this.setPosition(offset);
         world.spawnEntity(this);
         actor.setDead();
     }
-
 
 
     @Override
@@ -216,8 +222,10 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         //States
         this.dataManager.register(DEATH_BOOLEAN, Boolean.valueOf(false));
         this.dataManager.register(SUMMON_BOOLEAN, Boolean.valueOf(false));
+        this.dataManager.register(SET_SPAWN_LOC, Boolean.valueOf(false));
         //
-        this.dataManager.register(SPAWN_LOCATION, null);
+
+        this.dataManager.register(SPAWN_LOCATION, new BlockPos(this.getPositionVector().x, this.getPositionVector().y, this.getPositionVector().z));
 
     }
 
@@ -284,6 +292,12 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     public boolean isShulkerAttack() {
         return this.dataManager.get(SHULKER_ATTACK);
     }
+    public boolean isSetSpawnLoc() {
+        return this.dataManager.get(SET_SPAWN_LOC);
+    }
+    public void setSetSpawnLoc(boolean value) {
+        this.dataManager.set(SET_SPAWN_LOC, Boolean.valueOf(value));
+    }
 
     public void setHammerProjectile(Boolean value) {
         this.dataManager.set(HAMMER_PROJECTILE, Boolean.valueOf(value));
@@ -317,13 +331,13 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)MobConfig.health * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.39590D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ModConfig.lamentor_toughness_armor * ModConfig.lamented_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ModConfig.lamentor_armor * ModConfig.lamented_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.attack_damage * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.lamentor_toughness_armor * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.lamentor_armor * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.attack_damage * ModConfig.lamented_multiplier);
     }
 
 
@@ -350,7 +364,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         //Spawn Telporting Location
         //This is too keep the boss at it's starting location and keep it from getting too far away
 
-        if(this.getSpawnLocation() != null) {
+        if(this.getSpawnLocation() != null && this.isSetSpawnLoc()) {
             Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
 
             double distSq = this.getDistanceSq(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
@@ -394,7 +408,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             this.setImmovable(false);
         }
         //Allows boss to destory blocks while quick dashing
-        if(ModConfig.bosses_of_mass_destruction) {
+        if(MobConfig.bosses_of_mass_destruction) {
             if(this.isSpinCycle() || this.isPierceAttack() || this.isMultiPierceAttack()) {
                 AxisAlignedBB box = getEntityBoundingBox().grow(1.25, 0.1, 1.25).offset(0, 0.1, 0);
                 ModUtils.destroyBlocksInAABB(box, world, this);
@@ -406,6 +420,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
 
     }
+
     //Particle Call
     @Override
     public void onEntityUpdate() {
@@ -624,10 +639,10 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         return factory;
     }
 
-    Supplier<Projectile> crystalBallProjectile = () -> new EntityCrystalSpikeSmall(world, this, ModConfig.crystal_damage, null);
+    Supplier<Projectile> crystalBallProjectile = () -> new EntityCrystalSpikeSmall(world, this, MobConfig.crystal_damage, null);
 
 
-    public static int Boss_Cooldown = ModConfig.boss_speed * 20;
+    public static int Boss_Cooldown = MobConfig.boss_speed * 20;
 
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
@@ -705,7 +720,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 for (int i = 0; i < 60; i += 4) {
                     addEvent(() -> {
                         this.playSound(SoundEvents.ENTITY_BLAZE_SHOOT, 0.4f, 0.8f + ModRand.getFloat(0.2F));
-                        float damage =ModConfig.crystal_damage;
+                        float damage =MobConfig.crystal_damage;
                         EntityCrystalSpikeSmall projectile = new EntityCrystalSpikeSmall(this.world, this, damage, null);
                         Vec3d pos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(ModRand.getFloat(2), 3, ModRand.getFloat(2))));
                         Vec3d targetPos = new Vec3d(target.posX + ModRand.getFloat(2) - 1, target.posY, target.posZ + ModRand.getFloat(2) - 1);
@@ -748,7 +763,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.75, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).disablesShields().directEntity(this).build();
-                            float damage = this.getAttack() * ModConfig.pierce_multiplier;
+                            float damage = this.getAttack() * MobConfig.pierce_multiplier;
                             ModUtils.handleAreaImpact(1.5f, (e) -> damage, this, offset, source, 0.7f, 0, false);
                         }, i);
                     }
@@ -802,7 +817,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             addEvent(() -> {
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 0.75, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = this.getAttack() * ModConfig.circle_multiplier;
+                float damage = this.getAttack() * MobConfig.circle_multiplier;
                 ModUtils.handleAreaImpact(1.5f, (e) -> damage, this, offset, source, 0.7f, 0, false);
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
             }, 4);
@@ -882,8 +897,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             addEvent(() -> {
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(2.0, 0, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = this.getAttack() * ModConfig.hammer_multiplier;
-                float explostionFactor = ModConfig.explosion_size;
+                float damage = this.getAttack() * MobConfig.hammer_multiplier;
+                float explostionFactor = MobConfig.explosion_size;
                 ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.9f, 1, false);
                 this.world.newExplosion(this, offset.x, offset.y, offset.z, explostionFactor, false, true);
             }, 20);
@@ -914,7 +929,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                            float damage = this.getAttack() * ModConfig.pierce_multiplier;
+                            float damage = this.getAttack() * MobConfig.pierce_multiplier;
                             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
                         }, t);
                     }
@@ -942,7 +957,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                            float damage =  this.getAttack() * ModConfig.pierce_multiplier;
+                            float damage =  this.getAttack() * MobConfig.pierce_multiplier;
                             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
                         }, t);
                     }
@@ -970,7 +985,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                            float damage = this.getAttack() * ModConfig.pierce_multiplier;
+                            float damage = this.getAttack() * MobConfig.pierce_multiplier;
                             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
                         }, t);
                     }

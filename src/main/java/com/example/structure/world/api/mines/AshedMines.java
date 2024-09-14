@@ -1,6 +1,7 @@
 package com.example.structure.world.api.mines;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.world.api.vaults.VaultTemplate;
@@ -32,7 +33,7 @@ public class AshedMines {
 
     private int yAxel2Level = 0;
 
-    private static final int SIZE = ModConfig.ashed_mines_size;
+    private static final int SIZE = WorldConfig.ashed_mines_size;
 
     private static final int SECOND_SIZE = SIZE + 4;
 

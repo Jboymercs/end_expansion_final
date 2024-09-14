@@ -1,6 +1,7 @@
 package com.example.structure.entity;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.ai.ActionGolemQuake;
 import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.util.IAttack;
@@ -76,7 +77,7 @@ public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable,
     public boolean getCanSpawnHere() {
         // Middle end island check
         if (this.world.provider.getDimension() == 1 && world.rand.nextInt(28) == 0) {
-            return !ModConfig.does_spawn_middle ? Math.abs(this.posX) > 500 || Math.abs(this.posZ) > 500 : true;
+            return !WorldConfig.does_spawn_middle ? Math.abs(this.posX) > 500 || Math.abs(this.posZ) > 500 : true;
         }
         return super.getCanSpawnHere();
 

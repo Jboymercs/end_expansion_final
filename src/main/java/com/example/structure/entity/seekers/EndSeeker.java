@@ -1,5 +1,7 @@
 package com.example.structure.entity.seekers;
 
+import com.example.structure.config.ItemConfig;
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
@@ -234,8 +236,8 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)ModConfig.seeker_health * ModConfig.lamented_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ModConfig.seeker_attack_damage * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.seeker_health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.seeker_attack_damage * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
@@ -341,7 +343,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
             addEvent(()-> {
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-                ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
+                ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ItemConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
                Vec3d vel2 = target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
@@ -356,7 +358,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
             addEvent(()-> {
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-                ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
+                ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ItemConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
                 Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);
@@ -371,7 +373,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
             addEvent(()-> {
                 this.playSound(ModSoundHandler.SEEKER_SHOOT, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-                ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ModConfig.purp_projectile);
+                ProjectilePurple projectilePurple = new ProjectilePurple(world, this, ItemConfig.purp_projectile);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.5, 0.3)));
                 Vec3d vel2 =  target.getPositionVector().add(ModUtils.yVec(1.0D)).subtract(offset);
                 projectilePurple.setPosition(offset.x, offset.y, offset.z);

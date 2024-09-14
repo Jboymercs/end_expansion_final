@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModColors;
@@ -25,7 +26,7 @@ public class EntityCrystalSpikeSmall extends Projectile{
 
 
     public EntityCrystalSpikeSmall(World worldIn, EntityLivingBase throwerIn, float damage, ItemStack stack) {
-        super(worldIn, throwerIn, (float) (ModConfig.crystal_damage * ModConfig.lamented_multiplier));
+        super(worldIn, throwerIn, (float) (MobConfig.crystal_damage * ModConfig.lamented_multiplier));
         this.setNoGravity(true);
 
 

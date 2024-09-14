@@ -1,6 +1,7 @@
 package com.example.structure.world.api.structures;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.util.MapGenModStructure;
 import com.example.structure.util.handlers.BiomeRegister;
 import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
@@ -102,7 +103,7 @@ public class MapGenKingFortress extends MapGenModStructure implements INetherAPI
 
         @Override
         public boolean isSizeableStructure() {
-            return components.size() > ModConfig.fortress_size;
+            return components.size() > WorldConfig.fortress_size;
         }
 
     }

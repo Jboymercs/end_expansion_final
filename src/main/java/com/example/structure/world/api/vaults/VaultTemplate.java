@@ -1,6 +1,7 @@
 package com.example.structure.world.api.vaults;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderEyeFly;
 import com.example.structure.entity.painting.EntityEEPainting;
@@ -134,7 +135,7 @@ public class VaultTemplate extends ModStructureTemplate {
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= ModConfig.vault_mob_chance) {
+        if (randomNumberGenerator >= WorldConfig.vault_mob_chance) {
             return false;
         }
         return true;
@@ -142,7 +143,7 @@ public class VaultTemplate extends ModStructureTemplate {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= ModConfig.vault_loot_chance) {
+        if(randomNumberChestGenerator >= WorldConfig.vault_loot_chance) {
             return false;
         }
         return true;

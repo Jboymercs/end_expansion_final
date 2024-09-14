@@ -1,5 +1,6 @@
 package com.example.structure.entity.endking;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityEye;
@@ -20,6 +21,10 @@ import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
@@ -70,6 +75,9 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
 
     private final String ANIM_CAST_ARENA = "castArena";
 
+    public static DataParameter<Boolean> SET_SPAWN_LOC_KING = EntityDataManager.createKey(EntityEndKing.class, DataSerializers.BOOLEAN);
+
+    public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityEndKing.class, DataSerializers.BLOCK_POS);
 
     //PHASE THREE
 
@@ -102,14 +110,54 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
 
     private final String ANIM_DEATH_BOSS = "death";
 
+    public boolean isSetSpawnLoc() {
+        return this.dataManager.get(SET_SPAWN_LOC_KING);
+    }
+    public void setSetSpawnLoc(boolean value) {
+        this.dataManager.set(SET_SPAWN_LOC_KING, Boolean.valueOf(value));
+    }
+
+    public void setSpawnLocation(BlockPos pos) {
+        this.dataManager.set(SPAWN_LOCATION, pos);
+    }
+
+    public BlockPos getSpawnLocation() {
+        return this.dataManager.get(SPAWN_LOCATION);
+    }
+
     private final EntityAIBase flyattackAi = new EntityAerialKingAttack(this, 24, 1, 30, new TimedAttackIniator<>(this, 20));
     private final EntityAIBase basAttackAi = new EntityKingTimedAttack<>(this, 1.0, 60, 24.0f, 0.4f);
     private Consumer<EntityLivingBase> prevAttack;
 
     public EntityEndKing(World world) {
         super(world);
-        this.healthScaledAttackFactor = ModConfig.king_scaled_factor;
+        this.healthScaledAttackFactor = MobConfig.king_scaled_factor;
         this.experienceValue = 4500;
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("Set_Spawn_Loc_King", this.dataManager.get(SET_SPAWN_LOC_KING));
+        nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
+        nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
+        nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
+    }
+
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
+        this.dataManager.set(SET_SPAWN_LOC_KING, nbt.getBoolean("Set_Spawn_Loc_King"));
+        this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
+    }
+
+    @Override
+    public void entityInit() {
+        super.entityInit();
+        this.dataManager.register(SET_SPAWN_LOC_KING, Boolean.valueOf(false));
+        //
+        this.dataManager.register(SPAWN_LOCATION, new BlockPos(this.getPositionVector().x, this.getPositionVector().y, this.getPositionVector().z));
     }
 
     @Override
@@ -134,7 +182,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public void onUpdate() {
         super.onUpdate();
 
-        if(this.getSpawnLocation() != null) {
+        if(this.getSpawnLocation() != null && this.isSetSpawnLoc()) {
             Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
 
             double distSq = this.getDistanceSq(SpawnLoc.x, SpawnLoc.y, SpawnLoc.z);
@@ -217,7 +265,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         EntityLivingBase target = this.getAttackTarget();
 
         //Destroys Blocks while this is Dashing if the config option enables it
-        if(this.isFlyDashMove() && ModConfig.bosses_of_mass_destruction) {
+        if(this.isFlyDashMove() && MobConfig.bosses_of_mass_destruction) {
             AxisAlignedBB box = getEntityBoundingBox().grow(1.1, 0.1, 1.1).offset(0, -0.1, 0);
             ModUtils.destroyBlocksInAABB(box, world, this);
         }
@@ -314,6 +362,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         BlockPos offset = Pos.add(new BlockPos(0,0,0));
         this.setPosition(offset);
         this.setSpawnLocation(offset);
+        this.setSetSpawnLoc(true);
         world.spawnEntity(this);
         double healthChange = this.getHealth() / this.getMaxHealth();
         if(healthChange == 1) {
@@ -629,7 +678,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
               addEvent(()-> {
                   Vec3d offset = this.getPositionVector().add(ModUtils.yVec(1.5f));
                   DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                  float damage = (float) (this.getAttack() * ModConfig.end_king_leap_attack);
+                  float damage = (float) (this.getAttack() * MobConfig.end_king_leap_attack);
                   ModUtils.handleAreaImpact(2.0f, (e) -> damage, this, offset, source, 0.6f, 0, false);
               }, i);
           }
@@ -848,7 +897,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
           this.setImmovable(true);
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-          float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+          float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
           ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.7f, 0, false);
       }, 30);
 
@@ -873,7 +922,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.5, 1.5, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-          float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+          float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
           ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
 
       }, 21);
@@ -927,7 +976,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(3.6, 1.5, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-          float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+          float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
           ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
       }, 26);
 
@@ -935,7 +984,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(-3.6, 1.5, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (this.getAttack() * ModConfig.end_king_ghost_damage);
+            float damage = (float) (this.getAttack() * MobConfig.end_king_ghost_damage);
             ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
         }, 35);
 

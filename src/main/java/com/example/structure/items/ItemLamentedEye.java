@@ -1,5 +1,6 @@
 package com.example.structure.items;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
@@ -36,7 +37,7 @@ public class ItemLamentedEye extends ItemBase{
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        int EyeCooldown = ModConfig.eye_cooldown * 20;
+        int EyeCooldown = ItemConfig.eye_cooldown * 20;
     if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
         player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 80, 3));
         stack.damageItem(1, player);
