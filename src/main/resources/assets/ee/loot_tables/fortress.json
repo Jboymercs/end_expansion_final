@@ -19,8 +19,13 @@
         },
         {
           "type": "item",
+          "name": "ee:arena_key_4",
+          "weight": 12
+        },
+        {
+          "type": "item",
           "name": "ee:infusion_core",
-          "weight": 20
+          "weight": 10
         },
 
         {
@@ -78,7 +83,12 @@
         {
           "type": "item",
           "name": "ee:infused_crystal",
-          "weight": 10
+          "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "ee:arena_key_3",
+          "weight": 8
         },
         {
           "type": "item",

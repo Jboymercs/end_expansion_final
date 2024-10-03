@@ -1,7 +1,9 @@
 package com.example.structure.util.handlers;
 
 
+import com.example.structure.blocks.arenaBlocks.ArenaStateMapper;
 import com.example.structure.init.ModBlocks;
+import com.example.structure.init.ModFluid;
 import com.example.structure.init.ModItems;
 import com.example.structure.items.ItemAbstractMultiModel;
 import com.example.structure.items.tools.CustomModelLoader;
@@ -97,7 +99,7 @@ public class RegistryHandler {
                 ((IHasModel) block).registerModels();
             }
         }
-
+        ModelLoader.setCustomStateMapper(ModBlocks.BARE_EYE_ARENA, new ArenaStateMapper());
         ModelLoaderRegistry.registerLoader(new CustomModelLoader());
         ((ItemAbstractMultiModel)ModItems.GUN_LAUNCHER).registerModels();
 

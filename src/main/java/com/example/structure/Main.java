@@ -3,11 +3,9 @@ package com.example.structure;
 import com.example.structure.advancements.EEAdvancements;
 import com.example.structure.config.ModConfig;
 import com.example.structure.config.WorldConfig;
-import com.example.structure.init.ModDimensions;
-import com.example.structure.init.ModEntities;
-import com.example.structure.init.ModProfressions;
-import com.example.structure.init.ModRecipes;
+import com.example.structure.init.*;
 import com.example.structure.items.gecko.AmberArmorSet;
+import com.example.structure.packets.ModNetworkPackets;
 import com.example.structure.proxy.CommonProxy;
 import com.example.structure.renderer.armor.AmberArmorRenderer;
 import com.example.structure.util.ModReference;
@@ -88,6 +86,8 @@ public class Main {
         //Sky Box Registry
         ModDimensions.registerDimensionChanges();
 
+        //Fluids
+        ModFluid.registerFluids();
         //Advancements
         EEAdvancements.Initialization();
 
@@ -137,7 +137,7 @@ public class Main {
         ModSoundHandler.registerSounds();
         ModRecipes.init();
         ModProfressions.associateCareersAndTrades();
-
+        ModNetworkPackets.registerNetworkPackets();
         if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded) {
             //Sky Stuff
             proxy.registerEventHandlers();

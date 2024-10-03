@@ -19,6 +19,11 @@
         },
         {
           "type": "item",
+          "name": "ee:arena_key_1",
+          "weight": 18
+        },
+        {
+          "type": "item",
           "name": "minecraft:chorus_fruit",
           "weight": 25
         },

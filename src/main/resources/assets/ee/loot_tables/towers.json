@@ -22,7 +22,11 @@
           "name": "ee:infusion_core",
           "weight": 3
         },
-
+        {
+          "type": "item",
+          "name": "ee:arena_key_3",
+          "weight": 3
+        },
         {
           "type": "item",
           "name": "minecraft:diamond",

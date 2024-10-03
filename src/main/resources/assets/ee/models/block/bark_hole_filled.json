@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ee:blocks/bare_bark",
+    "side": "ee:blocks/bark_hole_filled"
+  }
+}

@@ -299,6 +299,16 @@
         },
         {
           "type": "item",
+          "name": "ee:arena_key_1",
+          "weight": 6
+        },
+        {
+          "type": "item",
+          "name": "ee:arena_key_2",
+          "weight": 3
+        },
+        {
+          "type": "item",
           "name": "minecraft:bone",
           "weight": 10,
           "functions": [

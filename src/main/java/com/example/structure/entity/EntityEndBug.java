@@ -5,6 +5,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.EntityAITimedAttack;
 import com.example.structure.entity.animation.Animation;
 import com.example.structure.entity.animation.IAnimatedEntity;
+import com.example.structure.entity.barrend.EntityLidoped;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.init.ModItems;
@@ -162,6 +163,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
         this.tasks.addTask(4, new EntityAITimedAttack<>(this, 1.2, 60, 3.0f, 0.2f));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityLidoped>(this, EntityLidoped.class, 1, true, false, null));
     }
 
     @Override

@@ -1,3 +1,6 @@
 {
-  "parent": "ee:block/bare_plant"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ee:blocks/bare_plant"
+  }
 }

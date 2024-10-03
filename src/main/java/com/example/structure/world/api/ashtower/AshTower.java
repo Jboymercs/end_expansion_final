@@ -2,6 +2,7 @@ package com.example.structure.world.api.ashtower;
 
 
 import com.example.structure.util.ModRand;
+import com.example.structure.util.integration.ModIntegration;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.Tuple;
@@ -35,33 +36,35 @@ public class AshTower {
     }
 
     public void startBaseTower(BlockPos pos, Rotation rot) {
-        String[] base_types = {"base_1", "base_2"};
-        AshTowerTemplate template = new AshTowerTemplate(manager, "base_2", pos, rot, 0, true);
+        AshTowerTemplate template;
+
+        if(ModIntegration.IS_DEEPER_DEPTHS_LOADED) {
+            String[] base_types = {"compat/base_1", "compat/base_2"};
+            template = new AshTowerTemplate(manager, ModRand.choice(base_types), pos, rot, 0, true);
+        } else {
+            String[] base_types = {"base_1", "base_2"};
+            template = new AshTowerTemplate(manager, ModRand.choice(base_types), pos, rot, 0, true);
+        }
+
         components.add(template);
         AshTowerTemplate.resetTemplateCount();
         generateLayer(template, BlockPos.ORIGIN, rot);
 
         generateWalkWays(template, BlockPos.ORIGIN, rot);
-
-       // int failedSTarts = 0;
-      //  for(Tuple<Rotation, BlockPos> tuple : CROSS_POS) {
-         //   if(!generateWalkWays(template, tuple.getSecond(), rot.add(tuple.getFirst()))) {
-         //       failedSTarts++;
-         //   }
-
-      //  }
-        //List<StructureComponent> structures = new ArrayList<>(components);
-       // if(failedSTarts > 3) {
-        //    components.clear();
-       //     components.addAll(structures);
-
-      //  }
     }
 
     public boolean generateLayer(AshTowerTemplate parent, BlockPos pos, Rotation rotation) {
         BlockPos posToo = pos.add(-21, 16, 0);
-        String[] lower_level_layers = {"layer_1", "layer_2", "layer_7", "layer_8"};
-        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(lower_level_layers), rotation);
+
+        AshTowerTemplate template;
+        if(ModIntegration.IS_DEEPER_DEPTHS_LOADED) {
+            String[] lower_level_layers = {"compat/layer_1", "compat/layer_2", "compat/layer_7", "compat/layer_8"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(lower_level_layers), rotation);
+        } else {
+            String[] lower_level_layers = {"layer_1", "layer_2", "layer_7", "layer_8"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(lower_level_layers), rotation);
+        }
+
 
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
@@ -85,8 +88,15 @@ public class AshTower {
 
     public boolean generateSecondLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
         BlockPos posToo = pos.add(-21, 16, 0);
-        String[] upper_level_layers = {"layer_3", "layer_4", "layer_6", "layer_8"};
-        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(upper_level_layers), rot);
+        AshTowerTemplate template;
+        if(ModIntegration.IS_DEEPER_DEPTHS_LOADED) {
+            String[] upper_level_layers = {"compat/layer_3", "compat/layer_4", "compat/layer_6", "compat/layer_8"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(upper_level_layers), rot);
+        } else {
+            String[] upper_level_layers = {"layer_3", "layer_4", "layer_6", "layer_8"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(upper_level_layers), rot);
+        }
+
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
 
@@ -103,9 +113,17 @@ public class AshTower {
     }
 
     public boolean generateThirdLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
-        String[] highest_level_layers = {"layer_5", "layer_3", "layer_7", "layer_6"};
+
         BlockPos posToo = pos.add(-21, 16, 0);
-        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(highest_level_layers), rot);
+        AshTowerTemplate template;
+        if(ModIntegration.IS_DEEPER_DEPTHS_LOADED) {
+            String[] highest_level_layers = {"compat/layer_5", "compat/layer_3", "compat/layer_7", "compat/layer_6"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(highest_level_layers), rot);
+        } else {
+            String[] highest_level_layers = {"layer_5", "layer_3", "layer_7", "layer_6"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(highest_level_layers), rot);
+        }
+
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
 
@@ -127,8 +145,15 @@ public class AshTower {
 
     public boolean generateTopLayer(AshTowerTemplate parent, BlockPos pos, Rotation rot) {
         BlockPos posToo = pos.add(-21, 16, 0);
-        String[] roof_level_layers = {"top_1", "top_2"};
-        AshTowerTemplate template = addAdjustedPiece(parent, posToo, ModRand.choice(roof_level_layers), rot);
+        AshTowerTemplate template;
+        if(ModIntegration.IS_DEEPER_DEPTHS_LOADED) {
+            String[] roof_level_layers = {"compat/top_1", "compat/top_2"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(roof_level_layers), rot);
+        } else {
+            String[] roof_level_layers = {"top_1", "top_2"};
+            template = addAdjustedPiece(parent, posToo, ModRand.choice(roof_level_layers), rot);
+        }
+
         if(template.isCollidingExcParent(manager, parent, components)) {
             return false;
 

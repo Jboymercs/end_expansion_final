@@ -27,6 +27,12 @@ public class ParticleManager {
     }
 
 
+    public static void spawnFirework(World world, Vec3d pos, Vec3d color, Vec3d vel) {
+        Particle particle = new ParticleFirework.Factory().createParticle(0, world, pos.x, pos.y, pos.z, vel.x, vel.y, vel.z);
+        particle.setRBGColorF((float) color.x, (float) color.y, (float) color.z);
+        Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+    }
+
     public static void spawnColoredSmoke(World worldIn, Vec3d pos, Vec3d baseColor, Vec3d vel) {
         Particle particle = new ParticleSmokeNormal.Factory().createParticle(0, worldIn, pos.x, pos.y, pos.z, vel.x, vel.y, vel.z);
 

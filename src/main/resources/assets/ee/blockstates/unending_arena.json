@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "ee:arena_inactive"
+    },
+    "state=inactive": {
+      "model": "ee:arena_inactive"
+    },
+    "state=active": {
+      "model": "ee:arena_active"
+    },
+    "state=ejecting": {
+      "model": "ee:arena_ejecting"
+    }
+  }
+}

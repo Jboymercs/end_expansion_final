@@ -3,8 +3,8 @@
     {
       "name" : "ee:treasure_towers",
       "rolls": {
-        "min": 1,
-        "max": 2
+        "min": 2,
+        "max": 3
       },
       "entries": [
         {
@@ -21,6 +21,11 @@
           "type": "item",
           "name": "ee:obi_coin",
           "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "ee:arena_key_3",
+          "weight": 5
         },
         {
           "type": "item",

@@ -53,6 +53,8 @@ public class ModItems {
     //Ash Wastelands Items
     public static  final Item RED_CRYSTAL_ITEM = new ItemRedCrystal("red_crystal_item", "red_crystal",ModCreativeTabs.ITEMS);
     public static final Item RED_CRYSTAL_CHUNK = new ItemBase("red_chunk", ModCreativeTabs.ITEMS);
+    public static final Item GREEN_CRYSTAL_ITEM = new ItemGreenCrystal("green_crystal_item", "green_crystal", ModCreativeTabs.ITEMS);
+    public static final Item GREEN_CRYSTAL_CHUNK = new ItemBase("green_chunk", ModCreativeTabs.ITEMS);
     public static final Item INFUSED_CRYSTAL = new ItemInfusedCrystal("infused_crystal", "infuse", ModCreativeTabs.ITEMS);
     public static final Item INFUSION_CORE = new ItemInfusionCore("infusion_core", "core", ModCreativeTabs.ITEMS);
     public static final Item STALKER_HIDE = new ItemBase("stalker_hide", ModCreativeTabs.ITEMS);
@@ -104,6 +106,13 @@ public class ModItems {
 
     public static final Item AMBER_DAGGER = new ItemChomperDagger("amber_dagger", DAGGER_MATERIAL, "dagger_desc");
     public static final Item AMBER_PICKAXE = new ItemAmberPickaxe("amber_pickaxe", AMBER_SET);
+
+    public static final Item ARENA_KEY_ONE = new ItemArenaKey("arena_key_1", ModCreativeTabs.ITEMS, "arena_key_desc");
+    public static final Item ARENA_KEY_TWO = new ItemArenaKey("arena_key_2", ModCreativeTabs.ITEMS, "arena_key_desc");
+    public static final Item ARENA_KEY_THREE = new ItemArenaKey("arena_key_3", ModCreativeTabs.ITEMS, "arena_key_desc");
+    public static final Item ARENA_KEY_FOUR = new ItemArenaKey("arena_key_4", ModCreativeTabs.ITEMS, "arena_key_desc");
+    public static final Item ARENA_KEY_FIVE = new ItemArenaKey("arena_key_5", ModCreativeTabs.ITEMS, "arena_key_desc");
+    public static final Item BLOODWEED_REFINED = new ItemDescription("bloodweed_refined", ModCreativeTabs.ITEMS, "bloodweed_refined_desc");
 
 
     public static final Item UNHOLY_ARROW = new ItemUnholyArrow("mod_arrow_unholy");

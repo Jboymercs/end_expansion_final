@@ -39,21 +39,23 @@ public class ModEvents {
         Random rand = new Random();
 
         if(!base.world.isRemote) {
-            if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.DARK_HELMET&& base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.DARK_CHESTPLATE) {
-                base.removeActivePotionEffect(ModPotions.CORRUPTED);
-            } else {
-                if(base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD && rand.nextInt(20) == 0|| base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_ITEM && rand.nextInt(20) == 0||
-                        base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_AXE && rand.nextInt(20) == 0
-                        || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0) {
+            if(base instanceof EntityPlayer) {
+                if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.DARK_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.DARK_CHESTPLATE) {
+                    base.removeActivePotionEffect(ModPotions.CORRUPTED);
+                } else {
+                    if (base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_ITEM && rand.nextInt(20) == 0 ||
+                            base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_AXE && rand.nextInt(20) == 0
+                            || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0) {
 
-                    if (timeTillRage < 0) {
-                        base.getHeldItemMainhand().damageItem(5, base);
-                        base.addPotionEffect(new PotionEffect(ModPotions.CORRUPTED, 400, 1));
-                        timeTillRage = 40;
-                    } else {
-                        timeTillRage--;
+                        if (timeTillRage < 0) {
+                            base.getHeldItemMainhand().damageItem(5, base);
+                            base.addPotionEffect(new PotionEffect(ModPotions.CORRUPTED, 400, 1));
+                            timeTillRage = 40;
+                        } else {
+                            timeTillRage--;
+                        }
+
                     }
-
                 }
             }
         }
@@ -68,7 +70,7 @@ public class ModEvents {
         EntityLivingBase base = event.getEntityLiving();
         ItemStack mainhand = base.getHeldItemMainhand();
 
-        if(mainhand.getItem() instanceof ItemEndfallStaff) {
+        if(mainhand.getItem() instanceof ItemEndfallStaff && base instanceof EntityPlayer) {
             if(base.isSwingInProgress && !base.world.isRemote && ProjectileCooldown < 0) {
                 Vec3d playerLookVec = base.getLookVec();
                 Vec3d playerPos = new Vec3d(base.posX + playerLookVec.x * 1.4D,base.posY + playerLookVec.y + base.getEyeHeight(), base. posZ + playerLookVec.z * 1.4D);
@@ -100,24 +102,26 @@ public class ModEvents {
     @SubscribeEvent
     public void onArmorEquip(LivingEvent.LivingUpdateEvent event) {
         EntityLivingBase base = event.getEntityLiving();
-
-        if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.ENDFALL_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.ENDFALL_CHESTPLATE &&
-                base.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == ModItems.ENDFALL_LEGGINGS && base.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == ModItems.ENDFALL_BOOTS) {
-            if (!base.world.isRemote && base.ticksExisted % 40 == 0) {
-                base.addPotionEffect(new PotionEffect(MobEffects.SPEED, 60, 0));
-                base.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 60, 0));
+        if(base instanceof EntityPlayer) {
+            if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.ENDFALL_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.ENDFALL_CHESTPLATE &&
+                    base.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == ModItems.ENDFALL_LEGGINGS && base.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == ModItems.ENDFALL_BOOTS) {
+                if (!base.world.isRemote && base.ticksExisted % 40 == 0) {
+                    base.addPotionEffect(new PotionEffect(MobEffects.SPEED, 60, 0));
+                    base.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 60, 0));
+                }
             }
         }
-
-        if(base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.AMBER_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.AMBER_CHESTPLATE &&
-        base.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == ModItems.AMBER_LEGGINGS && base.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == ModItems.AMBER_BOOTS) {
-            if(!base.world.isRemote && base.ticksExisted % 40 == 0) {
-                base.addPotionEffect(new PotionEffect(MobEffects.HASTE, 60, 0));
-                List<EntityLivingBase> nearbyEntities = base.world.getEntitiesWithinAABB(EntityLivingBase.class, base.getEntityBoundingBox().grow(8D), entityLivingBase -> !(entityLivingBase.getIsInvulnerable()));
-                if(!nearbyEntities.isEmpty()) {
-                    for(EntityLivingBase base2 : nearbyEntities) {
-                        if(!(base2 instanceof EntityPlayer)) {
-                            base2.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 100, 0));
+        if(base instanceof EntityPlayer) {
+            if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.AMBER_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.AMBER_CHESTPLATE &&
+                    base.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == ModItems.AMBER_LEGGINGS && base.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == ModItems.AMBER_BOOTS) {
+                if (!base.world.isRemote && base.ticksExisted % 40 == 0) {
+                    base.addPotionEffect(new PotionEffect(MobEffects.HASTE, 60, 0));
+                    List<EntityLivingBase> nearbyEntities = base.world.getEntitiesWithinAABB(EntityLivingBase.class, base.getEntityBoundingBox().grow(8D), entityLivingBase -> !(entityLivingBase.getIsInvulnerable()));
+                    if (!nearbyEntities.isEmpty()) {
+                        for (EntityLivingBase base2 : nearbyEntities) {
+                            if (!(base2 instanceof EntityPlayer)) {
+                                base2.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 100, 0));
+                            }
                         }
                     }
                 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/tinted_cross",
+  "textures": {
+    "cross": "ee:blocks/green_crystal_top"
+  }
+}

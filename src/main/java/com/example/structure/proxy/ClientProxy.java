@@ -8,7 +8,9 @@ import com.example.structure.event_handler.client.MusicHandlerEE;
 import com.example.structure.gui.book.GuiBook;
 import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.handlers.RenderHandler;
+import com.example.structure.util.particles.ParticlePixel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,6 +67,29 @@ public class ClientProxy extends CommonProxy {
         switch (selector) {
             case 1: return ClientRender.SCREEN_SHAKE;
             default: return defaultVal;
+        }
+    }
+
+    @Override
+    public void spawnParticle(int particle, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, int... parameters)
+    {
+        Minecraft minecraft = Minecraft.getMinecraft();
+        World world = minecraft.world;
+        minecraft.effectRenderer.addEffect(getFactory(particle).createParticle(0, world, posX, posY, posZ, speedX, speedY, speedZ, parameters));
+    }
+
+    /**
+     * This is used by the Particle Spawning as an ID system for out Particles.
+     * We do not require Ids for Particles, it's just more convenient for sending over packets!
+     * */
+    @SideOnly(Side.CLIENT)
+    public static IParticleFactory getFactory(int particleId)
+    {
+        switch(particleId)
+        {
+            default:
+            case 1:
+                return new ParticlePixel.Factory();
         }
     }
 

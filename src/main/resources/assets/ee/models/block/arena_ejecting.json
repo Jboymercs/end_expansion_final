@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ee:blocks/arena_top_eject",
+    "side": "ee:blocks/arena_side_active"
+  }
+}

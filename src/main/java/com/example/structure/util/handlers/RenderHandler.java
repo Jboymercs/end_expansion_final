@@ -4,6 +4,8 @@ import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
+import com.example.structure.entity.barrend.EntityLidoped;
+import com.example.structure.entity.barrend.EntityMadSpirit;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -20,6 +22,7 @@ import com.example.structure.entity.render.arrow.RenderArrowBase;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.trader.*;
+import git.jbredwards.nether_api.mod.common.world.gen.MapGenCavesEnd;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
@@ -27,6 +30,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -166,5 +170,9 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityLamentorWave.class, RenderLamentorWave::new);
         //End Expansion Painting
         RenderingRegistry.registerEntityRenderingHandler(EntityEEPainting.class, RenderEEPainting::new);
+        //Lidoped
+        RenderingRegistry.registerEntityRenderingHandler(EntityLidoped.class, RenderLidoped::new);
+        //Mad Spirit
+        RenderingRegistry.registerEntityRenderingHandler(EntityMadSpirit.class, RenderMadSpirit::new);
     }
 }

@@ -78,6 +78,17 @@ public abstract class EntityModBase extends EntityCreature {
         this.experienceValue = 5;
 
     }
+
+    public void setScale(double scaleFactor) {
+        double currentHealth = this.getHealth();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(currentHealth * scaleFactor);
+        this.setHealth((float) (currentHealth * scaleFactor));
+        double currentAttackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+        double reAdjustedValue = currentAttackDamage * (scaleFactor * 0.4);
+        //this is scaleFactor * 0.4 * base Attack damage
+        //that away attack damage doesn't go crazy
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(currentAttackDamage + reAdjustedValue);
+    }
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -91,7 +102,7 @@ public abstract class EntityModBase extends EntityCreature {
         return this.dataManager == null ? false : this.dataManager.get(IMMOVABLE);
     }
 
-    protected void setImmovable(boolean immovable) {
+    public void setImmovable(boolean immovable) {
         this.dataManager.set(IMMOVABLE, immovable);
     }
 

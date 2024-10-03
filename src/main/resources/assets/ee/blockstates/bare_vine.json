@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "ee:bare_middle"
+  },
+  "variants": {
+    "is_top": {
+      "true": {
+        "model" : "ee:bare_top"
+      },
+      "false": { }
+    },
+    "is_bottom": {
+      "true": {
+        "model": "ee:bare_bottom"
+      },
+      "false": { }
+    }
+  }
+}

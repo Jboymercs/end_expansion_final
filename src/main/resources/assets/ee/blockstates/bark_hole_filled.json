@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "ee:bark_hole_filled" },
+    "axis=z":   { "model": "ee:bark_hole_filled", "x": 90 },
+    "axis=x":   { "model": "ee:bark_hole_filled", "x": 90, "y": 90 },
+    "axis=none": { "model": "ee:bark_hole_filled" }
+  }
+}

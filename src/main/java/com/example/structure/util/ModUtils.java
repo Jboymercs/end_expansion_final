@@ -18,6 +18,8 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
@@ -822,6 +824,18 @@ public class ModUtils {
         return points;
     }
 
+    /**
+     * Calls the function n times, passing in the ith iteration
+     *
+     * @param n
+     * @param func
+     */
+    public static void performNTimes(int n, Consumer<Integer> func) {
+        for (int i = 0; i < n; i++) {
+            func.accept(i);
+        }
+    }
+
 
     public static BlockPos posToChunk(BlockPos pos) {
         return new BlockPos(pos.getX() / 16f, pos.getY(), pos.getZ() / 16f);
@@ -882,5 +896,41 @@ public class ModUtils {
         }
 
         return false;
+    }
+
+
+    /**
+     * Returns a {@link Vec3d} of the coordinates at the centre of the given entity's bounding box. This is more
+     * efficient than {@code GeometryUtils.getCentre(entity.getEntityBoundingBox())} as it can use the entity's fields.
+     */
+    public static Vec3d getCentre(Entity entity){
+        return new Vec3d(entity.posX, entity.posY + entity.height/2, entity.posZ);
+    }
+
+    /**
+     * Returns a {@link Vec3d} of the coordinates at the centre of the given block position (i.e. the block coordinates
+     * plus 0.5 in x, y, and z).
+     */
+    public static Vec3d getCentre(BlockPos pos){
+        return new Vec3d(pos).add(0.5, 0.5, 0.5);
+    }
+
+    /**
+     * Returns a {@link Vec3d} of the coordinates at the centre of the given bounding box (The one in {@code AxisAlignedBB}
+     * itself is client-side only).
+     */
+    public static Vec3d getCentre(AxisAlignedBB box){
+        return new Vec3d(box.minX + (box.maxX - box.minX) * 0.5, box.minY + (box.maxY - box.minY) * 0.5, box.minZ + (box.maxZ - box.minZ) * 0.5);
+    }
+
+
+    public static void undoGravity(Entity entity){
+        if(!entity.hasNoGravity()){
+            double gravity = 0.04;
+            if(entity instanceof EntityThrowable) gravity = 0.03;
+            else if(entity instanceof EntityArrow) gravity = 0.05;
+            else if(entity instanceof EntityLivingBase) gravity = 0.08;
+            entity.motionY += gravity;
+        }
     }
 }

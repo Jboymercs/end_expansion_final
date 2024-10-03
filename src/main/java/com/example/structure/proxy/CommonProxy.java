@@ -5,6 +5,8 @@ import com.example.structure.blocks.BlockLeavesBase;
 import com.example.structure.event_handler.ModEvents;
 import com.example.structure.packets.MessageDirectionForRender;
 import com.example.structure.packets.MessageModParticles;
+import com.example.structure.packets.ModNetworkPackets;
+import com.example.structure.packets.ParticleSSMesage;
 import com.example.structure.util.ModReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -76,6 +78,18 @@ public class CommonProxy implements IGuiHandler {
         }
         return null;
     }
+
+    /** Handles spawning of Particles */
+    public void spawnParticle(int particleId, World world, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, int... parameters)
+    {
+        if (world.isRemote)
+        { spawnParticle(particleId, posX, posY, posZ, speedX, speedY, speedZ, parameters); }
+        else
+        { ModNetworkPackets.network.sendToAllTracking( new ParticleSSMesage(particleId, posX, posY, posZ, speedX, speedY, speedZ, parameters), new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 0.0D)); }
+    }
+
+    /** This exists to be overridden in the ClientProxy! */
+    public void spawnParticle(int particleId, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, int... parameters) {}
 
     public void openGuiBook(ItemStack bestiary, EntityPlayer player) {
 

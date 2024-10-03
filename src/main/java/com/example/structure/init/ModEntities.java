@@ -7,6 +7,8 @@ import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
+import com.example.structure.entity.barrend.EntityLidoped;
+import com.example.structure.entity.barrend.EntityMadSpirit;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -89,6 +91,8 @@ public class ModEntities {
         registerTileEntity(TileEntityCompulsor.class, "compulsor_entity");
         //Ash Chute - Utility
         registerTileEntity(TileEntityAshChute.class, "ash_chute_entity");
+        //Arena Entity
+        registerTileEntity(TileEntityUnEndingArena.class, "entity_unending_arena");
         //End King
         registerEntityWithID("end_king", EntityEndKing.class, ENTITY_START_ID++, 50, knight_mobs);
         //Red Crystal
@@ -171,6 +175,10 @@ public class ModEntities {
         registerEntity("lamentor_wave", EntityLamentorWave.class, ENTITY_START_ID++, 100);
         //End Expansion Painting
         registerEntity("lamented_islands_painting", EntityEEPainting.class, ENTITY_START_ID++, 100);
+        //Barrend Lidoped
+        registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, ash_mobs);
+        //Mad Spirit
+        registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, ash_mobs);
 
     }
 
@@ -179,6 +187,9 @@ public class ModEntities {
         spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, MobConfig.parasite_spawn_rate, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, MobConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, MobConfig.chomper_spawn_rate, 1, 3, BiomeRegister.END_ASH_WASTELANDS);
+        spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 3, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, 2, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 2, 1, 2, BiomeRegister.BARREND_LOWLANDS);
     }
 
 

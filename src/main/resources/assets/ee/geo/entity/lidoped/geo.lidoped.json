@@ -1,0 +1,113 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "Group",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Torso",
+					"parent": "Group",
+					"pivot": [0, 5, 0],
+					"cubes": [
+						{"origin": [-2, 3, -3], "size": [4, 3, 7], "uv": [0, 0]},
+						{"origin": [-2.5, 5, 2], "size": [5, 2, 3], "pivot": [0, 6, 3], "rotation": [-22.5, 0, 0], "uv": [0, 18]},
+						{"origin": [-3, 4.5, -2], "size": [6, 3, 5], "uv": [0, 10]},
+						{"origin": [-2.5, 4, -3.5], "size": [5, 3, 2], "pivot": [0, 6, -3], "rotation": [17.5, 0, 0], "uv": [16, 18]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Torso",
+					"pivot": [0, 5, -3],
+					"cubes": [
+						{"origin": [-1.5, 3, -6], "size": [3, 3, 3], "uv": [22, 0]},
+						{"origin": [-1, 4.25, -6.25], "size": [2, 2, 2], "uv": [22, 7]}
+					]
+				},
+				{
+					"name": "FLeftLeg",
+					"parent": "Torso",
+					"pivot": [2, 4, -1.5],
+					"rotation": [0, 0, -20],
+					"cubes": [
+						{"origin": [2, 4, -2], "size": [3, 0, 1], "uv": [22, 11], "mirror": true}
+					]
+				},
+				{
+					"name": "FLJ",
+					"parent": "FLeftLeg",
+					"pivot": [5, 4, -1.5],
+					"rotation": [0, 0, 105],
+					"cubes": [
+						{"origin": [5, 4, -2], "size": [5, 0, 1], "uv": [22, 6], "mirror": true}
+					]
+				},
+				{
+					"name": "RLeftLeg",
+					"parent": "Torso",
+					"pivot": [-2, 4, -1.5],
+					"rotation": [0, 0, 20],
+					"cubes": [
+						{"origin": [-5, 4, -2], "size": [3, 0, 1], "uv": [22, 11]}
+					]
+				},
+				{
+					"name": "RFJ",
+					"parent": "RLeftLeg",
+					"pivot": [-5, 4, -1.5],
+					"rotation": [0, 0, -105],
+					"cubes": [
+						{"origin": [-10, 4, -2], "size": [5, 0, 1], "uv": [22, 6]}
+					]
+				},
+				{
+					"name": "RBackLeg",
+					"parent": "Torso",
+					"pivot": [-2, 4, 2],
+					"rotation": [0, 0, 20],
+					"cubes": [
+						{"origin": [-5, 4, 1.5], "size": [3, 0, 1], "uv": [22, 11]}
+					]
+				},
+				{
+					"name": "RBJ",
+					"parent": "RBackLeg",
+					"pivot": [-5, 4, 2],
+					"rotation": [0, 0, -105],
+					"cubes": [
+						{"origin": [-10, 4, 1.5], "size": [5, 0, 1], "uv": [22, 6]}
+					]
+				},
+				{
+					"name": "LBackLeg",
+					"parent": "Torso",
+					"pivot": [2, 4, 2],
+					"rotation": [0, 0, -20],
+					"cubes": [
+						{"origin": [2, 4, 1.5], "size": [3, 0, 1], "uv": [22, 11], "mirror": true}
+					]
+				},
+				{
+					"name": "LBJ",
+					"parent": "LBackLeg",
+					"pivot": [5, 4, 2],
+					"rotation": [0, 0, 105],
+					"cubes": [
+						{"origin": [5, 4, 1.5], "size": [5, 0, 1], "uv": [22, 6], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

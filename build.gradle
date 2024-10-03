@@ -129,7 +129,8 @@ dependencies {
     implementation(fg.deobf('com.github.jbredwards:nether-API:f2f48d7b8b'))
     //Geckolib
     implementation (fg.deobf('software.bernie.geckolib:geckolib-forge-1.12.2:3.0.31'))
-
+    //Deeper Depths
+    implementation fg.deobf("curse.maven:deeper-depths-1101129:5753202")
     //Shaded `shade`
     //shade("io.github.kostaskougios:cloning:${project.cloning_version}")
 
