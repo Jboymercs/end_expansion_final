@@ -6,6 +6,7 @@ import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.items.*;
 import com.example.structure.items.armor.ModArmorBase;
 import com.example.structure.items.arrow.ItemArrowBase;
+import com.example.structure.items.arrow.ItemGreenArrow;
 import com.example.structure.items.arrow.ItemUnholyArrow;
 import com.example.structure.items.tools.*;
 import com.example.structure.util.ModReference;
@@ -36,6 +37,7 @@ public class ModItems {
     private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, ItemConfig.cordium_sword_damage, 40);
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
+    private static final ItemArmor.ArmorMaterial LIDOPED_ARMOR = EnumHelper.addArmorMaterial("lidoped", ModReference.MOD_ID + ":lidoped", 650, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
     private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
     private static final ItemArmor.ArmorMaterial ENDFALL_ARMOR = EnumHelper.addArmorMaterial("endfall", ModReference.MOD_ID + ":endfallarmor", 650, new int[]{(int) (6 * ModConfig.fall_armor_scale), (int) (9 * ModConfig.fall_armor_scale), (int) (12 * ModConfig.fall_armor_scale), (int) (6 * ModConfig.fall_armor_scale)}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, (float)(6F * ModConfig.fall_armor_scale));
 
@@ -113,9 +115,16 @@ public class ModItems {
     public static final Item ARENA_KEY_FOUR = new ItemArenaKey("arena_key_4", ModCreativeTabs.ITEMS, "arena_key_desc");
     public static final Item ARENA_KEY_FIVE = new ItemArenaKey("arena_key_5", ModCreativeTabs.ITEMS, "arena_key_desc");
     public static final Item BLOODWEED_REFINED = new ItemDescription("bloodweed_refined", ModCreativeTabs.ITEMS, "bloodweed_refined_desc");
+    public static final Item LIDOPED_SHELL = new ItemBase("lidoped_shell", ModCreativeTabs.ITEMS);
+    public static final Item LIDOPED_HELMET = new ModArmorBase("lidoped_helmet", LIDOPED_ARMOR, 1, EntityEquipmentSlot.HEAD, "lidoped", "lidoped_helmet_desc");
+    public static final Item SPIRIT_GOOP = new ItemBase("spirit_goop", ModCreativeTabs.ITEMS);
+    public static final Item LIDOPED_BUCKET = new ItemBucketPlacer("lidoped_bucket");
+    public static final Item ULTRA_GOOP = new ItemTreasureDescription("ultra_goop", ModCreativeTabs.ITEMS, "ultra_goop_desc");
+    public static final Item MEMORIUM_STONE = new ItemBase("memory_stone", ModCreativeTabs.ITEMS);
 
 
     public static final Item UNHOLY_ARROW = new ItemUnholyArrow("mod_arrow_unholy");
+    public static final Item GREEN_ARROW = new ItemGreenArrow("mod_arrow_green");
     public static final Item CHOMPER_ARROW = new ItemArrowBase("mod_arrow_chomper");
 
     public static final Item BOMB_PROJECTILE = new ItemBase("bomb_proj", null);

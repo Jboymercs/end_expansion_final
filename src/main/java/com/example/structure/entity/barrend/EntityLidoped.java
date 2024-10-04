@@ -13,6 +13,7 @@ import com.example.structure.init.ModBlocks;
 import com.example.structure.init.ModPotions;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
+import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -30,6 +31,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -491,6 +493,15 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
         this.dataManager.set(SKIN_TYPE, Integer.valueOf(skinType));
     }
 
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "lidoped");
+    @Override
+    protected ResourceLocation getLootTable() {
+        return LOOT;
+    }
+    @Override
+    protected boolean canDropLoot() {
+        return true;
+    }
 
     public void equipBugBackItem(LIDOPED_BACK head, ItemStack state) {
         if(world.isRemote) {

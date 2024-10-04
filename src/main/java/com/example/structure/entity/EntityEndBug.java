@@ -392,7 +392,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
        if(!this.isFightMode()) {
            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(bite));
            double[] weights = {
-                   (distance < 3) ? 1/distance : 0 //Bite Attack
+                   (distance <= 4) ? 1/distance : 0 //Bite Attack
            };
            prevAttack = ModRand.choice(attacks, rand, weights).next();
            prevAttack.accept(target);

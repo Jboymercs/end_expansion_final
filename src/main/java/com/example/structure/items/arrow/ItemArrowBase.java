@@ -2,6 +2,7 @@ package com.example.structure.items.arrow;
 
 import com.example.structure.Main;
 import com.example.structure.entity.arrow.EntityChomperArrow;
+import com.example.structure.entity.arrow.EntityGreenArrow;
 import com.example.structure.entity.arrow.EntityModArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.init.ModCreativeTabs;
@@ -35,6 +36,10 @@ public class ItemArrowBase extends ItemArrow implements IHasModel {
 
             if(stackIn.getItem() == ModItems.CHOMPER_ARROW) {
                 unholy_arrow = new EntityChomperArrow(worldIn);
+            }
+
+            if(stackIn.getItem() == ModItems.GREEN_ARROW) {
+                unholy_arrow = new EntityGreenArrow(worldIn);
             }
 
 

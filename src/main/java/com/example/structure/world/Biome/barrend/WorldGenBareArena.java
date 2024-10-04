@@ -18,12 +18,10 @@ public class WorldGenBareArena extends WorldGenStructure {
 
     @Override
     public void generateStructure(World world, BlockPos pos, Rotation rotation) {
-        if(spacing > 100 && !world.isAirBlock(pos.add(18, 0, 18))) {
-            System.out.println("Generated Arena At" + pos);
+        if(spacing > 150 && !world.isAirBlock(pos.add(18, 0, 18))) {
             spacing = 0;
             super.generateStructure(world, pos.add(-3, 0, -3), Rotation.NONE);
         }
-        System.out.println("Spacing At" + spacing);
         spacing++;
     }
 

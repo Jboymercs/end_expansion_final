@@ -194,6 +194,11 @@
         },
         {
           "type": "item",
+          "name": "ee:ultra_goop",
+          "weight": 6
+        },
+        {
+          "type": "item",
           "name": "ee:endfall_pickaxe",
           "weight": 5,
           "functions": [

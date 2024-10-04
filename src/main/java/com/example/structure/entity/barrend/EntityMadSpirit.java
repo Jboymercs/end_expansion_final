@@ -4,9 +4,11 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.*;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.entity.util.TimedAttackIniator;
+import com.example.structure.init.ModItems;
 import com.example.structure.init.ModPotions;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
+import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,6 +16,7 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -21,6 +24,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import scala.tools.nsc.backend.icode.Primitives;
@@ -185,7 +189,9 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase base: nearbyEntities) {
                     if(!(base instanceof EntityBarrendMob)) {
-                        base.addPotionEffect(new PotionEffect(ModPotions.MADNESS, 400, 0));
+                        if(base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() != ModItems.LIDOPED_HELMET) {
+                            base.addPotionEffect(new PotionEffect(ModPotions.MADNESS, 400, 0));
+                        }
                     }
                 }
             }
@@ -305,6 +311,16 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
     @Override
     public void travel(float strafe, float vertical, float forward) {
         ModUtils.aerialTravel(this, strafe, vertical, forward);
+    }
+
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "mad_spirit");
+    @Override
+    protected ResourceLocation getLootTable() {
+        return LOOT;
+    }
+    @Override
+    protected boolean canDropLoot() {
+        return true;
     }
 
     @Override

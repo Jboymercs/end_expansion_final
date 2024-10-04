@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.PotionEffect;
@@ -45,7 +46,9 @@ public class BlockBareAcid extends BlockFluidClassic implements IHasModel {
         {
             if(entityIn instanceof EntityPlayer) {
                 if(!entityIn.world.isRemote) {
-                    ((EntityPlayer) entityIn).addPotionEffect(new PotionEffect(ModPotions.MADNESS, 600, 0));
+                    if(((EntityPlayer) entityIn).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() != ModItems.LIDOPED_HELMET) {
+                        ((EntityPlayer) entityIn).addPotionEffect(new PotionEffect(ModPotions.MADNESS, 600, 0));
+                    }
                 }
             }
         }

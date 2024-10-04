@@ -1,0 +1,6 @@
+{
+  "variants":
+  {
+    "variant=default": { "model": "ee:bare_planks_double" }
+  }
+}

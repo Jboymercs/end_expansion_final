@@ -1,0 +1,9 @@
+{
+  "parent": "block/half_slab",
+  "textures":
+  {
+    "bottom": "ee:blocks/bare_planks",
+    "top": "ee:blocks/bare_planks",
+    "side": "ee:blocks/bare_planks"
+  }
+}

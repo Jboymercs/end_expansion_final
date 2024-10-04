@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "R"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:spirit_goop"
+    },
+    "R": {
+      "item": "ee:mod_arrow_chomper"
+    }
+  },
+  "result": {
+    "item": "ee:mod_arrow_green"
+  }
+}

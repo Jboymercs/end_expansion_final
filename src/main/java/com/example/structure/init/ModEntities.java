@@ -5,6 +5,7 @@ import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
+import com.example.structure.entity.arrow.EntityGreenArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.barrend.EntityLidoped;
@@ -156,6 +157,7 @@ public class ModEntities {
         registerEntity("large_aoe", EntityLargeAOEEffect.class, ENTITY_START_ID++, 80);
         registerEntity("unholy_arrow", EntityUnholyArrow.class, ENTITY_START_ID++, 80);
         registerEntity("chomper_arrow", EntityChomperArrow.class, ENTITY_START_ID++, 90);
+        registerEntity("green_arrow", EntityGreenArrow.class, ENTITY_START_ID++, 90);
         registerEntity("sword_spike", EntitySwordSpike.class, ENTITY_START_ID++, 90);
         //Avalon Trader
         registerEntityWithID("avalon", EntityAvalon.class, ENTITY_START_ID++, 90, end_mobs);

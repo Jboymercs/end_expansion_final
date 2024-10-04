@@ -105,7 +105,7 @@ public class RenderArrowBase extends Render<EntityModArrow> {
     @Override
     protected ResourceLocation getEntityTexture(EntityModArrow entity)
     {
-        String base = entity instanceof EntityUnholyArrow ? "unholy" : entity instanceof EntityChomperArrow ? "chomper" : "unused";
+        String base = entity instanceof EntityUnholyArrow ? "unholy" : entity instanceof EntityChomperArrow ? "chomper" : "green";
         return new ResourceLocation(ModReference.MOD_ID, "textures/entity/arrow/" + base +  "_arrow.png");
     }
 }

@@ -57,7 +57,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
                 //End Vaults, A mini-dungeon that has roguelike generation too it. Main place to find the purple crystal resource
                 //Cannot spawn in the Ash Wastelands
-                if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS) {
+                if(world.getBiomeForCoordsBody(pos) != BiomeRegister.END_ASH_WASTELANDS && world.getBiomeForCoordsBody(pos) != BiomeRegister.BARREND_LOWLANDS) {
                     if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 60) {
                         endVaults.generate(world, random, pos);
                     }

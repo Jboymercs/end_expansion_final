@@ -218,6 +218,11 @@
         },
         {
           "type": "item",
+          "name": "ee:ultra_goop",
+          "weight": 3
+        },
+        {
+          "type": "item",
           "name": "ee:dark_ingot",
           "weight": 5,
           "functions": [

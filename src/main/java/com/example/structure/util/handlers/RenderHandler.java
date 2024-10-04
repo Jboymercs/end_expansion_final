@@ -2,6 +2,7 @@ package com.example.structure.util.handlers;
 
 import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
+import com.example.structure.entity.arrow.EntityGreenArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.EntityBarrendGolem;
 import com.example.structure.entity.barrend.EntityLidoped;
@@ -150,6 +151,8 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityUnholyArrow.class, RenderArrowBase::new);
         //Chomper Arrow
         RenderingRegistry.registerEntityRenderingHandler(EntityChomperArrow.class, RenderArrowBase::new);
+        //Green Arrow
+        RenderingRegistry.registerEntityRenderingHandler(EntityGreenArrow.class, RenderArrowBase::new);
         //Sword Spike
         RenderingRegistry.registerEntityRenderingHandler(EntitySwordSpike.class, RenderSwordSpike::new);
         //Avalon Trader

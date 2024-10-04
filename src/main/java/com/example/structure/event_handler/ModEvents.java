@@ -4,6 +4,7 @@ import com.example.structure.config.ItemConfig;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ProjectilePurple;
+import com.example.structure.entity.barrend.EntityMadSpirit;
 import com.example.structure.entity.endking.ProjectileSpinSword;
 import com.example.structure.init.ModItems;
 import com.example.structure.init.ModPotions;
@@ -16,14 +17,18 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -173,7 +178,28 @@ public class ModEvents {
             }
 
         }
+
+        if(entity.isPotionActive(ModPotions.MADNESS) && !hasSpawnedSpirit) {
+            if(entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.LIDOPED_HELMET) {
+                entity.removeActivePotionEffect(ModPotions.MADNESS);
+            }
+            //SPawns a mad spirit upon death of an entity inflicted with Madness
+            World world = event.getEntityLiving().getEntityWorld();
+            if(!world.isRemote) {
+                if(entity.deathTime == 1) {
+                    Vec3d spawnPos = new Vec3d(entity.posX, entity.posY + 1.0, entity.posZ);
+                    EntityMadSpirit spirit = new EntityMadSpirit(world);
+                    spirit.setPosition(spawnPos.x, spawnPos.y, spawnPos.z);
+                    entity.world.spawnEntity(spirit);
+                    hasSpawnedSpirit = true;
+                }
+            }
+        } else {
+            hasSpawnedSpirit = false;
+        }
     }
+
+    private boolean hasSpawnedSpirit = false;
 
 
 
