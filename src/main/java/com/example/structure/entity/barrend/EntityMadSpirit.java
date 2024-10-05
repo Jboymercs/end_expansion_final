@@ -156,7 +156,7 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
     @Override
     public boolean getCanSpawnHere()
     {
-        return this.world.rand.nextInt(12) == 0;
+        return this.world.rand.nextInt(16) == 0;
     }
 
 

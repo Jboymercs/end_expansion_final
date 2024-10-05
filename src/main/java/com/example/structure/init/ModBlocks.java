@@ -113,6 +113,9 @@ public class ModBlocks {
     public static final Block BARE_STONE_SMOOTH = new BlockBase("bare_stone_smooth", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_STONE_WALL = new BlockModWall("bare_stone_wall", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_BRICKS = new BlockBarrendDungeonTile("bare_bricks", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_BRICKS_HOLE = new BlockBarrendDungeonTile("bare_bricks_hole", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_BRICKS_CRACK = new BlockBarrendDungeonTile("bare_bricks_crack", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_SMALL_POT = new BlockSmallPot("bare_small_pot", Material.GRASS, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_DOOR = new BlockBase("bare_door", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_DOOR_CONNECTOR = new BlockBase("bare_door_connect", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
 

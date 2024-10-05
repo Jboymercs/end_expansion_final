@@ -21,6 +21,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -931,6 +933,28 @@ public class ModUtils {
             else if(entity instanceof EntityArrow) gravity = 0.05;
             else if(entity instanceof EntityLivingBase) gravity = 0.08;
             entity.motionY += gravity;
+        }
+    }
+
+    public static boolean compareItemStacks(ItemStack stack, ItemStack check, boolean useNBT) {
+        if (stack != null && check != null) {
+            if (check.getItem() == stack.getItem() && (check.getMetadata() == 32767 || check.getMetadata() == stack.getMetadata())) {
+                if (!useNBT) {
+                    return true;
+                } else {
+                    NBTTagCompound nbt1 = stack.getTagCompound();
+                    NBTTagCompound nbt2 = check.getTagCompound();
+                    if (nbt1 != null && nbt2 != null) {
+                        return nbt1.equals(nbt2);
+                    } else {
+                        return nbt1 == nbt2;
+                    }
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 }

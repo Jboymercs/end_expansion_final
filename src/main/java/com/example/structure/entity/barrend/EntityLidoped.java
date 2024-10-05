@@ -390,7 +390,7 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
     @Override
     public boolean getCanSpawnHere()
     {
-            return this.world.rand.nextInt(8) == 0;
+            return this.world.rand.nextInt(16) == 0;
     }
 
     private Consumer<EntityLivingBase> prevAttack;

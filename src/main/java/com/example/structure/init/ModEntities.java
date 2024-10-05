@@ -94,6 +94,8 @@ public class ModEntities {
         registerTileEntity(TileEntityAshChute.class, "ash_chute_entity");
         //Arena Entity
         registerTileEntity(TileEntityUnEndingArena.class, "entity_unending_arena");
+        //Small Barrend Pot
+        registerTileEntity(TileEntityBarePot.class, "small_pot");
         //End King
         registerEntityWithID("end_king", EntityEndKing.class, ENTITY_START_ID++, 50, knight_mobs);
         //Red Crystal
@@ -181,6 +183,7 @@ public class ModEntities {
         registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, ash_mobs);
         //Mad Spirit
         registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, ash_mobs);
+
 
     }
 

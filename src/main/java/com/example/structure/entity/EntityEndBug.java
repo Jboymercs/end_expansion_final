@@ -163,7 +163,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
         this.tasks.addTask(4, new EntityAITimedAttack<>(this, 1.2, 60, 3.0f, 0.2f));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityLidoped>(this, EntityLidoped.class, 1, true, false, null));
+      //  this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityLidoped>(this, EntityLidoped.class, 1, true, false, null));
     }
 
     @Override
@@ -390,9 +390,10 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         double distance = Math.sqrt(distanceSq);
        if(!this.isFightMode()) {
-           List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(bite));
+           List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(bite, bite_2));
            double[] weights = {
-                   (distance <= 4) ? 1/distance : 0 //Bite Attack
+                   (distance <= 4) ? 1/distance : 0, //Bite Attack
+                   (distance <= 4) ? 1/distance : 0
            };
            prevAttack = ModRand.choice(attacks, rand, weights).next();
            prevAttack.accept(target);
@@ -401,6 +402,17 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     }
 
     private final Consumer<EntityLivingBase> bite = (target) -> {
+        this.setFightMode(true);
+        addEvent(()-> {
+            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1, 1, 0)));
+            DamageSource damageSource = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+            float damage = (float) (MobConfig.parasite_damage * ModConfig.biome_multiplier);
+            ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, offset, damageSource, 0.5f, 0, false);
+        }, 8);
+        addEvent(()-> this.setFightMode(false), 10);
+    };
+
+    private final Consumer<EntityLivingBase> bite_2 = (target) -> {
         this.setFightMode(true);
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1, 1, 0)));
