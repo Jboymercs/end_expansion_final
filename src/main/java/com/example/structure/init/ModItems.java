@@ -130,6 +130,7 @@ public class ModItems {
     public static final Item BOMB_PROJECTILE = new ItemBase("bomb_proj", null);
 
     public static final Item ACID_PROJECTILE = new ItemBase("green_orb", null);
+    public static final Item PARASITE_PROJECTILE = new ItemProjectileBomb("parasitebomb");
 
 
     //Misc.

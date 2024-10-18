@@ -2,10 +2,12 @@ package com.example.structure.init;
 
 import com.example.structure.blocks.*;
 import com.example.structure.blocks.arenaBlocks.BlockUnEndingArena;
+import com.example.structure.blocks.barrend_dungeon.BlockBarrendDoor;
 import com.example.structure.blocks.barrend_dungeon.BlockBarrendDungeonTile;
 import com.example.structure.blocks.fluid.BlockBareAcid;
 import com.example.structure.blocks.slab.BlockDoubleSlab;
 import com.example.structure.blocks.slab.BlockHalfSlab;
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityExplosion;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.integration.ModIntegration;
@@ -116,12 +118,12 @@ public class ModBlocks {
     public static final Block BARE_BRICKS_HOLE = new BlockBarrendDungeonTile("bare_bricks_hole", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_BRICKS_CRACK = new BlockBarrendDungeonTile("bare_bricks_crack", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_SMALL_POT = new BlockSmallPot("bare_small_pot", Material.GRASS, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
-    public static final Block BARE_DOOR = new BlockBase("bare_door", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block BARE_DOOR = new BlockBarrendDoor("bare_door", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE, ModItems.MEMORIUM_STONE).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_DOOR_CONNECTOR = new BlockBase("bare_door_connect", Material.ROCK, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE).setCreativeTab(ModCreativeTabs.ITEMS);
 
 
     public static final BlockSlab BARE_STONE_DOUBLE = new BlockDoubleSlab("bare_stone_double", Material.ROCK, CreativeTabs.BUILDING_BLOCKS, ModBlocks.BARE_STONE_HALF, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
-    public static final BlockSlab BARE_STONE_HALF = new BlockHalfSlab("bare_stone_half", Material.ROCK, CreativeTabs.BUILDING_BLOCKS, ModBlocks.BARE_STONE_HALF, ModBlocks.BARE_STONE_DOUBLE, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
+    public static final BlockSlab BARE_STONE_HALF = new BlockHalfSlab("bare_stone_half", Material.ROCK, ModCreativeTabs.ITEMS, ModBlocks.BARE_STONE_HALF, ModBlocks.BARE_STONE_DOUBLE, STONE_HARDNESS, STONE_RESISTANCE, SoundType.STONE);
     public static final Block BARE_PLANT = new BlockBarrendPlant("bare_plant", Material.GRASS).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_GRASS = new BlockBarrendPlant("bare_grass", Material.GRASS).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_ACID = new BlockBareAcid("bare_acid", ModFluid.ACID, Material.WATER).setLightLevel(0.75F);

@@ -204,7 +204,7 @@ public class EntityAILidopedHome<T extends EntityLidoped> extends EntityAIBase {
                 //we're doing this incase our little bug like creature can't get to there home
                 if(createNewHomeCheck < 0) {
                     AxisAlignedBB box = this.entity.getEntityBoundingBox().grow(2, 1, 2);
-                    BlockPos searchForNewHome = ModUtils.searchForBlocks(box, this.entity.world, this.entity, ModBlocks.BARE_BARK.getDefaultState());
+                    BlockPos searchForNewHome = ModUtils.searchForBlocks(box, this.entity.world, ModBlocks.BARE_BARK.getDefaultState());
                     if(searchForNewHome != null) {
                         this.entity.setHomePos(searchForNewHome);
                         this.entity.world.setBlockState(searchForNewHome, ModBlocks.BARE_BARK_HOLE.getDefaultState());
@@ -250,7 +250,7 @@ public class EntityAILidopedHome<T extends EntityLidoped> extends EntityAIBase {
 
     public void searchForResource() {
         AxisAlignedBB box = this.entity.getEntityBoundingBox().grow(4, 2, 4);
-        BlockPos searchForBloodWeed = ModUtils.searchForBlocks(box, this.entity.world, this.entity, ModBlocks.BARE_GRASS.getDefaultState());
+        BlockPos searchForBloodWeed = ModUtils.searchForBlocks(box, this.entity.world, ModBlocks.BARE_GRASS.getDefaultState());
         if(selectedBlockPos == null && searchForBloodWeed != null) {
             selectedBlockPos = searchForBloodWeed;
             this.entity.getNavigator().clearPath();

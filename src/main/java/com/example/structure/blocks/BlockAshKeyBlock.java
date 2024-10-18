@@ -2,6 +2,7 @@ package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.TileEntityUpdater;
 import com.example.structure.init.ModCreativeTabs;
+import com.example.structure.util.ModUtils;
 import com.google.common.base.Predicate;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -10,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -17,8 +19,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -94,11 +98,14 @@ public class BlockAshKeyBlock extends BlockBase implements IBlockUpdater, ITileE
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
                                     float hitZ) {
-        if (playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == this.activationItem) {
+
+        if (playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == this.activationItem && ModUtils.getAdvancementCompletion(playerIn, "kill_lamentor")) {
             playerIn.getHeldItem(hand).shrink(1);
             worldIn.spawnEntity(this.spawnPortal.apply(worldIn, pos));
             worldIn.setBlockToAir(pos);
             worldIn.setBlockToAir(pos.up());
+        } else {
+            playerIn.sendStatusMessage(new TextComponentTranslation("ee.status.ash_key_block", new Object[0]), true);
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }

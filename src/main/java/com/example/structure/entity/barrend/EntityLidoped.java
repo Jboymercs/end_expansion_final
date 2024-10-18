@@ -227,7 +227,7 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
 
             if(!this.isHasHome()) {
                 AxisAlignedBB box = getEntityBoundingBox().grow(12, 8, 12);
-                BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.BARE_BARK_HOLE.getDefaultState());
+                BlockPos setTooPos = ModUtils.searchForBlocks(box, world, ModBlocks.BARE_BARK_HOLE.getDefaultState());
                 if(setTooPos != null) {
                     //Found Home
                     this.setHomePos(setTooPos);

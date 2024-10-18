@@ -50,12 +50,6 @@ public class BlockGreenCrystal extends BlockBase implements IBlockUpdater, ITile
                     return player.isPotionActive(ModPotions.MADNESS);
                 }
             });
-
-            if (list.size() > 0) {
-                ModUtils.performNTimes(10, (i) -> {
-                   // ParticleManager.spawnFirework(world, new Vec3d(pos).add(new Vec3d(0.5, 39 + i, 0.5)), ModColors.GREEN, ModUtils.yVec(-0.1f));
-                });
-            }
         }
     }
 

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group" : "planks",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:bare_bark"
+    }
+  },
+  "result": {
+    "item": "ee:bare_planks",
+    "count": 4
+  }
+}

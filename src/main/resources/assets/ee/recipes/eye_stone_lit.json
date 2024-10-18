@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:eye_stone"
+    },
+    "R": {
+      "item": "ee:spirit_goop"
+    }
+  },
+
+  "result": {
+    "item": "ee:eye_stone_lit",
+    "count": 1
+  }
+}

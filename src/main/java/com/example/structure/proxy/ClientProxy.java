@@ -9,7 +9,11 @@ import com.example.structure.gui.book.GuiBook;
 import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.handlers.RenderHandler;
 import com.example.structure.util.particles.ParticlePixel;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -17,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -91,6 +96,22 @@ public class ClientProxy extends CommonProxy {
             case 1:
                 return new ParticlePixel.Factory();
         }
+    }
+
+    @Override
+    public boolean doesPlayerHaveXAdvancement(EntityPlayer player, ResourceLocation Id) {
+        if(player instanceof EntityPlayerSP) {
+            ClientAdvancementManager manager = ((EntityPlayerSP) player).connection.getAdvancementManager();
+            Advancement advancement = manager.getAdvancementList().getAdvancement(Id);
+            if(advancement == null) {
+                System.out.println("advancement is NULL");
+                return false;
+            }
+            AdvancementProgress progress = manager.advancementToProgress.get(advancement);
+            return progress != null && progress.isDone();
+        }
+
+        return super.doesPlayerHaveXAdvancement(player, Id);
     }
 
     @Override

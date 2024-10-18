@@ -32,6 +32,11 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static double biome_multiplier = 1;
 
+    @Config.Name("Barrend Biome Difficulty")
+    @Config.Comment("A Universal config option that multiplies all base health, attack damage, and abilities by this value to all Barrend Bogs Entities")
+    @Config.RequiresMcRestart
+    public static double barrend_multiplier = 1;
+
     @Config.Name("Ash Wastelands Biome Weight")
     @Config.Comment("Change the weight of the Ash Wastelands Biome spawn")
     @Config.RequiresMcRestart
@@ -73,7 +78,10 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean disable_scaling_mod = false;
 
-
+    @Config.Name("Disable Mod Progression Locking")
+    @Config.Comment("When set to false, mod progression is disabled, this includes locked dungeons/ locked parts of the guidebook")
+    @Config.RequiresMcRestart
+    public static boolean isModProgressionEnabled = true;
     //Armor
     @Config.Name("Scale Cordium Armor set")
     @Config.Comment("Scale the Cordium Armor set, putting anything above 1 will times the base values of the armor by this amount, useful for modpack creators")

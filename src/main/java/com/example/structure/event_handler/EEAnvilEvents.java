@@ -18,7 +18,6 @@ public class EEAnvilEvents {
         ItemStack leftInput = event.getLeft();
         ItemStack rightInput = event.getRight();
         ItemStack output = event.getOutput();
-        System.out.println("DETECINT ANVIL");
         if(rightInput.getItem() == ModItems.ULTRA_GOOP) {
             Item[] endExpansionTools = new Item[]{ModItems.BOSS_SWORD, ModItems.KNIGHT_SWORD, ModItems.ENDFALL_SWORD, ModItems.AMBER_SWORD,
                     ModItems.AMBER_DAGGER, ModItems.AMBER_AXE, ModItems.UNHOLY_AXE, ModItems.PURE_AXE, ModItems.AMBER_PICKAXE, ModItems.INFUSED_PICKAXE,
@@ -29,7 +28,6 @@ public class EEAnvilEvents {
 
             for (int i = 0; i < endExpansionTools.length; i++) {
                 if (leftInput.getItem() == endExpansionTools[i]) {
-                    System.out.println("DETECTING");
                     Item[] outputItem = new Item[]{ModItems.BOSS_SWORD, ModItems.KNIGHT_SWORD, ModItems.ENDFALL_SWORD, ModItems.AMBER_SWORD,
                             ModItems.AMBER_DAGGER, ModItems.AMBER_AXE, ModItems.UNHOLY_AXE, ModItems.PURE_AXE, ModItems.AMBER_PICKAXE, ModItems.INFUSED_PICKAXE,
                             ModItems.GUN_LAUNCHER, ModItems.ENDFALL_STAFF, ModItems.ENDFALL_BOW, ModItems.DURABLE_SHIELD,

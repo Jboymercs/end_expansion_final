@@ -309,7 +309,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           }
       } else if (hasLaunchedBlocksOne) {
           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
           if (setTooPos == null) {
               this.setStateLine(0.5F);
           }
@@ -326,7 +326,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           }
       } else if (hasLaunchedBlocksTwo) {
           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
           if (setTooPos == null) {
               this.setStateLine(0.25F);
           }
@@ -343,7 +343,7 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
           }
       } else if (hasLaunchedBlocksThree) {
           AxisAlignedBB box = getEntityBoundingBox().grow(20, 8, 20);
-          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, this, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
+          BlockPos setTooPos = ModUtils.searchForBlocks(box, world, ModBlocks.OBSIDIAN_HEALTH_BLOCK.getDefaultState());
           if (setTooPos == null) {
 
               this.setStateLine(0F);

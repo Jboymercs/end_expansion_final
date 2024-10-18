@@ -8,14 +8,17 @@ import com.example.structure.packets.MessageModParticles;
 import com.example.structure.packets.ModNetworkPackets;
 import com.example.structure.packets.ParticleSSMesage;
 import com.example.structure.util.ModReference;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -25,6 +28,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 
@@ -93,6 +97,17 @@ public class CommonProxy implements IGuiHandler {
 
     public void openGuiBook(ItemStack bestiary, EntityPlayer player) {
 
+    }
+
+    public boolean doesPlayerHaveXAdvancement(EntityPlayer player, ResourceLocation Id) {
+        if (player instanceof EntityPlayerMP) {
+            Advancement adv = ((EntityPlayerMP) player).getServerWorld().getAdvancementManager().getAdvancement(Id);
+            if(adv == null) {
+                System.out.println("Advancement null on serverside");
+            }
+            return adv != null && ((EntityPlayerMP) player).getAdvancements().getProgress(adv).isDone();
+        }
+        return false;
     }
 
     @Nullable

@@ -7,9 +7,9 @@ import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
 import com.example.structure.entity.arrow.EntityGreenArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
-import com.example.structure.entity.barrend.EntityBarrendGolem;
-import com.example.structure.entity.barrend.EntityLidoped;
-import com.example.structure.entity.barrend.EntityMadSpirit;
+import com.example.structure.entity.barrend.*;
+import com.example.structure.entity.barrend.ultraparasite.EntityMoveTile;
+import com.example.structure.entity.barrend.ultraparasite.EntityParasiteBombAOE;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -52,14 +52,42 @@ public class ModEntities {
 
     public static Vec3i end_mobs = new Vec3i(0x833d91, 0xd8d295, 0);
     public static Vec3i knight_mobs = new Vec3i(0x6B0103, 0xd8d295, 0);
-
     public static Vec3i ash_mobs = new Vec3i(0x260B2C, 0xd8d295, 0);
+
+    //Main Boss or Secret Class
+    public static Vec3i lamentor_boss = new Vec3i(0x3eaccc,0xeadc2d,0);
+    public static Vec3i ashed_king_boss = new Vec3i(0xd31a4e,0xeadc2d,0);
+    public static Vec3i avalon_boss = new Vec3i(0x8a017f,0xeadc2d,0);
+
+    //Mini Boss Class
+    public static Vec3i elder_seeker = new Vec3i(0xc5d455,0xd8d295,0);
+    public static Vec3i unholy_knight = new Vec3i(0xff0000,0xd8d295,0);
+    public static Vec3i barrend_golem = new Vec3i(0x9108ab,0xd8d295,0);
+    public static Vec3i evoled_parasite = new Vec3i(0xc60587,0xd8d295,0);
+
+    //Combat mobs Class
+    public static Vec3i end_seeker = new Vec3i(0xc5d455,0x696969,0);
+    public static Vec3i contructor = new Vec3i(0xef6bf5,0x696969,0);
+    public static Vec3i fell_knight = new Vec3i(0xe23131,0x696969,0);
+    public static Vec3i fell_shield = new Vec3i(0xb50202,0x696969,0);
+    public static Vec3i fell_mage = new Vec3i(0xf66a6a,0x696969,0);
+    public static Vec3i mad_spirit = new Vec3i(0x63c53d,0x696969,0);
+
+    //Biome Ambience Mobs
+    public static Vec3i ender_eye = new Vec3i(0x3d7cc5,0xc8c8c8,0);
+    public static Vec3i guilder = new Vec3i(0x08cbc1,0xc8c8c8,0);
+    public static Vec3i ashed_parasite = new Vec3i(0xa63e78,0xc8c8c8,0);
+    public static Vec3i end_stalker = new Vec3i(0x3e3b3d,0xc8c8c8,0);
+    public static Vec3i depths_chomper = new Vec3i(0x775803,0xc8c8c8,0);
+    public static Vec3i lidoped = new Vec3i(0xd19c0b,0xc8c8c8,0);
+    public static Vec3i barrend_walker = new Vec3i(0x543257,0xc8c8c8,0);
+
 
     public static void registerEntities() {
         //Crystal Boss
-        registerEntityWithID("crystal_boss", EntityCrystalKnight.class, ENTITY_START_ID++, 50, end_mobs);
+        registerEntityWithID("crystal_boss", EntityCrystalKnight.class, ENTITY_START_ID++, 50, lamentor_boss);
         //Shulker Constructor
-        registerEntityWithID("buffker", EntityBuffker.class, ENTITY_START_ID++, 50, end_mobs);
+        registerEntityWithID("buffker", EntityBuffker.class, ENTITY_START_ID++, 50, contructor);
         //Crystal Ball - Utility
         registerEntity("crystal_ball", EntityCrystalSpikeSmall.class, ENTITY_START_ID++, 50);
         //Ground Crystal - Utility
@@ -97,7 +125,7 @@ public class ModEntities {
         //Small Barrend Pot
         registerTileEntity(TileEntityBarePot.class, "small_pot");
         //End King
-        registerEntityWithID("end_king", EntityEndKing.class, ENTITY_START_ID++, 50, knight_mobs);
+        registerEntityWithID("end_king", EntityEndKing.class, ENTITY_START_ID++, 50, ashed_king_boss);
         //Red Crystal
         registerEntity("red_crystal", EntityRedCrystal.class, ENTITY_START_ID++, 50);
         //SpinSword Projectile
@@ -107,17 +135,17 @@ public class ModEntities {
         //Nuclear Explosion
         registerEntity("nuke", EntityNuclearExplosion.class, ENTITY_START_ID++, 60);
         //End Bug
-        registerEntityWithID("end_bug", EntityEndBug.class, ENTITY_START_ID++, 60, ash_mobs);
+        registerEntityWithID("end_bug", EntityEndBug.class, ENTITY_START_ID++, 60, ashed_parasite);
         //Ender Knight
-        registerEntityWithID("end_knight", EntityEnderKnight.class, ENTITY_START_ID++, 50, knight_mobs);
+        registerEntityWithID("end_knight", EntityEnderKnight.class, ENTITY_START_ID++, 50, fell_knight);
         //Ender Shield
-        registerEntityWithID("end_shield", EntityEnderShield.class, ENTITY_START_ID++, 60, knight_mobs);
+        registerEntityWithID("end_shield", EntityEnderShield.class, ENTITY_START_ID++, 60, fell_shield);
         //Ender Mage
-        registerEntityWithID("end_mage", EntityEnderMage.class, ENTITY_START_ID++, 60, knight_mobs);
+        registerEntityWithID("end_mage", EntityEnderMage.class, ENTITY_START_ID++, 60, fell_mage);
         //Ender Sword Ultra - Hidden Bosses
-        registerEntityWithID("end_lord", EntityKnightLord.class, ENTITY_START_ID++, 60, knight_mobs);
+        registerEntityWithID("end_lord", EntityKnightLord.class, ENTITY_START_ID++, 60, unholy_knight);
         //Snatcher
-        registerEntityWithID("snatcher", EntitySnatcher.class, ENTITY_START_ID++, 70, ash_mobs);
+        registerEntityWithID("snatcher", EntitySnatcher.class, ENTITY_START_ID++, 70, end_stalker);
         //Heal Aura
         registerEntity("heal_aura", EntityHealAura.class, ENTITY_START_ID++, 60);
         //Ghost King Phase 2 Attack
@@ -131,7 +159,7 @@ public class ModEntities {
         //Mega Structure Block
         registerTileEntity(TileEntityMegaStructure.class, "mega_structure");
         //Alien Controller
-        registerEntityWithID("controller", EntityController.class, ENTITY_START_ID++, 70, end_mobs);
+        registerEntityWithID("controller", EntityController.class, ENTITY_START_ID++, 70, guilder);
         //Lamented Eye - Utility
         registerEntity("lame_eye", EntityLamentedEye.class, ENTITY_START_ID++, 70);
         //Ghost Arm - Utility
@@ -145,24 +173,24 @@ public class ModEntities {
         //Ground Sword Projectile - Utitlity
         registerEntity("sword_attack", EntityGroundSword.class, ENTITY_START_ID++, 80);
         //End Seeker
-        registerEntityWithID("end_seeker", EndSeeker.class, ENTITY_START_ID++, 80, end_mobs);
+        registerEntityWithID("end_seeker", EndSeeker.class, ENTITY_START_ID++, 80, end_seeker);
         //Ender Eye
-        registerEntityWithID("end_eye", EntityEnderEyeFly.class, ENTITY_START_ID++, 80, end_mobs);
+        registerEntityWithID("end_eye", EntityEnderEyeFly.class, ENTITY_START_ID++, 80, ender_eye);
         //End Seeker - Hidden Bosses
-        registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, end_mobs);
+        registerEntityWithID("end_seeker_prime", EndSeekerPrime.class, ENTITY_START_ID++, 80, elder_seeker);
         //Barrend Golem - Hidden Bosses
-        registerEntityWithID("golem_b", EntityBarrendGolem.class, ENTITY_START_ID++, 80, ash_mobs);
+        registerEntityWithID("golem_b", EntityBarrendGolem.class, ENTITY_START_ID++, 80, barrend_golem);
         //End King Friendly - Item Summon
         registerEntity("friend_king", EntityFriendKing.class, ENTITY_START_ID++, 80);
 
-        registerEntityWithID("depths_chomper", EntityChomper.class, ENTITY_START_ID++, 80, ash_mobs);
+        registerEntityWithID("depths_chomper", EntityChomper.class, ENTITY_START_ID++, 80, depths_chomper);
         registerEntity("large_aoe", EntityLargeAOEEffect.class, ENTITY_START_ID++, 80);
         registerEntity("unholy_arrow", EntityUnholyArrow.class, ENTITY_START_ID++, 80);
         registerEntity("chomper_arrow", EntityChomperArrow.class, ENTITY_START_ID++, 90);
         registerEntity("green_arrow", EntityGreenArrow.class, ENTITY_START_ID++, 90);
         registerEntity("sword_spike", EntitySwordSpike.class, ENTITY_START_ID++, 90);
         //Avalon Trader
-        registerEntityWithID("avalon", EntityAvalon.class, ENTITY_START_ID++, 90, end_mobs);
+        registerEntityWithID("avalon", EntityAvalon.class, ENTITY_START_ID++, 90, avalon_boss);
         //Mini Avalon
         registerEntity("mini_avalon", EntityMiniValon.class, ENTITY_START_ID++, 100);
         //AOE Entity
@@ -180,9 +208,19 @@ public class ModEntities {
         //End Expansion Painting
         registerEntity("lamented_islands_painting", EntityEEPainting.class, ENTITY_START_ID++, 100);
         //Barrend Lidoped
-        registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, ash_mobs);
+        registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, lidoped);
         //Mad Spirit
-        registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, ash_mobs);
+        registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, mad_spirit);
+        //Void Tripod
+        registerEntityWithID("void_tripod", EntityVoidTripod.class, ENTITY_START_ID++, 110, barrend_walker);
+        //Big Rick
+        registerEntityWithID("big_rick", EntityUltraParasite.class, ENTITY_START_ID++, 110, evoled_parasite);
+        //Move TIle
+        registerEntity("move_tile_aoe", EntityMoveTile.class, ENTITY_START_ID++, 110);
+        //Parasite Projectile Bomb
+        registerEntity("parasite_bomb", ProjectileParasiteBomb.class, ENTITY_START_ID++, 110);
+        //Parasite Bomb AOE
+        registerEntity("parasite_bomb_aoe", EntityParasiteBombAOE.class, ENTITY_START_ID++, 110);
 
 
     }
@@ -193,8 +231,9 @@ public class ModEntities {
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, MobConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, MobConfig.chomper_spawn_rate, 1, 3, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 3, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-        spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, 2, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+        //spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, 2, 1, 2, BiomeRegister.BARREND_LOWLANDS);
         spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 2, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 2, 1, 1, BiomeRegister.BARREND_LOWLANDS);
     }
 
 

@@ -40,7 +40,7 @@ public abstract class EntityBarrendMob extends EntityModBase {
 
             if(!nearbyEntities.isEmpty()) {
                 for(EntityLivingBase entity: nearbyEntities) {
-                    if(!(entity instanceof EntityBarrendMob)) {
+                    if(!(entity instanceof EntityBarrendMob) && !(this instanceof EntityUltraParasite)) {
                         if(entity instanceof EntityPlayer) {
                             if(entity.isPotionActive(ModPotions.MADNESS) && !((EntityPlayer) entity).isCreative() && !((EntityPlayer) entity).isSpectator()) {
                                 if(entity.isEntityAlive()) {
@@ -65,7 +65,7 @@ public abstract class EntityBarrendMob extends EntityModBase {
             checkForEnemies--;
         }
 
-        if(taret != null && !taret.isEntityAlive()) {
+        if(taret != null && !taret.isEntityAlive() && !(this instanceof EntityUltraParasite)) {
             this.setAttackTarget(null);
         }
     }

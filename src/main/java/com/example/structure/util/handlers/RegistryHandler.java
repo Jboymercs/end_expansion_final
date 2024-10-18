@@ -74,6 +74,8 @@ public class RegistryHandler {
         ModelLoader.setCustomModelResourceLocation(ModItems.DURABLE_SHIELD, 0, new ModelResourceLocation(ModReference.MOD_ID + ":durable_shield", "inventory"));
         ModelLoader.setCustomModelResourceLocation(ModItems.ENDFALL_STAFF, 0, new ModelResourceLocation(ModReference.MOD_ID + ":efstaff", "inventory"));
         ModelLoader.setCustomModelResourceLocation(ModItems.PROJECTILE_PURPLE, 0, new ModelResourceLocation(ModReference.MOD_ID + ":projpurp", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ModItems.PARASITE_PROJECTILE, 0, new ModelResourceLocation(ModReference.MOD_ID + ":parasitebomb", "inventory"));
+
        //ModelLoader.setCustomModelResourceLocation(Items.ALTAR, 0, new ModelResourceLocation(ModReference.MOD_ID + ":altar", "inventory"));
 
         ModItems.CRYSTAL_BALL.setTileEntityItemStackRenderer(new RenderCrystalBall());
@@ -83,6 +85,7 @@ public class RegistryHandler {
         ModItems.DURABLE_SHIELD.setTileEntityItemStackRenderer(new RenderDurableShield());
         ModItems.ENDFALL_STAFF.setTileEntityItemStackRenderer(new RenderEndfallStaff());
         ModItems.PROJECTILE_PURPLE.setTileEntityItemStackRenderer(new RenderPurple());
+        ModItems.PARASITE_PROJECTILE.setTileEntityItemStackRenderer(new RenderParasiteBomb());
 
         for (Item item : ModItems.ITEMS) {
             if (item instanceof IHasModel) {

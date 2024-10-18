@@ -1,6 +1,8 @@
 package com.example.structure.util;
 
 
+import com.example.structure.Main;
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
@@ -12,12 +14,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
@@ -256,7 +260,7 @@ public class ModUtils {
     /**
      * Search For blocks in area, this will be a periodic check
      */
-    public static BlockPos searchForBlocks(AxisAlignedBB box, World world, Entity entity, IBlockState block) {
+    public static BlockPos searchForBlocks(AxisAlignedBB box, World world, IBlockState block) {
         int i = MathHelper.floor(box.minX);
         int j = MathHelper.floor(box.minY);
         int k = MathHelper.floor(box.minZ);
@@ -621,6 +625,7 @@ public class ModUtils {
         float f = projectile.hasNoGravity() ? 0 : MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
         projectile.shoot(d1, d2 + f, d3, velocity, inaccuracy);
     }
+
     public static void addEntityVelocity(Entity entity, Vec3d vec) {
         entity.addVelocity(vec.x, vec.y, vec.z);
     }
@@ -900,10 +905,28 @@ public class ModUtils {
         return false;
     }
 
+    /**
+     * Gets the advancement and if that current player has the advancement completed
+     *  If the config option is set to false, this will return automatically true
+     */
+    public static boolean getAdvancementCompletion(EntityPlayer currentPlayer, String advancementName) {
+        if(!ModConfig.isModProgressionEnabled) {
+            return true;
+        }
+
+        ResourceLocation loc = new ResourceLocation(ModReference.MOD_ID + ":" +  advancementName);
+        System.out.println(loc);
+      boolean isCompleted = Main.proxy.doesPlayerHaveXAdvancement(currentPlayer, loc);
+      return isCompleted;
+    }
+
 
     /**
      * Returns a {@link Vec3d} of the coordinates at the centre of the given entity's bounding box. This is more
-     * efficient than {@code GeometryUtils.getCentre(entity.getEntityBoundingBox())} as it can use the entity's fields.
+     * efficient than {@code GeometryUtils.getCentre(entity.getEntityBoundingBox())}
+     *
+     *
+     * as it can use the entity's fields.
      */
     public static Vec3d getCentre(Entity entity){
         return new Vec3d(entity.posX, entity.posY + entity.height/2, entity.posZ);

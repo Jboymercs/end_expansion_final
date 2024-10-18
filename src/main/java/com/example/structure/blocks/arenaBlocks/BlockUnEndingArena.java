@@ -4,6 +4,7 @@ import com.example.structure.blocks.BlockBase;
 import com.example.structure.blocks.IBlockUpdater;
 import com.example.structure.entity.tileentity.TileEntityUnEndingArena;
 import com.example.structure.init.ModItems;
+import com.example.structure.util.ModUtils;
 import com.google.common.base.Predicate;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -19,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -73,22 +75,26 @@ public class BlockUnEndingArena extends BlockBase implements ITileEntityProvider
         if(te instanceof TileEntityUnEndingArena) {
             TileEntityUnEndingArena spawner = (TileEntityUnEndingArena) te;
             if(spawner.getState() != BlockEnumArenaStates.ACTIVE) {
-                if (player.getHeldItemMainhand().getItem() == this.activationItem) {
-                    spawner.setState(BlockEnumArenaStates.ACTIVE, 1, 1.25);
-                    player.getHeldItemMainhand().shrink(1);
-                    return true;
-                } else if (player.getHeldItemMainhand().getItem() == this.activationItem2) {
-                    spawner.setState(BlockEnumArenaStates.ACTIVE, 2, 1.5);
-                    player.getHeldItemMainhand().shrink(1);
-                    return true;
-                } else if (player.getHeldItemMainhand().getItem() == this.activationItem3) {
-                    spawner.setState(BlockEnumArenaStates.ACTIVE, 3, 1.25);
-                    player.getHeldItemMainhand().shrink(1);
-                    return true;
-                } else if (player.getHeldItemMainhand().getItem() == this.activationItem4) {
-                    spawner.setState(BlockEnumArenaStates.ACTIVE, 4, 1.5);
-                    player.getHeldItemMainhand().shrink(1);
-                    return true;
+                if (ModUtils.getAdvancementCompletion(player, "kill_seeker_prime")) {
+                    if (player.getHeldItemMainhand().getItem() == this.activationItem) {
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 1, 1.25);
+                        player.getHeldItemMainhand().shrink(1);
+                        return true;
+                    } else if (player.getHeldItemMainhand().getItem() == this.activationItem2) {
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 2, 1.5);
+                        player.getHeldItemMainhand().shrink(1);
+                        return true;
+                    } else if (player.getHeldItemMainhand().getItem() == this.activationItem3) {
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 3, 1.25);
+                        player.getHeldItemMainhand().shrink(1);
+                        return true;
+                    } else if (player.getHeldItemMainhand().getItem() == this.activationItem4) {
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 4, 1.5);
+                        player.getHeldItemMainhand().shrink(1);
+                        return true;
+                    }
+                } else {
+                    player.sendStatusMessage(new TextComponentTranslation("ee.status.arena_block", new Object[0]), true);
                 }
             }
 

@@ -290,9 +290,9 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
                 this.isHuntingBlock = true;
                 //Search for Blocks within it's area
                 AxisAlignedBB box = getEntityBoundingBox().grow(8, 8, 8);
-                BlockPos pos = ModUtils.searchForBlocks(box, world, this, currentBlock);
+                BlockPos pos = ModUtils.searchForBlocks(box, world, currentBlock);
                 //Check to see if a block of that type exists
-                if(ModUtils.searchForBlocks(box, world, this, currentBlock) != null) {
+                if(ModUtils.searchForBlocks(box, world, currentBlock) != null) {
                     Vec3d lookPos = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
                     this.getMoveHelper().setMoveTo(pos.getX(), pos.getY() + 2, pos.getZ(), 0.35);
                     ModUtils.facePosition(lookPos, this, 45, 45);

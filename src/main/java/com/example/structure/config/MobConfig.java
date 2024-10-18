@@ -373,4 +373,24 @@ public class MobConfig {
     @Config.Comment("Change X times base Attack Damage for specific abilities of the Barrend Golem, such as it's charge, and Slam Attacks")
     @Config.RequiresMcRestart
     public static double barrend_golem_attack_multiplier = 1.4;
+
+    @Config.Name("Evoled Parasite Health")
+    @Config.Comment("Change the Health of the Evolved Parasite")
+    @Config.RequiresMcRestart
+    public static double evolved_parasite_health = 450;
+
+    @Config.Name("Evolved Parasite Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Evolved Parasite")
+    @Config.RequiresMcRestart
+    public static double evolved_parasite_attack_damage = 40;
+
+    @Config.Name("Evolved Parasite Armor")
+    @Config.Comment("Change the Armor value of the Evolved Parasite")
+    @Config.RequiresMcRestart
+    public static double evolved_parasite_armor = 16;
+
+    @Config.Name("Evolved Parasite Armor Toughness")
+    @Config.Comment("Change the Armor Toughness of the Evolved Parasite")
+    @Config.RequiresMcRestart
+    public static double evolved_parasite_toughness = 4;
 }

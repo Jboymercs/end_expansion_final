@@ -185,7 +185,7 @@ public class BarrendCrypts {
 
         if(straight_template.getDistance() > SIZE || straight_template.isCollidingExcParent(manager, parent, components)) {
             //generate End
-            return false;
+            return this.generateQuickEnd(parent, pos, rot);
         }
 
         components.add(straight_template);
@@ -203,18 +203,19 @@ public class BarrendCrypts {
         if(!genSuccess) {
             components.remove(straight_template);
            // return this.generateEnd(parent, pos, rot);
+            return this.generateQuickEnd(parent, pos, rot);
         }
 
         return true;
     }
 
     private boolean generateCross(BarrendCryptTemplate parent, BlockPos pos, Rotation rot) {
-        String[] cross_types = {"tiles/cross_1", "tiles/cross_2"};
+        String[] cross_types = {"tiles/cross_1", "tiles/cross_2", "tiles/cross_3"};
         BarrendCryptTemplate cross_template = addAdjustedPiece(parent, pos, ModRand.choice(cross_types), rot);
 
         if(cross_template.getDistance() > SIZE || cross_template.isCollidingExcParent(manager, parent, components)) {
             //generate End
-            return false;
+            return this.generatePiecePart(parent, pos, rot);
         }
 
         components.add(cross_template);
@@ -231,11 +232,141 @@ public class BarrendCrypts {
             components.clear();
             components.addAll(structures);
            // generateEnd(templateAdjusted, pos, rot);
+            return this.generatePiecePart(parent, pos, rot);
         }
 
         return true;
     }
 
+    private int chamberNumber = 0;
+    private boolean generatedBossChamber = false;
+
+    private boolean generateChamber(BarrendCryptTemplate parent, BlockPos pos, Rotation rot, int ID) {
+        BarrendCryptTemplate chamber = null;
+
+        if(ID == 1) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-4,0), "chamber/chamber_1", rot);
+        } else if (ID == 2) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,0,0), "chamber/chamber_2", rot);
+        } else if (ID == 3) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-4,0), "chamber/chamber_3", rot);
+        } else if (ID == 4) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-2,0), "chamber/chamber_4", rot);
+        }
+
+        if(chamber != null) {
+
+            if(chamberNumber > 2 && !generatedBossChamber) {
+                chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-9,0), "chamber/boss_chamber", rot);
+
+                if(chamber.isCollidingExcParent(manager, parent, components)) {
+                    return this.generateHelperStraight(parent, pos, rot);
+                }
+
+                chamberNumber++;
+                components.add(chamber);
+                generatedBossChamber = true;
+                return true;
+            }
+
+            if(chamber.isCollidingExcParent(manager, parent, components)) {
+                return this.generateHelperStraight(parent, pos, rot);
+            }
+
+            chamberNumber++;
+            components.add(chamber);
+            return true;
+        }
+
+
+        return false;
+    }
+
+    private boolean generateHelperStraight(BarrendCryptTemplate parent, BlockPos pos, Rotation rot) {
+        String[] helper_straights = {"help_straight_1", "help_straight_2", "help_straight_3"};
+        BarrendCryptTemplate straight = addAdjustedPieceWithoutDistance(parent, pos, ModRand.choice(helper_straights), rot);
+
+        if(straight.isCollidingExcParent(manager, parent, components)) {
+            return false;
+        }
+
+        int randChamberEvent = ModRand.range(1, 5);
+        if(!generateChamberAttemptTwo(straight, pos, rot, randChamberEvent)) {
+            return this.generateQuickEndAttempted(parent, pos, rot);
+        }
+
+        components.add(straight);
+        return true;
+    }
+
+    private boolean generateChamberAttemptTwo(BarrendCryptTemplate parent, BlockPos pos, Rotation rot, int ID) {
+        BarrendCryptTemplate chamber = null;
+
+        if(ID == 1) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-4,0), "chamber/chamber_1", rot);
+        } else if (ID == 2) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,0,0), "chamber/chamber_2", rot);
+        } else if (ID == 3) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-4,0), "chamber/chamber_3", rot);
+        } else if (ID == 4) {
+            chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-2,0), "chamber/chamber_4", rot);
+        }
+
+        if(chamber != null) {
+
+            if(chamberNumber > 2 && !generatedBossChamber) {
+                chamber = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN.add(0,-9,0), "chamber/boss_chamber", rot);
+
+                if(chamber.isCollidingExcParent(manager, parent, components)) {
+                    return this.generateHelperStraight(parent, pos, rot);
+                }
+
+                chamberNumber++;
+                components.add(chamber);
+                generatedBossChamber = true;
+                return true;
+            }
+
+            if(chamber.isCollidingExcParent(manager, parent, components)) {
+                return false;
+            }
+
+            chamberNumber++;
+            components.add(chamber);
+            return true;
+        }
+
+
+        return false;
+    }
+
+    private boolean generateQuickEnd(BarrendCryptTemplate parent, BlockPos pos, Rotation rot) {
+        //Seals all entryways from the Crypt
+        if(world.rand.nextInt(3) == 0) {
+            int randChamberEvent = ModRand.range(1, 5);
+            return this.generateChamber(parent, pos, rot, randChamberEvent);
+        }
+
+        BarrendCryptTemplate template = addAdjustedPieceWithoutDistance(parent, pos, "quick_end", rot);
+        components.add(template);
+        return true;
+    }
+
+    private boolean generatePiecePart(BarrendCryptTemplate parent, BlockPos pos, Rotation rot) {
+        //creates a divended between an endpoint and the the connector, used to keep chambers from offsetting and screwing up structure gen
+
+        BarrendCryptTemplate template = addAdjustedPieceWithoutDistance(parent, BlockPos.ORIGIN, "piece_part", rot);
+        components.add(template);
+        generateQuickEnd(template, BlockPos.ORIGIN, rot);
+        return true;
+    }
+
+    private boolean generateQuickEndAttempted(BarrendCryptTemplate parent, BlockPos pos, Rotation rot) {
+        //Seals all entryways from the Crypt After attempting to spawn a chamber
+        BarrendCryptTemplate template = addAdjustedPieceWithoutDistance(parent, pos, "quick_end", rot);
+        components.add(template);
+        return true;
+    }
 
 
 

@@ -4,9 +4,9 @@ import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
 import com.example.structure.entity.arrow.EntityGreenArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
-import com.example.structure.entity.barrend.EntityBarrendGolem;
-import com.example.structure.entity.barrend.EntityLidoped;
-import com.example.structure.entity.barrend.EntityMadSpirit;
+import com.example.structure.entity.barrend.*;
+import com.example.structure.entity.barrend.ultraparasite.EntityMoveTile;
+import com.example.structure.entity.barrend.ultraparasite.EntityParasiteBombAOE;
 import com.example.structure.entity.endking.*;
 import com.example.structure.entity.endking.friendly.EntityFriendKing;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
@@ -20,9 +20,11 @@ import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.entity.painting.RenderEEPainting;
 import com.example.structure.entity.render.*;
 import com.example.structure.entity.render.arrow.RenderArrowBase;
+import com.example.structure.entity.render.moveTile.RenderMoveTile;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.trader.*;
+import com.example.structure.init.ModItems;
 import git.jbredwards.nether_api.mod.common.world.gen.MapGenCavesEnd;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -177,5 +179,15 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityLidoped.class, RenderLidoped::new);
         //Mad Spirit
         RenderingRegistry.registerEntityRenderingHandler(EntityMadSpirit.class, RenderMadSpirit::new);
+        //Void Tripod
+        RenderingRegistry.registerEntityRenderingHandler(EntityVoidTripod.class, RenderTripod::new);
+        //Ultra Parasite
+        RenderingRegistry.registerEntityRenderingHandler(EntityUltraParasite.class, RenderUltraParasite::new);
+        //Move Tile
+        RenderingRegistry.registerEntityRenderingHandler(EntityMoveTile.class, RenderMoveTile::new);
+        //Parasite Bomb
+        registerProjectileRenderer(ProjectileParasiteBomb.class, ModItems.PARASITE_PROJECTILE);
+        //Parasite Bomb AOE
+        RenderingRegistry.registerEntityRenderingHandler(EntityParasiteBombAOE.class, RenderParasiteBombAOE::new);
     }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:bare_planks"
+    }
+  },
+  "result": {
+    "item": "ee:bare_planks_stairs",
+    "data": 0,
+    "count": 4
+  }
+}

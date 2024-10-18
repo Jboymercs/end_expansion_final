@@ -167,8 +167,8 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
 
         if(ticksExisted > 20 && ticksExisted < 100) {
             AxisAlignedBB box = getEntityBoundingBox().grow(15, 7, 15);
-            BlockPos posToo = ModUtils.searchForBlocks(box, world, this, Blocks.IRON_BARS.getDefaultState());
-            if(ModUtils.searchForBlocks(box, world, this, Blocks.IRON_BARS.getDefaultState()) != null) {
+            BlockPos posToo = ModUtils.searchForBlocks(box, world, Blocks.IRON_BARS.getDefaultState());
+            if(ModUtils.searchForBlocks(box, world, Blocks.IRON_BARS.getDefaultState()) != null) {
                 if(posToo != null) {
                     world.setBlockToAir(posToo);
                 }

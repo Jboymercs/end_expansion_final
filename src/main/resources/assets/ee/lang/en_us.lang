@@ -46,6 +46,11 @@ entity.barrend_parasite.name=Barrend Parasite
 entity.lamentor_wave.name=Lamentor Wave Attack
 entity.lidoped.name=Lidoped
 entity.mad_spirit.name=Mad Spirit
+entity.void_tripod.name=Barrend Walker
+entity.big_rick.name=Evolved Barrend Parasite
+entity.move_tile_aoe.name=Boss AOE wave
+entity.parasite_bomb.name=Charged Acid Bomb
+entity.parasite_bomb_aoe.name=Parasite Acid Bomb
 tile.lamented_end_stone.name=Lamented End Stone
 tile.end_ash.name=Ashed End Stone
 tile.ash_brick.name=Ashed Brick
@@ -193,6 +198,7 @@ item.lidoped_bucket.name=Bucket with a
 item.spirit_goop.name=Mad Spirit Goop
 item.ultra_goop.name=Enchanted Goop Concoction
 item.memory_stone.name=Memorium Stone
+item.parasitebomb.name=Charged Parasite Bomb
 entity.acid_proj.name=Parasite Acid
 entity.bomb_proj.name=Avalon's Bomb
 entity.controller_lift.name=Guilder Lift
@@ -307,7 +313,10 @@ advancements.ee.craft_amber_torch.description=Craft Cordium Torches.
 advancements.ee.find_coin.title=The End's Secrets
 advancements.ee.find_coin.description=Find an Avalon's Coin
 
-
+#Status
+ee.status.ash_key_block=You have not defeated the Lamentor yet
+ee.status.arena_block=You have not defeated an Elder End Seeker yet
+ee.status.barrend_crypt=You have not defeated the Ashed King yet
 
 ee.desc.amber_desc=Full set gives Haste, and allows you to see nearby creatures.
 ee.desc.dimensional_key=Right click on the key block to awaken the Lamentor
@@ -356,6 +365,11 @@ death.attack.ee:magicMaelstrom=%1$s was magicked by a %2$s
 
 #Index Titles
 
+#Locked Entry
+title.locked_entry=Locked Entry
+
+#Locked Requirements
+
 #Book Info - Intro
 desc.intro_0=The end is known to hold many
 desc.intro_1=mysteries. This book will act
@@ -363,7 +377,12 @@ desc.intro_2=as a guide of your travels and
 desc.intro_3=unlock new notes as you explore
 desc.intro_4=the end. But be wary traveller.
 desc.intro_5=There is many threats to be
-desc.intro_6=additionally found!
+desc.intro_6=found on your adventures!
+desc.intro_7=
+desc.intro_8=A key to unlocking entries is
+desc.intro_9=by slaying mobs, defeating bosses,
+desc.intro_10=and discovering resources from
+desc.intro_11=the mod.
 
 #Pure Crystals
 title.pure_cry_0=Pure Crystals
@@ -432,11 +451,13 @@ desc.lame_1=biome, the Lamented islands are seen
 desc.lame_2=as the End's strangest architecture.
 desc.lame_3=This structure acts like a jail cell
 desc.lame_4=where an ancient race remains trapped
-desc.lame_5=within. It is recommended to seek
+desc.lame_5=within. It is required to seek
 desc.lame_6=out one of these buildings before
 desc.lame_7=progressing to any other biomes. But
 desc.lame_8=be wary traveller, as danger is high
 desc.lame_9=in Lamented Islands.
+desc.lame_10=Defeating the Lamentor is required
+desc.lame_11=to progress in the mod.
 
 
 #Constructor

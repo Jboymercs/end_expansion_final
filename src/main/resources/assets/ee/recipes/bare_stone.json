@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:bare_sand"
+    }
+  },
+  "result": {
+    "item": "ee:bare_stone",
+    "count": 4
+  }
+}

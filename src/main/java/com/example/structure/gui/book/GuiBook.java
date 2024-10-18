@@ -2,6 +2,7 @@ package com.example.structure.gui.book;
 
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModReference;
+import com.example.structure.util.ModUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -195,7 +197,7 @@ public class GuiBook extends GuiScreen {
                 //IntroDuction + Index
                 GlStateManager.pushMatrix();
                 int t = (this.width - X) / 2;
-                this.writeLeftFromString(0, 6, "desc.intro_");
+                this.writeLeftFromString(0, 11, "desc.intro_");
                 this.drawItemStack(new ItemStack(ModItems.LAMENTED_EYE), (this.width - 75 * 2) / 2, 14);
                 GlStateManager.popMatrix();
                 break;
@@ -216,214 +218,387 @@ public class GuiBook extends GuiScreen {
             case 2:
                 //End Vaults + End Seeker
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 0, 115, 58, 115, 464);
+                if(ModUtils.getAdvancementCompletion(player, "kill_seeker")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 0, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("entity.end_seeker.name");
+                    this.writeRightFromString(6, 12, "desc.seeker_");
+                } else {
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createRightPictureTitleFromString("entity.end_seeker.name");
+                }
+
                 this.createLeftTitleFromString("title.vaults_0");
-                this.createRightPictureTitleFromString("entity.end_seeker.name");
                 this.writeLeftFromString(0, 8, "desc.vaults_");
-                this.writeRightFromString(6, 12, "desc.seeker_");
                 GlStateManager.popMatrix();
                 break;
 
             case 3:
                 //End Compulsor + Ancient Guilder
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(MOB_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 232, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("title.compulsor_0");
-                this.writeLeftFromString(6, 12, "block.cmp_");
-                this.createRightPictureTitleFromString("entity.controller.name");
-                this.writeRightFromString(6, 12, "desc.guilder_");
+                if(ModUtils.getAdvancementCompletion(player, "craft_compulsor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 232, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.compulsor_0");
+                    this.writeLeftFromString(6, 12, "block.cmp_");
+                } else {
+                    this.createLeftPictureTitleFromString("title.compulsor_0");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.createLockedEntryLeft("title.locked_entry");
+                }
+                if (ModUtils.getAdvancementCompletion(player, "kill_guilder")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("entity.controller.name");
+                    this.writeRightFromString(6, 12, "desc.guilder_");
+                } else {
+                    this.createRightPictureTitleFromString("entity.controller.name");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryRight("title.locked_entry");
+                }
+
                 GlStateManager.popMatrix();
                 break;
 
             case 4:
                 //Conversion Charts
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 232, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 91, 0, 348, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("title.chart_1");
-                this.createRightPictureTitleFromString("title.chart_1_cont");
-                this.writeLeftFromString(6, 12, "desc.chart_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_guilder")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 232, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 91, 0, 348, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.chart_1");
+                    this.createRightPictureTitleFromString("title.chart_1_cont");
+                    this.writeLeftFromString(6, 12, "desc.chart_");
+                } else {
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.createLeftPictureTitleFromString("title.chart_1");
+                    this.createRightPictureTitleFromString("title.chart_1_cont");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                }
+
                 GlStateManager.popMatrix();
                 break;
 
             case 5:
                 //Lamented Islands + Constructor
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(MOB_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 0, 115, 58, 115, 464);
+                if(ModUtils.getAdvancementCompletion(player, "kill_constructor")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 0, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("entity.buffker.name");
+                    this.writeRightFromString(6, 13, "desc.cons_");
+                } else {
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createRightPictureTitleFromString("entity.buffker.name");
+                }
+
                 this.createLeftTitleFromString("title.lame_0");
-                this.createRightPictureTitleFromString("entity.buffker.name");
-                this.writeLeftFromString(0, 9, "desc.lame_");
-                this.writeRightFromString(6, 13, "desc.cons_");
+                this.writeLeftFromString(0, 11, "desc.lame_");
           GlStateManager.popMatrix();
                 break;
 
             case 6:
                 //The Lamentor
-
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(MOB_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 58, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("entity.crystal_boss.name");
-                this.writeLeftFromString(6, 13, "desc.cboss_");
-                this.createRightTitleFromString("title.cboss_0");
-                this.writeRightFromString(0, 13, "skill.cboss_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_seeker_prime") || ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 58, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("entity.crystal_boss.name");
+                    this.writeLeftFromString(6, 13, "desc.cboss_");
+                    this.createRightTitleFromString("title.cboss_0");
+                    this.writeRightFromString(0, 13, "skill.cboss_");
+                } else {
+                    this.createLeftPictureTitleFromString("entity.crystal_boss.name");
+                    this.createRightPictureTitleFromString("title.cboss_0");
+                    this.writeLeftFromString(6, 13, "desc.cboss_");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
 
             case 7:
                 //Lamented Eye Trinket + End Compulsor
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 116, 115, 58 ,115 , 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 174, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("title.lame_eye_0");
-                this.createRightPictureTitleFromString("title.shield_0");
-                this.writeLeftFromString(6, 11, "skill.mdl_");
-                this.writeRightFromString(6, 13, "skill.shield_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 116, 115, 58 ,115 , 464);
+                    this.writeLeftFromString(6, 11, "skill.mdl_");
+                    this.createLeftPictureTitleFromString("title.lame_eye_0");
+                } else {
+                    this.createLeftPictureTitleFromString("title.lame_eye_0");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
+                if(ModUtils.getAdvancementCompletion(player, "kill_guilder")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 174, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("title.shield_0");
+                    this.writeRightFromString(6, 13, "skill.shield_");
+                } else {
+                    this.createRightPictureTitleFromString("title.shield_0");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
                 GlStateManager.popMatrix();
                 break;
             case 8:
                 //Ash Wastelands Biome + End Ash + Ash Brick
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 0, 115, 58, 115, 464);
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 0, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("tile.ash_brick.name");
+                    this.writeRightFromString(6, 12, "desc.ash_block_");
+                } else {
+                    this.createRightPictureTitleFromString("tile.ash_brick.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 this.createLeftTitleFromString("title.biome_0");
                 this.writeLeftFromString(0, 13, "desc.ash_");
-                this.createRightPictureTitleFromString("tile.ash_brick.name");
-                this.writeRightFromString(6, 12, "desc.ash_block_");
                 GlStateManager.popMatrix();
                 break;
             case 9:
                 //Unholy Crystals + Red Lamp
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 348, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 0, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.red_crystal_item.name");
-                this.createRightPictureTitleFromString("title.cont_red");
-                this.writeLeftFromString(6, 12, "desc.red_");
-                this.writeRightFromString(6, 9, "desc.cont_red_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 348, 115, 58, 115, 464);
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 0, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.red_crystal_item.name");
+                    this.createRightPictureTitleFromString("title.cont_red");
+                    this.writeLeftFromString(6, 12, "desc.red_");
+                    this.writeRightFromString(6, 9, "desc.cont_red_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.red_crystal_item.name");
+                    this.createRightPictureTitleFromString("title.cont_red");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
                 GlStateManager.popMatrix();
                 break;
             case 10:
                 //Door KeyHole + Door Creator
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width -245) / 2, 13,0, 174, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 290, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("tile.ash_door.name");
-                this.writeLeftFromString(6, 13, "desc.hole_");
-                this.createRightPictureTitleFromString("tile.end_door.name");
-                this.writeRightFromString(6, 10, "desc.crea_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width -245) / 2, 13,0, 174, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 290, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("tile.ash_door.name");
+                    this.writeLeftFromString(6, 13, "desc.hole_");
+                    this.createRightPictureTitleFromString("tile.end_door.name");
+                    this.writeRightFromString(6, 10, "desc.crea_");
+                } else {
+                    this.createRightPictureTitleFromString("tile.end_door.name");
+                    this.createLeftPictureTitleFromString("tile.ash_door.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 11:
                 //Ash Trap + Start of Ash Items
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("tile.ash_trap_floor.name");
-                this.writeLeftFromString(6, 12, "desc.trap_");
-                this.createRightPictureTitleFromString("tile.red_lamp.name");
-                this.writeRightFromString(6, 7, "desc.lamp_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("tile.ash_trap_floor.name");
+                    this.writeLeftFromString(6, 12, "desc.trap_");
+                    this.createRightPictureTitleFromString("tile.red_lamp.name");
+                    this.writeRightFromString(6, 7, "desc.lamp_");
+                } else {
+                    this.createLeftPictureTitleFromString("tile.ash_trap_floor.name");
+                    this.createRightPictureTitleFromString("tile.red_lamp.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
                 GlStateManager.popMatrix();
                 break;
             case 12:
                 //Brick Rods + Amber Ore
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 116, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.brick_rod.name");
-                this.createRightPictureTitleFromString("tile.amber_ore.name");
-                this.writeLeftFromString(6, 8, "desc.brick_rod_");
-                this.writeRightFromString(6, 11, "desc.amber_ore_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 116, 115, 58, 115, 464);
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.brick_rod.name");
+                    this.createRightPictureTitleFromString("tile.amber_ore.name");
+                    this.writeLeftFromString(6, 8, "desc.brick_rod_");
+                    this.writeRightFromString(6, 11, "desc.amber_ore_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.brick_rod.name");
+                    this.createRightPictureTitleFromString("tile.amber_ore.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
                 GlStateManager.popMatrix();
                 break;
             case 13:
                 //Amber Torches + Amber Pickaxe
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 174, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 174, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("tile.amber_torch.name");
-                this.createRightPictureTitleFromString("item.amber_pickaxe.name");
-                this.writeLeftFromString(6, 12, "desc.amber_torch_");
-                this.writeRightFromString(6, 10, "desc.amber_pickaxe_");
+                if(ModUtils.getAdvancementCompletion(player, "find_cordium")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 174, 115, 58, 115, 464);
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 174, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("tile.amber_torch.name");
+                    this.createRightPictureTitleFromString("item.amber_pickaxe.name");
+                    this.writeLeftFromString(6, 12, "desc.amber_torch_");
+                    this.writeRightFromString(6, 10, "desc.amber_pickaxe_");
+                } else {
+                    this.createLeftPictureTitleFromString("tile.amber_torch.name");
+                    this.createRightPictureTitleFromString("item.amber_pickaxe.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
                 GlStateManager.popMatrix();
                 break;
             case 14:
                 //Amber Axe + Amber Dagger
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 290, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.amber_axe.name");
-                this.createRightPictureTitleFromString("item.amber_dagger.name");
-                this.writeLeftFromString(6, 12, "desc.amber_axe_");
-                this.writeRightFromString(6, 11, "desc.amber_dagger_");
+                if(ModUtils.getAdvancementCompletion(player, "find_cordium")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 290, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.amber_axe.name");
+                    this.createRightPictureTitleFromString("item.amber_dagger.name");
+                    this.writeLeftFromString(6, 12, "desc.amber_axe_");
+                    this.writeRightFromString(6, 11, "desc.amber_dagger_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.amber_axe.name");
+                    this.createRightPictureTitleFromString("item.amber_dagger.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
 
             case 15:
                 //Infused Crystals + Infused Pickaxe
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 406, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.infused_crystal.name");
-                this.createRightPictureTitleFromString("item.endfall_pickaxe.name");
-                this.writeLeftFromString(6, 13, "desc.if_cry_");
-                this.writeRightFromString(6, 10, "desc.pick_");
+                if(ModUtils.getAdvancementCompletion(player, "find_core") && ModUtils.getAdvancementCompletion(player, "find_red") &&
+                ModUtils.getAdvancementCompletion(player, "find_purple")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 406, 115, 58, 115, 464);
+                    this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.infused_crystal.name");
+                    this.createRightPictureTitleFromString("item.endfall_pickaxe.name");
+                    this.writeLeftFromString(6, 13, "desc.if_cry_");
+                    this.writeRightFromString(6, 10, "desc.pick_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.infused_crystal.name");
+                    this.createRightPictureTitleFromString("item.endfall_pickaxe.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 16:
                 //Amber Armor Set + Helmet + Chestplate + leggings
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 348, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 91, 0, 0, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("title.amber_armor_0");
-                this.createRightPictureTitleFromString("title.amber_armor_0_cont");
-                this.writeLeftFromString(6, 12, "desc.amber_armor_");
+                if(ModUtils.getAdvancementCompletion(player, "find_cordium") && ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 348, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 91, 0, 0, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.amber_armor_0");
+                    this.createRightPictureTitleFromString("title.amber_armor_0_cont");
+                    this.writeLeftFromString(6, 12, "desc.amber_armor_");
+                } else {
+                    this.createLeftPictureTitleFromString("title.amber_armor_0");
+                    this.createRightPictureTitleFromString("title.amber_armor_0_cont");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 17:
                 //Amber Armor Set Boots + Depths Chomper
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 58, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("title.amber_armor_0_cont");
-                this.createRightPictureTitleFromString("entity.depths_chomper.name");
-                this.writeRightFromString(6, 12, "desc.chomper_");
+                if(ModUtils.getAdvancementCompletion(player, "find_cordium") && ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.amber_armor_0_cont");
+                } else {
+                    this.createLeftPictureTitleFromString("title.amber_armor_0_cont");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+
+                if(ModUtils.getAdvancementCompletion(player, "kill_chomper")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 58, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("entity.depths_chomper.name");
+                    this.writeRightFromString(6, 12, "desc.chomper_");
+                } else {
+                    this.createRightPictureTitleFromString("entity.depths_chomper.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 18:
                 //Ashed Parasite + End Stalker
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(MOB_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 290, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("entity.end_bug.name");
-                this.writeLeftFromString(6, 13, "desc.bug_");
-                this.createRightPictureTitleFromString("entity.snatcher.name");
-                this.writeRightFromString(6, 13, "desc.stal_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_end_bug")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 290, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("entity.end_bug.name");
+                    this.writeLeftFromString(6, 13, "desc.bug_");
+                } else {
+                    this.createLeftPictureTitleFromString("entity.end_bug.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+
+                if(ModUtils.getAdvancementCompletion(player, "kill_stalker")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("entity.snatcher.name");
+                    this.writeRightFromString(6, 13, "desc.stal_");
+                } else {
+                    this.createRightPictureTitleFromString("entity.snatcher.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
 
                 GlStateManager.popMatrix();
                 break;
@@ -431,92 +606,173 @@ public class GuiBook extends GuiScreen {
             case 19:
                 //End King's Fortress plus other structures
                 GlStateManager.pushMatrix();
-                this.createLeftTitleFromString("title.end_fort_0");
-                this.writeLeftFromString(0, 8, "desc.fort_");
-                this.createRightTitleFromString("title.ot_str_0");
-                this.writeRightFromString(0, 8, "desc.ot_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.createLeftTitleFromString("title.end_fort_0");
+                    this.writeLeftFromString(0, 8, "desc.fort_");
+                    this.createRightTitleFromString("title.ot_str_0");
+                    this.writeRightFromString(0, 8, "desc.ot_");
+                } else {
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.createRightPictureTitleFromString("title.ot_str_0");
+                    this.createLeftPictureTitleFromString("title.end_fort_0");
+                }
+
                 GlStateManager.popMatrix();
                 break;
 
             case 20:
                 //Ender Knights
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(MOB_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 174, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("title.knights_0");
-                this.writeLeftFromString(6, 13, "desc.knig_");
-                this.createRightTitleFromString("title.knights_1");
-                this.writeRightFromString(0, 12, "desc.mage_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_knights")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 174, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.knights_0");
+                    this.writeLeftFromString(6, 13, "desc.knig_");
+                    this.createRightTitleFromString("title.knights_1");
+                    this.writeRightFromString(0, 12, "desc.mage_");
+                } else {
+                    this.createLeftPictureTitleFromString("title.knights_0");
+                    this.createRightPictureTitleFromString("title.knights_1");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
                 GlStateManager.popMatrix();
                 break;
 
             case 21:
                 //Dark Armour Set
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) /2, 13, 0, 348, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.dark_helmet.name");
-                this.createRightPictureTitleFromString("item.dark_chestplate.name");
-                this.writeLeftFromString(6, 11, "desc.dd_helm_");
-                this.writeRightFromString(6, 9, "desc.dd_cont_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_knights")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) /2, 13, 0, 348, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.dark_helmet.name");
+                    this.createRightPictureTitleFromString("item.dark_chestplate.name");
+                    this.writeLeftFromString(6, 11, "desc.dd_helm_");
+                    this.writeRightFromString(6, 9, "desc.dd_cont_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.dark_helmet.name");
+                    this.createRightPictureTitleFromString("item.dark_chestplate.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 22:
                 //Ender King + End Chad
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(MOB_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 348, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("entity.end_lord.name");
-                this.createRightPictureTitleFromString("entity.end_king.name");
-                this.writeLeftFromString(6, 13, "desc.chad_");
-                this.writeRightFromString(6, 13, "desc.king_");
+
+                if(ModUtils.getAdvancementCompletion(player, "kill_ultra_knight")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("entity.end_lord.name");
+                    this.writeLeftFromString(6, 13, "desc.chad_");
+                } else {
+                    this.createLeftPictureTitleFromString("entity.end_lord.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+
+                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 348, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("entity.end_king.name");
+                    this.writeRightFromString(6, 13, "desc.king_");
+                } else {
+                    this.createRightPictureTitleFromString("entity.end_king.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 23:
                 //Endfall Helmet, Chestplate
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 174, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 232, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.endfall_helmet.name");
-                this.createRightPictureTitleFromString("item.endfall_chestplate.name");
-                this.writeLeftFromString(6, 12, "desc.end_mod_");
-                this.writeRightFromString(6, 12, "desc.end_cont_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                    this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 174, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 232, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.endfall_helmet.name");
+                    this.createRightPictureTitleFromString("item.endfall_chestplate.name");
+                    this.writeLeftFromString(6, 12, "desc.end_mod_");
+                    this.writeRightFromString(6, 12, "desc.end_cont_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.endfall_helmet.name");
+                    this.createRightPictureTitleFromString("item.endfall_chestplate.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 24:
                 //Endfall Leggings, Boots, and the Mini-Nuke
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 91, 0, 348, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 0, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("desc.ef_arm");
-                this.createRightPictureTitleFromString("tile.mini_nuke.name");
-                this.writeRightFromString(6, 9, "desc.mn_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                    this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 91, 0, 348, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 0, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("desc.ef_arm");
+                    this.createRightPictureTitleFromString("tile.mini_nuke.name");
+                    this.writeRightFromString(6, 9, "desc.mn_");
+                } else {
+                    this.createLeftPictureTitleFromString("desc.ef_arm");
+                    this.createRightPictureTitleFromString("tile.mini_nuke.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 25:
                 //Endfall Sword & Bow
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
-                drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 116, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.endfall_sword.name");
-                this.createRightPictureTitleFromString("item.bow.name");
-                this.writeLeftFromString(6, 12, "skill.sword_");
-                this.writeRightFromString(6, 11, "skill.ef_bow_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                    this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 116, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.endfall_sword.name");
+                    this.createRightPictureTitleFromString("item.bow.name");
+                    this.writeLeftFromString(6, 12, "skill.sword_");
+                    this.writeRightFromString(6, 11, "skill.ef_bow_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.endfall_sword.name");
+                    this.createRightPictureTitleFromString("item.bow.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+
                 GlStateManager.popMatrix();
                 break;
             case 26:
                 //EndFall Staff
                 GlStateManager.pushMatrix();
-                this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
-                drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
-                this.createLeftPictureTitleFromString("item.efstaff.name");
-                this.writeLeftFromString(6, 12, "skill.ef_st_");
+                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.efstaff.name");
+                    this.writeLeftFromString(6, 12, "skill.ef_st_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.efstaff.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
                 //LAST PAGE
                 GlStateManager.popMatrix();
                 break;
@@ -570,6 +826,28 @@ public class GuiBook extends GuiScreen {
         GlStateManager.pushMatrix();
     }
 
+    private void createLockedEntryRight(String text) {
+        String s = I18n.format(text);
+        int k = this.fontRenderer.getStringWidth(s) / 2;
+        int i = (this.width - X) / 2;
+        GlStateManager.scale(0.8F, 0.8F, 0.0F);
+        GlStateManager.translate(0.0F, 0.4F, 0F);
+        this.fontRenderer.drawString(TextFormatting.GRAY + s, Math.round((i + 200 - (k * 0.75F))/ 0.8F),  Math.round(33  / 0.8F), 0);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+    }
+
+
+    private void createLockedEntryLeft(String text) {
+        String s = I18n.format(text);
+        int k = this.fontRenderer.getStringWidth(s) / 2;
+        int i = (this.width - X) / 2;
+        GlStateManager.scale(0.8F, 0.8F, 0.0F);
+        GlStateManager.translate(0.0F, 0.4F, 0F);
+        this.fontRenderer.drawString(TextFormatting.GRAY + s, Math.round((i + 70 - (k * 0.75F))/ 0.8F),  Math.round(33  / 0.8F), 0);
+        GlStateManager.popMatrix();
+        GlStateManager.pushMatrix();
+    }
 
     private void createIndexTitleFromString(int x, int y, String text) {
         String s = I18n.format(text);
