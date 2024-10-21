@@ -13,12 +13,8 @@ import com.example.structure.entity.barrend.ultraparasite.ActionLargeAOE;
 import com.example.structure.entity.endking.EntityAbstractEndKing;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
 import com.example.structure.entity.util.IAttack;
-import com.example.structure.event_handler.ClientRender;
 import com.example.structure.init.ModItems;
-import com.example.structure.util.ModColors;
-import com.example.structure.util.ModDamageSource;
-import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
+import com.example.structure.util.*;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -34,6 +30,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
@@ -358,13 +355,14 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
 
         addEvent(()-> {
             this.startFirstParticles = true;
+            this.screenShakeValue = 1.2F;
         }, 20);
         addEvent(()-> this.setImmovable(true), 23);
 
         addEvent(()-> {
         //do the roar
         world.setEntityState(this, ModUtils.PARTICLE_BYTE);
-            ClientRender.SCREEN_SHAKE = 0.57F;
+        //SCREENSHAKE BYTE
         }, 33);
 
         addEvent(()-> {
@@ -410,16 +408,6 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
     @Override
     public void handleStatusUpdate(byte id) {
         super.handleStatusUpdate(id);
-
-        if(id == ModUtils.PARTICLE_BYTE) {
-            //list
-            if(this.isPhaseTransition()) {
-             ClientRender.SCREEN_SHAKE = 0.57F;
-
-            } else {
-                ClientRender.SCREEN_SHAKE = 0.2F;
-            }
-        }
 
         if(id == ModUtils.SECOND_PARTICLE_BYTE) {
             ParticleManager.spawnColoredSmoke(world, getPositionVector().add(new Vec3d(ModRand.range(-7, 7), ModRand.range(-3, 3), ModRand.range(-7, 7))), ModColors.GREEN, new Vec3d(0,0.05,0));
@@ -533,7 +521,7 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
             prevAttack = ModRand.choice(close_attacks, rand, weights).next();
             prevAttack.accept(target);
         }
-        return (prevAttack == begin_grab) ? 0 : HealthChange <= 0.5 ? 10 : 30;
+        return (prevAttack == begin_grab) ? 0 : HealthChange <= 0.5 ? 10 : 20;
     }
 
 
@@ -735,9 +723,7 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
 
       //immovable and lock lock true
 
-        addEvent(()-> {
-        world.setEntityState(this, ModUtils.PARTICLE_BYTE);
-        }, 5);
+        addEvent(()-> this.screenShakeValue = 0.9F, 2);
         //disable shield
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.3,1.5,0)));
@@ -1084,6 +1070,16 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
         return this.ticksExisted;
     }
 
+
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "big_rick");
+    @Override
+    protected ResourceLocation getLootTable() {
+        return LOOT;
+    }
+    @Override
+    protected boolean canDropLoot() {
+        return true;
+    }
 
     @Override
     public void setCustomNameTag(@Nonnull String name) {

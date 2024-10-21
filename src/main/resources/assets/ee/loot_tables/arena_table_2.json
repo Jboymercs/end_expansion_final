@@ -199,6 +199,21 @@
         },
         {
           "type": "item",
+          "name": "ee:madness_trinket",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "ee:barrend_tablet",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "ee:blood_reinforce",
+          "weight": 2
+        },
+        {
+          "type": "item",
           "name": "ee:endfall_pickaxe",
           "weight": 5,
           "functions": [

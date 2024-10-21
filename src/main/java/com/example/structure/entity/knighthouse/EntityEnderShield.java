@@ -177,7 +177,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     @Override
     public void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new EntityTimedAttackShield<>(this, (this.isShielded()) ? 1.2 : 1.5, 40, 3F, 0.5f));
+        this.tasks.addTask(4, new EntityTimedAttackShield<>(this, (this.isShielded()) ? 1.2 : 1.4, 40, 3F, 0.5f));
     }
 
     private <E extends IAnimatable> PlayState predicateArms(AnimationEvent<E> event) {

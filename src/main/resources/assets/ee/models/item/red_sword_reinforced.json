@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "ee:item/knight_sword_reinforced"
+  }
+}

@@ -1,16 +1,21 @@
 package com.example.structure.gui.book;
 
+import com.example.structure.config.ProgressionConfig;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.ModUtils;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -18,6 +23,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Objects;
 
 
 public class GuiBook extends GuiScreen {
@@ -329,7 +336,7 @@ public class GuiBook extends GuiScreen {
             case 7:
                 //Lamented Eye Trinket + End Compulsor
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 116, 115, 58 ,115 , 464);
                     this.writeLeftFromString(6, 11, "skill.mdl_");
@@ -337,7 +344,7 @@ public class GuiBook extends GuiScreen {
                 } else {
                     this.createLeftPictureTitleFromString("title.lame_eye_0");
                     this.createLockedEntryLeft("title.locked_entry");
-                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
                 }
 
                 if(ModUtils.getAdvancementCompletion(player, "kill_guilder")) {
@@ -348,14 +355,14 @@ public class GuiBook extends GuiScreen {
                 } else {
                     this.createRightPictureTitleFromString("title.shield_0");
                     this.createLockedEntryRight("title.locked_entry");
-                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
                 }
                 GlStateManager.popMatrix();
                 break;
             case 8:
                 //Ash Wastelands Biome + End Ash + Ash Brick
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 0, 115, 58, 115, 464);
                     this.createRightPictureTitleFromString("tile.ash_brick.name");
@@ -373,7 +380,7 @@ public class GuiBook extends GuiScreen {
             case 9:
                 //Unholy Crystals + Red Lamp
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 348, 115, 58, 115, 464);
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
@@ -395,7 +402,7 @@ public class GuiBook extends GuiScreen {
             case 10:
                 //Door KeyHole + Door Creator
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width -245) / 2, 13,0, 174, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 290, 115, 58, 115, 464);
@@ -417,7 +424,7 @@ public class GuiBook extends GuiScreen {
             case 11:
                 //Ash Trap + Start of Ash Items
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
@@ -438,7 +445,7 @@ public class GuiBook extends GuiScreen {
             case 12:
                 //Brick Rods + Amber Ore
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 116, 115, 58, 115, 464);
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
@@ -460,7 +467,7 @@ public class GuiBook extends GuiScreen {
             case 13:
                 //Amber Torches + Amber Pickaxe
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "find_cordium")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.cordium_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 174, 115, 58, 115, 464);
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
@@ -482,7 +489,7 @@ public class GuiBook extends GuiScreen {
             case 14:
                 //Amber Axe + Amber Dagger
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "find_cordium")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.cordium_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13,0, 232, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 290, 115, 58, 115, 464);
@@ -505,8 +512,7 @@ public class GuiBook extends GuiScreen {
             case 15:
                 //Infused Crystals + Infused Pickaxe
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "find_core") && ModUtils.getAdvancementCompletion(player, "find_red") &&
-                ModUtils.getAdvancementCompletion(player, "find_purple")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.infused_crystal_progress_stage)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 406, 115, 58, 115, 464);
                     this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
@@ -529,7 +535,7 @@ public class GuiBook extends GuiScreen {
             case 16:
                 //Amber Armor Set + Helmet + Chestplate + leggings
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "find_cordium") && ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.cordium_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_4);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 348, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
@@ -552,7 +558,7 @@ public class GuiBook extends GuiScreen {
             case 17:
                 //Amber Armor Set Boots + Depths Chomper
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "find_cordium") && ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.cordium_progress_stages)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
                     this.createLeftPictureTitleFromString("title.amber_armor_0_cont");
@@ -606,7 +612,7 @@ public class GuiBook extends GuiScreen {
             case 19:
                 //End King's Fortress plus other structures
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lamentor_progress_stages)) {
                     this.createLeftTitleFromString("title.end_fort_0");
                     this.writeLeftFromString(0, 8, "desc.fort_");
                     this.createRightTitleFromString("title.ot_str_0");
@@ -647,7 +653,7 @@ public class GuiBook extends GuiScreen {
             case 21:
                 //Dark Armour Set
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_knights")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.dark_armor_progress_stage)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES_2);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) /2, 13, 0, 348, 115, 58, 115, 464);
@@ -697,7 +703,7 @@ public class GuiBook extends GuiScreen {
             case 23:
                 //Endfall Helmet, Chestplate
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
                     this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 174, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 232, 115, 58, 115, 464);
@@ -719,7 +725,7 @@ public class GuiBook extends GuiScreen {
             case 24:
                 //Endfall Leggings, Boots, and the Mini-Nuke
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
                     this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 290, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 91, 0, 348, 115, 58, 115, 464);
@@ -741,7 +747,7 @@ public class GuiBook extends GuiScreen {
             case 25:
                 //Endfall Sword & Bow
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
                     this.mc.renderEngine.bindTexture(ENDFALL_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 116, 115, 58, 115, 464);
@@ -763,7 +769,7 @@ public class GuiBook extends GuiScreen {
             case 26:
                 //EndFall Staff
                 GlStateManager.pushMatrix();
-                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "find_soul")) {
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
                     this.mc.renderEngine.bindTexture(BLOCK_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 58, 115, 58, 115, 464);
                     this.createLeftPictureTitleFromString("item.efstaff.name");
@@ -847,6 +853,29 @@ public class GuiBook extends GuiScreen {
         this.fontRenderer.drawString(TextFormatting.GRAY + s, Math.round((i + 70 - (k * 0.75F))/ 0.8F),  Math.round(33  / 0.8F), 0);
         GlStateManager.popMatrix();
         GlStateManager.pushMatrix();
+    }
+
+
+    private void writeAdvRequirementsRight(String[] advancementList) {
+        String advReq = "desc.locked_adv";
+        for(int x = 7; x <= 13; x++) {
+            for(String adv : advancementList) {
+                String s = I18n.format(adv);
+                int k = this.fontRenderer.getStringWidth(s) / 2;
+                int i = (this.width - X) / 2;
+                GlStateManager.scale(0.6F, 0.6F, 0.0F);
+                GlStateManager.translate(0.8F, 0.8F, 0F);
+                this.fontRenderer.drawString(TextFormatting.BLACK + s, Math.round((i + 200 - (k * 0.6F))/ 0.6F),  Math.round(70 + (x * 8) / 0.6F), 0);
+            }
+            String s = I18n.format(advReq);
+            int k = this.fontRenderer.getStringWidth(s) / 2;
+            int i = (this.width - X) / 2;
+            GlStateManager.scale(0.6F, 0.6F, 0.0F);
+            GlStateManager.translate(0.8F, 0.8F, 0F);
+            this.fontRenderer.drawString(TextFormatting.BLACK + s, Math.round((i + 200 - (k * 0.6F))/ 0.6F),  Math.round(70 + (6 * 8) / 0.6F), 0);
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
+        }
     }
 
     private void createIndexTitleFromString(int x, int y, String text) {

@@ -8,6 +8,9 @@ import com.example.structure.items.armor.ModArmorBase;
 import com.example.structure.items.arrow.ItemArrowBase;
 import com.example.structure.items.arrow.ItemGreenArrow;
 import com.example.structure.items.arrow.ItemUnholyArrow;
+import com.example.structure.items.reinforced.ToolReinforcedAmberDagger;
+import com.example.structure.items.reinforced.ToolReinforcedAmberSword;
+import com.example.structure.items.reinforced.ToolReinforcedRedAxe;
 import com.example.structure.items.tools.*;
 import com.example.structure.util.ModReference;
 import net.minecraft.init.SoundEvents;
@@ -15,6 +18,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.ArrayList;
@@ -27,7 +31,9 @@ public class ModItems {
     private static final Item.ToolMaterial SWORD = EnumHelper.addToolMaterial("rare_sword", 2, 450, 8.0f, ItemConfig.sword_damage, 20);
 
     private static final Item.ToolMaterial DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_materual", 5, 300, 7.0F, ItemConfig.dagger_damage, 25);
+    private static final Item.ToolMaterial REINFORCED_DAGGER_MATERIAL = EnumHelper.addToolMaterial("dagger_material_reinforced", 5, 300, 7.0F, ItemConfig.dagger_damage + 1, 25);
     private static final Item.ToolMaterial RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 974, 8.0f, ItemConfig.unholy_sword_damage, 20);
+    private static final Item.ToolMaterial REINFORCED_RED_SWORD = EnumHelper.addToolMaterial("unholy", 2, 974, 8.0f, ItemConfig.unholy_sword_damage + 1, 20);
 
     private static final Item.ToolMaterial PURE_AXE_MATERIAL = EnumHelper.addToolMaterial("pure", 3, 625, 7.0F, ItemConfig.pure_axe_damage, 40);
     private static final Item.ToolMaterial END_FALL = EnumHelper.addToolMaterial("end_fall", 2, 1800, 8.0f, ItemConfig.endfall_sword_damage, 50);
@@ -35,6 +41,7 @@ public class ModItems {
     private static final Item.ToolMaterial ENDFALL_PICKAXE = EnumHelper.addToolMaterial("endfall_pickaxe", 6, 1781, 10.0F, 4, 25);
 
     private static final Item.ToolMaterial AMBER_SET = EnumHelper.addToolMaterial("amber_set", 3, 874, 7.0F, ItemConfig.cordium_sword_damage, 40);
+    private static final Item.ToolMaterial AMBER_SET_REINFORCED = EnumHelper.addToolMaterial("amber_set_reinforced", 3, 874, 7.0F, ItemConfig.cordium_sword_damage + 1, 40);
     private static final ItemArmor.ArmorMaterial DARK_ARMOR = EnumHelper.addArmorMaterial("dark", ModReference.MOD_ID + ":dark", 385, new int[]{(int) (5 * ModConfig.dark_armor_scale), (int) (8 * ModConfig.dark_armor_scale), (int) (10 * ModConfig.dark_armor_scale), (int) (5 * ModConfig.dark_armor_scale)}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) (5F * ModConfig.dark_armor_scale));
 
     private static final ItemArmor.ArmorMaterial LIDOPED_ARMOR = EnumHelper.addArmorMaterial("lidoped", ModReference.MOD_ID + ":lidoped", 650, new int[]{(int)(4 * ModConfig.cordium_armor_scale), (int)(7 * ModConfig.cordium_armor_scale), (int)(9 * ModConfig.cordium_armor_scale), (int)(4 * ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
@@ -121,8 +128,17 @@ public class ModItems {
     public static final Item LIDOPED_BUCKET = new ItemBucketPlacer("lidoped_bucket");
     public static final Item ULTRA_GOOP = new ItemTreasureDescription("ultra_goop", ModCreativeTabs.ITEMS, "ultra_goop_desc");
     public static final Item MEMORIUM_STONE = new ItemBase("memory_stone", ModCreativeTabs.ITEMS);
+    public static final Item BLOODWEED_REINFORCEMENT = new ItemDescription("blood_reinforce", ModCreativeTabs.ITEMS, "blood_armor_desc");
+    public static final Item BARREND_TABLET = new ItemBarrendTablet("barrend_tablet", ModCreativeTabs.ITEMS, "barrend_tablet_desc");
+    public static final Item FAST_TRINKET = new ItemFastTrinket("madness_trinket", ModCreativeTabs.ITEMS, "fast_trinket_desc");
+    public static final Item MAD_TRINKET = new ItemDescription("mad_trinket", ModCreativeTabs.ITEMS, "mad_trinket_desc");
+    public static final Item BOLD_TRINKET = new ItemBoldTrinket("bold_trinket", ModCreativeTabs.ITEMS, "bold_trinket_desc");
+    public static final Item MADNESS_BERRIES = new ItemMadnessBerries("madness_berries", 4, 2, false, "madness_berries_desc");
 
-
+    public static final Item REINFORCED_AMBER_SWORD = new ToolReinforcedAmberSword("amber_sword_reinforced", AMBER_SET_REINFORCED, "reinforced_amber_desc");
+    public static final Item REINFORCED_AMBER_DAGGER = new ToolReinforcedAmberDagger("amber_dagger_reinforced",REINFORCED_DAGGER_MATERIAL,"reinforced_amber_dagger");
+    public static final Item REINFORCED_KNIGHT_SWORD = new ToolRedSword("red_sword_reinforced", "reinforced_red_sword",REINFORCED_RED_SWORD);
+    public static final Item REINFORCED_UNHOLY_AXE = new ToolReinforcedRedAxe("red_axe_reinforced", REINFORCED_RED_SWORD, ItemConfig.cordium_axe_damage + 1, -3.0F, "reinforced_red_axe");
     public static final Item UNHOLY_ARROW = new ItemUnholyArrow("mod_arrow_unholy");
     public static final Item GREEN_ARROW = new ItemGreenArrow("mod_arrow_green");
     public static final Item CHOMPER_ARROW = new ItemArrowBase("mod_arrow_chomper");

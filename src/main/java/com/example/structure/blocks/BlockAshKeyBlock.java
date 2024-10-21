@@ -1,5 +1,6 @@
 package com.example.structure.blocks;
 
+import com.example.structure.config.ProgressionConfig;
 import com.example.structure.entity.tileentity.TileEntityUpdater;
 import com.example.structure.init.ModCreativeTabs;
 import com.example.structure.util.ModUtils;
@@ -99,13 +100,13 @@ public class BlockAshKeyBlock extends BlockBase implements IBlockUpdater, ITileE
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
                                     float hitZ) {
 
-        if (playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == this.activationItem && ModUtils.getAdvancementCompletion(playerIn, "kill_lamentor")) {
+        if (playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == this.activationItem && ModUtils.getAdvancementCompletionAsList(playerIn, ProgressionConfig.lamentor_progress_stages)) {
             playerIn.getHeldItem(hand).shrink(1);
             worldIn.spawnEntity(this.spawnPortal.apply(worldIn, pos));
             worldIn.setBlockToAir(pos);
             worldIn.setBlockToAir(pos.up());
         } else {
-            playerIn.sendStatusMessage(new TextComponentTranslation("ee.status.ash_key_block", new Object[0]), true);
+            playerIn.sendStatusMessage(new TextComponentTranslation(ProgressionConfig.ashed_king_locked_message, new Object[0]), true);
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }

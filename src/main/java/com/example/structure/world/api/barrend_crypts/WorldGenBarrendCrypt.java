@@ -33,7 +33,7 @@ public class WorldGenBarrendCrypt extends WorldGenerator {
     public boolean generate(World world, Random random, BlockPos pos) {
         int yHieght = getGroundFromAbove(world, pos.getX() + 2, pos.getZ() + 2);
         int yHieghtAdjust = getGroundFromAbove(world, pos.getX() + 11, pos.getZ() + 11);
-        if(yHieght > 58 && yHieghtAdjust > 58 && spacing > 200) {
+        if(yHieght > 60 && yHieghtAdjust > 60 && spacing > 75) {
             getStructureStart(world, pos.getX() >> 4, pos.getZ() >> 4, random).generateStructure(world, random, new StructureBoundingBox(pos.getX() - 200, pos.getZ() - 200, pos.getX() + 200, pos.getZ() + 200));
             return true;
         }

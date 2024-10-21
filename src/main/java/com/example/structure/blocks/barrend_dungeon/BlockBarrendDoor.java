@@ -2,6 +2,7 @@ package com.example.structure.blocks.barrend_dungeon;
 
 import com.example.structure.blocks.BlockBase;
 import com.example.structure.blocks.IBlockUpdater;
+import com.example.structure.config.ProgressionConfig;
 import com.example.structure.entity.tileentity.TileEntityUpdater;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModColors;
@@ -62,10 +63,8 @@ public class BlockBarrendDoor extends BlockBase implements IBlockUpdater, ITileE
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if(playerIn.getHeldItemMainhand().isEmpty() && !ModUtils.getAdvancementCompletion(playerIn, "kill_king")) {
-            playerIn.sendStatusMessage(new TextComponentTranslation("ee.status.barrend_crypt", new Object[0]), true);
-        }
-        if(playerIn.getHeldItemMainhand().getItem() == this.activationItem && ModUtils.getAdvancementCompletion(playerIn, "kill_king")) {
+
+        if(playerIn.getHeldItemMainhand().getItem() == this.activationItem && ModUtils.getAdvancementCompletionAsList(playerIn, ProgressionConfig.barrend_crypt_progress_stage)) {
             if(!worldIn.isRemote) {
                 playerIn.getHeldItemMainhand().damageItem(1, playerIn);
                 for(int i = 0; i <= 9; i++) {
@@ -81,7 +80,7 @@ public class BlockBarrendDoor extends BlockBase implements IBlockUpdater, ITileE
                 worldIn.setBlockToAir(pos);
             }
         } else {
-            playerIn.sendStatusMessage(new TextComponentTranslation("ee.status.barrend_crypt", new Object[0]), true);
+            playerIn.sendStatusMessage(new TextComponentTranslation(ProgressionConfig.barrend_crypt_locked_message, new Object[0]), true);
         }
 
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

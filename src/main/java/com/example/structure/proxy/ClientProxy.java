@@ -104,7 +104,6 @@ public class ClientProxy extends CommonProxy {
             ClientAdvancementManager manager = ((EntityPlayerSP) player).connection.getAdvancementManager();
             Advancement advancement = manager.getAdvancementList().getAdvancement(Id);
             if(advancement == null) {
-                System.out.println("advancement is NULL");
                 return false;
             }
             AdvancementProgress progress = manager.advancementToProgress.get(advancement);

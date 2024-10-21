@@ -51,6 +51,7 @@ entity.big_rick.name=Evolved Barrend Parasite
 entity.move_tile_aoe.name=Boss AOE wave
 entity.parasite_bomb.name=Charged Acid Bomb
 entity.parasite_bomb_aoe.name=Parasite Acid Bomb
+entity.barrend_guard.name=Crypt Watcher
 tile.lamented_end_stone.name=Lamented End Stone
 tile.end_ash.name=Ashed End Stone
 tile.ash_brick.name=Ashed Brick
@@ -199,6 +200,16 @@ item.spirit_goop.name=Mad Spirit Goop
 item.ultra_goop.name=Enchanted Goop Concoction
 item.memory_stone.name=Memorium Stone
 item.parasitebomb.name=Charged Parasite Bomb
+item.barrend_tablet.name=Malid's Protection
+item.blood_reinforce.name=Bloodweed Reinforcement Kit
+item.madness_berries.name=Spirit Berries
+item.madness_trinket.name=Talisman of the Agile
+item.mad_trinket.name=Talisman of the Mad
+item.bold_trinket.name=Talisman of the Bold
+item.amber_sword_reinforced.name=Reinforced Cordium Sword
+item.amber_dagger_reinforced.name=Reinforced Cordium Dagger
+item.red_sword_reinforced.name=Reinforced Lustrian Sword
+item.red_axe_reinforced.name=Reinforced Lustrian Axe
 entity.acid_proj.name=Parasite Acid
 entity.bomb_proj.name=Avalon's Bomb
 entity.controller_lift.name=Guilder Lift
@@ -312,6 +323,8 @@ advancements.ee.craft_amber_torch.title=I'm safe now, right?
 advancements.ee.craft_amber_torch.description=Craft Cordium Torches.
 advancements.ee.find_coin.title=The End's Secrets
 advancements.ee.find_coin.description=Find an Avalon's Coin
+advancements.ee.craft_memory_stone.title=Underlying Evil
+advancements.ee.craft_memory_stone.description=Craft a Memorium Stone
 
 #Status
 ee.status.ash_key_block=You have not defeated the Lamentor yet
@@ -344,16 +357,26 @@ ee.desc.hf_desc=Eating will apply short Regeneration 2, eating too many can caus
 ee.desc.crown_desc=With this treasure, I summon divine general of the wastelands, The Ashed King!
 ee.desc.dagger_desc=On right click provides a short boost backwards and Speed II for a short time
 ee.desc.desc_amber_torch=While just a torch, this one wards away Stalkers that get close to them.
-ee.desc.red_axe_desc=Cursed with the Red Rage, Right Clicking will apply Strength II for a short period of time.
+ee.desc.red_axe_desc=Cursed with the Red Rage, Right Clicking will apply Strength I for a short period of time.
 ee.desc.pure_axe_desc=A rare relic lost to time, Right Clicking will launch you in the air the longer you are in the air, the larger the impact.
 ee.desc.amber_sword_desc=Right Clicking will summon Spikes on entities close to you.
 ee.desc.coin_desc=When thrown in front of the Avalon, this will earn you a special reward.
 ee.desc.painting_desc=The Lamentor's place of self imprisonment that is long lost and forgotten.
-ee.desc.arena_key_desc=Used in the Arena found in the Barrend Swamplands Biome, with the tier corresponding to the difficulty. Read Barrend Swamplands for more info.
+ee.desc.arena_key_desc=Used in the Arena found in the Barrend Bogs Biome, with the tier corresponding to the difficulty. Read Barrend Bogs for more info.
 ee.desc.green_crystal=Radiated with an unknown energy, best be careful with this one. The wildlife here doesn't seem to like it.
 ee.desc.bloodweed_refined_desc=A sturdy material for weaponry, but can also be used with other items to cook durable food.
 ee.desc.lidoped_helmet_desc=Nullifies any Madness effect that is given.
 ee.desc.ultra_goop_desc=Use it in an anvil to repair any End Expansion Weapon or Armor Piece to full durability!
+ee.desc.blood_armor_desc=Use it in anvil to updgrade non-boss melee weapons, increasing damage and reducing cooldowns!
+ee.desc.barrend_tablet_desc=When in mainhand or offhand and applied with Madness, you will be given Resistance. Lidoped Helmet negates these effects.
+ee.desc.fast_trinket_desc=When Right clicked you will be launched back shortly and an AOE will spawn in your old position
+ee.desc.reinforced_amber_desc=Right Clicking will summon Spikes on entities close to you with a reduced cooldown time.
+ee.desc.reinforced_amber_dagger=On right click provides a short boost backwards and Speed II for a short time with a reduced cooldown and damage on ability use.
+ee.desc.reinforced_red_sword=Cursed with the Red Rage
+ee.desc.reinforced_red_axe=Cursed with the Red Rage, Right Clicking will apply Strength II for a short period of time with a reduced cooldown.
+ee.desc.madness_berries_desc=Gives Regeneration II for a longer period but applies Madness.
+ee.desc.mad_trinket_desc=Idea not in yet
+ee.desc.bold_trinket_desc=On right click you are immune to damage for a short period of time.
 death.attack.ee:maelstrom=%1$s succumbed to the void
 death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s
 death.attack.ee:playerMaelstrom=%1$s was killed by %2$s
@@ -367,6 +390,9 @@ death.attack.ee:magicMaelstrom=%1$s was magicked by a %2$s
 
 #Locked Entry
 title.locked_entry=Locked Entry
+
+#Locked Entry Requirements
+desc.locked_adv=Advancements Required:
 
 #Locked Requirements
 

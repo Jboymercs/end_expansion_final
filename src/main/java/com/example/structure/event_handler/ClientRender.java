@@ -9,7 +9,7 @@ public class ClientRender {
     public static float SCREEN_SHAKE = 0f;
 
     public static float getScreenShake(boolean positive) {
-        float factor = SCREEN_SHAKE/2f;
+        float factor = SCREEN_SHAKE/2F;
         return positive ? factor : factor*-1;
     }
 

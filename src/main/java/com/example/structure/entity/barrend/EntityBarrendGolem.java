@@ -231,7 +231,7 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
 
             prevAttack.accept(target);
         }
-        return prevAttack == charge ? 140 : 40;
+        return prevAttack == charge ? 140 : 30;
     }
 
     Vec3d chargePos;

@@ -925,7 +925,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 addEvent(() -> {
                     ModUtils.leapTowards(this, target.getPositionVector(), 0.8f, -0.4f);
                     this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-                    for (int t = 0; t < 15; t += 5) {
+                    for (int t = 0; t < 6; t += 5) {
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
@@ -953,7 +953,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 addEvent(() -> {
                     ModUtils.leapTowards(this, target.getPositionVector(), 0.8f, -0.4f);
                     this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-                    for (int t = 0; t < 15; t += 5) {
+                    for (int t = 0; t < 6; t += 5) {
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
@@ -981,7 +981,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 addEvent(() -> {
                     ModUtils.leapTowards(this, target.getPositionVector(), 0.8f, -0.4f);
                     this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-                    for (int t = 0; t < 15; t += 5) {
+                    for (int t = 0; t < 6; t += 5) {
                         addEvent(() -> {
                             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
                             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();

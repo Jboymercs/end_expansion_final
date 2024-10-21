@@ -56,6 +56,8 @@ public class ModUtils {
     public static byte SECOND_PARTICLE_BYTE = 14;
     public static byte THIRD_PARTICLE_BYTE = 15;
     public static byte FOURTH_PARTICLE_BYTE = 16;
+
+    public static byte SCREEN_SHAKE_BYTE = 17;
     public static Vec3d Y_AXIS = new Vec3d(0, 1, 0);
 
     public static Vec3d Z_AXIS = new Vec3d(0, 0, 1);
@@ -915,11 +917,37 @@ public class ModUtils {
         }
 
         ResourceLocation loc = new ResourceLocation(ModReference.MOD_ID + ":" +  advancementName);
-        System.out.println(loc);
       boolean isCompleted = Main.proxy.doesPlayerHaveXAdvancement(currentPlayer, loc);
       return isCompleted;
     }
 
+
+    public static boolean getAdvancementCompletionAsList(EntityPlayer currentPlayer, String[] advancementNamesList) {
+        if(!ModConfig.isModProgressionEnabled) {
+            return true;
+        }
+
+        for(String adv : advancementNamesList) {
+            ResourceLocation loc = new ResourceLocation(adv);
+            boolean isCompleted = Main.proxy.doesPlayerHaveXAdvancement(currentPlayer, loc);
+
+            if(!isCompleted) {
+                break;
+            }
+
+            return true;
+        }
+      return false;
+    }
+
+    public static float calculateValueWithPrecentage(float precentageOf, float precentageVal) {
+        return (precentageOf * Math.min(precentageVal, 100.0F)) / 100.0F;
+    }
+
+
+    public static float getPercentageOf(float precentageOf, float precentageVal) {
+        return Math.min((precentageVal * 100.0F) / precentageOf, 100.0F);
+    }
 
     /**
      * Returns a {@link Vec3d} of the coordinates at the centre of the given entity's bounding box. This is more

@@ -6,6 +6,7 @@ import com.deeperdepths.common.blocks.enums.EnumTrialSpawnerState;
 import com.deeperdepths.common.integration.RaidsIntegration;
 import com.deeperdepths.common.potion.DeeperDepthsPotions;
 import com.example.structure.blocks.arenaBlocks.BlockEnumArenaStates;
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityBuffker;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
@@ -162,7 +163,7 @@ public class TileEntityUnEndingArena extends TileEntity implements ITickable {
                     //do barrier
 
                     //do mobs total
-                    int grandTotal = isMiniBossSpawn ? 1 :(3* waveCount) + 3;
+                    int grandTotal = isMiniBossSpawn ? 1 :(3* waveCount) + 3 + ModConfig.wave_count_additive;
 
                     if(current_mobs.isEmpty() && spawned_mobs >= grandTotal) {
                         //Eject Loot
@@ -212,6 +213,10 @@ public class TileEntityUnEndingArena extends TileEntity implements ITickable {
                             entity.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, world.rand.nextFloat() * 360, 0);
                             spawned_mobs++;
                             current_mobs.add(new WeakReference<>(entity));
+                            if(ModConfig.doMobsScalingFromArena && !ModConfig.disable_scaling_mod) {
+                                //scales the mobs to players around ontop of already the scale from tier keys
+                                entity.iAmBossMob = true;
+                            }
                             world.spawnEntity(entity);
                             this.isWaveSet = false;
                             cooldown = 60;

@@ -2,6 +2,8 @@ package com.example.structure.blocks.arenaBlocks;
 
 import com.example.structure.blocks.BlockBase;
 import com.example.structure.blocks.IBlockUpdater;
+import com.example.structure.config.ModConfig;
+import com.example.structure.config.ProgressionConfig;
 import com.example.structure.entity.tileentity.TileEntityUnEndingArena;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModUtils;
@@ -75,26 +77,26 @@ public class BlockUnEndingArena extends BlockBase implements ITileEntityProvider
         if(te instanceof TileEntityUnEndingArena) {
             TileEntityUnEndingArena spawner = (TileEntityUnEndingArena) te;
             if(spawner.getState() != BlockEnumArenaStates.ACTIVE) {
-                if (ModUtils.getAdvancementCompletion(player, "kill_seeker_prime")) {
+                if (ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.arena_progress_stages)) {
                     if (player.getHeldItemMainhand().getItem() == this.activationItem) {
-                        spawner.setState(BlockEnumArenaStates.ACTIVE, 1, 1.25);
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 1, ModConfig.tier_one_scale);
                         player.getHeldItemMainhand().shrink(1);
                         return true;
                     } else if (player.getHeldItemMainhand().getItem() == this.activationItem2) {
-                        spawner.setState(BlockEnumArenaStates.ACTIVE, 2, 1.5);
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 2, ModConfig.tier_two_scale);
                         player.getHeldItemMainhand().shrink(1);
                         return true;
                     } else if (player.getHeldItemMainhand().getItem() == this.activationItem3) {
-                        spawner.setState(BlockEnumArenaStates.ACTIVE, 3, 1.25);
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 3, ModConfig.tier_three_scale);
                         player.getHeldItemMainhand().shrink(1);
                         return true;
                     } else if (player.getHeldItemMainhand().getItem() == this.activationItem4) {
-                        spawner.setState(BlockEnumArenaStates.ACTIVE, 4, 1.5);
+                        spawner.setState(BlockEnumArenaStates.ACTIVE, 4, ModConfig.tier_four_scale);
                         player.getHeldItemMainhand().shrink(1);
                         return true;
                     }
                 } else {
-                    player.sendStatusMessage(new TextComponentTranslation("ee.status.arena_block", new Object[0]), true);
+                    player.sendStatusMessage(new TextComponentTranslation(ProgressionConfig.arena_locked_message, new Object[0]), true);
                 }
             }
 

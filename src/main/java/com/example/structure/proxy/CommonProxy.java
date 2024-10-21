@@ -102,9 +102,6 @@ public class CommonProxy implements IGuiHandler {
     public boolean doesPlayerHaveXAdvancement(EntityPlayer player, ResourceLocation Id) {
         if (player instanceof EntityPlayerMP) {
             Advancement adv = ((EntityPlayerMP) player).getServerWorld().getAdvancementManager().getAdvancement(Id);
-            if(adv == null) {
-                System.out.println("Advancement null on serverside");
-            }
             return adv != null && ((EntityPlayerMP) player).getAdvancements().getProgress(adv).isDone();
         }
         return false;

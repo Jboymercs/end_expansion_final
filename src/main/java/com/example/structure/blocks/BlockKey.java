@@ -1,8 +1,10 @@
 package com.example.structure.blocks;
 
+import com.example.structure.config.ProgressionConfig;
 import com.example.structure.entity.EntityGroundCrystal;
 import com.example.structure.entity.tileentity.TileEntityUpdater;
 import com.example.structure.init.ModCreativeTabs;
+import com.example.structure.util.ModUtils;
 import com.google.common.base.Predicate;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -18,6 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -96,11 +99,13 @@ public class BlockKey extends BlockBase implements IBlockUpdater, ITileEntityPro
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
                                     float hitZ) {
-        if (playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == this.activationItem) {
+        if (playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == this.activationItem && ModUtils.getAdvancementCompletionAsList(playerIn, ProgressionConfig.lamentor_key_progress_stages)) {
             playerIn.getHeldItem(hand).shrink(1);
             worldIn.spawnEntity(this.spawnPortal.apply(worldIn, pos));
             worldIn.setBlockToAir(pos);
             worldIn.setBlockToAir(pos.up());
+        } else {
+            playerIn.sendStatusMessage(new TextComponentTranslation(ProgressionConfig.lamentor_locked_message, new Object[0]), true);
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }

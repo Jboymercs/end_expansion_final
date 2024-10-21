@@ -50,7 +50,8 @@ public class ModEvents {
                 } else {
                     if (base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.KNIGHT_SWORD && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_ITEM && rand.nextInt(20) == 0 ||
                             base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.RED_CRYSTAL_CHUNK && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_AXE && rand.nextInt(20) == 0
-                            || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0) {
+                            || base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0 || base.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == ModItems.UNHOLY_ARROW && rand.nextInt(20) == 0 ||
+                    base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.REINFORCED_KNIGHT_SWORD && rand.nextInt(10) == 0|| base.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == ModItems.REINFORCED_UNHOLY_AXE && rand.nextInt(10) == 0) {
 
                         if (timeTillRage < 0) {
                             base.getHeldItemMainhand().damageItem(5, base);
@@ -60,6 +61,25 @@ public class ModEvents {
                             timeTillRage--;
                         }
 
+                    }
+                }
+
+                //adds resistance if the player has madness, however effect doesn't work if player is wearing the Lidoped Helmet
+                if(base.getHeldItemMainhand().getItem() == ModItems.BARREND_TABLET && base.isPotionActive(ModPotions.MADNESS) || base.getHeldItemOffhand().getItem() == ModItems.BARREND_TABLET &&
+                base.isPotionActive(ModPotions.MADNESS)) {
+                    if(base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() != ModItems.LIDOPED_HELMET) {
+                        if(base.ticksExisted % 40 == 0) {
+                            base.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 60, 0));
+                            if(rand.nextInt(20) == 0) {
+                                ItemStack stack1 = base.getHeldItemMainhand();
+                                ItemStack stack2 = base.getHeldItemOffhand();
+                                if(stack1.getItem() == ModItems.BARREND_TABLET) {
+                                    stack1.damageItem(1, base);
+                                } else if (stack2.getItem() == ModItems.BARREND_TABLET) {
+                                    stack2.damageItem(1, base);
+                                }
+                            }
+                        }
                     }
                 }
             }

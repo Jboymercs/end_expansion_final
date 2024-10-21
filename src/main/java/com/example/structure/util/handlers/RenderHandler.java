@@ -5,6 +5,7 @@ import com.example.structure.entity.arrow.EntityChomperArrow;
 import com.example.structure.entity.arrow.EntityGreenArrow;
 import com.example.structure.entity.arrow.EntityUnholyArrow;
 import com.example.structure.entity.barrend.*;
+import com.example.structure.entity.barrend.guard.EntityBarrendGuard;
 import com.example.structure.entity.barrend.ultraparasite.EntityMoveTile;
 import com.example.structure.entity.barrend.ultraparasite.EntityParasiteBombAOE;
 import com.example.structure.entity.endking.*;
@@ -189,5 +190,7 @@ public class RenderHandler {
         registerProjectileRenderer(ProjectileParasiteBomb.class, ModItems.PARASITE_PROJECTILE);
         //Parasite Bomb AOE
         RenderingRegistry.registerEntityRenderingHandler(EntityParasiteBombAOE.class, RenderParasiteBombAOE::new);
+        //Barrend Guard
+        RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGuard.class, RenderBarrendGuard::new);
     }
 }

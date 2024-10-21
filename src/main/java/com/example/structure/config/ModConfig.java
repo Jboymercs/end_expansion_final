@@ -74,12 +74,12 @@ public class ModConfig {
     public static double scale_attack_damge = 0.18;
 
     @Config.Name("Disable Mod Scaling")
-    @Config.Comment("Disable scaling for Health of bosses when more than one players is nearby, set to true to disable")
+    @Config.Comment("Disable scaling for Health and Attack Damage of bosses when more than one players is nearby, set to true to disable")
     @Config.RequiresMcRestart
     public static boolean disable_scaling_mod = false;
 
     @Config.Name("Disable Mod Progression Locking")
-    @Config.Comment("When set to false, mod progression is disabled, this includes locked dungeons/ locked parts of the guidebook")
+    @Config.Comment("When set to false, mod progression is disabled, this includes locked dungeons/locked parts of the guidebook. Disabling this will disable everything in progression_config")
     @Config.RequiresMcRestart
     public static boolean isModProgressionEnabled = true;
     //Armor
@@ -97,5 +97,40 @@ public class ModConfig {
     @Config.Comment("Scale the End Fall Armor set, putting anything above 1 will times the base values of the armor by this amount, useful for modpack creators")
     @Config.RequiresMcRestart
     public static double fall_armor_scale = 1.0;
+
+    @Config.Name("Barrend Arena Scaling Tier 1")
+    @Config.Comment("Change the scaling for Tier 1 arena keys, this is not including other players around")
+    @Config.RequiresMcRestart
+    public static double tier_one_scale = 1.25;
+
+    @Config.Name("Barrend Arena Scaling Tier 2")
+    @Config.Comment("Change the scaling for Tier 2 arena keys, this is not including other players around")
+    @Config.RequiresMcRestart
+    public static double tier_two_scale = 1.5;
+
+    @Config.Name("Barrend Arena Scaling Tier 3")
+    @Config.Comment("Change the scaling for Tier 3 arena keys, this is not including other players around")
+    @Config.RequiresMcRestart
+    public static double tier_three_scale = 1.25;
+
+    @Config.Name("Barrend Arena Scaling Tier 4")
+    @Config.Comment("Change the scaling for Tier 4 arena keys, this is not including other players around")
+    @Config.RequiresMcRestart
+    public static double tier_four_scale = 1.5;
+
+    @Config.Name("Barrend Arena Scaling Tier 5")
+    @Config.Comment("Change the scaling for Tier 5 arena keys, this is not including other players around")
+    @Config.RequiresMcRestart
+    public static double tier_five_scale = 1.5;
+
+    @Config.Name("Barrend Arena Wave Count")
+    @Config.Comment("Add additional mob spawns to each tier key used. This number is added to total count of mobs to spawn, not current mobs alive during a wave")
+    @Config.RequiresMcRestart
+    public static int wave_count_additive = 0;
+
+    @Config.Name("Barrend Arena Mobs and Players Scaling")
+    @Config.Comment("When set to false, mobs spawning from the Arena will not use Boss scaling. Take note, that boss scaling takes effect from 48 blocks away. This will not affect you if you are alone")
+    @Config.RequiresMcRestart
+    public static boolean doMobsScalingFromArena = true;
 
 }

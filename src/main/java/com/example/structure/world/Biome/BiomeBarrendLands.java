@@ -54,7 +54,7 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
             new WorldGenBareSmallRuins("ruins_4"), new WorldGenBareSmallRuins("ruins_5"), new WorldGenBareSmallRuins("ruins_6"), new WorldGenBareSmallRuins("ruins_7")
             , new WorldGenBareSmallRuins("ruins_8")};
     private Random random;
-    public static BiomeProperties properties = new BiomeProperties("Barrend Low Lands");
+    public static BiomeProperties properties = new BiomeProperties("Barrend Bogs");
     public BiomeBarrendLands() {
         super(properties.setRainDisabled());
         this.spawnableMonsterList.clear();

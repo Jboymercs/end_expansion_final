@@ -1,5 +1,6 @@
 package com.example.structure.entity.barrend;
 
+import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityController;
 import com.example.structure.entity.ai.EntityAILidopedHome;
@@ -218,7 +219,7 @@ public class EntityVoidTripod extends EntityBarrendMob implements IAnimatable, I
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) 80 * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.void_walker_health * ModConfig.barrend_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16 * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
@@ -226,7 +227,7 @@ public class EntityVoidTripod extends EntityBarrendMob implements IAnimatable, I
     @Override
     public boolean getCanSpawnHere()
     {
-        return this.world.rand.nextInt(30) == 0;
+        return this.world.rand.nextInt(40) == 0;
     }
 
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
@@ -298,7 +299,7 @@ public class EntityVoidTripod extends EntityBarrendMob implements IAnimatable, I
             //do Attack effects and damage
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.5, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-                float damage = (float) (16 * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.void_walker_attack_damage * ModConfig.barrend_multiplier);
                 ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 1.4f, 0, false);
             },37);
 

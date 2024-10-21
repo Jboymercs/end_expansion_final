@@ -42,7 +42,7 @@ public class ItemRedAxe extends ItemAxe implements IHasModel {
         ItemStack stack = player.getHeldItem(hand);
         int SwordCoolDown = 8 * 20;
         if(!worldIn.isRemote && !player.getCooldownTracker().hasCooldown(this)) {
-            player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60, 1));
+            player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60, 0));
             player.getCooldownTracker().setCooldown(this, SwordCoolDown);
             stack.damageItem(2, player);
 

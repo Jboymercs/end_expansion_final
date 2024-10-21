@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:memory_stone"
+    },
+    "title": {
+      "translate": "advancements.ee.craft_memory_stone.title"
+    },
+    "description": {
+      "translate": "advancements.ee.craft_memory_stone.description"
+    }
+  },
+  "parent": "ee:find_soul",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:memory_stone"
+          }
+        ]
+      }
+    }
+  }
+}

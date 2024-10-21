@@ -332,7 +332,7 @@ public class MobConfig {
     @Config.Name("End Seekers Prime Health")
     @Config.Comment("Change the Health of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_health = 180;
+    public static double seeker_prime_health = 200;
 
     @Config.Name("End Seeker Prime Armor")
     @Config.Comment("Change the base armor value of the End Seeker")
@@ -347,12 +347,12 @@ public class MobConfig {
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 18;
+    public static double seeker_prime_attack_damage = 22;
 
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_health = 85;
+    public static double barrend_golem_health = 100;
 
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")
@@ -393,4 +393,36 @@ public class MobConfig {
     @Config.Comment("Change the Armor Toughness of the Evolved Parasite")
     @Config.RequiresMcRestart
     public static double evolved_parasite_toughness = 4;
+
+    @Config.Name("Mad Spirit Health")
+    @Config.Comment("Change the Health of the Mad Spirit")
+    @Config.RequiresMcRestart
+    public static double mad_spirit_health = 40;
+
+    @Config.Name("Mad Spirit Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Mad Spirit")
+    @Config.RequiresMcRestart
+    public static double mad_spirit_attack_damage = 24;
+
+    @Config.Name("Lidoped Health")
+    @Config.Comment("Change the Health of the Lidoped")
+    @Config.RequiresMcRestart
+    public static double lidoped_health = 20;
+
+    @Config.Name("Lidoped Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Lidoped")
+    @Config.RequiresMcRestart
+    public static double lidoped_attack_damage = 8;
+
+    @Config.Name("Void Walker Health")
+    @Config.Comment("Change the Health of the Void Walker")
+    @Config.RequiresMcRestart
+    public static double void_walker_health = 80;
+
+    @Config.Name("Void Walker Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Void Walker")
+    @Config.RequiresMcRestart
+    public static double void_walker_attack_damage = 18;
+
+
 }

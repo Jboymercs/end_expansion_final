@@ -28,6 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.PriorityQueue;
 import com.google.common.base.Predicate;
+import org.lwjgl.Sys;
 
 public abstract class EntityModBase extends EntityCreature {
 
@@ -200,6 +201,43 @@ public abstract class EntityModBase extends EntityCreature {
         super.entityInit();
         this.dataManager.register(IMMOVABLE, Boolean.valueOf(false));
 
+    }
+
+    public static boolean isPos = true;
+    public float screenShakeValue = 0f;
+
+    //Particle Call
+    @Override
+    public void onEntityUpdate() {
+        super.onEntityUpdate();
+        if(screenShakeValue > 0) {
+            world.setEntityState(this, ModUtils.SCREEN_SHAKE_BYTE);
+            screenShakeValue-=0.01F;
+        }
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id) {
+        super.handleStatusUpdate(id);
+
+        if(id == ModUtils.SCREEN_SHAKE_BYTE) {
+            List<EntityPlayer> nearbyPlayers = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(25D), e -> !e.isSpectator());
+            if(!nearbyPlayers.isEmpty()) {
+                for(EntityPlayer player : nearbyPlayers) {
+
+                    if(player != null && world.isRemote) {
+                        player.rotationPitch += getScreenShakeVal(isPos);
+                        isPos = !isPos;
+                        screenShakeValue-=0.01F;
+                    }
+                }
+            }
+        }
+    }
+
+    private float getScreenShakeVal(boolean positive) {
+        float factor = screenShakeValue/2F;
+        return positive ? factor : factor*-1;
     }
 
 

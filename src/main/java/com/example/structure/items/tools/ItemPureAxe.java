@@ -86,7 +86,6 @@ public class ItemPureAxe extends ItemAxe implements IHasModel {
 
                 if (hasGround) {
                     new ActionWaveFromPlayer(timeInAir).performAction(entityIn, entityIn);
-                    System.out.println("Entity has Ground");
                     setTooHasAir = false;
                     tackDelay = 5;
                     timeInAir = 0;
