@@ -69,11 +69,6 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-      //  nbt.setBoolean("Bug_Mode", this.dataManager.get(BUG_MODE));
-     //   nbt.setBoolean("Head_Twitch", this.dataManager.get(HEAD_TWITCH));
-      //  nbt.setBoolean("Butt_Twitch", this.dataManager.get(BUTT_TWITCH));
-     //   nbt.setBoolean("Digging", this.dataManager.get(DIGGING));
-
         nbt.setBoolean("Bug_Mode", this.isFightMode());
         nbt.setBoolean("Head_Twitch", this.isHeadTwitch());
         nbt.setBoolean("Butt_Twitch", this.isButtTwitch());
@@ -82,12 +77,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
-     //   this.dataManager.set(BUG_MODE, nbt.getBoolean("Bug_Mode"));
-    //    this.dataManager.set(HEAD_TWITCH, nbt.getBoolean("Head_Twitch"));
-    //    this.dataManager.set(BUTT_TWITCH, nbt.getBoolean("Butt_Twitch"));
-    //    this.dataManager.set(DIGGING, nbt.getBoolean("Digging"));
-
+        super.readEntityFromNBT(nbt);
         this.setFightMode(nbt.getBoolean("Bug_Mode"));
         this.setHeadTwitch(nbt.getBoolean("Head_Twitch"));
         this.setButtTwitch(nbt.getBoolean("Butt_Twitch"));

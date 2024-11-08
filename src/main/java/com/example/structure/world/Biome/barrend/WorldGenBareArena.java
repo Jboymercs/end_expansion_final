@@ -1,5 +1,6 @@
 package com.example.structure.world.Biome.barrend;
 
+import com.example.structure.config.WorldConfig;
 import com.example.structure.world.WorldGenStructure;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +19,7 @@ public class WorldGenBareArena extends WorldGenStructure {
 
     @Override
     public void generateStructure(World world, BlockPos pos, Rotation rotation) {
-        if(spacing > 150 && !world.isAirBlock(pos.add(18, 0, 18))) {
+        if(spacing > WorldConfig.bare_arena_spacing && !world.isAirBlock(pos.add(18, 0, 18))) {
             spacing = 0;
             super.generateStructure(world, pos.add(-3, 0, -3), Rotation.NONE);
         }

@@ -118,9 +118,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     public boolean isSummonKnight() {return this.dataManager.get(SUMMON);}
     private float timeSinceNoTarget = 0;
 
-    public boolean canAttemptBlock = false;
-
-    public boolean isCurrentlyBlocking = false;
+    public int blockTimer = 40;
 
 
     private EntityAIBase attackAi = new EntityAerialTimedAttack(this, 10, 2, 30, new TimedAttackIniator<>(this, 20));
@@ -177,6 +175,8 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
 
         }
 
+        blockTimer--;
+
         EntityLivingBase target = this.getAttackTarget();
         //Switches to Flying upon spotting the Enemy
         if(target != null && !this.isFlyingMode() && !this.isSummonKnight()) {
@@ -203,19 +203,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             this.navigator = new PathNavigateGround(this, world);
             this.setFlyingMode(false);
         }
-        if(target != null) {
-            if(target instanceof EntityPlayer) {
-                if(target.isSwingInProgress && this.canAttemptBlock) {
-                this.blockCurrentTarget();
-                }
-            }
 
-        }
-        if(this.isBlocking()) {
-            this.setMultiAttack(false);
-            this.setPierce(false);
-            this.setMultiStrike(false);
-        }
         if(this.isSummonCrystals() && !this.isImmovable()) {
             this.motionY--;
         }
@@ -228,16 +216,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             world.playSound(currentPos.x, currentPos.y, currentPos.z, ModSoundHandler.LORD_KNIGHT_FLY, SoundCategory.HOSTILE, 0.7f, 0.9F, true);
         }, 10);
     }
-    public void blockCurrentTarget() {
-        this.setFightMode(true);
-        this.setBlocking(true);
-        this.isCurrentlyBlocking = true;
-        addEvent(()-> {
-            this.setFightMode(false);
-            this.setBlocking(false);
-            this.isCurrentlyBlocking = false;
-        }, 30);
-    }
+
 
 
     @Override
@@ -352,26 +331,26 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private final Consumer<EntityLivingBase> multiStrike = (target) -> {
     this.setFightMode(true);
     this.setMultiStrike(true);
-    this.canAttemptBlock = true;
-    addEvent(()-> this.canAttemptBlock = false, 15);
-        addEvent(()-> this.canAttemptBlock = true, 22);
-        addEvent(()-> this.canAttemptBlock = false, 30);
 
         addEvent(()-> {
-        if(!this.isBlocking()) {
-            this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
-            DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = 6.0f;
-            ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
-        }
-        }, 17);
+            Vec3d targetPos = target.getPositionVector();
+            addEvent(()-> {
+                if(!this.isBlocking()) {
+                    ModUtils.leapTowards(this, targetPos, 0.4f, 0.05f);
+                    this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+                    Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
+                    DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+                    float damage = 6.0f;
+                    ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
+                }
+            }, 7);
+        }, 10);
 
         addEvent(()-> {
             Vec3d targetPos = target.getPositionVector();
             addEvent(()-> {
             if(!this.isBlocking()) {
-                ModUtils.leapTowards(this, targetPos, 0.4f, 0.1f);
+                ModUtils.leapTowards(this, targetPos, 0.45f, 0.05f);
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
@@ -391,12 +370,10 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
       this.setFightMode(true);
       this.setMultiAttack(true);
       addEvent(()-> this.lockLook = true, 5);
-      addEvent(()-> this.canAttemptBlock = true, 15);
-        addEvent(()-> this.canAttemptBlock = false, 25);
 
         addEvent(()-> {
             if(!this.isBlocking()) {
-                ModUtils.leapTowards(this, target.getPositionVector(), 0.3f, 0f);
+                ModUtils.leapTowards(this, target.getPositionVector(), 0.4f, 0f);
             }
           }, 5);
 
@@ -408,11 +385,13 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
+            addEvent(()-> this.lockLook =false, 5);
         }, 10);
 
         addEvent(()-> {
             if(!this.isBlocking()) {
-                ModUtils.leapTowards(this, target.getPositionVector(), 0.3f, 0f);
+                this.lockLook = true;
+                ModUtils.leapTowards(this, target.getPositionVector(), 0.43f, 0f);
             }
         }, 25);
 
@@ -441,8 +420,6 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.setPierce(true);
         addEvent(()-> this.lockLook = true, 5);
         Vec3d targetPos = target.getPositionVector();
-        addEvent(()-> this.canAttemptBlock = true, 25);
-        addEvent(()-> this.canAttemptBlock = false, 35);
         addEvent(()-> ModUtils.leapTowards(this, targetPos, 0.9f, 0.1f), 18);
         addEvent(()-> {
             for(int i = 0; i < 10; i += 5) {
@@ -588,8 +565,9 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     }
 
     private boolean canBlockDamageSource(DamageSource damageSourceIn) {
-        if (!damageSourceIn.isUnblockable() && this.isCurrentlyBlocking) {
+        if (!damageSourceIn.isUnblockable() && blockTimer <= 0 && !this.isFightMode() && !this.isSummonKnight()) {
             Vec3d vec3d = damageSourceIn.getDamageLocation();
+            this.doBlockAction();
 
             if (vec3d != null) {
                 Vec3d vec3d1 = this.getLook(1.0F);
@@ -601,6 +579,15 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         }
 
         return false;
+    }
+
+    protected void doBlockAction() {
+        this.setBlocking(true);
+
+        addEvent(()-> {
+            this.setBlocking(false);
+            this.blockTimer = 40;
+        }, 30);
     }
 
     @Override

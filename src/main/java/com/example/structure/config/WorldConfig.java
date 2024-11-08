@@ -164,4 +164,37 @@ public class WorldConfig {
     @Config.RangeInt(min = 0, max = 5)
     public static int ashed_tower_chest_spawn = 3;
 
+    @Config.Name("Barrend Arena Chance to Spawn")
+    @Config.Comment("Change the chance to spawn the Barrend Arena, This is done by per chunk checking if the ground is atleast 58, modify carefully")
+    @Config.RequiresMcRestart
+    public static int bare_arena_spacing = 150;
+
+    @Config.Name("Barrend Bogs Arches")
+    @Config.Comment("Change the chance to spawn Barrend Bog Arches, these are the arches going above the fog.")
+    @Config.RequiresMcRestart
+    public static int bare_arches_spacing = 60;
+
+    @Config.Name("Barrend Crypts Chance to Spawn")
+    @Config.Comment("Change the chance to spawn Barrend Crypts (Only works if dev stuff is activated in general_config)")
+    @Config.RequiresMcRestart
+    public static int bare_crypts_spacing = 75;
+
+    @Config.Name("Barrend Crypts Chest Spawn Chance")
+    @Config.Comment("Change the spawn chance of chests in the Barrend Crypts (Only works if dev stuff is activated in general_config")
+    @Config.RequiresMcRestart
+    @Config.RangeInt(min = 0, max = 5)
+    public static int bare_crypt_chest_chance = 3;
+
+    @Config.Name("Barrend Crypts Pot Spawn Chance")
+    @Config.Comment("Change the spawn chance of pots in the Barrend Crypts (Only works if dev stuff is activated in general_config")
+    @Config.RequiresMcRestart
+    @Config.RangeInt(min = 0, max = 5)
+    public static int bare_crypt_pot_chance = 4;
+
+    @Config.Name("Barrend Crypts Mob Spawn Chance")
+    @Config.Comment("Change the spawn chance of mobs in the Barrend Crypts (Only works if dev stuff is activated in general_config")
+    @Config.RequiresMcRestart
+    @Config.RangeInt(min = 0, max = 10)
+    public static int bare_crypt_mob_chance = 6;
+
 }

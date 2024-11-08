@@ -212,12 +212,12 @@ public class MobConfig {
     @Config.Name("Unholy Knight Base Health")
     @Config.Comment("Change the Base Health of the Unholy Knight")
     @Config.RequiresMcRestart
-    public static double unholy_knight_health = 200;
+    public static double unholy_knight_health = 225;
 
     @Config.Name("Unholy Knight Base Armor")
     @Config.Comment("Change the base armor value of the Unholy Knight")
     @Config.RequiresMcRestart
-    public static double unholy_knight_armor = 10;
+    public static double unholy_knight_armor = 12;
 
     @Config.Name("Unholy Knight Base Armor Toughness")
     @Config.Comment("Change the base armor toughness value of the Unholy Knight")
@@ -227,7 +227,7 @@ public class MobConfig {
     @Config.Name("Unholy Knight Base Attack Damage")
     @Config.Comment("Change the Base attack damage of the Unholy knight")
     @Config.RequiresMcRestart
-    public static float unholy_knight_damage = 22;
+    public static float unholy_knight_damage = 44;
 
     @Config.Name("Ashed Parasite Base Health")
     @Config.Comment("Change the base Health of the Ashed Parasite")
@@ -307,7 +307,7 @@ public class MobConfig {
     @Config.Name("Avalon Attack Damage")
     @Config.Comment("Change the Attack Damage of the Avalan Trader")
     @Config.RequiresMcRestart
-    public static double avalon_attack_damage = 24;
+    public static double avalon_attack_damage = 28;
 
     @Config.Name("Avalon Lazer Damage Multiplier")
     @Config.Comment("Change the Lazer Multipler by the Avalon's base attack damage")
@@ -327,7 +327,7 @@ public class MobConfig {
     @Config.Name("End Seeker Attack Damage")
     @Config.Comment("Change the Attack Damage of the End Seeker")
     @Config.RequiresMcRestart
-    public static double seeker_attack_damage = 13;
+    public static double seeker_attack_damage = 15;
 
     @Config.Name("End Seekers Prime Health")
     @Config.Comment("Change the Health of the End Seeker Prime")
@@ -347,7 +347,7 @@ public class MobConfig {
     @Config.Name("End Seeker Prime Attack Damaage")
     @Config.Comment("Change the Attack Damage of the End Seeker Prime")
     @Config.RequiresMcRestart
-    public static double seeker_prime_attack_damage = 22;
+    public static double seeker_prime_attack_damage = 24;
 
     @Config.Name("Barrend Golem Health")
     @Config.Comment("Change the Health of the Barrend Golem")
@@ -357,7 +357,7 @@ public class MobConfig {
     @Config.Name("Barrend Golem Attack Damage")
     @Config.Comment("Change the Attack Damage of the Barrend Golem")
     @Config.RequiresMcRestart
-    public static double barrend_golem_attack_damage = 32;
+    public static double barrend_golem_attack_damage = 60;
 
     @Config.Name("Barrend Golem Base Armor")
     @Config.Comment("Change the base armor value of the Barrend Golem")
@@ -382,7 +382,7 @@ public class MobConfig {
     @Config.Name("Evolved Parasite Attack Damage")
     @Config.Comment("Change the Attack Damage of the Evolved Parasite")
     @Config.RequiresMcRestart
-    public static double evolved_parasite_attack_damage = 40;
+    public static double evolved_parasite_attack_damage = 48;
 
     @Config.Name("Evolved Parasite Armor")
     @Config.Comment("Change the Armor value of the Evolved Parasite")
@@ -402,7 +402,7 @@ public class MobConfig {
     @Config.Name("Mad Spirit Attack Damage")
     @Config.Comment("Change the Attack Damage of the Mad Spirit")
     @Config.RequiresMcRestart
-    public static double mad_spirit_attack_damage = 24;
+    public static double mad_spirit_attack_damage = 30;
 
     @Config.Name("Lidoped Health")
     @Config.Comment("Change the Health of the Lidoped")

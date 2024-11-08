@@ -149,7 +149,7 @@ public class BarrendCryptTemplate extends ModStructureTemplate {
     //Generator for Mob Spawns
     public boolean generateMobSpawn() {
         int randomNumberGenerator = ModRand.range(0, 10);
-        if (randomNumberGenerator >= 6) {
+        if (randomNumberGenerator >= WorldConfig.bare_crypt_mob_chance) {
             return false;
         }
         return true;
@@ -157,7 +157,7 @@ public class BarrendCryptTemplate extends ModStructureTemplate {
     //Generator for Chests
     public boolean generateChestSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator >= 3) {
+        if(randomNumberChestGenerator >= WorldConfig.bare_crypt_chest_chance) {
             return false;
         }
         return true;
@@ -165,7 +165,7 @@ public class BarrendCryptTemplate extends ModStructureTemplate {
 
     public boolean generatePotSpawn() {
         int randomNumberChestGenerator = ModRand.range(0, 5);
-        if(randomNumberChestGenerator > 4) {
+        if(randomNumberChestGenerator > WorldConfig.bare_crypt_pot_chance) {
             return false;
         }
         return true;

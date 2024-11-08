@@ -212,19 +212,21 @@ public class ModEntities {
         registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, lidoped);
         //Mad Spirit
         registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, mad_spirit);
-        //Void Tripod
-        registerEntityWithID("void_tripod", EntityVoidTripod.class, ENTITY_START_ID++, 110, barrend_walker);
-        //Big Rick
-        registerEntityWithID("big_rick", EntityUltraParasite.class, ENTITY_START_ID++, 110, evoled_parasite);
         //Move TIle
         registerEntity("move_tile_aoe", EntityMoveTile.class, ENTITY_START_ID++, 110);
-        //Parasite Projectile Bomb
-        registerEntity("parasite_bomb", ProjectileParasiteBomb.class, ENTITY_START_ID++, 110);
-        //Parasite Bomb AOE
-        registerEntity("parasite_bomb_aoe", EntityParasiteBombAOE.class, ENTITY_START_ID++, 110);
-        //Barrend Guard - NEEDS COLOR
-        registerEntityWithID("barrend_guard", EntityBarrendGuard.class, ENTITY_START_ID++, 110, barrend_golem);
 
+        if(ModConfig.dev_stuff_enabled) {
+            //Parasite Projectile Bomb
+            registerEntity("parasite_bomb", ProjectileParasiteBomb.class, ENTITY_START_ID++, 110);
+            //Parasite Bomb AOE
+            registerEntity("parasite_bomb_aoe", EntityParasiteBombAOE.class, ENTITY_START_ID++, 110);
+            //Barrend Guard - NEEDS COLOR
+            registerEntityWithID("barrend_guard", EntityBarrendGuard.class, ENTITY_START_ID++, 110, barrend_golem);
+            //Void Tripod
+            registerEntityWithID("void_tripod", EntityVoidTripod.class, ENTITY_START_ID++, 110, barrend_walker);
+            //Big Rick
+            registerEntityWithID("big_rick", EntityUltraParasite.class, ENTITY_START_ID++, 110, evoled_parasite);
+        }
 
     }
 

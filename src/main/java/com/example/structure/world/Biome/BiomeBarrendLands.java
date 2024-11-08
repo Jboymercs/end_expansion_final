@@ -1,5 +1,6 @@
 package com.example.structure.world.Biome;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEndBug;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.entity.barrend.EntityLidoped;
@@ -113,7 +114,7 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
 
 
         //ruins
-        if (world.rand.nextInt(3) == 0) {
+        if (world.rand.nextInt(4) == 0) {
             for (int k2 = 0; k2 < ModRand.range(1, 4); k2++) {
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
@@ -225,7 +226,7 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
         }
 
         //Barrend Crypts
-        if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 58) {
+        if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 58 && ModConfig.dev_stuff_enabled) {
             int y = getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ());
             barrend_crypt.generate(chunkGenerator.getWorld(), random, pos.add(0, y, 0));
         }

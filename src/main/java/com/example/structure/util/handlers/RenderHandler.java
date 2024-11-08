@@ -1,5 +1,6 @@
 package com.example.structure.util.handlers;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.*;
 import com.example.structure.entity.arrow.EntityChomperArrow;
 import com.example.structure.entity.arrow.EntityGreenArrow;
@@ -180,17 +181,20 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityLidoped.class, RenderLidoped::new);
         //Mad Spirit
         RenderingRegistry.registerEntityRenderingHandler(EntityMadSpirit.class, RenderMadSpirit::new);
-        //Void Tripod
-        RenderingRegistry.registerEntityRenderingHandler(EntityVoidTripod.class, RenderTripod::new);
-        //Ultra Parasite
-        RenderingRegistry.registerEntityRenderingHandler(EntityUltraParasite.class, RenderUltraParasite::new);
-        //Move Tile
-        RenderingRegistry.registerEntityRenderingHandler(EntityMoveTile.class, RenderMoveTile::new);
-        //Parasite Bomb
-        registerProjectileRenderer(ProjectileParasiteBomb.class, ModItems.PARASITE_PROJECTILE);
-        //Parasite Bomb AOE
-        RenderingRegistry.registerEntityRenderingHandler(EntityParasiteBombAOE.class, RenderParasiteBombAOE::new);
-        //Barrend Guard
-        RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGuard.class, RenderBarrendGuard::new);
+
+        if(ModConfig.dev_stuff_enabled) {
+            //Void Tripod
+            RenderingRegistry.registerEntityRenderingHandler(EntityVoidTripod.class, RenderTripod::new);
+            //Ultra Parasite
+            RenderingRegistry.registerEntityRenderingHandler(EntityUltraParasite.class, RenderUltraParasite::new);
+            //Move Tile
+            RenderingRegistry.registerEntityRenderingHandler(EntityMoveTile.class, RenderMoveTile::new);
+            //Parasite Bomb
+            registerProjectileRenderer(ProjectileParasiteBomb.class, ModItems.PARASITE_PROJECTILE);
+            //Parasite Bomb AOE
+            RenderingRegistry.registerEntityRenderingHandler(EntityParasiteBombAOE.class, RenderParasiteBombAOE::new);
+            //Barrend Guard
+            RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGuard.class, RenderBarrendGuard::new);
+        }
     }
 }

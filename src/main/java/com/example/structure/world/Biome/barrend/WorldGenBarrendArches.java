@@ -1,5 +1,6 @@
 package com.example.structure.world.Biome.barrend;
 
+import com.example.structure.config.WorldConfig;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.world.WorldGenStructure;
 import net.minecraft.init.Blocks;
@@ -22,7 +23,7 @@ public class WorldGenBarrendArches extends WorldGenStructure {
     @Override
     public void generateStructure(World world, BlockPos pos, Rotation rotation) {
         //fines opposite corner
-        if(spacing > 60 && !world.isAirBlock(pos.add(11, 0, 2))) {
+        if(spacing > WorldConfig.bare_arches_spacing && !world.isAirBlock(pos.add(11, 0, 2))) {
             spacing = 0;
             if(world.rand.nextInt(5) == 0) {
                 camp.generateStructure(world, pos, rotation);
@@ -31,5 +32,13 @@ public class WorldGenBarrendArches extends WorldGenStructure {
             super.generateStructure(world, pos.add(0, 0, 0), Rotation.NONE);
         }
         spacing++;
+    }
+
+    @Override
+    protected void handleDataMarker(String function, BlockPos pos, World world, Random random) {
+        if(function.startsWith("chest")) {
+            world.setBlockToAir(pos);
+            world.setBlockToAir(pos.add(0, -1 ,0));
+        }
     }
 }

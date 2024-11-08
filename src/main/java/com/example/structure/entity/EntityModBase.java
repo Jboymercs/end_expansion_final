@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.MobGroundNavigate;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.ServerScaleUtil;
@@ -70,7 +71,7 @@ public abstract class EntityModBase extends EntityCreature {
 
     private Vec3d initialPosition = null;
 
-
+    private double scaleVal;
 
     protected static final DataParameter<Boolean> IMMOVABLE = EntityDataManager.createKey(EntityModBase.class, DataSerializers.BOOLEAN);
 
@@ -80,6 +81,11 @@ public abstract class EntityModBase extends EntityCreature {
 
     }
 
+    /**
+     * Sets scale for entities prior to having a target iniialized, this for blocks like the Barrend Arena
+     * setting scale for mobs, this is separate from multiplayer scaling
+     * @param scaleFactor
+     */
     public void setScale(double scaleFactor) {
         double currentHealth = this.getHealth();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(currentHealth * scaleFactor);
@@ -88,8 +94,22 @@ public abstract class EntityModBase extends EntityCreature {
         double reAdjustedValue = currentAttackDamage * (scaleFactor * 0.4);
         //this is scaleFactor * 0.4 * base Attack damage
         //that away attack damage doesn't go crazy
+        scaleVal = scaleFactor;
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(currentAttackDamage + reAdjustedValue);
     }
+
+    /**
+     * Used to help orientate entities with new attacks when set above certain scale factors
+     * @return
+     */
+    public double getScale() {
+        if(scaleVal > ModConfig.unlock_attacks_factor && ModConfig.enabled_scaled_attacks) {
+            return scaleVal;
+        }
+
+        return 0;
+    }
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

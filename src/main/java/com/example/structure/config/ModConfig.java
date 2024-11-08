@@ -133,4 +133,19 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean doMobsScalingFromArena = true;
 
+    @Config.Name("Scale Factor unlocks new attacks")
+    @Config.Comment("Change this value that when that scale is exceeded, mini-bosses/bosses unlock new attacks when there scaled health/attack damage exceeds this factor. Not applied to multiplayer scaling!")
+    @Config.RequiresMcRestart
+    public static double unlock_attacks_factor = 1.0;
+
+    @Config.Name("Disable scale factor unlocks new attacks")
+    @Config.Comment("When set to false, new attacks are not unlocked when the scale factor for it is exceeded")
+    @Config.RequiresMcRestart
+    public static boolean enabled_scaled_attacks = true;
+
+    @Config.Name("Enable Experimental stuff")
+    @Config.Comment("When set to true, all dev content will be visible and registered")
+    @Config.RequiresMcRestart
+    public static boolean dev_stuff_enabled = false;
+
 }

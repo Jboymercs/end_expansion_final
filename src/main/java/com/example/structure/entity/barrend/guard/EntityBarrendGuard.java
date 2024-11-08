@@ -31,7 +31,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EntityBarrendGuard extends EntityBarrendMob implements IAnimatable, IAttack, IAnimationTickable {
 
     private AnimationFactory factory = new AnimationFactory(this);
-    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityUltraParasite.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityBarrendGuard.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SLIME_MODE = EntityDataManager.createKey(EntityBarrendGuard.class, DataSerializers.BOOLEAN);
     private final String ANIM_WALK = "walk";
     private final String ANIM_WALK_UPPER = "walk_upper";
     private final String ANIM_BACKPACK_IDLE = "idle_backpack";
@@ -39,6 +40,8 @@ public class EntityBarrendGuard extends EntityBarrendMob implements IAnimatable,
 
     public void setFightMode(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
     public boolean isFightMode() {return this.dataManager.get(FIGHT_MODE);}
+    public void setSlimeMode(boolean value) {this.dataManager.set(SLIME_MODE, Boolean.valueOf(value));}
+    public boolean isSlimeMode() {return this.dataManager.get(SLIME_MODE);}
 
     public EntityBarrendGuard(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
@@ -54,17 +57,20 @@ public class EntityBarrendGuard extends EntityBarrendMob implements IAnimatable,
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setBoolean("Fight_Mode", this.isFightMode());
+        nbt.setBoolean("Slime_Mode", this.isSlimeMode());
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
         this.setFightMode(nbt.getBoolean("Fight_Mode"));
+        this.setSlimeMode(nbt.getBoolean("Slime_Mode"));
     }
     @Override
     public void entityInit() {
         super.entityInit();
         this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
+        this.dataManager.register(SLIME_MODE, Boolean.valueOf(false));
     }
 
     @Override

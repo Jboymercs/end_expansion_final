@@ -402,6 +402,7 @@ public class ModUtils {
                                     block != Blocks.REPEATING_COMMAND_BLOCK &&
                                     block != Blocks.CHAIN_COMMAND_BLOCK &&
                                     block != Blocks.BEDROCK &&
+                                    block != ModBlocks.BARE_EYE_ARENA &&
                                     !(block instanceof BlockLiquid)) {
                                 if (world.getClosestPlayer(blockpos.getX(), blockpos.getY(), blockpos.getZ(), 20, false) != null) {
                                     world.destroyBlock(blockpos, false);
