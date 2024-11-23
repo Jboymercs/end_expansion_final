@@ -267,6 +267,8 @@ advancements.ee.kill_chomper.title=Fine I'll let you sleep
 advancements.ee.kill_chomper.description=Slay a Depths Chomper
 advancements.ee.kill_avalon.title=Slay the Avalon
 advancements.ee.kill_avalon.description=located on the surface surrounded by obsidian pillars.
+advancements.ee.kill_lidoped.title=Sweet lil guy
+advancements.ee.kill_lidoped.description=Slay a Lidoped to unlock it's entries.
 
 
 
@@ -325,6 +327,8 @@ advancements.ee.find_coin.title=The End's Secrets
 advancements.ee.find_coin.description=Find an Avalon's Coin
 advancements.ee.craft_memory_stone.title=Underlying Evil
 advancements.ee.craft_memory_stone.description=Craft a Memorium Stone
+advancements.ee.find_arena_key.title=The Arena Awaits!
+advancements.ee.find_arena_key.description=Find a Tier One Barrend Arena key.
 
 #Status
 ee.status.ash_key_block=You have not defeated the Lamentor yet
@@ -819,6 +823,89 @@ desc.king_10=You may find him atop the main
 desc.king_11=fortress by using an Ashed Key on
 desc.king_12=the key block. As he unlocks your
 desc.king_13=full potential.
+
+#Barrend Bogs Introduction
+title.barrend_bogs.name=The Barrend Bogs
+
+desc.barrend_bogs_0=Driven with Madness and an
+desc.barrend_bogs_1=unorthodox beauty, This biome
+desc.barrend_bogs_2=brings a more hidden sense
+desc.barrend_bogs_3=of despair unlike how the
+desc.barrend_bogs_4=Ash Wastelands is more frontal.
+desc.barrend_bogs_5=While the creatures here are
+desc.barrend_bogs_6= more neutral to outside
+desc.barrend_bogs_7=guests. Tampering too much
+desc.barrend_bogs_8=may result in a quick fate.
+desc.barrend_bogs_9=This biome seems to hold a
+desc.barrend_bogs_10=older culture and civilization
+desc.barrend_bogs_11=going back before the war
+desc.barrend_bogs_12=between the Fell Knights
+desc.barrend_bogs_13=and the End's resistance.
+
+#Barrend Arena
+title.barrend_arena.name=Barrend Arena
+
+desc.barrend_arena_6=By inserting Arena keys
+desc.barrend_arena_7=into this. It will lock
+desc.barrend_arena_8=you in and you'll fight
+desc.barrend_arena_9=waves of monsters. Upon
+desc.barrend_arena_10=completion you'll be
+desc.barrend_arena_11=rewarded, with the chance
+desc.barrend_arena_12=of exclusive loot.
+
+#Barrend Wood + Stone
+title.barrend_wood.name=Barrend Wood & Stone
+
+title.eye_stone.name=Barrend Eye Stone
+
+desc.bare_wood_6=Throughout the Barrend Bogs,
+desc.bare_wood_7=several trees and other stone
+desc.bare_wood_8=materials can be found. You,
+desc.bare_wood_9=traveller can use these to add
+desc.bare_wood_10=to your home or shape the
+desc.bare_wood_11=environment to your liking.
+desc.bare_wood_12=Walls, Slabs, and stairs can
+desc.bare_wood_13=be made with these.
+
+#Memorium Stone
+
+desc.memory_stone_6=Using this, you'll
+desc.memory_stone_7=be able to unlock the door
+desc.memory_stone_8=to the Barrend Crypts. This
+desc.memory_stone_9=trinket has several uses, allowing
+desc.memory_stone_10=for multiple opens of different
+desc.memory_stone_11=doors. Just be wary what you find
+desc.memory_stone_12=down there.
+
+#Lidoped
+desc.lidoped_6=This cute little creature can
+desc.lidoped_7=make a nice farming for
+desc.lidoped_8=Bloodweed. By having a holed
+desc.lidoped_9=Barrend Bark nearby and some
+desc.lidoped_10=Barrend Plants. This little guy
+desc.lidoped_11=will harvest and return Refined
+desc.lidoped_12=Bloodweed to the hole. These
+desc.lidoped_13=creatures can also be bucketed.
+
+#Lidoped Helmet
+desc.lido_helmet_6=On the slight chance of getting
+desc.lido_helmet_7=a shell from slaying a Lidoped.
+desc.lido_helmet_8=You can make a helmet with the
+desc.lido_helmet_9=other materials. This helmet
+desc.lido_helmet_10=negates the Madness effect,
+desc.lido_helmet_11=however items requiring Madness
+desc.lido_helmet_12= will not work with this helmet
+desc.lido_helmet_13=on.
+
+#Bloodweed Reinforcement Kit
+desc.kit_6=Taking one of these and
+desc.kit_7=putting it into an anvil
+desc.kit_8=along with a non-boss weapon.
+desc.kit_9=Will upgrade the weapon with
+desc.kit_10=higher damage, a reduced cooldown,
+desc.kit_11=and typically heightening the
+desc.kit_12=weapons ability. Weapons can
+desc.kit_13=only be upgraded once.
 
 #Endfall Set
 desc.end_mod_6=Congrats on your quest traveller,

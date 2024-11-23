@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:lidoped_shell"
+    },
+    "title": {
+      "translate": "advancements.ee.kill_lidoped.title"
+    },
+    "description": {
+      "translate": "advancements.ee.kill_lidoped.description"
+    }
+  },
+  "parent": "ee:kill_seeker_prime",
+  "criteria": {
+    "Lamentor": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "ee:lidoped"
+        }
+      }
+    }
+  }
+}

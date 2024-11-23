@@ -32,14 +32,16 @@ public class GuiBook extends GuiScreen {
     protected static final int Y = 180;
     private int currentPage;
     private int prevPage = -1;
-    private final int totalPages = 27;
+    private final int totalPages = 35;
     private static final ResourceLocation GUI_BASE_BOOK_BACKGROUND = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/book_default.png");
     private static final ResourceLocation GUI_INDEX_BUTTON = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button.png");
     private static final ResourceLocation GUI_INDEX_BUTTON_2 = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button_2.png");
     private static final ResourceLocation GUI_INDEX_BUTTON_3 = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button_3.png");
     private static final ResourceLocation GUI_INDEX_BUTTON_4 = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button_4.png");
     private static final ResourceLocation GUI_INDEX_BUTTON_5 = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button_5.png");
+    private static final ResourceLocation GUI_INDEX_BUTTON_6 = new ResourceLocation(ModReference.MOD_ID + ":textures/gui/button_6.png");
     private static final ResourceLocation MOB_PICTURES = new ResourceLocation( "ee:textures/gui/cards.png");
+    private static final ResourceLocation MOB_PICTURES_2 = new ResourceLocation("ee:textures/gui/cards_2.png");
     private static final ResourceLocation BLOCK_PICTURES = new ResourceLocation("ee:textures/gui/block_cards.png");
     private static final ResourceLocation BLOCK_PICTURES_2 = new ResourceLocation("ee:textures/gui/block_cards_2.png");
     private static final ResourceLocation ENDFALL_PICTURES = new ResourceLocation("ee:textures/gui/block_cards_3.png");
@@ -47,13 +49,10 @@ public class GuiBook extends GuiScreen {
     private static final ResourceLocation BLOCK_PICTURES_4 = new ResourceLocation("ee:textures/gui/block_cards_4.png");
 
     private static final ResourceLocation BLOCK_PICTURES_5 = new ResourceLocation("ee:textures/gui/block_cards_5.png");
+    private static final ResourceLocation BLOCK_PICTURES_6 = new ResourceLocation("ee:textures/gui/blocks_cards_6.png");
 
     //Used for unlocking parts of the book
-    public boolean hasLamentedIslands = false;
-    public boolean hasEndResources = false;
-    public boolean hasAshWastelands = false;
-    public boolean hasEndGameGear = false;
-    public boolean hasEndKingFortress = false;
+
     ItemStack book;
     GuiButton exitButton;
     private NextPageButton buttonNextPage;
@@ -64,6 +63,7 @@ public class GuiBook extends GuiScreen {
     private IndexButtonTest4 indexButtons4;
     private IndexButtonTest5 indexButtons5;
 
+    private IndexButtonTest6 indexButton6;
 
     GuiBook self;
     private float time = 0;
@@ -86,8 +86,8 @@ public class GuiBook extends GuiScreen {
         this.indexButtons2 = this.addButton(new IndexButtonTest2(4, t + 151, 38, 5)); // Lamented Islands
         this.indexButtons3 = this.addButton(new IndexButtonTest3(5, t + 151, 58, 8)); // Ash Wastelands
         this.indexButtons4 = this.addButton(new IndexButtonTest4(6, t + 151, 78, 19)); //End King's Fortress
-        this.indexButtons5 = this.addButton(new IndexButtonTest5(7, t + 151, 98, 23)); //End Game Gear
-
+        this.indexButtons5 = this.addButton(new IndexButtonTest5(7, t + 151, 118, 30)); //End Game Gear
+        this.indexButton6 = this.addButton(new IndexButtonTest6(8, t + 151, 98, 23)); // Barrend Bogs
         this.updateButtons();
     }
 
@@ -148,6 +148,7 @@ public class GuiBook extends GuiScreen {
         this.indexButtons3.visible = this.currentPage == 0;
         this.indexButtons4.visible = this.currentPage == 0;
         this.indexButtons5.visible = this.currentPage == 0;
+        this.indexButton6.visible = this.currentPage == 0;
     }
 
 
@@ -187,6 +188,9 @@ public class GuiBook extends GuiScreen {
             } else if(button.id == 7) {
                 IndexButtonTest5 button2 = (IndexButtonTest5) button;
                 this.currentPage = button2.getPage();
+            } else if (button.id == 8) {
+                IndexButtonTest6 buttonTest6 = (IndexButtonTest6) button;
+                this.currentPage = buttonTest6.getPage();
             }
             this.updateButtons();
         }
@@ -254,6 +258,7 @@ public class GuiBook extends GuiScreen {
                     this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
                     this.createLockedEntryLeft("title.locked_entry");
                 }
+
                 if (ModUtils.getAdvancementCompletion(player, "kill_guilder")) {
                     this.mc.renderEngine.bindTexture(MOB_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
@@ -594,7 +599,6 @@ public class GuiBook extends GuiScreen {
                     this.createLockedEntryLeft("title.locked_entry");
                     this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
                 }
-
                 if(ModUtils.getAdvancementCompletion(player, "kill_stalker")) {
                     this.mc.renderEngine.bindTexture(MOB_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13,0, 116, 115, 58, 115, 464);
@@ -605,7 +609,6 @@ public class GuiBook extends GuiScreen {
                     this.createLockedEntryRight("title.locked_entry");
                     this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
                 }
-
                 GlStateManager.popMatrix();
                 break;
 
@@ -687,7 +690,7 @@ public class GuiBook extends GuiScreen {
                     this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
                 }
 
-                if(ModUtils.getAdvancementCompletion(player, "kill_king") && ModUtils.getAdvancementCompletion(player, "kill_lamentor")) {
+                if(ModUtils.getAdvancementCompletion(player, "kill_king")) {
                     this.mc.renderEngine.bindTexture(MOB_PICTURES);
                     drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 348, 115, 58, 115, 464);
                     this.createRightPictureTitleFromString("entity.end_king.name");
@@ -701,6 +704,109 @@ public class GuiBook extends GuiScreen {
                 GlStateManager.popMatrix();
                 break;
             case 23:
+                // BARREND BIOME START
+                // + Barrend Arena
+                    GlStateManager.pushMatrix();
+                    if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.arena_progress_stages)) {
+                        this.mc.renderEngine.bindTexture(BLOCK_PICTURES_5);
+                        drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 406, 115, 58, 115, 464);
+                        this.createRightPictureTitleFromString("title.barrend_arena.name");
+                        this.writeRightFromString(6, 12, "desc.barrend_arena_");
+                    } else {
+                        this.createLockedEntryRight("title.locked_entry");
+                        //RIGHT SIDE
+                        this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    }
+                this.createLeftTitleFromString("title.barrend_bogs.name");
+                this.writeLeftFromString(0, 13, "desc.barrend_bogs_");
+                    GlStateManager.popMatrix();
+                    break;
+            case 24:
+                //Barrend Wood + Stone
+                GlStateManager.pushMatrix();
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.barrend_blocks_progress_stage)) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_6);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 0, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 58, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 91, 0, 116, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.barrend_wood.name");
+                    this.writeLeftFromString(6, 13, "desc.bare_wood_");
+                } else {
+                    this.createLeftPictureTitleFromString("title.barrend_wood.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryLeft("title.locked_entry");
+                    //LEFT SIDE
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+                GlStateManager.popMatrix();
+                break;
+            case 25:
+                // Barrend Eye Stone + Memorium Stone
+                GlStateManager.pushMatrix();
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.barrend_blocks_progress_stage)) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_6);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 174, 115, 58, 115, 464);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 91, 0, 232, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("title.eye_stone.name");
+                } else {
+                    this.createLeftPictureTitleFromString("title.eye_stone.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    //LEFT SIDE
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_6);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 290, 115, 58, 115, 464);
+                    this.createRightPictureTitleFromString("item.memory_stone.name");
+                    this.writeRightFromString(6, 12, "desc.memory_stone_");
+                } else {
+                    this.createRightPictureTitleFromString("item.memory_stone.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                }
+                GlStateManager.popMatrix();
+                break;
+            case 26:
+                GlStateManager.pushMatrix();
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lidoped_progress_stage)) {
+                    this.mc.renderEngine.bindTexture(MOB_PICTURES_2);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 0, 115, 58, 115, 464);
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_6);
+                    drawModalRectWithCustomSizedTexture((this.width + 17) / 2, 13, 0, 348, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("entity.lidoped.name");
+                    this.writeLeftFromString(6, 13, "desc.lidoped_");
+                    this.createRightPictureTitleFromString("item.lidoped_helmet.name");
+                    this.writeRightFromString(6, 13, "desc.lido_helmet_");
+                } else {
+                    this.createLeftPictureTitleFromString("entity.lidoped.name");
+                    this.createRightPictureTitleFromString("item.lidoped_helmet.name");
+                    this.createLockedEntryRight("title.locked_entry");
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                    this.createLockedEntryLeft("title.locked_entry");
+                    //LEFT SIDE
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+                GlStateManager.popMatrix();
+                break;
+            case 27:
+                //BloodWeed Reinforcement Kit +
+                GlStateManager.pushMatrix();
+                if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.lidoped_progress_stage) && ModUtils.getAdvancementCompletion(player, "craft_infused_crystal")) {
+                    this.mc.renderEngine.bindTexture(BLOCK_PICTURES_6);
+                    drawModalRectWithCustomSizedTexture((this.width - 245) / 2, 13, 0, 406, 115, 58, 115, 464);
+                    this.createLeftPictureTitleFromString("item.blood_reinforce.name");
+                    this.writeLeftFromString(6, 13, "desc.kit_");
+                } else {
+                    this.createLeftPictureTitleFromString("item.blood_reinforce.name");
+                    this.createLockedEntryLeft("title.locked_entry");
+                    //LEFT SIDE
+                    this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                }
+                GlStateManager.popMatrix();
+                break;
+            case 30:
                 //Endfall Helmet, Chestplate
                 GlStateManager.pushMatrix();
                 if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
@@ -722,7 +828,7 @@ public class GuiBook extends GuiScreen {
 
                 GlStateManager.popMatrix();
                 break;
-            case 24:
+            case 31:
                 //Endfall Leggings, Boots, and the Mini-Nuke
                 GlStateManager.pushMatrix();
                 if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
@@ -744,7 +850,7 @@ public class GuiBook extends GuiScreen {
 
                 GlStateManager.popMatrix();
                 break;
-            case 25:
+            case 32:
                 //Endfall Sword & Bow
                 GlStateManager.pushMatrix();
                 if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
@@ -766,7 +872,7 @@ public class GuiBook extends GuiScreen {
 
                 GlStateManager.popMatrix();
                 break;
-            case 26:
+            case 33:
                 //EndFall Staff
                 GlStateManager.pushMatrix();
                 if(ModUtils.getAdvancementCompletionAsList(player, ProgressionConfig.end_fall_progress_stage)) {
@@ -1133,6 +1239,39 @@ public class GuiBook extends GuiScreen {
                 boolean flag = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 mc.getTextureManager().bindTexture(GUI_INDEX_BUTTON_5);
+                int i = 0;
+                int j = 15;
+                if(flag) {
+                    j += 15;
+                }
+                drawModalRectWithCustomSizedTexture(this.x, this.y, i, j, 105, 15, 105,  30);
+
+
+            }
+        }
+
+    }
+
+    @SideOnly(Side.CLIENT)
+    static class IndexButtonTest6 extends GuiButton {
+
+        private final int page;
+        private String textTooDisplay;
+        public IndexButtonTest6(int buttonId, int x, int y, int pageIn) {
+            super(buttonId, x, y, "");
+            this.page = pageIn;
+
+        }
+
+        public int getPage() {
+            return page;
+        }
+
+        public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+            if(this.visible) {
+                boolean flag = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                mc.getTextureManager().bindTexture(GUI_INDEX_BUTTON_6);
                 int i = 0;
                 int j = 15;
                 if(flag) {

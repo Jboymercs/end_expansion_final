@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ee:arena_key_1"
+    },
+    "title": {
+      "translate": "advancements.ee.find_arena_key.title"
+    },
+    "description": {
+      "translate": "advancements.ee.find_arena_key.description"
+    }
+  },
+  "parent": "ee:craft_guidebook",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ee:arena_key_1"
+          }
+        ]
+      }
+    }
+  }
+}

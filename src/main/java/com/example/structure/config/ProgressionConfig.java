@@ -11,7 +11,8 @@ public class ProgressionConfig {
     @Config.Comment("What advancements are required for players to use and unlock the Barrend Arena entries")
     @Config.RequiresMcRestart
     public static String[] arena_progress_stages = {
-            "ee:kill_seeker_prime"
+            "ee:kill_seeker_prime",
+            "ee:find_arena_key"
     };
     @Config.Name("Lamentor Unlock Stage Requirements")
     @Config.Comment("What advancements are required to unlock Ashed Kings Fortress, and several Guidebook entries. ModId : advancementName")
@@ -93,5 +94,21 @@ public class ProgressionConfig {
             "ee:kill_king",
             "ee:find_soul",
             "ee:craft_memory_stone"
+    };
+
+    @Config.Name("Barrend Blocks And Materials Requirements")
+    @Config.Comment("What advancements are required to unlock Barrend Wood, Stone, and lighting sources. ModId : advancementName")
+    @Config.RequiresMcRestart
+    public static String[] barrend_blocks_progress_stage = {
+            "ee:find_purple",
+            "ee:kill_seeker_prime"
+    };
+
+    @Config.Name("Lidoped Unlock Stages")
+    @Config.Comment("What advancements are required to unlock Lidoped Entries, Lidoped Helmet, and Bloodweed Reinforcement Kit. ModId: advancementName")
+    @Config.RequiresMcRestart
+    public static String[] lidoped_progress_stage = {
+            "ee:kill_lidoped",
+            "ee:find_purple"
     };
 }
