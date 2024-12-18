@@ -61,6 +61,10 @@ public class ItemConfig {
     @Config.RequiresMcRestart
     public static float cordium_axe_damage = 8;
 
+    @Config.Name("Lustrian Axe Damage")
+    @Config.Comment("Change the Damage of the Lustrian Axe")
+    @Config.RequiresMcRestart
+    public static float unholy_axe_damage = 9;
     @Config.Name("End's Revolt Axe Cooldown")
     @Config.Comment("Change the End's Revolt (pure_axe) cooldown")
     @Config.RequiresMcRestart

@@ -126,7 +126,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.17D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.knighthouse_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.knighthouse_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
@@ -317,7 +317,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
                                     .type(ModDamageSource.MOB)
                                     .directEntity(this)
                                     .build();
-                            float damage = (float) ((MobConfig.end_shielder_damage - 1) * ModConfig.biome_multiplier);
+                            float damage = (float) ((MobConfig.end_shielder_damage - 1) * getAttackModifierAsh());
                             ModUtils.handleAreaImpact(0.5f, (e) -> damage, this, pos, source, 0.6F, 0, false );
                             this.playSound(SoundEvents.ITEM_SHIELD_BLOCK,1.0f, 0.6f - ModRand.getFloat(0.3f) );
                         }
@@ -347,7 +347,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
             this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.7, 1.3, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage =(float) (MobConfig.end_shielder_damage * ModConfig.biome_multiplier);
+            float damage =(float) (MobConfig.end_shielder_damage * getAttackModifierAsh());
             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.6f, 0, false);
         }
     }, 15);
@@ -375,7 +375,7 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
               this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
               Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.2, 1.3, 0)));
               DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-              float damage = (float) ((MobConfig.end_shielder_damage + 1) * ModConfig.biome_multiplier);
+              float damage = (float) ((MobConfig.end_shielder_damage + 1) * getAttackModifierAsh());
               ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
           }
       },20 );

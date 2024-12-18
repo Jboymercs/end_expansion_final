@@ -1,6 +1,7 @@
 package com.example.structure.util.handlers;
 
 import com.example.structure.util.ModReference;
+import net.minecraft.block.SoundType;
 import net.minecraft.client.audio.Sound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -144,8 +145,40 @@ public class ModSoundHandler {
     //Door Creator
     public static SoundEvent DOOR_POWER_UP;
 
+    public static SoundEvent ASH_STEP;
+    public static SoundEvent ASH_BREAK;
+    public static SoundEvent ASH_HIT;
+    public static SoundEvent ASH_PLACE;
 
+    public static SoundEvent ASH_BRICK_PLACE;
+    public static SoundEvent ASH_BRICK_STEP;
+    public static SoundEvent ASH_BRICK_BREAK;
+
+    public static SoundEvent BARE_LOG_PLACE;
+    public static SoundEvent BARE_LOG_STEP;
+    public static SoundEvent BARE_LOG_HIT;
+    public static SoundEvent BARE_LOG_BREAK;
+
+    public static SoundEvent CRYSTAL_BREAK;
+    public static SoundEvent CRYSTAL_PLACE;
     public static void registerSounds() {
+        //ASH
+        ASH_BREAK = registerSound("ash.break", "block");
+        ASH_STEP = registerSound("ash.step", "block");
+        ASH_PLACE = registerSound("ash.place", "block");
+        ASH_HIT = registerSound("ash.hit", "block");
+        //ASH BRICK
+        ASH_BRICK_BREAK = registerSound("ash_brick.break", "block");
+        ASH_BRICK_PLACE = registerSound("ash_brick.place", "block");
+        ASH_BRICK_STEP = registerSound("ash_brick.step", "block");
+        //BARREND LOGS
+        BARE_LOG_PLACE = registerSound("bare_log.place", "block");
+        BARE_LOG_BREAK = registerSound("bare_log.break", "block");
+        BARE_LOG_STEP = registerSound("bare_log.step", "block");
+        BARE_LOG_HIT = registerSound("bare_log.hit", "block");
+        //CRYSTALS
+        CRYSTAL_BREAK = registerSound("shard.break", "block");
+        CRYSTAL_PLACE = registerSound("shard.place", "block");
         BOSS_IDLE = registerSound("boss.idle", "entity");
         BOSS_HURT = registerSound("boss.hurt", "entity");
         BOSS_DEATH = registerSound("boss.death", "entity");

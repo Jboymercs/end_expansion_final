@@ -17,6 +17,7 @@ import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
+import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
 import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
 import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.entity.painting.RenderEEPainting;
@@ -27,6 +28,7 @@ import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.trader.*;
 import com.example.structure.init.ModItems;
+import com.example.structure.util.ModUtils;
 import git.jbredwards.nether_api.mod.common.world.gen.MapGenCavesEnd;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -181,6 +183,8 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityLidoped.class, RenderLidoped::new);
         //Mad Spirit
         RenderingRegistry.registerEntityRenderingHandler(EntityMadSpirit.class, RenderMadSpirit::new);
+        //Blood Slash
+        registerProjectileRenderer(EntityBloodSlash.class, ModItems.INVISIBLE);
 
         if(ModConfig.dev_stuff_enabled) {
             //Void Tripod

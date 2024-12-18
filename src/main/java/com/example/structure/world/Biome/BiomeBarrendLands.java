@@ -1,9 +1,12 @@
 package com.example.structure.world.Biome;
 
 import com.example.structure.config.ModConfig;
+import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntityEndBug;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.entity.barrend.EntityLidoped;
+import com.example.structure.entity.barrend.EntityMadSpirit;
+import com.example.structure.entity.barrend.EntityVoidTripod;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
 import com.example.structure.world.Biome.barrend.*;
@@ -62,6 +65,10 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
         this.spawnableCreatureList.clear();
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
+
+        this.spawnableCreatureList.add(new SpawnListEntry(EntityLidoped.class, 1, 1, 1));
+        this.spawnableCreatureList.add(new SpawnListEntry(EntityVoidTripod.class, 1, 1, 2));
+        this.spawnableCreatureList.add(new SpawnListEntry(EntityMadSpirit.class, 1, 1, 2));
         this.topBlock = BARE_FLOOR;
         random = new Random();
 

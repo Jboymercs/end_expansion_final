@@ -140,7 +140,7 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.5, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (MobConfig.mad_spirit_attack_damage * ModConfig.barrend_multiplier);
+            float damage = (float) (MobConfig.mad_spirit_attack_damage * getAttackModifiersBarrend());
             ModUtils.handleAreaImpact(1.5f, (e) -> damage, this, offset, source, 0.6f, 0, false);
         }, 27);
 
@@ -233,7 +233,7 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.mad_spirit_health * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.mad_spirit_health * getHealthModifierBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4 * ModConfig.barrend_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }

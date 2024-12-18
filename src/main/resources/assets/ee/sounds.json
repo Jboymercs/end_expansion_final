@@ -1050,6 +1050,284 @@
       }
     ]
   },
+  "block.ash.break": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "ee:block/ash/break1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/break2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/break3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/break4",
+        "stream": true
+      }
+    ]
+  },
+  "block.ash.hit": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "ee:block/ash/break1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/break2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/break3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/break4",
+        "stream": true
+      }
+    ]
+  },
+  "block.ash.step": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "ee:block/ash/step1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/step2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/step3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/step4",
+        "stream": true
+      }
+    ]
+  },
+  "block.ash.place": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "ee:block/ash/step1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/step2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/step3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash/step4",
+        "stream": true
+      }
+    ]
+  },
+  "block.ash_brick.break": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "ee:block/ash_brick/place1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/place2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/place3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/place4",
+        "stream": true
+      }
+    ]
+  },
+  "block.ash_brick.place": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "ee:block/ash_brick/place1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/place2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/place3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/place4",
+        "stream": true
+      }
+    ]
+  },
+  "block.ash_brick.step": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "ee:block/ash_brick/step1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/step2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/step3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/ash_brick/step4",
+        "stream": true
+      }
+    ]
+  },
+  "block.bare_log.step": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "ee:block/bare_log/step1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/step2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/step3",
+        "stream": true
+      }
+    ]
+  },
+  "block.bare_log.place": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "ee:block/bare_log/step1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/step2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/step3",
+        "stream": true
+      }
+    ]
+  },
+  "block.bare_log.hit": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "ee:block/bare_log/break1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/break2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/break3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/break4",
+        "stream": true
+      }
+    ]
+  },
+  "block.bare_log.break": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "ee:block/bare_log/break1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/break2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/break3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/bare_log/break4",
+        "stream": true
+      }
+    ]
+  },
+  "block.shard.break": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "ee:block/shard/break1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/shard/break2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/shard/break3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/shard/break4",
+        "stream": true
+      }
+    ]
+  },
+  "block.shard.place": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "ee:block/shard/place1",
+        "stream": true
+      },
+      {
+        "name": "ee:block/shard/place2",
+        "stream": true
+      },
+      {
+        "name": "ee:block/shard/place3",
+        "stream": true
+      },
+      {
+        "name": "ee:block/shard/place4",
+        "stream": true
+      }
+    ]
+  },
   "biome.ambient.ambient": {
     "category": "biome",
     "subtitle": "biome.ambience",

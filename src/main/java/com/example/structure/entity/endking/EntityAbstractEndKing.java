@@ -487,13 +487,13 @@ public class EntityAbstractEndKing extends EntityModBase implements IEntityMulti
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.end_king_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.end_king_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.end_king_armor * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.end_king_armor_toughness * ModConfig.biome_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.end_king_damage * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.end_king_damage * getAttackModifierAsh());
     }
 
 

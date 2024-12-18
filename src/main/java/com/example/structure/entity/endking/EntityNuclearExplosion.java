@@ -145,7 +145,7 @@ public class EntityNuclearExplosion extends EntityModBase implements IAnimatable
             if(!nearbyPlayers.isEmpty() && ticksExisted > 15 && ticksExisted < 85) {
                 world.setEntityState(this, ModUtils.PARTICLE_BYTE);
                 for(EntityPlayer player : nearbyPlayers) {
-                    ClientRender.SCREEN_SHAKE = 2f;
+                //    ClientRender.SCREEN_SHAKE = 2f;
                 }
             }
 
@@ -170,7 +170,7 @@ public class EntityNuclearExplosion extends EntityModBase implements IAnimatable
             if(!nearbyPlayers.isEmpty() && ticksExisted > 15 && ticksExisted < 85) {
                 world.setEntityState(this, ModUtils.PARTICLE_BYTE);
                 for(EntityPlayer player : nearbyPlayers) {
-                    ClientRender.SCREEN_SHAKE = 2f;
+                 //   ClientRender.SCREEN_SHAKE = 2f;
                 }
             }
 

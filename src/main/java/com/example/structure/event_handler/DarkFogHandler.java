@@ -60,11 +60,11 @@ public class DarkFogHandler {
                 if (posY < CLIFF_FOG_HEIGHT + SWAMP_FOG_LAYERS + SWAMP_FOG_FADE_START) {
                     double maxFogThickness = 0.07f;
                     double minFogThickness = 0.005f;
-                    double distanceFromMax = posY - CLIFF_FOG_HEIGHT;
+                   double distanceFromMax = posY - CLIFF_FOG_HEIGHT;
                     double closenessToMax = distanceFromMax / (SWAMP_FOG_LAYERS + SWAMP_FOG_FADE_START);
                     double fogThickness = maxFogThickness * MathHelper.clamp(1 - closenessToMax, 0, 1);
                     GlStateManager.setFog(GlStateManager.FogMode.EXP);
-                    GlStateManager.setFogDensity((float) Math.max(fogThickness, minFogThickness));
+                   GlStateManager.setFogDensity((float) Math.max(fogThickness, minFogThickness));
                 }
             }
         }
@@ -128,7 +128,7 @@ public class DarkFogHandler {
                         setupFog = ReflectionHelper.findMethod(EntityRenderer.class, "setupFog", "func_78468_a", int.class, float.class);
                         setupFog.setAccessible(true);
                     } catch (Exception e) {
-                        System.out.println("Failed to render fog: " + e);
+                       System.out.println("Failed to render fog: " + e);
                     }
                 }
 

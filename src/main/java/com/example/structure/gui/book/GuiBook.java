@@ -806,6 +806,18 @@ public class GuiBook extends GuiScreen {
                 }
                 GlStateManager.popMatrix();
                 break;
+            case 28:
+            case 29:
+                GlStateManager.pushMatrix();
+                this.createLockedEntryLeft("title.locked_entry");
+                //LEFT SIDE
+                this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width - 75 * 2) / 2, 14);
+                this.createLockedEntryRight("title.locked_entry");
+                //RIGHT SIDE
+                this.drawItemStack(new ItemStack(Blocks.BARRIER), (this.width + 55 * 2) / 2, 14);
+                GlStateManager.popMatrix();
+                break;
+            //LEFT SIDE
             case 30:
                 //Endfall Helmet, Chestplate
                 GlStateManager.pushMatrix();

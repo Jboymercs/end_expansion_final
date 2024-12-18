@@ -119,7 +119,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MobConfig.stalker_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MobConfig.stalker_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
@@ -344,7 +344,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
           this.playSound(ModSoundHandler.STALKER_SWING, 1.0f, 1.0f - ModRand.getFloat(0.3F));
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-          float damage = (float) (MobConfig.stalker_damage * ModConfig.biome_multiplier);
+          float damage = (float) (MobConfig.stalker_damage * getAttackModifierAsh());
           ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
       }, 9);
 
@@ -358,14 +358,14 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-          float damage = (float) ((MobConfig.stalker_damage -2) * ModConfig.biome_multiplier);
+          float damage = (float) ((MobConfig.stalker_damage -2) * getAttackModifierAsh());
           ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
       }, 10);
       //R
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.3, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) ((MobConfig.stalker_damage -2) * ModConfig.biome_multiplier);
+            float damage = (float) ((MobConfig.stalker_damage -2) * getAttackModifierAsh());
             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
         }, 20);
 

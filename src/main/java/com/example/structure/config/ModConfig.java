@@ -134,7 +134,7 @@ public class ModConfig {
     public static boolean doMobsScalingFromArena = true;
 
     @Config.Name("Scale Factor unlocks new attacks")
-    @Config.Comment("Change this value that when that scale is exceeded, mini-bosses/bosses unlock new attacks when there scaled health/attack damage exceeds this factor. Not applied to multiplayer scaling!")
+    @Config.Comment("Change this value that when that scale is exceeded, mini-bosses/bosses unlock new attacks when there scaled health/attack damage exceeds this factor. Not applied to multiplayer scaling or universal scaling!")
     @Config.RequiresMcRestart
     public static double unlock_attacks_factor = 1.0;
 
@@ -144,8 +144,13 @@ public class ModConfig {
     public static boolean enabled_scaled_attacks = true;
 
     @Config.Name("Enable Experimental stuff")
-    @Config.Comment("When set to true, all dev content will be visible and registered")
+    @Config.Comment("When set to true, all dev content will be sent to generate in the End, this includes Dungeons, Barrend Bogs Biome, and other areas. USE WITH CAUTION")
     @Config.RequiresMcRestart
     public static boolean dev_stuff_enabled = false;
+
+    @Config.Name("BOMD Compat Support")
+    @Config.Comment("If BOMD + DA is loaded in, End Expansion will higher its difficulty to accomodate for the gear that BOMD has to offer. Basically default stats will go up for everything, mobs, weapons, armor. default : true")
+    @Config.RequiresMcRestart
+    public static boolean is_bomd_compat = true;
 
 }

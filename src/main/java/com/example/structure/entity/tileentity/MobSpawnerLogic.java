@@ -40,7 +40,7 @@ public abstract class MobSpawnerLogic {
     protected Supplier<BlockPos> pos;
     protected Block block;
     protected float level;
-    protected MobSpawnData[] mobs = {new MobSpawnData(ModReference.MOD_ID + ":dream_elk")};
+    protected MobSpawnData[] mobs = {new MobSpawnData(ModReference.MOD_ID + ":end_seeker")};
     protected int[] mobWeights = {1};
 
     /**
@@ -251,9 +251,8 @@ public abstract class MobSpawnerLogic {
             if (data.mobData != null) {
                 dataCompound.setTag("SpawnData", data.mobData);
             }
+                dataCompound.setString("EntityId", data.mobId);
 
-
-            dataCompound.setString("EntityId", data.mobId);
             dataCompound.setInteger("Count", data.count);
             nbttaglist.appendTag(dataCompound);
         }

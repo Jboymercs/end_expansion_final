@@ -219,7 +219,7 @@ public class EntityVoidTripod extends EntityBarrendMob implements IAnimatable, I
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.void_walker_health * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.void_walker_health * getHealthModifierBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16 * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
@@ -299,7 +299,7 @@ public class EntityVoidTripod extends EntityBarrendMob implements IAnimatable, I
             //do Attack effects and damage
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.5, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-                float damage = (float) (MobConfig.void_walker_attack_damage * ModConfig.barrend_multiplier);
+                float damage = (float) (MobConfig.void_walker_attack_damage * getAttackModifiersBarrend());
                 ModUtils.handleAreaImpact(3.0f, (e) -> damage, this, offset, source, 1.4f, 0, false);
             },37);
 

@@ -3,15 +3,16 @@ package com.example.structure.entity.knighthouse;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityAerialTimedAttack;
 import com.example.structure.entity.ai.EntityFlyMoveHelper;
 import com.example.structure.entity.endking.EntityRedCrystal;
+import com.example.structure.entity.knighthouse.knightlord.ActionQuickSlash;
+import com.example.structure.entity.knighthouse.knightlord.ActionScatterSlash;
+import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.entity.util.TimedAttackIniator;
-import com.example.structure.util.ModColors;
-import com.example.structure.util.ModDamageSource;
-import com.example.structure.util.ModRand;
-import com.example.structure.util.ModUtils;
+import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.sun.jna.platform.win32.WinBase;
@@ -30,6 +31,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -50,6 +52,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class EntityKnightLord extends EntityKnightBase implements IAnimatable, IAttack, IAnimationTickable {
 
@@ -58,6 +61,8 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private static final DataParameter<Boolean> MULTI_ATTACK = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> BLOCKING = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MULTI_STRIKE = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLOOD_SLASH = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SUMMON_CRYSTALS = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SUMMON = EntityDataManager.createKey(EntityKnightLord.class, DataSerializers.BOOLEAN);
 
@@ -80,6 +85,8 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         nbt.setBoolean("Multi_Strike", this.isMultiStrike());
         nbt.setBoolean("Summon_Crystals", this.isSummonCrystals());
         nbt.setBoolean("Summon", this.isSummonKnight());
+        nbt.setBoolean("Blood_Slash", this.isBloodSlash());
+        nbt.setBoolean("Combo_Attack", this.isComboAttack());
     }
 
     @Override
@@ -100,6 +107,8 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.setMultiStrike(nbt.getBoolean("Multi_Strike"));
         this.setSummonCrystals(nbt.getBoolean("Summon_Crystals"));
         this.setSummonKnight(nbt.getBoolean("Summon"));
+        this.setComboAttack(nbt.getBoolean("Combo_Attack"));
+        this.setBloodSlash(nbt.getBoolean("Blood_Slash"));
 
     }
     public void setFlyingMode(boolean value) {this.dataManager.set(FLYING_MODE, Boolean.valueOf(value));}
@@ -116,6 +125,10 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     public boolean isSummonCrystals() {return this.dataManager.get(SUMMON_CRYSTALS);}
     public void setSummonKnight(boolean value) {this.dataManager.set(SUMMON, Boolean.valueOf(value));}
     public boolean isSummonKnight() {return this.dataManager.get(SUMMON);}
+    public void setBloodSlash(boolean value) {this.dataManager.set(BLOOD_SLASH, Boolean.valueOf(value));}
+    public boolean isBloodSlash() {return this.dataManager.get(BLOOD_SLASH);}
+    public void setComboAttack(boolean value) {this.dataManager.set(COMBO_ATTACK, Boolean.valueOf(value));}
+    public boolean isComboAttack() {return this.dataManager.get(COMBO_ATTACK);}
     private float timeSinceNoTarget = 0;
 
     public int blockTimer = 40;
@@ -131,11 +144,17 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
 
     private final String ANIM_MULTI_ATTACK = "attack";
     private final String ANIM_STRIKE_ATTACK = "strike";
+
+    private final String ANIM_BLOOD_SLASH = "blood_slash";
+    private final String ANIM_COMBO = "combo";
     private final String ANIM_CRYSTALS = "crystals";
     private final String ANIM_BLOCK = "block";
 
     private final String ANIM_ON_SUMMON = "summon";
     private Consumer<EntityLivingBase> prevAttack;
+
+    Supplier<Projectile> ground_projectiles = () -> new EntityBloodSlash(world, this, (float) MobConfig.unholy_knight_damage, null, ModColors.RED);
+    private boolean isGroundAttack = false;
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityKnightLord(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
@@ -204,7 +223,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             this.setFlyingMode(false);
         }
 
-        if(this.isSummonCrystals() && !this.isImmovable()) {
+        if(this.isSummonCrystals() && !this.isImmovable() || this.isGroundAttack && !this.isImmovable()) {
             this.motionY--;
         }
 
@@ -228,6 +247,8 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
        this.dataManager.register(BLOCKING, Boolean.valueOf(false));
        this.dataManager.register(SUMMON_CRYSTALS, Boolean.valueOf(false));
        this.dataManager.register(MULTI_STRIKE, Boolean.valueOf(false));
+       this.dataManager.register(BLOOD_SLASH, Boolean.valueOf(false));
+       this.dataManager.register(COMBO_ATTACK, Boolean.valueOf(false));
        this.dataManager.register(SUMMON, Boolean.valueOf(true));
     }
 
@@ -250,7 +271,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.34D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.unholy_knight_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.unholy_knight_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((double) MobConfig.unholy_knight_armor * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.7D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.unholy_knight_armor_toughness * ModConfig.biome_multiplier);
@@ -268,13 +289,15 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         double distance = Math.sqrt(distanceSq);
         if(!this.isFightMode() && !this.isBlocking() && !this.isSummonKnight()) {
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(pierceAttack, multiAttack, multiStrike, summonLine, randomTeleport));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(pierceAttack, multiAttack, multiStrike, summonLine, randomTeleport, combo_attack, blood_slash_attack));
             double[] weights = {
                     (distance > 3 && prevAttack != pierceAttack) ? 1 : 0,
                     (distance < 4 && prevAttack != multiAttack) ? 1 : 0,
                     (distance < 4 && prevAttack != multiStrike) ? 1 : 0,
                     (distance > 3 && prevAttack != summonLine) ? 1 : 0,
-                    (distance > 1 && prevAttack != randomTeleport) ? 1 : 0
+                    (distance > 1 && prevAttack != randomTeleport) ? 1 : 0,
+                    (distance > 2 && prevAttack != combo_attack && getScaleForNewAttacks()) ? 1 : 0, //MAKE SURE TO HAVE SCALE FACTOR INVOLVED
+                    (distance > 3 && prevAttack != blood_slash_attack && getScaleForNewAttacks()) ? 1 : 0 //MAKE SURE TO HAVE SCALE FACTOR INVOLVED
             };
 
             prevAttack = ModRand.choice(attacks, rand, weights).next();
@@ -284,6 +307,97 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
         return (this.isBlocking()) ? 60 : 10;
     }
 
+    private final Consumer<EntityLivingBase> combo_attack = (target) -> {
+      this.setFightMode(true);
+      this.setComboAttack(true);
+      this.setImmovable(true);
+      addEvent(()-> {
+          Vec3d savedPos = target.getPositionVector();
+          this.lockLook = true;
+
+        addEvent(()-> {
+            this.setImmovable(false);
+            double distance = this.getPositionVector().distanceTo(savedPos);
+            ModUtils.leapTowards(this, savedPos, (float) (distance * 0.11),0F);
+        }, 7);
+      }, 7);
+
+      addEvent(()-> {
+          this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+          Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.3, 0.75, 0)));
+          DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+          float damage = (float) (MobConfig.unholy_knight_damage * getAttackModifierAsh());
+          ModUtils.handleAreaImpact(1.25f, (e) -> damage, this, offset, source, 0.5f, 0, false);
+          this.lockLook = false;
+      }, 20);
+
+      addEvent(()-> {
+          Vec3d savedPos = target.getPositionVector();
+          this.setImmovable(true);
+          addEvent(()-> {
+              this.setImmovable(false);
+              double distance = this.getPositionVector().distanceTo(savedPos);
+              ModUtils.leapTowards(this, savedPos, (float) (distance * 0.065),0F);
+              this.lockLook = true;
+          }, 7);
+      }, 23);
+
+      addEvent(()-> {
+          this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+          Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.3, 0.75, 0)));
+          DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+          float damage = (float) (MobConfig.unholy_knight_damage * getAttackModifierAsh());
+          ModUtils.handleAreaImpact(1.25f, (e) -> damage, this, offset, source, 0.5f, 0, false);
+      }, 35);
+
+      addEvent(()-> this.lockLook = false, 40);
+
+      addEvent(()-> this.isGroundAttack = true, 44);
+
+      addEvent(()-> {
+        new ActionQuickSlash(ground_projectiles, 0.7F).performAction(this, target);
+        this.setImmovable(true);
+        this.isGroundAttack = false;
+      }, 57);
+
+      addEvent(()-> this.setImmovable(false), 80);
+
+      addEvent(()-> {
+        this.setFightMode(false);
+        this.setComboAttack(false);
+      }, 85);
+    };
+
+
+    private final Consumer<EntityLivingBase> blood_slash_attack = (target) -> {
+      this.setFightMode(true);
+      this.setBloodSlash(true);
+        this.setImmovable(true);
+
+        addEvent(()-> {
+            this.setImmovable(false);
+            this.isGroundAttack = true;
+        }, 17);
+
+        addEvent(()-> {
+            //Do Action
+            new ActionScatterSlash(ground_projectiles, 0.75F).performAction(this, target);
+        }, 20);
+
+        addEvent(()-> {
+            this.isGroundAttack = false;
+            this.setImmovable(true);
+        }, 25);
+
+        addEvent(()-> {
+            this.setImmovable(false);
+        }, 45);
+
+      addEvent(()-> {
+          this.setFightMode(false);
+          this.setBloodSlash(false);
+      },50);
+    };
     private final Consumer<EntityLivingBase> randomTeleport = (target) -> {
         this.setFightMode(true);
         addEvent(()-> {
@@ -340,7 +454,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                     this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                     Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                     DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                    float damage = 6.0f;
+                    float damage = (float) (MobConfig.unholy_knight_damage * getAttackModifierAsh());
                     ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
                 }
             }, 7);
@@ -354,7 +468,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.unholy_knight_damage * getAttackModifierAsh());
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
             }, 18);
@@ -382,7 +496,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.unholy_knight_damage * getAttackModifierAsh());
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
             addEvent(()-> this.lockLook =false, 5);
@@ -400,7 +514,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                 this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 1.3, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                float damage = (float) (MobConfig.unholy_knight_damage * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.unholy_knight_damage * getAttackModifierAsh());
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
             }
         }, 30);
@@ -427,7 +541,7 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
                     if(!this.isBlocking()) {
                         Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.3, 1.3, 0)));
                         DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                        float damage = (float) ((MobConfig.unholy_knight_damage + 1) * ModConfig.biome_multiplier);
+                        float damage = (float) ((MobConfig.unholy_knight_damage + 1) * getAttackModifierAsh());
                         ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.5f, 0, false);
                     }
                 }, i);
@@ -493,6 +607,14 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             }
             if(this.isSummonCrystals()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CRYSTALS, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isBloodSlash()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLOOD_SLASH, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isComboAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO, false));
                 return PlayState.CONTINUE;
             }
         }
@@ -588,6 +710,20 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
             this.setBlocking(false);
             this.blockTimer = 40;
         }, 30);
+    }
+
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "knight_lord");
+    private static final ResourceLocation LOOT_ARENA = new ResourceLocation(ModReference.MOD_ID, "knight_lord_arena");
+    @Override
+    protected ResourceLocation getLootTable() {
+        if(getScaleForNewAttacks()) {
+            return LOOT_ARENA;
+        }
+        return LOOT;
+    }
+    @Override
+    protected boolean canDropLoot() {
+        return true;
     }
 
     @Override

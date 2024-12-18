@@ -19,6 +19,7 @@ import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityHealAura;
 import com.example.structure.entity.knighthouse.EntityKnightLord;
+import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
 import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
 import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.entity.seekers.EndSeeker;
@@ -214,6 +215,8 @@ public class ModEntities {
         registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, mad_spirit);
         //Move TIle
         registerEntity("move_tile_aoe", EntityMoveTile.class, ENTITY_START_ID++, 110);
+        //Blood Slash
+        registerEntity("blood_slash", EntityBloodSlash.class, ENTITY_START_ID++, 110);
 
         if(ModConfig.dev_stuff_enabled) {
             //Parasite Projectile Bomb
@@ -235,9 +238,9 @@ public class ModEntities {
         spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, MobConfig.parasite_spawn_rate, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, MobConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, MobConfig.chomper_spawn_rate, 1, 3, BiomeRegister.END_ASH_WASTELANDS);
-        spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-        spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-        spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
+      //  spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+      //  spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+      //  spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
     }
 
 

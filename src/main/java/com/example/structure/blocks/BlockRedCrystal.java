@@ -1,6 +1,7 @@
 package com.example.structure.blocks;
 
 import com.example.structure.Main;
+import com.example.structure.util.handlers.EESoundTypes;
 import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,7 +19,7 @@ public class BlockRedCrystal extends BlockBase {
     public BlockRedCrystal(String name, Material material, Item item) {
         super(name, material);
         this.itemDropped = item;
-        this.setSoundType(SoundType.GLASS);
+        this.setSoundType(EESoundTypes.CRYSTAL_RED);
     }
 
     @Override

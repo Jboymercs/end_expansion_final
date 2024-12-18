@@ -29,12 +29,12 @@ public class BlockCrystalTopBase extends BlockBush implements IHasModel {
 
     private Item itemDropped;
     protected static final AxisAlignedBB CRYSTAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
-    public BlockCrystalTopBase(String name, Material materialIn, Item itemDropped) {
+    public BlockCrystalTopBase(String name, Material materialIn, Item itemDropped, SoundType soundType) {
         super(materialIn);
         setTranslationKey(name);
         setRegistryName(name);
         this.itemDropped = itemDropped;
-        this.setSoundType(SoundType.GLASS);
+        this.setSoundType(soundType);
         // Add both an item as a block and the block itself
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));

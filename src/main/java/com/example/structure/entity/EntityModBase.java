@@ -4,6 +4,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.MobGroundNavigate;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.ServerScaleUtil;
+import com.example.structure.util.integration.ModIntegration;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -102,12 +103,8 @@ public abstract class EntityModBase extends EntityCreature {
      * Used to help orientate entities with new attacks when set above certain scale factors
      * @return
      */
-    public double getScale() {
-        if(scaleVal > ModConfig.unlock_attacks_factor && ModConfig.enabled_scaled_attacks) {
-            return scaleVal;
-        }
-
-        return 0;
+    public boolean getScaleForNewAttacks() {
+        return scaleVal > ModConfig.unlock_attacks_factor && ModConfig.enabled_scaled_attacks;
     }
 
     @Override
@@ -221,6 +218,31 @@ public abstract class EntityModBase extends EntityCreature {
         super.entityInit();
         this.dataManager.register(IMMOVABLE, Boolean.valueOf(false));
 
+    }
+
+
+    public double getHealthModifierLamented() {
+        return ModConfig.lamented_multiplier + ModIntegration.getMultiplierCountAll();
+    }
+
+    public double getHealthModifierAsh() {
+        return ModConfig.biome_multiplier + ModIntegration.getMultiplierCountAll();
+    }
+
+    public double getHealthModifierBarrend() {
+        return ModConfig.barrend_multiplier + ModIntegration.getMultiplierCountAll();
+    }
+
+    public double getAttackModifierLamented() {
+        return ModConfig.lamented_multiplier + ModIntegration.getMultiplierCountAttackDamage();
+    }
+
+    public double getAttackModifierAsh() {
+        return ModConfig.biome_multiplier + ModIntegration.getMultiplierCountAttackDamage();
+    }
+
+    public double getAttackModifiersBarrend() {
+        return ModConfig.barrend_multiplier + ModIntegration.getMultiplierCountAttackDamage();
     }
 
     public static boolean isPos = true;

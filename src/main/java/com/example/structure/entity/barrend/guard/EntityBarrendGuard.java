@@ -89,10 +89,10 @@ public class EntityBarrendGuard extends EntityBarrendMob implements IAnimatable,
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) 60 * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) 60 * getHealthModifierBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8 * ModConfig.barrend_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(2 * ModConfig.barrend_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(25 * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(25 * getAttackModifiersBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.7D);
     }
 

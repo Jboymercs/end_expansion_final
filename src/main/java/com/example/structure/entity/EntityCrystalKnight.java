@@ -11,6 +11,7 @@ import com.example.structure.init.ModBlocks;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
+import com.example.structure.util.integration.ModIntegration;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -331,13 +332,13 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)MobConfig.health * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)MobConfig.health * getHealthModifierLamented());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.39590D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.lamentor_toughness_armor * ModConfig.lamented_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.lamentor_armor * ModConfig.lamented_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.attack_damage * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.attack_damage * getAttackModifierLamented());
     }
 
 

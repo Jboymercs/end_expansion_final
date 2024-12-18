@@ -52,6 +52,7 @@ entity.move_tile_aoe.name=Boss AOE wave
 entity.parasite_bomb.name=Charged Acid Bomb
 entity.parasite_bomb_aoe.name=Parasite Acid Bomb
 entity.barrend_guard.name=Crypt Watcher
+entity.blood_slash.name=Lord's Blood Slash
 tile.lamented_end_stone.name=Lamented End Stone
 tile.end_ash.name=Ashed End Stone
 tile.ash_brick.name=Ashed Brick

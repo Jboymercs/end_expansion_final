@@ -5,6 +5,7 @@ import com.example.structure.entity.tileentity.TileEntityUpdater;
 import com.example.structure.init.ModPotions;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.handlers.EESoundTypes;
 import com.example.structure.util.handlers.ParticleManager;
 import com.google.common.base.Predicate;
 import net.minecraft.block.ITileEntityProvider;
@@ -30,7 +31,7 @@ public class BlockGreenCrystal extends BlockBase implements IBlockUpdater, ITile
     public BlockGreenCrystal(String name, Material material, Item item) {
         super(name, material);
         this.itemDropped = item;
-        this.setSoundType(SoundType.GLASS);
+        this.setSoundType(EESoundTypes.CRYSTAL_GREEN);
     }
 
     @Override

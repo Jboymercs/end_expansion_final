@@ -1,6 +1,7 @@
 package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
+import com.example.structure.util.handlers.EESoundTypes;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ import javax.annotation.Nullable;
 public class BlockNoSource extends BlockBase implements ITileEntityProvider, IBlockUpdater {
     public BlockNoSource(String name, Material material, float hardness, float resistance, SoundType soundType) {
         super(name, material, hardness, resistance, soundType);
+        this.setSoundType(EESoundTypes.ASH_BRICK);
     }
 
     @Override

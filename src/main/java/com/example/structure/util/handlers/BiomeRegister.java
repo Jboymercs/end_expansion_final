@@ -1,5 +1,6 @@
 package com.example.structure.util.handlers;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.BiomeBarrendLands;
 
@@ -19,7 +20,9 @@ public class BiomeRegister {
 
     public static void registerBiomes() {
         initBiome(END_ASH_WASTELANDS, "ash_wastelands", Type.END);
-        initBiome(BARREND_LOWLANDS, "barrend_low_lands", Type.END);
+        if(ModConfig.dev_stuff_enabled) {
+            initBiome(BARREND_LOWLANDS, "barrend_low_lands", Type.END);
+        }
     }
 
 

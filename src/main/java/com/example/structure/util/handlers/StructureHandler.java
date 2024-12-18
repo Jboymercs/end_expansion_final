@@ -1,6 +1,7 @@
 package com.example.structure.util.handlers;
 
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.event_handler.EventStronghold;
 import com.example.structure.world.api.ashtower.AshTowerTemplate;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
@@ -39,8 +40,10 @@ public class StructureHandler {
         MapGenStructureIO.registerStructure(WorldGenLamentedIslands.Start.class, "LamentedIslands");
         MapGenStructureIO.registerStructureComponent(LamentedIslandsTemplate.class, "LIP");
         //Barrend Crypts
-        MapGenStructureIO.registerStructure(WorldGenBarrendCrypt.Start.class, "BarrendCrypts");
-        MapGenStructureIO.registerStructureComponent(BarrendCryptTemplate.class, "BCP");
+        if(ModConfig.dev_stuff_enabled) {
+            MapGenStructureIO.registerStructure(WorldGenBarrendCrypt.Start.class, "BarrendCrypts");
+            MapGenStructureIO.registerStructureComponent(BarrendCryptTemplate.class, "BCP");
+        }
         //Replaced Stronghold
         MinecraftForge.TERRAIN_GEN_BUS.register(new EventStronghold());
         MapGenStructureIO.registerStructure(MapGenBetterStronghold.Start.class, "BetterStronghold");

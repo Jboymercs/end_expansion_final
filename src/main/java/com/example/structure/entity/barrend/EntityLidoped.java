@@ -283,7 +283,7 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
     private void performAttachedAttack(EntityLivingBase target) {
         Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0, 0)));
         DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-        float damage = (float) (MobConfig.lidoped_attack_damage * ModConfig.barrend_multiplier);
+        float damage = (float) (MobConfig.lidoped_attack_damage * getAttackModifiersBarrend());
         ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.2f, 0, false);
         target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200, 0));
         attackCooldownTwo = 25;
@@ -324,7 +324,7 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.lidoped_health * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.lidoped_health * getHealthModifierBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10 * ModConfig.barrend_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
     }
@@ -428,7 +428,7 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
       addEvent(()-> {
           Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.2, 0)));
           DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-          float damage = (float) (MobConfig.lidoped_attack_damage * ModConfig.barrend_multiplier);
+          float damage = (float) (MobConfig.lidoped_attack_damage * getAttackModifiersBarrend());
           ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.2f, 0, false);
       }, 27);
 

@@ -2,6 +2,7 @@ package com.example.structure.blocks;
 import com.example.structure.entity.tileentity.TileEntityActivate;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.init.ModCreativeTabs;
+import com.example.structure.util.handlers.EESoundTypes;
 import com.google.common.base.Predicate;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -48,7 +49,7 @@ public class BlockDoorActivation extends BlockBase implements IBlockUpdater, ITi
     }
 
     public BlockDoorActivation(String name, Item item) {
-        super(name, Material.ROCK, 1000, 10000, SoundType.STONE);
+        super(name, Material.ROCK, 1000, 10000, EESoundTypes.ASH_BRICK);
         this.setBlockUnbreakable();
         this.activationItem = item;
         this.hasTileEntity = true;

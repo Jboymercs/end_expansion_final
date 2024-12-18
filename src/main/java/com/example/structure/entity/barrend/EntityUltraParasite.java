@@ -212,10 +212,10 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.evolved_parasite_health * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.evolved_parasite_health * getHealthModifierBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.evolved_parasite_armor * ModConfig.barrend_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.evolved_parasite_toughness * ModConfig.barrend_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.evolved_parasite_attack_damage * ModConfig.barrend_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.evolved_parasite_attack_damage * getAttackModifiersBarrend());
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 

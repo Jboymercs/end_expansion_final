@@ -3,6 +3,7 @@ package com.example.structure.entity.trader;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
@@ -54,13 +55,13 @@ public class EntityControllerLift extends EntityModBase implements IAnimatable {
 
             if (!nearbyPlayers.isEmpty()) {
                 for (EntityLivingBase base : nearbyPlayers) {
-                    if (!(base instanceof EntityAOEArena) && !(base instanceof EntityMiniValon) && !(base instanceof EntityAvalon)) {
+                    if (!(base instanceof EntityAOEArena) && !(base instanceof EntityMiniValon) && !(base instanceof EntityAvalon) && !(base instanceof EndSeekerPrime)) {
                         Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
                         DamageSource source = ModDamageSource.builder()
                                 .type(ModDamageSource.MOB)
                                 .directEntity(this)
                                 .build();
-                        float damage = (float) ((MobConfig.guilder_attack_damage * 0.75) * ModConfig.lamented_multiplier);
+                        float damage = (float) ((MobConfig.guilder_attack_damage * 0.75) * getAttackModifierLamented());
                         ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 1.5F, 0, false);
                     }
                 }

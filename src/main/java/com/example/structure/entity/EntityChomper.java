@@ -380,7 +380,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(36D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.chomper_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.chomper_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.6D);
     }
@@ -420,7 +420,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
             this.playSound(ModSoundHandler.CHOMPER_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 1.0, 0)));
             DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-            float damage = (float) (MobConfig.chomper_attack_damange * ModConfig.biome_multiplier);
+            float damage = (float) (MobConfig.chomper_attack_damange * getAttackModifierAsh());
             ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
         }, 3);
 
@@ -445,7 +445,7 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
                 this.playSound(ModSoundHandler.CHOMPER_BITE, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 1.0, 0)));
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-                float damage = (float) (MobConfig.chomper_attack_damange * ModConfig.biome_multiplier);
+                float damage = (float) (MobConfig.chomper_attack_damange * getAttackModifierAsh());
                 ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.4f, 0, false);
             }
         }, 29);

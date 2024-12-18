@@ -326,11 +326,11 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.barrend_golem_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.barrend_golem_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.barrend_golem_attack_damage * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.barrend_golem_attack_damage * getAttackModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.barrend_golem_armor * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.barrend_golem_armor_toughness * ModConfig.biome_multiplier);
     }

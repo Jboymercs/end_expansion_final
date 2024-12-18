@@ -69,5 +69,10 @@ public class ParticleManager {
         spawnParticleWithColor(particle, baseColor);
     }
 
+    public static void spawnDust(World worldIn, Vec3d pos, Vec3d baseColor, Vec3d motion, int age) {
+        ModParticle particle = new ModParticle(worldIn, pos, motion, 3, age, true);
+        particle.setParticleTextureRange(64, 14, 2);
+        spawnParticleWithColor(particle, baseColor);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.TileEntityTrap;
+import com.example.structure.util.handlers.EESoundTypes;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,7 +15,8 @@ public class GroundCrystalTrapBlock extends BlockBase {
     public GroundCrystalTrapBlock(String name, Material material) {
         super(name, material);
         hasTileEntity = true;
-        this.blockSoundType = SoundType.STONE;
+      //  this.blockSoundType = SoundType.STONE;
+        setSoundType(EESoundTypes.ASH_BRICK);
     }
 
     @Override

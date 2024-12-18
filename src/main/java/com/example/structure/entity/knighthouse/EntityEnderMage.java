@@ -170,7 +170,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.knighthouse_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.knighthouse_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
     }
@@ -257,7 +257,7 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
       this.setAttackMode(true);
         this.playSound(ModSoundHandler.KNIGHT_CAST_ATTACK, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
       addEvent(() -> {
-        ProjectileSpinSword sword = new ProjectileSpinSword(world, this, 6.0f);
+        ProjectileSpinSword sword = new ProjectileSpinSword(world, this, (float) (6.0f * getAttackModifierAsh()));
         sword.setTravelRange(40f);
         Vec3d pos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.8,3.0,0)));
         sword.setPosition(pos.x, pos.y, pos.z);

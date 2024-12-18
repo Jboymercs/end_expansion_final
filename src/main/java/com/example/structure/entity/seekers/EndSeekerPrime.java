@@ -5,11 +5,14 @@ import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ProjectilePurple;
 import com.example.structure.entity.ai.EntityAISeeker;
 import com.example.structure.entity.ai.EntityAiSeekerPrime;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
+import com.example.structure.entity.knighthouse.knightlord.ActionQuickSlash;
+import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.*;
@@ -52,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
 
@@ -65,6 +69,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     private static final DataParameter<Boolean> COMBO_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> WIND_SWEEP_ATTACK = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
 
+    private static final DataParameter<Boolean> SUMMON_AOE = EntityDataManager.createKey(EndSeekerPrime.class, DataSerializers.BOOLEAN);
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -78,6 +83,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         nbt.setBoolean("Shoot_Gun", this.isShootGun());
         nbt.setBoolean("Combo_Attack", this.isComboAttack());
         nbt.setBoolean("Wind_Sweep_Attack", this.isWindSweepAttack());
+        nbt.setBoolean("Summon_Aoe", this.isSummonAOE());
     }
 
     @Override
@@ -92,6 +98,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         this.setShootGun(nbt.getBoolean("Shoot_Gun"));
         this.setComboAttack(nbt.getBoolean("Combo_Attack"));
         this.setWindSweepAttack(nbt.getBoolean("Wind_Sweep_Attack"));
+        this.setSummonAoe(nbt.getBoolean("Summon_Aoe"));
     }
 
     public void setFightMode(boolean value) {this.dataManager.set(PRIME_MODE, Boolean.valueOf(value));}
@@ -110,6 +117,8 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     public boolean isComboAttack() {return this.dataManager.get(COMBO_ATTACK);}
     public void setWindSweepAttack(boolean value) {this.dataManager.set(WIND_SWEEP_ATTACK, Boolean.valueOf(value));}
     public boolean isWindSweepAttack() {return this.dataManager.get(WIND_SWEEP_ATTACK);}
+    public void setSummonAoe(boolean value) {this.dataManager.set(SUMMON_AOE, Boolean.valueOf(value));}
+    public boolean isSummonAOE() {return this.dataManager.get(SUMMON_AOE);}
     private Consumer<EntityLivingBase> prevAttack;
 
     //Idle Animations
@@ -127,10 +136,14 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
 
     private final String ANIM_COMBO_ATTACK = "combo_1";
     private final String ANIM_WIND_SWEEP_ATTACK = "wind_sweep";
+    private final String ANIM_SUMMON_AOE = "summon_aoe";
     private AnimationFactory factory = new AnimationFactory(this);
     public int blinkCoolDown = 0;
     public boolean isMeleeMode = false;
     public boolean isRangedMode = false;
+
+    Supplier<Projectile> ground_projectiles = () -> new EntityBloodSlash(world, this, (float) this.getAttack(), null, ModColors.AZURE);
+
 
     public EndSeekerPrime(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
@@ -213,6 +226,7 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         this.dataManager.register(SHOOT_GUN, Boolean.valueOf(false));
         this.dataManager.register(COMBO_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(WIND_SWEEP_ATTACK, Boolean.valueOf(false));
+        this.dataManager.register(SUMMON_AOE, Boolean.valueOf(false));
     }
 
     //Particle Call
@@ -250,8 +264,8 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.seeker_prime_health * ModConfig.lamented_multiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.seeker_prime_attack_damage * ModConfig.lamented_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) MobConfig.seeker_prime_health * getHealthModifierLamented());
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.seeker_prime_attack_damage * getAttackModifierLamented());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
@@ -264,14 +278,15 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         double distance = Math.sqrt(distanceSq);
         double HealthChange = this.getHealth() / this.getMaxHealth();
         if(!this.isFightMode()) {
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeAttackOne, meleeAttackTwo, dashAttack, shootGunAttack, comboAttack, wind_sweep));
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(meleeAttackOne, meleeAttackTwo, dashAttack, shootGunAttack, comboAttack, wind_sweep, summon_aoe_attack));
             double[] weights = {
                     (distance < 2 && prevAttack != meleeAttackOne) ? 2/distance : 0, // First Melee Attack
                     (distance < 2 && prevAttack != meleeAttackTwo) ? 2/distance : 0, // Second Melee Attack
                     (distance <= 9) ? 1/distance : 0, //Dash Attack
                     (distance > 9) ? distance * 0.02 : 0, //Shoot Gun Attack
                     (distance < 6 && prevAttack != comboAttack) ? 1.5/distance : 0, //Combo Attack
-                    (distance < 7 && prevAttack != wind_sweep && HealthChange <= 0.5) ? 1.5/distance : 0 // Wind Sweep
+                    (distance < 7 && prevAttack != wind_sweep && HealthChange <= 0.5) ? 1.5/distance : 0, // Wind Sweep
+                    (distance > 3 && prevAttack != summon_aoe_attack && getScaleForNewAttacks()) ? 1.5/distance : 0 // Summon AOE, only activates from arena spawns
             };
 
             prevAttack = ModRand.choice(attacks, rand, weights).next();
@@ -280,6 +295,33 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
         }
         return prevAttack == comboAttack || prevAttack == shootGunAttack || prevAttack == dashAttack ? 40 : 20;
     }
+
+    private final Consumer<EntityLivingBase> summon_aoe_attack = (target) -> {
+        this.setFightMode(true);
+        this.setSummonAoe(true);
+
+        addEvent(()-> this.setImmovable(true), 15);
+
+        addEvent(()-> {
+            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0,1.3,0)));
+            DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
+            float damage = this.getAttack();
+            ModUtils.handleAreaImpact(2.0f, (e)-> damage, this, offset, source, 0.9f, 0, false);
+        }, 39);
+
+        addEvent(()-> {
+        //summon AOE
+            this.playSound(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
+            int distanceFrom = (int) this.getDistance(target);
+            new ActionPrimeAOE(distanceFrom + 2).performAction(this, target);
+        }, 50);
+
+        addEvent(()-> this.setImmovable(false), 90);
+        addEvent(()-> {
+        this.setSummonAoe(false);
+        this.setFightMode(false);
+        }, 100);
+    };
 
     private final Consumer<EntityLivingBase> wind_sweep = (target) -> {
       this.setFightMode(true);
@@ -308,6 +350,9 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
               DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
               float damage = this.getAttack();
               ModUtils.handleAreaImpact(1.8f, (e)-> damage, this, offset, source, 0.7f, 0, false);
+              if(getScaleForNewAttacks()) {
+                  new ActionQuickSlash(ground_projectiles, 0.55F).performAction(this, target);
+              }
               this.lockLook = false;
               addEvent(()-> this.setFlameParticles = false, 2);
           }, 26);
@@ -330,6 +375,9 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
                 float damage = this.getAttack();
                 ModUtils.handleAreaImpact(1.8f, (e)-> damage, this, offset, source, 0.7f, 0, false);
+                if(getScaleForNewAttacks()) {
+                    new ActionQuickSlash(ground_projectiles, 0.55F).performAction(this, target);
+                }
                 this.lockLook = false;
                 addEvent(()-> this.setFlameParticles = false, 2);
             }, 12);
@@ -359,6 +407,9 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
                 DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
                 float damage = this.getAttack();
                 ModUtils.handleAreaImpact(1.5f, (e)-> damage, this, offset, source, 0.4f, 0, false);
+                if(getScaleForNewAttacks()) {
+                    new ActionQuickSlash(ground_projectiles, 0.55F).performAction(this, target);
+                }
             }, 12);
         }, 5);
 
@@ -564,8 +615,12 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     }
 
     private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "seeker_prime");
+    private static final ResourceLocation LOOT_ARENA = new ResourceLocation(ModReference.MOD_ID, "seeker_prime_arena");
     @Override
     protected ResourceLocation getLootTable() {
+        if(getScaleForNewAttacks()) {
+            return LOOT_ARENA;
+        }
         return LOOT;
     }
     @Override
@@ -610,6 +665,9 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
             }
             if(this.isWindSweepAttack()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WIND_SWEEP_ATTACK, false));
+            }
+            if(this.isSummonAOE()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON_AOE, false));
             }
 
             return PlayState.CONTINUE;

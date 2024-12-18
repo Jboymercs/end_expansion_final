@@ -60,11 +60,11 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     private int animationTick;
 
     private static final Set<Item> TAME_ITEMS = Sets.newHashSet(ModItems.RED_CRYSTAL_ITEM);
-    protected static final DataParameter<Boolean> BUG_MODE = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> HEAD_TWITCH = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> BUTT_TWITCH = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BUG_MODE = EntityDataManager.createKey(EntityEndBug.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> HEAD_TWITCH = EntityDataManager.createKey(EntityEndBug.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> BUTT_TWITCH = EntityDataManager.createKey(EntityEndBug.class, DataSerializers.BOOLEAN);
 
-    protected static final DataParameter<Boolean> DIGGING = EntityDataManager.createKey(EntityModBaseTameable.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> DIGGING = EntityDataManager.createKey(EntityEndBug.class, DataSerializers.BOOLEAN);
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -136,7 +136,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MobConfig.parasite_health * ModConfig.biome_multiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MobConfig.parasite_health * getHealthModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
@@ -397,7 +397,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1, 1, 0)));
             DamageSource damageSource = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (MobConfig.parasite_damage * ModConfig.biome_multiplier);
+            float damage = (float) (MobConfig.parasite_damage * getAttackModifierAsh());
             ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, offset, damageSource, 0.5f, 0, false);
         }, 8);
         addEvent(()-> this.setFightMode(false), 10);
@@ -408,7 +408,7 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
         addEvent(()-> {
             Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1, 1, 0)));
             DamageSource damageSource = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-            float damage = (float) (MobConfig.parasite_damage * ModConfig.biome_multiplier);
+            float damage = (float) (MobConfig.parasite_damage * getAttackModifierAsh());
             ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, offset, damageSource, 0.5f, 0, false);
         }, 8);
         addEvent(()-> this.setFightMode(false), 10);

@@ -1,6 +1,7 @@
 package com.example.structure.blocks;
 
 import com.example.structure.entity.tileentity.TileEntityReverse;
+import com.example.structure.util.handlers.EESoundTypes;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +18,7 @@ public class BlockReverseBlock extends BlockBase implements ITileEntityProvider,
 
     public BlockReverseBlock(String name, Material material) {
         super(name, material);
+        this.setSoundType(EESoundTypes.ASH_BRICK);
     }
 
     @Override

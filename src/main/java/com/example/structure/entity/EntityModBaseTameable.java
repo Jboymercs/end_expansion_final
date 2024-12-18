@@ -1,8 +1,10 @@
 package com.example.structure.entity;
 
+import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.MobGroundNavigate;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModUtils;
+import com.example.structure.util.integration.ModIntegration;
 import com.google.common.collect.Sets;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityAgeable;
@@ -153,6 +155,14 @@ public abstract class EntityModBaseTameable extends EntityTameable {
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
 
+    }
+
+    public double getAttackModifierAsh() {
+        return ModConfig.biome_multiplier + ModIntegration.getMultiplierCountAttackDamage();
+    }
+
+    public double getHealthModifierAsh() {
+        return ModConfig.biome_multiplier + ModIntegration.getMultiplierCountAll();
     }
 
     /**

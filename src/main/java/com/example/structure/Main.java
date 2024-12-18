@@ -90,7 +90,9 @@ public class Main {
         ModFluid.registerFluids();
         //Advancements
         EEAdvancements.Initialization();
-
+        //Sounds
+        ModSoundHandler.registerSounds();
+        //
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
         //Register Entities
         ModEntities.registerEntities();
@@ -134,7 +136,6 @@ public class Main {
 
         BiomeRegister.registerBiomes();
         StructureHandler.handleStructureRegistries();
-        ModSoundHandler.registerSounds();
         ModRecipes.init();
         ModProfressions.associateCareersAndTrades();
         ModNetworkPackets.registerNetworkPackets();

@@ -1009,4 +1009,8 @@ public class ModUtils {
             return false;
         }
     }
+
+    public static Vec3d entityPos(Entity entity) {
+        return new Vec3d(entity.posX, entity.posY, entity.posZ);
+    }
 }
