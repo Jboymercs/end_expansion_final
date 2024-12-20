@@ -302,15 +302,12 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
                 if(!nearbyEntities.isEmpty()) {
                     for(EntityLivingBase base : nearbyEntities) {
                         if(base == target && !world.isRemote) {
-                                //ModUtils.setEntityPosition(base, this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.6, 0.7, 0))));
                                 Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.4, 0.4, 0)));
-                                //target.setPosition(offset.x, offset.y, offset.z);
                                 base.setPosition(offset.x, offset.y, offset.z);
                                 base.setPositionAndUpdate(offset.x, offset.y, offset.z);
                                 double d0 = (offset.x - base.posX) * 0.08;
                                 double d2 = (offset.y - base.posY) * 0.05;
                                 double d1 = (offset.z - base.posZ) * 0.08;
-                               // base.addVelocity(d0, d2, d1);
                                 this.faceEntity(base, 30.0F, 30.0F);
 
                         }

@@ -94,7 +94,7 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
+        super.readEntityFromNBT(nbt);
      //   this.dataManager.set(STRIKE_ATTACK, nbt.getBoolean("Strike_Attack"));
      //   this.dataManager.set(RUNNING_CHECK, nbt.getBoolean("Running_Check"));
       //  this.dataManager.set(DASH_ATTACK, nbt.getBoolean("Dash_Attack"));

@@ -24,6 +24,7 @@ import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
 import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.entity.tileentity.*;
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
 import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
@@ -67,6 +68,8 @@ public class ModEntities {
     public static Vec3i barrend_golem = new Vec3i(0x9108ab,0xd8d295,0);
     public static Vec3i evoled_parasite = new Vec3i(0xc60587,0xd8d295,0);
 
+    public static Vec3i shadow_player = new Vec3i(0x202329,0xd8d295,0);
+
     //Combat mobs Class
     public static Vec3i end_seeker = new Vec3i(0xc5d455,0x696969,0);
     public static Vec3i contructor = new Vec3i(0xef6bf5,0x696969,0);
@@ -83,6 +86,7 @@ public class ModEntities {
     public static Vec3i depths_chomper = new Vec3i(0x775803,0xc8c8c8,0);
     public static Vec3i lidoped = new Vec3i(0xd19c0b,0xc8c8c8,0);
     public static Vec3i barrend_walker = new Vec3i(0x543257,0xc8c8c8,0);
+
 
 
     public static void registerEntities() {
@@ -229,6 +233,8 @@ public class ModEntities {
             registerEntityWithID("void_tripod", EntityVoidTripod.class, ENTITY_START_ID++, 110, barrend_walker);
             //Big Rick
             registerEntityWithID("big_rick", EntityUltraParasite.class, ENTITY_START_ID++, 110, evoled_parasite);
+            //Shadow Player
+            registerEntityWithID("shadow_player", EntityShadowPlayer.class, ENTITY_START_ID++, 110, shadow_player);
         }
 
     }

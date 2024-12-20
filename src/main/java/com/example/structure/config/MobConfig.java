@@ -424,5 +424,40 @@ public class MobConfig {
     @Config.RequiresMcRestart
     public static double void_walker_attack_damage = 18;
 
+    @Config.Name("Shadow Player Health")
+    @Config.Comment("Change the health of the Shadow Player Boss")
+    @Config.RequiresMcRestart
+    public static double shadow_player_health = 175;
+
+    @Config.Name("Shadow Player Damage")
+    @Config.Comment("Change the damage done by the Shadow Player Boss")
+    @Config.RequiresMcRestart
+    public static double shadow_player_damage = 32;
+
+    @Config.Name("Shadow Player Armor")
+    @Config.Comment("Change the armor value of the Shadow Player Boss")
+    @Config.RequiresMcRestart
+    public static double shadow_armor = 20;
+
+    @Config.Name("Shadow Player Armor Toughness")
+    @Config.Comment("Change the armor toughness of the Shadow Player Boss")
+    @Config.RequiresMcRestart
+    public static double shadow_armor_toughness = 16;
+
+    @Config.Name("Shadow Player Health Potion Amount")
+    @Config.Comment("Change the Health Potion amount the Shadow Player Boss can use")
+    @Config.RequiresMcRestart
+    public static int shadow_potion_amount = 5;
+
+    @Config.Name("Shadow Player Health Potion Heal Amount")
+    @Config.Comment("Change the percentage of health healed when the Shadow Boss drinks a health potion, done by MaxHealth * x")
+    @Config.RequiresMcRestart
+    public static double shadow_heal_amount = 0.07;
+
+    @Config.Name("Shadow Player Health Potion Use")
+    @Config.Comment("How Long the cooldown inbetween using Health Potions, in seconds")
+    @Config.RequiresMcRestart
+    public static int shadow_heal_cooldown = 30;
+
 
 }

@@ -97,6 +97,11 @@ public class ItemConfig {
     @Config.RequiresMcRestart
     public static int medal_cooldown = 30;
 
+    @Config.Name("Shadow Tear Cooldown")
+    @Config.Comment("Change the cooldown of the Shadow Tear, in seconds")
+    @Config.RequiresMcRestart
+    public static int shadow_tear_cooldown = 240;
+
     @Config.Name("Crown of A Past Era Cooldown")
     @Config.Comment("Change the cooldown of the Crown of A Past Era, in seconds")
     @Config.RangeInt(min = 1, max = 9000)

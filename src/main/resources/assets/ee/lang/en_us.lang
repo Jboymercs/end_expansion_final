@@ -53,6 +53,7 @@ entity.parasite_bomb.name=Charged Acid Bomb
 entity.parasite_bomb_aoe.name=Parasite Acid Bomb
 entity.barrend_guard.name=Crypt Watcher
 entity.blood_slash.name=Lord's Blood Slash
+entity.shadow_player.name=Player's Shadow
 tile.lamented_end_stone.name=Lamented End Stone
 tile.end_ash.name=Ashed End Stone
 tile.ash_brick.name=Ashed Brick
@@ -211,6 +212,9 @@ item.amber_sword_reinforced.name=Reinforced Cordium Sword
 item.amber_dagger_reinforced.name=Reinforced Cordium Dagger
 item.red_sword_reinforced.name=Reinforced Lustrian Sword
 item.red_axe_reinforced.name=Reinforced Lustrian Axe
+item.record.wasteland_disc.desc=UnseenDontRun - Long Road Ahead
+item.wasteland_disc.name=Wasteland Music Disc
+item.fake_potion.name=Fake Healing Potion
 entity.acid_proj.name=Parasite Acid
 entity.bomb_proj.name=Avalon's Bomb
 entity.controller_lift.name=Guilder Lift
@@ -232,12 +236,31 @@ ee.dialog.king_talk_2=You and I have more in common than you think.
 ee.dialog.king_talk_3=This is where it ends for you...
 ee.dialog.king_talk_4=it's time to put your aspirations to the grave...
 ee.dialog.king_talk_5=traveller.
-
 #Phase 3
 ee.dialog.king_transform_1=May thy rage enlighten me once more.
 
 #Death Dialog
 ee.dialog.king_death_1=This is your cursed land to handle now... Traveller...
+
+#Shadow Player
+ee.dialog.shadow_intro_0=Ah. Another beast to slay.
+ee.dialog.shadow_intro_1=This one looks quite similar to me?
+ee.dialog.shadow_intro_2=No matter.
+ee.dialog.shadow_intro_3=They all fall the same.
+
+ee.dialog.shadow_middle_0=Why are you still standing?
+ee.dialog.shadow_middle_1=Don't you get it?
+ee.dialog.shadow_middle_2=I'm supposed to win.
+ee.dialog.shadow_middle_3=I
+ee.dialog.shadow_middle_4=ALWAYS
+ee.dialog.shadow_middle_5=WIN.
+
+ee.dialog.shadow_end_0=I see.
+ee.dialog.shadow_end_1=I must have not been real enough.
+ee.dialog.shadow_end_2=Just a figment of intangible reality.
+ee.dialog.shadow_end_3=But you.
+ee.dialog.shadow_end_4=If I only I could be what you are.
+ee.dialog.shadow_end_5=A veritable MONSTER.
 
 #Advancements
 advancements.ee.root.title=End Expansion
@@ -335,6 +358,7 @@ advancements.ee.find_arena_key.description=Find a Tier One Barrend Arena key.
 ee.status.ash_key_block=You have not defeated the Lamentor yet
 ee.status.arena_block=You have not defeated an Elder End Seeker yet
 ee.status.barrend_crypt=You have not defeated the Ashed King yet
+ee.status.shadow_player=There is already a shadow player nearby.
 
 ee.desc.amber_desc=Full set gives Haste, and allows you to see nearby creatures.
 ee.desc.dimensional_key=Right click on the key block to awaken the Lamentor

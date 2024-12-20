@@ -39,7 +39,7 @@ public class ProjectileAcid extends Projectile{
     protected void spawnParticles() {
         for (int i = 0; i < this.PARTICLE_AMOUNT; i++) {
             float size = 0.25f;
-            ParticleManager.spawnColoredSmoke(world, getPositionVector(), ModColors.GREEN, new Vec3d(0, 0.1, 0));
+            ParticleManager.spawnColoredSmoke(world, getPositionVector(), ModColors.GREEN, Vec3d.ZERO);
         }
 
     }

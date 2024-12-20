@@ -13,6 +13,7 @@ import com.example.structure.items.reinforced.ToolReinforcedAmberSword;
 import com.example.structure.items.reinforced.ToolReinforcedRedAxe;
 import com.example.structure.items.tools.*;
 import com.example.structure.util.ModReference;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.integration.ModIntegration;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -149,7 +150,9 @@ public class ModItems {
     public static final Item ACID_PROJECTILE = new ItemBase("green_orb", null);
     public static final Item PARASITE_PROJECTILE = new ItemProjectileBomb("parasitebomb");
 
+    public static final Item WASTELAND_MUSIC = new ItemEEMusicDisc("wasteland_disc", ModSoundHandler.BIOME_MUSIC);
 
+    public static final Item FAKE_HEALING_POTION = new ItemBase("fake_potion", null);
     //Misc.
 
    // public static Item ALTAR;

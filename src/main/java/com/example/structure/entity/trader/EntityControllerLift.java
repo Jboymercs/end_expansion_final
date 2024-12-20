@@ -4,6 +4,7 @@ import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
@@ -34,6 +35,18 @@ public class EntityControllerLift extends EntityModBase implements IAnimatable {
         this.setSize(0.8F, 9.0F);
     }
 
+    private EntityShadowPlayer shadowPlayer;
+
+    public EntityControllerLift(World worldIn, EntityShadowPlayer shadowPlayer) {
+        super(worldIn);
+        this.setNoAI(true);
+        this.setImmovable(true);
+        this.setNoGravity(true);
+        this.noClip = true;
+        this.shadowPlayer = shadowPlayer;
+        this.setSize(0.8F, 9.0F);
+    }
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -55,15 +68,28 @@ public class EntityControllerLift extends EntityModBase implements IAnimatable {
 
             if (!nearbyPlayers.isEmpty()) {
                 for (EntityLivingBase base : nearbyPlayers) {
-                    if (!(base instanceof EntityAOEArena) && !(base instanceof EntityMiniValon) && !(base instanceof EntityAvalon) && !(base instanceof EndSeekerPrime)) {
-                        Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
-                        DamageSource source = ModDamageSource.builder()
-                                .type(ModDamageSource.MOB)
-                                .directEntity(this)
-                                .build();
-                        float damage = (float) ((MobConfig.guilder_attack_damage * 0.75) * getAttackModifierLamented());
-                        ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 1.5F, 0, false);
+                    if(shadowPlayer != null) {
+                        if (!(base instanceof EntityModBase)) {
+                            Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
+                            DamageSource source = ModDamageSource.builder()
+                                    .type(ModDamageSource.MOB)
+                                    .directEntity(this)
+                                    .build();
+                            float damage = (float) ((shadowPlayer.getAttack()));
+                            ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 0.4F, 0, false);
+                        }
+                    } else {
+                        if (!(base instanceof EntityAOEArena) && !(base instanceof EntityMiniValon) && !(base instanceof EntityAvalon) && !(base instanceof EndSeekerPrime) && !(base instanceof EntityShadowPlayer)) {
+                            Vec3d pos = base.getPositionVector().add(ModUtils.yVec(0.4));
+                            DamageSource source = ModDamageSource.builder()
+                                    .type(ModDamageSource.MOB)
+                                    .directEntity(this)
+                                    .build();
+                            float damage = (float) ((MobConfig.guilder_attack_damage * 0.75) * getAttackModifierLamented());
+                            ModUtils.handleAreaImpact(0.25f, (e) -> damage, this, pos, source, 1.5F, 0, false);
+                        }
                     }
+
                 }
             }
         }

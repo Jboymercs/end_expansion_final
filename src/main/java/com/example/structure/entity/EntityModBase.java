@@ -245,6 +245,16 @@ public abstract class EntityModBase extends EntityCreature {
         return ModConfig.barrend_multiplier + ModIntegration.getMultiplierCountAttackDamage();
     }
 
+    @Override
+    public boolean isNonBoss()
+    {
+        if(this.iAmBossMob) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static boolean isPos = true;
     public float screenShakeValue = 0f;
 
