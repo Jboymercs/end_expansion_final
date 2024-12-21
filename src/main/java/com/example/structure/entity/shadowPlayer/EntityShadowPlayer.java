@@ -7,17 +7,18 @@ import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.ai.EntityAITimedKnight;
 import com.example.structure.entity.ai.EntityAIUltraParasite;
-import com.example.structure.entity.shadowPlayer.action.ActionArenaAOE;
-import com.example.structure.entity.shadowPlayer.action.ActionForwardTeleport;
-import com.example.structure.entity.shadowPlayer.action.ActionRevoltAOE;
-import com.example.structure.entity.shadowPlayer.action.ActionShootRanged;
+import com.example.structure.entity.animation.Animation;
+import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
+import com.example.structure.entity.shadowPlayer.action.*;
 import com.example.structure.entity.trader.EntityControllerLift;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.init.ModItems;
+import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
+import com.example.structure.util.handlers.ParticleManager;
 import com.google.common.base.Optional;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,6 +41,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -60,11 +62,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IAnimationTickable, IAttack {
 
+    public boolean isBlackParticles = false;
     private Consumer<EntityLivingBase> prevAttack;
-
+    Supplier<Projectile> ground_projectiles = () -> new EntityBloodSlash(world, this, (float) MobConfig.unholy_knight_damage, null, ModColors.RED);
     public Vec3d chargeDir;
     private final BossInfoServer bossInfo = (new BossInfoServer(this.getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.NOTCHED_6));
     private static final DataParameter<Boolean> FIGHT_MODE = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
@@ -87,6 +91,10 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
     private static final DataParameter<Boolean> SUMMON_START = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> MIDDLE_START = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> END_START = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> AOE_ARENA_ATTACK = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SUMMON_ORB = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BLOOD_SLASH = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
     private static final DataParameter<ItemStack> ITEM_HAND = EntityDataManager.<ItemStack>createKey(EntityShadowPlayer.class, DataSerializers.ITEM_STACK);
     public void setFightModeZero(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
     public boolean isFightModeZero() {return this.dataManager.get(FIGHT_MODE);}
@@ -110,6 +118,10 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     public void setDoRangedAttack(boolean value) {this.dataManager.set(DO_RANGED_ATTACK, Boolean.valueOf(value));}
     public void setSummonStart(boolean value) {this.dataManager.set(SUMMON_START, Boolean.valueOf(value));}
     public void setMiddleStart(boolean value) {this.dataManager.set(MIDDLE_START, Boolean.valueOf(value));}
+    public void setEndStart(boolean value) {this.dataManager.set(END_START, Boolean.valueOf(value));}
+    public void setAoeArenaAttack(boolean value) {this.dataManager.set(AOE_ARENA_ATTACK, Boolean.valueOf(value));}
+    public void setBloodSlash(boolean value) {this.dataManager.set(BLOOD_SLASH, Boolean.valueOf(value));}
+    public void setSummonOrb(boolean value) {this.dataManager.set(SUMMON_ORB, Boolean.valueOf(value));}
     public boolean isComboDash() {return this.dataManager.get(COMBO_DASH);}
     public boolean isComboDashAlt() {return this.dataManager.get(COMBO_DASH_ALT);}
     public boolean isQuickAttack() {return this.dataManager.get(QUICK_ATTACK);}
@@ -125,6 +137,10 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     public boolean isDoRangedAttack() {return this.dataManager.get(DO_RANGED_ATTACK);}
     public boolean isSummonStart() {return this.dataManager.get(SUMMON_START);}
     public boolean isMiddleStart() {return this.dataManager.get(MIDDLE_START);}
+    public boolean isEndStart() {return this.dataManager.get(END_START);}
+    public boolean isArenaAttack() {return this.dataManager.get(AOE_ARENA_ATTACK);}
+    public boolean isBloodSlash() {return this.dataManager.get(BLOOD_SLASH);}
+    public boolean isSummonOrb() {return this.dataManager.get(SUMMON_ORB);}
 
     //Idle and movement of small non-important parts
     private final String ANIM_IDLE_LOWER = "idle_lower";
@@ -136,6 +152,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private final String ANIM_NO_RING = "ring_off";
     private final String ANIM_SUMMON_START = "summon";
     private final String ANIM_MIDDLE_START = "phase_transition";
+    private final String ANIM_END_START = "death";
 
     //Attack Animations
     private final String ANIM_COMBO_DASH = "combo";
@@ -151,6 +168,9 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private final String ANIM_BS_CONTINUE = "bs_continue";
     private final String ANIM_USE_POTION = "use_potion";
     private final String ANIM_DO_RANGED_ATTACK = "ranged_attack";
+    private final String ANIM_SUMMON_ORB = "summon_orb";
+    private final String ANIM_BLOOD_SLASH = "blood_slash";
+    private final String ANIM_AOE_ARENA = "aoe_arena";
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -173,6 +193,10 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         nbt.setBoolean("Do_Ranged", this.isDoRangedAttack());
         nbt.setBoolean("Summon_Start", this.isSummonStart());
         nbt.setBoolean("Phase_Transition", this.isMiddleStart());
+        nbt.setBoolean("End_Start", this.isEndStart());
+        nbt.setBoolean("Aoe_Arena", this.isArenaAttack());
+        nbt.setBoolean("Blood_Slash", this.isBloodSlash());
+        nbt.setBoolean("Summon_Orb", this.isSummonOrb());
     }
 
     @Override
@@ -196,6 +220,10 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         this.setDoRangedAttack(nbt.getBoolean("Do_Ranged"));
         this.setSummonStart(nbt.getBoolean("Summon_Start"));
         this.setMiddleStart(nbt.getBoolean("Phase_Transition"));
+        this.setEndStart(nbt.getBoolean("End_Start"));
+        this.setAoeArenaAttack(nbt.getBoolean("Aoe_Arena"));
+        this.setBloodSlash(nbt.getBoolean("Blood_Slash"));
+        this.setSummonOrb(nbt.getBoolean("Summon_Orb"));
         if (this.hasCustomName()) {
             this.bossInfo.setName(this.getDisplayName());
         }
@@ -230,12 +258,14 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         this.owner = owner;
         this.setShadowAttackDamage = attackDamage;
         this.setShadowHealth = health;
+        this.experienceValue = 20;
 
     }
 
     public EntityShadowPlayer(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 1.95F);
+        this.experienceValue = 400;
     }
 
     @Override
@@ -260,6 +290,50 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         this.dataManager.register(DO_RANGED_ATTACK, Boolean.valueOf(false));
         this.dataManager.register(SUMMON_START, Boolean.valueOf(false));
         this.dataManager.register(MIDDLE_START, Boolean.valueOf(false));
+        this.dataManager.register(END_START, Boolean.valueOf(false));
+        this.dataManager.register(SUMMON_ORB, Boolean.valueOf(false));
+        this.dataManager.register(BLOOD_SLASH, Boolean.valueOf(false));
+        this.dataManager.register(AOE_ARENA_ATTACK, Boolean.valueOf(false));
+    }
+
+    private boolean isBlackParticlesTwo = false;
+
+    @Override
+    public void handleStatusUpdate(byte id) {
+        if(id == ModUtils.PARTICLE_BYTE) {
+            ModUtils.circleCallback(1, 15, (pos)-> {
+                pos = new Vec3d(pos.x, 0.5, pos.y);
+                ParticleManager.spawnDust(world, pos.add(this.getPositionVector()), ModColors.BLACK, ModUtils.yVec(0.05), ModRand.range(5, 10));
+                ParticleManager.spawnDust(world, pos.add(this.getPositionVector().add(ModUtils.yVec(0.6))), ModColors.BLACK, ModUtils.yVec(0.05), ModRand.range(5, 10));
+                ParticleManager.spawnDust(world, pos.add(this.getPositionVector().add(ModUtils.yVec(1.2))), ModColors.BLACK, ModUtils.yVec(0.05), ModRand.range(5, 10));
+            });
+        }
+
+        if(id == ModUtils.SECOND_PARTICLE_BYTE) {
+            ModUtils.circleCallback(1, 15, (pos)-> {
+                pos = new Vec3d(pos.x, 0.25, pos.y);
+                ParticleManager.spawnDust(world, pos.add(this.getPositionVector()), ModColors.BLACK, ModUtils.yVec(0.05), ModRand.range(5, 10));
+            });
+        }
+        if(id == ModUtils.THIRD_PARTICLE_BYTE) {
+            ModUtils.circleCallback(2, 25, (pos)-> {
+                pos = new Vec3d(pos.x, 0, pos.y);
+                ParticleManager.spawnDust(world, this.getPositionVector().add(ModUtils.yVec(1)), ModColors.GREEN, pos.normalize().scale(0.1), ModRand.range(10, 15));
+                ParticleManager.spawnDust(world, this.getPositionVector().add(ModUtils.yVec(2)), ModColors.GREEN, pos.normalize().scale(0.1), ModRand.range(10, 15));
+                ParticleManager.spawnDust(world, this.getPositionVector().add(ModUtils.yVec(3)), ModColors.GREEN, pos.normalize().scale(0.1), ModRand.range(10, 15));
+            });
+        }
+        super.handleStatusUpdate(id);
+    }
+    @Override
+    public void onEntityUpdate() {
+        super.onEntityUpdate();
+        if(this.isBlackParticles && world.rand.nextInt(2) == 0) {
+            world.setEntityState(this, ModUtils.PARTICLE_BYTE);
+        }
+        if(this.isBlackParticlesTwo && world.rand.nextInt(2) == 0) {
+            world.setEntityState(this, ModUtils.SECOND_PARTICLE_BYTE);
+        }
     }
 
     @Override
@@ -298,6 +372,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private int needsHeavyAttack = 0;
     private int needsLightAttack = 0;
     private int needsRangedAttack = 0;
+    private int needsFinisherAttack = 0;
 
     private int useMilkBuckettimer = 400;
     public boolean setStrafing = false;
@@ -344,6 +419,10 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
                         if(stack.getItem() instanceof ItemBow) {
                             needsHeavyAttack++;
+                        }
+
+                        if(playerH <= 0.4) {
+                            needsFinisherAttack += 0.5;
                         }
                     }
 
@@ -495,12 +574,14 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         }, 65);
     }
 
+    private boolean setUpSecondPhase = false;
+
     @Override
     public int startAttack(EntityLivingBase target, float distanceSq, boolean strafingBackwards) {
         double distance = Math.sqrt(distanceSq);
         double HealthChange = this.getHealth() / this.getMaxHealth();
-        if(!this.isFightModeZero() && !this.isUseHealthPotion()) {
-            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(combo_dash, quick_swing, swing_basic, dash_away, axe_attack, axe_aoe_attack, bs_attack, do_ranged_attack));
+        if(!this.isFightModeZero() && !this.isUseHealthPotion() && !this.setDeathTooActive && !this.isEndStart()) {
+            List<Consumer<EntityLivingBase>> attacks = new ArrayList<>(Arrays.asList(combo_dash, quick_swing, swing_basic, dash_away, axe_attack, axe_aoe_attack, bs_attack, do_ranged_attack, do_arena_aoe, do_blood_slash, do_evil_cube));
             double[] weights = {
                     (distance <= 12 && distance >= 5 && prevAttack != combo_dash) ? 1/distance + needsHeavyAttack : 0,
                     (distance <= 6 && prevAttack != quick_swing) ? 1/distance + needsLightAttack : 0,
@@ -508,15 +589,82 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
                     (distance <= 6 && prevAttack != dash_away && setSpamCheck) ? 2/distance : 0,
                     (distance <= 9 && prevAttack != axe_attack && distance >= 2) ? 1/distance + needsHeavyAttack : 0,
                     (distance <= 9 && prevAttack != axe_aoe_attack && distance >= 2) ? 1/distance + needsHeavyAttack : 0,
-                    (distance <= 12 && prevAttack != bs_attack && distance >= 7) ? 1/distance + needsHeavyAttack : 0,
-                    (distance <= 13 && distance >= 9 && prevAttack != do_ranged_attack) ? 1/distance + needsRangedAttack : 0
+                    (distance <= 12 && prevAttack != bs_attack && distance >= 7) ? 1/distance + needsHeavyAttack + needsFinisherAttack : 0,
+                    (distance <= 13 && distance >= 9 && prevAttack != do_ranged_attack) ? 1/distance + needsRangedAttack : 0,
+                    (distance <= 11 && distance >= 4 && prevAttack != do_arena_aoe && HealthChange <= 0.5) ? 1/distance + (int)((needsRangedAttack + needsHeavyAttack)/ 2) : 0,
+                    (prevAttack != do_blood_slash && HealthChange <= 0.6 && setUpSecondPhase) ? 1000 : (distance <= 13 && distance >= 4 && prevAttack != do_blood_slash && HealthChange <= 0.5) ? 1/distance + needsRangedAttack : 0,
+                    (distance <= 13 && distance >= 5 && HealthChange <= 0.5 && prevAttack != do_evil_cube) ? 1/distance + (int) ((needsRangedAttack + needsHeavyAttack)/ 2) : 0
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
 
             prevAttack.accept(target);
         }
-        return 12 + ModRand.range(1, 10);
+        return (HealthChange <= 0.5) ? 5 : 12 + ModRand.range(1, 10);
     }
+
+    private final Consumer<EntityLivingBase> do_evil_cube = (target) -> {
+      this.setSummonOrb(true);
+      this.setFightModeZero(true);
+      this.setStrafing = true;
+
+      addEvent(()-> {
+        this.setImmovable(true);
+        this.lockLook = true;
+        EntityMadnessCube cube = new EntityMadnessCube(world, target);
+        Vec3d relPos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 0, 0)));
+        cube.setPosition(new BlockPos(relPos.x, relPos.y, relPos.z));
+        world.spawnEntity(cube);
+      }, 25);
+
+      addEvent(()-> {
+          this.setImmovable(false);
+          this.lockLook = false;
+      }, 50);
+
+      addEvent(()-> {
+        this.setSummonOrb(false);
+        this.setFightModeZero(false);
+      }, 90);
+    };
+    private final Consumer<EntityLivingBase> do_blood_slash = (target) -> {
+      this.setFightModeZero(true);
+      this.setBloodSlash(true);
+      this.setStrafing = true;
+      this.setUpSecondPhase = false;
+
+      addEvent(()-> {
+        new ActionBloodSlash(ground_projectiles, 0.6F).performAction(this, target);
+      }, 35);
+
+      addEvent(()-> {
+          new ActionBloodSlash(ground_projectiles, 0.6F).performAction(this, target);
+      }, 75);
+
+      addEvent(()-> {
+        this.setBloodSlash(false);
+        addEvent(()-> {
+            this.setFightModeZero(false);
+            this.setStrafing = false;
+        }, 20);
+      }, 95);
+    };
+
+    private final Consumer<EntityLivingBase> do_arena_aoe = (target) -> {
+      this.setAoeArenaAttack(true);
+      this.setFullBodyUsage(true);
+      this.setImmovable(true);
+      this.setFightModeZero(true);
+
+      addEvent(()-> new ActionArenaAOE().performAction(this, target), 30);
+        addEvent(()-> new ActionArenaAOE().performAction(this, target), 70);
+        addEvent(()-> new ActionArenaAOE().performAction(this, target), 110);
+      addEvent(()-> {
+        this.setAoeArenaAttack(false);
+        this.setFullBodyUsage(false);
+        this.setImmovable(false);
+        this.setFightModeZero(false);
+      }, 130);
+    };
 
     private final Consumer<EntityLivingBase> do_ranged_attack = (target) -> {
       this.setFightModeZero(true);
@@ -983,6 +1131,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         animationData.addAnimationController(new AnimationController(this, "fight_controller", 0, this::predicateAttack));
         animationData.addAnimationController(new AnimationController(this, "ring_idle", 0, this::predicateRing));
         animationData.addAnimationController(new AnimationController(this, "other_idles", 0, this::predicateOtherIdles));
+        animationData.addAnimationController(new AnimationController(this, "death_state", 0, this::predicateDeathState));
     }
 
     private <E extends IAnimatable> PlayState predicateOtherIdles(AnimationEvent<E> event) {
@@ -1023,8 +1172,17 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         return PlayState.STOP;
     }
 
+    private <E extends IAnimatable> PlayState predicateDeathState(AnimationEvent<E> event) {
+        if(this.isFightModeZero() && this.isEndStart()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_END_START, false));
+            return PlayState.CONTINUE;
+        }
+
+        event.getController().markNeedsReload();
+        return PlayState.STOP;
+    }
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
-        if(this.isFightModeZero()) {
+        if(this.isFightModeZero() && !this.isEndStart()) {
             if(this.isComboDash()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_DASH, false));
                 return PlayState.CONTINUE;
@@ -1085,6 +1243,18 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
                 event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MIDDLE_START, false));
                 return PlayState.CONTINUE;
             }
+            if(this.isArenaAttack()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_AOE_ARENA, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isSummonOrb()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON_ORB, false));
+                return PlayState.CONTINUE;
+            }
+            if(this.isBloodSlash()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLOOD_SLASH, false));
+                return PlayState.CONTINUE;
+            }
 
         }
         event.getController().markNeedsReload();
@@ -1103,7 +1273,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
     @Override
     public final boolean attackEntityFrom(DamageSource source, float amount) {
-        if(this.isContinueBSAttack() || source.getTrueSource() instanceof EntityControllerLift || this.isSummonStart() || this.isMiddleStart()) {
+        if(this.isContinueBSAttack() || source.getTrueSource() instanceof EntityControllerLift || this.isSummonStart() || this.isMiddleStart() || this.isEndStart()) {
             return false;
         }
 
@@ -1113,6 +1283,18 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     @Override
     public int tickTimer() {
         return this.ticksExisted;
+    }
+
+    protected boolean setDeathTooActive = false;
+    @Override
+    public void onDeath(DamageSource cause) {
+
+        if(!setDeathTooActive) {
+            this.setFightModeZero(false);
+            this.setFullBodyUsage(false);
+            this.beginDeathDialog();
+            super.onDeath(cause);
+        }
     }
 
     @Override
@@ -1190,7 +1372,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         this.setPosition(offset.getX(), offset.getY(), offset.getZ());
        // this.setSpawnLocation(offset);
       //  this.setSetSpawnLoc(true);
-        this.setCustomNameTag(player.getName() + " Shadow");
+        this.setCustomNameTag(player.getName() + "'s Shadow");
         world.spawnEntity(this);
         double healthChange = this.getHealth() / this.getMaxHealth();
         if(healthChange == 1) {
@@ -1216,7 +1398,8 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
     public void beginFirstDialog() {
         this.lockLook = true;
-
+        this.isBlackParticles = true;
+        addEvent(()-> this.isBlackParticles = false, 50);
         addEvent(()-> this.lockLook = false, 100);
 
         addEvent(()-> {
@@ -1260,6 +1443,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         this.hasDonePhase = true;
         this.setRingOff(false);
 
+        addEvent(()-> this.isBlackParticlesTwo = true, 20);
         addEvent(()-> {
             for (EntityPlayer player : this.bossInfo.getPlayers()) {
                 player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
@@ -1308,13 +1492,92 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
             //Dialog 6
         }, 140);
 
-        addEvent(()-> new ActionArenaAOE().performAction(this, target), 133);
+        addEvent(()-> {
+            this.isBlackParticlesTwo = false;
+            world.setEntityState(this, ModUtils.THIRD_PARTICLE_BYTE);
+            new ActionArenaAOE().performAction(this, target);
+            }, 133);
 
         addEvent(()-> {
+            this.setUpSecondPhase = true;
             this.setMiddleStart(false);
             this.setImmovable(false);
             this.setFightModeZero(false);
             this.setFullBodyUsage(false);
         }, 180);
+    }
+
+    public void beginDeathDialog() {
+        this.setDeathTooActive = true;
+        this.setHealth(0.0001f);
+        this.setRingOff(true);
+        this.setFightModeZero(true);
+        this.setFullBodyUsage(true);
+        this.setImmovable(true);
+        this.setEndStart(true);
+
+        addEvent(()-> this.isBlackParticles = true, 400);
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_end_0")));
+            }
+            //Dialog 1
+        }, 40);
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_end_1")));
+            }
+            //Dialog 2
+        }, 140);
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_end_2")));
+            }
+            //Dialog 3
+        }, 200);
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_end_3")));
+            }
+            //Dialog 4
+        }, 290);
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_end_4")));
+            }
+            //Dialog 5
+        }, 340);
+
+        addEvent(()-> {
+            for (EntityPlayer player : this.bossInfo.getPlayers()) {
+                player.sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_end_5")));
+            }
+            //Dialog 6
+        }, 400);
+
+        addEvent(()-> {
+            this.setDropItemsWhenDead(true);
+
+        }, 450);
+        addEvent(()-> {
+            this.setFightModeZero(false);
+            this.setFullBodyUsage(false);
+            this.setImmovable(false);
+            this.setEndStart(false);
+            this.isBlackParticles = false;
+            this.setDead();
+
+        }, 460);
     }
 }

@@ -24,9 +24,11 @@ import com.example.structure.entity.painting.RenderEEPainting;
 import com.example.structure.entity.render.*;
 import com.example.structure.entity.render.arrow.RenderArrowBase;
 import com.example.structure.entity.render.moveTile.RenderMoveTile;
+import com.example.structure.entity.render.shadowPlayer.RenderMadnessCube;
 import com.example.structure.entity.render.shadowPlayer.RenderShadowPlayer;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.shadowPlayer.EntityMadnessCube;
 import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.entity.trader.*;
 import com.example.structure.init.ModItems;
@@ -203,6 +205,8 @@ public class RenderHandler {
             RenderingRegistry.registerEntityRenderingHandler(EntityBarrendGuard.class, RenderBarrendGuard::new);
             //Shadow Player Boss
             RenderingRegistry.registerEntityRenderingHandler(EntityShadowPlayer.class, RenderShadowPlayer::new);
+            //Madness Cube
+            RenderingRegistry.registerEntityRenderingHandler(EntityMadnessCube.class, RenderMadnessCube::new);
         }
     }
 }

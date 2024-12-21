@@ -60,7 +60,7 @@ public class EntityAIAttackShadow<T extends EntityShadowPlayer & IAttack> extend
     public void updateTask() {
         EntityLivingBase target = this.entity.getAttackTarget();
 
-        if (target == null) {
+        if (target == null || this.entity.isEndStart()) {
             return;
         }
 

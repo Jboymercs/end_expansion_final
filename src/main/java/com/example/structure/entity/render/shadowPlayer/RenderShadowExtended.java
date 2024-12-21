@@ -1,6 +1,7 @@
 package com.example.structure.entity.render.shadowPlayer;
 
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.model.shadowPlayer.ModelMadnessCube;
 import com.example.structure.util.misc.BlockRenderUtil;
 import com.example.structure.util.misc.MatrixUtil;
 import net.minecraft.block.state.IBlockState;
@@ -60,6 +61,8 @@ public abstract class RenderShadowExtended<T extends EntityModBase & IAnimatable
      * 1 => Magical armor overlay
      */
     private int currentModelRenderCycle = 0;
+
+
 
     // Entrypoint for rendering, calls everything else
     @Override

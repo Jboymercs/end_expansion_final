@@ -24,6 +24,7 @@ import com.example.structure.entity.lamentorUtil.EntityLamentorWave;
 import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.entity.seekers.EndSeeker;
 import com.example.structure.entity.seekers.EndSeekerPrime;
+import com.example.structure.entity.shadowPlayer.EntityMadnessCube;
 import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.entity.tileentity.*;
 import com.example.structure.entity.tileentity.source.TileEntityNoSource;
@@ -235,6 +236,8 @@ public class ModEntities {
             registerEntityWithID("big_rick", EntityUltraParasite.class, ENTITY_START_ID++, 110, evoled_parasite);
             //Shadow Player
             registerEntityWithID("shadow_player", EntityShadowPlayer.class, ENTITY_START_ID++, 110, shadow_player);
+            //madness cube
+            registerEntity("madness_cube", EntityMadnessCube.class, ENTITY_START_ID++, 120);
         }
 
     }

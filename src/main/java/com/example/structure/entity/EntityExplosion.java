@@ -1,6 +1,7 @@
 package com.example.structure.entity;
 
 import com.example.structure.entity.endking.EntityEndKing;
+import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.init.ModItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
