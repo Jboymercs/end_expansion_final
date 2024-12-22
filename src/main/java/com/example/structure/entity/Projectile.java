@@ -1,7 +1,9 @@
 package com.example.structure.entity;
 
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.entity.util.EntityModThrowable;
 import com.example.structure.init.ModItems;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.network.datasync.DataParameter;
@@ -13,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class Projectile extends EntityModThrowable {
+public class Projectile extends EntityModThrowable implements IMagicEntity {
     protected float travelRange;
     private final Vec3d startPos;
     protected static final byte IMPACT_PARTICLE_BYTE = 3;
@@ -138,5 +140,20 @@ public class Projectile extends EntityModThrowable {
     public Projectile setItemToRender(Item itemToRender) {
         this.itemToRender = itemToRender;
         return this;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return true;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this.shootingEntity;
     }
 }

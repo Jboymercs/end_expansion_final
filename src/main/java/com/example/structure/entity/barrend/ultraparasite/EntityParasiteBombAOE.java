@@ -3,11 +3,13 @@ package com.example.structure.entity.barrend.ultraparasite;
 import com.example.structure.config.MobConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.barrend.EntityBarrendMob;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.init.ModPotions;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.MobEffects;
@@ -25,7 +27,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityParasiteBombAOE extends EntityBarrendMob implements IAnimatable {
+public class EntityParasiteBombAOE extends EntityBarrendMob implements IAnimatable, IMagicEntity {
     /**
      * A simple low AI that just damages the player and disappears following, creates a nice effect for waves or AOE
      */
@@ -121,5 +123,20 @@ public class EntityParasiteBombAOE extends EntityBarrendMob implements IAnimatab
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

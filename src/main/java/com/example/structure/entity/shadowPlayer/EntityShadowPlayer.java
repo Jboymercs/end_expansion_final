@@ -9,8 +9,10 @@ import com.example.structure.entity.ai.EntityAITimedKnight;
 import com.example.structure.entity.ai.EntityAIUltraParasite;
 import com.example.structure.entity.animation.Animation;
 import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.entity.shadowPlayer.action.*;
 import com.example.structure.entity.trader.EntityControllerLift;
+import com.example.structure.entity.util.EntityModThrowable;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModColors;
@@ -21,6 +23,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.google.common.base.Optional;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -244,6 +247,8 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private double setShadowHealth;
     private double setShadowAttackDamage;
 
+
+
     /**
      * Used for summoning the Shadow under the Player's Aid
      * @param worldIn
@@ -382,6 +387,8 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
     private boolean hasDonePhase = false;
 
+    private int attemptDodge = 10;
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -390,7 +397,45 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
             this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         }
 
+        //curr Target
         EntityLivingBase target = this.getAttackTarget();
+        //Incoming Projectiles
+        if(!this.isFightModeZero() && !world.isRemote) {
+            List<Entity> nearbyProjectiles = this.world.getEntitiesWithinAABB(Entity.class, this.getEntityBoundingBox().grow(5D), e -> !e.getIsInvulnerable() && (!(e.getIsInvulnerable())));
+
+            if(!nearbyProjectiles.isEmpty()) {
+                //we will want this guy to leap away
+                if(nearbyProjectiles instanceof EntityModThrowable) {
+                    for(Entity proj : nearbyProjectiles) {
+                        if(attemptDodge < 0 && proj.motionX != 0 && proj.motionZ != 0 && proj.motionY != 0) {
+                            Vec3d targetedPos = this.getPositionVector().add(ModRand.range(-3, 3) + 2,0,ModRand.range(-3, 3) + 2);
+                            double distance = this.getPositionVector().distanceTo(targetedPos);
+                            ModUtils.leapTowardsWhileCheckingGround(this, targetedPos, (float) (distance * 0.25),0.1F);
+                            attemptDodge = 15;
+                        }
+                    }
+                }
+                else if(nearbyProjectiles instanceof IMagicEntity) {
+                    for(Entity proj : nearbyProjectiles) {
+                        //leap away
+                        if(proj instanceof Projectile) {
+                            if(attemptDodge < 0 && proj.motionX != 0 && proj.motionZ != 0 && proj.motionY != 0) {
+                                Vec3d targetedPos = this.getPositionVector().add(ModRand.range(-3, 3) + 2,0,ModRand.range(-3, 3) + 2);
+                                double distance = this.getPositionVector().distanceTo(targetedPos);
+                                ModUtils.leapTowardsWhileCheckingGround(this, targetedPos, (float) (distance * 0.25),0.1F);
+                                attemptDodge = 15;
+                            }
+                        }
+                        //back away
+                        else if(((IMagicEntity)proj).isDodgeable() && ((IMagicEntity)proj).getOwnerFromMagic() != this) {
+
+                        }
+                    }
+                }
+            }
+        }
+
+        attemptDodge--;
 
         if(target != null && !world.isRemote) {
             //this is to keep the boss from taking too much damage, it will attempt to back off
@@ -437,7 +482,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
             }
             //A check to allow the shadow to throw ranged attacks if not in range to do anything else
             if(distSq >= 13) {
-                if(rangedAttackCooldown > 0 && !this.isDoRangedAttack() && !this.isFightModeZero()) {
+                if(rangedAttackCooldown > 0 && !this.isDoRangedAttack() && !this.isFightModeZero() && !this.isEndStart()) {
                     rangedAttackCooldown--;
                 }
 
@@ -481,7 +526,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
                 }
             }
             //Used For Healing the Boss
-            if(healthCurr < (this.getMaxHealth() - this.heal_amount_potion - 0.05)) {
+            if(healthCurr < (healthCurr - this.heal_amount_potion - 0.05)) {
                 if(usedPotions < potionAmount) {
                     if (heal_shadow_cooldown > 0) {
                         heal_shadow_cooldown--;
@@ -512,10 +557,20 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         }
 
         if(this.isBackOff && target != null && !world.isRemote) {
-            double d0 = (this.posX - target.posX) * 0.01;
-            double d1 = (this.posY - target.posY) * 0.005;
-            double d2 = (this.posZ - target.posZ) * 0.01;
-            this.addVelocity(d0, d1, d2);
+            double distSq = this.getDistance(target);
+
+            if(distSq >= 12) {
+                this.motionX = 0;
+                this.motionZ = 0;
+                this.faceEntity(target, 35F, 35F);
+            } else {
+                Vec3d dirToo = this.getPositionVector().subtract(target.getPositionVector()).normalize();
+                Vec3d jumpTooPos = this.getPositionVector().add(dirToo.scale(20));
+                Vec3d currPos = this.getPositionVector();
+                Vec3d dir = jumpTooPos.subtract(currPos).normalize();
+                ModUtils.addEntityVelocity(this, dir.scale(0.1));
+                this.faceEntity(target, 35F, 35F);
+            }
         }
     }
 
@@ -610,7 +665,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
       addEvent(()-> {
         this.setImmovable(true);
         this.lockLook = true;
-        EntityMadnessCube cube = new EntityMadnessCube(world, target);
+        EntityMadnessCube cube = new EntityMadnessCube(world, target, this);
         Vec3d relPos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.5, 0, 0)));
         cube.setPosition(new BlockPos(relPos.x, relPos.y, relPos.z));
         world.spawnEntity(cube);
@@ -624,6 +679,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
       addEvent(()-> {
         this.setSummonOrb(false);
         this.setFightModeZero(false);
+        this.setStrafing = false;
       }, 90);
     };
     private final Consumer<EntityLivingBase> do_blood_slash = (target) -> {
@@ -642,11 +698,9 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
       addEvent(()-> {
         this.setBloodSlash(false);
-        addEvent(()-> {
             this.setFightModeZero(false);
             this.setStrafing = false;
-        }, 20);
-      }, 95);
+      }, 115);
     };
 
     private final Consumer<EntityLivingBase> do_arena_aoe = (target) -> {
@@ -677,11 +731,9 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
       addEvent(()-> {
         this.setDoRangedAttack(false);
-        addEvent(()-> {
             this.setFightModeZero(false);
             this.setStrafing = false;
-        }, 30);
-      }, 50);
+      }, 80);
 
     };
 
@@ -1290,8 +1342,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     public void onDeath(DamageSource cause) {
 
         if(!setDeathTooActive) {
-            this.setFightModeZero(false);
-            this.setFullBodyUsage(false);
+
             this.beginDeathDialog();
             super.onDeath(cause);
         }

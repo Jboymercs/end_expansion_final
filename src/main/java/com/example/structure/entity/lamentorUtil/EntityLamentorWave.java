@@ -4,6 +4,7 @@ import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityCrystalKnight;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.entity.trader.EntityAOEArena;
 import com.example.structure.entity.trader.EntityAvalon;
 import com.example.structure.entity.trader.EntityMiniValon;
@@ -11,6 +12,7 @@ import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -24,7 +26,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityLamentorWave extends EntityModBase implements IAnimatable {
+public class EntityLamentorWave extends EntityModBase implements IAnimatable, IMagicEntity {
 
     /**
      * A supplement from the Controller's Wave Entity but slower
@@ -118,5 +120,20 @@ public class EntityLamentorWave extends EntityModBase implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

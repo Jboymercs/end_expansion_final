@@ -3,6 +3,7 @@ package com.example.structure.entity.trader;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
@@ -22,7 +23,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityAOEArena extends EntityModBase implements IAnimatable {
+public class EntityAOEArena extends EntityModBase implements IAnimatable, IMagicEntity {
 
     /**
      * A spam entity that damages at a certain point
@@ -164,5 +165,20 @@ public class EntityAOEArena extends EntityModBase implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

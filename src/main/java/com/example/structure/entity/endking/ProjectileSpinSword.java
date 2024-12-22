@@ -6,12 +6,14 @@ import com.example.structure.entity.EntityGhostArm;
 import com.example.structure.entity.Projectile;
 import com.example.structure.entity.endking.ghosts.EntityGhostPhase;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.init.ModItems;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -24,7 +26,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ProjectileSpinSword extends Projectile {
+public class ProjectileSpinSword extends Projectile implements IMagicEntity {
 
     private static final int PARTICLE_AMOUNT = 1;
 
@@ -168,5 +170,20 @@ public class ProjectileSpinSword extends Projectile {
 
         super.onHit(result);
 
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return true;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return false;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

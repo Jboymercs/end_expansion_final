@@ -1,11 +1,8 @@
 package com.example.structure.entity.shadowPlayer;
 
 import com.example.structure.config.MobConfig;
-import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
-import com.example.structure.entity.endking.EntityEndKing;
-import com.example.structure.entity.endking.EntityRedCrystal;
-import com.example.structure.entity.knighthouse.EntityKnightBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.init.ModPotions;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
@@ -34,7 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityMadnessCube extends EntityModBase implements IAnimatable, IAnimationTickable {
+public class EntityMadnessCube extends EntityModBase implements IAnimatable, IAnimationTickable, IMagicEntity {
 
     private AnimationFactory factory = new AnimationFactory(this);
 
@@ -58,9 +55,11 @@ public class EntityMadnessCube extends EntityModBase implements IAnimatable, IAn
 
     private EntityLivingBase target;
 
-    public EntityMadnessCube(World world, EntityLivingBase target) {
+    private EntityLivingBase owner;
+    public EntityMadnessCube(World world, EntityLivingBase target, EntityLivingBase owner) {
         super(world);
         this.target = target;
+        this.owner = owner;
         this.setSize(1.2F, 1.95F);
         this.setNoGravity(true);
         this.noClip = true;
@@ -89,34 +88,21 @@ public class EntityMadnessCube extends EntityModBase implements IAnimatable, IAn
         this.rotationYawHead = 0;
         this.renderYawOffset = 0;
 
-        if(ticksExisted > 300) {
+        if(ticksExisted > 400) {
             world.setEntityState(this, ModUtils.PARTICLE_BYTE);
             this.setDead();
         }
         if(target != null && !world.isRemote) {
 
-            List<EntityLivingBase> targetTooSuck = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(5D), e -> !e.getIsInvulnerable() && (!(e instanceof EntityModBase)));
-            //suck nearby entities in
-            if(!targetTooSuck.isEmpty()) {
-                for(EntityLivingBase base : targetTooSuck) {
-                    if(!base.isBeingRidden() && base.canBePushed() && !(base instanceof EntityShadowPlayer)) {
-                        Vec3d posToTravelToo = this.getPositionVector().add(ModUtils.yVec(1.0D));
-                        Vec3d currPos = base.getPositionVector();
-                        Vec3d dir = posToTravelToo.subtract(currPos).normalize();
-                        ModUtils.addEntityVelocity(base, dir.scale(0.04 * 0.1));
-                    }
-                }
-            }
-
             //travel too target
             Vec3d posToTravelToo = target.getPositionVector().add(ModUtils.yVec(1.0D));
             Vec3d currPos = this.getPositionVector();
             Vec3d dir = posToTravelToo.subtract(currPos).normalize();
-            ModUtils.addEntityVelocity(this, dir.scale(0.04 * 0.05));
+            ModUtils.addEntityVelocity(this, dir.scale(0.1));
 
             //Explode on close proximity
 
-            List<EntityLivingBase> targetTooExplode = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(4D), e -> !e.getIsInvulnerable() && (!(e instanceof EntityModBase)));
+            List<EntityLivingBase> targetTooExplode = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(2D), e -> !e.getIsInvulnerable() && (!(e instanceof EntityModBase)));
 
             if(!targetTooExplode.isEmpty()) {
                 for(EntityLivingBase base : targetTooExplode) {
@@ -140,7 +126,7 @@ public class EntityMadnessCube extends EntityModBase implements IAnimatable, IAn
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5);
     }
 
@@ -191,5 +177,21 @@ public class EntityMadnessCube extends EntityModBase implements IAnimatable, IAn
     @Override
     public int tickTimer() {
         return this.ticksExisted;
+    }
+
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return true;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public EntityLivingBase getOwnerFromMagic() {
+        return owner;
     }
 }

@@ -1,11 +1,13 @@
 package com.example.structure.entity.arrow;
 
+import com.example.structure.entity.magic.IMagicEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.world.World;
 
-public abstract class EntityModArrow extends EntityArrow implements IProjectile {
+public abstract class EntityModArrow extends EntityArrow implements IProjectile, IMagicEntity {
 
     private int ticksInAir;
 
@@ -48,5 +50,20 @@ public abstract class EntityModArrow extends EntityArrow implements IProjectile 
     public void setNoGravity(boolean flight)
     {
         this.hasNoGravity = flight;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return true;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this.shootingEntity;
     }
 }

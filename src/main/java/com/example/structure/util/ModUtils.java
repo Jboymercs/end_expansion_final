@@ -502,6 +502,50 @@ public class ModUtils {
             entity.motionZ *= scale;
         }
     }
+
+
+    public static void leapTowardsWhileCheckingGround(EntityLivingBase entity, Vec3d target, float horzVel, float yVel) {
+        BlockPos pos = new BlockPos(target.x, 0, target.z);
+        int y = getSurfaceHeight(entity.world, pos, (int) target.y - 3, (int) target.y + 1);
+        if(y == 0) {
+            //failed attempt
+            System.out.println("Failed Dodge Attempt");
+            return;
+        }
+        Vec3d dir = target.subtract(entity.getPositionVector()).normalize();
+        Vec3d leap = new Vec3d(dir.x, 0, dir.z).normalize().scale(horzVel).add(ModUtils.yVec(yVel));
+        entity.motionX += leap.x;
+        if (entity.motionY < 0.1) {
+            entity.motionY += leap.y;
+        }
+        entity.motionZ += leap.z;
+
+        // Normalize to make sure the velocity doesn't go beyond what we expect
+        double horzMag = Math.sqrt(Math.pow(entity.motionX, 2) + Math.pow(entity.motionZ, 2));
+        double scale = horzVel / horzMag;
+        if (scale < 1) {
+            entity.motionX *= scale;
+            entity.motionZ *= scale;
+        }
+    }
+
+
+    public static int getSurfaceHeight(World world, BlockPos pos, int min, int max)
+    {
+        int currentY = max;
+
+        while(currentY >= min)
+        {
+            if(!world.isAirBlock(pos.add(0, currentY, 0)) && !world.isRemote && world.getBlockState(pos.add(0, currentY, 0)).isFullBlock()) {
+                return currentY;
+            }
+
+            currentY--;
+        }
+
+        return 0;
+    }
+
     // Act as a quick dash of sorts from it's location to the Player's location, in a fluid line. Used mostly for the Crystal boss
     public static void leapDash (EntityLivingBase entity, Vec3d target, float horzVel, double targetYValue) {
         Vec3d dir = target.subtract(entity.getPositionVector().normalize());
@@ -631,6 +675,10 @@ public class ModUtils {
 
     public static void addEntityVelocity(Entity entity, Vec3d vec) {
         entity.addVelocity(vec.x, vec.y, vec.z);
+    }
+
+    public static void setEntityVelocitystatic(Entity entity, Vec3d vec) {
+        entity.setVelocity(vec.x, vec.y, vec.z);
     }
 
     public static void facePosition(Vec3d pos, Entity entity, float maxYawIncrease, float maxPitchIncrease) {

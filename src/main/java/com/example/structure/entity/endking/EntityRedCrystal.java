@@ -4,8 +4,10 @@ import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -24,7 +26,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityRedCrystal extends EntityModBase implements IAnimatable {
+public class EntityRedCrystal extends EntityModBase implements IAnimatable, IMagicEntity {
     private AnimationFactory factory = new AnimationFactory(this);
 
     private final String ANIM_CRYSTAL = "summon";
@@ -112,5 +114,20 @@ public class EntityRedCrystal extends EntityModBase implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

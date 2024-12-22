@@ -1,5 +1,6 @@
 package com.example.structure.entity.barrend.ultraparasite;
 
+import com.example.structure.entity.magic.IMagicEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class EntityMoveTile extends Entity implements IEntityAdditionalSpawnData {
+public class EntityMoveTile extends Entity implements IEntityAdditionalSpawnData, IMagicEntity {
     public Block block;
     public int blockMeta;
     public int jumpDelay;
@@ -223,5 +224,20 @@ public class EntityMoveTile extends Entity implements IEntityAdditionalSpawnData
         this.blockMeta = buffer.readInt();
         this.origin = buffer.readBlockPos();
         this.jumpDelay = buffer.readInt();
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

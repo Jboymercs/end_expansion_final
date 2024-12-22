@@ -3,12 +3,14 @@ package com.example.structure.entity.trader;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.entity.seekers.EndSeekerPrime;
 import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -22,7 +24,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityControllerLift extends EntityModBase implements IAnimatable {
+public class EntityControllerLift extends EntityModBase implements IAnimatable, IMagicEntity {
 
     private AnimationFactory factory = new AnimationFactory(this);
 
@@ -134,5 +136,20 @@ public class EntityControllerLift extends EntityModBase implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return shadowPlayer;
     }
 }

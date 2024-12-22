@@ -2,9 +2,11 @@ package com.example.structure.entity.knighthouse;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.math.Vec3d;
@@ -21,7 +23,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityHealAura extends EntityModBase implements IAnimatable {
+public class EntityHealAura extends EntityModBase implements IAnimatable, IMagicEntity {
     EntityLivingBase targetStay;
 
     private String ANIM_SCALE = "scale";
@@ -123,5 +125,20 @@ public class EntityHealAura extends EntityModBase implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return false;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

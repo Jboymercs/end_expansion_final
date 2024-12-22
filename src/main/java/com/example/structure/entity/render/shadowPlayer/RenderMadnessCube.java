@@ -7,8 +7,10 @@ import com.example.structure.entity.render.geo.GeoGlowingLayer;
 import com.example.structure.entity.render.geo.RenderGeoExtended;
 import com.example.structure.entity.shadowPlayer.EntityMadnessCube;
 import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
+import com.example.structure.entity.trader.EntityAvalon;
 import com.example.structure.util.ModReference;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
@@ -27,6 +29,17 @@ public class RenderMadnessCube extends RenderGeoExtended<EntityMadnessCube> {
         super(renderManager, new ModelMadnessCube(MODEL_RESLOC, TEXTURE, "madness_cube"));
         this.addLayer(new GeoGlowingLayer<EntityMadnessCube>(this, this.TEXTURE_GETTER, this.MODEL_ID_GETTER));
 
+    }
+
+    @Override
+    public void doRender(EntityMadnessCube entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        GlStateManager.enableNormalize();
+        GlStateManager.enableBlend();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.75F);
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        GlStateManager.disableBlend();
+        GlStateManager.disableNormalize();
     }
 
     @Nullable

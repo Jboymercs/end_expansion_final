@@ -2,8 +2,10 @@ package com.example.structure.entity.shadowPlayer;
 
 import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.util.IAttack;
+import com.example.structure.util.ModUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.math.Vec3d;
 
 public class EntityAIAttackShadow<T extends EntityShadowPlayer & IAttack> extends EntityAIBase {
     private final T entity;
@@ -83,13 +85,16 @@ public class EntityAIAttackShadow<T extends EntityShadowPlayer & IAttack> extend
                 this.entity.getNavigator().clearPath();
                 ++this.strafingTime;
             }
-        else if (distSq <= 4 && canSee) {
+        else if (distSq <= 16 && canSee) {
                 this.entity.getNavigator().clearPath();
                 ++this.strafingTime;
-                double d0 = (this.entity.posX - target.posX) * 0.015;
-                double d1 = (this.entity.posY - target.posY) * 0.005;
-                double d2 = (this.entity.posZ - target.posZ) * 0.015;
-                this.entity.addVelocity(d0, d1, d2);
+                Vec3d dirToo = this.entity.getPositionVector().subtract(target.getPositionVector()).normalize();
+                Vec3d jumpTooPos = this.entity.getPositionVector().add(dirToo.scale(20));
+                Vec3d currPos = this.entity.getPositionVector();
+                Vec3d dir = jumpTooPos.subtract(currPos).normalize();
+                ModUtils.addEntityVelocity(this.entity, dir.scale(0.14));
+
+              //  this.entity.addVelocity(d0, d1, d2);
                 this.entity.faceEntity(target, this.lookSpeed, this.lookSpeed);
             } else if (!this.entity.isBackOff){
                 this.entity.getNavigator().tryMoveToEntityLiving(target, this.moveSpeedAmp);

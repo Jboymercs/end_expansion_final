@@ -4,10 +4,12 @@ import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -31,7 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityGroundSword extends EntityModBase implements IAnimatable, IAnimationTickable {
+public class EntityGroundSword extends EntityModBase implements IAnimatable, IAnimationTickable, IMagicEntity {
     /**
      * A Entity Class used for the Swords that hit the ground from the End King
      */
@@ -250,5 +252,20 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
     @Override
     public int tickTimer() {
         return this.ticksExisted;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return true;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

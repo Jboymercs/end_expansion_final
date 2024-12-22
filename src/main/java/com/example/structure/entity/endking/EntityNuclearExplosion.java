@@ -2,6 +2,7 @@ package com.example.structure.entity.endking;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
@@ -9,6 +10,7 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -31,7 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
 
-public class EntityNuclearExplosion extends EntityModBase implements IAnimatable {
+public class EntityNuclearExplosion extends EntityModBase implements IAnimatable, IMagicEntity {
     private final String ANIM_SUMMON = "explode";
 
     private final String ANIM_DAMAGE = "damage";
@@ -282,5 +284,20 @@ public class EntityNuclearExplosion extends EntityModBase implements IAnimatable
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Override
+    public boolean getDoesEntityMove() {
+        return false;
+    }
+
+    @Override
+    public boolean isDodgeable() {
+        return false;
+    }
+
+    @Override
+    public Entity getOwnerFromMagic() {
+        return this;
     }
 }

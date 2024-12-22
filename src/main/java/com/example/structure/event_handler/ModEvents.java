@@ -6,6 +6,7 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ProjectilePurple;
 import com.example.structure.entity.barrend.EntityMadSpirit;
 import com.example.structure.entity.endking.ProjectileSpinSword;
+import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.init.ModItems;
 import com.example.structure.init.ModPotions;
 import com.example.structure.items.ItemEndfallStaff;
@@ -17,6 +18,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -206,7 +208,7 @@ public class ModEvents {
             //SPawns a mad spirit upon death of an entity inflicted with Madness
             World world = event.getEntityLiving().getEntityWorld();
             if(!world.isRemote) {
-                if(entity.deathTime == 1) {
+                if(entity.deathTime == 1 && !(entity instanceof IMagicEntity)) {
                     Vec3d spawnPos = new Vec3d(entity.posX, entity.posY + 1.0, entity.posZ);
                     EntityMadSpirit spirit = new EntityMadSpirit(world);
                     spirit.setPosition(spawnPos.x, spawnPos.y, spawnPos.z);
