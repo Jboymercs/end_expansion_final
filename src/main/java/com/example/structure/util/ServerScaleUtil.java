@@ -2,11 +2,13 @@ package com.example.structure.util;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityModBase;
+import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServerScaleUtil {
@@ -102,19 +104,72 @@ public class ServerScaleUtil {
         if(currentTarget != null && !world.isRemote && currentTarget instanceof EntityPlayer) {
             double range = actor.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue();
             List<EntityPlayer> nearbySimilarTargets = actor.world.getEntitiesWithinAABB(EntityPlayer.class, actor.getEntityBoundingBox().grow(range), e-> !e.getIsInvulnerable());
-
+            List<EntityShadowPlayer> nearbyShadow= actor.world.getEntitiesWithinAABB(EntityShadowPlayer.class, actor.getEntityBoundingBox().grow(range), e-> !e.getIsInvulnerable());
             int currentPlayerCountCanSee = 0;
+            int shadowPlayerCurrent = 0;
+            //Accounting for Shadow Players
+            if(!nearbyShadow.isEmpty()) {
+                for(EntityShadowPlayer shadowPlayer : nearbyShadow) {
+                    if(shadowPlayer.getOwner() != null) {
+                        currentPlayerCountCanSee++;
+                        shadowPlayerCurrent++;
+                    }
+                }
+            }
             if(!nearbySimilarTargets.isEmpty()) {
                 //Firts gets a count
                 for(EntityPlayer baseToo : nearbySimilarTargets) {
-                    if(!baseToo.isSpectator() && !baseToo.isCreative()) {
-                        currentPlayerCountCanSee++;
-                    }
+                        if (!baseToo.isSpectator() && !baseToo.isCreative()) {
+                            currentPlayerCountCanSee++;
+                        }
                 }
                 //After checking how many players it runs a test to see if there is more than one this entity can see and then selects them as it's new target
                 for(EntityPlayer baseFrom : nearbySimilarTargets) {
                     if(currentPlayerCountCanSee > 1 && actor.getEntitySenses().canSee(baseFrom) && !baseFrom.isCreative() && !baseFrom.isSpectator()) {
                         return baseFrom;
+                    } else {
+                        //If there is only one, return current target
+                        return currentTarget;
+                    }
+
+                }
+            }
+        }
+
+        return currentTarget;
+    }
+
+
+    public static EntityLivingBase targetSwitcherIncludingShadow(EntityModBase actor, World world) {
+        EntityLivingBase currentTarget = actor.getAttackTarget();
+        if(currentTarget != null && !world.isRemote && currentTarget instanceof EntityPlayer || currentTarget != null && !world.isRemote && currentTarget instanceof EntityShadowPlayer) {
+            double range = actor.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue();
+            List<EntityLivingBase> nearbySimilarTargets = actor.world.getEntitiesWithinAABB(EntityLivingBase.class, actor.getEntityBoundingBox().grow(range), e-> !e.getIsInvulnerable());
+            int currentPlayerCountCanSee = 0;
+            List<EntityLivingBase> targetSelection = new ArrayList<>();
+
+            if(!nearbySimilarTargets.isEmpty()) {
+                //Firts gets a count
+                for(EntityLivingBase baseToo : nearbySimilarTargets) {
+
+                    if(baseToo instanceof EntityShadowPlayer) {
+                        if(((EntityShadowPlayer)baseToo).getOwner() != null) {
+                            currentPlayerCountCanSee++;
+                            targetSelection.add(baseToo);
+                        }
+                    }
+                    if(baseToo instanceof EntityPlayer) {
+                        EntityPlayer player = ((EntityPlayer) baseToo);
+                        if(!player.isSpectator() && !player.isCreative()) {
+                            currentPlayerCountCanSee++;
+                            targetSelection.add(baseToo);
+                        }
+                    }
+                }
+                //After checking how many players it runs a test to see if there is more than one this entity can see and then selects them as it's new target
+                for(EntityLivingBase baseFrom : nearbySimilarTargets) {
+                    if(!targetSelection.isEmpty() && currentPlayerCountCanSee > 1 && actor.getEntitySenses().canSee(baseFrom)) {
+                        return targetSelection.iterator().next();
                     } else {
                         //If there is only one, return current target
                         return currentTarget;

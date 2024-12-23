@@ -41,6 +41,17 @@
           "weight": 5
         }
       ]
+    },
+    {
+      "name" : "ee:big_rick",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "ee:madness_eye",
+          "weight": 5
+        }
+      ]
     }
   ]
 }

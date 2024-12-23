@@ -112,6 +112,9 @@ public class ModSoundHandler {
     public static SoundEvent GUILDER_HURT;
     public static SoundEvent GUILDER_AGGRO;
     public static SoundEvent GUILDER_CHANGE;
+
+    //Shadow Tear
+    public static SoundEvent SHADOW_TEAR_USE;
     //Barrend Golem and Parasite
     public static SoundEvent PARASITE_GROUND;
     public static SoundEvent BARREND_PARASITE_BITE;
@@ -287,6 +290,8 @@ public class ModSoundHandler {
         AVALON_CAST = registerSound("avalon.cast", "entity");
         AVALON_SPEAK = registerSound("avalon.speak", "entity");
         MINI_AVALON_SHOOT = registerSound("avalon.lazer_shoot", "entity");
+
+        SHADOW_TEAR_USE = registerSound("shadow.shadow_tear", "entity");
 
         BIOME_AMBIENCE = registerSound("ambient.ambient", "biome");
         BIOME_MUSIC = registerSound("ambient.music", "biome");

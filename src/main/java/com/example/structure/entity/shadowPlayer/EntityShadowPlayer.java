@@ -1,5 +1,6 @@
 package com.example.structure.entity.shadowPlayer;
 
+import com.example.structure.config.ItemConfig;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.EntityEnderKnight;
@@ -11,6 +12,9 @@ import com.example.structure.entity.animation.Animation;
 import com.example.structure.entity.knighthouse.knightlord.EntityBloodSlash;
 import com.example.structure.entity.magic.IMagicEntity;
 import com.example.structure.entity.shadowPlayer.action.*;
+import com.example.structure.entity.shadowPlayer.ai.EntityAIShadowHurtByTarget;
+import com.example.structure.entity.shadowPlayer.ai.EntityShadowFollow;
+import com.example.structure.entity.shadowPlayer.ai.EntityShadowOwnerAttack;
 import com.example.structure.entity.trader.EntityControllerLift;
 import com.example.structure.entity.util.EntityModThrowable;
 import com.example.structure.entity.util.IAttack;
@@ -26,10 +30,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -41,6 +46,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -61,9 +67,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -99,6 +103,8 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private static final DataParameter<Boolean> SUMMON_ORB = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> BLOOD_SLASH = EntityDataManager.createKey(EntityShadowPlayer.class, DataSerializers.BOOLEAN);
     private static final DataParameter<ItemStack> ITEM_HAND = EntityDataManager.<ItemStack>createKey(EntityShadowPlayer.class, DataSerializers.ITEM_STACK);
+
+    protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityShadowPlayer.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public void setFightModeZero(boolean value) {this.dataManager.set(FIGHT_MODE, Boolean.valueOf(value));}
     public boolean isFightModeZero() {return this.dataManager.get(FIGHT_MODE);}
     public void setFullBodyUsage(boolean value) {this.dataManager.set(FULL_BODY_USAGE, Boolean.valueOf(value));}
@@ -144,6 +150,29 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     public boolean isArenaAttack() {return this.dataManager.get(AOE_ARENA_ATTACK);}
     public boolean isBloodSlash() {return this.dataManager.get(BLOOD_SLASH);}
     public boolean isSummonOrb() {return this.dataManager.get(SUMMON_ORB);}
+
+    @Nullable
+    public UUID getOwnerId()
+    {
+        return (UUID)((Optional)this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
+    }
+
+    public void setOwnerId(@Nullable UUID p_184754_1_)
+    {
+        this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
+    }
+
+    @Nullable
+    public EntityLivingBase getOwner()
+    {
+        UUID uuid = this.getOwnerId();
+        if(uuid == null) {
+            return null;
+        }
+        else {
+            return this.world.getPlayerEntityByUUID(uuid);
+        }
+    }
 
     //Idle and movement of small non-important parts
     private final String ANIM_IDLE_LOWER = "idle_lower";
@@ -200,6 +229,15 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         nbt.setBoolean("Aoe_Arena", this.isArenaAttack());
         nbt.setBoolean("Blood_Slash", this.isBloodSlash());
         nbt.setBoolean("Summon_Orb", this.isSummonOrb());
+
+        if (this.getOwnerId() == null)
+        {
+            nbt.setString("OwnerUUID", "");
+        }
+        else
+        {
+            nbt.setString("OwnerUUID", this.getOwnerId().toString());
+        }
     }
 
     @Override
@@ -230,12 +268,31 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         if (this.hasCustomName()) {
             this.bossInfo.setName(this.getDisplayName());
         }
+        String s;
+        if (nbt.hasKey("OwnerUUID", 8))
+        {
+            s = nbt.getString("OwnerUUID");
+        }
+        else
+        {
+            String s1 = nbt.getString("Owner");
+            s = PreYggdrasilConverter.convertMobOwnerIfNeeded(Objects.requireNonNull(this.getServer()), s1);
+        }
+
+        if (!s.isEmpty())
+        {
+                this.setOwnerId(UUID.fromString(s));
+        }
     }
     private AnimationFactory factory = new AnimationFactory(this);
 
     public EntityShadowPlayer(World worldIn, float x, float y, float z) {
         super(worldIn, x, y, z);
         this.setSize(0.6F, 1.95F);
+        this.experienceValue = 400;
+        if(this.getOwner() == null && !world.isRemote) {
+            this.setUpBossAI();
+        }
     }
 
     private int potionAmount = MobConfig.shadow_potion_amount;
@@ -243,24 +300,22 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private double heal_amount_potion = MobConfig.shadow_heal_amount * this.getMaxHealth();
 
     private int heal_shadow_cooldown = MobConfig.shadow_heal_cooldown * 20;
-    public EntityPlayer owner;
     private double setShadowHealth;
     private double setShadowAttackDamage;
 
+    private int setShadowLifeTime = ItemConfig.shadow_tear_life_time * 20;
 
 
     /**
      * Used for summoning the Shadow under the Player's Aid
      * @param worldIn
-     * @param owner
      * @param potionAmount
      * @param health
      * @param attackDamage
      */
-    public EntityShadowPlayer(World worldIn, EntityPlayer owner, int potionAmount, double health, double attackDamage) {
+    public EntityShadowPlayer(World worldIn, int potionAmount, double health, double attackDamage) {
         super(worldIn);
         this.potionAmount = potionAmount;
-        this.owner = owner;
         this.setShadowAttackDamage = attackDamage;
         this.setShadowHealth = health;
         this.experienceValue = 20;
@@ -271,12 +326,16 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         super(worldIn);
         this.setSize(0.6F, 1.95F);
         this.experienceValue = 400;
+        if(this.getOwner() == null && !world.isRemote) {
+            this.setUpBossAI();
+        }
     }
 
     @Override
     public void entityInit() {
         super.entityInit();
         this.dataManager.register(ITEM_HAND, ItemStack.EMPTY);
+        this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
         this.dataManager.register(FIGHT_MODE, Boolean.valueOf(false));
         this.dataManager.register(FULL_BODY_USAGE, Boolean.valueOf(false));
         this.dataManager.register(RING_OFF, Boolean.valueOf(true));
@@ -343,21 +402,19 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
     @Override
     public void initEntityAI() {
-        super.initEntityAI();
         this.tasks.addTask(4, new EntityAIAttackShadow<>(this, 1.2, 10, 12, 0.35F));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAILookIdle(this));
-        if(owner == null) {
-            this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
-        }
+        super.initEntityAI();
     }
+
 
     @Override
     public void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((setShadowHealth != 0) ? setShadowHealth : (double) MobConfig.shadow_player_health * getHealthModifierBarrend());
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue((setShadowAttackDamage != 0) ? setShadowAttackDamage : MobConfig.shadow_player_damage * getAttackModifiersBarrend());
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40D);
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue( (double) MobConfig.shadow_player_health * getHealthModifierBarrend());
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue( MobConfig.shadow_player_damage * getAttackModifiersBarrend());
+            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.shadow_armor * ModConfig.lamented_multiplier);
@@ -393,8 +450,18 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     public void onUpdate() {
         super.onUpdate();
 
-        if(owner == null) {
+        if(this.getOwner() == null) {
             this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        }
+
+        //Shadow LifeTime
+        if(this.getOwner() != null) {
+            if(setShadowLifeTime < -1) {
+                this.setDead();
+                this.getOwner().sendMessage(new TextComponentString(TextFormatting.RED + this.getName() + ":" + TextFormatting.WHITE)
+                        .appendSibling(new TextComponentTranslation(ModUtils.LANG_CHAT + "shadow_remove")));
+            }
+            setShadowLifeTime--;
         }
 
         //curr Target
@@ -494,7 +561,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
             double healthCurr = this.getHealth() /this.getMaxHealth();
 
-            if(healthCurr <= 0.5 && !this.hasDonePhase && !this.isFightModeZero()) {
+            if(healthCurr <= 0.5 && !this.hasDonePhase && !this.isFightModeZero() && this.getOwner() == null) {
                 this.beginPhaseDialog(target);
             }
 
@@ -646,9 +713,9 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
                     (distance <= 9 && prevAttack != axe_aoe_attack && distance >= 2) ? 1/distance + needsHeavyAttack : 0,
                     (distance <= 12 && prevAttack != bs_attack && distance >= 7) ? 1/distance + needsHeavyAttack + needsFinisherAttack : 0,
                     (distance <= 13 && distance >= 9 && prevAttack != do_ranged_attack) ? 1/distance + needsRangedAttack : 0,
-                    (distance <= 11 && distance >= 4 && prevAttack != do_arena_aoe && HealthChange <= 0.5) ? 1/distance + (int)((needsRangedAttack + needsHeavyAttack)/ 2) : 0,
-                    (prevAttack != do_blood_slash && HealthChange <= 0.6 && setUpSecondPhase) ? 1000 : (distance <= 13 && distance >= 4 && prevAttack != do_blood_slash && HealthChange <= 0.5) ? 1/distance + needsRangedAttack : 0,
-                    (distance <= 13 && distance >= 5 && HealthChange <= 0.5 && prevAttack != do_evil_cube) ? 1/distance + (int) ((needsRangedAttack + needsHeavyAttack)/ 2) : 0
+                    (distance <= 11 && distance >= 4 && prevAttack != do_arena_aoe && HealthChange <= 0.5 && this.getOwner() == null) ? 1/distance + (int)((needsRangedAttack + needsHeavyAttack)/ 2) : 0,
+                    (prevAttack != do_blood_slash && this.getOwner() != null) ? 1/distance + needsRangedAttack : (prevAttack != do_blood_slash && HealthChange <= 0.6 && setUpSecondPhase) ? 1000 : (distance <= 13 && distance >= 4 && prevAttack != do_blood_slash && HealthChange <= 0.5) ? 1/distance + needsRangedAttack : 0,
+                    (distance <= 13 && distance >= 5 && HealthChange <= 0.5 && prevAttack != do_evil_cube && this.getOwner() == null) ? 1/distance + (int) ((needsRangedAttack + needsHeavyAttack)/ 2) : 0
             };
             prevAttack = ModRand.choice(attacks, rand, weights).next();
 
@@ -1341,9 +1408,13 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     @Override
     public void onDeath(DamageSource cause) {
 
-        if(!setDeathTooActive) {
+        if(!setDeathTooActive && this.getOwner() == null) {
 
             this.beginDeathDialog();
+            super.onDeath(cause);
+        } else {
+            this.setDropItemsWhenDead(false);
+            this.experienceValue = 0;
             super.onDeath(cause);
         }
     }
@@ -1351,7 +1422,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
-        if(owner == null) {
+        if(this.getOwner() == null) {
             this.bossInfo.addPlayer(player);
         }
     }
@@ -1359,7 +1430,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
-        if(owner == null) {
+        if(this.getOwner() == null) {
             this.bossInfo.removePlayer(player);
         }
     }
@@ -1441,6 +1512,44 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
         }
     }
 
+    protected void setUpBossAI() {
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, 1, true, false, null));
+    }
+
+    public void onSummonViaPlayer(BlockPos pos, EntityPlayer owner) {
+        BlockPos offset = pos.add(new BlockPos(0,0,0));
+        this.setPosition(offset.getX(), offset.getY(), offset.getZ());
+        this.setUpOwnerAttributes();
+        this.setUpOwnerAI();
+        this.setCustomNameTag(owner.getName() + "'s Shadow");
+        this.setFightModeZero(true);
+        this.setFullBodyUsage(true);
+        this.setSummonStart(true);
+        this.setImmovable(true);
+        this.isBlackParticles = true;
+        addEvent(()-> this.isBlackParticles = false, 90);
+        addEvent(()-> {
+            this.setFightModeZero(false);
+            this.setFullBodyUsage(false);
+            this.setSummonStart(false);
+            this.setImmovable(false);
+        }, 180);
+    }
+
+    protected void setUpOwnerAI() {
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityModBase>(this, EntityModBase.class, 1, true, false, null));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityMob>(this, EntityMob.class, 1, true, false, null));
+        this.targetTasks.addTask(3, new EntityAIShadowHurtByTarget(this));
+        this.targetTasks.addTask(4, new EntityShadowOwnerAttack(this));
+        this.tasks.addTask(5, new EntityShadowFollow(this, 1.4D, 3, 16));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 9));
+    }
+
+    protected void setUpOwnerAttributes() {
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(setShadowHealth * getHealthModifierBarrend());
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(setShadowAttackDamage * getAttackModifiersBarrend());
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30D);
+    }
 
 
     /**
@@ -1450,6 +1559,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     public void beginFirstDialog() {
         this.lockLook = true;
         this.isBlackParticles = true;
+        this.playSound(ModSoundHandler.SHADOW_TEAR_USE, 1.0f, 1.0f);
         addEvent(()-> this.isBlackParticles = false, 50);
         addEvent(()-> this.lockLook = false, 100);
 

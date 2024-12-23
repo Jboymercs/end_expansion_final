@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "R",
+    "#"
+  ],
+  "key": {
+    "R": {
+      "item": "ee:shadow_tear"
+    },
+    "#": {
+      "item": "ee:green_crystal_item"
+    },
+    "X": {
+      "item": "ee:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "ee:shadow_tear_two"
+  }
+}

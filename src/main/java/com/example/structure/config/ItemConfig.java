@@ -100,7 +100,27 @@ public class ItemConfig {
     @Config.Name("Shadow Tear Cooldown")
     @Config.Comment("Change the cooldown of the Shadow Tear, in seconds")
     @Config.RequiresMcRestart
-    public static int shadow_tear_cooldown = 240;
+    public static int shadow_tear_cooldown = 600;
+
+    @Config.Name("Shadow Tear Summon Health")
+    @Config.Comment("Change the Health of the Shadow Tear at base tier")
+    @Config.RequiresMcRestart
+    public static double shadow_tear_health = 50;
+
+    @Config.Name("Shadow Tear Summon Attack Damage")
+    @Config.Comment("Change the Attack Damage of the Shadow Tear at base tier")
+    @Config.RequiresMcRestart
+    public static double shadow_tear_attack_damage = 10;
+
+    @Config.Name("Shadow Tear Summon Lifetime")
+    @Config.Comment("Change the Shadow Tear lifetime, in seconds")
+    @Config.RequiresMcRestart
+    public static int shadow_tear_life_time = 220;
+
+    @Config.Name("Shadow Tear Multiplier")
+    @Config.Comment("Change the multiplier of upgrading the shadow Tear to the 2nd tier. This multiplies lifetime, health, attack damage by this factor")
+    @Config.RequiresMcRestart
+    public static double shadow_tear_upgrade = 1.6;
 
     @Config.Name("Crown of A Past Era Cooldown")
     @Config.Comment("Change the cooldown of the Crown of A Past Era, in seconds")

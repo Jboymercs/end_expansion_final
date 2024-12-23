@@ -2,6 +2,7 @@ package com.example.structure.entity;
 
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.ai.MobGroundNavigate;
+import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.ServerScaleUtil;
 import com.example.structure.util.integration.ModIntegration;
@@ -174,11 +175,15 @@ public abstract class EntityModBase extends EntityCreature {
         }
         //This is where target Switching occurs for bosses
         if(this.iAmBossMob && checkNearbyPlayers <= 0 && target != null) {
-                if(target instanceof EntityPlayer) {
-                    //Makes sure it's a player for the second time in here, just as a double check.
-                    this.setAttackTarget(ServerScaleUtil.targetSwitcher(this, world));
+                if(target instanceof EntityShadowPlayer || target instanceof EntityPlayer) {
+                    this.setAttackTarget(ServerScaleUtil.targetSwitcherIncludingShadow(this, world));
                     this.checkNearbyPlayers = 250;
-            }
+                }
+            //    if(target instanceof EntityPlayer) {
+                    //Makes sure it's a player for the second time in here, just as a double check.
+            //        this.setAttackTarget(ServerScaleUtil.targetSwitcher(this, world));
+             //       this.checkNearbyPlayers = 250;
+         //   }
         } else {
             checkNearbyPlayers--;
         }

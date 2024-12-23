@@ -1040,6 +1040,17 @@
 
     ]
   },
+  "entity.shadow.shadow_tear": {
+    "category": "entity",
+    "subtitle": "entity.shadow.shadow_use",
+    "sounds": [
+      {
+        "name": "ee:entity/shadow/shadow_tear",
+        "stream": true
+      }
+
+    ]
+  },
   "block.door.power": {
     "category": "block",
     "subtitle": "block.door.power",

@@ -150,7 +150,10 @@ public class ModItems {
     public static final Item ACID_PROJECTILE = new ItemBase("green_orb", null);
     public static final Item PARASITE_PROJECTILE = new ItemProjectileBomb("parasitebomb");
 
-    public static final Item WASTELAND_MUSIC = new ItemEEMusicDisc("wasteland_disc", ModSoundHandler.BIOME_MUSIC);
+    public static final Item WASTELAND_MUSIC = new ItemEEMusicDisc("wasteland_disc", ModSoundHandler.BIOME_MUSIC).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static Item MADNESS_EYE = new ItemMadnessEyeKey("madness_eye", ModCreativeTabs.ITEMS, "madness_eye_desc");
+    public static Item SHADOW_TEAR = new ItemShadowTear("shadow_tear", ModCreativeTabs.ITEMS, "shadow_tear_desc", false);
+    public static Item SHADOW_TEAR_TWO = new ItemShadowTear("shadow_tear_two", ModCreativeTabs.ITEMS, "shadow_tear_two_desc", true);
 
     public static final Item FAKE_HEALING_POTION = new ItemBase("fake_potion", null);
     //Misc.

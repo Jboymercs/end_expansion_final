@@ -1,6 +1,7 @@
 package com.example.structure.entity.knighthouse.knightlord;
 
 import com.example.structure.entity.Projectile;
+import com.example.structure.entity.shadowPlayer.EntityShadowPlayer;
 import com.example.structure.util.ModColors;
 import com.example.structure.util.ModDamageSource;
 import com.example.structure.util.ModRand;
@@ -9,6 +10,7 @@ import com.example.structure.util.handlers.ParticleManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -90,6 +92,11 @@ public class EntityBloodSlash extends Projectile {
     protected void onQuakeUpdate() {
         List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().grow(AREA_FACTOR).expand(0, 0.25f, 0));
         for (Entity entity : list) {
+            if(entity instanceof EntityPlayer && this.shootingEntity instanceof EntityShadowPlayer) {
+                if(((EntityShadowPlayer)shootingEntity).getOwner() != null) {
+                    return;
+                }
+            }
             if (entity instanceof EntityLivingBase && this.shootingEntity != null && entity != this.shootingEntity) {
                 int burnTime = this.isBurning() ? 5 : 0;
                 entity.setFire(burnTime);

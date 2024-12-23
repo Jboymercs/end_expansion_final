@@ -217,6 +217,9 @@ item.red_axe_reinforced.name=Reinforced Lustrian Axe
 item.record.wasteland_disc.desc=UnseenDontRun - Long Road Ahead
 item.wasteland_disc.name=Wasteland Music Disc
 item.fake_potion.name=Fake Healing Potion
+item.madness_eye.name=Eye of Madness
+item.shadow_tear.name=Shadow Tear
+item.shadow_tear_two.name=Upgraded Shadow Tear
 entity.acid_proj.name=Parasite Acid
 entity.bomb_proj.name=Avalon's Bomb
 entity.controller_lift.name=Guilder Lift
@@ -263,6 +266,9 @@ ee.dialog.shadow_end_2=Just a figment of intangible reality.
 ee.dialog.shadow_end_3=But you.
 ee.dialog.shadow_end_4=If I only I could be what you are.
 ee.dialog.shadow_end_5=A veritable MONSTER.
+
+#Shadow Player
+ee.dialog.shadow_remove=I am being summoned back to the void player, may you win this fight.
 
 #Advancements
 advancements.ee.root.title=End Expansion
@@ -408,6 +414,9 @@ ee.desc.reinforced_red_axe=Cursed with the Red Rage, Right Clicking will apply S
 ee.desc.madness_berries_desc=Gives Regeneration II for a longer period but applies Madness.
 ee.desc.mad_trinket_desc=Idea not in yet
 ee.desc.bold_trinket_desc=On right click you are immune to damage for a short period of time.
+ee.desc.shadow_tear_desc=On right click you will summon forth the Players Shadow to aid you. Can be upgraded!
+ee.desc.shadow_tear_two_desc=On right click you will summon forth the Players Shadow to aid you with more health, attack damage.
+ee.desc.madness_eye_desc=Used on the obelisk within a structure high in the sky above the Bogs.
 death.attack.ee:maelstrom=%1$s succumbed to the void
 death.attack.ee:mobMaelstrom=%1$s was killed by a %2$s
 death.attack.ee:playerMaelstrom=%1$s was killed by %2$s
