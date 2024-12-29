@@ -4,6 +4,8 @@ import com.example.structure.config.ItemConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.painting.EntityEEPainting;
 import com.example.structure.items.*;
+import com.example.structure.items.armor.ArmorLamented;
+import com.example.structure.items.armor.ArmorLamentedHelmet;
 import com.example.structure.items.armor.ModArmorBase;
 import com.example.structure.items.arrow.ItemArrowBase;
 import com.example.structure.items.arrow.ItemGreenArrow;
@@ -50,6 +52,8 @@ public class ModItems {
     private static final ItemArmor.ArmorMaterial AMBER_ARMOR = EnumHelper.addArmorMaterial("amber", ModReference.MOD_ID + ":amber", 450, new int[]{(int)((4 + ModIntegration.getAdditiveArmorCount())* ModConfig.cordium_armor_scale), (int)((7 + ModIntegration.getAdditiveArmorCount())* ModConfig.cordium_armor_scale), (int)((9 + ModIntegration.getAdditiveArmorCount())* ModConfig.cordium_armor_scale), (int)((4 + ModIntegration.getAdditiveArmorCount())* ModConfig.cordium_armor_scale)}, 40, SoundEvents.ITEM_ARMOR_EQUIP_IRON, (float)(4F * ModConfig.cordium_armor_scale));
     private static final ItemArmor.ArmorMaterial ENDFALL_ARMOR = EnumHelper.addArmorMaterial("endfall", ModReference.MOD_ID + ":endfallarmor", 650, new int[]{(int) ((6 + ModIntegration.getAdditiveArmorCount())* ModConfig.fall_armor_scale), (int) ((9 + ModIntegration.getAdditiveArmorCount())* ModConfig.fall_armor_scale), (int) ((12 + ModIntegration.getAdditiveArmorCount() )* ModConfig.fall_armor_scale), (int) ((6 + ModIntegration.getAdditiveArmorCount())* ModConfig.fall_armor_scale)}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, (float)(6F * ModConfig.fall_armor_scale));
 
+    private static final ItemArmor.ArmorMaterial LAMENTED_ARMOR = EnumHelper.addArmorMaterial("lamented", ModReference.MOD_ID + ":lamented", 325, new int[]{(int) ((3 + ModIntegration.getAdditiveArmorCount())* ModConfig.fall_armor_scale), (int) ((6 + ModIntegration.getAdditiveArmorCount())* ModConfig.fall_armor_scale), (int) ((8 + ModIntegration.getAdditiveArmorCount() )* ModConfig.fall_armor_scale), (int) ((3 + ModIntegration.getAdditiveArmorCount())* ModConfig.fall_armor_scale)}, 15, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, (float) (2.5F));
+
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
     //Guide Book
@@ -83,6 +87,9 @@ public class ModItems {
     public static final Item AMBER_CHESTPLATE = new ModArmorBase("amber_chestplate", AMBER_ARMOR, 1, EntityEquipmentSlot.CHEST, "amber", "amber_desc");
     public static final Item AMBER_LEGGINGS = new ModArmorBase("amber_leggings", AMBER_ARMOR, 2, EntityEquipmentSlot.LEGS, "amber", "amber_desc");
     public static final Item AMBER_BOOTS = new ModArmorBase("amber_boots", AMBER_ARMOR, 1, EntityEquipmentSlot.FEET, "amber", "amber_desc");
+    public static final Item LAMENTED_CHESTPLATE = new ArmorLamented("lamented_chestplate", LAMENTED_ARMOR, 1, EntityEquipmentSlot.CHEST, "lamented", "lamented_armor_desc");
+    public static final Item LAMENTED_HELMET = new ArmorLamentedHelmet("lamented_helmet", LAMENTED_ARMOR, 1, EntityEquipmentSlot.HEAD, "lamented_helmet", "lamented_armor_desc");
+
 
     public static final Item MOD_PAINTING = new ItemPainting(EntityEEPainting.class, "lamented_islands_item", ModCreativeTabs.ITEMS, "painting_desc");
 
@@ -154,6 +161,8 @@ public class ModItems {
     public static Item MADNESS_EYE = new ItemMadnessEyeKey("madness_eye", ModCreativeTabs.ITEMS, "madness_eye_desc");
     public static Item SHADOW_TEAR = new ItemShadowTear("shadow_tear", ModCreativeTabs.ITEMS, "shadow_tear_desc", false);
     public static Item SHADOW_TEAR_TWO = new ItemShadowTear("shadow_tear_two", ModCreativeTabs.ITEMS, "shadow_tear_two_desc", true);
+    public static Item STAR_SHARD_RAW = new ItemBase("star_shard_raw", ModCreativeTabs.ITEMS);
+    public static Item STAR_SHARD = new ItemDescription("star_shard", ModCreativeTabs.ITEMS, "star_shard_desc");
 
     public static final Item FAKE_HEALING_POTION = new ItemBase("fake_potion", null);
     //Misc.

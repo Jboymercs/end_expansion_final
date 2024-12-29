@@ -7,10 +7,12 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
+import com.example.structure.world.Biome.ore.WorldGenStarShard;
 import com.example.structure.world.api.lamentedIslands.WorldGenLamentedIslands;
 import com.example.structure.world.api.trader.WorldGenTraderOutcamp;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -95,8 +97,19 @@ public class WorldGenCustomStructure implements IWorldGenerator {
 
         }
 
+        }
+    }
 
 
+    private void genOre(IBlockState block, int size, int spawnChances, int minHeight, int maxHeight, World world, Random rand, int chunkX, int chunkZ){
+        WorldGenStarShard generator = new WorldGenStarShard(size, block);
+        int dy =  maxHeight - minHeight +1;
+        if (dy < 1) return;
+        for (int i = 0; i < spawnChances; i++){
+            int x = chunkX * 16 + rand.nextInt(16);
+            int y = minHeight + rand.nextInt(dy);
+            int z = chunkZ * 16 + rand.nextInt(16);
+            generator.generate(world, rand, new BlockPos(x, y, z));
         }
     }
 

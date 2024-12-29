@@ -28,7 +28,7 @@ public class WorldProviderEndEE extends WorldProviderTheEnd {
     @SideOnly(Side.CLIENT)
     @Override
     public boolean isSkyColored() {
-        return false;
+        return true;
     }
 
     @SideOnly(Side.CLIENT)
@@ -51,7 +51,7 @@ public class WorldProviderEndEE extends WorldProviderTheEnd {
     @Override
     public Vec3d getFogColor(final float celestialAngle, final float partialTicks) {
 
-        return getFogColor(world, celestialAngle, partialTicks, 0.09411766, 0.07529412, 0.09411766, NetherAPIFogColorEvent.Nether::new);
+        return getFogColor(world, celestialAngle, partialTicks, 0.09411766, 0.07529412, 0.09411766, NetherAPIFogColorEvent.End::new);
     }
 
     @Override

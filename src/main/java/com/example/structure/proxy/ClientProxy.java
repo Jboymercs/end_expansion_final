@@ -6,6 +6,8 @@ import com.example.structure.entity.util.data.GlowingMetadataSectionSerializer;
 import com.example.structure.event_handler.ClientRender;
 import com.example.structure.event_handler.client.MusicHandlerEE;
 import com.example.structure.gui.book.GuiBook;
+import com.example.structure.init.ModItems;
+import com.example.structure.items.model.ModelPureHelmet;
 import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.handlers.RenderHandler;
 import com.example.structure.util.particles.ParticlePixel;
@@ -13,10 +15,12 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,6 +39,8 @@ public class ClientProxy extends CommonProxy {
     public void registerItemRenderer(Item item, int meta, String id) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
     }
+
+    private final ModelBiped MODEL_LAMENTED_HELMET = new ModelPureHelmet(0F);
 
     @Override
     public void setFancyGraphics(BlockLeavesBase block, boolean isFancy) {
@@ -111,6 +117,14 @@ public class ClientProxy extends CommonProxy {
         }
 
         return super.doesPlayerHaveXAdvancement(player, Id);
+    }
+
+    @Override
+    public Object getArmorModel(Item item, EntityLivingBase entity) {
+        if(item == ModItems.LAMENTED_HELMET){
+            return MODEL_LAMENTED_HELMET;
+        }
+        return null;
     }
 
     @Override

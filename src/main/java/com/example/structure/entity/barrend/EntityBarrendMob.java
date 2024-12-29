@@ -27,7 +27,7 @@ public abstract class EntityBarrendMob extends EntityModBase {
     }
 
 
-    private int checkForEnemies = 60;
+    private int checkForEnemies = 100;
 
     @Override
     public void onUpdate() {
@@ -53,12 +53,12 @@ public abstract class EntityBarrendMob extends EntityModBase {
                                 this.setAttackTarget(entity);
                                 this.checkForEnemies = 300;
                             } else {
-                                this.checkForEnemies = 60;
+                                this.checkForEnemies = 100;
                             }
                         }
                     }
                 }
-                this.checkForEnemies = 60;
+                this.checkForEnemies = 100;
             }
 
         } else {

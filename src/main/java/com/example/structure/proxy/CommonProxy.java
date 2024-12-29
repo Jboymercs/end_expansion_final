@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -97,6 +98,10 @@ public class CommonProxy implements IGuiHandler {
 
     public void openGuiBook(ItemStack bestiary, EntityPlayer player) {
 
+    }
+
+    public Object getArmorModel(Item item, EntityLivingBase entity) {
+        return null;
     }
 
     public boolean doesPlayerHaveXAdvancement(EntityPlayer player, ResourceLocation Id) {

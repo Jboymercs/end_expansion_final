@@ -35,6 +35,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeForest;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.MapGenStructure;
@@ -125,7 +126,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
     {
         //Ash Heights
         if(rand.nextInt(2) == 0) {
-            int yHieght = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 70);
+            int yHieght = getEndSurfaceHeight(world, pos.add(random.nextInt(16), 0, random.nextInt(16)), 50, 70);
             if(yHieght > 0) {
                 ashHeights.generate(world, rand, pos.add(ModRand.range(1, 16), yHieght + 1, ModRand.range(1, 16)));
             }
@@ -134,9 +135,9 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         //Ash Spikes
         for (int k2 = 0; k2 < this.spikesPerChunk; ++k2)
         {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
-            int yHieght = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 70);
+            int l6 = random.nextInt(14) + 2;
+            int k10 = random.nextInt(14) + 2;
+            int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
             if(yHieght > 0) {
                 this.spikes.generate(world, random, pos.add(l6, yHieght, k10));
             }
@@ -145,9 +146,9 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         //Geyser's
         if(rand.nextInt(7) == 0) {
             for (int k2 = 0; k2 < this.geyserPerChunk; ++k2) {
-                int l6 = random.nextInt(16) + 8;
-                int k10 = random.nextInt(16) + 8;
-                int yHieght = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 70);
+                int l6 = random.nextInt(16);
+                int k10 = random.nextInt(16);
+                int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
                 if (yHieght > 0) {
                     this.geyser.generate(world, random, pos.add(l6, yHieght, k10));
                 }
@@ -156,9 +157,9 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         //Red Crystal Ore
         if(rand.nextInt(30) == 1) {
             for (int k2 = 0; k2 < this.crystalSelect; ++k2) {
-                int l6 = random.nextInt(16) + 8;
-                int k10 = random.nextInt(16) + 8;
-                int yHieght = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 70);
+                int l6 = random.nextInt(15) + 2;
+                int k10 = random.nextInt(15) + 2;
+                int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
                 if (yHieght > 0) {
                 this.crystalOre.generate(world, random, pos.add(l6, yHieght, k10));
                 }
@@ -167,9 +168,9 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         //Ash Ruins
         if(rand.nextInt(4) == 0) {
             for (int k2 = 0; k2 < this.ruinsPerChunk; ++k2) {
-                int l6 = random.nextInt(16) + 8;
-                int k10 = random.nextInt(16) + 8;
-                int yHieght2 = getEndSurfaceHeight(world, pos.add(16, 0, 16), 50, 90);
+                int l6 = random.nextInt(16) + 1;
+                int k10 = random.nextInt(16) + 1;
+                int yHieght2 = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 90);
                 if (yHieght2 > 0 && world.getBlockState(pos.add(pos.getX() >> 4, yHieght2, pos.getZ() >> 4)).isFullBlock()) {
                     WorldGenStructure ruin = ModRand.choice(ruins);
                     ruin.generate(world, rand, pos.add(l6, yHieght2, k10));
@@ -179,8 +180,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
 
         //Vines
         for(int k2 = 0; k2< ModRand.range(30, 50); k2++) {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
+            int l6 = random.nextInt(16) + 1;
+            int k10 = random.nextInt(16) + 1;
             int depthSignature = 2;
             int vineLength = ModRand.range(1, 4);
             for(int y = 60; y > 5; y--) {
@@ -198,8 +199,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
 
         //Plants
         for(int k2 = 0; k2 < ModRand.range(30, 50);k2++) {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
+            int l6 = random.nextInt(16) + 1;
+            int k10 = random.nextInt(16) + 1;
             int depthSignature = 2;
             for(int y = 45; y > 14; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
@@ -218,8 +219,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
 
         //Corruption Blocks
         for(int k2 = 0; k2 < ModRand.range(30, 50);k2++) {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
+            int l6 = random.nextInt(16) + 1;
+            int k10 = random.nextInt(16) + 1;
             for(int y = 40; y > 15; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState() && world.rand.nextInt(2) == 0) {
@@ -230,8 +231,8 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
 
         //Cordium Ore
         for(int k2 = 0; k2 < ModRand.range(2, 5);k2++) {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
+            int l6 = random.nextInt(15) + 2;
+            int k10 = random.nextInt(15) + 2;
             for(int y = 40; y > 15; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 if(currentBlock == ModBlocks.BROWN_END_STONE.getDefaultState() && world.rand.nextInt(7) == 0) {
@@ -273,6 +274,7 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         }
         return 0;
     }
+
 
 
 

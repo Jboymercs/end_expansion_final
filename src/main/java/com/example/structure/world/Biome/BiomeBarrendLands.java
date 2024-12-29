@@ -9,7 +9,12 @@ import com.example.structure.entity.barrend.EntityMadSpirit;
 import com.example.structure.entity.barrend.EntityVoidTripod;
 import com.example.structure.init.ModBlocks;
 import com.example.structure.util.ModRand;
+import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.world.Biome.barrend.*;
+import com.example.structure.world.Biome.barrend.portal.WorldGenBarePortal;
+import com.example.structure.world.Biome.barrend.spires.WorldGenSpireBase;
+import com.example.structure.world.Biome.generation.WorldGenAshHeights;
+import com.example.structure.world.Biome.ore.WorldGenStarShard;
 import com.example.structure.world.api.barrend_crypts.WorldGenBarrendCrypt;
 import com.example.structure.world.islands.WorldGenOutpost;
 import git.jbredwards.nether_api.api.audio.IDarkSoundAmbience;
@@ -49,8 +54,11 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
 
     public WorldGenBarrendCrypt barrend_crypt = new WorldGenBarrendCrypt();
 
+    public WorldGenerator barrendHeights = new WorldGenSpireBase();
     private final WorldGenBarrendArches[] arches = {new WorldGenBarrendArches("arch_1"),new WorldGenBarrendArches("arch_2"),new WorldGenBarrendArches("arch_3"),
             new WorldGenBarrendArches("arch_4"),};
+
+    private final WorldGenerator barrend_portal = new WorldGenBarePortal("bare_portal");
 
     private WorldGenBarePatches bare_sand_patches = new WorldGenBarePatches();
     private WorldGenBareAcid bare_acid_patches = new WorldGenBareAcid();
@@ -76,12 +84,25 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
 
     @Override
     public void decorate(World world, Random rand, BlockPos pos) {
+
+
+        //Barrend Islands
+
+            for(int k2 = 0; k2 < ModRand.range(0, 3); k2++) {
+                int l6 = random.nextInt(16) + 8;
+                int k10 = random.nextInt(16) + 8;
+                int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
+                if(yHieght > 54 && rand.nextInt(2) == 0) {
+                    barrendHeights.generate(world, rand, pos.add(l6, yHieght + (rand.nextInt(2) == 0 ? ModRand.range(25, 30) : ModRand.range(65, 70)), k10));
+                }
+            }
+
         //Plants
         for (int k2 = 0; k2 < ModRand.range(8, 30); k2++) {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
+            int l6 = random.nextInt(16);
+            int k10 = random.nextInt(16);
             int depthSignature = 2;
-            for (int y = 110; y > 32; y--) {
+            for (int y = 160; y > 32; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 if (depthSignature == 1) {
                     if(rand.nextInt(3) == 0) {
@@ -104,7 +125,7 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
                 int l6 = random.nextInt(16) + 8;
                 int k10 = random.nextInt(16) + 8;
                 int depthSignature = 2;
-                for (int y = 110; y > 50; y--) {
+                for (int y = 160; y > 50; y--) {
                     IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                     if (depthSignature == 1) {
                             WorldGenBarrendTree tree = ModRand.choice(barrendTrees);
@@ -123,10 +144,10 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
         //ruins
         if (world.rand.nextInt(4) == 0) {
             for (int k2 = 0; k2 < ModRand.range(1, 4); k2++) {
-                int l6 = random.nextInt(16) + 8;
-                int k10 = random.nextInt(16) + 8;
+                int l6 = random.nextInt(12) + 2;
+                int k10 = random.nextInt(12) + 2;
                 int depthSignature = 2;
-                for (int y = 110; y > 32; y--) {
+                for (int y = 160; y > 32; y--) {
                     IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                     if (depthSignature == 1) {
                         WorldGenBareSmallRuins tree = ModRand.choice(barrendRuins);
@@ -145,10 +166,10 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
 
         //Sand Patches
         for(int k2 = 0; k2 < ModRand.range(1, 3);k2++) {
-            int l6 = random.nextInt(16) + 8;
-            int k10 = random.nextInt(16) + 8;
+            int l6 = random.nextInt(8) + 4;
+            int k10 = random.nextInt(8) + 4;
             int depthSignature = 2;
-            for(int y = 120; y > 32; y--) {
+            for(int y = 160; y > 32; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 if(depthSignature == 1) {
                     if(!world.isAirBlock(pos.add(l6, y, k10))) {
@@ -170,7 +191,7 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
             int l6 = random.nextInt(16) + 8;
             int k10 = random.nextInt(16) + 8;
             int depthSignature = 2;
-            for(int y = 120; y > 32; y--) {
+            for(int y = 160; y > 32; y--) {
                 IBlockState currentBlock = world.getBlockState(pos.add(l6, y, k10));
                 if(depthSignature == 1) {
                     if(!world.isAirBlock(pos.add(l6, y, k10))) {
@@ -232,13 +253,38 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
             archTooGenerate.generate(chunkGenerator.getWorld(), random, pos.add(0, y -4, 0));
         }
 
+        //Barrend Portal Summoning Structure
+        if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 100) {
+            int y = getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ());
+            barrend_portal.generate(chunkGenerator.getWorld(), random, pos.add(0, y - 2, 0));
+        }
+
         //Barrend Crypts
         if(getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ()) > 58 && ModConfig.dev_stuff_enabled) {
             int y = getGroundFromAbove(chunkGenerator.getWorld(), pos.getX(), pos.getZ());
-            barrend_crypt.generate(chunkGenerator.getWorld(), random, pos.add(0, y, 0));
+            if(y < 61) {
+                barrend_crypt.generate(chunkGenerator.getWorld(), random, pos.add(0, y, 0));
+            }
         }
 
+        //StarShard Ore
+       // genOre(ModBlocks.STAR_SHARD_ORE.getDefaultState(), ModRand.range(1, 4), 10, 80, 160, chunkGenerator.getWorld(), random, chunkX, chunkZ);
 
+
+
+    }
+
+
+    private void genOre(IBlockState block, int size, int spawnChances, int minHeight, int maxHeight, World world, Random rand, int chunkX, int chunkZ){
+        WorldGenStarShard generator = new WorldGenStarShard(size, block);
+        int dy =  maxHeight - minHeight +1;
+        if (dy < 1) return;
+        for (int i = 0; i < spawnChances; i++){
+            int x = chunkX + rand.nextInt(16);
+            int y = minHeight + rand.nextInt(dy);
+            int z = chunkZ + rand.nextInt(16);
+            generator.generate(world, rand, new BlockPos(x, y, z));
+        }
     }
 
     @Override
@@ -309,6 +355,21 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
         }
 
         return y;
+    }
+
+    private int getEndSurfaceHeight(World world, BlockPos pos, int min, int max)
+    {
+        int maxY = max;
+        int minY = min;
+        int currentY = maxY;
+
+        while(currentY >= minY)
+        {
+            if(!world.isAirBlock(pos.add(0, currentY, 0)))
+                return currentY;
+            currentY--;
+        }
+        return 0;
     }
 
     @Nullable

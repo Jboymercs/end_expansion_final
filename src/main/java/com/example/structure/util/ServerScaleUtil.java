@@ -182,4 +182,55 @@ public class ServerScaleUtil {
         return currentTarget;
     }
 
+
+
+    public static int getPlayers(EntityLivingBase actor, World world) {
+
+        int playersNearby = 0;
+
+        if(!world.isRemote) {
+            List<EntityPlayer> nearbyPlayers = actor.world.getEntitiesWithinAABB(EntityPlayer.class, actor.getEntityBoundingBox().grow(60D), e -> !e.getIsInvulnerable());
+            if (!nearbyPlayers.isEmpty()) {
+                for (EntityPlayer playerCap : nearbyPlayers) {
+                    if (!playerCap.isCreative() && !playerCap.isSpectator()) {
+                        playersNearby++;
+                    }
+                }
+            }
+        }
+
+        if(playersNearby > 1) {
+            //subtract one for the first player, the first player is always base stats, and it only adds after the first player is accounted for
+            return playersNearby - 1;
+        } else {
+            return 0;
+        }
+    }
+
+
+    /**
+     * Used for resetting bosses if they have killed a player and there is no current active targets
+     * @param actor
+     * @param world
+     * @return
+     */
+    public static int getPlayersForReset(EntityLivingBase actor, World world) {
+
+        int playersNearby = 0;
+
+        if(!world.isRemote) {
+            double range = actor.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue();
+            List<EntityPlayer> nearbyPlayers = actor.world.getEntitiesWithinAABB(EntityPlayer.class, actor.getEntityBoundingBox().grow(range), e -> !e.getIsInvulnerable());
+            if (!nearbyPlayers.isEmpty()) {
+                for (EntityPlayer playerCap : nearbyPlayers) {
+                    if (!playerCap.isCreative() && !playerCap.isSpectator()) {
+                        playersNearby++;
+                    }
+                }
+            }
+        }
+
+        return playersNearby;
+    }
+
 }

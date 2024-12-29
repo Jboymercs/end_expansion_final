@@ -40,10 +40,10 @@ public class StructureHandler {
         MapGenStructureIO.registerStructure(WorldGenLamentedIslands.Start.class, "LamentedIslands");
         MapGenStructureIO.registerStructureComponent(LamentedIslandsTemplate.class, "LIP");
         //Barrend Crypts
-        if(ModConfig.dev_stuff_enabled) {
-            MapGenStructureIO.registerStructure(WorldGenBarrendCrypt.Start.class, "BarrendCrypts");
-            MapGenStructureIO.registerStructureComponent(BarrendCryptTemplate.class, "BCP");
-        }
+
+        MapGenStructureIO.registerStructure(WorldGenBarrendCrypt.Start.class, "BarrendCrypts");
+        MapGenStructureIO.registerStructureComponent(BarrendCryptTemplate.class, "BCP");
+
         //Replaced Stronghold
         MinecraftForge.TERRAIN_GEN_BUS.register(new EventStronghold());
         MapGenStructureIO.registerStructure(MapGenBetterStronghold.Start.class, "BetterStronghold");

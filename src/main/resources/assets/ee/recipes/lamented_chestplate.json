@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "VVV",
+    "#V#"
+  ],
+  "key": {
+    "#": {
+      "item": "ee:purple_crystal_item"
+    },
+    "V": {
+      "item": "ee:star_shard"
+    }
+  },
+  "result": {
+    "item": "ee:lamented_chestplate"
+  }
+}

@@ -133,6 +133,7 @@ public class ModBlocks {
     public static final Block BARE_BARK = new BlockLogBase("bare_bark", WOOD_HARDNESS, WOOD_RESISTANCE, EESoundTypes.BARREND_LOG).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_BARK_HOLE = new BlockLogBase("bare_bark_hole", WOOD_HARDNESS, WOOD_RESISTANCE, EESoundTypes.BARREND_LOG).setCreativeTab(ModCreativeTabs.ITEMS);
     public static final Block BARE_BARK_HOLE_FILLED = new BlockFilledBarrendLog("bark_hole_filled", WOOD_HARDNESS, WOOD_RESISTANCE, SoundType.SLIME, ModItems.BLOODWEED_REFINED).setCreativeTab(ModCreativeTabs.ITEMS);
+    public static final Block STAR_SHARD_ORE = new BlockStarShard("star_shard_ore", STONE_HARDNESS, STONE_RESISTANCE, EESoundTypes.ASH);
 
     //Misc
     public static final Block MEGA_STRUCTURE_BLOCK = new BlockMegaStructure("mega_structure_block");

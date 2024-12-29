@@ -190,7 +190,6 @@ public class RenderHandler {
         //Blood Slash
         registerProjectileRenderer(EntityBloodSlash.class, ModItems.INVISIBLE);
 
-        if(ModConfig.dev_stuff_enabled) {
             //Void Tripod
             RenderingRegistry.registerEntityRenderingHandler(EntityVoidTripod.class, RenderTripod::new);
             //Ultra Parasite
@@ -207,6 +206,5 @@ public class RenderHandler {
             RenderingRegistry.registerEntityRenderingHandler(EntityShadowPlayer.class, RenderShadowPlayer::new);
             //Madness Cube
             RenderingRegistry.registerEntityRenderingHandler(EntityMadnessCube.class, RenderMadnessCube::new);
-        }
     }
 }

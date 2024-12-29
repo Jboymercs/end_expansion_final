@@ -332,7 +332,7 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if(!this.isCurrentlyVisible) {
-            return false;
+            return super.attackEntityFrom(source, 1F);
         }
         return super.attackEntityFrom(source, amount);
     }

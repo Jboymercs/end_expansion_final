@@ -20,9 +20,9 @@ public class BiomeRegister {
 
     public static void registerBiomes() {
         initBiome(END_ASH_WASTELANDS, "ash_wastelands", Type.END);
-        if(ModConfig.dev_stuff_enabled) {
-            initBiome(BARREND_LOWLANDS, "barrend_low_lands", Type.END);
-        }
+
+        initBiome(BARREND_LOWLANDS, "barrend_low_lands", Type.END);
+
     }
 
 

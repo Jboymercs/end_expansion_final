@@ -22,7 +22,7 @@ public class ModIntegration {
 
     public static double getMultiplierCountAttackDamage() {
         if(IS_BOMD_DA_LOADED && ModConfig.is_bomd_compat) {
-            return 0.09;
+            return 0.05;
         }
         return 0;
     }

@@ -13,6 +13,7 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
 import com.example.structure.util.integration.ModIntegration;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -21,6 +22,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,6 +31,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -99,6 +103,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     private static final DataParameter<Boolean> SUMMON_BOOLEAN = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DEATH_BOOLEAN = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
 
+    private static final DataParameter<Boolean> HAD_PREVIOUS_TARGET = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
+
     public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BLOCK_POS);
     public static DataParameter<Boolean> SET_SPAWN_LOC = EntityDataManager.createKey(EntityCrystalKnight.class, DataSerializers.BOOLEAN);
 
@@ -121,6 +127,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         nbt.setBoolean("Hammer_Projectile", this.dataManager.get(HAMMER_PROJECTILE));
         nbt.setBoolean("Summon_Boolean", this.dataManager.get(SUMMON_BOOLEAN));
         nbt.setBoolean("Death_Boolean", this.dataManager.get(DEATH_BOOLEAN));
+        nbt.setBoolean("Had_Target", this.dataManager.get(HAD_PREVIOUS_TARGET));
         nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
         nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
         nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
@@ -148,6 +155,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         this.dataManager.set(HAMMER_PROJECTILE, nbt.getBoolean("Hammer_Projectile"));
         this.dataManager.set(SUMMON_BOOLEAN, nbt.getBoolean("Summon_Boolean"));
         this.dataManager.set(DEATH_BOOLEAN, nbt.getBoolean("Death_Boolean"));
+        this.dataManager.set(HAD_PREVIOUS_TARGET, nbt.getBoolean("Had_Target"));
         this.dataManager.set(SET_SPAWN_LOC, nbt.getBoolean("Set_Spawn_Loc"));
         this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
     }
@@ -188,7 +196,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
 
     public BlockPos centerPos;
-
+    private int targetTrackingTimer = 400;
 
     public void onSummon(BlockPos Pos, Projectile actor) {
         BlockPos offset = Pos.add(new BlockPos(0,3,0));
@@ -223,6 +231,7 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         //States
         this.dataManager.register(DEATH_BOOLEAN, Boolean.valueOf(false));
         this.dataManager.register(SUMMON_BOOLEAN, Boolean.valueOf(false));
+        this.dataManager.register(HAD_PREVIOUS_TARGET, Boolean.valueOf(false));
         this.dataManager.register(SET_SPAWN_LOC, Boolean.valueOf(false));
         //
 
@@ -287,6 +296,8 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
     public boolean isMultiPierceAttack() {
         return this.dataManager.get(MULTI_PIERCE_ATTACK);
     }
+    public boolean isHadPreviousTarget() {return this.dataManager.get(HAD_PREVIOUS_TARGET);}
+    public void setHadPreviousTarget(boolean value) {this.dataManager.set(HAD_PREVIOUS_TARGET, Boolean.valueOf(value));}
     public void setShulkerAttack(Boolean value) {
         this.dataManager.set(SHULKER_ATTACK, Boolean.valueOf(value));
     }
@@ -362,6 +373,30 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
         }
 
+        EntityLivingBase target = this.getAttackTarget();
+        //Target Tracking
+        if(!world.isRemote) {
+            if (this.getSpawnLocation() != null && this.isSetSpawnLoc()) {
+                if (target != null) {
+                    if (target instanceof EntityPlayer) {
+                        this.setHadPreviousTarget(true);
+                    }
+                }
+
+                //Creates a Target tracking to ensure if it can despawn or not
+                if (target == null && this.isHadPreviousTarget()) {
+                    int nearbyPlayers = ServerScaleUtil.getPlayersForReset(this, world);
+                    if (nearbyPlayers == 0) {
+                        if (targetTrackingTimer > 0) {
+                            targetTrackingTimer--;
+                        }
+                        if (targetTrackingTimer < 1) {
+                            this.resetBossTask();
+                        }
+                    }
+                }
+            }
+        }
         //Spawn Telporting Location
         //This is too keep the boss at it's starting location and keep it from getting too far away
 
@@ -397,7 +432,6 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             this.motionY = 0;
         }
         if(targetFloating) {
-            EntityLivingBase target = this.getAttackTarget();
             if(target != null) {
                 target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 3));
             }
@@ -422,6 +456,23 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
 
     }
 
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "end_key_reset");
+
+    private void resetBossTask() {
+        this.setImmovable(true);
+        this.setHadPreviousTarget(false);
+        BlockPos pos = this.getSpawnLocation();
+        world.setBlockState(pos.add(0, -3, 0), ModBlocks.END_KEY_BLOCK.getDefaultState());
+        world.setBlockState(pos.add(0, -2, 0), Blocks.CHEST.getDefaultState());
+        TileEntity te = world.getTileEntity(pos.add(0, -2, 0));
+        if(te instanceof TileEntityChest) {
+            TileEntityChest chest = (TileEntityChest) te;
+            chest.setLootTable(LOOT, rand.nextLong());
+        }
+        this.experienceValue = 0;
+        this.setDropItemsWhenDead(false);
+        this.setDead();
+    }
     //Particle Call
     @Override
     public void onEntityUpdate() {

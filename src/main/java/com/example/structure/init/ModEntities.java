@@ -223,7 +223,7 @@ public class ModEntities {
         //Blood Slash
         registerEntity("blood_slash", EntityBloodSlash.class, ENTITY_START_ID++, 110);
 
-        if(ModConfig.dev_stuff_enabled) {
+
             //Parasite Projectile Bomb
             registerEntity("parasite_bomb", ProjectileParasiteBomb.class, ENTITY_START_ID++, 110);
             //Parasite Bomb AOE
@@ -238,7 +238,7 @@ public class ModEntities {
             registerEntityWithID("shadow_player", EntityShadowPlayer.class, ENTITY_START_ID++, 110, shadow_player);
             //madness cube
             registerEntity("madness_cube", EntityMadnessCube.class, ENTITY_START_ID++, 120);
-        }
+
 
     }
 
@@ -247,9 +247,9 @@ public class ModEntities {
         spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, MobConfig.parasite_spawn_rate, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, MobConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, MobConfig.chomper_spawn_rate, 1, 3, BiomeRegister.END_ASH_WASTELANDS);
-      //  spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-      //  spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-      //  spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
     }
 
 

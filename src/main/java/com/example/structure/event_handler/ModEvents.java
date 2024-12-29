@@ -16,6 +16,7 @@ import com.example.structure.util.ModRand;
 import com.example.structure.util.ModUtils;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.ParticleManager;
+import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -34,6 +35,7 @@ import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.security.KeyStore;
 import java.util.List;
 import java.util.Random;
 
@@ -82,6 +84,17 @@ public class ModEvents {
                                 }
                             }
                         }
+                    }
+                }
+
+                if(base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == ModItems.LAMENTED_HELMET && base.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ModItems.LAMENTED_CHESTPLATE) {
+                    if(base.hurtTime > 0) {
+                        double health = base.getHealth() / base.getMaxHealth();
+                        if(health <= 0.5 && rand.nextInt(10) == 0) {
+                            base.addPotionEffect(new PotionEffect(MobEffects.SPEED, 100, 0, false, false));
+                            base.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 80, 0, false, false));
+                        }
+
                     }
                 }
             }

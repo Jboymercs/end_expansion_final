@@ -10,6 +10,7 @@ import com.example.structure.entity.endking.EndKingAction.*;
 import com.example.structure.entity.endking.ghosts.EntityPermanantGhost;
 import com.example.structure.entity.util.IAttack;
 import com.example.structure.entity.util.TimedAttackIniator;
+import com.example.structure.init.ModBlocks;
 import com.example.structure.util.*;
 import com.example.structure.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
@@ -20,6 +21,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -27,6 +29,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -78,6 +82,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public static DataParameter<Boolean> SET_SPAWN_LOC_KING = EntityDataManager.createKey(EntityEndKing.class, DataSerializers.BOOLEAN);
 
     public static DataParameter<BlockPos> SPAWN_LOCATION = EntityDataManager.createKey(EntityEndKing.class, DataSerializers.BLOCK_POS);
+    private static final DataParameter<Boolean> HAD_PREVIOUS_TARGET = EntityDataManager.createKey(EntityEndKing.class, DataSerializers.BOOLEAN);
 
     //PHASE THREE
 
@@ -124,6 +129,8 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public BlockPos getSpawnLocation() {
         return this.dataManager.get(SPAWN_LOCATION);
     }
+    public boolean isHadPreviousTarget() {return this.dataManager.get(HAD_PREVIOUS_TARGET);}
+    public void setHadPreviousTarget(boolean value) {this.dataManager.set(HAD_PREVIOUS_TARGET, Boolean.valueOf(value));}
 
     private final EntityAIBase flyattackAi = new EntityAerialKingAttack(this, 24, 1, 30, new TimedAttackIniator<>(this, 20));
     private final EntityAIBase basAttackAi = new EntityKingTimedAttack<>(this, 1.0, 60, 24.0f, 0.4f);
@@ -139,6 +146,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setBoolean("Set_Spawn_Loc_King", this.dataManager.get(SET_SPAWN_LOC_KING));
+        nbt.setBoolean("Had_Target", this.dataManager.get(HAD_PREVIOUS_TARGET));
         nbt.setInteger("Spawn_Loc_X", this.getSpawnLocation().getX());
         nbt.setInteger("Spawn_Loc_Y", this.getSpawnLocation().getY());
         nbt.setInteger("Spawn_Loc_Z", this.getSpawnLocation().getZ());
@@ -149,6 +157,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
         this.dataManager.set(SET_SPAWN_LOC_KING, nbt.getBoolean("Set_Spawn_Loc_King"));
+        this.dataManager.set(HAD_PREVIOUS_TARGET, nbt.getBoolean("Had_Target"));
         this.setSpawnLocation(new BlockPos(nbt.getInteger("Spawn_Loc_X"), nbt.getInteger("Spawn_Loc_Y"), nbt.getInteger("Spawn_Loc_Z")));
     }
 
@@ -156,6 +165,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public void entityInit() {
         super.entityInit();
         this.dataManager.register(SET_SPAWN_LOC_KING, Boolean.valueOf(false));
+        this.dataManager.register(HAD_PREVIOUS_TARGET, Boolean.valueOf(false));
         //
         this.dataManager.register(SPAWN_LOCATION, new BlockPos(this.getPositionVector().x, this.getPositionVector().y, this.getPositionVector().z));
     }
@@ -173,7 +183,7 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     }
 
     public int switchTimer = 400;
-
+    private int targetTrackingTimer = 400;
 
     public int waitTimer = 60;
 
@@ -181,6 +191,30 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     @Override
     public void onUpdate() {
         super.onUpdate();
+
+        EntityLivingBase target = this.getAttackTarget();
+        if(!world.isRemote) {
+            if (this.getSpawnLocation() != null && this.isSetSpawnLoc()) {
+                if (target != null) {
+                    if (target instanceof EntityPlayer) {
+                        this.setHadPreviousTarget(true);
+                    }
+                }
+
+                //Creates a Target tracking to ensure if it can despawn or not
+                if (target == null && this.isHadPreviousTarget()) {
+                    int nearbyPlayers = ServerScaleUtil.getPlayersForReset(this, world);
+                    if (nearbyPlayers == 0) {
+                        if (targetTrackingTimer > 0) {
+                            targetTrackingTimer--;
+                        }
+                        if (targetTrackingTimer < 1) {
+                            this.resetBossTask();
+                        }
+                    }
+                }
+            }
+        }
 
         if(this.getSpawnLocation() != null && this.isSetSpawnLoc()) {
             Vec3d SpawnLoc = new Vec3d(this.getSpawnLocation().getX(), this.getSpawnLocation().getY(), this.getSpawnLocation().getZ());
@@ -254,6 +288,23 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
     public void teleportTarget(double x, double y, double z) {
         this.setPosition(x , y, z);
 
+    }
+
+    private static final ResourceLocation LOOT = new ResourceLocation(ModReference.MOD_ID, "fortress_key_reset");
+    private void resetBossTask() {
+        this.setImmovable(true);
+        this.setHadPreviousTarget(false);
+        BlockPos pos = this.getSpawnLocation();
+        world.setBlockState(pos, ModBlocks.ASH_KEY_BLOCK.getDefaultState());
+        world.setBlockState(pos.up(), Blocks.CHEST.getDefaultState());
+        TileEntity te = world.getTileEntity(pos.up());
+        if(te instanceof TileEntityChest) {
+            TileEntityChest chest = (TileEntityChest) te;
+            chest.setLootTable(LOOT, rand.nextLong());
+        }
+        this.experienceValue = 0;
+        this.setDropItemsWhenDead(false);
+        this.setDead();
     }
 
 
