@@ -153,4 +153,9 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean is_bomd_compat = true;
 
+    @Config.Name("Better End Support")
+    @Config.Comment("If Better End Forge Backport is installed, End Expansion add mob spawns in Better End's Biomes. NOTE that the sky box from End Expansion will automatically be disabled with Better End installed")
+    @Config.RequiresMcRestart
+    public static boolean is_better_end_compat = true;
+
 }

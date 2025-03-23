@@ -131,6 +131,8 @@ dependencies {
     implementation (fg.deobf('software.bernie.geckolib:geckolib-forge-1.12.2:3.0.31'))
     //Deeper Depths
     implementation fg.deobf("curse.maven:deeper-depths-1101129:5753202")
+    //Better End Forge Backport
+    implementation fg.deobf("curse.maven:betterendforge-backport-1165149:6285724")
     //Shaded `shade`
     //shade("io.github.kostaskougios:cloning:${project.cloning_version}")
 

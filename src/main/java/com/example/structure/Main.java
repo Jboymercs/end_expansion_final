@@ -13,6 +13,7 @@ import com.example.structure.util.handlers.BiomeRegister;
 import com.example.structure.util.handlers.FogHandler;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.StructureHandler;
+import com.example.structure.util.integration.ModIntegration;
 import com.example.structure.world.Biome.WorldProviderEndEE;
 import com.example.structure.world.WorldGenCustomStructure;
 import com.example.structure.world.api.structures.MapGenKingFortress;
@@ -112,7 +113,7 @@ public class Main {
     @Mod.EventHandler
     @SubscribeEvent(priority = EventPriority.LOWEST)
     static void serverAboutToStart(@Nonnull final FMLServerStartingEvent event) {
-        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded) {
+        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded && !ModIntegration.IS_BETTER_END_LOADED) {
             DimensionManager.unregisterDimension(1);
             DimensionType END = DimensionType.register("End", "_end", 1, WorldProviderEndEE.class, false);
             DimensionManager.registerDimension(1, END);

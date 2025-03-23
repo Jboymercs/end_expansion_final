@@ -373,7 +373,7 @@ ee.status.arena_block=You have not defeated an Elder End Seeker yet
 ee.status.barrend_crypt=You have not defeated the Ashed King yet
 ee.status.shadow_player=There is already a shadow player nearby.
 
-ee.desc.amber_desc=Full set gives Haste, and allows you to see nearby creatures.
+amber_desc=Full set gives Haste, and allows you to see nearby creatures.
 ee.desc.dimensional_key=Right click on the key block to awaken the Lamentor
 ee.desc.lamented_eye=Right Click to enable Levitation 3 for a short period of time.
 ee.desc.sword_desc=The Lamentors Sword, a fast and deadly blade. Right click to find out

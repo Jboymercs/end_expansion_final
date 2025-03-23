@@ -10,6 +10,7 @@ import com.example.structure.init.ModItems;
 import com.example.structure.items.model.ModelPureHelmet;
 import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.handlers.RenderHandler;
+import com.example.structure.util.integration.ModIntegration;
 import com.example.structure.util.particles.ParticlePixel;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -129,7 +130,9 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerEventHandlers() {
-        MinecraftForge.EVENT_BUS.register(EndSkyHandler.class);
+        if(!ModIntegration.IS_BETTER_END_LOADED) {
+            MinecraftForge.EVENT_BUS.register(EndSkyHandler.class);
+        }
     }
 
     //Will come back to this and clean it up and put it in with the other GUI's
