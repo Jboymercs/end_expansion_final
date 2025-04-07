@@ -1,6 +1,7 @@
 package com.example.structure.init;
 
 import com.example.structure.Main;
+import com.example.structure.config.CompatConfig;
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.entity.*;
@@ -32,6 +33,10 @@ import com.example.structure.entity.tileentity.source.TileEntityPowerSource;
 import com.example.structure.entity.trader.*;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
+import com.example.structure.util.integration.ModIntegration;
+import com.example.structure.util.misc.EELogger;
+import com.google.common.collect.Lists;
+import mod.beethoven92.betterendforge.common.init.ModBiomes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -44,6 +49,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ModEntities {
@@ -251,6 +257,31 @@ public class ModEntities {
         spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
         spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
     }
+
+    public static void registerEntitySpawnsBE() {
+        for(Biome biome : loadBiomesForMob()) {
+            spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.CREATURE, 20, 1, 3, biome);
+        }
+    }
+
+
+    private static List<Biome> spawnBiomesAshedParasite;
+    private static List<Biome> loadBiomesForMob() {
+        if (spawnBiomesAshedParasite == null) {
+            spawnBiomesAshedParasite = Lists.newArrayList();
+            for (String str : CompatConfig.ashed_parasite_spawn_biomes) {
+                try {
+                    Biome biome = Biome.REGISTRY.getObject(new ResourceLocation(str));
+                    if (biome != null) spawnBiomesAshedParasite.add(biome);
+                    else EELogger.logError("Biome " + str + " is not registered", new NullPointerException());
+                } catch (Exception e) {
+                    EELogger.logError(str + " is not a valid registry name", e);
+                }
+            }
+        }
+        return spawnBiomesAshedParasite;
+    }
+
 
 
 

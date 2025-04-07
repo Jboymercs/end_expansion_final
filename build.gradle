@@ -123,8 +123,7 @@ dependencies {
     minecraft("net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}")
 
     //Mixin
-
-   // implementation(fg.deobf("maven.modrinth:mixinbooter:${project.mixinbooter_version}"))
+    implementation fg.deobf("curse.maven:mixin-booter-419286:6156863")
     //Nether API
     implementation(fg.deobf('com.github.jbredwards:nether-API:f2f48d7b8b'))
     //Geckolib
@@ -133,6 +132,7 @@ dependencies {
     implementation fg.deobf("curse.maven:deeper-depths-1101129:5753202")
     //Better End Forge Backport
     implementation fg.deobf("curse.maven:betterendforge-backport-1165149:6285724")
+
     //Shaded `shade`
     //shade("io.github.kostaskougios:cloning:${project.cloning_version}")
 

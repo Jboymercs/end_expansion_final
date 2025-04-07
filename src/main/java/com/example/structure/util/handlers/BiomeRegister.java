@@ -19,9 +19,9 @@ public class BiomeRegister {
 
 
     public static void registerBiomes() {
-        initBiome(END_ASH_WASTELANDS, "ash_wastelands", Type.END);
+        initBiome(END_ASH_WASTELANDS, "ash_wastelands", Type.END, Type.DRY, Type.WASTELAND);
 
-        initBiome(BARREND_LOWLANDS, "barrend_low_lands", Type.END);
+        initBiome(BARREND_LOWLANDS, "barrend_low_lands", Type.END, Type.SWAMP, Type.LUSH);
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.structure;
 
 import com.example.structure.advancements.EEAdvancements;
+import com.example.structure.command.CommandLocateEE;
 import com.example.structure.config.ModConfig;
 import com.example.structure.config.WorldConfig;
 import com.example.structure.init.*;
@@ -144,6 +145,10 @@ public class Main {
             //Sky Stuff
             proxy.registerEventHandlers();
         }
+
+        if(ModIntegration.IS_BETTER_END_LOADED && ModConfig.is_better_end_compat) {
+            ModEntities.registerEntitySpawnsBE();
+        }
     }
 
 
@@ -151,6 +156,13 @@ public class Main {
     public static ResourceLocation locate(String location)
     {
         return new ResourceLocation(ModReference.MOD_ID, location);
+    }
+
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event)
+    {
+        // register server commands
+        event.registerServerCommand(new CommandLocateEE());
     }
 
 

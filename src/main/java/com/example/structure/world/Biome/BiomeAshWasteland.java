@@ -90,7 +90,6 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         this.spawnableCreatureList.clear();
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
-
         //Let's Try this again
         this.spawnableCreatureList.add(new SpawnListEntry(EntitySnatcher.class, 1, 1, 1));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityChomper.class, 1, 1, 3));

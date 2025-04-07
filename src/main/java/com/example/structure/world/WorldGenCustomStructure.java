@@ -49,12 +49,11 @@ public class WorldGenCustomStructure implements IWorldGenerator {
             if (WorldConfig.does_structure_spawn) {
 
                 // Lamented Islands, the first major boss Arena and dungeon of the mod
-                //Cannot spawn in the Ash Wastelands
-                    if(world.provider.getBiomeForCoords(pos).getClass() != BiomeAshWasteland.class && world.provider.getBiomeForCoords(pos).getClass() == BiomeEnd.class) {
-                        if(getGroundFromAbove(world, pos.getX(), pos.getZ()) > 50) {
-                            the_islands.generate(world, random, pos);
-                        }
-                    }
+                if(WorldConfig.lamented_islands_enabled) {
+                    the_islands.generate(world, random, pos);
+                }
+
+
 
 
                 //End Vaults, A mini-dungeon that has roguelike generation too it. Main place to find the purple crystal resource
@@ -90,10 +89,6 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                         }
                     }
                 }
-
-
-
-
 
         }
 

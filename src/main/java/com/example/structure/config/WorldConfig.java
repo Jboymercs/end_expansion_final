@@ -12,9 +12,15 @@ public class WorldConfig {
     public static boolean does_structure_spawn = true;
 
     @Config.Name("Lamented Islands Structure Frequency")
-    @Config.Comment("Change the spacing between Lamented Islands, lower means more frequent, higher means less")
+    @Config.Comment("Change the spacing between Lamented Islands, lower means more frequent, higher means less, in Chunks")
     @Config.RequiresMcRestart
-    public static int structureFrequency = 300;
+    public static int structureFrequency = 100;
+
+    @Config.Name("Lamented Islands Blacklisted Biome Types")
+    @Config.Comment("Add Biome types that DISALLOW the Lamented Islands from spawning in that biome, examples of tags are HOT, COLD, SPOOKY")
+    @Config.RequiresMcRestart
+    public static String[] biome_types_lamented_islands = {"WASTELAND"
+    };
 
     @Config.Name("Lamented Islands Mob Spawn Chance")
     @Config.Comment("Change the chance of mob spawns on the Lamented Islands")
@@ -32,6 +38,16 @@ public class WorldConfig {
     @Config.RangeInt(min = 0, max = 5)
     @Config.RequiresMcRestart
     public static int lamentedIslandsLootChance = 2;
+
+    @Config.Name("Lamented Islands Search Distance")
+    @Config.Comment("Change the search distance of the locate command and the locator item for the Lamented Islands, in Chunks")
+    @Config.RequiresMcRestart
+    public static int lamented_islands_search_distance = 150;
+
+    @Config.Name("Lamented Islands Enabled/Disabled")
+    @Config.Comment("Change if the Lamented Islands should generate or not")
+    @Config.RequiresMcRestart
+    public static boolean lamented_islands_enabled = true;
 
     @Config.Name("Mobs Spawning at Middle End Islands")
     @Config.Comment("Change if mobs spawns at the middle island, aka the Ender Dragon Island")
