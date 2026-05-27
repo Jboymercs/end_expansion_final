@@ -1,7 +1,7 @@
 package com.example.structure.world.misc;
 
 import com.example.structure.util.ModUtils;
-import com.example.structure.world.Biome.WorldChunkGeneratorEE;
+import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -9,7 +9,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 
 public class GenUtils {
 
-    public static int getGroundHeight(ModStructureTemplate template, WorldChunkGeneratorEE gen, Rotation rotation) {
+    public static int getGroundHeight(ModStructureTemplate template, INetherAPIChunkGenerator gen, Rotation rotation) {
         StructureBoundingBox box = template.getBoundingBox();
         int corner1 = getGroundHeight(new BlockPos(box.maxX, 0, box.maxZ), gen, rotation);
         int corner2 = getGroundHeight(new BlockPos(box.minX, 0, box.maxZ), gen, rotation);
@@ -23,10 +23,10 @@ public class GenUtils {
     /*
      * From MapGenEndCity: determines the ground height
      */
-    public static int getGroundHeight(BlockPos pos, WorldChunkGeneratorEE gen, Rotation rotation) {
+    public static int getGroundHeight(BlockPos pos, INetherAPIChunkGenerator gen, Rotation rotation) {
         BlockPos chunk = ModUtils.posToChunk(pos);
         ChunkPrimer chunkprimer = new ChunkPrimer();
-        gen.setBlocksInChunk(chunk.getX(), chunk.getZ(), chunkprimer);
+        gen.setBlocksInPrimer(chunk.getX(), chunk.getZ(), chunkprimer);
         int i = 5;
         int j = 5;
 

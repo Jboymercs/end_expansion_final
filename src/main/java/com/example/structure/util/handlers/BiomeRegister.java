@@ -33,7 +33,7 @@ public class BiomeRegister {
         ForgeRegistries.BIOMES.register(biome);
         BiomeDictionary.addTypes(biome, types);
     }
-    //Registration with Nether-API
+    //Registration with Nether-API handled by API event handler
 
 
 }

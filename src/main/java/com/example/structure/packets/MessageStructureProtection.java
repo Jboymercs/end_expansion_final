@@ -1,8 +1,8 @@
 package com.example.structure.packets;
 
-import com.example.structure.world.Biome.WorldProviderEndEE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.client.IRenderHandler;
@@ -52,7 +52,7 @@ public class MessageStructureProtection implements IMessage {
                 WorldProvider provider = Minecraft.getMinecraft().world.provider;
 
                 // add weather box if needed
-                if (provider instanceof WorldProviderEndEE) {
+                if (provider.getDimensionType() == DimensionType.THE_END) {
                     IRenderHandler weatherRenderer = provider.getWeatherRenderer();
 
                 }

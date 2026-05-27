@@ -15,7 +15,6 @@ import com.example.structure.util.handlers.FogHandler;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.StructureHandler;
 import com.example.structure.util.integration.ModIntegration;
-import com.example.structure.world.Biome.WorldProviderEndEE;
 import com.example.structure.world.WorldGenCustomStructure;
 import com.example.structure.world.api.structures.MapGenKingFortress;
 import git.jbredwards.nether_api.mod.NetherAPI;
@@ -47,7 +46,7 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 import javax.annotation.Nonnull;
 
 
-@Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION)
+@Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION, dependencies = ModReference.DEPENDENCIES)
 public class Main {
 
     /**
@@ -69,7 +68,6 @@ public class Main {
     public static CommonProxy proxy;
     public static SimpleNetworkWrapper network;
 
-    public static final boolean isNetherAPILoaded = Loader.isModLoaded("nether_api");
     public static final Logger LOGGER = LogManager.getLogger(ModReference.MOD_ID);
 
     @Mod.Instance
@@ -85,8 +83,6 @@ public class Main {
     public void preInit(FMLPreInitializationEvent event) {
         GeckoLib.initialize();
         logger = event.getModLog();
-        //Sky Box Registry
-        ModDimensions.registerDimensionChanges();
 
         //Fluids
         ModFluid.registerFluids();
@@ -110,17 +106,6 @@ public class Main {
 
 
 
-    // Register dimension overrides
-    @Mod.EventHandler
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    static void serverAboutToStart(@Nonnull final FMLServerStartingEvent event) {
-        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded && !ModIntegration.IS_BETTER_END_LOADED) {
-            DimensionManager.unregisterDimension(1);
-            DimensionType END = DimensionType.register("End", "_end", 1, WorldProviderEndEE.class, false);
-            DimensionManager.registerDimension(1, END);
-        }
-    }
-
 
     @SideOnly(Side.CLIENT)
     @Mod.EventHandler
@@ -129,8 +114,6 @@ public class Main {
         //GeoArmorRenderer.registerArmorRenderer(AmberArmorSet.class, new AmberArmorRenderer());
 
     }
-
-    public MapGenStructure fortress = new MapGenKingFortress(WorldConfig.fortress_spacing, 0, WorldConfig.fortress_odds);
 
 
     @Mod.EventHandler
@@ -141,7 +124,7 @@ public class Main {
         ModRecipes.init();
         ModProfressions.associateCareersAndTrades();
         ModNetworkPackets.registerNetworkPackets();
-        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded) {
+        if(ModConfig.isSkyBoxEnalbed) {
             //Sky Stuff
             proxy.registerEventHandlers();
         }
