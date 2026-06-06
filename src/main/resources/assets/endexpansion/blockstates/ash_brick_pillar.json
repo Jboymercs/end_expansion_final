@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "endexpansion:ash_brick_pillar" },
+    "axis=z":   { "model": "endexpansion:ash_brick_pillar", "x": 90 },
+    "axis=x":   { "model": "endexpansion:ash_brick_pillar", "x": 90, "y": 90 },
+    "axis=none": { "model": "endexpansion:ash_brick" }
+  }
+}

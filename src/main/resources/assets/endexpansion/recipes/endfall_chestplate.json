@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V V",
+    "R#R",
+    "VBV"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:soul"
+    },
+    "V": {
+      "item": "endexpansion:dark_ingot"
+    },
+    "R": {
+      "item": "endexpansion:infused_crystal"
+    },
+    "B": {
+      "item": "endexpansion:star_shard"
+    }
+  },
+  "result": {
+    "item": "endexpansion:endfall_chestplate"
+  }
+}

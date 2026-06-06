@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "ee:blocks/ash_trap_floor",
-    "side": "ee:blocks/ash_brick"
-  }
-}

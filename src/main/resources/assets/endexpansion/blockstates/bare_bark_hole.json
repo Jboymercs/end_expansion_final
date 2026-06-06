@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "endexpansion:bare_bark_hole" },
+    "axis=z":   { "model": "endexpansion:bare_bark_hole", "x": 90 },
+    "axis=x":   { "model": "endexpansion:bare_bark_hole", "x": 90, "y": 90 },
+    "axis=none": { "model": "endexpansion:bare_bark_hole" }
+  }
+}

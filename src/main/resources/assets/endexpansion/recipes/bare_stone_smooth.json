@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:bare_stone"
+    }
+  },
+  "result": {
+    "item": "endexpansion:bare_stone_smooth",
+    "count": 4
+  }
+}

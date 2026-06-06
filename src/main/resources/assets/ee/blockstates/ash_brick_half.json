@@ -1,7 +1,0 @@
-{
-  "variants":
-  {
-    "half=bottom,variant=default": { "model": "ee:ash_brick_half_bottom" },
-    "half=top,variant=default": { "model": "ee:ash_brick_half_top" }
-  }
-}

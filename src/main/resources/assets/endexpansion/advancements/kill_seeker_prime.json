@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:gun"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.kill_vault.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.kill_vault.description"
+    },
+    "frame": "challenge"
+  },
+  "parent": "endexpansion:kill_seeker",
+  "criteria": {
+    "EndSeeker": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "endexpansion:end_seeker_prime"
+        }
+      }
+    }
+  }
+}

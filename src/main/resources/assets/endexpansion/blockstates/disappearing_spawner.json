@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "endexpansion:disappearing_spawner" }
+  }
+}

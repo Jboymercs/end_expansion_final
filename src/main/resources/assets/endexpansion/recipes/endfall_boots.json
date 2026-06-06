@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "V V"
+  ],
+  "key": {
+    "V": {
+      "item": "endexpansion:dark_ingot"
+    },
+    "R": {
+      "item": "endexpansion:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "endexpansion:endfall_boots"
+  }
+}

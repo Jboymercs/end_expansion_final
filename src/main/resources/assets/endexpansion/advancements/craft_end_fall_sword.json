@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:endfall_sword"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_end_sword.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_end_sword.description"
+    }
+  },
+  "parent": "endexpansion:find_soul",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:endfall_sword"
+          }
+        ]
+      }
+    }
+  }
+}

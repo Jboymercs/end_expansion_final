@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#X#",
+    "XRX"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "#": {
+      "item": "endexpansion:ash_brick"
+    },
+    "X": {
+      "item": "endexpansion:red_chunk"
+    }
+  },
+  "result": {
+    "item": "endexpansion:end_door"
+  }
+}

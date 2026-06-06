@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "R",
+    "#"
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:shadow_tear"
+    },
+    "#": {
+      "item": "endexpansion:green_crystal_item"
+    },
+    "X": {
+      "item": "endexpansion:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "endexpansion:shadow_tear_two"
+  }
+}

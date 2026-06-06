@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "endexpansion:blocks/bare_stone_top",
+    "bottom" : "endexpansion:blocks/bare_stone_top",
+    "side": "endexpansion:blocks/bare_stone_smooth_side"
+  }
+}

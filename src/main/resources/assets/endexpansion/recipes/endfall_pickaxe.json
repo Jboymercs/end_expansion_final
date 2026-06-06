@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " R ",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:brick_rod"
+    },
+    "#": {
+      "item": "endexpansion:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "endexpansion:endfall_pickaxe"
+  }
+}

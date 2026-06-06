@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VV",
+    "V#",
+    " R"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:brick_rod"
+    },
+    "V": {
+      "item": "endexpansion:amber_ingot"
+    },
+    "R": {
+      "item": "endexpansion:red_crystal_item"
+    }
+  },
+  "result": {
+    "item": "endexpansion:amber_axe"
+  }
+}

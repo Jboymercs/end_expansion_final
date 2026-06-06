@@ -1,0 +1,6 @@
+{
+  "parent": "block/leaves",
+  "textures": {
+    "all": "endexpansion:blocks/bare_leaves"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:red_crystal_item"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.find_red.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.find_red.description"
+    }
+  },
+  "parent": "endexpansion:root",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:red_chunk"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:sprout_plant"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.find_cordium.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.find_cordium.decription"
+    }
+  },
+  "parent": "endexpansion:find_red",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:amber_raw"
+          }
+        ]
+      }
+    }
+  }
+}

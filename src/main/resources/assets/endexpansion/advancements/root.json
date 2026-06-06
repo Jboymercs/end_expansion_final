@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:lamented"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.root.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.root.description"
+    },
+    "background": "endexpansion:textures/blocks/brown_stone.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "entered_end": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "the_end"
+      }
+    }
+  }
+}

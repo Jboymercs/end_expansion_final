@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:green_chunk"
+    }
+  },
+  "result": {
+    "item": "endexpansion:green_crystal_item",
+    "count": 1
+  }
+}

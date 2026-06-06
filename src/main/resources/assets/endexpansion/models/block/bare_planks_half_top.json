@@ -1,0 +1,9 @@
+{
+  "parent": "block/upper_slab",
+  "textures":
+  {
+    "bottom": "endexpansion:blocks/bare_planks",
+    "top": "endexpansion:blocks/bare_planks",
+    "side": "endexpansion:blocks/bare_planks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "explode=false": { "model": "endexpansion:mini_nuke" },
+    "explode=true": {"model":  "endexpansion:mini_nuke"}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R",
+    "#"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:bone"
+    },
+    "#": {
+      "item": "endexpansion:ash_chisle"
+    }
+  },
+  "result": {
+    "item": "endexpansion:ash_skull"
+  }
+}

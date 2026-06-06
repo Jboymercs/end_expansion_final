@@ -1,0 +1,44 @@
+{
+  "pools": [
+    {
+      "name" : "endexpansion:end_key_dungeon",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:key",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "endexpansion:end_key_dungeon",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:arena_key_2",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:amber_helmet"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_amber_armor.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_amber_armor.description"
+    }
+  },
+  "parent": "endexpansion:find_cordium",
+  "criteria": {
+    "amberHelmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:amber_helmet"
+          }
+        ]
+      }
+    },
+    "amberChestPlate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:amber_chestplate"
+          }
+        ]
+      }
+    },
+    "amberLeggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:amber_leggings"
+          }
+        ]
+      }
+    },
+    "amberBoots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:amber_boots"
+          }
+        ]
+      }
+    }
+  }
+}

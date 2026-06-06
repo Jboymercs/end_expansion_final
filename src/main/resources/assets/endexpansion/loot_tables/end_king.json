@@ -1,0 +1,44 @@
+{
+  "pools": [
+    {
+      "name" : "endexpansion:end_king",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:soul",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "endexpansion:end_king",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:king_crown",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

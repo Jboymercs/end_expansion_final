@@ -1,0 +1,6 @@
+{
+  "variants":
+  {
+    "variant=default": { "model": "endexpansion:end_brick_double" }
+  }
+}

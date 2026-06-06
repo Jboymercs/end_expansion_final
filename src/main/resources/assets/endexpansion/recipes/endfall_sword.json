@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X",
+    "R"
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:brick_rod"
+    },
+    "#": {
+      "item": "endexpansion:infused_crystal"
+    },
+    "X": {
+      "item": "endexpansion:soul"
+    }
+  },
+  "result": {
+    "item": "endexpansion:endfall_sword"
+  }
+}

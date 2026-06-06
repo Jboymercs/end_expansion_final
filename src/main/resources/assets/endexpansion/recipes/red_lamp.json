@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "RXR",
+    "###"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:glass"
+    },
+    "#": {
+      "item": "endexpansion:ash_brick"
+    },
+    "X": {
+      "item": "endexpansion:red_chunk"
+    }
+  },
+  "result": {
+    "item": "endexpansion:red_lamp"
+  }
+}

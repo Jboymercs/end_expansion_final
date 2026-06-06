@@ -1,0 +1,34 @@
+package com.jboymercs.endexpansion.init;
+
+
+import com.jboymercs.endexpansion.event_handler.PotionInArena;
+import com.jboymercs.endexpansion.potion.PotionCorrupted;
+import com.jboymercs.endexpansion.potion.PotionMadness;
+import com.jboymercs.endexpansion.util.ModReference;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+@Mod.EventBusSubscriber(modid = ModReference.MOD_ID)
+public class ModPotions{
+    private ModPotions(){}
+
+    public static PotionCorrupted CORRUPTED = (PotionCorrupted) new PotionCorrupted(true, 0).setPotionName("potion." + ModReference.MOD_ID + ".corrupted").setRegistryName(ModReference.MOD_ID, "corrupted");
+    public static PotionInArena IN_ARENA = (PotionInArena) new PotionInArena(true, 0).setPotionName("potion." + ModReference.MOD_ID + ".entrapped").setRegistryName(ModReference.MOD_ID, "entrapped");
+
+    public static PotionMadness MADNESS = (PotionMadness) new PotionMadness(true, 0).setPotionName("potion." + ModReference.MOD_ID + ".the_madness").setRegistryName(ModReference.MOD_ID, "the_madness");
+
+    public static PotionType redcorruption = new PotionType("potionCorruption", new PotionEffect[]{new PotionEffect(ModPotions.CORRUPTED, 100)}).setRegistryName("poison_corruption");
+
+
+
+    @SubscribeEvent
+    public static void registerPotions(RegistryEvent.Register<Potion> event) {
+        event.getRegistry().registerAll(
+                CORRUPTED,IN_ARENA, MADNESS
+        );
+    }
+}

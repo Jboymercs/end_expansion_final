@@ -1,0 +1,24 @@
+package com.jboymercs.endexpansion.entity.render;
+
+import com.jboymercs.endexpansion.entity.EntityGroundCrystal;
+import com.jboymercs.endexpansion.entity.model.ModelGroundCrystal;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderManager;
+
+public class RenderGroundCrystal extends RenderAbstractGeoEntity<EntityGroundCrystal>{
+    public RenderGroundCrystal(RenderManager renderManager) {
+        super(renderManager, new ModelGroundCrystal());
+    }
+
+
+    @Override
+    public void doRender(EntityGroundCrystal entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        GlStateManager.enableNormalize();
+        GlStateManager.enableBlend();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.75F);
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        GlStateManager.disableBlend();
+        GlStateManager.disableNormalize();
+    }
+}

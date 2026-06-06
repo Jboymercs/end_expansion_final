@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GV#",
+    " B ",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:brick_rod"
+    },
+    "B": {
+      "item": "endexpansion:soul"
+    },
+    "V": {
+      "item": "endexpansion:infused_crystal"
+    },
+    "#": {
+      "item": "endexpansion:red_chunk"
+    },
+    "G": {
+      "item": "endexpansion:purple_chunk"
+    }
+  },
+  "result": {
+    "item": "endexpansion:efstaff"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "pools": [
+    {
+      "name" : "endexpansion:fortress_key",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:ash_key",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "endexpansion:fortress_key",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:arena_key_4",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "#R#",
+    "#R#"
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:purple_chunk"
+    },
+    "#": {
+      "item": "minecraft:end_bricks"
+    }
+  },
+  "result": {
+    "item": "endexpansion:compulsor"
+  }
+}

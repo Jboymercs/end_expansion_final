@@ -1,0 +1,6 @@
+{
+  "variants":
+  {
+    "variant=default": { "model": "endexpansion:ash_brick_double" }
+  }
+}

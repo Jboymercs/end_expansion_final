@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VRV",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:bloodweed_refined"
+    },
+    "V": {
+      "item": "endexpansion:green_crystal_item"
+    },
+    "R": {
+      "item": "endexpansion:lidoped_shell"
+    }
+  },
+  "result": {
+    "item": "endexpansion:lidoped_helmet"
+  }
+}

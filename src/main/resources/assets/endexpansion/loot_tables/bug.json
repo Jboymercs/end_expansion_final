@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "name" : "endexpansion:bug",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:carapace",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "endexpansion:bug_food",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

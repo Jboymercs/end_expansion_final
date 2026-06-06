@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "RVR",
+    "#R#"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:bloodweed_refined"
+    },
+    "V": {
+      "item": "endexpansion:soul"
+    },
+    "R": {
+      "item": "endexpansion:dark_ingot"
+    }
+  },
+  "result": {
+    "item": "endexpansion:memory_stone",
+    "count": 1
+  }
+}

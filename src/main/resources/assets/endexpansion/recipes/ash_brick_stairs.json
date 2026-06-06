@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:ash_brick"
+    }
+  },
+  "result": {
+    "item": "endexpansion:ash_brick_stairs",
+    "data": 0,
+    "count": 4
+  }
+}

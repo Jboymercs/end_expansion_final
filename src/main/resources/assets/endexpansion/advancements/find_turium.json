@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:end_h_plant"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.turium.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.turium.description"
+    }
+  },
+  "parent": "endexpansion:root",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:heal_food"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:shulker_shell"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.kill_constructor.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.kill_constructor.description"
+    }
+  },
+  "parent": "endexpansion:root",
+  "criteria": {
+    "Boulderer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "endexpansion:buffker"
+        }
+      }
+    }
+  }
+}

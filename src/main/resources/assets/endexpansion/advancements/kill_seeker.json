@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:purple_chunk"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.kill_seeker.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.kill_seeker.description"
+    }
+  },
+  "parent": "endexpansion:root",
+  "criteria": {
+    "EndSeeker": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "endexpansion:end_seeker"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:amber_torch"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_amber_torch.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_amber_torch.description"
+    }
+  },
+  "parent": "endexpansion:find_cordium",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:amber_torch"
+          }
+        ]
+      }
+    }
+  }
+}

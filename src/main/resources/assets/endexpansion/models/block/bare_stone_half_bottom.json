@@ -1,0 +1,9 @@
+{
+  "parent": "block/half_slab",
+  "textures":
+  {
+    "bottom": "endexpansion:blocks/bare_stone_bottom",
+    "top": "endexpansion:blocks/bare_stone_bottom",
+    "side": "endexpansion:blocks/bare_stone_bottom"
+  }
+}
