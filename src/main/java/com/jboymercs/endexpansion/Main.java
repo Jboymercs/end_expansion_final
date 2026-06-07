@@ -13,20 +13,15 @@ import com.jboymercs.endexpansion.util.handlers.FogHandler;
 import com.jboymercs.endexpansion.util.handlers.ModSoundHandler;
 import com.jboymercs.endexpansion.util.handlers.StructureHandler;
 import com.jboymercs.endexpansion.util.integration.ModIntegration;
-import com.jboymercs.endexpansion.world.Biome.WorldProviderEndEE;
 import com.jboymercs.endexpansion.world.WorldGenCustomStructure;
 import com.jboymercs.endexpansion.world.api.structures.MapGenKingFortress;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -36,10 +31,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
-import javax.annotation.Nonnull;
 
-
-@Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION)
+@Mod(modid = ModReference.MOD_ID, name = ModReference.NAME, version = ModReference.VERSION, dependencies="required-after:nether_api;required-after:geckolib3")
 public class Main {
 
     /**
@@ -61,7 +54,6 @@ public class Main {
     public static CommonProxy proxy;
     public static SimpleNetworkWrapper network;
 
-    public static final boolean isNetherAPILoaded = Loader.isModLoaded("nether_api");
     public static final Logger LOGGER = LogManager.getLogger(ModReference.MOD_ID);
 
     @Mod.Instance
@@ -77,8 +69,6 @@ public class Main {
     public void preInit(FMLPreInitializationEvent event) {
         GeckoLib.initialize();
         logger = event.getModLog();
-        //Sky Box Registry
-        ModDimensions.registerDimensionChanges();
 
         //Fluids
         ModFluid.registerFluids();
@@ -86,7 +76,7 @@ public class Main {
         EEAdvancements.Initialization();
         //Sounds
         ModSoundHandler.registerSounds();
-        //
+
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
         //Register Entities
         ModEntities.registerEntities();
@@ -98,19 +88,10 @@ public class Main {
         proxy.init();
     }
 
-
-
-
-
     // Register dimension overrides
     @Mod.EventHandler
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    static void serverAboutToStart(@Nonnull final FMLServerStartingEvent event) {
-        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded && !ModIntegration.IS_BETTER_END_LOADED) {
-            DimensionManager.unregisterDimension(1);
-            DimensionType END = DimensionType.register("End", "_end", 1, WorldProviderEndEE.class, false);
-            DimensionManager.registerDimension(1, END);
-        }
+    static void serverAboutToStart(FMLServerAboutToStartEvent event) {
+        ModDimensions.registerDimensionChanges();
     }
 
 
@@ -133,7 +114,7 @@ public class Main {
         ModRecipes.init();
         ModProfressions.associateCareersAndTrades();
         ModNetworkPackets.registerNetworkPackets();
-        if(ModConfig.isSkyBoxEnalbed && isNetherAPILoaded) {
+        if(ModConfig.isSkyBoxEnalbed) {
             //Sky Stuff
             proxy.registerEventHandlers();
         }

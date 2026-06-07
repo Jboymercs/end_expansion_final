@@ -23,51 +23,51 @@ public class WorldProviderEndEE extends WorldProviderTheEnd {
     }
 
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean isSkyColored() {
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IRenderHandler getSkyRenderer() {
-        return new EndSkyHandler();
-    }
-
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean doesXZShowFog(final int x, final int z) {
-        if(forceExtraEndFog) return true;
-        @Nonnull final Biome biome = world.getBiome(new BlockPos(x, 0, z));
-        return biome instanceof IEndBiome && ((IEndBiome)biome).hasExtraXZFog(world, x, z);
-    }
-
-    @Nonnull
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Vec3d getFogColor(final float celestialAngle, final float partialTicks) {
-        return super.getFogColor(celestialAngle, partialTicks);
-    }
-
-    @Override
-    public double getVoidFogYFactor() {
-        return 8.0f / 256f;
-    }
-
-    @Nonnull
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Vec3d getBiomeFogColor(final float celestialAngle, final float partialTicks, @Nonnull final Biome biome) {
-        return biome instanceof IEndBiome ? ((IEndBiome)biome).getFogColor(celestialAngle, partialTicks) : getDefaultFogColor(celestialAngle, partialTicks);
-    }
-
-    @Nonnull
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Vec3d getDefaultFogColor(final float celestialAngle, final float partialTicks) {
-        return new Vec3d(0.09411766, 0.07529412, 0.09411766);
-    }
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public boolean isSkyColored() {
+//        return true;
+//    }
+//
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public IRenderHandler getSkyRenderer() {
+//        return new EndSkyHandler();
+//    }
+//
+//
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public boolean doesXZShowFog(final int x, final int z) {
+//        if(forceExtraEndFog) return true;
+//        @Nonnull final Biome biome = world.getBiome(new BlockPos(x, 0, z));
+//        return biome instanceof IEndBiome && ((IEndBiome)biome).hasExtraXZFog(world, x, z);
+//    }
+//
+//    @Nonnull
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public Vec3d getFogColor(final float celestialAngle, final float partialTicks) {
+//        return super.getFogColor(celestialAngle, partialTicks);
+//    }
+//
+//    @Override
+//    public double getVoidFogYFactor() {
+//        return 8.0f / 256f;
+//    }
+//
+//    @Nonnull
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public Vec3d getBiomeFogColor(final float celestialAngle, final float partialTicks, @Nonnull final Biome biome) {
+//        return biome instanceof IEndBiome ? ((IEndBiome)biome).getFogColor(celestialAngle, partialTicks) : getDefaultFogColor(celestialAngle, partialTicks);
+//    }
+//
+//    @Nonnull
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public Vec3d getDefaultFogColor(final float celestialAngle, final float partialTicks) {
+//        return new Vec3d(0.09411766, 0.07529412, 0.09411766);
+//    }
 
 }
