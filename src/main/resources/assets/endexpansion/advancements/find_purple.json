@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:purple_crystal_item"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.purple_find.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.purple_find.description"
+    }
+  },
+  "parent": "endexpansion:root",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:purple_chunk"
+          }
+        ]
+      }
+    }
+  }
+}

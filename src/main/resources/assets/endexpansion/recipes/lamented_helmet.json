@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VVV",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:purple_crystal_item"
+    },
+    "V": {
+      "item": "endexpansion:star_shard"
+    }
+  },
+  "result": {
+    "item": "endexpansion:lamented_helmet"
+  }
+}

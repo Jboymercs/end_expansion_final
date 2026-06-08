@@ -1,7 +1,0 @@
-{
-  "variants":
-  {
-    "half=bottom,variant=default": { "model": "ee:bare_planks_half_bottom" },
-    "half=top,variant=default": { "model": "ee:bare_planks_half_top" }
-  }
-}

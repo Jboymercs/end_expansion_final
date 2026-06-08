@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "ee:blocks/bare_log_top",
-    "side": "ee:blocks/bare_bark"
-  }
-}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "endexpansion:ash_chute", "x": 180 },
+    "facing=up":    { "model": "endexpansion:ash_chute" },
+    "facing=north": { "model": "endexpansion:ash_chute", "x": 90 },
+    "facing=south": { "model": "endexpansion:ash_chute", "x": -90 },
+    "facing=west":  { "model": "endexpansion:ash_chute", "x": -90, "y": 90 },
+    "facing=east":  { "model": "endexpansion:ash_chute", "x": 90, "y":90 }
+  }
+}

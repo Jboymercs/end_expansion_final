@@ -1,0 +1,42 @@
+package com.jboymercs.endexpansion.world.Biome.barrend;
+
+import com.jboymercs.endexpansion.config.WorldConfig;
+import com.jboymercs.endexpansion.world.WorldGenStructure;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.Random;
+
+public class WorldGenBarrendArches extends WorldGenStructure {
+
+    private final WorldGenBookCamp camp = new WorldGenBookCamp("camp");
+    private int spacing = 0;
+
+    public WorldGenBarrendArches(String structureName) {
+        super("barrendbiome/ruins/" + structureName);
+    }
+
+
+    @Override
+    public void generateStructure(World world, BlockPos pos, Rotation rotation) {
+        //fines opposite corner
+        if(spacing > WorldConfig.bare_arches_spacing && !world.isAirBlock(pos.add(11, 0, 2))) {
+            spacing = 0;
+            if(world.rand.nextInt(5) == 0) {
+                camp.generateStructure(world, pos, rotation);
+                return;
+            }
+            super.generateStructure(world, pos.add(0, 0, 0), Rotation.NONE);
+        }
+        spacing++;
+    }
+
+    @Override
+    protected void handleDataMarker(String function, BlockPos pos, World world, Random random) {
+        if(function.startsWith("chest")) {
+            world.setBlockToAir(pos);
+            world.setBlockToAir(pos.add(0, -1 ,0));
+        }
+    }
+}

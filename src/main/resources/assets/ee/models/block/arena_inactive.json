@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "ee:blocks/arena_top_inactive",
-    "side": "ee:blocks/arena_side_inactive"
-  }
-}

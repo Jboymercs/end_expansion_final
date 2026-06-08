@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:mini_nuke"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_mini_nuke.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_mini_nuke.description"
+    }
+  },
+  "parent": "endexpansion:find_soul",
+  "criteria": {
+    "mininuke": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:mini_nuke"
+          }
+        ]
+      }
+    }
+  }
+}

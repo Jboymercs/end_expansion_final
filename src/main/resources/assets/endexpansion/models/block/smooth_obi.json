@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "endexpansion:blocks/eyed_obi_top",
+    "side": "endexpansion:blocks/smooth_obi"
+  }
+}

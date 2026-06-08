@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:efstaff"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_staff.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_staff.description"
+    }
+  },
+  "parent": "endexpansion:find_soul",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:efstaff"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "endexpansion:blocks/compulsor_top_off",
+    "side": "endexpansion:blocks/compulsor_side"
+  }
+}

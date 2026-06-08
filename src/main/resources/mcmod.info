@@ -1,14 +1,15 @@
 [
   {
-    "modid": "ee",
-    "name": "End Expansion",
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
     "description": "A mod adding a plethora of content to the End with a new end game meaning of difficult bosses and unique items",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "modpage",
     "authorList": [
       "FakeDrayn",
-      "UnOriginal"
+      "UnOriginal",
+      "wdcftgg"
     ],
     "credits": "UnseenDontRun",
     "logoFile": "endexpansion.png",

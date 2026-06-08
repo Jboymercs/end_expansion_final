@@ -1,6 +1,0 @@
-{
-  "parent": "block/tinted_cross",
-  "textures": {
-    "cross": "ee:blocks/end_h_plant"
-  }
-}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V#V",
+    "R R"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:soul"
+    },
+    "V": {
+      "item": "endexpansion:infused_crystal"
+    },
+    "R": {
+      "item": "endexpansion:dark_ingot"
+    }
+  },
+  "result": {
+    "item": "endexpansion:endfall_helmet"
+  }
+}

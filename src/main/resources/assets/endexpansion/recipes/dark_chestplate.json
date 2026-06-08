@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "#X#",
+    "RXR"
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:stalker_hide"
+    },
+    "#": {
+      "item": "endexpansion:dark_ingot"
+    },
+    "X": {
+      "item": "endexpansion:carapace"
+    }
+  },
+  "result": {
+    "item": "endexpansion:dark_chestplate"
+  }
+}

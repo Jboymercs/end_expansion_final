@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:medal"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_medal.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_medal.description"
+    }
+  },
+  "parent": "endexpansion:find_purple",
+  "criteria": {
+    "medallion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:medal"
+          }
+        ]
+      }
+    }
+  }
+}

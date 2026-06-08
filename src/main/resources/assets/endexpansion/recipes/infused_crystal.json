@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GV#"
+  ],
+  "key": {
+    "G": {
+      "item": "endexpansion:red_crystal_item"
+    },
+    "V": {
+      "item": "endexpansion:infusion_core"
+    },
+    "#": {
+      "item": "endexpansion:purple_crystal_item"
+    }
+  },
+  "result": {
+    "item": "endexpansion:infused_crystal"
+  }
+}

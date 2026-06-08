@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:obi_coin"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.find_coin.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.find_coin.description"
+    }
+  },
+  "parent": "endexpansion:find_purple",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:obi_coin"
+          }
+        ]
+      }
+    }
+  }
+}

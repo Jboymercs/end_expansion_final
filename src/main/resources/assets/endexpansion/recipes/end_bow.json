@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " V#",
+    "R B",
+    " V#"
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:infused_crystal"
+    },
+    "B": {
+      "item": "endexpansion:soul"
+    },
+    "V": {
+      "item": "endexpansion:brick_rod"
+    },
+    "#": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "endexpansion:end_bow"
+  }
+}

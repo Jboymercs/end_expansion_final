@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "endexpansion:blocks/ash_chute",
+    "side": "endexpansion:blocks/end_ash"
+  }
+}

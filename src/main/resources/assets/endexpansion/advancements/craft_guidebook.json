@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:end_info_book"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.craft_book.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.craft_book.description"
+    }
+  },
+  "parent": "endexpansion:root",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:end_info_book"
+          }
+        ]
+      }
+    }
+  }
+}

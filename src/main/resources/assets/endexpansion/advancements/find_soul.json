@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:soul"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.find_soul.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.find_soul.description"
+    }
+  },
+  "parent": "endexpansion:kill_king",
+  "criteria": {
+    "guidebook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "endexpansion:soul"
+          }
+        ]
+      }
+    }
+  }
+}

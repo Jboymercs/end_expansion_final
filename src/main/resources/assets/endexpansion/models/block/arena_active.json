@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "endexpansion:blocks/arena_top_active",
+    "side": "endexpansion:blocks/arena_side_active"
+  }
+}

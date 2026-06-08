@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "RVR",
+    "#B#"
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:red_crystal_item"
+    },
+    "B": {
+      "item": "endexpansion:soul"
+    },
+    "V": {
+      "item": "endexpansion:plate"
+    },
+    "#": {
+      "item": "endexpansion:ash_brick"
+    }
+  },
+  "result": {
+    "item": "endexpansion:mini_nuke"
+  }
+}

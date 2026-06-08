@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "name" : "endexpansion:mad_spirit",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endexpansion:spirit_goop",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

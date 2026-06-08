@@ -1,0 +1,6 @@
+{
+  "variants":
+  {
+    "variant=default": { "model": "endexpansion:bare_stone_double" }
+  }
+}

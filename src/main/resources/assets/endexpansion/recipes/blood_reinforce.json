@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#R#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:bloodweed_refined"
+    },
+    "R": {
+      "item": "endexpansion:infused_crystal"
+    }
+  },
+  "result": {
+    "item": "endexpansion:blood_reinforce"
+  }
+}

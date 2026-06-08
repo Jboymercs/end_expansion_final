@@ -1,6 +1,0 @@
-{
-  "parent": "block/wall_side",
-  "textures": {
-    "wall": "ee:blocks/bare_stone_smooth_side"
-  }
-}

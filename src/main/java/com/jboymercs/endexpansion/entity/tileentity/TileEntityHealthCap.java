@@ -1,0 +1,33 @@
+package com.jboymercs.endexpansion.entity.tileentity;
+
+import com.jboymercs.endexpansion.entity.trader.EntityAbstractAvalon;
+import com.jboymercs.endexpansion.entity.trader.EntityAvalon;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+
+import java.util.List;
+
+public class TileEntityHealthCap extends TileEntity implements ITickable {
+    @Override
+    public void update() {
+        if (!this.world.isRemote) {
+            //Hopefully via converting this to a box, it'll prevent the crash from placing them
+            AxisAlignedBB box = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1).grow(25D);
+            List<EntityAvalon> nearbyBoss = this.world.getEntitiesWithinAABB(EntityAvalon.class, box, e -> !e.getIsInvulnerable());
+
+            if (!nearbyBoss.isEmpty()) {
+                for (EntityAbstractAvalon blossom : nearbyBoss) {
+                    double health = blossom.getHealth() / blossom.getMaxHealth();
+                    EntityLivingBase target = blossom.getAttackTarget();
+                    if (target != null) {
+                        if (health < blossom.getStatLine() - 0.02) {
+                            blossom.heal(1.0f);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

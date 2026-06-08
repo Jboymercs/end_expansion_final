@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R#R",
+    "RXR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "endexpansion:plate"
+    },
+    "#": {
+      "item": "endexpansion:dark_ingot"
+    },
+    "X": {
+      "item": "endexpansion:purple_crystal_item"
+    }
+  },
+  "result": {
+    "item": "endexpansion:durable_shield"
+  }
+}

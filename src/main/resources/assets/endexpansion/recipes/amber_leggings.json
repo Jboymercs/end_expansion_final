@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "B B",
+    "V V"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:amber_ingot"
+    },
+    "B": {
+      "item": "endexpansion:plate"
+    },
+    "V": {
+      "item": "endexpansion:stalker_hide"
+    }
+  },
+  "result": {
+    "item": "endexpansion:amber_leggings"
+  }
+}

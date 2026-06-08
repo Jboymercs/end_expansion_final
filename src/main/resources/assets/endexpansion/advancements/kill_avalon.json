@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "endexpansion:eyed_obi"
+    },
+    "title": {
+      "translate": "advancements.endexpansion.kill_avalon.title"
+    },
+    "description": {
+      "translate": "advancements.endexpansion.kill_avalon.description"
+    },
+    "frame": "challenge"
+  },
+  "parent": "endexpansion:find_coin",
+  "criteria": {
+    "Boulderer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "endexpansion:avalon"
+        }
+      }
+    }
+  }
+}

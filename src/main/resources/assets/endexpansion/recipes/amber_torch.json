@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "R"
+  ],
+  "key": {
+    "#": {
+      "item": "endexpansion:amber_ingot"
+    },
+    "R": {
+      "item": "endexpansion:brick_rod"
+    }
+  },
+  "result": {
+    "item": "endexpansion:amber_torch",
+    "count": 4
+  }
+}

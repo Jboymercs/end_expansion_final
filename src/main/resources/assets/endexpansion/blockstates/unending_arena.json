@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "endexpansion:arena_inactive"
+    },
+    "state=inactive": {
+      "model": "endexpansion:arena_inactive"
+    },
+    "state=active": {
+      "model": "endexpansion:arena_active"
+    },
+    "state=ejecting": {
+      "model": "endexpansion:arena_ejecting"
+    }
+  }
+}

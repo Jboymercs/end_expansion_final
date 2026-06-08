@@ -1,0 +1,6 @@
+{
+  "parent": "block/tinted_cross",
+  "textures": {
+    "cross": "endexpansion:blocks/green_crystal_top"
+  }
+}
