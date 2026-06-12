@@ -35,7 +35,7 @@ public class BlockStarShard extends BlockOre implements IHasModel {
         setHardness(hardness);
         setResistance(resistance);
         this.setSoundType(soundType);
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
 
     }
 

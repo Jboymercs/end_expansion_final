@@ -27,7 +27,7 @@ public class EntityAIControllerFly extends EntityAIBase {
     @Override
     public boolean shouldExecute() {
         EntityLivingBase target = parentEntity.getAttackTarget();
-        if(parentEntity.isInteract() || parentEntity.isHuntingBlock || target != null) {
+        if(parentEntity.isInteract() || parentEntity.isHuntingBlock() || target != null) {
             return false;
         }
 
@@ -50,48 +50,52 @@ public class EntityAIControllerFly extends EntityAIBase {
         Random random = this.parentEntity.getRNG();
         BlockPos Loc = parentEntity.getPosition();
         int yHeight = getGroundFromAbove(parentEntity.world, Loc.getX(), Loc.getZ());
-        if(yHeight != 0) {
-            if((Loc.getY() - yHeight) > 5) {
+        if(!parentEntity.isHuntingBlock()) {
+            if (yHeight != 0) {
+                if ((Loc.getY() - yHeight) > 5) {
+                    double d0 = this.parentEntity.posX + ModRand.range(-10, 10);
+                    double d1 = (this.parentEntity.posY + ModRand.range(-5, -1));
+                    double d2 = this.parentEntity.posZ + ModRand.range(-10, 10);
+                    this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
+                    if ((Loc.getY() - yHeight) < 3) {
+                        resetTest = true;
+                    }
+                } else {
+                    double d0 = this.parentEntity.posX + ModRand.range(-10, 10);
+                    double d1 = (this.parentEntity.posY + ModRand.range(2, 4));
+                    double d2 = this.parentEntity.posZ + ModRand.range(-10, 10);
+                    this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
+                    if ((Loc.getY() - yHeight) > 8) {
+                        resetTest = true;
+                    }
+                }
+            } else if (Loc.getY() < 65) {
                 double d0 = this.parentEntity.posX + ModRand.range(-10, 10);
                 double d1 = (this.parentEntity.posY + ModRand.range(-5, -1));
                 double d2 = this.parentEntity.posZ + ModRand.range(-10, 10);
                 this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-                if((Loc.getY() - yHeight) < 3) {
+                if (Loc.getY() < 35) {
                     resetTest = true;
                 }
-            } else {
+            } else if (Loc.getY() > 30) {
                 double d0 = this.parentEntity.posX + ModRand.range(-10, 10);
-                double d1 = (this.parentEntity.posY + ModRand.range(2, 4));
+                double d1 = (this.parentEntity.posY + ModRand.range(3, 5));
                 double d2 = this.parentEntity.posZ + ModRand.range(-10, 10);
                 this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-                if((Loc.getY() - yHeight) > 8) {
+                if (Loc.getY() > 60) {
                     resetTest = true;
                 }
-            }
-        } else if (Loc.getY() < 65){
-            double d0 = this.parentEntity.posX + ModRand.range(-10, 10);
-            double d1 = (this.parentEntity.posY + ModRand.range(-5, -1));
-            double d2 = this.parentEntity.posZ + ModRand.range(-10, 10);
-            this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-            if(Loc.getY() < 35) {
-                resetTest = true;
-            }
-        } else if(Loc.getY() > 30) {
-            double d0 = this.parentEntity.posX + ModRand.range(-10, 10);
-            double d1 = (this.parentEntity.posY + ModRand.range(3, 5));
-            double d2 = this.parentEntity.posZ + ModRand.range(-10, 10);
-            this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-            if(Loc.getY() > 60) {
-                resetTest = true;
             }
         }
     }
 
     @Override
     public void updateTask() {
-        Vec3d pos = ModUtils.getEntityVelocity(parentEntity).normalize().scale(0.1).add(parentEntity.getPositionVector());
-        ModUtils.facePosition(pos, parentEntity, 45, 45);
-        parentEntity.getLookHelper().setLookPosition(pos.x, pos.y, pos.z, 3, 3);
+        if(!parentEntity.isHuntingBlock()) {
+            Vec3d pos = ModUtils.getEntityVelocity(parentEntity).normalize().scale(0.1).add(parentEntity.getPositionVector());
+            ModUtils.facePosition(pos, parentEntity, 45, 45);
+            parentEntity.getLookHelper().setLookPosition(pos.x, pos.y, pos.z, 3, 3);
+        }
         super.updateTask();
     }
 

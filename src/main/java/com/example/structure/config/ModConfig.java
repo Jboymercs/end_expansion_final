@@ -148,14 +148,4 @@ public class ModConfig {
     @Config.RequiresMcRestart
     public static boolean dev_stuff_enabled = false;
 
-    @Config.Name("BOMD Compat Support")
-    @Config.Comment("If BOMD + DA is loaded in, End Expansion will higher its difficulty to accomodate for the gear that BOMD has to offer. Basically default stats will go up for everything, mobs, weapons, armor. default : true")
-    @Config.RequiresMcRestart
-    public static boolean is_bomd_compat = true;
-
-    @Config.Name("Better End Support")
-    @Config.Comment("If Better End Forge Backport is installed, End Expansion add mob spawns in Better End's Biomes. NOTE that the sky box from End Expansion will automatically be disabled with Better End installed")
-    @Config.RequiresMcRestart
-    public static boolean is_better_end_compat = true;
-
 }

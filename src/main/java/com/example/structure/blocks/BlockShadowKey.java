@@ -49,7 +49,7 @@ public class BlockShadowKey extends BlockBase implements IBlockUpdater, ITileEnt
         this.setBlockUnbreakable();
         this.activationItem = item;
         this.hasTileEntity = true;
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
     }
 
     @Override

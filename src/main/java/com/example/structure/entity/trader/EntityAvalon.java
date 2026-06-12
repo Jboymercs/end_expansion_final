@@ -369,32 +369,32 @@ public class EntityAvalon extends EntityAbstractAvalon implements IAnimatable, I
     private <E extends IAnimatable> PlayState predicateFight(AnimationEvent<E> event) {
         if(this.isFightMode() && !this.isSummonState() && !this.isDeathState()) {
             if(this.isCastAOE()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_AOE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CAST_AOE));
                 return PlayState.CONTINUE;
             }
             if(this.isCastLazers()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_LAZERS, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CAST_LAZERS));
                 return PlayState.CONTINUE;
             }
             if(this.isSmashAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SMASH_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SMASH_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isProjectileAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PROJECTILE_BOMB, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PROJECTILE_BOMB));
                 return PlayState.CONTINUE;
             }
             if(this.isTeleportAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DELAY_SMASH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DELAY_SMASH));
                 return PlayState.CONTINUE;
             }
         }
         if(this.isSummonState()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON));
             return PlayState.CONTINUE;
         }
         if(this.isDeathState()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DEATH, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DEATH));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();

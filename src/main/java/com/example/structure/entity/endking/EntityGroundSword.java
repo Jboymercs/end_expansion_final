@@ -225,9 +225,9 @@ public class EntityGroundSword extends EntityModBase implements IAnimatable, IAn
     private<E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
 
         if(this.isFast()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SELECTION_STRING, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SELECTION_STRING));
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SELECTION_STRING, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SELECTION_STRING));
         }
 
         return PlayState.CONTINUE;

@@ -260,14 +260,14 @@ public class EntityNuclearExplosion extends EntityModBase implements IAnimatable
 
     private <E extends IAnimatable> PlayState predicateScale(AnimationEvent<E> event) {
         if(this.isFightMode()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DAMAGE, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DAMAGE));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
         return PlayState.STOP;
     }
     private<E extends IAnimatable> PlayState predicateIdle(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON, false));
+        event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON));
         return PlayState.CONTINUE;
     }
 

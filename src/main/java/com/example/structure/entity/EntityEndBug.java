@@ -262,19 +262,19 @@ public class EntityEndBug extends EntityModBaseTameable implements IAnimatable, 
 
     private <E extends IAnimatable> PlayState predicateIdleAnims(AnimationEvent<E> event) {
         if(this.isFightMode()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BITE, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BITE));
             return PlayState.CONTINUE;
         }
         if(this.isDigging()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DIG, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DIG));
             return PlayState.CONTINUE;
         }
         if(this.isButtTwitch()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BUTT_TWITCH, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BUTT_TWITCH));
             return PlayState.CONTINUE;
         }
         if(this.isHeadTwitch()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_HEAD_TWITCH, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_HEAD_TWITCH));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();

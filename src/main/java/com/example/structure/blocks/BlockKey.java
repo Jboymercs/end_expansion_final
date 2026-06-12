@@ -49,7 +49,7 @@ public class BlockKey extends BlockBase implements IBlockUpdater, ITileEntityPro
         this.activationItem = item;
         this.hasTileEntity = true;
         this.spawnPortal = spawnPortal;
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
     }
 
     @Override

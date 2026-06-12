@@ -942,47 +942,47 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
         if(this.isFightMode()) {
            //do attack stuff
             if(this.isPierceSwing()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PIERCE_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PIERCE_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isComboSwing()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_COMBO_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isBeginGrab()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BEGIN_GRAB, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BEGIN_GRAB));
                 return PlayState.CONTINUE;
             }
             if(this.isContinueGrab()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CONTINUE_GRAB, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CONTINUE_GRAB));
                 return PlayState.CONTINUE;
             }
             if(this.isEndGrab()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_END_GRAB, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_END_GRAB));
                 return PlayState.CONTINUE;
             }
             if(this.isJumpAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_JUMP_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_JUMP_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isShootProjectile()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SHOOT_PROJECTILE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SHOOT_PROJECTILE));
                 return PlayState.CONTINUE;
             }
             if(this.isJumpBack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_JUMP_BACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_JUMP_BACK));
                 return PlayState.CONTINUE;
             }
             if(this.isTailWhip()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_TAIL_WHIP, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_TAIL_WHIP));
                 return PlayState.CONTINUE;
             }
             if(this.isLargeAoe()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_LARGE_AOE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_LARGE_AOE));
                 return PlayState.CONTINUE;
             }
             if(this.isPhaseTransition()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_TRANSITION, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_TRANSITION));
                 return PlayState.CONTINUE;
             }
         }

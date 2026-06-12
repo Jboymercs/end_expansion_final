@@ -133,7 +133,7 @@ public class EntityBarrendParasite extends EntityModBase implements IAnimatable 
     }
 
     private<E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CRYSTAL, false));
+        event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CRYSTAL));
         return PlayState.CONTINUE;
     }
 

@@ -572,12 +572,12 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private <E extends IAnimatable> PlayState predicateBlock(AnimationEvent<E> event) {
         if(!this.isSummonKnight()) {
             if (this.isBlocking()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLOCK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BLOCK));
                 return PlayState.CONTINUE;
             }
         }
         if(this.isSummonKnight()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_ON_SUMMON, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_ON_SUMMON));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
@@ -594,27 +594,27 @@ public class EntityKnightLord extends EntityKnightBase implements IAnimatable, I
     private<E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if(this.isFightMode() && !this.isBlocking()) {
             if(this.isPierce()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PIERCE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PIERCE));
                 return PlayState.CONTINUE;
             }
             if(this.isMultiAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MULTI_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MULTI_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isMultiStrike()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_STRIKE_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_STRIKE_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isSummonCrystals()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CRYSTALS, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CRYSTALS));
                 return PlayState.CONTINUE;
             }
             if(this.isBloodSlash()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLOOD_SLASH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BLOOD_SLASH));
                 return PlayState.CONTINUE;
             }
             if(this.isComboAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_COMBO));
                 return PlayState.CONTINUE;
             }
         }

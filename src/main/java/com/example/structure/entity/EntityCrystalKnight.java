@@ -600,27 +600,27 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         //Attack Animations
         //Simple Strike
         if(this.isStrikeAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(STRIKE_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(STRIKE_ANIM));
             return PlayState.CONTINUE;
         }
         //Summon Small Crystals
         if(this.isCrystalAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(CRYSTAL_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(CRYSTAL_ANIM));
             return PlayState.CONTINUE;
         }
         // Spin Start Anim
         if(this.isSpinStart()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(SPIN_BEGIN_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(SPIN_BEGIN_ANIM));
             return PlayState.CONTINUE;
         }
         // Spin Cycle End - Attack
         if(this.isSpinAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(SPIN_ATTACK_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(SPIN_ATTACK_ANIM));
             return PlayState.CONTINUE;
         }
         //Pierce Attack
         if(this.isPierceAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(PIERCE_DASH_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(PIERCE_DASH_ANIM));
             return PlayState.CONTINUE;
         }
         //Spin Loop Anim
@@ -630,12 +630,12 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         }
         //Summon Ground Crystals
         if(this.isSummonAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(GROUND_CRYSTALS_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(GROUND_CRYSTALS_ANIM));
             return PlayState.CONTINUE;
         }
         //Hammer Start Anim
         if(this.isHammerStart()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(HAMMER_BEGIN_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(HAMMER_BEGIN_ANIM));
             return PlayState.CONTINUE;
         }
         //Hammer Travel Cycle Anim
@@ -645,22 +645,22 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
         }
         //Hammer Attack Anim
         if(this.isHammerAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(HAMMER_ATTACK_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(HAMMER_ATTACK_ANIM));
             return PlayState.CONTINUE;
         }
         //Multiple Pierce Anims
         if(this.isMultiPierceAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(MULTI_ATTACK_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(MULTI_ATTACK_ANIM));
             return PlayState.CONTINUE;
         }
         //Summon Shulkers Anim
         if(this.isShulkerAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(SUMMON_SHULKERS_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(SUMMON_SHULKERS_ANIM));
             return PlayState.CONTINUE;
         }
         //HammerProjectileAttack
         if(this.isHammerProjectile()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(RANGED_HAMMER_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(RANGED_HAMMER_ANIM));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
@@ -766,9 +766,6 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
                 this.playSound(ModSoundHandler.BOSS_CAST_AMBIENT, 1.0f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
             }, 25);
             addEvent(() -> {
-
-
-
                 for (int i = 0; i < 60; i += 4) {
                     addEvent(() -> {
                         this.playSound(SoundEvents.ENTITY_BLAZE_SHOOT, 0.4f, 0.8f + ModRand.getFloat(0.2F));
@@ -969,24 +966,40 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             addEvent(() -> {
                 this.meleeSwitch = true;
                 this.rangeSwitch = false;
-                new ActionAerialTeleport(ModColors.AZURE).performAction(this, target);
+                Vec3d playerPos = target.getPositionVector();
+                Vec3d targetedPos = playerPos.add(7 * ModRand.randSign(), 1, 7 * ModRand.randSign());
+                new ActionAerialTeleport(ModColors.AZURE, targetedPos).performAction(this, target);
                 this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.3F));
+                this.setImmovable(true);
                 addEvent(() -> {
                     this.setMultiPierceAttack(true);
                 }, 20);
-                addEvent(() -> {
-                    ModUtils.leapTowards(this, target.getPositionVector(), 0.8f, -0.4f);
-                    this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-                    for (int t = 0; t < 6; t += 5) {
-                        addEvent(() -> {
-                            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
-                            DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                            float damage = this.getAttack() * MobConfig.pierce_multiplier;
-                            ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
-                        }, t);
-                    }
 
-                }, 60);
+                addEvent(() -> {
+                    this.setImmovable(false);
+                    Vec3d posSet = target.getPositionVector().subtract(this.getPositionVector()).normalize();
+                    Vec3d targetFinalPos = target.getPositionVector().add(posSet.scale(6));
+                    double distance = this.getPositionVector().distanceTo(targetFinalPos);
+                    ModUtils.leapTowards(this, targetFinalPos, (float) (distance * 0.15), -0.1f);
+                    this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
+                    this.lockLook = true;
+                    addEvent(()-> {
+                        for (int t = 0; t < 19; t += 5) {
+                            addEvent(() -> {
+                                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
+                                DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+                                float damage = this.getAttack() * MobConfig.pierce_multiplier;
+                                ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
+                            }, t);
+                        }
+                    }, 5);
+
+                    addEvent(()-> {
+                        this.lockLook = false;
+                    }, 30);
+
+                }, 55);
+
                 addEvent(() -> {
                     this.setMultiPierceAttack(false);
 
@@ -997,24 +1010,39 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             addEvent(() -> {
                 this.meleeSwitch = true;
                 this.rangeSwitch = false;
-                new ActionAerialTeleport(ModColors.AZURE).performAction(this, target);
+                Vec3d playerPos = target.getPositionVector();
+                Vec3d targetedPos = playerPos.add(7 * ModRand.randSign(), 1, 7 * ModRand.randSign());
+                new ActionAerialTeleport(ModColors.AZURE, targetedPos).performAction(this, target);
                 this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.3F));
+                this.setImmovable(true);
                 addEvent(() -> {
                     this.setMultiPierceAttack(true);
                 }, 20);
-                addEvent(() -> {
-                    ModUtils.leapTowards(this, target.getPositionVector(), 0.8f, -0.4f);
-                    this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-                    for (int t = 0; t < 6; t += 5) {
-                        addEvent(() -> {
-                            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
-                            DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                            float damage =  this.getAttack() * MobConfig.pierce_multiplier;
-                            ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
-                        }, t);
-                    }
 
-                }, 60);
+                addEvent(() -> {
+                    this.setImmovable(false);
+                    Vec3d posSet = target.getPositionVector().subtract(this.getPositionVector()).normalize();
+                    Vec3d targetFinalPos = target.getPositionVector().add(posSet.scale(6));
+                    double distance = this.getPositionVector().distanceTo(targetFinalPos);
+                    ModUtils.leapTowards(this, targetFinalPos, (float) (distance * 0.15), -0.1f);
+                    this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
+                    this.lockLook = true;
+                    addEvent(()-> {
+                        for (int t = 0; t < 19; t += 5) {
+                            addEvent(() -> {
+                                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
+                                DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+                                float damage = this.getAttack() * MobConfig.pierce_multiplier;
+                                ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
+                            }, t);
+                        }
+                    }, 5);
+
+                    addEvent(()-> {
+                        this.lockLook = false;
+                    }, 30);
+
+                }, 55);
                 addEvent(() -> {
                     this.setMultiPierceAttack(false);
 
@@ -1025,23 +1053,39 @@ public class EntityCrystalKnight extends EntityModBase implements IAnimatable, I
             addEvent(() -> {
                 this.meleeSwitch = true;
                 this.rangeSwitch = false;
-                new ActionAerialTeleport(ModColors.AZURE).performAction(this, target);
+                Vec3d playerPos = target.getPositionVector();
+                Vec3d targetedPos = playerPos.add(7 * ModRand.randSign(), 1, 7 * ModRand.randSign());
+                new ActionAerialTeleport(ModColors.AZURE, targetedPos).performAction(this, target);
                 this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.3F));
+                this.setImmovable(true);
                 addEvent(() -> {
                     this.setMultiPierceAttack(true);
                 }, 20);
+
                 addEvent(() -> {
-                    ModUtils.leapTowards(this, target.getPositionVector(), 0.8f, -0.4f);
+                    this.setImmovable(false);
+                    Vec3d posSet = target.getPositionVector().subtract(this.getPositionVector()).normalize();
+                    Vec3d targetFinalPos = target.getPositionVector().add(posSet.scale(6));
+                    double distance = this.getPositionVector().distanceTo(targetFinalPos);
+                    ModUtils.leapTowards(this, targetFinalPos, (float) (distance * 0.15), -0.1f);
                     this.playSound(ModSoundHandler.BOSS_DASH, 0.7f, 1.0f / (rand.nextFloat() * 0.4f + 0.4f));
-                    for (int t = 0; t < 6; t += 5) {
-                        addEvent(() -> {
-                            Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
-                            DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
-                            float damage = this.getAttack() * MobConfig.pierce_multiplier;
-                            ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
-                        }, t);
-                    }
-                }, 60);
+                    this.lockLook = true;
+                    addEvent(()-> {
+                        for (int t = 0; t < 19; t += 5) {
+                            addEvent(() -> {
+                                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.0, 1.0, 0)));
+                                DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).build();
+                                float damage = this.getAttack() * MobConfig.pierce_multiplier;
+                                ModUtils.handleAreaImpact(1.0f, (e) -> damage, this, offset, source, 0.3f, 0, false);
+                            }, t);
+                        }
+                    }, 5);
+
+                    addEvent(()-> {
+                        this.lockLook = false;
+                    }, 30);
+
+                }, 55);
 
                 addEvent(() -> {
 

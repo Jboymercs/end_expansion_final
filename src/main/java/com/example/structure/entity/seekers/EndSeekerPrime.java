@@ -649,25 +649,25 @@ public class EndSeekerPrime extends EntityModBase implements IAnimatable, IAttac
     private <E extends IAnimatable> PlayState predicateAttacks(AnimationEvent<E> event) {
         if(this.isFightMode()) {
             if(this.isMeleeStrikeOne()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MELEE_ATTACK_ONE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MELEE_ATTACK_ONE));
             }
             if(this.isMeleeStrikeTwo()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MELEE_ATTACK_TWO, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MELEE_ATTACK_TWO));
             }
             if(this.isPierceAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DASH_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DASH_ATTACK));
             }
             if(this.isShootGun()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SHOOT_GUN, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SHOOT_GUN));
             }
             if(this.isComboAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_COMBO_ATTACK));
             }
             if(this.isWindSweepAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WIND_SWEEP_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_WIND_SWEEP_ATTACK));
             }
             if(this.isSummonAOE()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON_AOE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON_AOE));
             }
 
             return PlayState.CONTINUE;

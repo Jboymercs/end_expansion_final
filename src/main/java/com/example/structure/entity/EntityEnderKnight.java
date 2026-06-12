@@ -251,19 +251,19 @@ public class EntityEnderKnight extends EntityKnightBase implements IAnimatable, 
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if(!this.isDeathKnight()) {
             if (this.isStrikeAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_STRIKE_ONE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_STRIKE_ONE));
                 return PlayState.CONTINUE;
             }
             if (this.isSecondStrike()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_STRIKE_TWO, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_STRIKE_TWO));
                 return PlayState.CONTINUE;
             }
             if (this.isDashAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DASH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DASH));
                 return PlayState.CONTINUE;
             }
             if (this.isThirdStrike()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_STRIKE_THREE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_STRIKE_THREE));
                 return PlayState.CONTINUE;
             }
         }

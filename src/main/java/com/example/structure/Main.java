@@ -2,6 +2,7 @@ package com.example.structure;
 
 import com.example.structure.advancements.EEAdvancements;
 import com.example.structure.command.CommandLocateEE;
+import com.example.structure.config.CompatConfig;
 import com.example.structure.config.ModConfig;
 import com.example.structure.config.WorldConfig;
 import com.example.structure.init.*;
@@ -16,7 +17,6 @@ import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.handlers.StructureHandler;
 import com.example.structure.util.integration.ModIntegration;
 import com.example.structure.world.WorldGenCustomStructure;
-import com.example.structure.world.api.structures.MapGenKingFortress;
 import git.jbredwards.nether_api.mod.NetherAPI;
 import git.jbredwards.nether_api.mod.common.compat.stygian_end.StygianEndHandler;
 import git.jbredwards.nether_api.mod.common.world.WorldProviderNether;
@@ -129,7 +129,7 @@ public class Main {
             proxy.registerEventHandlers();
         }
 
-        if(ModIntegration.IS_BETTER_END_LOADED && ModConfig.is_better_end_compat) {
+        if(ModIntegration.IS_BETTER_END_LOADED && CompatConfig.is_better_end_compat) {
             ModEntities.registerEntitySpawnsBE();
         }
     }

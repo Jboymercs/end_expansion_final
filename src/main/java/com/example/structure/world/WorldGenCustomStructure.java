@@ -9,6 +9,7 @@ import com.example.structure.world.Biome.BiomeAshWasteland;
 import com.example.structure.world.Biome.generation.WorldGenEndPlant;
 import com.example.structure.world.Biome.ore.WorldGenStarShard;
 import com.example.structure.world.api.lamentedIslands.WorldGenLamentedIslands;
+import com.example.structure.world.api.structures.WorldGenKingFortress;
 import com.example.structure.world.api.trader.WorldGenTraderOutcamp;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import net.minecraft.block.Block;
@@ -34,6 +35,7 @@ public class WorldGenCustomStructure implements IWorldGenerator {
     public static final WorldGenEndVaults endVaults = new WorldGenEndVaults();
 
     public static final WorldGenLamentedIslands the_islands = new WorldGenLamentedIslands();
+    public static final WorldGenKingFortress king_fortress = new WorldGenKingFortress();
     private int trader_spacing = WorldConfig.avalon_trader_spacing;
 
     public static final WorldGenEndPlant healPlants = new WorldGenEndPlant(ModBlocks.END_HEAL_PLANT.getDefaultState());
@@ -53,7 +55,10 @@ public class WorldGenCustomStructure implements IWorldGenerator {
                     the_islands.generate(world, random, pos);
                 }
 
-
+                //Kings Fortress
+                if(WorldConfig.fortress_enabled) {
+                    king_fortress.generate(world, random, pos);
+                }
 
 
                 //End Vaults, A mini-dungeon that has roguelike generation too it. Main place to find the purple crystal resource

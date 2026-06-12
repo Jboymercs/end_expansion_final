@@ -354,13 +354,13 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
 
     private <E extends IAnimatable>PlayState predicateActions(AnimationEvent<E> event) {
         if(this.isAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_ATTACK, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_ATTACK));
             return PlayState.CONTINUE;
         } else if (this.isStartHarvest()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BEGIN_HARVEST, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BEGIN_HARVEST));
             return PlayState.CONTINUE;
         } else if (this.isEndHarvest()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_END_HARVEST, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_END_HARVEST));
             return PlayState.CONTINUE;
         }
 

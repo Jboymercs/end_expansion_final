@@ -480,23 +480,23 @@ public class EntityChomper extends EntityModBase implements IAnimationTickable, 
 
     private<E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if(this.isWarn()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_WARN, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_WARN));
             return PlayState.CONTINUE;
         }
         if(this.isBite()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BITE, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BITE));
             return PlayState.CONTINUE;
         }
         if(this.isDigUp()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_POP_OUT, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_POP_OUT));
             return PlayState.CONTINUE;
         }
         if(this.isDigDown()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DIG, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DIG));
             return PlayState.CONTINUE;
         }
         if(this.isAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_ATTACK, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_ATTACK));
             return PlayState.CONTINUE;
         }
 

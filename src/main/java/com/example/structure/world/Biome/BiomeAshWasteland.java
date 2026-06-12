@@ -14,7 +14,6 @@ import com.example.structure.world.Biome.generation.*;
 import com.example.structure.world.WorldGenStructure;
 import com.example.structure.world.api.ashtower.WorldGenAshTower;
 import com.example.structure.world.api.mines.WorldGenMines;
-import com.example.structure.world.api.structures.MapGenKingFortress;
 import com.example.structure.world.islands.WorldGenOutpost;
 import git.jbredwards.nether_api.api.audio.IMusicType;
 import git.jbredwards.nether_api.api.audio.ISoundAmbience;

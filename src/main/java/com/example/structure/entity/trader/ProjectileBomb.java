@@ -13,6 +13,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ProjectileBomb extends Projectile {
 
@@ -59,6 +61,17 @@ public class ProjectileBomb extends Projectile {
         Vec3d circleOffset = new Vec3d(pos.x, 0, pos.y);
         circleOffset = ModUtils.rotateVector2(circleOffset, ModUtils.Y_AXIS, ticksExisted * 2);
         return circleOffset;
+    }
+
+    public float getBrightness()
+    {
+        return 1.0F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender()
+    {
+        return 15728880;
     }
 
 

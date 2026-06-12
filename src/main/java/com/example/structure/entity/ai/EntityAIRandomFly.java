@@ -26,7 +26,7 @@ public class EntityAIRandomFly extends EntityAIBase {
     public boolean shouldExecute() {
         EntityMoveHelper entitymovehelper = this.parentEntity.getMoveHelper();
         stopMovingTimer--;
-        if(parentEntity.isInteract() || parentEntity.isHuntingBlock) {
+        if(parentEntity.isInteract() || parentEntity.isHuntingBlock()) {
             return false;
         }
         return parentEntity.getPosition() != posUpdate && stopMovingTimer < 180;

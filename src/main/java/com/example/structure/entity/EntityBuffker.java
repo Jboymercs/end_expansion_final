@@ -1,5 +1,6 @@
 package com.example.structure.entity;
 
+import com.example.structure.Main;
 import com.example.structure.config.ModConfig;
 import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.ai.ActionGolemQuake;
@@ -152,6 +153,8 @@ public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable,
         //Attack Status
         addEvent(()-> this.playSound(SoundEvents.ENTITY_SHULKER_OPEN, 1.0f, 1.0f / rand.nextFloat() * 0.4f + 0.4f), 3);
         addEvent(()-> {
+            Vec3d relPos = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(0.5, 0.05, 0)));
+            Main.proxy.spawnParticle(2, world, relPos.x, relPos.y, relPos.z, 0, 0, 0, 12464843);
             new ActionGolemQuake().performAction(this, target);
             this.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 0.7f, 1.0f / rand.nextFloat() * 0.4f + 0.4f);
         }, 25);
@@ -174,7 +177,7 @@ public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable,
     //The Peak animation shulkers do
     private<E extends IAnimatable> PlayState predicatePeak(AnimationEvent<E> event) {
         if(this.isBlinkMode() && !this.isFightMode()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(BLINK_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(BLINK_ANIM));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
@@ -204,11 +207,11 @@ public class EntityBuffker extends EntityAbstractBuffker implements IAnimatable,
 
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if (this.isShootAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(SHOOT_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(SHOOT_ANIM));
             return PlayState.CONTINUE;
         }
         if(this.isShockWaveAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(SHOCKWAVE_ANIM, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(SHOCKWAVE_ANIM));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();

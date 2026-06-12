@@ -3,7 +3,6 @@ package com.example.structure.entity;
 
 import com.example.structure.config.MobConfig;
 import com.example.structure.config.WorldConfig;
-import com.example.structure.entity.ai.EntityAIRandomFly;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.trader.EntityAOEArena;
@@ -66,13 +65,13 @@ import java.util.function.Consumer;
 
 public class EntityController extends EntityModBase implements IAnimatable, IAttack, IAnimationTickable {
 
-    public boolean isHuntingBlock = false;
     private static final DataParameter<Optional<IBlockState>> BLOCK_HEAD = EntityDataManager.<Optional<IBlockState>>createKey(EntityController.class, DataSerializers.OPTIONAL_BLOCK_STATE);
 
     protected static final DataParameter<Boolean> CONTROLLER_MODE = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> INTERACT = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SHOOT_PROJECTILES = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
     protected static final DataParameter<Boolean> SUMMON_LIFT_ATTACK = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> HUNTING_BLOCK = EntityDataManager.createKey(EntityController.class, DataSerializers.BOOLEAN);
 
 
     @Override
@@ -87,11 +86,12 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
         nbt.setBoolean("Interact", this.isInteract());
         nbt.setBoolean("Shoot_Projectiles", this.isShootProjectiles());
         nbt.setBoolean("Summon_Lift_Attack", this.isSummonLiftAttack());
+        nbt.setBoolean("Hunting_Block", this.isHuntingBlock());
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
+        super.readEntityFromNBT(nbt);
      //   this.dataManager.set(CONTROLLER_MODE, nbt.getBoolean("Controller_Mode"));
      //   this.dataManager.set(INTERACT, nbt.getBoolean("Interact"));
      //   this.dataManager.set(SHOOT_PROJECTILES, nbt.getBoolean("Shoot_Projectiles"));
@@ -101,6 +101,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
         this.setInteract(nbt.getBoolean("Interact"));
         this.setShootProjectiles(nbt.getBoolean("Shoot_Projectiles"));
         this.setSummonLiftAttack(nbt.getBoolean("Summon_Lift_Attack"));
+        this.setHuntingBlock(nbt.getBoolean("Hunting_Block"));
     }
 
     public void setFightMode(boolean value) {this.dataManager.set(CONTROLLER_MODE, Boolean.valueOf(value));}
@@ -111,6 +112,8 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     public boolean isShootProjectiles() {return this.dataManager.get(SHOOT_PROJECTILES);}
     public void setSummonLiftAttack(boolean value) {this.dataManager.set(SUMMON_LIFT_ATTACK, Boolean.valueOf(value));}
     public boolean isSummonLiftAttack() {return this.dataManager.get(SUMMON_LIFT_ATTACK);}
+    public void setHuntingBlock(boolean value) {this.dataManager.set(HUNTING_BLOCK, Boolean.valueOf(value));}
+    public boolean isHuntingBlock() {return this.dataManager.get(HUNTING_BLOCK);}
     private AnimationFactory factory = new AnimationFactory(this);
     private final String ANIM_IDLE = "idle";
     private final String ANIM_MOVE = "walk";
@@ -206,6 +209,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     this.dataManager.register(INTERACT, Boolean.valueOf(false));
     this.dataManager.register(SUMMON_LIFT_ATTACK, Boolean.valueOf(false));
     this.dataManager.register(SHOOT_PROJECTILES, Boolean.valueOf(false));
+    this.dataManager.register(HUNTING_BLOCK, Boolean.valueOf(false));
     }
 
     @Override
@@ -286,8 +290,10 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
             } else {
                 checkNearbyPlayers--;
             }
+
+
             if(startBlockSearch < 0) {
-                this.isHuntingBlock = true;
+                this.setHuntingBlock(true);
                 //Search for Blocks within it's area
                 AxisAlignedBB box = getEntityBoundingBox().grow(8, 8, 8);
                 BlockPos pos = ModUtils.searchForBlocks(box, world, currentBlock);
@@ -300,7 +306,7 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
                     double distSq = this.getDistanceSq(distanceFrom.x, distanceFrom.y, distanceFrom.z);
                     double distance = Math.sqrt(distSq);
                     //Found Block move to it's Location
-                    if(distance > 3) {
+                    if(distance > 5) {
                         blockTooAttempts--;
                     } else {
                         //Start to change Block
@@ -311,13 +317,13 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
                     //Failed to reach location in time, start over
                     if(blockTooAttempts < 0) {
                         startBlockSearch = 80;
-                        this.isHuntingBlock = false;
+                        this.setHuntingBlock(false);
                         blockTooAttempts = 200;
                     }
                 } else {
                     startBlockSearch = 80;
                     blockTooAttempts = 200;
-                    this.isHuntingBlock = false;
+                    this.setHuntingBlock(false);
                 }
             } else {
                 startBlockSearch--;
@@ -393,8 +399,8 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
         }, 25);
 
         addEvent(()-> {
-            startBlockSearch = 80;
-            this.isHuntingBlock = false;
+            startBlockSearch = 10;
+            this.setHuntingBlock(false);
             blockTooAttempts = 200;
             this.setImmovable(false);
             this.setInteract(false);
@@ -504,16 +510,16 @@ public class EntityController extends EntityModBase implements IAnimatable, IAtt
     private<E extends IAnimatable> PlayState predicateInteractions(AnimationEvent<E> e) {
         if(this.isFightMode()) {
             if(this.isShootProjectiles()) {
-                e.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SHOOT, false));
+                e.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SHOOT));
                 return PlayState.CONTINUE;
             }
             if(this.isSummonLiftAttack()) {
-                e.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_LIFT, false));
+                e.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_LIFT));
                 return PlayState.CONTINUE;
             }
         }
         if(this.isInteract()) {
-            e.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_INTERACT, false));
+            e.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_INTERACT));
             return PlayState.CONTINUE;
         }
         e.getController().markNeedsReload();

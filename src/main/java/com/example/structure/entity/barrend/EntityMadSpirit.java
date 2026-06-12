@@ -157,7 +157,7 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
     @Override
     public boolean getCanSpawnHere()
     {
-        return this.world.rand.nextInt(24) == 0;
+        return this.world.rand.nextInt(44) == 0;
     }
 
 
@@ -279,11 +279,11 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
 
     private<E extends IAnimatable>PlayState predicateAttack(AnimationEvent<E> event) {
         if(this.isBiteAttack()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_ATTACK, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_ATTACK));
             return PlayState.CONTINUE;
         }
         if(this.isOnSummon()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON));
             return PlayState.CONTINUE;
         }
 

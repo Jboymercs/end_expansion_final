@@ -32,7 +32,7 @@ public class BlockBareAcid extends BlockFluidClassic implements IHasModel {
         super(fluid, material);
         this.setRegistryName(name);
         this.setTranslationKey(name);
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
         // Add both an item as a block and the block itself
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
