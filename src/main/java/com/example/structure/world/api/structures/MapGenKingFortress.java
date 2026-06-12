@@ -4,8 +4,6 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.config.WorldConfig;
 import com.example.structure.util.MapGenModStructure;
 import com.example.structure.util.handlers.BiomeRegister;
-import git.jbredwards.nether_api.api.registry.INetherAPIRegistryListener;
-import git.jbredwards.nether_api.api.structure.INetherAPIStructureEntry;
 import git.jbredwards.nether_api.api.structure.ISpawningStructure;
 import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import net.minecraft.entity.EnumCreatureType;
@@ -23,12 +21,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-public class MapGenKingFortress extends MapGenModStructure implements INetherAPIStructureEntry, ISpawningStructure, INetherAPIRegistryListener {
+public class MapGenKingFortress extends MapGenModStructure implements ISpawningStructure {
     INetherAPIChunkGenerator provider;
 
-    public MapGenKingFortress(int spacing, int offset, int odds) {
+    public MapGenKingFortress(INetherAPIChunkGenerator providerIn, int spacing, int offset, int odds) {
         super(spacing, offset, odds);
-
+        world = providerIn.getWorld();
+        provider = providerIn;
     }
 
     @Override
@@ -41,19 +40,6 @@ public class MapGenKingFortress extends MapGenModStructure implements INetherAPI
         return new MapGenKingFortress.Start(this.world, provider, this.rand, chunkX, chunkZ, this);
     }
 
-
-    @Nonnull
-    @Override
-    public String getCommandName() {
-        return getStructureName();
-    }
-
-    @Nonnull
-    @Override
-    public Function<INetherAPIChunkGenerator, MapGenStructure> getStructureFactory() {
-        return chunkGenerator -> new MapGenKingFortress(20, 0, 1);
-    }
-
     @Nonnull
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(@Nonnull EnumCreatureType type, @Nonnull World world, @Nonnull BlockPos pos) {
@@ -62,14 +48,12 @@ public class MapGenKingFortress extends MapGenModStructure implements INetherAPI
 
 
     public static class Start extends StructureStart {
-        INetherAPIChunkGenerator provider;
         public Start() {
 
         }
 
         public Start(World worldIn, INetherAPIChunkGenerator provider, Random rand, int chunkX, int chunkZ, MapGenKingFortress structure) {
             super(chunkX, chunkZ);
-            this.provider = provider;
             this.create(worldIn, provider, rand, chunkX, chunkZ, structure);
 
         }

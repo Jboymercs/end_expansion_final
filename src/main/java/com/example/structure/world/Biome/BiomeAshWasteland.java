@@ -6,6 +6,7 @@ import com.example.structure.config.WorldConfig;
 import com.example.structure.entity.EntityChomper;
 import com.example.structure.entity.EntitySnatcher;
 import com.example.structure.init.ModBlocks;
+import com.example.structure.proxy.ClientProxy;
 import com.example.structure.util.ModRand;
 import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.world.Biome.decorator.EEBiomeDecorator;
@@ -425,4 +426,15 @@ public class BiomeAshWasteland extends BiomeFogged implements IEndBiome, INether
         };
     }
 
+    @Nonnull
+    @Override
+    public IMusicType getMusicType() {
+        return ClientProxy.TRACK_ONE != null ? new VanillaMusicType(ClientProxy.TRACK_ONE) : IEndBiome.super.getMusicType();
+    }
+
+    @Nonnull
+    @Override
+    public IMusicType getBossMusicType() {
+        return ClientProxy.TRACK_ONE != null ? new VanillaMusicType(ClientProxy.TRACK_ONE) : IEndBiome.super.getBossMusicType();
+    }
 }

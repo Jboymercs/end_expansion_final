@@ -4,11 +4,12 @@ import com.example.structure.blocks.BlockLeavesBase;
 import com.example.structure.entity.util.data.GlowingMetadataSection;
 import com.example.structure.entity.util.data.GlowingMetadataSectionSerializer;
 import com.example.structure.event_handler.ClientRender;
-import com.example.structure.event_handler.client.MusicHandlerEE;
 import com.example.structure.gui.book.GuiBook;
 import com.example.structure.init.ModItems;
 import com.example.structure.items.model.ModelPureHelmet;
 import com.example.structure.sky.EndSkyHandler;
+import com.example.structure.util.ModReference;
+import com.example.structure.util.handlers.ModSoundHandler;
 import com.example.structure.util.CameraScreenShakeHandler;
 import com.example.structure.util.handlers.RenderHandler;
 import com.example.structure.util.integration.ModIntegration;
@@ -17,6 +18,7 @@ import com.example.structure.util.particles.ParticlePixel;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -31,12 +33,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
+    public static MusicTicker.MusicType TRACK_ONE;
 
     @Override
     public void registerItemRenderer(Item item, int meta, String id) {
@@ -63,13 +67,10 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-        Minecraft mc = Minecraft.getMinecraft();
-
-
+        // Init custom music type
+        TRACK_ONE = EnumHelperClient.addMusicType(ModReference.MOD_ID + ":TRACK_ONE", ModSoundHandler.BIOME_MUSIC, 1200, 15000);
         // Add custom metadataserializers
-        mc.metadataSerializer.registerMetadataSectionType(new GlowingMetadataSectionSerializer(), GlowingMetadataSection.class);
-        //Music handler for the Ash Wastelands
-        registerEvent(new MusicHandlerEE());
+        Minecraft.getMinecraft().metadataSerializer.registerMetadataSectionType(new GlowingMetadataSectionSerializer(), GlowingMetadataSection.class);
         //Registers Geckolib Entities
         RenderHandler.registerGeoEntityRenderers();
         super.init();

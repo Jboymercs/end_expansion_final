@@ -30,8 +30,6 @@ public abstract class GenStructure extends MapGenStructure {
     @Nullable
     @Override
     public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored) {
-        this.world = worldIn;
-
         return findNearestStructurePosBySpacing(worldIn, this, pos, 20, 11, 10387313, true, 100, findUnexplored);
     }
 
