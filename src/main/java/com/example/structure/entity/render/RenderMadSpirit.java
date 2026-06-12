@@ -7,8 +7,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 
@@ -26,13 +28,20 @@ public class RenderMadSpirit extends RenderAbstractGeoEntity<EntityMadSpirit> {
 
     @Override
     public void doRender(EntityMadSpirit entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        GlStateManager.enableNormalize();
+      //  GlStateManager.enableNormalize();
         GlStateManager.enableBlend();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.75F);
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        //GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        if(entity.getAttackTarget() != null) {
+            EntityLivingBase target = entity.getAttackTarget();
+                double distance = 0.25/target.getDistance(entity);
+                GlStateManager.color(1.0F, 1.0F, 1.0F, (float) distance);
+        } else {
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 0F);
+        }
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
         GlStateManager.disableBlend();
-        GlStateManager.disableNormalize();
+      //  GlStateManager.disableNormalize();
     }
 
 }

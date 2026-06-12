@@ -220,15 +220,15 @@ public class EntityEnderMage extends EntityKnightBase implements IAnimatable, IA
 
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
     if(this.isHealingMode()) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_HEAL, false));
+        event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CAST_HEAL));
         return PlayState.CONTINUE;
     }
      else if(this.isAttackMode()) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_ATTACK, false));
+        event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CAST_ATTACK));
         return PlayState.CONTINUE;
     }
      else if(this.isMarked()) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MARKED, false));
+        event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MARKED));
         return PlayState.CONTINUE;
     }
         event.getController().markNeedsReload();

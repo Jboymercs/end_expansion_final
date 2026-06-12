@@ -17,7 +17,7 @@ public class BlockBarrier extends BlockBase{
         this.setBlockUnbreakable();
         this.setLightLevel(0.8f);
         this.setResistance(6000000.0F);
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
 
     }
 

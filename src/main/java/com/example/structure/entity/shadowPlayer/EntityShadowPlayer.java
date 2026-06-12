@@ -1293,7 +1293,7 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
 
     private <E extends IAnimatable> PlayState predicateDeathState(AnimationEvent<E> event) {
         if(this.isFightModeZero() && this.isEndStart()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_END_START, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_END_START));
             return PlayState.CONTINUE;
         }
 
@@ -1303,75 +1303,75 @@ public class EntityShadowPlayer extends EntityModBase implements IAnimatable, IA
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if(this.isFightModeZero() && !this.isEndStart()) {
             if(this.isComboDash()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_DASH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_COMBO_DASH));
                 return PlayState.CONTINUE;
             }
             if(this.isComboDashAlt()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_DASH_ALT, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_COMBO_DASH_ALT));
                 return PlayState.CONTINUE;
             }
             if(this.isQuickAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SWING_QUICK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SWING_QUICK));
                 return PlayState.CONTINUE;
             }
             if(this.isQuickAttackAlt()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SWING_ALT, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SWING_ALT));
                 return PlayState.CONTINUE;
             }
             if(this.isSwingBasic()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SWING_BASIC, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SWING_BASIC));
                 return PlayState.CONTINUE;
             }
             if(this.isDashAway()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DASH_AWAY, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DASH_AWAY));
                 return PlayState.CONTINUE;
             }
             if(this.isAxeAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_AXE_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_AXE_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isAxeAOE()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_AXE_AOE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_AXE_AOE));
                 return PlayState.CONTINUE;
             }
             if(this.isBeginBSAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BS_STRIKE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BS_STRIKE));
                 return PlayState.CONTINUE;
             }
             if(this.isFinishBSAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BS_FINISH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BS_FINISH));
                 return PlayState.CONTINUE;
             }
             if(this.isContinueBSAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BS_CONTINUE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BS_CONTINUE));
                 return PlayState.CONTINUE;
             }
             if(this.isUseHealthPotion()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_USE_POTION, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_USE_POTION));
                 return PlayState.CONTINUE;
             }
             if(this.isDoRangedAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DO_RANGED_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DO_RANGED_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isSummonStart()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON_START, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON_START));
                 return PlayState.CONTINUE;
             }
             if(this.isMiddleStart()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MIDDLE_START, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MIDDLE_START));
                 return PlayState.CONTINUE;
             }
             if(this.isArenaAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_AOE_ARENA, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_AOE_ARENA));
                 return PlayState.CONTINUE;
             }
             if(this.isSummonOrb()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON_ORB, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON_ORB));
                 return PlayState.CONTINUE;
             }
             if(this.isBloodSlash()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLOOD_SLASH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BLOOD_SLASH));
                 return PlayState.CONTINUE;
             }
 

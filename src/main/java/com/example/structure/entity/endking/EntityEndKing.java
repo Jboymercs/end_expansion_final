@@ -536,66 +536,66 @@ public class EntityEndKing extends EntityAbstractEndKing implements IAnimatable,
         //Handles All Attacks
         if(this.isFightMode() && !this.isPhaseIntro() && !this.isBossStall() && !this.isBossStart() && !this.isDeathBoss()) {
             if(this.isLeapSweepAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SWEEP_LEAP, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SWEEP_LEAP));
             }
             if(this.isSummonCrystalsAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(SUMMON_AOE_CRYSTALS, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(SUMMON_AOE_CRYSTALS));
             }
             if(this.isSlamAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SLAM_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SLAM_ATTACK));
             }
             if(this.isSummonFireBallsAttack()) {
                 if(this.isPhaseHandler()) {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_FIRE_BALL, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_FIRE_BALL));
                 } else {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_FIRE_BALL, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_FIRE_BALL));
                 }
             }
             if(this.isSummonGhosts()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(SUMMON_AOE_CRYSTALS, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(SUMMON_AOE_CRYSTALS));
             }
             if(this.isUpperAttack()) {
                 if(this.isPhaseHandler()) {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_UPPER_ATTACK, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_UPPER_ATTACK));
                 } else {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_TOP_SWIPE, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_TOP_SWIPE));
                 }
 
             }
             if(this.isSideAttack()) {
                 if(this.isPhaseHandler()) {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_SIDE_SWIPE, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_SIDE_SWIPE));
                 } else {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SIDE_SWIPE, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SIDE_SWIPE));
                 }
             }
             if(this.isComboAttack()) {
                 if(this.isPhaseHandler()) {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_COMBO, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_COMBO));
                 } else {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_COMBO_LINE, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_COMBO_LINE));
                 }
 
             }
             if(this.isCastArena()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_ARENA, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CAST_ARENA));
             }
 
             if(this.isGroundSwords()) {
                 if(this.isPhaseHandler()) {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_CAST_SWORD, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_CAST_SWORD));
                 } else {
-                    event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_CAST_SWORD, false));
+                    event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_CAST_SWORD));
                 }
             }
             if(this.isMultipleStrikes()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PHASE_SUPER_SWING, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PHASE_SUPER_SWING));
             }
             if(this.isLazerAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_LAZER_BEAM, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_LAZER_BEAM));
             }
             if(this.isFlyDashMove()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_FLY_DASH, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_FLY_DASH));
             }
             return PlayState.CONTINUE;
         }

@@ -46,7 +46,7 @@ public class BlockAshKeyBlock extends BlockBase implements IBlockUpdater, ITileE
         this.activationItem = item;
         this.hasTileEntity = true;
         this.spawnPortal = spawnPortal;
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
     }
 
 

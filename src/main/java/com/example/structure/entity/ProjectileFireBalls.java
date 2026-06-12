@@ -14,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ProjectileFireBalls extends Projectile{
     private static final int EXPOSION_AREA_FACTOR = 2;
@@ -69,6 +71,17 @@ public class ProjectileFireBalls extends Projectile{
                     this.posZ + ModRand.getFloat(EXPOSION_AREA_FACTOR), 0, 0, 0);
             ParticleManager.spawnEffect(world, getPositionVector().add(ModRand.randVec().scale(EXPOSION_AREA_FACTOR * 2)), ModColors.RED);
         }
+    }
+
+    public float getBrightness()
+    {
+        return 1.0F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender()
+    {
+        return 15728880;
     }
 
     @Override

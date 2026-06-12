@@ -52,7 +52,7 @@ public class EntityLargeAOEEffect extends EntityModBase implements IAnimatable {
     }
 
     private<E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SUMMON, false));
+        event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SUMMON));
         return PlayState.CONTINUE;
     }
 

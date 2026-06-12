@@ -4,7 +4,6 @@ import com.example.structure.config.ModConfig;
 import com.example.structure.config.WorldConfig;
 import com.example.structure.util.ModRand;
 import com.google.common.collect.Lists;
-import git.jbredwards.nether_api.api.world.INetherAPIChunkGenerator;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +18,6 @@ public class KingFortress {
     private List<StructureComponent> components;
     private World world;
     private TemplateManager manager;
-    private INetherAPIChunkGenerator provider;
 
 
     private static final int SIZE = WorldConfig.fortress_size;
@@ -33,10 +31,9 @@ public class KingFortress {
 
 
     //Goal is to make a 2 level structure that when breaking island side surfaces, it will change it's room layout. With one of the rooms holding the bossRoom keyBlock
-    public KingFortress(World worldIn, TemplateManager manager, INetherAPIChunkGenerator provider, List<StructureComponent> components) {
+    public KingFortress(World worldIn, TemplateManager manager, List<StructureComponent> components) {
         this.world = worldIn;
         this.manager = manager;
-        this.provider = provider;
         this.components = components;
 
     }

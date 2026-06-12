@@ -25,7 +25,7 @@ entity.entity_idle.name=idle
 entity.end_bug.name=Ashed Parasite
 entity.ghost_king_phase.name=Ashed King's Ghost
 entity.ring_eye.name=King's Gaze
-entity.controller.name= Ancient Guilder
+entity.controller.name=Ancient Guilder
 entity.lame_eye.name=Lamented Eye
 entity.ghost_arm.name=King's Ghost Arm
 entity.mini_nuke.name=Mini Nuke
@@ -233,7 +233,8 @@ entity.unholy_arrow.name=Lustrian Arrow
 entity.green_arrow.name=Vacuian Arrow
 enitty.lamented_islands_painting.name=Lamented Islands Painting
 
-itemGroup.expansion=End Expansion
+itemGroup.expansion_items=End Expansion Items
+itemGroup.expansion_blocks=End Expansion Blocks
 
 potion.corrupted=Red Rage
 potion.entrapped=Entrapment

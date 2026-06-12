@@ -10,6 +10,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ProjectileParasiteBomb extends Projectile{
 
@@ -31,6 +33,17 @@ public class ProjectileParasiteBomb extends Projectile{
         for (int i = 0; i < this.PARTICLE_AMOUNT; i++) {
             ParticleManager.spawnColoredSmoke(world, getPositionVector(), ModColors.GREEN, new Vec3d(0, 0.1, 0));
         }
+    }
+
+    public float getBrightness()
+    {
+        return 1.0F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender()
+    {
+        return 15728880;
     }
 
     @Override

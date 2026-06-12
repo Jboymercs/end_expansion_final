@@ -25,7 +25,7 @@ public class ApiEventHandler {
         event.registry.registerBiome(BiomeRegister.BARREND_LOWLANDS, 80);
 
         //King Fortress
-        event.registry.registerStructure("EndKingsFortress", chunkGenerator -> Main.instance.fortress);
+     //   event.registry.registerStructure("EndKingsFortress", chunkGenerator -> Main.instance.fortress);
 
 
     }

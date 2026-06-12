@@ -54,7 +54,7 @@ public class BlockDoorActivation extends BlockBase implements IBlockUpdater, ITi
         this.activationItem = item;
         this.hasTileEntity = true;
 
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
     }
 
     @Override

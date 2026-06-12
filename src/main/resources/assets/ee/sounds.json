@@ -4,8 +4,7 @@
     "subtitle": "entity.boss.idle",
     "sounds": [
       {
-        "name": "ee:entity/boss/idle",
-        "stream": true
+        "name": "ee:entity/boss/idle"
       }
     ]
   },
@@ -14,8 +13,7 @@
     "subtitle": "entity.boss.hurt",
     "sounds": [
       {
-        "name": "ee:entity/boss/hurt",
-        "stream": true
+        "name": "ee:entity/boss/hurt"
       }
     ]
   },
@@ -24,8 +22,7 @@
     "subtitle": "entity.boss.death",
     "sounds": [
       {
-        "name": "ee:entity/boss/death",
-        "stream": true
+        "name": "ee:entity/boss/death"
       }
     ]
   },
@@ -34,8 +31,7 @@
     "subtitle": "entity.boss.summon",
     "sounds": [
       {
-        "name": "ee:entity/boss/summon",
-        "stream": true
+        "name": "ee:entity/boss/summon"
       }
     ]
   },
@@ -44,8 +40,7 @@
     "subtitle": "entity.boss.hammer",
     "sounds": [
       {
-        "name": "ee:entity/boss/hammer",
-        "stream": true
+        "name": "ee:entity/boss/hammer"
       }
     ]
   },
@@ -54,8 +49,7 @@
     "subtitle": "entity.boss.sword",
     "sounds": [
       {
-        "name": "ee:entity/boss/sword",
-        "stream": true
+        "name": "ee:entity/boss/sword"
       }
     ]
   },
@@ -64,8 +58,7 @@
     "subtitle": "entity.boss.dash",
     "sounds": [
       {
-        "name": "ee:entity/boss/dash",
-        "stream": true
+        "name": "ee:entity/boss/dash"
       }
     ]
   },
@@ -74,8 +67,7 @@
     "subtitle": "entity.boss.cast",
     "sounds": [
       {
-        "name": "ee:entity/boss/cast",
-        "stream": true
+        "name": "ee:entity/boss/cast"
       }
     ]
   },
@@ -84,12 +76,10 @@
     "subtitle": "entity.controller.idle",
     "sounds": [
       {
-        "name": "ee:entity/controller/idle_1",
-        "stream": true
+        "name": "ee:entity/controller/idle_1"
       },
       {
-        "name": "ee:entity/controller/idle_2",
-        "stream": true
+        "name": "ee:entity/controller/idle_2"
       }
     ]
   },
@@ -98,12 +88,10 @@
     "subtitle": "entity.controller.hurt",
     "sounds": [
       {
-        "name": "ee:entity/controller/hurt_1",
-        "stream": true
+        "name": "ee:entity/controller/hurt_1"
       },
       {
-        "name": "ee:entity/controller/hurt_2",
-        "stream": true
+        "name": "ee:entity/controller/hurt_2"
       }
     ]
   },
@@ -112,8 +100,7 @@
     "subtitle": "entity.controller.aggro",
     "sounds": [
       {
-        "name": "ee:entity/controller/aggro",
-        "stream": true
+        "name": "ee:entity/controller/aggro"
       }
     ]
   },
@@ -122,8 +109,7 @@
     "subtitle": "entity.controller.change",
     "sounds": [
       {
-        "name": "ee:entity/controller/change",
-        "stream": true
+        "name": "ee:entity/controller/change"
       }
     ]
   },
@@ -132,8 +118,7 @@
     "subtitle": "entity.parasite.ground",
     "sounds": [
       {
-        "name": "ee:entity/barrend/bite",
-        "stream": true
+        "name": "ee:entity/barrend/bite"
       }
     ]
   },
@@ -142,8 +127,7 @@
     "subtitle": "entity.barrend.bite",
     "sounds": [
       {
-        "name": "ee:entity/barrend/bite_2",
-        "stream": true
+        "name": "ee:entity/barrend/bite_2"
       }
     ]
   },
@@ -152,8 +136,7 @@
     "subtitle": "entity.barrend.hit",
     "sounds": [
       {
-        "name": "ee:entity/barrend/hit",
-        "stream": true
+        "name": "ee:entity/barrend/hit"
       }
     ]
   },
@@ -162,8 +145,7 @@
     "subtitle": "entity.barrend.raise_arm",
     "sounds": [
       {
-        "name": "ee:entity/barrend/raise_arm",
-        "stream": true
+        "name": "ee:entity/barrend/raise_arm"
       }
     ]
   },
@@ -172,8 +154,7 @@
     "subtitle": "entity.barrend.slam",
     "sounds": [
       {
-        "name": "ee:entity/barrend/slam",
-        "stream": true
+        "name": "ee:entity/barrend/slam"
       }
     ]
   },
@@ -182,8 +163,7 @@
     "subtitle": "entity.barrend.slam_jump",
     "sounds": [
       {
-        "name": "ee:entity/barrend/slam_jump",
-        "stream": true
+        "name": "ee:entity/barrend/slam_jump"
       }
     ]
   },
@@ -192,8 +172,7 @@
     "subtitle": "entity.barrend.strike",
     "sounds": [
       {
-        "name": "ee:entity/barrend/strike",
-        "stream": true
+        "name": "ee:entity/barrend/strike"
       }
     ]
   },
@@ -202,8 +181,7 @@
     "subtitle": "entity.barrend.shoot",
     "sounds": [
       {
-        "name": "ee:entity/barrend/shoot",
-        "stream": true
+        "name": "ee:entity/barrend/shoot"
       }
     ]
   },
@@ -212,8 +190,7 @@
     "subtitle": "entity.barrend.charge",
     "sounds": [
       {
-        "name": "ee:entity/barrend/charge",
-        "stream": true
+        "name": "ee:entity/barrend/charge"
       }
     ]
   },
@@ -222,8 +199,7 @@
     "subtitle": "entity.barrend.collide",
     "sounds": [
       {
-        "name": "ee:entity/barrend/collide",
-        "stream": true
+        "name": "ee:entity/barrend/collide"
       }
     ]
   },
@@ -232,8 +208,7 @@
     "subtitle": "entity.barrend.awaken",
     "sounds": [
       {
-        "name": "ee:entity/barrend/awaken",
-        "stream": true
+        "name": "ee:entity/barrend/awaken"
       }
     ]
   },
@@ -242,8 +217,7 @@
     "subtitle": "entity.barrend.short_raise",
     "sounds": [
       {
-        "name": "ee:entity/barrend/short_raise",
-        "stream": true
+        "name": "ee:entity/barrend/short_raise"
       }
     ]
   },
@@ -252,12 +226,10 @@
     "subtitle": "entity.barrend.idle",
     "sounds": [
       {
-        "name": "ee:entity/barrend/idle_1",
-        "stream": true
+        "name": "ee:entity/barrend/idle_1"
       },
       {
-        "name": "ee:entity/barrend/idle_2",
-        "stream": true
+        "name": "ee:entity/barrend/idle_2"
       }
     ]
   },
@@ -266,16 +238,13 @@
     "subtitle": "entity.barrend.hurt",
     "sounds": [
       {
-        "name": "ee:entity/barrend/hurt_1",
-        "stream": true
+        "name": "ee:entity/barrend/hurt_1"
       },
       {
-        "name": "ee:entity/barrend/hurt_2",
-        "stream": true
+        "name": "ee:entity/barrend/hurt_2"
       },
       {
-        "name": "ee:entity/barrend/hurt_3",
-        "stream": true
+        "name": "ee:entity/barrend/hurt_3"
       }
     ]
   },
@@ -284,8 +253,7 @@
     "subtitle": "entity.king.dash",
     "sounds": [
       {
-        "name": "ee:entity/king/dash",
-        "stream": true
+        "name": "ee:entity/king/dash"
       }
     ]
   },
@@ -294,8 +262,7 @@
     "subtitle": "entity.king.explode",
     "sounds": [
       {
-        "name": "ee:entity/king/explode",
-        "stream": true
+        "name": "ee:entity/king/explode"
       }
     ]
   },
@@ -304,8 +271,7 @@
     "subtitle": "entity.king.impact",
     "sounds": [
       {
-        "name": "ee:entity/king/impact",
-        "stream": true
+        "name": "ee:entity/king/impact"
       }
     ]
   },
@@ -314,8 +280,7 @@
     "subtitle": "entity.king.draw",
     "sounds": [
       {
-        "name": "ee:entity/king/draw",
-        "stream": true
+        "name": "ee:entity/king/draw"
       }
     ]
   },
@@ -324,8 +289,7 @@
     "subtitle": "entity.king.summon_eye",
     "sounds": [
       {
-        "name": "ee:entity/king/summon_eye",
-        "stream": true
+        "name": "ee:entity/king/summon_eye"
       }
     ]
   },
@@ -334,8 +298,7 @@
     "subtitle": "entity.king.prepare_slam",
     "sounds": [
       {
-        "name": "ee:entity/king/prepare_slam",
-        "stream": true
+        "name": "ee:entity/king/prepare_slam"
       }
     ]
   },
@@ -344,8 +307,7 @@
     "subtitle": "entity.king.cast",
     "sounds": [
       {
-        "name": "ee:entity/king/cast",
-        "stream": true
+        "name": "ee:entity/king/cast"
       }
     ]
   },
@@ -354,8 +316,7 @@
     "subtitle": "entity.king.fireball",
     "sounds": [
       {
-        "name": "ee:entity/king/fireball",
-        "stream": true
+        "name": "ee:entity/king/fireball"
       }
     ]
   },
@@ -364,8 +325,7 @@
     "subtitle": "entity.king.side_swipe",
     "sounds": [
       {
-        "name": "ee:entity/king/side_swipe",
-        "stream": true
+        "name": "ee:entity/king/side_swipe"
       }
     ]
   },
@@ -374,8 +334,7 @@
     "subtitle": "entity.king.top_swipe",
     "sounds": [
       {
-        "name": "ee:entity/king/top_swipe",
-        "stream": true
+        "name": "ee:entity/king/top_swipe"
       }
     ]
   },
@@ -384,8 +343,7 @@
     "subtitle": "entity.king.double_swipe",
     "sounds": [
       {
-        "name": "ee:entity/king/double_swipe",
-        "stream": true
+        "name": "ee:entity/king/double_swipe"
       }
     ]
   },
@@ -394,8 +352,7 @@
     "subtitle": "entity.king.throw_sword",
     "sounds": [
       {
-        "name": "ee:entity/king/throw_sword",
-        "stream": true
+        "name": "ee:entity/king/throw_sword"
       }
     ]
   },
@@ -404,8 +361,7 @@
     "subtitle": "entity.king.lazer",
     "sounds": [
       {
-        "name": "ee:entity/king/lazer",
-        "stream": true
+        "name": "ee:entity/king/lazer"
       }
     ]
   },
@@ -414,12 +370,10 @@
     "subtitle": "entity.king.hurt",
     "sounds": [
       {
-        "name": "ee:entity/king/hurt_1",
-        "stream": true
+        "name": "ee:entity/king/hurt_1"
       },
       {
-        "name": "ee:entity/king/hurt_2",
-        "stream": true
+        "name": "ee:entity/king/hurt_2"
       }
     ]
   },
@@ -428,8 +382,7 @@
     "subtitle": "entity.king.death",
     "sounds": [
       {
-        "name": "ee:entity/king/death",
-        "stream": true
+        "name": "ee:entity/king/death"
       }
     ]
   },
@@ -438,8 +391,7 @@
     "subtitle": "entity.king.fly",
     "sounds": [
       {
-        "name": "ee:entity/king/fly",
-        "stream": true
+        "name": "ee:entity/king/fly"
       }
     ]
   },
@@ -448,8 +400,7 @@
     "subtitle": "entity.king.intro",
     "sounds": [
       {
-        "name": "ee:entity/king/intro",
-        "stream": true
+        "name": "ee:entity/king/intro"
       }
     ]
   },
@@ -458,8 +409,7 @@
     "subtitle": "entity.king.transform",
     "sounds": [
       {
-        "name": "ee:entity/king/transform",
-        "stream": true
+        "name": "ee:entity/king/transform"
       }
     ]
   },
@@ -468,8 +418,7 @@
     "subtitle": "entity.knight.step",
     "sounds": [
       {
-        "name": "ee:entity/knight/step_1",
-        "stream": true
+        "name": "ee:entity/knight/step_1"
       }
     ]
   },
@@ -478,8 +427,7 @@
     "subtitle": "entity.knight.hurt",
     "sounds": [
       {
-        "name": "ee:entity/knight/hurt_1",
-        "stream": true
+        "name": "ee:entity/knight/hurt_1"
       }
     ]
   },
@@ -488,16 +436,13 @@
     "subtitle": "entity.knight.idle",
     "sounds": [
       {
-        "name": "ee:entity/knight/idle_1",
-        "stream": true
+        "name": "ee:entity/knight/idle_1"
       },
       {
-        "name": "ee:entity/knight/idle_2",
-        "stream": true
+        "name": "ee:entity/knight/idle_2"
       },
       {
-        "name": "ee:entity/knight/idle_3",
-        "stream": true
+        "name": "ee:entity/knight/idle_3"
       }
     ]
   },
@@ -506,8 +451,7 @@
     "subtitle": "entity.knight.death",
     "sounds": [
       {
-        "name": "ee:entity/knight/death",
-        "stream": true
+        "name": "ee:entity/knight/death"
       }
     ]
   },
@@ -516,8 +460,7 @@
     "subtitle": "entity.knight.dash",
     "sounds": [
       {
-        "name": "ee:entity/knight/dash",
-        "stream": true
+        "name": "ee:entity/knight/dash"
       }
     ]
   },
@@ -526,8 +469,7 @@
     "subtitle": "entity.knight.cast_heal",
     "sounds": [
       {
-        "name": "ee:entity/knight/cast_heal",
-        "stream": true
+        "name": "ee:entity/knight/cast_heal"
       }
     ]
   },
@@ -536,8 +478,7 @@
     "subtitle": "entity.knight.cast",
     "sounds": [
       {
-        "name": "ee:entity/knight/cast",
-        "stream": true
+        "name": "ee:entity/knight/cast"
       }
     ]
   },
@@ -546,12 +487,10 @@
     "subtitle": "entity.lord.hurt",
     "sounds": [
       {
-        "name": "ee:entity/lord/hurt_1",
-        "stream": true
+        "name": "ee:entity/lord/hurt_1"
       },
       {
-        "name": "ee:entity/lord/hurt_2",
-        "stream": true
+        "name": "ee:entity/lord/hurt_2"
       }
     ]
   },
@@ -560,8 +499,7 @@
     "subtitle": "entity.lord.death",
     "sounds": [
       {
-        "name": "ee:entity/lord/death",
-        "stream": true
+        "name": "ee:entity/lord/death"
       }
     ]
   },
@@ -570,8 +508,7 @@
     "subtitle": "entity.lord.fly",
     "sounds": [
       {
-        "name": "ee:entity/lord/fly",
-        "stream": true
+        "name": "ee:entity/lord/fly"
       }
     ]
   },
@@ -580,8 +517,7 @@
     "subtitle": "entity.lord.summon",
     "sounds": [
       {
-        "name": "ee:entity/lord/summon",
-        "stream": true
+        "name": "ee:entity/lord/summon"
       }
     ]
   },
@@ -590,12 +526,10 @@
     "subtitle": "entity.projectile.hover",
     "sounds": [
       {
-        "name": "ee:entity/projectile/hover_1",
-        "stream": true
+        "name": "ee:entity/projectile/hover_1"
       },
       {
-        "name": "ee:entity/projectile/hover_2",
-        "stream": true
+        "name": "ee:entity/projectile/hover_2"
       }
     ]
   },
@@ -604,8 +538,7 @@
     "subtitle": "entity.projectile.impact",
     "sounds": [
       {
-        "name": "ee:entity/projectile/impact",
-        "stream": true
+        "name": "ee:entity/projectile/impact"
       }
     ]
   },
@@ -614,8 +547,7 @@
     "subtitle": "entity.projectile.summon",
     "sounds": [
       {
-        "name": "ee:entity/projectile/summon",
-        "stream": true
+        "name": "ee:entity/projectile/summon"
       }
     ]
   },
@@ -624,8 +556,7 @@
     "subtitle": "entity.sword.summon",
     "sounds": [
       {
-        "name": "ee:entity/sword/summon",
-        "stream": true
+        "name": "ee:entity/sword/summon"
       }
     ]
   },
@@ -634,8 +565,7 @@
     "subtitle": "entity.sword.impact",
     "sounds": [
       {
-        "name": "ee:entity/sword/impact",
-        "stream": true
+        "name": "ee:entity/sword/impact"
       }
     ]
   },
@@ -644,8 +574,7 @@
     "subtitle": "entity.seeker.shoot",
     "sounds": [
       {
-        "name": "ee:entity/seeker/shoot",
-        "stream": true
+        "name": "ee:entity/seeker/shoot"
       }
     ]
   },
@@ -654,16 +583,13 @@
     "subtitle": "entity.seeker.hover",
     "sounds": [
       {
-        "name": "ee:entity/seeker/hover_1",
-        "stream": true
+        "name": "ee:entity/seeker/hover_1"
       },
       {
-        "name": "ee:entity/seeker/hover_2",
-        "stream": true
+        "name": "ee:entity/seeker/hover_2"
       },
       {
-        "name": "ee:entity/seeker/hover_3",
-        "stream": true
+        "name": "ee:entity/seeker/hover_3"
       }
     ]
   },
@@ -672,8 +598,7 @@
     "subtitle": "entity.seeker.hurt",
     "sounds": [
       {
-        "name": "ee:entity/seeker/hurt",
-        "stream": true
+        "name": "ee:entity/seeker/hurt"
       }
     ]
   },
@@ -682,8 +607,7 @@
     "subtitle": "entity.seeker.hurt_elder",
     "sounds": [
       {
-        "name": "ee:entity/seeker/hurt_elder",
-        "stream": true
+        "name": "ee:entity/seeker/hurt_elder"
       }
     ]
   },
@@ -692,8 +616,7 @@
     "subtitle": "entity.seeker.dash",
     "sounds": [
       {
-        "name": "ee:entity/seeker/dash",
-        "stream": true
+        "name": "ee:entity/seeker/dash"
       }
     ]
   },
@@ -702,16 +625,13 @@
     "subtitle": "block.crystal.glow",
     "sounds": [
       {
-        "name": "ee:block/crystal/glow_1",
-        "stream": true
+        "name": "ee:block/crystal/glow_1"
       },
       {
-        "name": "ee:block/crystal/glow_2",
-        "stream": true
+        "name": "ee:block/crystal/glow_2"
       },
       {
-        "name": "ee:block/crystal/glow_3",
-        "stream": true
+        "name": "ee:block/crystal/glow_3"
       }
     ]
   },
@@ -720,8 +640,7 @@
     "subtitle": "block.compulsor.on",
     "sounds": [
       {
-        "name": "ee:block/compulsor/compulsor_on",
-        "stream": true
+        "name": "ee:block/compulsor/compulsor_on"
       }
     ]
   },
@@ -730,16 +649,13 @@
     "subtitle": "entity.parasite.idle",
     "sounds": [
       {
-        "name": "ee:entity/parasite/idle_1",
-        "stream": true
+        "name": "ee:entity/parasite/idle_1"
       },
       {
-        "name": "ee:entity/parasite/idle_2",
-        "stream": true
+        "name": "ee:entity/parasite/idle_2"
       },
       {
-        "name": "ee:entity/parasite/idle_3",
-        "stream": true
+        "name": "ee:entity/parasite/idle_3"
       }
     ]
   },
@@ -748,8 +664,7 @@
     "subtitle": "entity.parasite.hurt",
     "sounds": [
       {
-        "name": "ee:entity/parasite/hurt_1",
-        "stream": true
+        "name": "ee:entity/parasite/hurt_1"
       }
     ]
   },
@@ -758,8 +673,7 @@
     "subtitle": "entity.parasite.step",
     "sounds": [
       {
-        "name": "ee:entity/parasite/step",
-        "stream": true
+        "name": "ee:entity/parasite/step"
       }
     ]
   },
@@ -768,8 +682,7 @@
     "subtitle": "entity.parasite.death",
     "sounds": [
       {
-        "name": "ee:entity/parasite/death",
-        "stream": true
+        "name": "ee:entity/parasite/death"
       }
     ]
   },
@@ -778,16 +691,13 @@
     "subtitle": "entity.stalker.hurt",
     "sounds": [
       {
-        "name": "ee:entity/stalker/hurt_1",
-        "stream": true
+        "name": "ee:entity/stalker/hurt_1"
       },
       {
-        "name": "ee:entity/stalker/hurt_2",
-        "stream": true
+        "name": "ee:entity/stalker/hurt_2"
       },
       {
-        "name": "ee:entity/stalker/hurt_3",
-        "stream": true
+        "name": "ee:entity/stalker/hurt_3"
       }
     ]
   },
@@ -796,8 +706,7 @@
     "subtitle": "entity.stalker.spotted",
     "sounds": [
       {
-        "name": "ee:entity/stalker/spotted",
-        "stream": true
+        "name": "ee:entity/stalker/spotted"
       }
     ]
   },
@@ -806,8 +715,7 @@
     "subtitle": "entity.stalker.attack",
     "sounds": [
       {
-        "name": "ee:entity/stalker/attack",
-        "stream": true
+        "name": "ee:entity/stalker/attack"
       }
     ]
   },
@@ -816,8 +724,7 @@
     "subtitle": "entity.stalker.swing",
     "sounds": [
       {
-        "name": "ee:entity/stalker/swing",
-        "stream": true
+        "name": "ee:entity/stalker/swing"
       }
     ]
   },
@@ -826,12 +733,10 @@
     "subtitle": "entity.stalker.step",
     "sounds": [
       {
-        "name": "ee:entity/stalker/step_1",
-        "stream": true
+        "name": "ee:entity/stalker/step_1"
       },
       {
-        "name": "ee:entity/stalker/step_2",
-        "stream": true
+        "name": "ee:entity/stalker/step_2"
       }
     ]
   },
@@ -840,12 +745,10 @@
     "subtitle": "entity.chomper.idle",
     "sounds": [
       {
-        "name": "ee:entity/chomper/idle_1",
-        "stream": true
+        "name": "ee:entity/chomper/idle_1"
       },
       {
-        "name": "ee:entity/chomper/idle_2",
-        "stream": true
+        "name": "ee:entity/chomper/idle_2"
       }
     ]
   },
@@ -854,12 +757,10 @@
     "subtitle": "entity.chomper.hurt",
     "sounds": [
       {
-        "name": "ee:entity/chomper/hurt_1",
-        "stream": true
+        "name": "ee:entity/chomper/hurt_1"
       },
       {
-        "name": "ee:entity/chomper/hurt_2",
-        "stream": true
+        "name": "ee:entity/chomper/hurt_2"
       }
     ]
   },
@@ -868,16 +769,13 @@
     "subtitle": "entity.chomper.warn",
     "sounds": [
       {
-        "name": "ee:entity/chomper/warn_1",
-        "stream": true
+        "name": "ee:entity/chomper/warn_1"
       },
       {
-        "name": "ee:entity/chomper/warn_2",
-        "stream": true
+        "name": "ee:entity/chomper/warn_2"
       },
       {
-        "name": "ee:entity/chomper/warn_3",
-        "stream": true
+        "name": "ee:entity/chomper/warn_3"
       }
     ]
   },
@@ -886,8 +784,7 @@
     "subtitle": "entity.chomper.bite",
     "sounds": [
       {
-        "name": "ee:entity/chomper/bite",
-        "stream": true
+        "name": "ee:entity/chomper/bite"
       }
     ]
   },
@@ -896,8 +793,7 @@
     "subtitle": "entity.chomper.pop_out",
     "sounds": [
       {
-        "name": "ee:entity/chomper/pop_out",
-        "stream": true
+        "name": "ee:entity/chomper/pop_out"
       }
     ]
   },
@@ -906,8 +802,7 @@
     "subtitle": "entity.chomper.leap",
     "sounds": [
       {
-        "name": "ee:entity/chomper/leap",
-        "stream": true
+        "name": "ee:entity/chomper/leap"
       }
     ]
   },
@@ -916,12 +811,10 @@
     "subtitle": "entity.avalon.idle",
     "sounds": [
       {
-        "name": "ee:entity/avalon/idle_1",
-        "stream": true
+        "name": "ee:entity/avalon/idle_1"
       },
       {
-        "name": "ee:entity/avalon/idle_2",
-        "stream": true
+        "name": "ee:entity/avalon/idle_2"
       }
     ]
   },
@@ -930,8 +823,7 @@
     "subtitle": "entity.avalon.disagree",
     "sounds": [
       {
-        "name": "ee:entity/avalon/disagree",
-        "stream": true
+        "name": "ee:entity/avalon/disagree"
       }
     ]
   },
@@ -940,8 +832,7 @@
     "subtitle": "entity.avalon.agree",
     "sounds": [
       {
-        "name": "ee:entity/avalon/agree",
-        "stream": true
+        "name": "ee:entity/avalon/agree"
       }
     ]
   },
@@ -950,12 +841,10 @@
     "subtitle": "entity.avalon.hurt",
     "sounds": [
       {
-        "name": "ee:entity/avalon/hurt_1",
-        "stream": true
+        "name": "ee:entity/avalon/hurt_1"
       },
       {
-        "name": "ee:entity/avalon/hurt_2",
-        "stream": true
+        "name": "ee:entity/avalon/hurt_2"
       }
     ]
   },
@@ -964,8 +853,7 @@
     "subtitle": "entity.avalon.death",
     "sounds": [
       {
-        "name": "ee:entity/avalon/death",
-        "stream": true
+        "name": "ee:entity/avalon/death"
       }
     ]
   },
@@ -974,8 +862,7 @@
     "subtitle": "entity.avalon.shoot",
     "sounds": [
       {
-        "name": "ee:entity/avalon/shoot",
-        "stream": true
+        "name": "ee:entity/avalon/shoot"
       }
     ]
   },
@@ -984,8 +871,7 @@
     "subtitle": "entity.avalon.smash",
     "sounds": [
       {
-        "name": "ee:entity/avalon/smash",
-        "stream": true
+        "name": "ee:entity/avalon/smash"
       }
     ]
   },
@@ -994,8 +880,7 @@
     "subtitle": "entity.avalon.delay_smash",
     "sounds": [
       {
-        "name": "ee:entity/avalon/delay_smash",
-        "stream": true
+        "name": "ee:entity/avalon/delay_smash"
       }
     ]
   },
@@ -1004,8 +889,7 @@
     "subtitle": "entity.avalon.lazer",
     "sounds": [
       {
-        "name": "ee:entity/avalon/lazer",
-        "stream": true
+        "name": "ee:entity/avalon/lazer"
       }
     ]
   },
@@ -1014,8 +898,7 @@
     "subtitle": "entity.avalon.cast",
     "sounds": [
       {
-        "name": "ee:entity/avalon/cast",
-        "stream": true
+        "name": "ee:entity/avalon/cast"
       }
     ]
   },
@@ -1024,8 +907,7 @@
     "subtitle": "entity.avalon.speak",
     "sounds": [
       {
-        "name": "ee:entity/avalon/speak",
-        "stream": true
+        "name": "ee:entity/avalon/speak"
       }
     ]
   },
@@ -1034,8 +916,7 @@
     "subtitle": "entity.avalon.lazer_shoot",
     "sounds": [
       {
-        "name": "ee:entity/avalon/lazer_shoot",
-        "stream": true
+        "name": "ee:entity/avalon/lazer_shoot"
       }
 
     ]
@@ -1045,8 +926,7 @@
     "subtitle": "entity.shadow.shadow_use",
     "sounds": [
       {
-        "name": "ee:entity/shadow/shadow_tear",
-        "stream": true
+        "name": "ee:entity/shadow/shadow_tear"
       }
 
     ]
@@ -1056,8 +936,7 @@
     "subtitle": "block.door.power",
     "sounds": [
       {
-        "name": "ee:block/door/power",
-        "stream": true
+        "name": "ee:block/door/power"
       }
     ]
   },
@@ -1066,20 +945,16 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "ee:block/ash/break1",
-        "stream": true
+        "name": "ee:block/ash/break1"
       },
       {
-        "name": "ee:block/ash/break2",
-        "stream": true
+        "name": "ee:block/ash/break2"
       },
       {
-        "name": "ee:block/ash/break3",
-        "stream": true
+        "name": "ee:block/ash/break3"
       },
       {
-        "name": "ee:block/ash/break4",
-        "stream": true
+        "name": "ee:block/ash/break4"
       }
     ]
   },
@@ -1088,20 +963,16 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "ee:block/ash/break1",
-        "stream": true
+        "name": "ee:block/ash/break1"
       },
       {
-        "name": "ee:block/ash/break2",
-        "stream": true
+        "name": "ee:block/ash/break2"
       },
       {
-        "name": "ee:block/ash/break3",
-        "stream": true
+        "name": "ee:block/ash/break3"
       },
       {
-        "name": "ee:block/ash/break4",
-        "stream": true
+        "name": "ee:block/ash/break4"
       }
     ]
   },
@@ -1110,20 +981,16 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "ee:block/ash/step1",
-        "stream": true
+        "name": "ee:block/ash/step1"
       },
       {
-        "name": "ee:block/ash/step2",
-        "stream": true
+        "name": "ee:block/ash/step2"
       },
       {
-        "name": "ee:block/ash/step3",
-        "stream": true
+        "name": "ee:block/ash/step3"
       },
       {
-        "name": "ee:block/ash/step4",
-        "stream": true
+        "name": "ee:block/ash/step4"
       }
     ]
   },
@@ -1132,20 +999,16 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "ee:block/ash/step1",
-        "stream": true
+        "name": "ee:block/ash/step1"
       },
       {
-        "name": "ee:block/ash/step2",
-        "stream": true
+        "name": "ee:block/ash/step2"
       },
       {
-        "name": "ee:block/ash/step3",
-        "stream": true
+        "name": "ee:block/ash/step3"
       },
       {
-        "name": "ee:block/ash/step4",
-        "stream": true
+        "name": "ee:block/ash/step4"
       }
     ]
   },
@@ -1154,20 +1017,16 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "ee:block/ash_brick/place1",
-        "stream": true
+        "name": "ee:block/ash_brick/place1"
       },
       {
-        "name": "ee:block/ash_brick/place2",
-        "stream": true
+        "name": "ee:block/ash_brick/place2"
       },
       {
-        "name": "ee:block/ash_brick/place3",
-        "stream": true
+        "name": "ee:block/ash_brick/place3"
       },
       {
-        "name": "ee:block/ash_brick/place4",
-        "stream": true
+        "name": "ee:block/ash_brick/place4"
       }
     ]
   },
@@ -1176,20 +1035,16 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "ee:block/ash_brick/place1",
-        "stream": true
+        "name": "ee:block/ash_brick/place1"
       },
       {
-        "name": "ee:block/ash_brick/place2",
-        "stream": true
+        "name": "ee:block/ash_brick/place2"
       },
       {
-        "name": "ee:block/ash_brick/place3",
-        "stream": true
+        "name": "ee:block/ash_brick/place3"
       },
       {
-        "name": "ee:block/ash_brick/place4",
-        "stream": true
+        "name": "ee:block/ash_brick/place4"
       }
     ]
   },
@@ -1198,20 +1053,16 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "ee:block/ash_brick/step1",
-        "stream": true
+        "name": "ee:block/ash_brick/step1"
       },
       {
-        "name": "ee:block/ash_brick/step2",
-        "stream": true
+        "name": "ee:block/ash_brick/step2"
       },
       {
-        "name": "ee:block/ash_brick/step3",
-        "stream": true
+        "name": "ee:block/ash_brick/step3"
       },
       {
-        "name": "ee:block/ash_brick/step4",
-        "stream": true
+        "name": "ee:block/ash_brick/step4"
       }
     ]
   },
@@ -1220,16 +1071,13 @@
     "subtitle": "subtitles.block.generic.footsteps",
     "sounds": [
       {
-        "name": "ee:block/bare_log/step1",
-        "stream": true
+        "name": "ee:block/bare_log/step1"
       },
       {
-        "name": "ee:block/bare_log/step2",
-        "stream": true
+        "name": "ee:block/bare_log/step2"
       },
       {
-        "name": "ee:block/bare_log/step3",
-        "stream": true
+        "name": "ee:block/bare_log/step3"
       }
     ]
   },
@@ -1238,16 +1086,13 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "ee:block/bare_log/step1",
-        "stream": true
+        "name": "ee:block/bare_log/step1"
       },
       {
-        "name": "ee:block/bare_log/step2",
-        "stream": true
+        "name": "ee:block/bare_log/step2"
       },
       {
-        "name": "ee:block/bare_log/step3",
-        "stream": true
+        "name": "ee:block/bare_log/step3"
       }
     ]
   },
@@ -1256,20 +1101,16 @@
     "subtitle": "subtitles.block.generic.hit",
     "sounds": [
       {
-        "name": "ee:block/bare_log/break1",
-        "stream": true
+        "name": "ee:block/bare_log/break1"
       },
       {
-        "name": "ee:block/bare_log/break2",
-        "stream": true
+        "name": "ee:block/bare_log/break2"
       },
       {
-        "name": "ee:block/bare_log/break3",
-        "stream": true
+        "name": "ee:block/bare_log/break3"
       },
       {
-        "name": "ee:block/bare_log/break4",
-        "stream": true
+        "name": "ee:block/bare_log/break4"
       }
     ]
   },
@@ -1278,20 +1119,16 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "ee:block/bare_log/break1",
-        "stream": true
+        "name": "ee:block/bare_log/break1"
       },
       {
-        "name": "ee:block/bare_log/break2",
-        "stream": true
+        "name": "ee:block/bare_log/break2"
       },
       {
-        "name": "ee:block/bare_log/break3",
-        "stream": true
+        "name": "ee:block/bare_log/break3"
       },
       {
-        "name": "ee:block/bare_log/break4",
-        "stream": true
+        "name": "ee:block/bare_log/break4"
       }
     ]
   },
@@ -1300,20 +1137,16 @@
     "subtitle": "subtitles.block.generic.break",
     "sounds": [
       {
-        "name": "ee:block/shard/break1",
-        "stream": true
+        "name": "ee:block/shard/break1"
       },
       {
-        "name": "ee:block/shard/break2",
-        "stream": true
+        "name": "ee:block/shard/break2"
       },
       {
-        "name": "ee:block/shard/break3",
-        "stream": true
+        "name": "ee:block/shard/break3"
       },
       {
-        "name": "ee:block/shard/break4",
-        "stream": true
+        "name": "ee:block/shard/break4"
       }
     ]
   },
@@ -1322,20 +1155,16 @@
     "subtitle": "subtitles.block.generic.place",
     "sounds": [
       {
-        "name": "ee:block/shard/place1",
-        "stream": true
+        "name": "ee:block/shard/place1"
       },
       {
-        "name": "ee:block/shard/place2",
-        "stream": true
+        "name": "ee:block/shard/place2"
       },
       {
-        "name": "ee:block/shard/place3",
-        "stream": true
+        "name": "ee:block/shard/place3"
       },
       {
-        "name": "ee:block/shard/place4",
-        "stream": true
+        "name": "ee:block/shard/place4"
       }
     ]
   },
@@ -1344,20 +1173,16 @@
     "subtitle": "biome.ambience",
     "sounds": [
       {
-        "name": "ee:biome/ambient/ambient_2",
-        "stream": true
+        "name": "ee:biome/ambient/ambient_2"
       },
       {
-        "name": "ee:biome/ambient/ambient_1",
-        "stream": true
+        "name": "ee:biome/ambient/ambient_1"
       },
       {
-        "name": "ee:biome/ambient/ambient_3",
-        "stream": true
+        "name": "ee:biome/ambient/ambient_3"
       },
       {
-        "name": "ee:biome/ambient/ambient_4",
-        "stream": true
+        "name": "ee:biome/ambient/ambient_4"
       }
     ]
   },

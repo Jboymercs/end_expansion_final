@@ -12,6 +12,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ProjectileAcid extends Projectile{
 
@@ -42,6 +44,17 @@ public class ProjectileAcid extends Projectile{
             ParticleManager.spawnColoredSmoke(world, getPositionVector(), ModColors.GREEN, Vec3d.ZERO);
         }
 
+    }
+
+    public float getBrightness()
+    {
+        return 1.0F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender()
+    {
+        return 15728880;
     }
 
 

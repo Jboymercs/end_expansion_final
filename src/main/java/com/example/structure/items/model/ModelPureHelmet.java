@@ -26,7 +26,7 @@ public class ModelPureHelmet extends ModelBiped {
 
 		head = new ModelRenderer(this);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
-		head.cubeList.add(new ModelBox(head, 0, 0, -4.5F, -9.0F, -4.5F, 9, 9, 9, 0.25F, false));
+		head.cubeList.add(new ModelBox(head, 0, 47, -4.5F, -9.0F, -4.5F, 9, 9, 9, 0.25F, false));
 		this.bipedHead.addChild(head);
 
 		cube_r1 = new ModelRenderer(this);

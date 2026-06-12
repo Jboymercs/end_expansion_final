@@ -231,15 +231,15 @@ public class EntityEnderShield extends EntityKnightBase implements IAnimatable, 
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if(this.isFightMode() && !this.isStunned()) {
             if(this.isPierceAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_PIERCE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_PIERCE));
                 return PlayState.CONTINUE;
             }
             if(this.isRegularAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_ATTACK));
                 return PlayState.CONTINUE;
             }
             if(this.isShieldAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SHIELD, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SHIELD));
                 return PlayState.CONTINUE;
             }
         }

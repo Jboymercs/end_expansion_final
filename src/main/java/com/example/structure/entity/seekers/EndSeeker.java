@@ -308,15 +308,16 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
       addEvent(()-> {
           this.playSound(ModSoundHandler.SEEKER_DASH, 1.0f, 1.0f / (rand.nextFloat() * 0.4F + 0.4f));
-      }, 18);
+      }, 15);
       addEvent(()-> {
-        Vec3d posToGo = target.getPositionVector();
-          float distance = getDistance(target);
+          Vec3d posSet = target.getPositionVector().subtract(this.getPositionVector()).normalize();
+          Vec3d targetedPos = target.getPositionVector().add(posSet.scale(-1));
+          double distance = this.getPositionVector().distanceTo(targetedPos);
         this.lockLook = true;
           this.setImmovable(true);
         addEvent(()-> {
             this.setImmovable(false);
-            ModUtils.leapTowards(this, posToGo, (float) (0.45 * Math.sqrt(distance)), 0.1f);
+            ModUtils.leapTowards(this, targetedPos, (float) (0.45 * Math.sqrt(distance)), 0.1f);
             for(int i = 0; i < 15; i+=5) {
                 addEvent(()-> {
                     Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.3,1.3,0)));
@@ -325,8 +326,8 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
                     ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, offset, source, 0.4f, 0, false);
                 }, i);
             }
-        },13 );
-      }, 10);
+        },10 );
+      }, 13);
       addEvent(()-> {
           this.lockLook = false;
         this.setPierceAttack(false);
@@ -399,7 +400,7 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
 
     private<E extends IAnimatable> PlayState predicateBlink(AnimationEvent<E> event) {
         if(this.isBlinkMode()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_BLINK, false));
+            event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_BLINK));
             return PlayState.CONTINUE;
         }
         event.getController().markNeedsReload();
@@ -422,16 +423,16 @@ public class EndSeeker extends EntityModBase implements IAnimatable, IAttack, IA
     private <E extends IAnimatable> PlayState predicateAttacks(AnimationEvent<E> event) {
         if(this.isFightMode()) {
             if(this.isMeleeStrikeOne()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MELEE_ATTACK_ONE, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MELEE_ATTACK_ONE));
             }
             if(this.isMeleeStrikeTwo()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_MELEE_ATTACK_TWO, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_MELEE_ATTACK_TWO));
             }
             if(this.isPierceAttack()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_DASH_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_DASH_ATTACK));
             }
             if(this.isShootGun()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_SHOOT_GUN, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_SHOOT_GUN));
             }
 
             return PlayState.CONTINUE;

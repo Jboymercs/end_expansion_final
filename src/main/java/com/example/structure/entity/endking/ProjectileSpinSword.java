@@ -23,6 +23,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -170,6 +172,17 @@ public class ProjectileSpinSword extends Projectile implements IMagicEntity {
 
         super.onHit(result);
 
+    }
+
+    public float getBrightness()
+    {
+        return 1.0F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender()
+    {
+        return 15728880;
     }
 
     @Override

@@ -59,6 +59,14 @@ public class CommandLocateEE implements ICommand {
                 } else {
                     throw new CommandException("commands.locate.failure", s);
                 }
+            } else if(s.equals("AshedKingsFortress")) {
+                BlockPos blockpos = findNearestPosAshedKingFortress(sender);
+
+                if (blockpos != null && WorldConfig.fortress_enabled) {
+                    sender.sendMessage(new TextComponentTranslation("commands.locate.success", new Object[]{s, blockpos.getX(), blockpos.getZ()}));
+                } else {
+                    throw new CommandException("commands.locate.failure", s);
+                }
             }
         }
     }
@@ -75,7 +83,7 @@ public class CommandLocateEE implements ICommand {
 
     @Override
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
-        return args.length == 1 ? getListOfStringsMatchingLastWord(args, "LamentedIslands") : Collections.emptyList();
+        return args.length == 1 ? getListOfStringsMatchingLastWord(args, "LamentedIslands","AshedKingsFortress") : Collections.emptyList();
     }
 
     public static BlockPos findNearestPosLamentedIslands(ICommandSender sender) {
@@ -88,6 +96,26 @@ public class CommandLocateEE implements ICommand {
             for (int i = -WorldConfig.lamented_islands_search_distance; i < WorldConfig.lamented_islands_search_distance + 1; i++) {
                 for (int j = -WorldConfig.lamented_islands_search_distance; j < WorldConfig.lamented_islands_search_distance + 1; j++) {
                     boolean c = IsLamentedIslandsAtPos(world, chunk.x + i, chunk.z + j);
+                    if (c) {
+                        resultpos = new BlockPos((chunk.x + i) << 4, 100, (chunk.z + j) << 4);
+                        break;
+                    }
+                }
+            }
+        }
+        return resultpos;
+    }
+
+    public static BlockPos findNearestPosAshedKingFortress(ICommandSender sender) {
+        BlockPos resultpos = null;
+        BlockPos pos = sender.getPosition();
+        World world = sender.getEntityWorld();
+        Chunk chunk = world.getChunk(pos);
+        //probably laggy as hell but hey it works
+        if(Math.abs(chunk.x) > 35 && Math.abs(chunk.z) > 35 && world.provider.getDimension() == 1) {
+            for (int i = -WorldConfig.ashed_kings_fortress_search_distance; i < WorldConfig.ashed_kings_fortress_search_distance + 1; i++) {
+                for (int j = -WorldConfig.ashed_kings_fortress_search_distance; j < WorldConfig.ashed_kings_fortress_search_distance + 1; j++) {
+                    boolean c = IsAshedKingFortressAtPos(world, chunk.x + i, chunk.z + j);
                     if (c) {
                         resultpos = new BlockPos((chunk.x + i) << 4, 100, (chunk.z + j) << 4);
                         break;
@@ -129,6 +157,37 @@ public class CommandLocateEE implements ICommand {
         }
     }
 
+    protected static boolean IsAshedKingFortressAtPos(World world, int chunkX, int chunkZ) {
+        int spacing = WorldConfig.fortress_spacing;
+        int separation = 16;
+        int i = chunkX;
+        int j = chunkZ;
+
+        if (chunkX < 0) {
+            chunkX -= spacing - 1;
+        }
+
+        if (chunkZ < 0) {
+            chunkZ -= spacing - 1;
+        }
+
+        int k = chunkX / spacing;
+        int l = chunkZ / spacing;
+        Random random = world.setRandomSeed(k, l, 50345840);
+        k = k * spacing;
+        l = l * spacing;
+        k = k + (random.nextInt(spacing - separation) + random.nextInt(spacing - separation)) / 2;
+        l = l + (random.nextInt(spacing - separation) + random.nextInt(spacing - separation)) / 2;
+
+        if (i == k && j == l) {
+            BlockPos pos = new BlockPos((i << 4), 0, (j << 4));
+            return isAbleToSpawnHereKingFortress(pos, world);
+        } else {
+
+            return false;
+        }
+    }
+
     public static boolean isAbleToSpawnHere(BlockPos pos, World world) {
         for(BiomeDictionary.Type types : getSpawnBiomeTypes()) {
             Biome biomeCurrently = world.provider.getBiomeForCoords(pos);
@@ -158,6 +217,37 @@ public class CommandLocateEE implements ICommand {
         }
 
         return lamentedIslandsSpawnBiomes;
+    }
+
+    public static boolean isAbleToSpawnHereKingFortress(BlockPos pos, World world) {
+        for(BiomeDictionary.Type types : getSpawnBiomeTypesKingFortress()) {
+            Biome biomeCurrently = world.provider.getBiomeForCoords(pos);
+            if(BiomeDictionary.hasType(biomeCurrently, types)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static List<BiomeDictionary.Type> kingFortressSpawnBiomes;
+
+    public static List<BiomeDictionary.Type> getSpawnBiomeTypesKingFortress() {
+        if(kingFortressSpawnBiomes == null) {
+            kingFortressSpawnBiomes = Lists.newArrayList();
+
+            for(String str : WorldConfig.biome_types_king_fortress) {
+                try {
+                    BiomeDictionary.Type type = BiomeDictionary.Type.getType(str);
+
+                    if (type != null) kingFortressSpawnBiomes.add(type);
+                    else EELogger.logError("Biome Type" + str + " is not correct", new NullPointerException());
+                } catch (Exception e) {
+                    EELogger.logError(str + " is not a valid type name", e);
+                }
+            }
+        }
+
+        return kingFortressSpawnBiomes;
     }
 
     public static List<String> getListOfStringsMatchingLastWord(String[] args, String... possibilities) {

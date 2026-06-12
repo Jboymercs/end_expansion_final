@@ -70,6 +70,11 @@ public class WorldConfig {
     @Config.RequiresMcRestart
     public static int stronghold_size = 5;
 
+    @Config.Name("Ashed King's Fortress Enable/Disable")
+    @Config.Comment("Change if the Ashed King's Fortress should generate or not.")
+    @Config.RequiresMcRestart
+    public static boolean fortress_enabled = true;
+
     @Config.Name("Ashed King's Fortress Chest Spawn Chance")
     @Config.Comment("Chance for chests to spawn throughout the dungeon, Lower value is higher chances")
     @Config.RangeInt(min = 0, max = 5)
@@ -85,18 +90,29 @@ public class WorldConfig {
     @Config.Name("Ashed King Fortress")
     @Config.Comment("Change the spacing of the End King Fortress in chunks away from another, this is applied in chunks that are Ash Wastelands not every chunk")
     @Config.RequiresMcRestart
-    public static int fortress_spacing = 70;
+    public static int fortress_spacing = 60;
 
     @Config.Name("Ashed King Fortress Odds")
     @Config.Comment("Change the odds of this structure spawning, take in mind the fortress has few structure to compete with for odds of spawning")
     @Config.RequiresMcRestart
     public static int fortress_odds = 1;
 
+    @Config.Name("Ashed Kings Fortress Search Distance")
+    @Config.Comment("Change the search distance of the locate command and the locator item for the Ashed Kings Fortress, in Chunks")
+    @Config.RequiresMcRestart
+    public static int ashed_kings_fortress_search_distance = 150;
+
     @Config.Name("Ashed King Fortress Size")
     @Config.Comment("Change the size of the fortress that generates")
     @Config.RangeInt(min = 1, max = 10)
     @Config.RequiresMcRestart
     public static int fortress_size = 5;
+
+    @Config.Name("Ashed King Fortress Whitelisted Biome Types")
+    @Config.Comment("Add Biome types that ALLOW the Ash Kings Fortress spawning in that biome, examples of tags are HOT, COLD, SPOOKY")
+    @Config.RequiresMcRestart
+    public static String[] biome_types_king_fortress = {"WASTELAND"
+    };
 
 
     @Config.Name("End Vaults Loot Chance")

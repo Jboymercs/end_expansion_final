@@ -260,7 +260,23 @@ public class ModEntities {
 
     public static void registerEntitySpawnsBE() {
         for(Biome biome : loadBiomesForMob()) {
-            spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.CREATURE, 20, 1, 3, biome);
+            spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, 20, 1, 3, biome);
+        }
+
+        for(Biome biome : loadBiomesForEndStalker()) {
+            spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, 5, 1, 2, biome);
+        }
+
+        for(Biome biome : loadBiomesForGuilder()) {
+            spawnRateBiomeSpecific(EntityController.class, EnumCreatureType.MONSTER, 10, 1, 2, biome);
+        }
+
+        for(Biome biome : loadBiomesForLidoped()) {
+            spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 7, 1, 2, biome);
+        }
+
+        for(Biome biome : loadBiomesForChomper()) {
+            spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, 5, 1, 2, biome);
         }
     }
 
@@ -280,6 +296,74 @@ public class ModEntities {
             }
         }
         return spawnBiomesAshedParasite;
+    }
+
+    private static List<Biome> spawnBiomesEndStalker;
+    private static List<Biome> loadBiomesForEndStalker() {
+        if (spawnBiomesEndStalker == null) {
+            spawnBiomesEndStalker = Lists.newArrayList();
+            for (String str : CompatConfig.end_stalker_spawn_biomes) {
+                try {
+                    Biome biome = Biome.REGISTRY.getObject(new ResourceLocation(str));
+                    if (biome != null) spawnBiomesEndStalker.add(biome);
+                    else EELogger.logError("Biome " + str + " is not registered", new NullPointerException());
+                } catch (Exception e) {
+                    EELogger.logError(str + " is not a valid registry name", e);
+                }
+            }
+        }
+        return spawnBiomesEndStalker;
+    }
+
+    private static List<Biome> spawnBiomesGuilder;
+    private static List<Biome> loadBiomesForGuilder() {
+        if (spawnBiomesGuilder == null) {
+            spawnBiomesGuilder = Lists.newArrayList();
+            for (String str : CompatConfig.ancient_guilder_spawn_biomes) {
+                try {
+                    Biome biome = Biome.REGISTRY.getObject(new ResourceLocation(str));
+                    if (biome != null) spawnBiomesGuilder.add(biome);
+                    else EELogger.logError("Biome " + str + " is not registered", new NullPointerException());
+                } catch (Exception e) {
+                    EELogger.logError(str + " is not a valid registry name", e);
+                }
+            }
+        }
+        return spawnBiomesGuilder;
+    }
+
+    private static List<Biome> spawnBiomeslidoped;
+    private static List<Biome> loadBiomesForLidoped() {
+        if (spawnBiomeslidoped == null) {
+            spawnBiomeslidoped = Lists.newArrayList();
+            for (String str : CompatConfig.lidoped_spawn_biomes) {
+                try {
+                    Biome biome = Biome.REGISTRY.getObject(new ResourceLocation(str));
+                    if (biome != null) spawnBiomeslidoped.add(biome);
+                    else EELogger.logError("Biome " + str + " is not registered", new NullPointerException());
+                } catch (Exception e) {
+                    EELogger.logError(str + " is not a valid registry name", e);
+                }
+            }
+        }
+        return spawnBiomeslidoped;
+    }
+
+    private static List<Biome> spawnBiomesChomper;
+    private static List<Biome> loadBiomesForChomper() {
+        if (spawnBiomesChomper == null) {
+            spawnBiomesChomper = Lists.newArrayList();
+            for (String str : CompatConfig.depths_chomper_spawn_biomes) {
+                try {
+                    Biome biome = Biome.REGISTRY.getObject(new ResourceLocation(str));
+                    if (biome != null) spawnBiomesChomper.add(biome);
+                    else EELogger.logError("Biome " + str + " is not registered", new NullPointerException());
+                } catch (Exception e) {
+                    EELogger.logError(str + " is not a valid registry name", e);
+                }
+            }
+        }
+        return spawnBiomesChomper;
     }
 
 

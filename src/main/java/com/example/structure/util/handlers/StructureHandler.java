@@ -12,7 +12,7 @@ import com.example.structure.world.api.lamentedIslands.WorldGenLamentedIslands;
 import com.example.structure.world.api.mines.MinesTemplate;
 import com.example.structure.world.api.mines.WorldGenMines;
 import com.example.structure.world.api.structures.FortressTemplate;
-import com.example.structure.world.api.structures.MapGenKingFortress;
+import com.example.structure.world.api.structures.WorldGenKingFortress;
 import com.example.structure.world.api.vaults.VaultTemplate;
 import com.example.structure.world.api.vaults.WorldGenEndVaults;
 import com.example.structure.world.stronghold.BetterStrongholdTemplate;
@@ -25,7 +25,7 @@ public class StructureHandler {
 
     public static void handleStructureRegistries(){
         //End King Fortress
-        MapGenStructureIO.registerStructure(MapGenKingFortress.Start.class, "EndKingsFortress");
+        MapGenStructureIO.registerStructure(WorldGenKingFortress.Start.class, "EndKingsFortress");
         MapGenStructureIO.registerStructureComponent(FortressTemplate.class, "EFP");
         //End Vaults
         MapGenStructureIO.registerStructure(WorldGenEndVaults.Start.class, "EndVaults");

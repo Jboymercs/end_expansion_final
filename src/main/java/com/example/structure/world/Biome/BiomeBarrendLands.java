@@ -88,14 +88,14 @@ public class BiomeBarrendLands extends BiomeFogged implements IEndBiome, INether
 
         //Barrend Islands
 
-            for(int k2 = 0; k2 < ModRand.range(0, 3); k2++) {
-                int l6 = random.nextInt(16) + 8;
-                int k10 = random.nextInt(16) + 8;
-                int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
-                if(yHieght > 54 && rand.nextInt(2) == 0) {
-                    barrendHeights.generate(world, rand, pos.add(l6, yHieght + (rand.nextInt(2) == 0 ? ModRand.range(25, 30) : ModRand.range(65, 70)), k10));
-                }
-            }
+       //     for(int k2 = 0; k2 < ModRand.range(0, 3); k2++) {
+           //     int l6 = random.nextInt(16) + 8;
+            //    int k10 = random.nextInt(16) + 8;
+            //    int yHieght = getEndSurfaceHeight(world, pos.add(l6, 0, k10), 50, 70);
+            //    if(yHieght > 54 && rand.nextInt(2) == 0) {
+               //     barrendHeights.generate(world, rand, pos.add(l6, yHieght + (rand.nextInt(2) == 0 ? ModRand.range(25, 30) : ModRand.range(65, 70)), k10));
+            //    }
+          //  }
 
         //Plants
         for (int k2 = 0; k2 < ModRand.range(8, 30); k2++) {

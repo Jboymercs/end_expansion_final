@@ -247,13 +247,13 @@ public class EntityVoidTripod extends EntityBarrendMob implements IAnimatable, I
     private <E extends IAnimatable> PlayState predicateAttack(AnimationEvent<E> event) {
         if(this.isFightMode()) {
             if(this.isStompAttack() && !this.isDugIn()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_STOMP_ATTACK, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_STOMP_ATTACK));
             }
             if(this.isSTartDug()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_START_DUG, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_START_DUG));
             }
             if(this.isEndDug()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation(ANIM_END_DUG, false));
+                event.getController().setAnimation(new AnimationBuilder().playOnce(ANIM_END_DUG));
             }
 
             return PlayState.CONTINUE;

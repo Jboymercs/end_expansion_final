@@ -26,7 +26,7 @@ public class BlockAmberTorch extends BlockTorch implements IHasModel {
         this.setHardness(0.0F);
         this.setLightLevel(0);
         this.setSoundType(SoundType.WOOD);
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
         this.setTranslationKey(name);
         this.setRegistryName(name);
         this.info_loc = info_loc;

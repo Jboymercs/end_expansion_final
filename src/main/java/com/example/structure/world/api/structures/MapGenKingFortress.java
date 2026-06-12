@@ -91,7 +91,7 @@ public class MapGenKingFortress extends MapGenModStructure implements INetherAPI
 
                     BlockPos blockpos = new BlockPos(chunkX * 16 + 8, yHeight, chunkZ * 16 + 8);
 
-                    KingFortress stronghold = new KingFortress(worldIn, worldIn.getSaveHandler().getStructureTemplateManager(), provider, components);
+                    KingFortress stronghold = new KingFortress(worldIn, worldIn.getSaveHandler().getStructureTemplateManager(), components);
                     stronghold.startFortress(blockpos, rotation);
                     this.updateBoundingBox();
                     if (this.isSizeableStructure()) {

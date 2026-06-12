@@ -1,5 +1,6 @@
 package com.example.structure.util.integration;
 
+import com.example.structure.config.CompatConfig;
 import com.example.structure.config.ModConfig;
 import mod.beethoven92.betterendforge.BetterEnd;
 import mod.beethoven92.betterendforge.common.init.ModBiomes;
@@ -19,28 +20,28 @@ public class ModIntegration {
     public static boolean IS_BETTER_END_LOADED = Loader.isModLoaded("betterendforge");
 
     public static double getMultiplierCountAll() {
-    if(IS_BOMD_DA_LOADED && ModConfig.is_bomd_compat) {
+    if(IS_BOMD_DA_LOADED && CompatConfig.is_uda_compat) {
         return 0.45;
     }
         return 0;
     }
 
     public static double getMultiplierCountAttackDamage() {
-        if(IS_BOMD_DA_LOADED && ModConfig.is_bomd_compat) {
+        if(IS_BOMD_DA_LOADED && CompatConfig.is_uda_compat) {
             return 0.15;
         }
         return 0;
     }
 
     public static int getMultiplierCountAttackWeapons() {
-    if(IS_BOMD_DA_LOADED && ModConfig.is_bomd_compat) {
+    if(IS_BOMD_DA_LOADED && CompatConfig.is_uda_compat) {
         return 2;
     }
     return 0;
     }
 
     public static int getAdditiveArmorCount() {
-       if (IS_BOMD_DA_LOADED && ModConfig.is_bomd_compat) {
+       if (IS_BOMD_DA_LOADED && CompatConfig.is_uda_compat) {
             return 2;
         }
         return 0;

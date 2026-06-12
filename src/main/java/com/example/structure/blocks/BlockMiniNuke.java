@@ -46,7 +46,7 @@ public class BlockMiniNuke extends BlockTNT implements IHasModel {
         setTranslationKey(name);
         setRegistryName(name);
         this.info_loc = info_loc;
-        this.setCreativeTab(ModCreativeTabs.ITEMS);
+        this.setCreativeTab(ModCreativeTabs.BLOCKS);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
         this.setDefaultState(this.getDefaultState().withProperty(NUKE, Boolean.valueOf(false)));

@@ -9,8 +9,10 @@ import com.example.structure.gui.book.GuiBook;
 import com.example.structure.init.ModItems;
 import com.example.structure.items.model.ModelPureHelmet;
 import com.example.structure.sky.EndSkyHandler;
+import com.example.structure.util.CameraScreenShakeHandler;
 import com.example.structure.util.handlers.RenderHandler;
 import com.example.structure.util.integration.ModIntegration;
+import com.example.structure.util.particles.ParticleImpact;
 import com.example.structure.util.particles.ParticlePixel;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -74,14 +76,6 @@ public class ClientProxy extends CommonProxy {
     }
 
 
-    @SideOnly(Side.CLIENT)
-    public static float getClientEffect(int selector, float defaultVal) {
-        switch (selector) {
-            case 1: return ClientRender.SCREEN_SHAKE;
-            default: return defaultVal;
-        }
-    }
-
     @Override
     public void spawnParticle(int particle, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, int... parameters)
     {
@@ -102,6 +96,8 @@ public class ClientProxy extends CommonProxy {
             default:
             case 1:
                 return new ParticlePixel.Factory();
+            case 2:
+                return new ParticleImpact.Factory();
         }
     }
 
@@ -133,6 +129,7 @@ public class ClientProxy extends CommonProxy {
         if(!ModIntegration.IS_BETTER_END_LOADED) {
             MinecraftForge.EVENT_BUS.register(EndSkyHandler.class);
         }
+        MinecraftForge.EVENT_BUS.register(CameraScreenShakeHandler.INSTANCE);
     }
 
     //Will come back to this and clean it up and put it in with the other GUI's
