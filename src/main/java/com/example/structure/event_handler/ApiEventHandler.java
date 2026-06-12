@@ -2,11 +2,9 @@ package com.example.structure.event_handler;
 
 
 import com.example.structure.config.ModConfig;
-import com.example.structure.config.WorldConfig;
 import com.example.structure.sky.EndSkyHandler;
 import com.example.structure.util.ModReference;
 import com.example.structure.util.handlers.BiomeRegister;
-import com.example.structure.world.api.structures.MapGenKingFortress;
 import git.jbredwards.nether_api.api.event.NetherAPIRegistryEvent;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.world.WorldEvent;
@@ -35,8 +33,8 @@ public class ApiEventHandler {
         event.registry.registerBiome(BiomeRegister.BARREND_LOWLANDS, 80);
 
         //King Fortress
-        event.registry.registerStructure("EndKingsFortress", chunkGenerator ->
-                new MapGenKingFortress(chunkGenerator, WorldConfig.fortress_spacing, 0, WorldConfig.fortress_odds));
+       // event.registry.registerStructure("EndKingsFortress", chunkGenerator ->
+             //   new MapGenKingFortress(chunkGenerator, WorldConfig.fortress_spacing, 0, WorldConfig.fortress_odds));
 
     }
 }
