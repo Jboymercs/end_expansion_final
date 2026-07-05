@@ -192,7 +192,7 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
     private int harvestSoundTimer = 20;
 
     private int attackCooldownTwo = 25;
-
+    private int homeSearchCooldown = 0;
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -225,7 +225,8 @@ public class EntityLidoped extends EntityBarrendMob implements IAttack, IAnimata
 
             }
 
-            if(!this.isHasHome()) {
+            if(!this.isHasHome() && homeSearchCooldown-- <= 0) {
+                homeSearchCooldown = 40;
                 AxisAlignedBB box = getEntityBoundingBox().grow(12, 8, 12);
                 BlockPos setTooPos = ModUtils.searchForBlocks(box, world, ModBlocks.BARE_BARK_HOLE.getDefaultState());
                 if(setTooPos != null) {

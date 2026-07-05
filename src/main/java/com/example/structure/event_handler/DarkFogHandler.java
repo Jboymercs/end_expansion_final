@@ -34,8 +34,20 @@ public class DarkFogHandler {
     public static final int SWAMP_FOG_FADE_START = 5;
     private static final float CLOUD_FOG_HEIGHT = 90.25f;
 
+    private static final double CLOUD_FOG_RED = 0.3D;
+    private static final double CLOUD_FOG_GREEN = 0D;
+    private static final double CLOUD_FOG_BLUE = 0.145D;
+    private static final double CLOUD_FOG_LENGTH_SQ = CLOUD_FOG_RED * CLOUD_FOG_RED + CLOUD_FOG_GREEN * CLOUD_FOG_GREEN + CLOUD_FOG_BLUE * CLOUD_FOG_BLUE;
+
     private static Method setupFog;
-    private static net.minecraftforge.client.IRenderHandler swampFogRenderer = new BarrendFogRenderer();
+    private static final net.minecraftforge.client.IRenderHandler swampFogRenderer = new BarrendFogRenderer();
+    private static final BlockPos.MutableBlockPos biomePos = new BlockPos.MutableBlockPos();
+    private static World cachedBiomeWorld;
+    private static int cachedBiomeDimension = Integer.MIN_VALUE;
+    private static int cachedBiomeX = Integer.MIN_VALUE;
+    private static int cachedBiomeY = Integer.MIN_VALUE;
+    private static int cachedBiomeZ = Integer.MIN_VALUE;
+    private static Biome cachedBiome;
 
 
     /**
@@ -46,71 +58,92 @@ public class DarkFogHandler {
     @SubscribeEvent()
     public static void onFogDensityRender(EntityViewRenderEvent.RenderFogEvent event) {
         Entity entity = event.getEntity();
-        World world = entity.world;
-        if(entity instanceof EntityPlayer && !ModConfig.isDarkFogDisabled) {
-            int playerX = MathHelper.floor(entity.posX);
-            int playerY = MathHelper.floor(entity.posY);
-            int playerZ = MathHelper.floor(entity.posZ);
-            Biome fpDis = world.getBiomeForCoordsBody(new BlockPos(playerX, playerY, playerZ));
-            if (fpDis instanceof BiomeAshWasteland) {
+        if(!(entity instanceof EntityPlayer) || ModConfig.isDarkFogDisabled) {
+            return;
+        }
+
+        Biome fpDis = getCachedBiome(entity);
+        if (fpDis instanceof BiomeAshWasteland) {
+            GlStateManager.setFog(GlStateManager.FogMode.EXP);
+            GlStateManager.setFogDensity(ModConfig.dark_fog_variable);
+        } else if (fpDis instanceof BiomeBarrendLands) {
+            double posY = event.getEntity().getPositionEyes((float) event.getRenderPartialTicks()).y;
+            if (posY < CLIFF_FOG_HEIGHT + SWAMP_FOG_LAYERS + SWAMP_FOG_FADE_START) {
+                double maxFogThickness = 0.07f;
+                double minFogThickness = 0.005f;
+                double distanceFromMax = posY - CLIFF_FOG_HEIGHT;
+                double closenessToMax = distanceFromMax / (SWAMP_FOG_LAYERS + SWAMP_FOG_FADE_START);
+                double fogThickness = maxFogThickness * MathHelper.clamp(1 - closenessToMax, 0, 1);
                 GlStateManager.setFog(GlStateManager.FogMode.EXP);
-                GlStateManager.setFogDensity(ModConfig.dark_fog_variable);
-            } else if (fpDis instanceof BiomeBarrendLands) {
-                double posY = event.getEntity().getPositionEyes((float) event.getRenderPartialTicks()).y;
-                if (posY < CLIFF_FOG_HEIGHT + SWAMP_FOG_LAYERS + SWAMP_FOG_FADE_START) {
-                    double maxFogThickness = 0.07f;
-                    double minFogThickness = 0.005f;
-                   double distanceFromMax = posY - CLIFF_FOG_HEIGHT;
-                    double closenessToMax = distanceFromMax / (SWAMP_FOG_LAYERS + SWAMP_FOG_FADE_START);
-                    double fogThickness = maxFogThickness * MathHelper.clamp(1 - closenessToMax, 0, 1);
-                    GlStateManager.setFog(GlStateManager.FogMode.EXP);
-                   GlStateManager.setFogDensity((float) Math.max(fogThickness, minFogThickness));
-                }
+                GlStateManager.setFogDensity((float) Math.max(fogThickness, minFogThickness));
             }
         }
 
-    }
-
-
-    private static Vec3d interpolateFogColor(Entity renderEntity, Vec3d fog1, Vec3d fog2, float transitionStart, float transitionLength) {
-        float alpha = ModUtils.clamp((renderEntity.posY - transitionStart) / transitionLength, 0, 1);
-        return fog1.scale(1 - alpha).add(fog2.scale(alpha));
     }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent()
     public static void onFogColor(EntityViewRenderEvent.FogColors event) {
-
         Entity entity = event.getEntity();
+        if (!(entity instanceof EntityPlayer)) {
+            return;
+        }
+
+        Biome fpDis = getCachedBiome(entity);
+        if (fpDis instanceof BiomeAshWasteland) {
+            event.setBlue(0);
+            event.setRed(0);
+            event.setGreen(0);
+        } else if(fpDis instanceof BiomeBarrendLands) {
+            applyBarrendFogColor(event, entity);
+        }
+    }
+
+    private static void applyBarrendFogColor(EntityViewRenderEvent.FogColors event, Entity entity) {
+        double originalRed = event.getRed();
+        double originalGreen = event.getGreen();
+        double originalBlue = event.getBlue();
+        double originalLengthSq = originalRed * originalRed + originalGreen * originalGreen + originalBlue * originalBlue;
+        double cloudScale = Math.sqrt(originalLengthSq / CLOUD_FOG_LENGTH_SQ);
+        double cloudRed = CLOUD_FOG_RED * cloudScale;
+        double cloudGreen = CLOUD_FOG_GREEN * cloudScale;
+        double cloudBlue = CLOUD_FOG_BLUE * cloudScale;
+
+        float cloudAlpha = ModUtils.clamp((entity.posY - CLOUD_FOG_HEIGHT) / 2, 0, 1);
+        double colorRed = interpolate(originalRed, cloudRed, cloudAlpha);
+        double colorGreen = interpolate(originalGreen, cloudGreen, cloudAlpha);
+        double colorBlue = interpolate(originalBlue, cloudBlue, cloudAlpha);
+
+        double colorLengthSq = colorRed * colorRed + colorGreen * colorGreen + colorBlue * colorBlue;
+        double swampScale = Math.sqrt(colorLengthSq / ModColors.SWAMP_FOG.lengthSquared());
+        double swampRed = ModColors.SWAMP_FOG.x * swampScale;
+        double swampGreen = ModColors.SWAMP_FOG.y * swampScale;
+        double swampBlue = ModColors.SWAMP_FOG.z * swampScale;
+
+        float swampAlpha = ModUtils.clamp(entity.posY - CLIFF_FOG_HEIGHT, 0, 1);
+        event.setRed((float) interpolate(swampRed, colorRed, swampAlpha));
+        event.setGreen((float) interpolate(swampGreen, colorGreen, swampAlpha));
+        event.setBlue((float) interpolate(swampBlue, colorBlue, swampAlpha));
+    }
+
+    private static double interpolate(double fog1, double fog2, float alpha) {
+        return fog1 * (1 - alpha) + fog2 * alpha;
+    }
+
+    private static Biome getCachedBiome(Entity entity) {
+        int playerX = MathHelper.floor(entity.posX);
+        int playerY = MathHelper.floor(entity.posY);
+        int playerZ = MathHelper.floor(entity.posZ);
         World world = entity.world;
-
-        if (entity instanceof EntityPlayer) {
-            Vec3d originalColor = new Vec3d(event.getRed(), event.getGreen(), event.getBlue());
-            Vec3d cloudColor = new Vec3d(0.3, 0, 0.145);
-            Vec3d color = interpolateFogColor(event.getEntity(), originalColor, cloudColor.scale(Math.sqrt(originalColor.lengthSquared() / cloudColor.lengthSquared())), CLOUD_FOG_HEIGHT, 2);
-            Vec3d color2 = interpolateFogColor(event.getEntity(), ModColors.SWAMP_FOG.scale(Math.sqrt(color.lengthSquared() / ModColors.SWAMP_FOG.lengthSquared())), color, CLIFF_FOG_HEIGHT, 1);
-            int playerX = MathHelper.floor(entity.posX);
-            int playerY = MathHelper.floor(entity.posY);
-            int playerZ = MathHelper.floor(entity.posZ);
-            Biome fpDis = world.getBiomeForCoordsBody(new BlockPos(playerX, playerY, playerZ));
-            if(fpDis instanceof BiomeBarrendLands) {
-                event.setRed((float) color2.x);
-                event.setGreen((float) color2.y);
-                event.setBlue((float) color2.z);
-            }
+        if (world != cachedBiomeWorld || entity.dimension != cachedBiomeDimension || playerX != cachedBiomeX || playerY != cachedBiomeY || playerZ != cachedBiomeZ) {
+            cachedBiomeWorld = world;
+            cachedBiomeDimension = entity.dimension;
+            cachedBiomeX = playerX;
+            cachedBiomeY = playerY;
+            cachedBiomeZ = playerZ;
+            cachedBiome = world.getBiomeForCoordsBody(biomePos.setPos(playerX, playerY, playerZ));
         }
-
-        if(entity instanceof EntityPlayer) {
-            int playerX = MathHelper.floor(entity.posX);
-            int playerY = MathHelper.floor(entity.posY);
-            int playerZ = MathHelper.floor(entity.posZ);
-            Biome fpDis = world.getBiomeForCoordsBody(new BlockPos(playerX, playerY, playerZ));
-            if (fpDis instanceof BiomeAshWasteland) {
-                event.setBlue(0);
-                event.setRed(0);
-                event.setGreen(0);
-            }
-        }
+        return cachedBiome;
     }
 
     @SideOnly(Side.CLIENT)
@@ -119,28 +152,24 @@ public class DarkFogHandler {
 
         if (!ModConfig.isDarkFogDisabled) {
             Minecraft mc = Minecraft.getMinecraft();
-            int playerX = (int) Math.floor(mc.getRenderViewEntity().posX);
-            int playerY = (int) Math.floor(mc.getRenderViewEntity().posY);
-            int playerZ = (int) Math.floor(mc.getRenderViewEntity().posZ);
-            if (mc.getRenderViewEntity().dimension == 1 && mc.getRenderViewEntity().world.getBiomeForCoordsBody(new BlockPos(playerX, playerY, playerZ)) instanceof BiomeBarrendLands) {
+            Entity renderViewEntity = mc.getRenderViewEntity();
+            if (renderViewEntity != null && renderViewEntity.dimension == 1 && getCachedBiome(renderViewEntity) instanceof BiomeBarrendLands) {
                 if (setupFog == null) {
                     try {
                         setupFog = ReflectionHelper.findMethod(EntityRenderer.class, "setupFog", "func_78468_a", int.class, float.class);
                         setupFog.setAccessible(true);
                     } catch (Exception e) {
-                       System.out.println("Failed to render fog: " + e);
                     }
                 }
 
                 if (setupFog != null) {
                     try {
-                        if (mc.getRenderViewEntity().posY > CLIFF_FOG_HEIGHT) {
+                        if (renderViewEntity.posY > CLIFF_FOG_HEIGHT) {
                             setupFog.invoke(mc.entityRenderer, 0, event.getPartialTicks());
-                            swampFogRenderer.render(event.getPartialTicks(), Minecraft.getMinecraft().world, Minecraft.getMinecraft());
+                            swampFogRenderer.render(event.getPartialTicks(), mc.world, mc);
                             GlStateManager.disableFog();
                         }
                     } catch (Exception e) {
-                        System.out.println("Failed to render fog: " + e);
                         GlStateManager.disableFog();
                     }
                 }

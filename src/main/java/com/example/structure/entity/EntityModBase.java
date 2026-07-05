@@ -165,7 +165,7 @@ public abstract class EntityModBase extends EntityCreature {
             }
         }
         //Deletion of Certain Entites due to there spamming
-        if(this.iAmBossMob) {
+        if(this.iAmBossMob && !this.world.isRemote && this.ticksExisted % 20 == 0) {
             List<EntityEnderCrystal> nearbyEyes = this.world.getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
             if(!nearbyEyes.isEmpty()) {
                 for(EntityEnderCrystal eye: nearbyEyes) {

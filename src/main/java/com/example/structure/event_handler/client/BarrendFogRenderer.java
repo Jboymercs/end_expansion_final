@@ -37,28 +37,33 @@ public class BarrendFogRenderer extends IRenderHandler implements ISelectiveReso
     private int texW;
     private int texH;
     private static final boolean WIREFRAME = false;
-    private DynamicTexture COLOR_TEX = null;
+    private final DynamicTexture[] colorTextures = new DynamicTexture[256];
 
     @Override
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
         Entity entity = mc.getRenderViewEntity();
         GlStateManager.alphaFunc(GL11.GL_GREATER, 0.0f);
 
+        int maxAlpha = 80;
+        int fogRed = (int) (ModColors.SWAMP_FOG.x * 255);
+        int fogGreen = (int) (ModColors.SWAMP_FOG.y * 255);
+        int fogBlue = (int) (ModColors.SWAMP_FOG.z * 255);
+        double entityHeight = entity.getPositionEyes(partialTicks).y;
+        double eyeHeight = entity.getEyeHeight();
+
         for (int i = 0; i < DarkFogHandler.SWAMP_FOG_LAYERS; i++) {
             float y = DarkFogHandler.CLIFF_FOG_HEIGHT + i;
-            int maxAlpha = 80;
-            double entityHeight = entity.getPositionEyes(partialTicks).y;
-            double distanceFromPlane = entityHeight - (y + entity.getEyeHeight());
+            double distanceFromPlane = entityHeight - (y + eyeHeight);
             // As the player approaches the plane, fade it out
             double alpha = maxAlpha * MathHelper.clamp(distanceFromPlane / DarkFogHandler.SWAMP_FOG_FADE_START, 0, 1);
 
-            this.renderPlane(partialTicks, world, mc, y, ModColors.SWAMP_FOG.scale(255), (int) alpha);
+            this.renderPlane(partialTicks, world, mc, y, fogRed, fogGreen, fogBlue, (int) alpha);
         }
 
         GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
     }
 
-    public void renderPlane(float partialTicks, WorldClient world, Minecraft mc, float height, Vec3d colorTweak, int alpha) {
+    public void renderPlane(float partialTicks, WorldClient world, Minecraft mc, float height, int red, int green, int blue, int alpha) {
         if (!isBuilt()) {
             reloadTextures();
         }
@@ -97,15 +102,10 @@ public class BarrendFogRenderer extends IRenderHandler implements ISelectiveReso
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-        if (COLOR_TEX == null)
-            COLOR_TEX = new DynamicTexture(1, 1);
-
-        // Apply a color multiplier through a texture upload if shaders aren't supported.
-        COLOR_TEX.getTextureData()[0] = alpha << 24 | ((int) (colorTweak.x)) << 16 | ((int) (colorTweak.y)) << 8 | (int) (colorTweak.z);
-        COLOR_TEX.updateDynamicTexture();
+        DynamicTexture colorTexture = getColorTexture(red, green, blue, alpha);
 
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        GlStateManager.bindTexture(COLOR_TEX.getGlTextureId());
+        GlStateManager.bindTexture(colorTexture.getGlTextureId());
         GlStateManager.enableTexture2D();
 
         // Bind the clouds texture last so the shader's sampler2D is correct.
@@ -199,15 +199,26 @@ public class BarrendFogRenderer extends IRenderHandler implements ISelectiveReso
     }
 
     public void checkSettings() {
-        renderDistance = mc.gameSettings.renderDistanceChunks;
-
-        if (isBuilt() && (mc.gameSettings.renderDistanceChunks != renderDistance)) {
+        int currentRenderDistance = mc.gameSettings.renderDistanceChunks;
+        if (isBuilt() && currentRenderDistance != renderDistance) {
             dispose();
         }
-
+        renderDistance = currentRenderDistance;
         if (!isBuilt()) {
             build();
         }
+    }
+
+    private DynamicTexture getColorTexture(int red, int green, int blue, int alpha) {
+        int clampedAlpha = MathHelper.clamp(alpha, 0, 255);
+        DynamicTexture colorTexture = colorTextures[clampedAlpha];
+        if (colorTexture == null) {
+            colorTexture = new DynamicTexture(1, 1);
+            colorTexture.getTextureData()[0] = clampedAlpha << 24 | red << 16 | green << 8 | blue;
+            colorTexture.updateDynamicTexture();
+            colorTextures[clampedAlpha] = colorTexture;
+        }
+        return colorTexture;
     }
 
     private void dispose() {

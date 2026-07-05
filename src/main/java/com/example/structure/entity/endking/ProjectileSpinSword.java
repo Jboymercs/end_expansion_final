@@ -62,6 +62,10 @@ public class ProjectileSpinSword extends Projectile implements IMagicEntity {
     public void onUpdate() {
         super.onUpdate();
 
+        if(this.world.isRemote) {
+            return;
+        }
+
         if(this.ticksExisted == 2) {
             this.playSound(ModSoundHandler.SWORD_SUMMON, 0.8F, 1.0F / (rand.nextFloat() * 0.3F + 0.2F));
         }

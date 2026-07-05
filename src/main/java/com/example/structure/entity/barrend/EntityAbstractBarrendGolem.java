@@ -281,10 +281,8 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        Vec3d[] avec3d = new Vec3d[this.hitboxParts.length];
-        for (int j = 0; j < this.hitboxParts.length; ++j) {
-            avec3d[j] = new Vec3d(this.hitboxParts[j].posX, this.hitboxParts[j].posY, this.hitboxParts[j].posZ);
-        }
+
+        this.rememberHitboxPositions();
 
         this.setHitBoxPos(main_body, new Vec3d(-0.1, 0.1, 0));
         this.setHitBoxPos(left_arm, new Vec3d(0, 0.4, 0.8));
@@ -315,11 +313,6 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         Vec3d knightPos = this.getPositionVector();
         ModUtils.setEntityPosition(model, knightPos);
 
-        for (int l = 0; l < this.hitboxParts.length; ++l) {
-            this.hitboxParts[l].prevPosX = avec3d[l].x;
-            this.hitboxParts[l].prevPosY = avec3d[l].y;
-            this.hitboxParts[l].prevPosZ = avec3d[l].z;
-        }
     }
 
 
@@ -333,6 +326,15 @@ public abstract class EntityAbstractBarrendGolem extends EntityModBase implement
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(MobConfig.barrend_golem_attack_damage * getAttackModifierAsh());
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(MobConfig.barrend_golem_armor * ModConfig.biome_multiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(MobConfig.barrend_golem_armor_toughness * ModConfig.biome_multiplier);
+    }
+
+    private void rememberHitboxPositions() {
+        for (int i = 0; i < this.hitboxParts.length; ++i) {
+            Entity part = this.hitboxParts[i];
+            part.prevPosX = part.posX;
+            part.prevPosY = part.posY;
+            part.prevPosZ = part.posZ;
+        }
     }
 
 

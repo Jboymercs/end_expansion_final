@@ -123,25 +123,25 @@ public abstract class EntityAbstractBuffker extends EntityModBase implements IEn
 
     }
 
+    private void rememberHitboxPositions() {
+        for (int i = 0; i < this.hitboxParts.length; ++i) {
+            Entity part = this.hitboxParts[i];
+            part.prevPosX = part.posX;
+            part.prevPosY = part.posY;
+            part.prevPosZ = part.posZ;
+        }
+    }
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        Vec3d[] avec3d = new Vec3d[this.hitboxParts.length];
-        for (int j = 0; j < this.hitboxParts.length; ++j) {
-            avec3d[j] = new Vec3d(this.hitboxParts[j].posX, this.hitboxParts[j].posY, this.hitboxParts[j].posZ);
-        }
+        this.rememberHitboxPositions();
 
         this.setHitBoxPos(torso, new Vec3d(0, 0.1, 0));
         this.setHitBoxPos(head, new Vec3d(0, 1.3, 0 ));
 
         Vec3d knightPos = this.getPositionVector();
         ModUtils.setEntityPosition(model, knightPos);
-
-        for (int l = 0; l < this.hitboxParts.length; ++l) {
-            this.hitboxParts[l].prevPosX = avec3d[l].x;
-            this.hitboxParts[l].prevPosY = avec3d[l].y;
-            this.hitboxParts[l].prevPosZ = avec3d[l].z;
-        }
 
 
         if(destroyShellProgress > 4 && !canBeDamagedInHead) {

@@ -40,6 +40,7 @@ import mod.beethoven92.betterendforge.common.init.ModBiomes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3i;
@@ -221,9 +222,9 @@ public class ModEntities {
         //End Expansion Painting
         registerEntity("lamented_islands_painting", EntityEEPainting.class, ENTITY_START_ID++, 100);
         //Barrend Lidoped
-        registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, lidoped);
+        //registerEntityWithID("lidoped", EntityLidoped.class, ENTITY_START_ID++, 100, lidoped);
         //Mad Spirit
-        registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, mad_spirit);
+       // registerEntityWithID("mad_spirit", EntityMadSpirit.class, ENTITY_START_ID++, 100, mad_spirit);
         //Move TIle
         registerEntity("move_tile_aoe", EntityMoveTile.class, ENTITY_START_ID++, 110);
         //Blood Slash
@@ -237,13 +238,13 @@ public class ModEntities {
             //Barrend Guard - NEEDS COLOR
             registerEntityWithID("barrend_guard", EntityBarrendGuard.class, ENTITY_START_ID++, 110, barrend_golem);
             //Void Tripod
-            registerEntityWithID("void_tripod", EntityVoidTripod.class, ENTITY_START_ID++, 110, barrend_walker);
+           // registerEntityWithID("void_tripod", EntityVoidTripod.class, ENTITY_START_ID++, 110, barrend_walker);
             //Big Rick
             registerEntityWithID("big_rick", EntityUltraParasite.class, ENTITY_START_ID++, 110, evoled_parasite);
             //Shadow Player
             registerEntityWithID("shadow_player", EntityShadowPlayer.class, ENTITY_START_ID++, 110, shadow_player);
             //madness cube
-            registerEntity("madness_cube", EntityMadnessCube.class, ENTITY_START_ID++, 120);
+            //registerEntity("madness_cube", EntityMadnessCube.class, ENTITY_START_ID++, 120);
 
 
     }
@@ -253,9 +254,10 @@ public class ModEntities {
         spawnRateBiomeSpecific(EntityEndBug.class, EnumCreatureType.MONSTER, MobConfig.parasite_spawn_rate, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntitySnatcher.class, EnumCreatureType.MONSTER, MobConfig.stalker_spawn_rate, 1, 1, BiomeRegister.END_ASH_WASTELANDS);
         spawnRateBiomeSpecific(EntityChomper.class, EnumCreatureType.MONSTER, MobConfig.chomper_spawn_rate, 1, 3, BiomeRegister.END_ASH_WASTELANDS);
-        spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-        spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
-        spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
+        spawnRateBiomeSpecific(EntityEnderman.class, EnumCreatureType.MONSTER, 1, 1, 4, BiomeRegister.END_ASH_WASTELANDS);
+       // spawnRateBiomeSpecific(EntityLidoped.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+      //  spawnRateBiomeSpecific(EntityMadSpirit.class, EnumCreatureType.MONSTER, 1, 1, 2, BiomeRegister.BARREND_LOWLANDS);
+      //  spawnRateBiomeSpecific(EntityVoidTripod.class, EnumCreatureType.MONSTER, 1, 1, 1, BiomeRegister.BARREND_LOWLANDS);
     }
 
     public static void registerEntitySpawnsBE() {

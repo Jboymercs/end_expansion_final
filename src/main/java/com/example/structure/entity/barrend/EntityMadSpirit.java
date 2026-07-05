@@ -169,61 +169,63 @@ public class EntityMadSpirit extends EntityBarrendMob implements IAttack, IAnima
 
         if(target != null && !world.isRemote) {
 
-            if(!isCurrentlyVisible) {
+            if (!isCurrentlyVisible) {
                 this.showSelf();
             }
 
-          //  Vec3d targetPos = target.getPositionVector();
+            //  Vec3d targetPos = target.getPositionVector();
 
-         //   if(this.getPositionVector().y > targetPos.y + 1) {
-           //     double distSq = this.getDistanceSq(target.posX, targetPos.y + 1, target.posZ);
+            //   if(this.getPositionVector().y > targetPos.y + 1) {
+            //     double distSq = this.getDistanceSq(target.posX, targetPos.y + 1, target.posZ);
             //    double distance = Math.sqrt(distSq);
             //    if(distance <= 6 && !this.isBiteAttack()) {
             //        this.motionY -= 0.1;
-           //     }
-          //  } else if (this.getPositionVector().y < targetPos.y + 2) {
-           //     this.motionY += 0.1;
-          //  }
+            //     }
+            //  } else if (this.getPositionVector().y < targetPos.y + 2) {
+            //     this.motionY += 0.1;
+            //  }
 
-            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(1.5D), e -> !e.getIsInvulnerable());
+            if (this.ticksExisted % 5 == 0) {
+                List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(1.5D), e -> !e.getIsInvulnerable());
 
-            if(!nearbyEntities.isEmpty()) {
-                for(EntityLivingBase base: nearbyEntities) {
-                    if(!(base instanceof EntityBarrendMob)) {
-                        if(base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() != ModItems.LIDOPED_HELMET) {
-                            base.addPotionEffect(new PotionEffect(ModPotions.MADNESS, 400, 0));
+                if (!nearbyEntities.isEmpty()) {
+                    for (EntityLivingBase base : nearbyEntities) {
+                        if (!(base instanceof EntityBarrendMob)) {
+                            if (base.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() != ModItems.LIDOPED_HELMET) {
+                                base.addPotionEffect(new PotionEffect(ModPotions.MADNESS, 400, 0));
+                            }
                         }
                     }
                 }
-            }
 
-            if(!target.isPotionActive(ModPotions.MADNESS)) {
-                //flee away
-                double distSq = this.getDistanceSq(target.posX, target.getEntityBoundingBox().minY, target.posZ);
-                double distance = Math.sqrt(distSq);
-                if(distance < 16) {
-                    double d0 = (this.posX - target.posX) * 0.015;
-                    double d1 = (this.posY - target.posY) * 0.01;
-                    double d2 = (this.posZ - target.posZ) * 0.015;
-                    this.addVelocity(d0, d1, d2);
-                } else if (this.isCurrentlyVisible){
-                    hideSelf();
-                }
             }
-
-        } else {
-            if (!world.isRemote) {
-                for (int i = 0; i < 6; i++) {
-                    if (!world.isAirBlock(this.getPosition().add(0, -i, 0))) {
-                        this.motionY += 0.1;
-                    } else {
-                        this.motionY = 0;
+                if (!target.isPotionActive(ModPotions.MADNESS)) {
+                    //flee away
+                    double distSq = this.getDistanceSq(target.posX, target.getEntityBoundingBox().minY, target.posZ);
+                    double distance = Math.sqrt(distSq);
+                    if (distance < 16) {
+                        double d0 = (this.posX - target.posX) * 0.015;
+                        double d1 = (this.posY - target.posY) * 0.01;
+                        double d2 = (this.posZ - target.posZ) * 0.015;
+                        this.addVelocity(d0, d1, d2);
+                    } else if (this.isCurrentlyVisible) {
+                        hideSelf();
                     }
                 }
-                this.motionX = 0;
-                this.motionZ = 0;
+
+            } else {
+                if (!world.isRemote) {
+                    for (int i = 0; i < 6; i++) {
+                        if (!world.isAirBlock(this.getPosition().add(0, -i, 0))) {
+                            this.motionY += 0.1;
+                        } else {
+                            this.motionY = 0;
+                        }
+                    }
+                    this.motionX = 0;
+                    this.motionZ = 0;
+                }
             }
-        }
     }
 
 

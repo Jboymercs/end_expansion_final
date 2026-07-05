@@ -132,8 +132,6 @@ public class Main {
         }
     }
 
-
-
     public static ResourceLocation locate(String location)
     {
         return new ResourceLocation(ModReference.MOD_ID, location);

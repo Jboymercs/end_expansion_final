@@ -99,24 +99,7 @@ public class EntityAILidopedHome<T extends EntityLidoped> extends EntityAIBase {
                 wanderTime--;
             }
 
-            Vec3d Pos = this.getPosition();
-
-            if(Pos == null) {
-                return;
-            }
-
-            if(idleTime < 0) {
-
-                if (this.entity.getNavigator().noPath() && !this.hasDoneAction) {
-                    this.entity.getNavigator().tryMoveToXYZ(Pos.x, Pos.y, Pos.z, moveSpeedAmp - 0.3);
-                    this.hasDoneAction = true;
-                } else if (this.entity.getNavigator().noPath() && this.hasDoneAction) {
-                    this.idleTime = 100 + ModRand.range(20, 100);
-                    this.hasDoneAction = false;
-                }
-            } else {
-                idleTime--;
-            }
+            this.updateWanderMovement();
 
             //do occasional wandering
 
@@ -131,25 +114,7 @@ public class EntityAILidopedHome<T extends EntityLidoped> extends EntityAIBase {
                 wanderTime--;
             }
 
-            Vec3d Pos = this.getPosition();
-
-            if(Pos == null) {
-                return;
-            }
-
-            if(idleTime < 0) {
-
-                if (this.entity.getNavigator().noPath() && !this.hasDoneAction) {
-                    this.entity.getNavigator().tryMoveToXYZ(Pos.x, Pos.y, Pos.z, moveSpeedAmp - 0.3);
-                    this.hasDoneAction = true;
-                } else if (this.entity.getNavigator().noPath() && this.hasDoneAction) {
-                    this.idleTime = 100 + ModRand.range(20, 100);
-                    this.hasDoneAction = false;
-                }
-            } else {
-                idleTime--;
-            }
-
+            this.updateWanderMovement();
             //do occasional wandering
 
         }
@@ -233,6 +198,24 @@ public class EntityAILidopedHome<T extends EntityLidoped> extends EntityAIBase {
         }
     }
 
+    private void updateWanderMovement() {
+        if(idleTime < 0) {
+            if (this.entity.getNavigator().noPath() && !this.hasDoneAction) {
+                Vec3d Pos = this.getPosition();
+                if(Pos == null) {
+                    return;
+                }
+                this.entity.getNavigator().tryMoveToXYZ(Pos.x, Pos.y, Pos.z, moveSpeedAmp - 0.3);
+                this.hasDoneAction = true;
+            } else if (this.entity.getNavigator().noPath() && this.hasDoneAction) {
+                this.idleTime = 100 + ModRand.range(20, 100);
+                this.hasDoneAction = false;
+            }
+        } else {
+            idleTime--;
+        }
+    }
+
 
     public void setSleep() {
         this.entity.setOnSleep(true);
@@ -249,11 +232,13 @@ public class EntityAILidopedHome<T extends EntityLidoped> extends EntityAIBase {
     }
 
     public void searchForResource() {
-        AxisAlignedBB box = this.entity.getEntityBoundingBox().grow(4, 2, 4);
-        BlockPos searchForBloodWeed = ModUtils.searchForBlocks(box, this.entity.world, ModBlocks.BARE_GRASS.getDefaultState());
-        if(selectedBlockPos == null && searchForBloodWeed != null) {
-            selectedBlockPos = searchForBloodWeed;
-            this.entity.getNavigator().clearPath();
+        if(selectedBlockPos == null) {
+            AxisAlignedBB box = this.entity.getEntityBoundingBox().grow(4, 2, 4);
+            BlockPos searchForBloodWeed = ModUtils.searchForBlocks(box, this.entity.world, ModBlocks.BARE_GRASS.getDefaultState());
+            if(searchForBloodWeed != null) {
+                selectedBlockPos = searchForBloodWeed;
+                this.entity.getNavigator().clearPath();
+            }
         }
 
         if(selectedBlockPos != null) {

@@ -230,16 +230,16 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
     }
 
     protected int setTooDeathTimer = 800;
+    private int lazerMinionCheckTimer = 0;
+    private int healthBlockCheckTimer = 0;
     @Override
     public void onUpdate() {
         super.onUpdate();
 
-        List<EntityMiniValon> nearbySwords = this.world.getEntitiesWithinAABB(EntityMiniValon.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
-
-        if(!nearbySwords.isEmpty()) {
-            this.hasLazerMinions = true;
-        } else {
-            this.hasLazerMinions = false;
+        if(!world.isRemote && lazerMinionCheckTimer-- <= 0) {
+            lazerMinionCheckTimer = 5;
+            List<EntityMiniValon> nearbySwords = this.world.getEntitiesWithinAABB(EntityMiniValon.class, this.getEntityBoundingBox().grow(30D), e -> !e.getIsInvulnerable());
+            this.hasLazerMinions = !nearbySwords.isEmpty();
         }
 
 
@@ -379,13 +379,19 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
         }, 60);
     }
 
+    private void rememberHitboxPositions() {
+        for (int i = 0; i < this.hitboxParts.length; ++i) {
+            Entity part = this.hitboxParts[i];
+            part.prevPosX = part.posX;
+            part.prevPosY = part.posY;
+            part.prevPosZ = part.posZ;
+        }
+    }
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        Vec3d[] avec3d = new Vec3d[this.hitboxParts.length];
-        for (int j = 0; j < this.hitboxParts.length; ++j) {
-            avec3d[j] = new Vec3d(this.hitboxParts[j].posX, this.hitboxParts[j].posY, this.hitboxParts[j].posZ);
-        }
+        this.rememberHitboxPositions();
         //Location of Hitboxes
         this.setHitBoxPos(hit_part_1, new Vec3d(0, 0.1, 0));
         this.setHitBoxPos(shield_1, new Vec3d(0.8, 0.1, 0.8));
@@ -401,12 +407,6 @@ public class EntityAbstractAvalon extends EntityTrader implements IEntityMultiPa
 
         Vec3d knightPos = this.getPositionVector();
         ModUtils.setEntityPosition(model, knightPos);
-
-        for (int l = 0; l < this.hitboxParts.length; ++l) {
-            this.hitboxParts[l].prevPosX = avec3d[l].x;
-            this.hitboxParts[l].prevPosY = avec3d[l].y;
-            this.hitboxParts[l].prevPosZ = avec3d[l].z;
-        }
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ModPotions{
     private ModPotions(){}
 
     public static PotionCorrupted CORRUPTED = (PotionCorrupted) new PotionCorrupted(true, 0).setRegistryName(ModReference.MOD_ID, "corrupted");
-    public static PotionInArena IN_ARENA = (PotionInArena) new PotionInArena(true, 0).setRegistryName(ModReference.MOD_ID, "entrapped");
+    public static PotionInArena IN_ARENA = (PotionInArena) new PotionInArena(true, 0).setRegistryName(ModReference.MOD_ID, "in_arena");
 
     public static PotionMadness MADNESS = (PotionMadness) new PotionMadness(true, 0).setRegistryName(ModReference.MOD_ID, "the_madness");
 

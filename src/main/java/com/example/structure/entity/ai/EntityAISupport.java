@@ -1,6 +1,7 @@
 package com.example.structure.entity.ai;
 
 
+import com.example.structure.entity.EntityEnderKnight;
 import com.example.structure.entity.knighthouse.EntityEnderMage;
 import com.example.structure.entity.knighthouse.EntityEnderShield;
 import com.example.structure.entity.knighthouse.EntityKnightBase;
@@ -11,6 +12,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.List;
 
 public class EntityAISupport extends EntityAIBase {
 
@@ -52,20 +55,33 @@ public class EntityAISupport extends EntityAIBase {
     public void updateTask() {
         super.updateTask();
 
-        Vec3d groupCenter = ModUtils.findEntityGroupCenter(this.supporter, supporter.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue());
-        boolean hasGroup = groupCenter.squareDistanceTo(this.supporter.getPositionVector()) != 0;
+        double followRange = supporter.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue();
+        List<EntityLivingBase> nearbyEntities = ModUtils.getEntitiesInBox(supporter, new AxisAlignedBB(supporter.getPosition()).grow(followRange));
+        Vec3d groupCenter = this.supporter.getPositionVector();
+        float numMobs = 1;
 
         /**
          * Provide support to the nearest mobs
          */
         EntityLivingBase optimalMob = null;
         double health = 2;
-        for (EntityLivingBase entity : ModUtils.getEntitiesInBox(supporter, new AxisAlignedBB(supporter.getPosition()).grow(supporter.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue()))) {
-            if (!EntityKnightBase.CAN_TARGET.apply(entity) && this.supporter.getEntitySenses().canSee(entity) || entity instanceof EntityEnderShield && entity.getHealth() / entity.getMaxHealth() < health && this.supporter.getDistanceSq(entity) < Math.pow(supportDistance, 2) && this.supporter.getEntitySenses().canSee(entity)) {
+        double supportDistanceSq = supportDistance * supportDistance;
+        for (EntityLivingBase entity : nearbyEntities) {
+            if (entity instanceof EntityEnderKnight && !(entity instanceof EntityEnderMage)) {
+                groupCenter = groupCenter.add(entity.getPositionVector());
+                numMobs += 1;
+            }
+
+            double healthRatio = entity.getHealth() / entity.getMaxHealth();
+            boolean needsSupport = !EntityKnightBase.CAN_TARGET.apply(entity)
+                    || entity instanceof EntityEnderShield && healthRatio < health && this.supporter.getDistanceSq(entity) < supportDistanceSq;
+            if (needsSupport && this.supporter.getEntitySenses().canSee(entity)) {
                 optimalMob = entity;
-                health = entity.getHealth() / entity.getMaxHealth();
+                health = healthRatio;
             }
         }
+        groupCenter = groupCenter.scale(1 / numMobs);
+        boolean hasGroup = numMobs > 1;
 
         if (optimalMob != null && hasGroup) {
             cooldown--;

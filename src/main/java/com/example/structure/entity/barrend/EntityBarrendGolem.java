@@ -117,13 +117,16 @@ public class EntityBarrendGolem extends EntityAbstractBarrendGolem implements IA
 
         if(this.isCharge()) {
             //Damages Entities while this is Charging
-            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable());
-            if(!nearbyEntities.isEmpty()) {
-                for(EntityLivingBase base : nearbyEntities) {
-                    Vec3d offset = base.getPositionVector().add(ModUtils.getRelativeOffset(base, new Vec3d(0.3, 0.3, 0)));
+            if(!world.isRemote) {
+                //Damages Entities while this is Charging
+                List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox(), e -> !e.getIsInvulnerable());
+                if (!nearbyEntities.isEmpty()) {
                     DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
                     float damage = (float) ((MobConfig.barrend_golem_attack_damage * MobConfig.barrend_golem_attack_multiplier) * ModConfig.biome_multiplier);
-                    ModUtils.handleAreaImpact(0.7f, (e)-> damage, this, offset, source, 1.2f, 0, false);
+                    for (EntityLivingBase base : nearbyEntities) {
+                        Vec3d offset = base.getPositionVector().add(ModUtils.getRelativeOffset(base, new Vec3d(0.3, 0.3, 0)));
+                        ModUtils.handleAreaImpact(0.7f, (e) -> damage, this, offset, source, 1.2f, 0, false);
+                    }
                 }
             }
 

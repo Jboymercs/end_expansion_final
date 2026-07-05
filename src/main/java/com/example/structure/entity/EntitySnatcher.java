@@ -215,7 +215,7 @@ public class EntitySnatcher extends EntityModBase implements IAttack, IAnimatabl
             AxisAlignedBB box = getEntityBoundingBox().grow(7, 7, 7);
             //A check for nearby Cordium Torches, will send away these guys if set true
             BlockPos posToo = ModUtils.searchForBlocks(box, world, ModBlocks.AMBER_TORCH.getDefaultState());
-            if(ModUtils.searchForBlocks(box, world, ModBlocks.AMBER_TORCH.getDefaultState()) != null) {
+            if(posToo != null) {
                 this.iAmPissedOff = false;
                 this.aggroTimer = 400;
                 this.spottedATorch = true;

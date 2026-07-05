@@ -56,7 +56,7 @@ public class TileEntityUnEndingArena extends TileEntity implements ITickable {
     private List<WeakReference<Entity>> current_mobs = Lists.newArrayList();
     private final List<UUID> mob_cache = Lists.newArrayList();
     private BlockEnumArenaStates state = BlockEnumArenaStates.INACTIVE;
-
+    private static final int CONTAINMENT_INTERVAL = 10;
 
     private double scale_level;
 
@@ -434,7 +434,10 @@ public class TileEntityUnEndingArena extends TileEntity implements ITickable {
     }
 
     private void containNearbyTargets(){
-
+        if(world.getTotalWorldTime() % CONTAINMENT_INTERVAL != 0) {
+            return;
+        }
+        NBTTagCompound arenaPosTag = NBTUtil.createPosTag(this.pos);
         List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, containmentField,
                 e -> e instanceof EntityPlayer || e instanceof EntityModBase);
 
@@ -444,7 +447,7 @@ public class TileEntityUnEndingArena extends TileEntity implements ITickable {
                 entity.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, 1));
             }
 
-            NBTExtras.storeTagSafely(entity.getEntityData(), PotionInArena.ENTITY_TAG, NBTUtil.createPosTag(this.pos));
+            NBTExtras.storeTagSafely(entity.getEntityData(), PotionInArena.ENTITY_TAG, arenaPosTag.copy());
         }
     }
 

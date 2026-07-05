@@ -294,25 +294,13 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
                 ModUtils.addEntityVelocity(this, targetedDir.scale(0.025 * 1.1));
             }
 
-            if(this.hasGrabbedSomething) {
-
-                List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class,
-                        this.getEntityBoundingBox().offset(ModUtils.getRelativeOffset(this, new Vec3d(0.8, -0.3, 0))).grow(2.5D, 3.0D, 1.5D),
-                        e -> !e.getIsInvulnerable());
-                if(!nearbyEntities.isEmpty()) {
-                    for(EntityLivingBase base : nearbyEntities) {
-                        if(base == target && !world.isRemote) {
-                                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.4, 0.4, 0)));
-                                base.setPosition(offset.x, offset.y, offset.z);
-                                base.setPositionAndUpdate(offset.x, offset.y, offset.z);
-                                double d0 = (offset.x - base.posX) * 0.08;
-                                double d2 = (offset.y - base.posY) * 0.05;
-                                double d1 = (offset.z - base.posZ) * 0.08;
-                                this.faceEntity(base, 30.0F, 30.0F);
-
-                        }
-                    }
-                }
+            if(this.hasGrabbedSomething && target != null && !target.getIsInvulnerable()
+                    && target.getEntityBoundingBox().intersects(this.getEntityBoundingBox()
+                    .offset(ModUtils.getRelativeOffset(this, new Vec3d(0.8, -0.3, 0))).grow(2.5D, 3.0D, 1.5D))) {
+                Vec3d offset = this.getPositionVector().add(ModUtils.getRelativeOffset(this, new Vec3d(1.4, 0.4, 0)));
+                target.setPosition(offset.x, offset.y, offset.z);
+                target.setPositionAndUpdate(offset.x, offset.y, offset.z);
+                this.faceEntity(target, 30.0F, 30.0F);
             }
 
         }
@@ -435,7 +423,6 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
                         ++this.strafingTime;
 
                     } else {
-                         System.out.println("Gathering Navigator to move too");
                         this.getNavigator().tryMoveToEntityLiving(target, 1.1);
                         this.strafingTime = -1;
                     }
@@ -787,20 +774,11 @@ public class EntityUltraParasite extends EntityBarrendMob implements IAnimatable
         //check for entity
         addEvent(()-> {
             this.setImmovable(true);
-            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class,
-                    this.getEntityBoundingBox().offset(ModUtils.getRelativeOffset(this, new Vec3d(0.8, -0.3, 0))).grow(2.5D, 3.0D, 1.5D),
-                    e -> !e.getIsInvulnerable());
-
-            if(!nearbyEntities.isEmpty()) {
-                for(EntityLivingBase base : nearbyEntities) {
-                    if(!this.hasGrabbedSomething) {
-                        System.out.println("Detecting something here!");
-                        if (base == target) {
-                            grabbedEntity = base;
-                            this.hasGrabbedSomething = true;
-                        }
-                    }
-                }
+            if(!this.hasGrabbedSomething && !target.getIsInvulnerable()
+                    && target.getEntityBoundingBox().intersects(this.getEntityBoundingBox()
+                    .offset(ModUtils.getRelativeOffset(this, new Vec3d(0.8, -0.3, 0))).grow(2.5D, 3.0D, 1.5D))) {
+                grabbedEntity = target;
+                this.hasGrabbedSomething = true;
             }
 
 

@@ -31,7 +31,7 @@ public class EEAdvancements {
     }
 
     public static void Initialization() {
-        DEFEAT_LAMENTOR = register(new DefeatMobTrigger(new ResourceLocation(ModReference.MOD_ID, "defeat_lamentor")));
+        DEFEAT_LAMENTOR = CriteriaTriggers.register(new DefeatMobTrigger(new ResourceLocation(ModReference.MOD_ID, "defeat_lamentor")));
     }
 
 }

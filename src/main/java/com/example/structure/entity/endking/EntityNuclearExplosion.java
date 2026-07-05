@@ -21,6 +21,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -223,27 +224,20 @@ public class EntityNuclearExplosion extends EntityModBase implements IAnimatable
 
 
     public void damageWorldNuke() {
-        for (int i = 0; i <= 69; i++) {
-            List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(i),e -> (!(e instanceof EntityEndKing)));
-            int hitCooldown = 5;
-            for(EntityLivingBase entityLivingBase : nearbyEntities) {
-                Vec3d targetPos = entityLivingBase.getPositionVector();
-                float damage = ModConfig.nuke_damage;
-                DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
-                ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, targetPos, source, 1.6f, 10, false);
-            }
-
-
-            List<EntityLivingBase> nearbyEntitiestoFly = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(i),e -> (!(e instanceof EntityEndKing)));
-            for(EntityLivingBase entityLivingBase :nearbyEntitiestoFly) {
-                Vec3d targetPos = entityLivingBase.getPositionVector();
-                Vec3d currentPos = this.getPositionVector();
-                double d0 = (targetPos.x - currentPos.x) * 0.9;
-                double d1 = (targetPos.y - currentPos.y) * 0.5;
-                double d2 = (targetPos.z - currentPos.z) * 0.9;
-                Vec3d vel = new Vec3d(d0, d1, d2);
-                ModUtils.addEntityVelocity(entityLivingBase, vel);
-            }
+        List<EntityLivingBase> nearbyEntities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(69D), e -> (!(e instanceof EntityEndKing)));
+        DamageSource source = ModDamageSource.builder().type(ModDamageSource.MOB).directEntity(this).disablesShields().build();
+        Vec3d currentPos = this.getPositionVector();
+        for(EntityLivingBase entityLivingBase : nearbyEntities) {
+            Vec3d targetPos = entityLivingBase.getPositionVector();
+            double maxAxisDistance = Math.max(Math.max(Math.abs(targetPos.x - currentPos.x), Math.abs(targetPos.y - currentPos.y)), Math.abs(targetPos.z - currentPos.z));
+            int originalHitCount = Math.max(1, 70 - MathHelper.ceil(maxAxisDistance));
+            float damage = ModConfig.nuke_damage * originalHitCount;
+            ModUtils.handleAreaImpact(1.0f, (e)-> damage, this, targetPos, source, 1.6f * originalHitCount, 10, false);
+            double d0 = (targetPos.x - currentPos.x) * 0.9 * originalHitCount;
+            double d1 = (targetPos.y - currentPos.y) * 0.5 * originalHitCount;
+            double d2 = (targetPos.z - currentPos.z) * 0.9 * originalHitCount;
+            Vec3d vel = new Vec3d(d0, d1, d2);
+            ModUtils.addEntityVelocity(entityLivingBase, vel);
         }
 
         addEvent(()-> {
