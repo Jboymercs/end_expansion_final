@@ -125,7 +125,8 @@ dependencies {
     //Mixin
     implementation fg.deobf("curse.maven:mixin-booter-419286:6156863")
     //Nether API
-    implementation(fg.deobf('com.github.jbredwards:nether-API:f2f48d7b8b'))
+   // implementation(fg.deobf('com.github.jbredwards:nether-API:f2f48d7b8b'))
+    implementation fg.deobf("curse.maven:nether-api-1306115:7216193")
     //Geckolib
     implementation (fg.deobf('software.bernie.geckolib:geckolib-forge-1.12.2:3.0.31'))
     //Deeper Depths
